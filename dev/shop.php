@@ -1,3 +1,25 @@
+<?php 
+$errMsg = "";
+try {
+	require_once('php/connectg3.php');
+    $prods  = $pdo->query("select * from product");
+    $prodsRow=$prods->fetchAll(PDO::FETCH_ASSOC);
+    // echo json_encode($prodsRow);
+
+    $imgs  = $pdo->query("select cmp_img,bg_img from collections order by vote desc limit 3");
+    $imgRow=$imgs->fetchAll(PDO::FETCH_ASSOC);
+    // echo json_encode($imgRow);
+    // print_r($prodsRow);
+?>
+<?php
+} catch (PDOException $e) {
+	$errMsg = $errMsg . "錯誤訊息: " . $e->getMessage() . "</br>";
+	$errMsg .= "錯誤行號: " . $e->getLine() . "<br>";
+}
+
+
+
+?>    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,35 +85,31 @@
                     <h2>選擇商品</h2>
                     <p class='intro'>請選擇您想要印製的圖案:</p>
                     <div class="choose_pic_wrap">
-                        <div class="item">
-                            <div class="pic">
-                                <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
-                                <img class="shop_animal" src="img/shop/animal1.png" alt="">
-                            </div>
-                            <p>我的動物</p>
+                        <!-- 從session storage撈 -->
+                    <div class="item">
+                        <div class="pic">
+                            <img class="shop_animal_bg"  alt="">
+                            <img class="shop_animal" alt="">
                         </div>
-                        <div class="item">
-                            <div class="pic">
-                                <img class="shop_animal_bg" src="img/shop/animal_bg2.png" alt="">
-                                <img class="shop_animal" src="img/shop/animal2.png" alt="">
-                            </div>
-                            <p>選美No.1</p>
-                        </div>
-                        <div class="item">
-                            <div class="pic">
-                                <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
-                                <img class="shop_animal" src="img/shop/animal3.png" alt="">
-                            </div>
-                            <p>選美No.2</p>
-                        </div>
-                        <div class="item">
-                            <div class="pic">
-                                <img class="shop_animal_bg" src="img/shop/animal_bg2.png" alt="">
-                                <img class="shop_animal" src="img/shop/animal1.png" alt="">
-                            </div>
-                            <p>選美No.3</p>
-                        </div>
+                        <p>我的動物</p>
                     </div>
+
+
+                    <!-- 從資料庫撈 -->
+                        <?php
+                        $imgName=['選美No.1','選美No.2','選美No.3'];
+                        foreach ($imgName as $i => $value) {
+                        ?>
+                        <div class="item">
+                            <div class="pic">
+                                <img class="shop_animal_bg" src=<?=$imgRow[$i]['bg_img'] ?> alt="">
+                                <img class="shop_animal" src=<?=$imgRow[$i]['cmp_img']?> alt="">
+                            </div>
+                            <p><?=$value?></p>
+                        </div>
+                        <?php
+                        }
+                        ?>
 
                 </div>
                 <div class="choose_bgpic">
@@ -222,6 +240,18 @@
     @@include('template/footer.html')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
+        
+        function choosePic(){
+            if(sessionStorage.user_id){  //如果登入了  撈session
+                document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src=sessionStorage.my_animal_bg_img;
+                document.querySelectorAll(".choose_pic .shop_animal")[0].src=sessionStorage.my_animal_img;
+            }else   //如果沒登入，給預設圖片
+            document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src='img/shop/animal_bg1.png';
+            document.querySelectorAll(".choose_pic .shop_animal")[0].src='img/shop/animal1.png';
+
+            
+          
+        };
         window.addEventListener("load",function(){
             let detailButtons=document.querySelectorAll('.view_detail');  //查看詳情
             let addCartButtons=document.querySelectorAll('.add_cart');//加入購物車
@@ -244,8 +274,6 @@
                 }
             }
 
-           
-            
             bgButtons[0].onclick=function(){   //要背景圖
                 for(i=0;i<document.querySelectorAll(".shop_animal_bg").length;i++){
                     document.querySelectorAll(".shop_animal_bg")[i].style.visibility="visible";
@@ -281,7 +309,10 @@
                     document.getElementById("cart_num").style.display='block';
                 }
             }
+
+            choosePic();
            
+            
         }); 
     </script>
 </body>
