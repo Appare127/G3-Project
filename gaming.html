@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <title>遊戲頁面</title>
+    <script src="./js/gaming/p5.js"></script>
+    <script src="./js/gaming/p5.dom.min.js"></script>
+    <script src="./js/gaming/collide2d.js"></script>
+    <script src="./js/gaming/unicorn.js" async></script>
+    <script src="./js/gaming/sketch.js" async></script>
+    <script src="./js/gaming/train.js" async></script>
+    <script src="./js/gaming/reward.js" async></script>
+    <script src="./js/gaming/question.js" async></script>
+   
+ 
+</head>
+<body>
+@@include('template/header.html')
+
+<div class="gaming">
+    <div id="question_page">
+        <div class="vsTitle"><h2>動物問答</h2><p>沒有力氣逃跑了...</p></div>
+        <div class="gaming_cloud1"><img src="img/game/gaming_cloud.png" alt=""></div>
+        <div class="gaming_cloud2"><img src="img/game/gaming_cloud.png" alt=""></div>
+        <div class="gaming_cloud3"><img src="img/game/gaming_cloud.png" alt=""></div>
+        <div class="gaming_animal">
+            <img src="img/game/info_pic.png">
+            <div class="animal_shadow"></div>
+        </div>
+        <div class="gaming_monster">
+            <img src="img/game/蠍子.png">
+            <div class="monster_shadow"></div>
+        </div>
+        <div class="vs_pic"><img src="img/game/gaming_vs.png" alt=""></div>
+        <div class="red_line"><img src="img/game/gaming_redLine.png" alt=""></div>
+        <div class="question_content">
+            <div id="questionBar"></div>
+            <div id="choiceSection">
+                <div id="choiceTitle"><span>請選擇答案:</span></div>
+                <div id="choicesBar"></div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="calculation">
+            <img id="gameover_title" src="img/game/cal-title.png">
+            <div id="solutionBar">
+                <div id="solutionHead"></div>
+                <div id="solutionText"></div>
+
+            </div>
+            <div id="message"> 
+                <div id="showReward">
+                        <div class="wrap"><img src="img/game/gaming_coin.png" alt=""><p id="reward_money"></p></div>
+                        <div class="wrap"><img src="img/game/gaming_present.png" alt=""><p id="ad_shopping"><a href="shop.html">去動物商城</a></p></div>
+                </div>
+                <div id="showScore">
+                        <div class="wrap"><img src="img/game/gaming_clock.png" alt=""><p id="score_time"></p></div>
+                        <div class="wrap"><img src="img/game/gaming_cup.png" alt=""><p id="ad_survive_chart"><a href="game.html">生存排行榜</a></p></div>
+                </div>
+            </div>
+            <div id="retry"><img src="img/game/gaming_controller.png" alt=""><span>再玩一次</span></div>
+    </div>
+</div> 
+@@include('template/footer.html')
+
+
+<script>
+
+
+
+let calculation = document.getElementsByClassName('calculation')[0];
+let questionPage = document.getElementById('question_page');
+let questionBar = document.getElementById('questionBar');
+let choicesBar = document.getElementById('choicesBar');
+let score = document.getElementsByClassName('score')[0];
+let solutionBar = document.getElementById('solutionBar');
+let solutionHead = document.getElementById('solutionHead');
+let solutionText = document.getElementById('solutionText');
+let animalPic = document.querySelector('.gaming_animal img');
+
+// scene[sessionStorage['sceneChoice']].monster
+// let 
+cusAnimal = {
+    pic:'./img/game/0902.png',
+}
+animalPic.src = cusAnimal.pic;
+// console.log(cusAnimal);
+
+function chosenArea(area){
+    if(!sessionStorage['sceneChoice']){
+        sessionStorage['sceneChoice'] = area;
+    }else{
+        sessionStorage['sceneChoice'] = area;
+    }
+}
+
+
+
+function restartGame(){
+    life=3;
+    message.style.display="none";
+    calculation.style.display="none";
+    questionPage.style.display="none";
+    life=3;
+    n = Math.floor( Math.random()* questions.length);
+    questions[n].displayQuestion();    
+    loop();
+}
+
+window.addEventListener('resize',function(){
+        questionPage.style.width=2/5*(window.innerWidth)+'px';
+        questionPage.style.display="none";
+});
+
+function doFirst(){
+    let retry = document.getElementById('retry');
+
+    retry.addEventListener('click',restartGame);
+    // questionPage.style.width=2/5*(window.innerWidth)+'px';
+    questionPage.style.display="none";
+    calculation.style.display="none";
+    if(sessionStorage['sceneChoice'] == null){
+        sessionStorage['sceneChoice'] = chosenArea('desert');
+    }
+    console.log('chosenArea():'+sessionStorage['sceneChoice']);
+    
+}
+
+window.addEventListener('load',doFirst);
+</script>    
+</body>
+</html>

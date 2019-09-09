@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>預約導覽</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
+</head>
+<body class="resv_body">
+
+    @@include('template/header.html')
+
+    <section class="resv_banner">
+        <div class="container">
+            <div class="banner_title">
+                <img class="icon_l" src="img/header/banner_icon_l.png" alt="">
+                <h1 class="title">預約導覽</h1>
+                <img class="icon_r" src="img/header/banner_icon_r.png" alt="">
+            </div>
+            <img src="img/resv/cloud_topright.png" alt="cloud" class="cloud_topright">
+            <img src="img/resv/cloud_train.png" alt="cloud" class="cloud_train">
+            <img src="img/resv/cloud_center.png" alt="cloud" class="cloud_center">
+            <img src="img/resv/cloud_animal.png" alt="cloud" class="cloud_animal">
+            <img src="img/resv/cloud_buttom.png" alt="cloud" class="cloud_buttom">
+            <img src="img/resv/train.png" alt="train" class="resv_train">
+            <img src="img/resv/animal_guide.png" alt="rhinoceros" class="rhinoceros">
+        </div>
+    </section>
+
+    <section class="resv_info">
+        <div class="container">
+            <!-- 日曆開始 -->
+            <div class="resv_calendargroup">
+                <div class="resv_calendar">
+                    <!-- <img src="img/resv/calendar_bg.png" alt="calendbg"> -->
+                    <div class="calendarbox">
+                        <div class="calendar_title">
+                            <span id="prev">
+                                <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span id="calendar_year">Year</span>
+                            <span>/</span>
+                            <span id="calendar_month">Month</span>
+                            <span id="next">
+                                <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </div>
+                        <div class="calendar_body">
+                            <div class="week_group">
+                                <ul>
+                                    <li>日</li>
+                                    <li>一</li>
+                                    <li>二</li>
+                                    <li>三</li>
+                                    <li>四</li>
+                                    <li>五</li>
+                                    <li>六</li>
+                                </ul>
+                            </div>
+                            <div class="day_group curday_after">
+                                <ul id="days">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calendar_text">
+                        <ul>
+                            <!-- <li class="aviable"></li> -->
+                            <li>可預約</li>
+                            <li class="unaviable"></li>
+                            <li>不可預約</li>
+                            <li class="full_booked"></li>
+                            <li>預約額滿</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="resv_desc">
+                    <p>確認詳情：會在預訂成功後立即確認，並將使用憑證發送至你的會員中心。</p>
+                    <p>如在註明的時限內沒有於收件箱或垃圾郵件箱中收到郵件，請及時通過郵件聯繫客戶服務</p>
+                    <p>注意事項：僅限指定日期使用.當日請出示憑證入場若預約當日臨時無法抵達，請事先於會員中心取消。</p>
+                </div>
+            </div>
+            <div class="resv_form">
+                <div class="show_data">
+                    <p>8/28日預約導覽時段資訊：</p><br>
+                    <span>場次1</span>
+                    <span class="show_datatime">10:00</span>
+                    <span class="show_datanum">剩餘20人</span><br>
+                    <span>場次2</span>
+                    <span class="show_datatime">14:30</span>
+                    <span class="show_datanum">剩餘20人</span>
+                </div>
+                <img class="wooden" src="img/resv/wooden.png" alt="wooden">
+                <form action="get.php" method="get">
+                    <h3 class="resvform_title">本園區提供免費「定時導覽解說」服務，若有需要請事前預約。每場約為40分鐘。</h3>
+                    <div class="resvform_users">
+                        <div class="time resvform_users">
+                            <label for="time_select">時間:</label>
+                            <select id="time_select">
+                                <option value="">--選擇時間--</option>
+                                <option value="10am">上午10點</option>
+                                <option value="14pm">下午2點</option>
+                            </select>
+                        </div>
+                        <div class="peoplenum resvform_users">
+                            <label for="peoplenum_select">人數:</label>
+                            <select id="peoplenum_select">
+                                <option value="">--選擇人數--</option>
+                                <option value="1">1</option>
+                                <option value="1">2</option>
+                                <option value="1">3</option>
+                                <option value="1">4</option>
+                                <option value="1">5</option>
+                            </select>
+                            <span>剩餘人數: 20</span>
+                        </div>
+                        <div class="resvform_users">
+                            請輸入驗證碼：
+                            <input type="text" id="code" name="verific_code" size="10"><br>
+                            <canvas id="resv_canvas" width="70px" height="27px"></canvas><br>
+                            <!-- <img src="https://picsum.photos/150/50?random=1"> -->
+                        </div>
+                    </div>
+                    <p class="resv_submit">
+                        <!-- <input type='submit' class="btn" value='送出'> -->
+                        <a href="#" class="btn_cloud" onclick="checkcode()">送出
+                            <span class="btn_cloudeffect"></span>
+<span class="btn_cloudeffect"></span>
+<span class="btn_cloudeffect"></span>
+<span class="btn_cloudeffect"></span>
+                        </a>
+                    </p>
+                </form>
+            </div>
+        </div>
+
+        <div class="entrances">
+            <img src="img/resv/train_animal.png" alt="train_animal" class="train_animal">
+            <img src="img/resv/gate.png" alt="gate" class="gate">
+        </div>
+    </section>
+
+    @@include('template/footer.html')
+    
+    <script src="js/main.js"></script>
+    <script src="js/resv/verfcode.js"></script>
+    <script src="js/resv/calendar.js"></script>
+    <!--引用jQuery-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <!--引用SweetAlert2.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js"
+        type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".btn_cloud").click(function () {
+                //alert範例
+                swal("已寄出新密碼", "請至您的信箱查收新的登入密碼", "success");
+                swal("預約成功", "請至會員中心查看您的QR-Code", "success");
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>動物商城</title>
+    @@include('template/csslink.html',{"csslink":"css/style.css"})
+    <style>
+        * {
+            /* outline: 1px solid #f00; */
+        }
+    </style>
+</head>
+
+<body class="shop" id="shop">
+    @@include('template/header.html')
+    <section class="banner">
+        <div class="container">
+            <div class="banner_title">
+                <img class="icon_l" src="img/header/banner_icon_l.png" alt="">
+                <h1 class="title">動物商城</h1>
+                <img class="icon_r" src="img/header/banner_icon_r.png" alt="">
+            </div>
+            <div class="banner_text">
+                <div class="guide_animal">
+                    <div class="guide_animal_animal">
+                        <img src="img/shop/animal2.png" alt="">
+                    </div>
+                    <div class="guide_animal_cloud">
+                        <img src="img/shop/titleCloud.png" alt="">
+                    </div>
+                </div>
+                <p>在這裡你可以印製專屬商品哦~趕快來逛逛吧！</p>
+            </div>
+
+        </div>
+        <div class="balloon">
+            <img src="img/shop/balloon.png" alt="">
+        </div>
+        <img class="cloudl cloud" src="img/shop/cloud.png" alt="">
+        <img class="cloudm cloud" src="img/shop/cloud.png" alt="">
+        <img class="cloudr cloud" src="img/shop/cloud.png" alt="">
+
+      
+    </section>
+    <section class="shop_area" id="shop_area">
+        <img class="cloudbl cloud" src="img/shop/cloud.png" alt="">
+        <img class="cloudbr cloud" src="img/shop/cloud.png" alt="">
+        <div class="tent">
+            <img src="img/shop/tent.png" alt="">
+        </div>
+        <div class="container">
+
+            <div class="wrap">
+                <div class="lights">
+                    <img src="img/shop/lights.png" alt="">
+                    <img src="img/shop/lights.png" alt="">
+                    <img src="img/shop/lights.png" alt="">
+                </div>
+                <div class="choose_pic">
+                    <h2>選擇商品</h2>
+                    <p class='intro'>請選擇您想要印製的圖案:</p>
+                    <div class="choose_pic_wrap">
+                        <div class="item">
+                            <div class="pic">
+                                <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
+                                <img class="shop_animal" src="img/shop/animal1.png" alt="">
+                            </div>
+                            <p>我的動物</p>
+                        </div>
+                        <div class="item">
+                            <div class="pic">
+                                <img class="shop_animal_bg" src="img/shop/animal_bg2.png" alt="">
+                                <img class="shop_animal" src="img/shop/animal1.png" alt="">
+                            </div>
+                            <p>選美No.1</p>
+                        </div>
+                        <div class="item">
+                            <div class="pic">
+                                <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
+                                <img class="shop_animal" src="img/shop/animal1.png" alt="">
+                            </div>
+                            <p>選美No.2</p>
+                        </div>
+                        <div class="item">
+                            <div class="pic">
+                                <img class="shop_animal_bg" src="img/shop/animal_bg2.png" alt="">
+                                <img class="shop_animal" src="img/shop/animal1.png" alt="">
+                            </div>
+                            <p>選美No.3</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="choose_bgpic">
+                    <p class="intro">
+                        請選擇圖案是否要背景圖片：<br>
+                        <input type="radio" name="bgpic" checked>我要背景圖片
+                        <input type="radio" name="bgpic" >我不要背景圖片
+                    </p>
+
+                </div>
+                <div class="choose_product">
+                    <div class="item">
+                        <div class="deco deco_top"></div>
+                        <h3>帆布袋</h3>
+                        <div class="prod_img">
+                            <img class="prod_plain" src="img/shop/bag.png" alt="">
+                            <div class="pic_chosen pic_chosen_bag">
+                                <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
+                                <img class="shop_animal" src="img/shop/animal1.png" alt="">
+                            </div>
+                        </div>
+                        <p class="price">NT$600</p>
+                        <div class="number">
+                            <button  class="minus_num">-</button>
+                            <input class="prod_num" type="number" value="1">
+                            <button  class="add_num">+</button>
+                        </div>
+                        <div class="btn">
+                            <a class="btn_cloudb view_detail">查看詳情@@include('template/btn_sp.html')</a>
+                            <a class="btn_cloudp add_cart">加入購物車@@include('template/btn_sp.html')</a>
+                        </div>
+                        <div class="deco deco_bottom"></div>
+                    </div>
+                    <div class="item">
+                        <div class="deco deco_top"></div>
+                        <h3>馬克杯</h3>
+                        <div class="prod_img">
+                            <img class="prod_plain" src="img/shop/cup.png" alt="">
+                            <div class="pic_chosen pic_chosen_cup">
+                                <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
+                                <img class="shop_animal" src="img/shop/animal1.png" alt="">
+                            </div>
+                        </div>
+                        <p class="price">NT$600</p>
+                        <div class="number">
+                            <button class="minus_num">-</button>
+                            <input class="prod_num" type="number" value="1">
+                            <button class="add_num">+</button>
+                        </div>
+                        <div class="btn">
+                            <a class="btn_cloudb view_detail">查看詳情@@include('template/btn_sp.html')</a>
+                            <a class="btn_cloudp add_cart">加入購物車@@include('template/btn_sp.html')</a>
+                        </div>
+                        <div class="deco deco_bottom"></div>
+                    </div>
+                    <div class="item">
+                        <div class="deco deco_top"></div>
+                        <h3>棒球帽</h3>
+                        <div class="prod_img">
+                            <img class="prod_plain" src="img/shop/hat.png" alt="">
+                            <div class="pic_chosen pic_chosen_hat">
+                                <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
+                                <img class="shop_animal" src="img/shop/animal1.png" alt="">
+                            </div>
+                        </div>
+                        <p class="price">NT$600</p>
+                        <div class="number">
+                            <button class="minus_num">-</button>
+                            <input class="prod_num" type="number" value="1">
+                            <button class="add_num">+</button>
+                        </div>
+                        <div class="btn">
+                            <a class="btn_cloudb view_detail">查看詳情@@include('template/btn_sp.html')</a>
+                            <a class="btn_cloudp add_cart">加入購物車@@include('template/btn_sp.html')</a>
+                        </div>
+                        <div class="deco deco_bottom"></div>
+                    </div>
+                    <div class="item">
+                        <div class="deco deco_top"></div>
+                        <h3>大抱枕</h3>
+                        <div class="prod_img">
+                            <img class="prod_plain" src="img/shop/pillow.png" alt="">
+                            <div class="pic_chosen pic_chosen_pillow">
+                                <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
+                                <img class="shop_animal" src="img/shop/animal1.png" alt="">
+                            </div>
+                        </div>
+                        <p class="price">NT$600</p>
+                        <div class="number">
+                            <button class="minus_num">-</button>
+                            <input class="prod_num" type="number" value="1">
+                            <button class="add_num">+</button>
+                        </div>
+                        <div class="btn">
+                            <a class="btn_cloudb view_detail">查看詳情@@include('template/btn_sp.html')</a>
+                            <a class="btn_cloudp add_cart">加入購物車@@include('template/btn_sp.html')</a>
+                        </div>
+                        <div class="deco deco_bottom"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 商品詳情 -->
+    <div class="prod_detail" id="prod_detail">
+        <div class="detail_container">
+            <button class="back_button">X</button>
+            <div class="wrap">
+                <div class="title">
+                    <p>商品詳情</p>
+                </div>
+                <div class="prod_img">
+                    <img class="prod_plain" src="img/shop/pillow.png" alt="">
+                    <div class="pic_chosen pic_chosen_pillow">
+                            <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
+                            <img class="shop_animal" src="img/shop/animal1.png" alt="">
+                        </div>
+                </div>
+                <div class="prod_text">
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero, fugiat!Lorem, ipsum dolor sit
+                        amet consectetur adipisicing elit. Vero, fugiat!Lorem, ipsum dolor sit amet consectetur
+                        adipisicing elit. Vero, fugiat</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @@include('template/footer.html')
+
+    <script>
+        window.addEventListener("load",function(){
+            let detailButtons=document.querySelectorAll('.view_detail');  //查看詳情
+            let addCartButtons=document.querySelectorAll('.add_cart');//加入購物車
+            let prodDetail=document.querySelector('.prod_detail');//視窗
+            let backButton=document.querySelector('.back_button');//視窗裡的叉叉
+            let bgButtons=document.getElementsByName("bgpic");//切換背景圖
+            let minusNumButtons=document.querySelectorAll('.minus_num');  //減少數量
+            let addNumButtons=document.querySelectorAll('.add_num');     //加數量
+            let prodNumInputs=document.querySelectorAll('.prod_num'); //商品Input的數量
+
+            for(i=0;i<minusNumButtons.length;i++){   //減num
+                minusNumButtons[i].onclick=function(){
+                    this.nextElementSibling.value==0?this.nextElementSibling.value=0:this.nextElementSibling.value--;
+                }
+            }
+
+            for(i=0;i<addNumButtons.length;i++){   //加num
+                addNumButtons[i].onclick=function(){
+                    this.previousElementSibling.value++;
+                }
+            }
+
+           
+            
+            bgButtons[0].onclick=function(){   //要背景圖
+                for(i=0;i<document.querySelectorAll(".shop_animal_bg").length;i++){
+                    document.querySelectorAll(".shop_animal_bg")[i].style.visibility="visible";
+                }
+                for(i=0;i<document.querySelectorAll(".prod_img .shop_animal").length;i++){
+                    document.querySelectorAll(".prod_img .shop_animal")[i].style.width='50%';
+                    document.querySelectorAll(".prod_img .shop_animal")[i].style.transform='translate(-50%,0)';
+                }
+            }
+
+            bgButtons[1].onclick=function(){   //不要背景圖
+                for(i=0;i<document.querySelectorAll(".shop_animal_bg").length;i++){
+                    document.querySelectorAll(".shop_animal_bg")[i].style.visibility="hidden";
+                };
+                for(i=0;i<document.querySelectorAll(".prod_img .shop_animal").length;i++){
+                    document.querySelectorAll(".prod_img .shop_animal")[i].style.width='100%';
+                    document.querySelectorAll(".prod_img .shop_animal")[i].style.transform='translate(-50%,-50%)';
+                };
+            }
+            backButton.onclick=function(){   //關閉視窗
+                prodDetail.style.display='none';
+            };
+
+            for(i=0;i<detailButtons.length;i++){   //查看詳情
+                detailButtons[i].onclick=function(){
+                    prodDetail.style.display='block';
+                }
+            }
+
+            for(i=0;i<addCartButtons.length;i++){  //加入購物車
+                addCartButtons[i].onclick=function(){
+                    alert("已成功加入")
+                }
+            }
+           
+        }); 
+    </script>
+</body>
+
+</html>
+

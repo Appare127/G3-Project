@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    @@include('template/csslink.html',{"csslink":"css/style.css"})
+    <title>結帳</title>
+    <style>
+        * {
+            /* outline: 1px solid #f00; */
+        }
+    </style>
+</head>
+
+<body class="checkOrder">
+    @@include('template/header.html')
+    <section class="cart_list">
+        <div class="container">
+                <h2>訂單明細</h2>
+            <div class="wrap">
+                <div class="list_header">
+                    <div>
+                        <p>商品圖片</p>
+                    </div>
+                    <div>
+                        <p>商品名稱</p>
+                    </div>
+                    <div>
+                        <p>單價</p>
+                    </div>
+                    <div>
+                        <p>數量</p>
+                    </div>
+                    <div>
+                        <p>小計</p>
+                    </div>
+
+                </div>
+                <div class="list_row">
+                    <div class="prod_pic col-6">
+                        <div class="pic_item">
+                            <img src="../img/shop/cup.png" alt="">
+                        </div>
+                    </div>
+                    <div class="prod_info col-6">
+                        <div class="prod_name "><span class="title_inline">商品名稱：</span>馬克杯</div>
+                        <div class="price"><span class="title_inline">商品單價：</span>$600</div>
+                        <div>
+                            <span class="title_inline">商品數量：</span>
+                            <span>1</span>
+                        </div>
+                        <div class="subTotal"><span class="title_inline">商品小計：</span>$600</div>
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                </div>
+                <div class="list_row">
+                    <div class="prod_pic col-6 ">
+                        <div class="pic_item">
+                            <img src="../img/shop/cup.png" alt="">
+                        </div>
+                    </div>
+                    <div class="prod_info col-6 ">
+                        <div class="prod_name "><span class="title_inline">商品名稱：</span>馬克杯</div>
+                        <div class="price"><span class="title_inline">商品單價：</span>$600</div>
+                        <div>
+                            <span class="title_inline">商品數量：</span>
+                            <span>1</span>
+                        </div>
+                        <div class="subTotal"><span class="title_inline">商品小計：</span>$600</div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- 點數折抵 -->
+                <div class="discount">
+                    <h3>金幣折抵</h3>
+                    <div class="discount_info">
+                        <p>您目前持有金幣：$<span>100</span></p>
+                        <a href="game.html">玩遊戲賺金幣</a>
+                    </div>
+                    <div class="discount_input">
+                        <p> $ <input type="number" name="" id=""></p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="total">
+                    <p>商品金額：$<span>100</span></p>
+                    <p>+運費：$60</p>
+                    <p>-點數折抵：$<span>10</span></p>
+                    <p>總金額為：$<span class="total_money">100</span></p>
+                </div>
+            </div>
+    </section>
+    <!-- 填寫資料 -->
+    <section class="write_info">
+        <div class="container">
+            <h2>填寫資料</h2>
+            <div class="wrap">
+                <div class="write_info_col buyer">
+                    <h3>訂購人資訊</h3>
+                    <p>姓名： <input type="text" name="" id=""></p>
+                    <p>電話： <input type="text" name="" id=""></p>
+                    <p>地址： <input type="text" name="" id=""></p>
+                </div>
+                <div class="write_info_col receiver">
+                    <h3>收件人資訊</h3>
+                    <p>姓名： <input type="text" name="" id=""></p>
+                    <p>電話： <input type="text" name="" id=""></p>
+                    <p>地址： <input type="text" name="" id=""></p>
+                    <p><input type="checkbox" name="" id="">同訂購人資料</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="creditCard">
+        <div class="container">
+            <h2>信用卡付費</h2>
+            <div class="wrap">
+                <p>信用卡帳號：
+                    <input type="text" name="" id="">-
+                    <input type="text" name="" id="">-
+                    <input type="text" name="" id="">-
+                    <input type="text" name="" id="">
+                </p>
+                <p>
+                    有效期限：
+                    <select name="" id="">
+                        <option value="1月">1月</option>
+                    </select>
+                    <select name="" id="">
+                        <option value="2019">2019年</option>
+                    </select>
+                </p>
+                <p>
+                    背面安全碼：
+                    <input type="text" name="" id="">
+                </p>
+            </div>
+        </div>
+    </section>
+    <div class="cart_btn">
+        <a class="btn_cloudy" href="cart.html">上一步@@include('template/btn_sp.html')</a>
+        <a class="btn_cloudp confirm" href="checkOder.html">送出訂單@@include('template/btn_sp.html')</a>
+    </div>
+    </div>
+
+    <!-- ====================再次確認資料的彈窗==================== -->
+    <div class="order_confirm">
+        <div class="confirm_container">
+            <p class="confirm_title">請確認您的資料：</p>
+            <p class="confirm_title">訂購人資訊：</p>
+            <p>姓名：111</p>
+            <p>電話：0987654321</p>
+            <p>地址：哈哈哈哈哈哈哈</p>
+
+            <p class="confirm_title">收件人資訊：</p>
+            <p>姓名：111</p>
+            <p>電話：0987654321</p>
+            <p>地址：哈哈哈哈哈哈哈</p>
+
+            <p class="confirm_title">信用卡資訊：</p>
+            <p>信用卡帳號：1234-5678-9123</p>
+            <p>有效期限：1月 2020年</p>
+            <div class="btn">
+                <button class="btn_cloudy writeAgain">重新填寫@@include('template/btn_sp.html')</button>
+                <button class="btn_cloudp submit">確認送出@@include('template/btn_sp.html')</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================送出訂單後，訂單資訊的彈窗============== -->
+    <div class="order_info">
+        <div class="order_info_container">
+            <p class="order_info_title">訂單已成立</p>
+            <p>請至會員中心查看訂單詳情。</p>
+            <p>訂單編號：<span>001</span></p>
+            <p>訂單成立時間：<span>2019/01/01 00:00</span></p>
+            <p>訂單狀態：<span>已付款</span></p>
+            <button class="btn_cloudb close"><span>關閉</span>@@include('template/btn_sp.html')</button>
+        </div>
+    </div>
+
+    @@include('template/footer.html')
+
+
+    <script>
+
+        window.addEventListener("load", function () {
+            //購物車頁的送出訂單
+            let confirm = document.querySelector(".cart_btn .confirm");
+
+            //確認資料視窗的確認送出
+            let submitButton = document.querySelector(".order_confirm .submit");
+            //確認資料視窗的重新填寫
+            let writeAgain = document.querySelector(".order_confirm .writeAgain");
+            //整個確認資料視窗
+            let confirmWindow = document.querySelector(".checkOrder .order_confirm");
+
+            //訂單成立視窗的關閉
+            let closeButton = document.querySelector(".order_info .close");
+
+            confirm.onclick = function () {
+                confirmWindow.style.display = "block";
+                return false;
+            };
+
+            writeAgain.onclick = function () {
+                confirmWindow.style.display = "none";
+            };
+
+            submitButton.onclick = function () {
+                confirmWindow.style.display = "none";
+                document.querySelector(".order_info").style.display = "block";
+
+            }
+
+            closeButton.onclick = function () {
+                document.querySelector(".order_info").style.display = "none";
+            }
+
+        })
+    </script>
+</body>
+
+</html>
