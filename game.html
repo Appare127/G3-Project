@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <title>遊戲導覽</title>
+</head>
+
+<body class="game_body">
+@@include('template/header.html')
+
+
+
+<div class="game_banner">
+    <div class="container">
+        <div class="game_title">
+            <img class="icon_l" src="img/header/banner_icon_l.png" alt="">
+            <h1 class="title">生存遊戲</h1>
+            <img class="icon_r" src="img/header/banner_icon_r.png" alt="">
+        </div>
+    </div>
+</div>
+
+
+<div class="game_role">
+    <div class="banner_pyramid"><img src="img/game/banner_pyramid.png" alt=""></div>
+    <div class="banner_tree"><img src="img/game/banner_tree.png" alt=""></div>
+    <div class="banner_mountain"><img src="img/game/banner_mountain.png" alt=""></div>
+    <div class="container">
+        <div class="role_title"><h2>參加角色</h2></div>
+        <div class="role_info">
+            <div class="cloud1"><img src="img/game/role_cloud.png" alt=""></div>
+            <div class="cloud2"><img src="img/game/role_cloud2.png" alt=""></div>
+            <div class="role_pic">
+                <div class="info_pic">
+                    <img src="img/game/info_pic.png" alt="">
+                </div>
+                <div class="info_name">
+                    <h2>鑽向敵人的心臟</h2>
+                </div>
+            </div>
+            <div class="role_value">
+                <div class="info_value">
+                    <div class="value_life">
+                    生命力:<img src="img/game/info_life.png" alt="">
+                    </div>
+                    <div class="value_jump">
+                    跳躍力:<img src="img/game/info_jump.png" alt="">
+                    </div>
+                </div>
+                <div class="info_diagram">
+                    <img src="img/game/info_diagram.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="game_scene">
+    <div class="container">
+        <div class="scene_title"><h2>選擇場景</h2></div>
+        <div class="scene_map">
+            <div class="forest_pointer">
+                <div class="forest_pointer_title">森林</div>
+                <img src="img/game/scene_arrow.png" alt="">
+            </div>
+            <div class="desert_pointer">
+                <div class="desert_pointer_title">沙漠</div>
+                <img src="img/game/scene_arrow.png" alt="">
+            </div>
+            <div class="mountain_pointer">
+                <div class="moutain_pointer_title">高山</div>
+                <img src="img/game/scene_arrow.png" alt="">
+            </div>
+            <!-- <img src="img/game/scene_map.png" alt=""> -->
+            <div class="game_full_map">
+                <img src="img/game/game_forest.png" alt="">
+                <img src="img/game/game_desert.png" alt="">
+                <img src="img/game/game_mountain.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="game_playing">
+    <div class="playing_container">
+        <div class="game_intro_window">
+            <div id="game_control_title"><h2>操作說明</h2></div>
+            <img id="game_intro_content" src="./img/game/game_intro_content.png" alt="">
+            <img id="game_closeBtn" src="./img/game/game_intro_closeBtn.png" alt=""></div>
+        <div class="arrowLeft"><</div>
+
+        <div class="playing_intro">
+            <a href="javascript:showIntro();" class="btn_c_nextpage">
+                操作說明
+                @@include('template/btn_sp.html')
+            </a>
+        
+        </div>
+        <!-- <a href="gaming.html" onclick="chosenArea('desert')"></a> -->
+            <div class="playing_desert playing_window">
+                <input type="hidden" id="userNo" value="1">
+                <p><a href="gaming.html" onclick="chosenArea('desert')">進入遊戲</a></p>
+            </div>
+            <div class="playing_forest playing_window">
+                <p><a href="gaming.html" onclick="chosenArea('forest')">進入遊戲</a></p>
+            </div>
+            <div class="playing_mountain playing_window">
+                <p><a href="gaming.html" onclick="chosenArea('mountain')">進入遊戲</a></p>
+            </div>
+        <div class="arrowRight">></div>
+    </div>
+
+</div>
+<div class="game_rank">
+    <div class="container">
+        <div class="rank_title"><h2>生存排行榜</h2></div>
+        <div class="rank_chart">
+                <div class="rank_top10_title">排行榜前十名</div>
+                <div class="chart_top">
+                    <div class="chart_top1">
+                        <div class="top1_title">
+                            <img src="img/game/top_pic.png" alt="">
+                            <div class="top_score">168秒</div>
+                            <div class="top_animal">艾咪</div>
+                            <div class="top_player">AABB</div>
+                        </div>
+
+                    </div>
+                    <div class="chart_top2">
+                        <div class="top2_title">
+                            <img src="img/game/top_pic.png" alt="">
+                            <div class="top_score">168秒</div>
+                            <div class="top_animal">艾咪</div>
+                            <div class="top_player">AABB</div>
+                        </div>
+
+                    </div>
+                    <div class="chart_top3">
+                        <div class="top3_title">
+                            <img src="img/game/top_pic.png" alt="">
+                            <div class="top_score">168秒</div>
+                            <div class="top_animal">艾咪</div>
+                            <div class="top_player">AABB</div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="chart_ranking">
+able c
+                    <tlass="ranking_table">
+                            <!-- <tr>
+                                <td>排名</td>
+                                <td>動物名稱</td>
+                                <td>會員名稱</td>
+                                <td>時間</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>小白獸</td>
+                                <td>apple7788</td>
+                                <td>112秒</td>
+                            </tr> -->
+                        </table>
+                    <img src="img/game/chart_ranking_bottom.png" alt="">
+                </div>
+        </div>
+    </div>
+</div>
+
+
+@@include('template/footer.html')
+<script>
+
+
+let x,y,z,areaChoice;
+let tempUserNo = 1;
+let userDataDesc = [];
+
+function $id(id){
+    return document.getElementById(id);
+}
+function $cls(cls){
+    return document.getElementsByClassName(cls);
+}
+
+function $que(css_selector){
+    return document.querySelectorAll(css_selector);
+}
+
+function showIntro(){
+    let introWindow = document.getElementsByClassName('game_intro_window')[0];
+    introWindow.style.display="block";
+}
+
+function closeIntro(){
+    let introWindow = document.getElementsByClassName('game_intro_window')[0];
+    introWindow.style.display="none";
+}
+
+
+function chosenArea(area){
+    if(sessionStorage['sceneChoice'] == null){
+        sessionStorage['sceneChoice'] = area;
+    }else{
+        sessionStorage['sceneChoice'] = area;
+    }
+}
+
+
+
+    
+    function mapPointer(location){
+        $cls('desert_pointer')[0].classList.remove('pointer_shaking');
+        $cls('mountain_pointer')[0].classList.remove('pointer_shaking');
+        $cls('forest_pointer')[0].classList.remove('pointer_shaking');
+        $cls('forest_pointer')[0].style.filter ="hue-rotate(360deg)";
+        $cls('desert_pointer')[0].style.filter ="hue-rotate(360deg)";
+        $cls('mountain_pointer')[0].style.filter ="hue-rotate(360deg)";
+
+        if(location.indexOf('forest')!=-1){
+            $cls('forest_pointer')[0].classList.add('pointer_shaking');
+            $cls('forest_pointer')[0].style.filter ="hue-rotate(180deg)";
+        }
+        if(location.indexOf('desert')!=-1){
+            $cls('desert_pointer')[0].classList.add('pointer_shaking');
+            $cls('desert_pointer')[0].style.filter ="hue-rotate(180deg)";
+        }
+        if(location.indexOf('mountain')!=-1){
+            $cls('mountain_pointer')[0].classList.add('pointer_shaking');
+            $cls('mountain_pointer')[0].style.filter ="hue-rotate(180deg)";
+        }
+    }
+
+    function picClicked(e){
+        if( e.target.style.left== x){
+            sliderRight();
+        }else if ( e.target.style.left == z ){
+            sliderLeft();
+        }
+        
+    }
+
+    
+    
+    function sliderLeft(){
+        let enterGame=document.querySelectorAll('.playing_window p');
+
+        if(window.innerWidth>=768){
+            for(var j=0;j<$cls('playing_window').length; j++){
+                enterGame[j].style.display="none";
+                if($cls('playing_window')[j].style.left!= x){
+                    $cls('playing_window')[j].style.left = parseInt($cls('playing_window')[j].style.left)- 30 + '%';
+    
+                }else {
+                    $cls('playing_window')[j].style.left = z;
+    
+                }
+                if($cls('playing_window')[j].style.left== x){ 
+                    $cls('playing_window')[j].style.zIndex = 2; 
+                    $cls('playing_window')[j].classList.add('normalScale');
+                    $cls('playing_window')[j].classList.remove('scaleUp');
+                }
+                if($cls('playing_window')[j].style.left== y){ 
+                    $cls('playing_window')[j].style.zIndex = 4;
+                    $cls('playing_window')[j].classList.remove('normalScale'); 
+                    $cls('playing_window')[j].classList.add('scaleUp');
+                    enterGame[j].style.display="block";
+                    mapPointer($cls('playing_window')[j].classList.value);
+
+                }
+                if($cls('playing_window')[j].style.left == z){ 
+                    $cls('playing_window')[j].style.zIndex = 2; 
+                    $cls('playing_window')[j].classList.add('normalScale');
+                    $cls('playing_window')[j].classList.remove('scaleUp');
+                }
+            }
+        }else {
+            for(var k=0;k<$cls('playing_window').length;k++){
+
+                if($cls('playing_window')[k].style.zIndex!=2){
+                    $cls('playing_window')[k].style.zIndex++;
+                    if($cls('playing_window')[k].style.zIndex==2){
+                        if($cls('playing_window')[k].classList.value.indexOf('forest')!=-1){
+                            mapPointer('forest');
+                        }
+                        if($cls('playing_window')[k].classList.value.indexOf('desert')!=-1){
+                            mapPointer('desert');
+                        }
+                        if($cls('playing_window')[k].classList.value.indexOf('mountain')!=-1){
+                            mapPointer('mountain');
+                        }
+                    }
+                }else{
+                    $cls('playing_window')[k].style.zIndex=0;
+                    // console.log($cls('playing_window')[k].classList.value);
+
+                }
+                
+            }
+        }
+    }
+    
+    function sliderRight(){
+        let enterGame=document.querySelectorAll('.playing_window p');
+        if(window.innerWidth>=768){
+            for(var j=0;j<$cls('playing_window').length; j++){
+                enterGame[j].style.display="none";                
+                if($cls('playing_window')[j].style.left != z){
+                    $cls('playing_window')[j].style.left = parseInt($cls('playing_window')[j].style.left) + 30 + '%';
+    
+                }else {
+                    $cls('playing_window')[j].style.left =  x;
+                }
+                
+                if($cls('playing_window')[j].style.left== x){ 
+                    $cls('playing_window')[j].style.zIndex = 2; 
+                    $cls('playing_window')[j].classList.add('normalScale');
+                    $cls('playing_window')[j].classList.remove('scaleUp');
+                }
+                if($cls('playing_window')[j].style.left== y){ 
+                    $cls('playing_window')[j].style.zIndex = 4;
+                    $cls('playing_window')[j].classList.remove('normalScale'); 
+                    $cls('playing_window')[j].classList.add('scaleUp');
+                    enterGame[j].style.display="block";
+                    mapPointer($cls('playing_window')[j].classList.value);
+                }
+                if($cls('playing_window')[j].style.left == z){ 
+                    $cls('playing_window')[j].style.zIndex = 2; 
+                    $cls('playing_window')[j].classList.add('normalScale');
+                    $cls('playing_window')[j].classList.remove('scaleUp');
+                }
+               
+            }
+        }else {
+            for(var k=0;k<$cls('playing_window').length;k++){
+                if($cls('playing_window')[k].style.zIndex!=0){
+                    $cls('playing_window')[k].style.zIndex--;
+
+                }else{
+                    $cls('playing_window')[k].style.zIndex=2;
+                    if($cls('playing_window')[k].style.zIndex==2){
+                        if($cls('playing_window')[k].classList.value.indexOf('forest')!=-1){
+                            mapPointer('forest');
+                        }
+                        if($cls('playing_window')[k].classList.value.indexOf('desert')!=-1){
+                            mapPointer('desert');
+                        }
+                        if($cls('playing_window')[k].classList.value.indexOf('mountain')!=-1){
+                            mapPointer('mountain');
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    function pointerToMap(e){
+        if(window.innerWidth>=768){
+            if(e.currentTarget==$cls('forest_pointer')[0]){
+                if($cls('playing_forest')[0].style.left == x){
+                    sliderRight();
+                }else if($cls('playing_forest')[0].style.left == z){
+                    sliderLeft();
+                }
+            }
+            if(e.currentTarget==$cls('desert_pointer')[0]){
+                if($cls('playing_desert')[0].style.left == x){
+                    sliderRight();
+                }else if($cls('playing_desert')[0].style.left == z){
+                    sliderLeft();
+                }
+            }
+            if(e.currentTarget==$cls('mountain_pointer')[0]){
+                if($cls('playing_mountain')[0].style.left == x){
+                    sliderRight();
+                }else if($cls('playing_mountain')[0].style.left == z){
+                    sliderLeft();
+                }
+            }
+        }else if(window.innerWidth<=767){
+
+        }
+
+    }
+    
+    function getCusAnimal(){
+        var xhr = new XMLHttpRequest();
+        xhr.onload=function (){
+            if( xhr.status == 200 ){ 
+                // alert(JSON.parse(xhr.responseText));
+                userData = JSON.parse(xhr.responseText);
+                sessionStorage['animal_img'] = userData.my_animal_img;
+                sessionStorage['animal_life'] =userData.animal_life;
+                sessionStorage['animal_jump'] =userData.animal_jump;
+                sessionStorage['animal_en1'] =userData.environ_adapt_1;
+                sessionStorage['animal_en2'] =userData.environ_adapt_2;
+                sessionStorage['animal_en3'] =userData.environ_adapt_3;
+
+
+                // alert(userData.my_animal_img);
+                // alert('session裡的動物圖:'+sessionStorage['animal_img']);
+                // alert('session裡的動物生命:'+sessionStorage['animal_life']);
+                // alert('session裡的動物跳躍力:'+sessionStorage['animal_jump']);
+                // alert('session裡的動物適應力1:'+sessionStorage['animal_en1']);
+                // alert('session裡的動物適應力2:'+sessionStorage['animal_en2']);
+                // alert('session裡的動物適應力3:'+sessionStorage['animal_en3']);
+            }else{
+                alert( xhr.status );
+            }
+        }
+
+        var url = "php/getCusAnimal.php?user_no="+ $id('userNo').value;
+        xhr.open("Get", url, true);  //readyState : 1
+
+        xhr.send( null );
+    }   
+  
+    function getRankingData(){
+ 
+        var xhr = new XMLHttpRequest();
+        xhr.onload=function (){
+            if( xhr.status == 200 ){ 
+                userDataDesc = JSON.parse(xhr.responseText);
+                // alert(userDataDesc[0].my_animal_img);
+
+                //塞入前三名照片跟資料
+                $que('.top1_title img')[0].src = userDataDesc[0].my_animal_img;
+                $que('.top1_title .top_score')[0].innerText = userDataDesc[0].game_record + '秒';
+                $que('.top1_title .top_animal')[0].innerText = userDataDesc[0].user_name;
+                $que('.top1_title .top_player')[0].innerText = userDataDesc[0].user_id;
+
+                $que('.top2_title img')[0].src = userDataDesc[1].my_animal_img;
+                $que('.top2_title .top_score')[0].innerText = userDataDesc[1].game_record + '秒';
+                $que('.top2_title .top_animal')[0].innerText = userDataDesc[1].user_name;
+                $que('.top2_title .top_player')[0].innerText = userDataDesc[1].user_id;
+
+                $que('.top3_title img')[0].src = userDataDesc[2].my_animal_img;
+                $que('.top3_title .top_score')[0].innerText = userDataDesc[2].game_record + '秒';
+                $que('.top3_title .top_animal')[0].innerText = userDataDesc[2].user_name;
+                $que('.top3_title .top_player')[0].innerText = userDataDesc[2].user_id;
+       
+                
+                $que('.chart_ranking .ranking_table')[0].innerHTML = '<tr><td>排名</td><td>動物名稱</td><td>會員名稱</td><td>時間</td></tr>';
+                for(var i=3; i<10; i++ ){
+                    
+                    $que('.chart_ranking .ranking_table')[0].innerHTML += '<tr>';
+                    $que('.chart_ranking .ranking_table')[0].innerHTML += `<td>${i+1}</td><td>${userDataDesc[i].user_name}</td><td>${userDataDesc[i].user_id}</td><td>${userDataDesc[i].game_record} 秒</td>`;
+                    $que('.chart_ranking .ranking_table')[0].innerHTML += '</tr>';
+
+                }
+            
+
+                //塞入4-10名
+                // <table class="ranking_table">
+                //         <tr>
+                //             <td>排名</td>
+                //             <td>動物名稱</td>
+                //             <td>會員名稱</td>
+                //             <td>時間</td>
+                //         </tr>
+                //         <tr>
+                //             <td>4</td>
+                //             <td>小白獸</td>
+                //             <td>apple7788</td>
+                //             <td>112秒</td>
+                //         </tr>
+                //     </table>
+
+
+            }else{
+                alert( xhr.status );
+            }
+        }
+        var url = "php/getRankingData.php";
+        xhr.open("Get", url, true);  //readyState : 1
+        xhr.send( null );
+
+
+       
+       
+
+        
+
+        // <div class="chart_top1">
+        //     <div class="top1_title">
+        //         <img src="img/game/top_pic.png" alt="">
+        //         <div class="top_score">168秒</div>
+        //         <div class="top_animal">艾咪</div>
+        //         <div class="top_player">AABB</div>
+        //     </div>
+        // </div>
+        
+
+
+    }
+
+    
+
+    window.addEventListener('resize',function(){
+        if(window.innerWidth<=767){
+            for(var i=0; i<$cls('playing_window').length; i++){
+                $cls('playing_window')[i].style.zIndex = i;
+                $cls('playing_window')[i].style.left = 0;
+            }
+        }else{
+            x="-5%"; y= "25%";  z= "55%";
+            for(var i=0; i<$cls('playing_window').length; i++){
+                $cls('playing_window')[i].addEventListener('click', picClicked);
+                $cls('playing_window')[i].style.left = i*30 - 5+ '%';
+                    if($cls('playing_window')[i].style.left== x){ 
+                        $cls('playing_window')[i].style.zIndex = 2; 
+                        $cls('playing_window')[i].classList.add('normalScale');
+                        $cls('playing_window')[i].classList.remove('scaleUp');
+                    }
+                    if($cls('playing_window')[i].style.left== y){ 
+                        $cls('playing_window')[i].style.zIndex = 4;
+                        $cls('playing_window')[i].classList.remove('normalScale'); 
+                        $cls('playing_window')[i].classList.add('scaleUp');
+                    }
+                    if($cls('playing_window')[i].style.left == z){ 
+                        $cls('playing_window')[i].style.zIndex = 2; 
+                        $cls('playing_window')[i].classList.add('normalScale');
+                        $cls('playing_window')[i].classList.remove('scaleUp');
+                    }
+            }
+        }
+    });
+
+    function doFirst(){
+        getRankingData();
+        getCusAnimal();
+        $cls('arrowLeft')[0].addEventListener('click', sliderLeft);
+        $cls('arrowRight')[0].addEventListener('click', sliderRight);
+        $cls('forest_pointer')[0].addEventListener('click', pointerToMap);
+        $cls('desert_pointer')[0].addEventListener('click', pointerToMap);
+        $cls('mountain_pointer')[0].addEventListener('click', pointerToMap);
+        let enterGame=document.querySelectorAll('.playing_window p');
+        let closeBtn = document.getElementById('game_closeBtn');
+        closeBtn.addEventListener('click', closeIntro);
+        let gameIntro =document.getElementsByClassName('btn_c_nextpage')[0];
+        gameIntro.addEventListener('click', showIntro );
+        let introWindow = document.getElementsByClassName('game_intro_window')[0];
+            introWindow.style.display="none";
+        $cls('forest_pointer')[0].classList.add('pointer_shaking');
+        $cls('forest_pointer')[0].style.filter ="hue-rotate(180deg)";
+
+        if(window.innerWidth>=768){
+            x="-5%"; y= "25%";  z= "55%";
+            for(var i=0; i<$cls('playing_window').length; i++){
+                enterGame[i].style.display="none";                
+                $cls('playing_window')[i].addEventListener('click', picClicked);
+                $cls('playing_window')[i].style.left = i*30 - 5+ '%';
+                    if($cls('playing_window')[i].style.left== x){ 
+                        $cls('playing_window')[i].style.zIndex = 2; 
+                        $cls('playing_window')[i].classList.add('normalScale');
+                        $cls('playing_window')[i].classList.remove('scaleUp');
+                    }
+                    if($cls('playing_window')[i].style.left== y){ 
+                        $cls('playing_window')[i].style.zIndex = 4;
+                        $cls('playing_window')[i].classList.remove('normalScale'); 
+                        $cls('playing_window')[i].classList.add('scaleUp');
+                        enterGame[i].style.display="block";
+                    }
+                    if($cls('playing_window')[i].style.left == z){ 
+                        $cls('playing_window')[i].style.zIndex = 2; 
+                        $cls('playing_window')[i].classList.add('normalScale');
+                        $cls('playing_window')[i].classList.remove('scaleUp');
+                    }
+            }
+        }else if(window.innerWidth<=767){
+            for(var i=0; i<$cls('playing_window').length; i++){
+                $cls('playing_window')[i].style.zIndex = i;
+            } 
+        }
+        
+    }
+    window.addEventListener('load', doFirst);
+  
+
+</script>
+    
+</body>
+</html>

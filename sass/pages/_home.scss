@@ -1,0 +1,1278 @@
+$lblue:#d8ecea;
+$dblue:#7DC7C5;
+
+*{
+    // outline: 1px solid #f00;
+}
+
+//頁面共用屬性
+.home_page{
+    background: linear-gradient(120deg, #cdeaf5 0%, #c2e9fb 100%);
+    h2{
+        background-image: url(../img/home/title.png);
+        background-repeat: no-repeat;
+        font-size: $h2_fz;
+        color:#fff;
+        font-weight: bold;
+        padding: 20px;
+        width: 215px;
+        box-sizing:border-box;
+        text-align: center;
+        margin: 20px 0;
+        //margin-bottom:50px;
+        transform:rotate(-10deg);
+    }
+
+    .intro{
+        text-align: center;
+        font-size: $lg_fz;
+          padding-bottom:30px;
+    }
+
+    .container{
+        max-width:1200px;
+        margin: auto;
+        box-sizing: border-box;
+        padding: 10px;
+    }
+
+}
+
+//////////////////////
+
+.home_header,.home_game{
+    img{
+        width: 100%;
+    }
+}
+
+.home_header{
+    padding-top: 120px;
+    background-image: url('../img/home/hd_cloud_b.png');
+    background-repeat: no-repeat; 
+    background-position:center 80%; 
+    background-size: contain;
+    padding-bottom: 200px;
+    .container{
+        padding-top: 130px;
+       
+    }
+    .home_title{
+        width: 80%;
+        margin: auto;
+        @include responds(medium){
+            width: 37%;
+            margin: 0;
+        }
+        p{
+            color:cadetblue;
+            font-size: $lg_fz;
+            text-align: right;
+            font-weight: bold;
+            padding: 5px;
+        }
+
+    }
+    .home_header_pic{
+        position: relative;
+        margin-top: 100px;
+        animation: beachWave 8s infinite linear;
+    }
+    img[alt*="pyramid"]{
+        position:absolute;
+        top: -2%;
+        left: 38%;
+        z-index: 2;
+        width: 21%;
+    }
+    img[alt*="island_up"]{
+        position: absolute;
+        width: 85%;
+        top: -2%;
+        left: 0;
+        right: 0;
+        margin: auto;
+        z-index: 1;
+    }
+
+    img[alt*="hd_water"]{
+        position: absolute;
+        width: 30%;
+        right: 9%;
+        bottom:18%;
+    }
+    
+
+
+
+    img[alt*="hd_rail"]{
+        display: none;
+        @include responds(xlarge){
+            display: block;
+            position: absolute;
+            width: 40%;
+            left: -33%;
+            top: 40%;
+        }
+    
+    }
+
+
+    
+    img[alt*="hd_train"]{
+
+        display: none;
+        @include responds(xlarge){
+            
+        display: block;
+            position: absolute;
+            width: 15%;
+            left: -25%;
+            top: 35%;
+        }
+    
+    }
+
+
+
+}
+//==================================客製
+
+.home_modify{
+    background-image: url('../img/home/grass.png');
+    background-repeat: no-repeat; 
+    background-size: cover; 
+   padding-bottom: 200px; 
+   overflow: hidden;
+    @include responds(medium){
+        flex-direction:row;
+   
+      background-position: center bottom;
+    }
+    @include responds(xlarge){
+        background-size: contain; 
+    }
+
+    .container{
+        position: relative;
+        
+        .modify_bg_ab{
+            display: none;
+        }
+
+        @include responds(medium){
+            flex-direction:row;
+
+            .modify_bg_ab{
+                display: block;
+        
+        img[alt*="tree_b_right"]{
+            position: absolute;
+            width: 15%;
+            right: -14%;
+            bottom: -9%;
+        }
+                
+        img[alt*="tree_b_left"]{
+            position: absolute;
+            width: 15%;
+            left: -22%;
+            bottom: 1%;
+        }
+
+        img[alt*="tree_s_right"]{
+            position: absolute;
+            width: 10%;
+            right: 0%;
+            bottom: 0%;
+        }
+        img[alt*="tree_s_left"]{
+            position: absolute;
+            width: 10%;
+            left: -8%;
+            bottom: 11%;
+        }
+            }
+
+        }
+
+        
+    }
+    
+        .modify_wrap{
+
+            display: flex;
+            width: 100%;
+            flex-direction:column;
+
+            @include responds(medium){
+                flex-direction:row;
+            }
+
+             
+            .modify_pic{
+                // width: 100%;   
+                @include responds(small){
+                    padding-bottom: 10%;
+                }
+
+                // @include responds(medium){
+                //     width: 50%;
+                //     // background-size: 50%;
+                //     padding-bottom: 0px;
+                // }
+                width: 100%;    
+               text-align: center;
+               background-image: url(../img/home/home_modify_b.png);
+               background-repeat: no-repeat;
+               background-position:bottom;
+               background-size: 80%;
+               position: relative;
+
+                    @include responds(medium){
+                    width: 50%;
+                    }
+    
+                img{
+                    width: 100%;
+
+                    @include responds(medium){
+                        position: absolute;
+                        width: 80%;
+                        left: 0;
+                        right: 0;
+                        bottom: 15%;
+                        margin: auto;
+                        }
+                }
+            }
+    
+            .modify_box{
+                width: 100%;
+                
+                @include responds(medium){
+                    width: 30%;
+                    margin: auto;
+                }
+ 
+    
+                .opt_btn{
+                    margin: 10px 0px;
+                    text-align: center;
+
+                    .opt_btn_head{
+                        display: inline-block;
+                        vertical-align: middle;
+                        // margin: 0 10px;
+                        padding: 5px 20px;
+                        // width: 80%;
+                        border-radius: 15px;
+                        background-color: $col_modify_box;
+                        position: relative;
+                        text-align: center;
+                        color: #333333;
+                        text-decoration: none;
+                        box-shadow: 0px 2px 0px 1px $col_modify_boxshadow;
+        
+                        // &:before{
+                        //     content: '';
+                        //     border-top: 20px solid $col_modify_box;
+                        //     border-right: 8px solid transparent;
+                        //     border-left: 8px solid transparent;
+                        //     border-bottom: 0px solid $col_modify_box;
+                        //     position: absolute;
+                        //     left: 13px;
+                        //     top: 30px;
+                        // }
+                    }
+              
+                }
+                
+                
+                .modify_opt{
+                    width: 100%;
+                    box-sizing: border-box;
+                    border: 5px solid $col_modify_box;
+                    background-color: #fff;
+                    border-radius: 30px;
+                    box-shadow: 2px 2px 0px 3px $col_modify_boxshadow;
+        
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin: auto;
+                    // width: 100%;
+                    
+                    .opt_item{
+                        box-sizing: border-box;
+                        width: 50%;
+                        height: calc(20vh);
+                        text-align: center;
+                        padding: 20px 0px;
+                        img{
+                            height: 100%;
+                        }
+                    }
+    
+                }
+
+            }
+
+  
+
+        }
+
+        .modify_txt{
+            text-align: center;
+            padding: 10px 0 0 0;
+            @include btn_cloud(110px,$col_btn_pink);
+            .btn_cloud{
+                margin: 15px 0;
+            }
+        }
+
+}
+//==================================遊戲
+.home_game{
+    background-image: url('../img/home/desert2.jpg');
+    background-repeat: no-repeat; 
+    background-size: cover;
+    position: relative;
+    background-position: center bottom;
+
+
+    @include responds(medium){
+        padding-bottom: 200px;
+    }
+
+
+    &:before{
+        content: '';
+        width: 100%;
+        height: 22%;
+        position: absolute;
+        top: -19%;
+        background-image: url(../img/home/beach.png);
+        background-size: cotain;
+        animation: beachWave 8s infinite linear;
+        // background-position: 0 100px;
+    }
+    .container{
+        position: relative;
+        padding-bottom: 100px;
+
+        .game_palyvideo{
+        //    visibility:hidden;
+            width: 100%;
+            text-align: center;
+            @include btn_cloud(110px,$col_btn_pink);
+            .btn_cloud{
+                margin-top: 15px;
+            }
+            @include responds(medium){
+                width: 70%;
+                // margin-left:9%;
+                margin: auto;
+            }
+        }
+    
+        .game_palyrank{
+            width: 100%;
+            margin: auto;
+            text-align: center;
+
+            @include responds(medium){
+                width: 40%;
+                position: absolute;
+                bottom: 0;
+                right:0%;
+            }
+
+
+            .title_bg{
+                background-image: url(../img/home/titleCloud.png);
+                background-repeat: no-repeat;
+                background-size: contain;
+                width: 202px;
+                height: 100px;
+                display:flex;
+                align-items: center;
+                justify-content: center;
+                position:relative;
+                top: 40px;
+                @include responds(small){
+                    margin: auto;
+                }
+
+                h3{
+                    font-weight: bold;
+                    color: cadetblue;  
+                    font-size: $h3_fz;
+                }
+             
+            }
+        
+    
+            .topwrap{
+                display: flex;
+                justify-content: center;
+                background-image: url(../img/game/rank_chart.png);
+                background-repeat: no-repeat;
+                // background-size: contain;
+                background-size: 100%;
+                background-position: center center;
+                padding: 20px;
+        
+                .bg_top{
+                    background-image: url('../img/game/chart_topx.png');
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    // background-size: 100%;
+                    padding: 10px;
+                    margin: 10px;
+                    flex-grow: 1;
+
+                    @include responds(medium){
+                        background-size: 100%;
+                        padding: 20px;
+                    }
+                        
+                    img{
+                        width: 100%;
+                    }
+                 
+                }
+            }
+    
+        }
+
+        .game_bg_ab{
+            position: absolute;
+            display:none;
+            @include responds (medium){
+                display: block;
+            }
+        }
+    }
+
+
+    
+}
+
+	@keyframes beachWave{
+		0%  {transform: translateY(0%) ;}
+		25% {transform: translateY(-10px);}
+		50% {transform: translateY(0%);}
+		75% {transform: translateY(-10px);}
+		100%{transform: translateY(0%);}
+	}
+
+
+///////////////////////////////
+
+//==================================排行榜
+.home_rank{
+    background-color: $lblue;
+    background-image: url(../img/home/mountain.png);
+    background-size: 300%;
+    background-repeat: no-repeat;
+    background-position: 0 -100px;
+    padding-bottom: 200px;
+    @include responds(medium){
+        background-size: 105%;
+        background-position: center 0;
+    }
+    @include responds(large){
+        background-size: contain;
+        background-position: 0 -100px;
+    }
+    .container{
+        padding-top: 100px;
+    }
+    .wrap{
+        display:flex;
+        flex-wrap:wrap;
+        position:relative;
+    }
+    .rank_col_msg{
+        width: 100%;
+        @include responds(medium){
+            width: 50%;
+        }
+        @include responds(large){
+            width: 40%;
+        }
+    }
+    .rank_col_top{
+        width: 100%;
+        @include responds(medium){
+            width: 50%;
+            box-sizing:border-box;
+            padding-top: 100px;
+        }
+        @include responds(large){
+            width: 60%;
+            padding-top: 80px;
+        }
+    }
+//留言區底圖
+    .rank_msg {
+        margin: auto;
+        background-image: url(../img/home/msg.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        box-sizing:border-box;
+        background-position:center;    
+        position:relative;   
+        height: 100%;
+        padding:0px 0px 40px;
+       
+        @include responds(medium){
+            padding:130px 10px;
+        }
+        @include responds(large){
+            padding:190px 30px;
+        }
+    }
+   
+    // =====================detail
+    .rank_msg{
+        h3{
+            text-align: center;
+            font-weight: bold;
+            color: cadetblue;
+            padding-top:30px ;
+            font-size: $h3_fz;
+            @include responds(medium){
+                padding-top: 90px;
+            }
+        }
+    }
+
+//一條留言
+    .msg_row{
+        display:flex;
+        justify-content: center;
+        width: 90%;
+        margin:10px auto;
+        @include responds(medium){
+            width: 100%;
+        }
+    }
+//留言區圖片
+    .msg_img{
+        position:relative;
+        img{
+            width:100%;
+        }
+        width: 70px;
+        margin-right:10px;
+        .animal{
+            position:absolute;
+            top: 50%;
+            left: 50%;
+            transform:translate(-50%,0);
+            width: 50%;
+        }
+    }
+//中間的字們
+    .msg_content{
+        text-align: right;
+        p{
+            padding: 3px;
+            text-align: left;
+        }
+        .msg_more{
+            font-size: $xs_fz;
+        }
+        .msg_date{
+            font-size: $xs_fz;
+            display:inline-block;
+            vertical-align: top;
+        }
+         @include btn_cloud(62px,$col_btn_blue);
+    }
+
+//前三名的每一個
+    .top_item{
+        width:90%;
+        margin:100px auto 0;
+        @include responds(medium){
+            margin: 0 auto 0;
+        }
+    }
+
+//包第二名第三名的框
+    .top_row{
+        @include responds(medium){
+            display:flex;
+            align-items: flex-end;
+            justify-content: space-between;
+        
+        }
+        @include responds(large){
+            display:flex;
+            margin-top:-100px;
+            padding-left: 50px;
+        }
+    }
+    
+    .top_one{
+        @include responds(medium){
+            width: 50%;  
+        }
+    }
+    .top_two{
+        @include responds(medium){
+            width: 50%;
+        }
+        @include responds(large){
+            width: 40%;
+            margin: 0px;
+        }
+    }
+    .top_three{
+        @include responds(medium){
+            width: 50%;
+        }
+        @include responds(large){
+            width: 40%;
+            margin: 0px;
+        }
+    }
+//石頭上面的所有東西
+    .top_content{
+        position:relative;
+        display:flex;
+        justify-content: center;
+    }
+//對話框
+    .top_info{
+        z-index: 1;
+        position:absolute;
+        top: -52px;
+        left: 0px;
+        background-color: #fff;
+        border: 2px solid cadetblue;
+        box-shadow:2px 2px 0 1px cadetblue;
+        border-radius:5px;
+        padding:3px;
+        transform: rotate(-26deg);
+        @include responds(medium){
+            display:none;
+        }
+        @include responds(large){
+            top: -34px;
+            left: -22px;
+            display:block;
+         }
+        
+        p{
+            font-size: $s_fz;
+        }
+        
+//對話框的三角形
+        @include pseudo(after,'',0px ,0px  ){
+            // background-color: #000;
+            border-top:20px solid cadetblue;
+            border-left:20px solid transparent;
+            border-right:20px solid transparent;
+            position:absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            
+        }
+    }
+//圖片
+    .top_img{
+        width: 60%;
+        margin:0 5px;
+        position:relative;
+        img{
+            width:100%;
+        }
+        .animal{
+            position:absolute;
+            top: 50%;
+            left: 50%;
+            transform:translate(-50%,0);
+            width: 50%;
+        }
+    }
+//btn
+    .top_btn{
+        margin-top: auto;
+        @include btn_cloud(53px,$col_btn_blue);
+       .btn_cloud{
+           display: block;
+           margin: 5px 0;
+           font-size: 14px;
+       }
+    }
+//石頭那塊
+    .top_rock{
+        background-image: url(../img/home/rock.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position:center;
+        padding-bottom: 38%;
+        margin-top: -50px;
+        @include responds(medium){
+            margin-top: -40px;
+        }
+    }
+//牌子
+    .top_medal{
+        background-image: url(../img/home/medal.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 30%;
+        margin: auto;
+        text-align: center;
+        height: 0px;
+        padding-bottom: 30%;
+        position:relative;
+        top:110px;
+        @include responds(medium){
+            top:55px;
+        }
+        
+        p{
+            padding: 5px;
+        }
+        .top_medal_content{
+            position:absolute;
+            width: 90%;
+            top: 50%;
+            left: 50%;
+            transform:translate(-50%,-50%);
+        }
+        .vote_rank{
+            color:red;
+            font-size: 3* $base_fz;
+            font-weight: bold;
+        }
+    }
+//大button
+    .main_btn{
+        position:absolute;
+        bottom: 0;
+        right: 0%;
+        @include btn_cloud(80px,$col_btn_pink);
+    }
+}
+
+
+// =====================預約導覽
+.home_resv {
+    overflow: hidden;
+    background-color: $lblue;
+    background-image: url(../img/home/sky.png);
+    background-repeat: no-repeat;
+    background-size: 100% 60%;
+    background-position:bottom;
+    width: 100%;
+    padding-bottom: 200px;
+//土地那條線
+@include pseudo(after,'' ,100%,5px ){
+    background-color: #000;
+}
+//說明文字
+.guide_word{
+    padding: 10px;
+    text-align: center;
+    @include responds(medium){
+        width: 40%;
+        position:relative;
+        left: 55%;
+        top: 50px;
+        box-sizing:border-box;
+    }
+}
+
+//包日曆和資訊，flex用
+    .wrap{
+        display:flex;
+        flex-wrap:wrap;
+        @include responds(medium){
+            margin-top: -95px;
+        } 
+    }
+
+
+    .col_calendar{
+        @include responds(medium){
+            width: 50%;
+        } 
+        .resv_calendar{
+            background-image: url("../img/home/calendar2.png");
+            @include responds(xlarge){
+                background-image: url("../img/resv/calendar_bg.png");
+                // width: 50%;
+            }
+            
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            padding:220px  0 40px;
+            box-sizing: border-box;
+            .calendarbox{
+                width: 90%;
+                @include responds(medium){
+                    width: 80%;
+                }
+                margin: auto;
+                background:#f0e4ba;
+                border-radius: 20px;
+                .calendar_title{
+                    text-align: center;
+                    color: #776f6f;
+                    padding-bottom: 2%;
+                    box-sizing: border-box;
+                    font-size: $lg_fz;
+                    .fa-chevron-left {
+                        &:before{
+                            content: "\f053";
+                        }
+                    }
+                    .fa-chevron-right {
+                        &:before{
+                            content: "\f054";
+                        }
+                    }
+                }
+                .week_group{
+                    font-size: $m_fz;
+                    font-weight: bold;
+                    color:$col_brown;
+                    ul{
+                        display: flex;
+                        justify-content: center;
+                        li{
+                            width: 14.2%;
+                            height: 36px;
+                            line-height: 36px;
+                            font-size: 18px;
+                            list-style-type: none;
+                            display: block;
+                            box-sizing: border-box;
+                            text-align: center;
+                            border-bottom: 1px solid #ab8450;
+                            cursor: pointer;
+                            // float: left;
+                        }
+                        .clearfix{
+                            clear: both;
+                        }
+                    }
+                }
+                .day_group{
+                    font-size: $m_fz;
+                    font-weight: bold;
+                    color:$col_brown;
+                    ul{
+                        width: 100%;
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: flex-start;
+                        li{
+                            width: 14.2%;
+                            height: 36px;
+                            line-height: 36px;
+                            font-size: 18px;
+                            list-style-type: none;
+                            display: block;
+                            box-sizing: border-box;
+                            text-align: center;
+                            border: 1px solid #ab8450;
+                            cursor: pointer;
+                        }
+                        // .unaviable{
+                        //     background: #a8a6a6;
+                        //     border-radius: 10px;
+                        // }
+                        // .full_booked{
+                        //     background: #f19149;
+                        //     border-radius: 10px;
+                        //     border: 1px solid #f19149;
+                        // }
+                        // 今日
+                        .colorbox{
+                            // border:1px solid #FFC300;
+                            background:#33a1d1;
+                        }
+                        // 今天之前的日期
+                        .lightgrey{
+                            color:#AAA;
+                        }                    
+                    }
+                }
+                .curday_after{
+                    li{
+                        &:hover{
+                            font-weight: bold;
+                            color: #e5ecec;
+                            background: #e89e4d;
+
+                        }        
+                    }
+                }
+            }
+            .calendar_text{
+                display: flex;
+                width: 80%;
+                margin: auto;
+                font-size: 0px;
+                li{
+                    display: inline-block;
+                    font-size: $s_fz;
+                    padding: 5px;
+                    // width: 5%;
+                }
+                .unaviable{
+                    background-color: #a8a6a6;
+                    border-radius: 20px;
+                    margin-left: 10px;
+                }
+                .full_booked{
+                    background-color: #f19149;
+                    border-radius: 20px;
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+   
+//顯示資訊的文字區
+    .col_info{
+        width: 100%;
+        display:flex;
+        align-items: center;
+        margin-top: 50px;
+        @include responds(medium){
+            width: 50%;
+            margin-top: 0px;
+        } 
+    }
+//顯示資訊那塊
+    .info_text{
+        background-color: rgba(255,255,255,0.5);
+        padding: 15px;
+        border-radius: 20px;
+        font-family: Microsoft JhengHei;
+        margin: auto;
+        width: 80%;
+    
+        @include responds(large){
+            width: 50%;
+        }   
+    }
+//每一列資訊
+    .text_row{
+        display:flex;
+        justify-content: center;
+        padding:5px 10px;
+        p{
+            padding:0 10px;
+        }
+    }
+//button
+@include btn_cloud(80px,$col_btn_pink);
+.main_title{
+    text-align: center;
+    margin: 20px 0 5px;
+}
+
+//火車+門
+    .background{
+        display:none;
+        @include responds(medium){
+            margin-top: -200px;
+            display:flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            transform:scale(0.7);
+        }
+        @include responds(xlarge){
+            transform:scale(1);
+        }
+    }
+
+    .train{
+        position:relative;
+        animation:train 13s infinite;
+        z-index: 1;
+       .hand{
+           position:absolute;
+           top: 32%;
+           left:50%;
+           transform: rotate(-24deg);
+           animation:hand 1s linear infinite;
+       }
+    }
+    .gate{
+        position:relative;
+        .gate_top{
+            position:absolute;
+            top: 0;
+            z-index: 2;
+        }
+    }
+}
+@keyframes train{
+    0%{right:100%}
+    50%{right:0}
+    100%{right:-100%}
+};
+
+@keyframes hand{
+    0%{transform: rotate(-24deg);top: 32%;}
+    50%{transform: rotate(-33deg);top: 29%;}
+    100%{transform: rotate(-24deg);top: 32%;}
+}
+
+
+
+// =====================================商城
+.home_shop{
+    background-color: #bbe0e7;
+    .wrap{
+        
+        @include responds(medium){
+            flex-direction:row-reverse;
+            display:flex;
+        justify-content: center;
+        }
+//選怪前三名的圖 區
+        .shop_rank{
+            width: 100%;
+            align-self: center;
+            @include responds(medium){
+                width: 30%;
+            }
+        }
+
+//商品 區
+        .shop_product{
+            width: 100%;
+            @include responds(medium){
+                width: 50%;
+            }
+        }
+    }
+
+//選怪圖區 細節
+    //標題背景
+    .p_bg{
+        background-image: url(../img/home/titleCloud.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 202px;
+        height: 100px;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        @include responds(small){
+            margin: auto;
+        }
+        p{
+            font-weight: bold;
+            color: cadetblue;  
+            font-size: $h3_fz;
+        }
+    }
+    .shop_rank_img{
+        margin: auto;
+        width: 90%;
+        display:flex;
+        justify-content: center;
+        margin-top: 20px;
+
+        img{
+            width:100%
+        }
+        .rank_img_item{
+            transform:rotate(15deg);
+            position:relative;
+            .shop_animal{
+                position:absolute;
+                top: 50%;
+                left: 50%;
+                transform:translate(-50%,0);
+                width: 50%;
+            }
+        }
+    }
+//商品那個框框 
+    .item{
+        width: 90%;
+        text-align: center;
+        border:2px solid saddlebrown;
+        background-color: #fff;
+        position:relative;
+        margin: 30px auto;
+//hover出來的樹懶   
+        @include pseudo(before,null,100%,32px){
+            background-image: url(../img/shop/sloth.png);
+            background-repeat: no-repeat;
+            position:absolute;
+            top: 0px;
+            transition:top 0.5s;   
+        }
+        &:hover {
+            &:before{
+                top:-35px;
+            }
+        }
+        h3{
+            font-size: $h3_fz;
+            padding: 10px;
+        }
+    }
+//拿來flex的外框
+    .prod_wrap{
+        @include responds(medium){
+            display:flex;
+            justify-content: space-around; 
+        }
+       
+    }
+//商品資訊
+    .prod_info{
+        align-self: center;
+        margin: auto;
+        @include responds(medium){
+            margin: 0px;
+        }
+//商品標題
+        h3{
+            font-weight: bold;
+        }
+//價格
+        .price{
+            margin-bottom: 10px;
+        }
+
+//btns  
+    @include btn_cloud(110px,$col_btn_blue);
+    .btn_cloud{
+        display:block;
+        @include responds(small){
+            margin: auto;
+        }
+        
+    }
+    }
+
+    
+//修改數量
+    .number{
+        display:flex;
+        justify-content: center;
+        -webkit-appearance: none;
+        button{
+            color:#fff;
+            font-weight: bold;
+            font-size: $lg_fz;
+            width: 25px;
+            height: 25px;
+            background-color:#5f4f23;
+            border:none;
+            border-radius: 5px;
+            line-height: 1;
+        }
+        input{
+            padding:5px 5px;  border:0 none;
+            width: 30px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+    }
+
+//上下的彩色邊框
+    .deco{
+        width: 100%;
+        height: 24px;
+    
+    }
+    .deco_top{
+        background-image: url('../img/shop/prod_deco_top.jpg');
+        position:relative;
+        background-repeat: repeat-x;
+        padding-bottom: 10px;
+        background-color: #fff;
+    }
+    
+    .deco_bottom{
+        background-image: url('../img/shop/prod_deco.jpg');
+    }
+    
+//商品圖片的外框    
+    .prod_img{
+        position:relative;
+        width: 70%;
+        margin: auto;
+        @include responds(medium){
+            margin: 0px;
+        }
+//商品本人
+        .prod_plain{
+            width: 100%;
+        }
+//選的動物圖案
+        .pic_chosen{
+            position:absolute;
+            width: 41%;
+            overflow:hidden;
+
+//做動畫用，包三張圖的
+            .pic_chosen_flex{
+                display:flex;
+                width: 400%;
+                position:relative;
+                animation:pic_chosen 7s linear infinite;
+            }
+            .pic_chosen_one{
+                position:relative;
+                width: 100%;
+            }
+            .shop_animal_bg{
+                width: 100%;
+            }
+            .shop_animal{
+                position:absolute;
+                top: 50%;
+                left: 50%;
+                transform:translate(-50%,0);
+                width: 50%;
+            }
+        }
+    }
+    @keyframes pic_chosen{
+        0%{right:0%}
+        16.6667%{right:0%}
+        33.3334%{right:100%}
+        50%{right:100%}
+        66.6667%{right:200%}
+        83.3334%{right:200%}
+        100%{right:300%}
+
+    }
+    @mixin picChosen($top,$left,$right){
+        top: $top;
+        left: $left;
+        right: $right;
+        margin:auto;
+    }
+    
+    .pic_chosen_cup{
+        @include picChosen(26%,0,24%)
+    }
+    
+    .main_btn{
+        text-align: right;
+        margin: 40px;
+        @include btn_cloud(75px,$col_btn_pink);
+    }
+}

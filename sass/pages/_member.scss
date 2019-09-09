@@ -1,0 +1,291 @@
+*{
+  // outline: 1px solid #f00; 
+}
+
+.bd_member{
+  font-family: Microsoft JhengHei;
+  padding-top:90px;
+  background-image:url('../img/member/member_bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center bottom;
+
+  h2{
+    text-align: center;
+    margin-bottom: 20px;
+
+  }
+
+  section{
+    // padding: 20px 0px;
+
+    img{
+      vertical-align: middle;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    p[class*="col-"]{
+      float: left;
+      box-sizing: border-box;
+      padding: 10px;
+    }
+
+  }
+
+  section{
+    min-height: calc(70vh);
+    padding-bottom: 20px;
+  }
+  
+}
+
+
+//主畫面切換
+.member_tab{
+  @include btn_cloud(100px,$col_btn_blue);
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+
+  .banner_cloud{
+    font-size: 0;
+    width: 60%;
+    margin: auto;
+    position: relative;
+    background-image: url(../img/header/banner_cloud.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 40px 0px 30px 0px;
+    .icon_l{
+        width: 25px;
+        height: 25px;
+    }
+    .icon_r{
+        width: 25px;
+        height: 25px;
+    }
+    .title{
+        margin: 0px 10px;
+    }
+    @include responds(medium){
+
+        width: 30%;
+        padding: 60px 0px 50px 0px;
+
+        .title{
+            margin: 0px 20px;
+        }
+    }
+
+}
+
+.tab_item{
+  display: flex;
+  // justify-content: space-around;
+}
+  .tablink_color{
+    background:$col_btn_blue;
+    color: $col_white;
+  }
+
+}
+
+//
+.baic_btn{
+  @include btn_cloud(100px,$col_btn_orange);
+}
+
+
+
+
+
+
+.my_baic,.my_love , .my_receive ,.my_order{
+  margin: 10px 0 0 0px;
+}
+
+.my_gamerecord,.my_animal{
+  margin: 20px 0 0 0;
+}
+
+.my_baic,.my_gamerecord,.my_animal,.my_love , .my_receive ,.my_order{
+  border: 5px solid #fff;
+  background-color: #fde5a4;
+  padding: 10px 0px;
+  box-sizing: border-box;
+  border-radius: 15px;
+
+}
+
+
+.baic_pic,.gamerecord_pic,.myanimal_pic,.upfile{
+  text-align: center;
+}
+
+
+.member_basic{
+  .upfile{
+    margin-top: 10px;
+  }
+  .myanimal_txt{
+      text-align: center;
+    }
+
+  .baic_btn{
+    margin-top: 10px;
+    text-align: center;
+  }
+
+}
+//我的訂單
+
+.member_order{
+  //整筆訂單
+
+  .myorder_item{
+    margin-bottom: 10px;
+    border-top: 2px dotted #157E8F;
+
+    .item_title{
+      // display: none;
+        @include responds(small){
+          display: none;
+        }
+    }
+
+    .item_list{
+      .s_show{
+        display: inline-block;
+
+          @include responds(medium){
+            display: none;
+          }
+      }
+
+    }
+
+
+  }
+
+    
+
+
+
+  //訂單明細 點了要打開
+  .myorder_item_detail{
+    
+    margin: 20px 10px;
+    // border: 2px solid $col_btn_blue;
+    // display: none;
+    background-image: url('../img/member/m_title_icon.png');
+    border-radius: 20px;
+    background-repeat:no-repeat;
+    background-position:bottom right;
+    background-color: rgba($color: #ffffff, $alpha: 0.5);
+    
+    @include responds(medium){
+      margin: 20px 60px;
+    }
+
+      //商品名稱
+      .item_title{
+          @include responds(small){
+            display: none;
+          }
+      }
+
+      .item_list{
+        .s_show{
+          display: inline-block;
+
+            @include responds(medium){
+              display: none;
+            }
+        }
+ 
+      }
+    }
+  }
+
+///我的預約
+.member_receive{
+
+
+  .myreceive_item{
+    margin-bottom: 10px;
+    border-top: 2px dotted #157E8F;
+
+    .item_title{
+      // display: none;
+        @include responds(small){
+          display: none;
+        }
+    }
+
+    .item_list{
+      .s_show{
+        display: inline-block;
+
+          @include responds(medium){
+            display: none;
+          }
+      }
+
+    }    
+  }
+
+  .qrcode_wrap{
+    // display: none;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+
+    .qrcode_pic{
+        width: 300px;
+        position: fixed;
+        text-align: center;
+        background-color: lightblue;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        // margin: auto;
+        border-radius: 10px;
+        box-sizing: border-box;
+        padding: 10px;
+    
+        .btn_close{
+          display: block;
+          border-radius: 50%;
+          background-color: #ccc;
+          box-shadow: 2px 2px 0 1px #333;
+          width: 30px;
+          height: 30px;
+          position: absolute;
+          top: -10px;
+          right: -10px;
+          line-height: 2;
+          text-align: center;
+        }
+      }
+
+  }
+
+}
+
+
+.baic_txt td , .gamerecord_txt td{
+  width: 10%;
+  padding: 10px;
+}
