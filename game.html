@@ -97,18 +97,16 @@
             </a>
         
         </div>
-       
+        <!-- <a href="gaming.html" onclick="chosenArea('desert')"></a> -->
             <div class="playing_desert playing_window">
+                <input type="hidden" id="userNo" value="1">
                 <p><a href="gaming.html" onclick="chosenArea('desert')">進入遊戲</a></p>
-                <input type="hidden" name="area" value="desert">
             </div>
             <div class="playing_forest playing_window">
                 <p><a href="gaming.html" onclick="chosenArea('forest')">進入遊戲</a></p>
-                <input type="hidden" name="area" value="forest">
             </div>
             <div class="playing_mountain playing_window">
                 <p><a href="gaming.html" onclick="chosenArea('mountain')">進入遊戲</a></p>
-                <input type="hidden" name="area" value="mountain">
             </div>
         <div class="arrowRight">></div>
     </div>
@@ -149,32 +147,21 @@
                     </div>
                 </div>
                 <div class="chart_ranking">
-                    <!-- <div class="ranking_row_title">
-                        <div class="ranking_number">排名</div>
-                        <div class="ranking_animal">動物名稱</div>
-                        <div class="ranking_player">會員名稱</div>
-                        <div class="ranking_timing">時間</div>
-                    </div>
-                    <div class="ranking_row">
-                        <div class="ranking_number">4</div>
-                        <div class="ranking_animal">小白獸</div>
-                        <div class="ranking_player">apple7788</div>
-                        <div class="ranking_timing">112秒</div>
-                    </div> -->
-                    <table class="ranking_table">
-                        <tr>
-                            <td>排名</td>
-                            <td>動物名稱</td>
-                            <td>會員名稱</td>
-                            <td>時間</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>小白獸</td>
-                            <td>apple7788</td>
-                            <td>112秒</td>
-                        </tr>
-                    </table>
+able c
+                    <tlass="ranking_table">
+                            <!-- <tr>
+                                <td>排名</td>
+                                <td>動物名稱</td>
+                                <td>會員名稱</td>
+                                <td>時間</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>小白獸</td>
+                                <td>apple7788</td>
+                                <td>112秒</td>
+                            </tr> -->
+                        </table>
                     <img src="img/game/chart_ranking_bottom.png" alt="">
                 </div>
         </div>
@@ -187,6 +174,19 @@
 
 
 let x,y,z,areaChoice;
+let tempUserNo = 1;
+let userDataDesc = [];
+
+function $id(id){
+    return document.getElementById(id);
+}
+function $cls(cls){
+    return document.getElementsByClassName(cls);
+}
+
+function $que(css_selector){
+    return document.querySelectorAll(css_selector);
+}
 
 function showIntro(){
     let introWindow = document.getElementsByClassName('game_intro_window')[0];
@@ -208,9 +208,7 @@ function chosenArea(area){
 }
 
 
-    function $cls(cls){
-        return document.getElementsByClassName(cls);
-    }
+
     
     function mapPointer(location){
         $cls('desert_pointer')[0].classList.remove('pointer_shaking');
@@ -386,7 +384,118 @@ function chosenArea(area){
 
     }
     
+    function getCusAnimal(){
+        var xhr = new XMLHttpRequest();
+        xhr.onload=function (){
+            if( xhr.status == 200 ){ 
+                // alert(JSON.parse(xhr.responseText));
+                userData = JSON.parse(xhr.responseText);
+                sessionStorage['animal_img'] = userData.my_animal_img;
+                sessionStorage['animal_life'] =userData.animal_life;
+                sessionStorage['animal_jump'] =userData.animal_jump;
+                sessionStorage['animal_en1'] =userData.environ_adapt_1;
+                sessionStorage['animal_en2'] =userData.environ_adapt_2;
+                sessionStorage['animal_en3'] =userData.environ_adapt_3;
 
+
+                // alert(userData.my_animal_img);
+                // alert('session裡的動物圖:'+sessionStorage['animal_img']);
+                // alert('session裡的動物生命:'+sessionStorage['animal_life']);
+                // alert('session裡的動物跳躍力:'+sessionStorage['animal_jump']);
+                // alert('session裡的動物適應力1:'+sessionStorage['animal_en1']);
+                // alert('session裡的動物適應力2:'+sessionStorage['animal_en2']);
+                // alert('session裡的動物適應力3:'+sessionStorage['animal_en3']);
+            }else{
+                alert( xhr.status );
+            }
+        }
+
+        var url = "php/getCusAnimal.php?user_no="+ $id('userNo').value;
+        xhr.open("Get", url, true);  //readyState : 1
+
+        xhr.send( null );
+    }   
+  
+    function getRankingData(){
+ 
+        var xhr = new XMLHttpRequest();
+        xhr.onload=function (){
+            if( xhr.status == 200 ){ 
+                userDataDesc = JSON.parse(xhr.responseText);
+                // alert(userDataDesc[0].my_animal_img);
+
+                //塞入前三名照片跟資料
+                $que('.top1_title img')[0].src = userDataDesc[0].my_animal_img;
+                $que('.top1_title .top_score')[0].innerText = userDataDesc[0].game_record + '秒';
+                $que('.top1_title .top_animal')[0].innerText = userDataDesc[0].user_name;
+                $que('.top1_title .top_player')[0].innerText = userDataDesc[0].user_id;
+
+                $que('.top2_title img')[0].src = userDataDesc[1].my_animal_img;
+                $que('.top2_title .top_score')[0].innerText = userDataDesc[1].game_record + '秒';
+                $que('.top2_title .top_animal')[0].innerText = userDataDesc[1].user_name;
+                $que('.top2_title .top_player')[0].innerText = userDataDesc[1].user_id;
+
+                $que('.top3_title img')[0].src = userDataDesc[2].my_animal_img;
+                $que('.top3_title .top_score')[0].innerText = userDataDesc[2].game_record + '秒';
+                $que('.top3_title .top_animal')[0].innerText = userDataDesc[2].user_name;
+                $que('.top3_title .top_player')[0].innerText = userDataDesc[2].user_id;
+       
+                
+                $que('.chart_ranking .ranking_table')[0].innerHTML = '<tr><td>排名</td><td>動物名稱</td><td>會員名稱</td><td>時間</td></tr>';
+                for(var i=3; i<10; i++ ){
+                    
+                    $que('.chart_ranking .ranking_table')[0].innerHTML += '<tr>';
+                    $que('.chart_ranking .ranking_table')[0].innerHTML += `<td>${i+1}</td><td>${userDataDesc[i].user_name}</td><td>${userDataDesc[i].user_id}</td><td>${userDataDesc[i].game_record} 秒</td>`;
+                    $que('.chart_ranking .ranking_table')[0].innerHTML += '</tr>';
+
+                }
+            
+
+                //塞入4-10名
+                // <table class="ranking_table">
+                //         <tr>
+                //             <td>排名</td>
+                //             <td>動物名稱</td>
+                //             <td>會員名稱</td>
+                //             <td>時間</td>
+                //         </tr>
+                //         <tr>
+                //             <td>4</td>
+                //             <td>小白獸</td>
+                //             <td>apple7788</td>
+                //             <td>112秒</td>
+                //         </tr>
+                //     </table>
+
+
+            }else{
+                alert( xhr.status );
+            }
+        }
+        var url = "php/getRankingData.php";
+        xhr.open("Get", url, true);  //readyState : 1
+        xhr.send( null );
+
+
+       
+       
+
+        
+
+        // <div class="chart_top1">
+        //     <div class="top1_title">
+        //         <img src="img/game/top_pic.png" alt="">
+        //         <div class="top_score">168秒</div>
+        //         <div class="top_animal">艾咪</div>
+        //         <div class="top_player">AABB</div>
+        //     </div>
+        // </div>
+        
+
+
+    }
+
+    
 
     window.addEventListener('resize',function(){
         if(window.innerWidth<=767){
@@ -419,7 +528,8 @@ function chosenArea(area){
     });
 
     function doFirst(){
-        
+        getRankingData();
+        getCusAnimal();
         $cls('arrowLeft')[0].addEventListener('click', sliderLeft);
         $cls('arrowRight')[0].addEventListener('click', sliderRight);
         $cls('forest_pointer')[0].addEventListener('click', pointerToMap);

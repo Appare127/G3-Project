@@ -65,7 +65,7 @@
             <div id="retry"><img src="img/game/gaming_controller.png" alt=""><span>再玩一次</span></div>
     </div>
 </div> 
-@@include('template/footer.html')
+<!-- @@include('template/footer.html') -->
 
 
 <script>
@@ -81,13 +81,22 @@ let solutionBar = document.getElementById('solutionBar');
 let solutionHead = document.getElementById('solutionHead');
 let solutionText = document.getElementById('solutionText');
 let animalPic = document.querySelector('.gaming_animal img');
+let gaming_animal = document.querySelector('.gaming_animal img');
+let gaming_monster = document.querySelector('.gaming_monster img');
+
+
 
 // scene[sessionStorage['sceneChoice']].monster
 // let 
-cusAnimal = {
-    pic:'./img/game/0902.png',
-}
-animalPic.src = cusAnimal.pic;
+//  cusAnimal = {
+//     pic:'./img/game/0902.png',
+//     life:'',
+//     jumpForce:'',
+//     forestAdapt:Number,
+//     desertAdapt:Number,
+//     mountainAdapt:Number,
+// }
+// gaming_animal.src = cusAnimal.pic;
 // console.log(cusAnimal);
 
 function chosenArea(area){
@@ -101,11 +110,12 @@ function chosenArea(area){
 
 
 function restartGame(){
-    life=3;
+    
     message.style.display="none";
     calculation.style.display="none";
     questionPage.style.display="none";
-    life=3;
+    life=sessionStorage['animal_life'];
+    timer=0;
     n = Math.floor( Math.random()* questions.length);
     questions[n].displayQuestion();    
     loop();
@@ -117,20 +127,36 @@ window.addEventListener('resize',function(){
 });
 
 function doFirst(){
+ 
     let retry = document.getElementById('retry');
-
     retry.addEventListener('click',restartGame);
-    // questionPage.style.width=2/5*(window.innerWidth)+'px';
     questionPage.style.display="none";
     calculation.style.display="none";
     if(sessionStorage['sceneChoice'] == null){
         sessionStorage['sceneChoice'] = chosenArea('desert');
     }
-    console.log('chosenArea():'+sessionStorage['sceneChoice']);
-    
+}
+
+function updateScoreMoney(){
+
+    let xhr = new XMLHttpRequest();
+    xhr.onload =function(){
+        if(xhr.status == 200){
+            alert(xhr.responseText);
+        }else {
+            alert(xhr.status);
+        }
+    }
+    // sessionStorage['game_record'] = timer;
+    var url = `php/userUpdateToDb.php?user_no=1&game_record=${timer}&game_money=${money}` ;
+    xhr.open("Get", url,true);
+    xhr.send(null);
+
+
 }
 
 window.addEventListener('load',doFirst);
+window.addEventListener('beforeunload', updateScoreMoney);
 </script>    
 </body>
 </html>
