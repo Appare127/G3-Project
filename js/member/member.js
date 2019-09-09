@@ -36,6 +36,28 @@ window.addEventListener('load',
 // <!------ tab open page ----->
 
 
+// <!------ 上傳大頭貼 ----->
+
+function fileChange(){
+
+  let readFile = new FileReader();
+  let file = document.getElementById('upFile').files[0];
+  readFile.readAsDataURL(file);
+  readFile.addEventListener('load',function(){
+    let upfilePic = document.getElementById('upfile_pic');
+    upfilePic.src= this.result;
+  })
+
+}
+
+window.addEventListener('load',function(){
+  document.getElementById('upFile').onchange = fileChange;
+})
+
+// <!------ 上傳大頭貼 ----->
+
+
+
 // <!------ 訂單明細收合----->
 var orderbtns=document.getElementsByClassName('js_order_show');
 var orderDetails = document.getElementsByClassName('myorder_item_detail');

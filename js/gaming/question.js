@@ -7,7 +7,7 @@ function Question(question, choices, answer,solution) {
     this.solution = solution;
     this.displayQuestion = function(){
         choicesBar.innerHTML = '';
-        questionBar.innerText = this.question;
+        questionBar.innerHTML ='<span style="font-size:24px;font-weight:700;">問題: </span>'+this.question;
         for(var i=0;i<this.choices.length; i++){
             btn.push(document.createElement('p'));
             btn[i].innerText = this.choices[i];
@@ -29,8 +29,6 @@ function Question(question, choices, answer,solution) {
             },100);
         }else{
             choicesBar.innerHTML = '';
-           
-            timer=0;
             solutionHead.innerHTML = `<p style="font-size:18px; font-weight:700">正確答案是<span style="color:red;font-size:24px;width:30px;"> ${this.answer+1}</span></p>`;
             solutionText.innerHTML = `<p>${this.solution}</p>`;
             calculation.style.display="block";

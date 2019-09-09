@@ -73,14 +73,14 @@
                         <div class="item">
                             <div class="pic">
                                 <img class="shop_animal_bg" src="img/shop/animal_bg2.png" alt="">
-                                <img class="shop_animal" src="img/shop/animal1.png" alt="">
+                                <img class="shop_animal" src="img/shop/animal2.png" alt="">
                             </div>
                             <p>選美No.1</p>
                         </div>
                         <div class="item">
                             <div class="pic">
                                 <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
-                                <img class="shop_animal" src="img/shop/animal1.png" alt="">
+                                <img class="shop_animal" src="img/shop/animal3.png" alt="">
                             </div>
                             <p>選美No.2</p>
                         </div>
@@ -201,6 +201,7 @@
             <button class="back_button">X</button>
             <div class="wrap">
                 <div class="title">
+                    <img src="img/shop/sign_board.png" alt="">
                     <p>商品詳情</p>
                 </div>
                 <div class="prod_img">
@@ -219,7 +220,7 @@
         </div>
     </div>
     @@include('template/footer.html')
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
         window.addEventListener("load",function(){
             let detailButtons=document.querySelectorAll('.view_detail');  //查看詳情
@@ -276,7 +277,8 @@
 
             for(i=0;i<addCartButtons.length;i++){  //加入購物車
                 addCartButtons[i].onclick=function(){
-                    alert("已成功加入")
+                    alert("已成功加入");
+                    document.getElementById("cart_num").style.display='block';
                 }
             }
            

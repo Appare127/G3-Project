@@ -15,7 +15,7 @@ $lblue:#d8ecea;
     .banner{
         position:relative;
         padding-top: 70px;
-        overflow: hidden;
+        // overflow: hidden;
         @media screen and (min-width:1200px){
             margin: auto;
             padding-top: 120px;
@@ -154,6 +154,7 @@ $lblue:#d8ecea;
     background-repeat: no-repeat;
     padding-bottom: 100px;
     position:relative;
+    background-size: 100%;
 
     //tent        
     .tent{
@@ -438,6 +439,7 @@ $lblue:#d8ecea;
 }
 // =====================================
 // 商品詳情
+
 .prod_detail{
     display:none;
     position:fixed;
@@ -503,9 +505,18 @@ $lblue:#d8ecea;
         padding-bottom: 33%;
         p{
             position:absolute;
-            top: 50%;
+            top: 15%;
             left: 50%;
             transform:translate(-50%,-50%);
+            color:#fff;
+            font-size: $lg_fz;
+        }
+        img{
+            width: 40%;
+            display: block;
+            margin: auto;
+            position:relative;
+            top:-30px;
         }
     }
     .prod_img{

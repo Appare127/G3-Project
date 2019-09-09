@@ -17,19 +17,10 @@ let life;
 let test = 999;
 let test2 = 999;
 
-// function scrollSpeed(period){
-//     if(period<10){
-//         return 2;
-//     }else if(period >=10){
-//         return 
-//     }
-// }
 let timer=0;
 let money=0;
 
-let cusAnimal = {
-    pic:'./img/game/0902.png',
-}
+
 
 let scene = {
     desert:{
@@ -51,11 +42,12 @@ let scene = {
 
 
 function preload() {
+    console.log('生命:'+sessionStorage['animal_life']);
     if(sessionStorage['sceneChoice'] == null){
         sessionStorage['sceneChoice'] = 'desert';
     }
-    console.log(sessionStorage['sceneChoice']);
-    uImg = loadImage(cusAnimal.pic);
+    uImg = loadImage( sessionStorage['animal_img']);
+
     tImg = loadImage(scene[sessionStorage['sceneChoice']].monster);
     bgImg = loadImage(scene[sessionStorage['sceneChoice']].area);
     rImg = loadImage(scene[sessionStorage['sceneChoice']].reward);
@@ -66,49 +58,48 @@ function preload() {
 }
 
 function setup() {
+    button = createButton('full screen'); //全螢幕按鈕
+    button.mousePressed(
+        function(){
+                let fs = fullscreen();
+                fullscreen(!fs);
+        }
+    );
 
-    if(windowWidth>=768){
-        // gaming = document.getElementsByClassName('gaming')[0];
+
+    if(windowWidth>=768){ //canvas的RWD
         var cnv = createCanvas(1200, 600);
         a=(windowWidth-width)/2;
         b=(windowHeight-height)/2;
         cnv.position(a,b);
-        x2 = width;
-        cnv.style('z-index', 1);
-        // console.log(cnv.parent());
     }else {
         var cnv = createCanvas(windowWidth, windowHeight-50);
-        x2 = width;
-        cnv.style('z-index', 1);
     }
-    unicorn = new Unicorn();
-    life = 1;
+
+
+    cnv.style('z-index', 1);
+    x2 = width;
+
+    unicorn = new Unicorn(sessionStorage['animal_life'],2); //客製動物 Unicorn(生命值,重力)
+    life = unicorn.life;
+
     
 }
-// function mousePressed() {
-//     if (mouseX > 0 && mouseX < 1200 && mouseY > 0 && mouseY < 600) {
-//         let fs = fullscreen();
-//         fullscreen(!fs);
-//     }
-// }
 
-function touchStarted(){
-    unicorn.jump();
-}
+
 
 function windowResized() {
-    
-    resizeCanvas(windowWidth, windowHeight*3/5);
-    console.log(windowWidth);
+    if(window.innerWidth>=768){
+        resizeCanvas(windowWidth, windowHeight*3/5);
+    }else {
+        resizeCanvas(windowWidth, windowHeight-50);
+    }
+
 }
 
-// window.addEventListener('resize',function(){
-//     cnv = createCanvas(3/5*windowWidth, 3/5*windowHeight);
-//     a=(windowWidth-width)/2;
-//     b=(windowHeight-height)/2;
-//     cnv.position(a,b);
-// });
-
+function touchStarted(){
+    unicorn.jump(-40);
+}
 
 function draw() {
     //阻擋空白鍵跟左右鍵的預設行為
@@ -174,8 +165,9 @@ function draw() {
         unicorn.x += 10;
     }
     if(keyIsDown(32)){
-        unicorn.jump();
+        unicorn.jump(-40);
     }
+
 
     // 碰到障礙物之後的行為
     for (let t of trains) {
@@ -191,13 +183,14 @@ function draw() {
 
 
             if (life == 0) { //死掉後
-                trains.splice(i-2,7);
+                trains.splice(i-5,15);
                 setTimeout(function(){
                     noLoop();
                 },0.1);
                 questionPage.style.display='block';
                 reward_money.innerHTML = `得到獎金：${money}`;
                 score_time.innerHTML = `生存時間：${timer}秒`;
+
             }
         }
     }
