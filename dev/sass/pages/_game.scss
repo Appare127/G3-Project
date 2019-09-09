@@ -14,9 +14,9 @@
     .game_body{
         background-image: url(../img/game/body-bg.png);
         background-position: 44% 25%;
+        background-attachment: fixed;
         background-repeat:no-repeat;
         width:100%;
-       
         .container {
             width:100%;
         }
