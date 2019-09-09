@@ -147,8 +147,8 @@
                     </div>
                 </div>
                 <div class="chart_ranking">
-able c
-                    <tlass="ranking_table">
+
+                    <table class="ranking_table">
                             <!-- <tr>
                                 <td>排名</td>
                                 <td>動物名稱</td>
@@ -440,15 +440,15 @@ function chosenArea(area){
                 $que('.top3_title .top_animal')[0].innerText = userDataDesc[2].user_name;
                 $que('.top3_title .top_player')[0].innerText = userDataDesc[2].user_id;
        
+                HTMLstr = "<tr><td>排名</td><td>動物名稱</td><td>會員名稱</td><td>時間</td></tr>";
                 
-                $que('.chart_ranking .ranking_table')[0].innerHTML = '<tr><td>排名</td><td>動物名稱</td><td>會員名稱</td><td>時間</td></tr>';
                 for(var i=3; i<10; i++ ){
                     
-                    $que('.chart_ranking .ranking_table')[0].innerHTML += '<tr>';
-                    $que('.chart_ranking .ranking_table')[0].innerHTML += `<td>${i+1}</td><td>${userDataDesc[i].user_name}</td><td>${userDataDesc[i].user_id}</td><td>${userDataDesc[i].game_record} 秒</td>`;
-                    $que('.chart_ranking .ranking_table')[0].innerHTML += '</tr>';
-
+                    HTMLstr += '<tr>';
+                    HTMLstr += `<td>${i+1}</td><td>${userDataDesc[i].user_name}</td><td>${userDataDesc[i].user_id}</td><td>${userDataDesc[i].game_record} 秒</td>`;
+                    HTMLstr += '</tr>';
                 }
+                $que('.chart_ranking .ranking_table')[0].innerHTML =HTMLstr;
             
 
                 //塞入4-10名
