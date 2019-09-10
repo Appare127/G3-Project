@@ -130,6 +130,7 @@ function doFirst(){
  
     let retry = document.getElementById('retry');
     retry.addEventListener('click',restartGame);
+    getQuestions();
     questionPage.style.display="none";
     calculation.style.display="none";
     if(sessionStorage['sceneChoice'] == null){

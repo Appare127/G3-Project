@@ -1,4 +1,6 @@
 var btn=[];
+var questions = [];
+var testArr = [];
 
 function Question(question, choices, answer,solution) {
     this.question = question;
@@ -40,21 +42,55 @@ function Question(question, choices, answer,solution) {
     }
 }
 
-var q1 = new Question('請問龍蝦是用哪裡尿尿?',['1.臉','2.觸角','3.殼'] ,0, "龍蝦用臉尿尿" );
-var q2 = new Question('請問藍鯨的屁可以包下一隻?',['1.貓','2.馬','3.大象'],1, "一隻馬");
-var q3 = new Question('請問獅子是什麼動物?',['1.肉食','2.草食'],0, "肉食");
-var q4 = new Question('請問獵豹的速度比什麼還要快?',['1.卡車','2.法拉利','3.飛機'],1, "獵豹比法拉利還要快:獵豹能在三秒之間從0加速至60英里每小時，比一輛法拉利Enzo還要快。");
+
+function getQuestions(){
+    var xhr = new XMLHttpRequest();
+    xhr.onload=function (){
+        if( xhr.status == 200 ){ 
+            questionData = JSON.parse(xhr.responseText);;
+            questions = buildQuestion(questionData, testArr);
+            n = Math.floor(Math.random()*questions.length);
+            questions[n].displayQuestion();
+        }else{
+            alert( xhr.status );
+        }
+    }
+
+    var url = "php/game/getQuestions.php";
+    xhr.open("Get", url, true);  //readyState : 1
+    xhr.send( null );
+}
 
 
 
-var questions = [q1, q2, q3, q4];
 
-var n = Math.floor( Math.random()* questions.length);
+function buildQuestion(queArray,questions){
+    for(var i=0; i<queArray.length; i++){
+        var q= new Question(queArray[i].question_name,[queArray[i].question_option1, queArray[i].question_option2, queArray[i].question_option3, queArray[i].question_option4], 
+            parseInt(queArray[i].question_ans)-1,
+            queArray[i].ans_description);
+        questions.push(q);
+        console.log(questions[i]);
+        if(i==queArray.length-1){
+            // questionSet(questions);
+        console.log(questions);
 
-questions[n].displayQuestion();
+        }
+    }
+    console.log(questions);
+    return questions;
+
+}
+
 
 function getUserChoice(e){    
     questions[n].checkAnswer(btn.indexOf(e.target));
 }
+
+
+
+
+
+
 
 
