@@ -77,25 +77,25 @@ try {
 
             <div class="wrap">
                 <div class="lights">
-                    <img src="img/shop/lights.png" alt="">
-                    <img src="img/shop/lights.png" alt="">
-                    <img src="img/shop/lights.png" alt="">
+                    <img src="img/shop/lights.png">
+                    <img src="img/shop/lights.png">
+                    <img src="img/shop/lights.png">
                 </div>
                 <div class="choose_pic">
                     <h2>選擇商品</h2>
                     <p class='intro'>請選擇您想要印製的圖案:</p>
                     <div class="choose_pic_wrap">
-                        <!-- 從session storage撈 -->
+                        <!-- 第一個我的動物，從session storage撈 -->
                     <div class="item">
                         <div class="pic">
-                            <img class="shop_animal_bg"  alt="">
-                            <img class="shop_animal" alt="">
+                            <img class="shop_animal_bg" >
+                            <img class="shop_animal" >
                         </div>
                         <p>我的動物</p>
                     </div>
 
 
-                    <!-- 從資料庫撈 -->
+                    <!-- 選美前三名從資料庫撈 -->
                         <?php
                         $imgName=['選美No.1','選美No.2','選美No.3'];
                         foreach ($imgName as $i => $value) {
@@ -112,6 +112,7 @@ try {
                         ?>
 
                 </div>
+                </div>
                 <div class="choose_bgpic">
                     <p class="intro">
                         請選擇圖案是否要背景圖片：<br>
@@ -121,17 +122,22 @@ try {
 
                 </div>
                 <div class="choose_product">
-                    <div class="item">
-                        <div class="deco deco_top"></div>
-                        <h3>帆布袋</h3>
+                <?php 
+                
+                foreach ($prodsRow as $i => $data) {
+                    $name=explode(".",explode("/",$prodsRow[$i]['product_img'])[2])[0];    
+                ?>
+                    <div class="item" id=<?=$name?> >
+                        <div class="deco deco_top" ></div>
+                        <h3><?=$prodsRow[$i]['product_name']?></h3>
                         <div class="prod_img">
-                            <img class="prod_plain" src="img/shop/bag.png" alt="">
-                            <div class="pic_chosen pic_chosen_bag">
+                            <img class="prod_plain" src=<?=$prodsRow[$i]['product_img']?> alt="">
+                            <div class=<?="pic_chosen_$name"?>>
                                 <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
                                 <img class="shop_animal" src="img/shop/animal1.png" alt="">
                             </div>
                         </div>
-                        <p class="price">NT$600</p>
+                        <p class="price"><?=$prodsRow[$i]['product_price']?></p>
                         <div class="number">
                             <button  class="minus_num">-</button>
                             <input class="prod_num" type="number" value="1">
@@ -143,72 +149,7 @@ try {
                         </div>
                         <div class="deco deco_bottom"></div>
                     </div>
-                    <div class="item">
-                        <div class="deco deco_top"></div>
-                        <h3>馬克杯</h3>
-                        <div class="prod_img">
-                            <img class="prod_plain" src="img/shop/cup.png" alt="">
-                            <div class="pic_chosen pic_chosen_cup">
-                                <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
-                                <img class="shop_animal" src="img/shop/animal1.png" alt="">
-                            </div>
-                        </div>
-                        <p class="price">NT$600</p>
-                        <div class="number">
-                            <button class="minus_num">-</button>
-                            <input class="prod_num" type="number" value="1">
-                            <button class="add_num">+</button>
-                        </div>
-                        <div class="btn">
-                            <a class="btn_cloudb view_detail">查看詳情@@include('template/btn_sp.html')</a>
-                            <a class="btn_cloudp add_cart">加入購物車@@include('template/btn_sp.html')</a>
-                        </div>
-                        <div class="deco deco_bottom"></div>
-                    </div>
-                    <div class="item">
-                        <div class="deco deco_top"></div>
-                        <h3>棒球帽</h3>
-                        <div class="prod_img">
-                            <img class="prod_plain" src="img/shop/hat.png" alt="">
-                            <div class="pic_chosen pic_chosen_hat">
-                                <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
-                                <img class="shop_animal" src="img/shop/animal1.png" alt="">
-                            </div>
-                        </div>
-                        <p class="price">NT$600</p>
-                        <div class="number">
-                            <button class="minus_num">-</button>
-                            <input class="prod_num" type="number" value="1">
-                            <button class="add_num">+</button>
-                        </div>
-                        <div class="btn">
-                            <a class="btn_cloudb view_detail">查看詳情@@include('template/btn_sp.html')</a>
-                            <a class="btn_cloudp add_cart">加入購物車@@include('template/btn_sp.html')</a>
-                        </div>
-                        <div class="deco deco_bottom"></div>
-                    </div>
-                    <div class="item">
-                        <div class="deco deco_top"></div>
-                        <h3>大抱枕</h3>
-                        <div class="prod_img">
-                            <img class="prod_plain" src="img/shop/pillow.png" alt="">
-                            <div class="pic_chosen pic_chosen_pillow">
-                                <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
-                                <img class="shop_animal" src="img/shop/animal1.png" alt="">
-                            </div>
-                        </div>
-                        <p class="price">NT$600</p>
-                        <div class="number">
-                            <button class="minus_num">-</button>
-                            <input class="prod_num" type="number" value="1">
-                            <button class="add_num">+</button>
-                        </div>
-                        <div class="btn">
-                            <a class="btn_cloudb view_detail">查看詳情@@include('template/btn_sp.html')</a>
-                            <a class="btn_cloudp add_cart">加入購物車@@include('template/btn_sp.html')</a>
-                        </div>
-                        <div class="deco deco_bottom"></div>
-                    </div>
+                <?php  }?>
                 </div>
             </div>
         </div>
@@ -225,9 +166,9 @@ try {
                 <div class="prod_img">
                     <img class="prod_plain" src="img/shop/pillow.png" alt="">
                     <div class="pic_chosen pic_chosen_pillow">
-                            <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
-                            <img class="shop_animal" src="img/shop/animal1.png" alt="">
-                        </div>
+                        <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
+                        <img class="shop_animal" src="img/shop/animal1.png" alt="">
+                    </div>
                 </div>
                 <div class="prod_text">
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero, fugiat!Lorem, ipsum dolor sit
@@ -248,10 +189,23 @@ try {
             }else   //如果沒登入，給預設圖片
             document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src='img/shop/animal_bg1.png';
             document.querySelectorAll(".choose_pic .shop_animal")[0].src='img/shop/animal1.png';
-
-            
-          
         };
+
+        function changePic(e){
+           let bg=this.children[0].children[0].src;
+           let animal=this.children[0].children[1].src;
+           document.querySelectorAll('.choose_product .prod_img').forEach((element,i) => {
+            
+                  element.children[1].children[0].src=bg;
+                 element.children[1].children[1].src=animal;
+                console.log(element);
+
+            //   })
+           });
+        // alert();
+        };
+
+
         window.addEventListener("load",function(){
             let detailButtons=document.querySelectorAll('.view_detail');  //查看詳情
             let addCartButtons=document.querySelectorAll('.add_cart');//加入購物車
@@ -261,6 +215,7 @@ try {
             let minusNumButtons=document.querySelectorAll('.minus_num');  //減少數量
             let addNumButtons=document.querySelectorAll('.add_num');     //加數量
             let prodNumInputs=document.querySelectorAll('.prod_num'); //商品Input的數量
+            let changePicBtn=document.querySelectorAll('.choose_pic_wrap .item')  //動物圖片
 
             for(i=0;i<minusNumButtons.length;i++){   //減num
                 minusNumButtons[i].onclick=function(){
@@ -310,8 +265,12 @@ try {
                 }
             }
 
-            choosePic();
-           
+            for(i=0;i<changePicBtn.length;i++){   //點按圖片會換 
+                changePicBtn[i].onclick=changePic;          
+                // console.log(changePicBtn[i]) 
+            }
+
+            choosePic();   //loading進那四張動物圖片
             
         }); 
     </script>
