@@ -1,12 +1,13 @@
 <?php
 try{
-require_once('../connectg3.php');
+require_once('connectg3.php');
 $date=$pdo->query('select date_unavailable from unavailable_date');
-$dateRow=[];
-while($dateRow1=$date->fetch(PDO::FETCH_NUM)){
-$dateRow =$dateRow + $dateRow1[0];
+$dateAry=[];
+while($dateRow=$date->fetch(PDO::FETCH_NUM)){
+$dateAry[] = $dateRow[0];
 };
-print_r( $dateRow);
+echo json_encode($dateAry);
+// print_r ($dateAry);
 
 
 

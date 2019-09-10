@@ -23,6 +23,8 @@ function createcode() {
         ctx.strokeText(code, 5, 20);//画布上添加验证码
     }
 }
+
+
 function checkcode() {
     var codeNum = document.getElementById("code").value;
     if (codeNum == code) {
