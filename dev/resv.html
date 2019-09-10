@@ -12,8 +12,10 @@
 </head>
 <body class="resv_body">
 
+    <!-- header -->
     @@include('template/header.html')
 
+    <!-- 標題/雲朵/左側火車 -->
     <section class="resv_banner">
         <div class="container">
             <div class="banner_title">
@@ -26,7 +28,9 @@
             <img src="img/resv/cloud_center.png" alt="cloud" class="cloud_center">
             <img src="img/resv/cloud_animal.png" alt="cloud" class="cloud_animal">
             <img src="img/resv/cloud_buttom.png" alt="cloud" class="cloud_buttom">
-            <img src="img/resv/train.png" alt="train" class="resv_train">
+            <img src="img/resv/train2.png" class="resv_train" alt="">
+            <img src="img/resv/3_rail.png" class="rail" alt="">
+            <!-- <img src="img/resv/train.png" alt="train" class="resv_train"> -->
             <img src="img/resv/animal_guide.png" alt="rhinoceros" class="rhinoceros">
         </div>
     </section>
@@ -37,6 +41,7 @@
             <div class="resv_calendargroup">
                 <div class="resv_calendar">
                     <!-- <img src="img/resv/calendar_bg.png" alt="calendbg"> -->
+                    <!-- 日曆主體開始 -->
                     <div class="calendarbox">
                         <div class="calendar_title">
                             <span id="prev">
@@ -67,6 +72,8 @@
                             </div>
                         </div>
                     </div>
+                    <!-- 日曆主體結束 -->
+
                     <div class="calendar_text">
                         <ul>
                             <!-- <li class="aviable"></li> -->
@@ -84,6 +91,7 @@
                     <p>注意事項：僅限指定日期使用.當日請出示憑證入場若預約當日臨時無法抵達，請事先於會員中心取消。</p>
                 </div>
             </div>
+            <!-- 右側表單開始 -->
             <div class="resv_form">
                 <div class="show_data">
                     <p>8/28日預約導覽時段資訊：</p><br>
@@ -129,21 +137,31 @@
                         <!-- <input type='submit' class="btn" value='送出'> -->
                         <a href="#" class="btn_cloud" onclick="checkcode()">送出
                             <span class="btn_cloudeffect"></span>
-<span class="btn_cloudeffect"></span>
-<span class="btn_cloudeffect"></span>
-<span class="btn_cloudeffect"></span>
+                            <span class="btn_cloudeffect"></span>
+                            <span class="btn_cloudeffect"></span>
+                            <span class="btn_cloudeffect"></span>
                         </a>
                     </p>
                 </form>
             </div>
         </div>
+        <!-- 右側表單結束 -->
 
+        <!-- 下方火車 -->
         <div class="entrances">
-            <img src="img/resv/train_animal.png" alt="train_animal" class="train_animal">
-            <img src="img/resv/gate.png" alt="gate" class="gate">
+            <div class="train">
+                <img src="img/resv/hand.png" alt="" class="hand">
+                <img src="img/resv/resv_train.png" alt="train_animal" class="train_animal">
+            </div>
+            <div class="gate">
+                <img src="img/resv/zooGate-1.png" alt="gate" class="large_gate">
+                <img src="img/resv/zooGate_top.png" alt="" class="gate_top">
+                <img src="img/resv/gate.png" alt="" class="small_gate">
+            </div>
         </div>
     </section>
 
+    <!-- footer -->
     @@include('template/footer.html')
     
     <script src="js/main.js"></script>
