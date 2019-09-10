@@ -410,7 +410,7 @@ function chosenArea(area){
             }
         }
 
-        var url = "php/getCusAnimal.php?user_no="+ $id('userNo').value;
+        var url = "php/game/getCusAnimal.php?user_no="+ $id('userNo').value;
         xhr.open("Get", url, true);  //readyState : 1
 
         xhr.send( null );
@@ -472,7 +472,7 @@ function chosenArea(area){
                 alert( xhr.status );
             }
         }
-        var url = "php/getRankingData.php";
+        var url = "php/game/getRankingData.php";
         xhr.open("Get", url, true);  //readyState : 1
         xhr.send( null );
 
