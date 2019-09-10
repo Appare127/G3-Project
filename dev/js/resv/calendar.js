@@ -13,12 +13,13 @@ var my_date = new Date(); //獲取當前時間
 var my_year = my_date.getFullYear(); //獲取當前年份
 var my_month = my_date.getMonth(); //獲取當前月份
 var my_day = my_date.getDate(); //獲取當前日期  
+console.log(my_date);
 
 //獲取某年某月的第一天是星期幾
 function day_start(month, year) {
     var tmpDate = new Date(year, month, 2);
     // new Date(year, month[, day]);
-    console.log(tmpDate.getDay());
+    // console.log(tmpDate.getDay());
     return (tmpDate.getDay());
 }
 //計算是不是閏年（前年份除以4的餘數）
@@ -45,7 +46,7 @@ prev.onclick = function (e) {
         my_year--;
         my_month = 11;
     }
-    refresh_date();
+    getDate();
 }
 //後月
 next.onclick = function (e) {
@@ -55,10 +56,11 @@ next.onclick = function (e) {
         my_year++;
         my_month = 0;
     }
-    refresh_date();
+    getDate();
 }
 
-function refresh_date() {
+
+function refresh_date(date) {
     var str = "";  //設置日期顯示，預設為空 line153
     var totalDay = days_month(my_month, my_year); //獲取該月天數
     var firstDay = day_start(my_month, my_year); //獲取該月第一天星期幾
@@ -66,7 +68,30 @@ function refresh_date() {
     for (var i = 1; i < firstDay; i++) {
         str += "<li> </li>"; //期使日期之前空白
     }
+
+    console.log(date);
+    console.log(date.length);
+
+    // date.forEach(n => {
+    //     year_lock=n.split('-')[0];
+    //     month_lock=n.split('-')[1];
+    //     day_lock=n.split('-')[2];
+    
+    // });
+    // console.log(day_lock);
+    
+    
+  
+
     for (var i = 1; i <= totalDay; i++) {
+        for(var j=0;j<date.length;j++){
+            day_lock=date[j].split('-')[2];
+            if(i == day_lock && year_lock == my_date.getFullYear() && month_lock == my_date.getMonth()){
+            // if(i == 1){
+                myclass = " class='lightgrey dispointer'";
+            }
+        }
+        
         if ((i < my_day && my_year == my_date.getFullYear() && my_month == my_date.getMonth()) || my_year < my_date.getFullYear() || (my_year == my_date.getFullYear() && my_month < my_date.getMonth())) {
             myclass = " class='lightgrey dispointer'"; //在當日期今天之前，灰色字
         } else if (i == my_day && my_year == my_date.getFullYear() && my_month == my_date.getMonth()) {
@@ -81,4 +106,11 @@ function refresh_date() {
     cyear.innerHTML = my_year; //設置年份顯示
 }
 
-window.addEventListener('load', refresh_date) //執行函數
+
+
+function getDate(){
+    fetch('php/resv/getDate.php').then(date => date.json()).then(date =>refresh_date(date) );
+};
+
+// window.addEventListener('load', refresh_date) //執行函數
+window.addEventListener('load', getDate) //執行函數
