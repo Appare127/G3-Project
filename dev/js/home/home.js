@@ -1,7 +1,7 @@
 function init() {
 
     animal_item()
-   // anime();
+    anime();
     water();
 }
 
@@ -77,7 +77,7 @@ function anime() {
      
     });
     var home_animal_5 = new TimelineMax({
-        
+        repeat:-1,
     });
 
 
@@ -97,15 +97,15 @@ function anime() {
         transformOrigin: "50% 50%",
     },.6)
 
-    .fromTo('.home_animal_01', .3, { 
+    .fromTo('.home_animal_01', .1, { 
       
         transformOrigin: "50% 80%",
     }
     ,{  ease: Power0.easeNone,
         yoyoease:Power0.easeNone,   
-        rotation:380,
+        rotation:370,
         yoyo: true,
-        repeat: 10,
+        repeat: 18,
         delay:1,
     },1.)
     .to('.home_animal_01', 3, { 
@@ -135,16 +135,16 @@ home_animal_2.to(".home_animal_02", 0, {
 .to('.home_animal_02',.2, { 
     rotation:354,
 },4.2)
-.fromTo('.home_animal_02', .2, { 
+.fromTo('.home_animal_02', .1, { 
     transformOrigin: "50% 60%",
 }
 ,{  ease: Power0.easeNone,
     yoyoease:Power0.easeNone,   
     yoyo: true,
     rotation:366    ,
-    repeat: 8,
+    repeat: 12,
    
-},4.4)
+},4.2)
 .to('.home_animal_02', 3, { 
     xPercent: 130,
     yPercent: 10,
@@ -199,16 +199,13 @@ home_animal_3.to(".home_animal_03", 0, {
 home_animal_4.to(".home_animal_04", 0, {
     x: 0,
     yPercent: -380,
-    scaleX:-1,
+    // scaleX:-1,
     rotation:0,
     rotation:0,
-  
 }, ).to('.home_animal_04', 2, {
     x: 0,
     yPercent: 0,
-  
     // delay: 1,
-    
      ease: Bounce.easeOut,
 },0.3 )
 .to('.home_animal_04',.8, { 
@@ -232,95 +229,236 @@ home_animal_5.to(".home_animal_05", 0, {
     scaleX:-1,
     rotation:0,
     rotation:0,
-  
 }, ).to('.home_animal_05', 2, {
     x: 0,
     yPercent: 0,
-  
     // delay: 1,
-    
      ease: Bounce.easeOut,
 },0.6 )
 .to('.home_animal_05',.8, { 
-    rotation:740,
-  
+    rotation:-740,
 },1.3)
-.fromTo('.home_animal_05', .6, { 
-    transformOrigin: "50% 60%",
-    rotation:20,
+.to('.home_animal_05',2,{
+    yPercent: -38,
+    xPercent: -60,
+    scaleX:- 0.5,
+    scaleY:0.5,
+})
+.to('.home_animal_05',5,{
+    scaleX:- 0.3,
+    scaleY:0.3,
+    xPercent: -180,
+})
+.fromTo('.home_animal_05', .3, { 
+    
+    rotation:5,
 }
 ,{  ease: Power0.easeNone,
     yoyoease:Power0.easeNone,   
-    rotation:-20,
+    rotation:-5,
     yoyo: true,
-    repeat: -1,
+    repeat: 25,
+    transformOrigin: "50% 80%",
 },2)
+
 }
 
 function water() {
     var hd_water_water = new TimelineMax({
         repeat: -1,
         yoyo: true,
+      //  paused: true,
     });
 
-    var hd_water_item_1 = new TimelineMax({
+    var hd_water_item_11 = new TimelineMax({
         repeat: -1,
-
+        //paused: true,
     });
+    var hd_water_item_12 = new TimelineMax({
+        repeat: -1,
+        //paused: true,
+    });
+    var hd_water_item_13 = new TimelineMax({
+        repeat: -1,
+        //paused: true,
+    });
+    var hd_water_item_21 = new TimelineMax({
+        repeat: -1,
+       
+    });
+    var hd_water_item_22 = new TimelineMax({
+        repeat: -1,
+       
+    });
+    var hd_water_item_31 = new TimelineMax({
+        repeat: -1,
+       
+    });
+    var hd_water_item_32 = new TimelineMax({
+        repeat: -1,
+       
+    });
+    var hd_water_round= new TimelineMax({
+        repeat: -1,
+        yoyo:true,
+      //  paused: true,
+    })
     var hd_water_round_01= new TimelineMax({
         repeat: -1,
         yoyo:true,
+      //  paused: true,
     })
 
-    hd_water_water.to("#hd_water_water", .8, {
+    var hd_water_round_02= new TimelineMax({
+        repeat: -1,
+        yoyo:true,
+      //  paused: true,
+    })
+    var hd_water_round_03= new TimelineMax({
+        repeat: -1,
+        yoyo:true,
+      //  paused: true,
+    })
+
+    hd_water_water.to("#hd_water_water", .6, {
       
-        scaleX: 1.05,
+        scaleX: 1.02,
 
         //scaleX:-1
     }, )
-    
-    hd_water_item_1
-    .to(".hd_water_item01", 0, {
+//水流
+
+ let wx=0.9;
+    hd_water_item_11
+    .to(".hd_water_item011", 0, {
         autoAlpha:.3,
         scaleX: .8,
          xPercent: function(index, target) {
-            return (index + 1) * 250 // 100, 200, 300
-          },
-          yPercent: function(index, target) {
-            return (index + 1) * -8 // 100, 200, 300
+            return (index) * 650 // 100, 200, 300
           },
    }, 0)
-    .staggerTo(".hd_water_item01", 2, {
-         yPercent: 380,
+    .staggerTo(".hd_water_item011",wx, {
+         yPercent: 1000,
          autoAlpha:1,
         ease: Power0.easeNone,
-        stagger:.2 ,
+         stagger:.5,
       //  yoyo:true,
     }, 0)
 
+    hd_water_item_12
+    .to(".hd_water_item012", 0, {
+        autoAlpha:.3,
+        scaleX: .8,
+         xPercent: function(index, target) {
+            return (index ) * 650  +975// 100, 200, 300
+          },
+   }, 0)
+    .staggerTo(".hd_water_item012",wx+0.2, {
+         yPercent: 1000,
+         autoAlpha:1,
+        ease: Power0.easeNone,
+         stagger:.8,
+      //  yoyo:true,
+    },)
+    hd_water_item_13
+    .to(".hd_water_item013", 0, {
+        autoAlpha:.3,
+        scaleX: .6,
+         xPercent: function(index, target) {
+            return (index ) * 650  +325// 100, 200, 300
+          },
+   }, 0)
+    .staggerTo(".hd_water_item013",wx, {
+         yPercent: 1000,
+         autoAlpha:1,
+        ease: Power0.easeNone,
+         stagger:.1,
+      //  yoyo:true,
+    }, 1.5)
 
-    // var hd_water_item_2 = new TimelineMax ("#hd_water_item02",{
-    //          repeat: -1,
-    // })
-//     hd_water_item_2
-//     .to(".hd_water_item02",0,{
-//         autoAlpha:0,
-//         scaleX: .8,
-//     },0)
-//     .to(".hd_water_item02", 1, {
-//     autoAlpha:.4,
-//     }, 1)
-//     .to( ".hd_water_item02",5, {
-//          yPercent: 380,
-//         ease: Power0.easeNone,
-       
-//     }, 1)
-//     .to(".hd_water_item02",.1, {
-//         autoAlpha:0,
-//    },5.2 )
+    hd_water_item_21
+    .to(".hd_water_item021", 0, {
+        autoAlpha:1,
+       // scaleX: .8,
+         xPercent: function(index, target) {
+            return (index ) * 400 // 100, 200, 300
+          },
+   }, )
+    .staggerTo(".hd_water_item021",wx-0.1, {
+         yPercent: 1400,
+         autoAlpha:1,
+        ease: Power0.easeNone,
+         stagger:.2,
+      //  yoyo:true,
+    }, 1)
+    hd_water_item_22
+    .to(".hd_water_item022", 0, {
+        autoAlpha:1,
+       // scaleX: .8,
+         xPercent: function(index, target) {
+            return (index) * 100 // 100, 200, 300
+          },
+   }, )
+    .staggerTo(".hd_water_item022",wx+.1, {
+         yPercent: 1400,
+         autoAlpha:1,
+        ease: Power0.easeNone,
+         stagger:.2,
+      //  yoyo:true,
+    }, )
+    hd_water_item_31
+    .to(".hd_water_item031", 0, {
+        autoAlpha:1,
+       // scaleX: .8,
+         xPercent: function(index, target) {
+            return (index) * 500 -300// 100, 200, 300
+          },
+   }, )
+    .staggerTo(".hd_water_item031",.6, {
+         yPercent: 450,
+         autoAlpha:1,
+        ease: Power0.easeNone,
+         stagger:.7,
+      //  yoyo:true,
+    }, )
+
+    hd_water_item_32
+    .to(".hd_water_item032", 0, {
+        autoAlpha:1,
+       // scaleX: .8,
+         xPercent: function(index, target) {
+            return (index) * 500 -300// 100, 200, 300
+          },
+   }, )
+    .staggerTo(".hd_water_item032",.6, {
+         yPercent: 450,
+         autoAlpha:1,
+        ease: Power0.easeNone,
+         stagger:-.4,
+      //  yoyo:true,
+    },.3 )
 
 
-    hd_water_round_01.to(".hd_water_round",.8,{
-        scale:1.2,
-      })
+
+
+
+    hd_water_round
+    .to(".hd_water_round",0,{
+        xPercent: function(index, target) {
+            return (index ) * 60 // 100, 200, 300
+          },
+      },0)
+      hd_water_round_01
+      .to(".hd_water_round11",.8,{
+        scale:1.05,
+      },)
+      hd_water_round_02
+      .to(".hd_water_round12",.6,{
+        scale:1.08,
+      },.3)
+      hd_water_round_03
+      .to(".hd_water_round13",.7,{
+        scale:1.06,
+        
+      },.3)
 }
