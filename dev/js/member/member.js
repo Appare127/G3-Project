@@ -123,3 +123,38 @@ function initQrcode(){
 window.addEventListener('load',initQrcode,false);
 
 // <!------ 預約qrcode收合 ----->
+
+function getOrder(){
+  let user_no=sessionStorage.user_no;
+  // console.log(user_no);
+  let xhr = new XMLHttpRequest();
+
+  xhr.onload = function () {
+    if (xhr.status == 200) {
+        if (xhr.responseText.indexOf("noOrder") != -1) {
+            alert("沒有訂單");
+      } else { //有訂單
+          let userData=JSON.parse(xhr.responseText)[0];
+          console.log(userData);
+          document.getElementById('orderNo').innerText=userData.order_no;
+          
+      }
+
+    } else {
+        alert(xhr.statusText);
+    }
+}
+
+
+  xhr.open("post", "php/getOrder.php", true);
+  xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+  xhr.send(`user_no=${user_no}`);
+
+
+}
+window.addEventListener('load',getOrder);
+
+
+
+// document.getElementById('').innerText=sessionStorage.user_no
+

@@ -192,17 +192,12 @@ try {
         };
 
         function changePic(e){
-           let bg=this.children[0].children[0].src;
-           let animal=this.children[0].children[1].src;
-           document.querySelectorAll('.choose_product .prod_img').forEach((element,i) => {
-            
-                  element.children[1].children[0].src=bg;
-                 element.children[1].children[1].src=animal;
-                console.log(element);
-
-            //   })
-           });
-        // alert();
+            let bg=this.children[0].children[0].src;
+            let animal=this.children[0].children[1].src;
+            document.querySelectorAll('.choose_product .prod_img').forEach((element,i) => {
+                element.children[1].children[0].src=bg;
+                element.children[1].children[1].src=animal;
+            });
         };
 
 
@@ -255,6 +250,7 @@ try {
             for(i=0;i<detailButtons.length;i++){   //查看詳情
                 detailButtons[i].onclick=function(){
                     prodDetail.style.display='block';
+                    prodDetail.
                 }
             }
 
