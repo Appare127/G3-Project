@@ -370,6 +370,7 @@
 
         //下面的火車
         .entrances{
+            overflow: hidden;
             display: flex;
             align-items: flex-end;
             justify-content: flex-end;  
@@ -512,6 +513,7 @@
 
             // 下面的火車
             .entrances{
+                overflow: hidden;
                 display: flex;
                 align-items: flex-end;
                 justify-content: flex-end;  
