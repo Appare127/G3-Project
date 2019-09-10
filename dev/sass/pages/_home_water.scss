@@ -1,0 +1,48 @@
+img[alt*="hd_water"]{
+    position: absolute;
+    width: 30%;
+    right: 9%;
+    bottom:18%;
+}
+div[alt*="hd_water"]{
+    overflow-x: hidden;
+    overflow: hidden;
+    position: absolute;
+    width: 30%;
+    height:47%;
+    right: 9%;
+    bottom:18%;
+    #hd_water_water{
+        width: 100%;
+        top: 10%;
+        right: 10%;
+    }
+    .hd_water{
+        position: absolute;
+        width: 100%;
+        right: 0%;
+        bottom:0%;
+        z-index: 4;
+    }
+    #hd_water_water{
+        opacity: .97;
+    }
+    .hd_water_item{
+        width: 3%;
+        position: absolute;
+        left: 15%;
+        top: 25%;
+     }
+
+
+    .hd_water_round{
+        width: 15%;
+        position: absolute;
+        bottom: -8%;
+        left: 10%;
+    }
+
+
+
+ 
+}

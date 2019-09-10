@@ -59,7 +59,7 @@ gulp.task('default', function () {
       server: {
           //根目錄
           baseDir: "./dest",
-          index: "shop.html"
+          index: "index.html"
 
       }
   });
