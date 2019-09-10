@@ -321,6 +321,6 @@ function water() {
 
 
     hd_water_round_01.to(".hd_water_round",.8,{
-        scale:1.1,
+        scale:1.2,
       })
 }
