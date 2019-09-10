@@ -1,4 +1,3 @@
-console.log('111');
 function createcode() {
     code = "";
     var codeLength = 4;//验证码的长度，可变

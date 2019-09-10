@@ -146,6 +146,7 @@ try {
                         <div class="btn">
                             <a class="btn_cloudb view_detail">查看詳情@@include('template/btn_sp.html')</a>
                             <a class="btn_cloudp add_cart">加入購物車@@include('template/btn_sp.html')</a>
+                            <input id='prod_data' type="hidden" value=<?=json_encode($prodsRow[$i])?>>
                         </div>
                         <div class="deco deco_bottom"></div>
                     </div>
@@ -165,15 +166,13 @@ try {
                 </div>
                 <div class="prod_img">
                     <img class="prod_plain" src="img/shop/pillow.png" alt="">
-                    <div class="pic_chosen pic_chosen_pillow">
+                    <div id='detail_pic_chosen' class="pic_chosen">
                         <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
                         <img class="shop_animal" src="img/shop/animal1.png" alt="">
                     </div>
                 </div>
                 <div class="prod_text">
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero, fugiat!Lorem, ipsum dolor sit
-                        amet consectetur adipisicing elit. Vero, fugiat!Lorem, ipsum dolor sit amet consectetur
-                        adipisicing elit. Vero, fugiat</p>
+                    <p></p>
                 </div>
             </div>
         </div>
@@ -186,12 +185,13 @@ try {
             if(sessionStorage.user_id){  //如果登入了  撈session
                 document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src=sessionStorage.my_animal_bg_img;
                 document.querySelectorAll(".choose_pic .shop_animal")[0].src=sessionStorage.my_animal_img;
-            }else   //如果沒登入，給預設圖片
+            }else{   //如果沒登入，給預設圖片
             document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src='img/shop/animal_bg1.png';
             document.querySelectorAll(".choose_pic .shop_animal")[0].src='img/shop/animal1.png';
+            }
         };
 
-        function changePic(e){
+        function changePic(e){    //點了會換圖
             let bg=this.children[0].children[0].src;
             let animal=this.children[0].children[1].src;
             document.querySelectorAll('.choose_product .prod_img').forEach((element,i) => {
@@ -250,7 +250,11 @@ try {
             for(i=0;i<detailButtons.length;i++){   //查看詳情
                 detailButtons[i].onclick=function(){
                     prodDetail.style.display='block';
-                    prodDetail.
+                    document.querySelector('.prod_detail .prod_plain').src=this.parentNode.parentNode.children[2].children[0].src;
+                    document.querySelector('.prod_detail .shop_animal_bg').src=this.parentNode.parentNode.children[2].children[1].children[0].src;
+                    document.querySelector('.prod_detail .shop_animal').src=this.parentNode.parentNode.children[2].children[1].children[1].src;
+                    document.getElementById('detail_pic_chosen').className=this.parentNode.parentNode.children[2].children[1].className;
+                    document.querySelector('.prod_detail .prod_text p').innerText=JSON.parse(this.nextElementSibling.nextElementSibling.value).product_description;
                 }
             }
 
