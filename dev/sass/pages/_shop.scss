@@ -381,10 +381,6 @@ $lblue:#d8ecea;
     @include responds(medium){
         width: 100%;
     }
-    .pic_chosen{
-        position:absolute;
-        width: 30%;
-    }
 
     .shop_animal{
         position:absolute;
@@ -402,20 +398,29 @@ $lblue:#d8ecea;
     margin:auto;
 }
 .pic_chosen_bag{
+    position:absolute;
+    width: 30%;
     @include picChosen(52%,0,0)
 }
 
 .pic_chosen_cup{
+    position:absolute;
+    width: 30%;
     @include picChosen(37%,0,18%)
 }
 
 .pic_chosen_hat{
+    position:absolute;
+    width: 30%;
     @include picChosen(21%,0,0)
 }
 
 .pic_chosen_pillow{
+    position:absolute;
+    width: 30%;
     @include picChosen(34%,0,0)
 }
+
 .btn{
     padding-top: 20px;
     @include btn_cloudp (50%);
