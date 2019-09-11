@@ -223,6 +223,7 @@
                 box-sizing: border-box;
                 // height: 470px;
                 border-width: 4.43px;
+            }
                 .show_data{
                     border: 3px dashed #d1c0a5;
                     border-radius: 20px;
@@ -231,9 +232,9 @@
                     display: inline-block;
                     width: 100%;
                     padding: 4.16%;
-                    .show_datatime, .show_datanum{
-                        margin-left: 10px;
-                    }
+                }
+                .show_datatime, .show_datanum{
+                    margin-left: 10px;
                 }
                 .resvform_title{
                     padding: 10px;
@@ -249,10 +250,10 @@
                         color: #c92626;
                         font-weight: bold;
                     }
-                    // 驗證碼
-                    #resv_canvas{
-                        border: 1px solid #ccc;
-                    }
+                }
+                // 驗證碼
+                #resv_canvas{
+                    border: 1px solid #ccc;
                 }
                 .resv_submit{
                     padding-bottom: 8px;
@@ -261,7 +262,7 @@
                         float: right;
                     }
                 }
-            }
+            
             // 右側表單結束
         }
         
@@ -333,43 +334,45 @@
     }
     .resv_info{
         .container{
-                display: flex;
-                flex-wrap: wrap;
-                .resv_calendargroup{
-                    .resv_calendar{
-                        width: 100%;
-                    }
-                    .resv_desc{
-                        width: 80%;
-                        margin: auto;
-                        p{
-                            font-size: $s_fz ;
-                            line-height: 1.8;
-                            padding: 8px 12px;
-                        }
-                    }
-                }
-
-                // 右側表單
-                .resv_form{
-                    width: 100%;
-                    margin: 50px 10px;
-                    .wooden{
-                        position: absolute;
-                        top: -7%;
-                        right: -7%;
-                        width: 20%;
-                    }
-                    .resv_submit{
-                        text-align: center;
-                        .btn_cloud{
-                            float: none;
-                            text-align: center;
-                            margin: 0;
-                        }
-                    }
-                }
+            display: flex;
+            flex-wrap: wrap;
         }
+        .resv_calendar{
+            width: 100%;
+            background-image: url(../img/resv/calendar2.png);
+        }
+        .resv_desc{
+            width: 80%;
+            margin: auto;
+            p{
+                font-size: $s_fz ;
+                line-height: 1.8;
+                padding: 8px 12px;
+            }
+        }
+                
+
+        // 右側表單
+        .resv_form{
+            width: 100%;
+            margin: 50px 10px;
+        }
+        .wooden{
+            position: absolute;
+            top: -7%;
+            right: -7%;
+            width: 20%;
+        }
+        .resv_submit{
+            text-align: center;
+            .btn_cloud{
+                float: none;
+                text-align: center;
+                margin: 0;
+            }
+        }
+       
+        
 
         //下面的火車
         .entrances{

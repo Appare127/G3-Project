@@ -59,7 +59,6 @@ next.onclick = function (e) {
     getDate();
 }
 
-
 function refresh_date(date) {
     var str = "";  //設置日期顯示，預設為空 line153
     var totalDay = days_month(my_month, my_year); //獲取該月天數
@@ -82,7 +81,7 @@ function refresh_date(date) {
             if(i == dates[j][2] && my_year==dates[j][0] && (my_month+1) == dates[j][1]){
                 myclass = " class='lightgrey dispointer'";
                 console.log(i);
-                 str += "<li" + myclass + ">" + i + "</li>"; //創建日期節點
+                str += "<li" + myclass + ">" + i + "</li>"; //創建日期節點
             }
         }
         if ((i < my_day && my_year == my_date.getFullYear() && my_month == my_date.getMonth()) || my_year < my_date.getFullYear() || (my_year == my_date.getFullYear() && my_month < my_date.getMonth())) {
@@ -93,17 +92,25 @@ function refresh_date(date) {
             myclass = " class='curday_after pointer'"; //在當日期今天之後，黑色字
         }
         str += "<li" + myclass + ">" + i + "</li>"; //創建日期節點
+       
     }
     holder.innerHTML = str; //設置日期顯示
     ctitle.innerHTML = month_name[my_month]; //設置英文月份顯示
     cyear.innerHTML = my_year; //設置年份顯示
+
+     $('.curday_after').click(showNumRemain);
+   
 }
 
 
 
 function getDate(){
-    fetch('php/resv/getDate.php').then(date => date.json()).then(date =>refresh_date(date) );
+    fetch('php/resv/getDate.php').then(date => date.json()).then(date =>{refresh_date(date);} );
 };
+
+ 
 
 // window.addEventListener('load', refresh_date) //執行函數
 window.addEventListener('load', getDate) //執行函數
+
+

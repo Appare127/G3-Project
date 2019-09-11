@@ -93,14 +93,24 @@
             </div>
             <!-- 右側表單開始 -->
             <div class="resv_form">
-                <div class="show_data">
-                    <p>8/28日預約導覽時段資訊：</p><br>
-                    <span>場次1</span>
-                    <span class="show_datatime">10:00</span>
-                    <span class="show_datanum">剩餘20人</span><br>
-                    <span>場次2</span>
-                    <span class="show_datatime">14:30</span>
-                    <span class="show_datanum">剩餘20人</span>
+                    
+                <div class="show_data"> 
+                    
+                    <p id='show_data_title'>請選擇日期：</p>
+                    <div class="show_data_table">
+                            <div >
+                                <span>場次</span>
+                                <span class="show_datatime">開始時間</span>
+                                <span >長度</span>
+                                <span class="show_datanum">剩餘人數</span>
+                            </div>
+                        <!-- <div class='show_data_row'>
+                            <span ></span>
+                            <span class="show_datatime"></span>
+                            <span class="show_datanum"></span>
+                        </div>  -->
+                  
+                    </div>
                 </div>
                 <img class="wooden" src="img/resv/wooden.png" alt="wooden">
                 <form action="get.php" method="get">
@@ -108,7 +118,7 @@
                     <div class="resvform_users">
                         <div class="time resvform_users">
                             <label for="time_select">時間:</label>
-                            <select id="time_select">
+                            <select id="time_select" disabled>
                                 <option value="">--選擇時間--</option>
                                 <option value="10am">上午10點</option>
                                 <option value="14pm">下午2點</option>
@@ -116,7 +126,7 @@
                         </div>
                         <div class="peoplenum resvform_users">
                             <label for="peoplenum_select">人數:</label>
-                            <select id="peoplenum_select">
+                            <select id="peoplenum_select" disabled>
                                 <option value="">--選擇人數--</option>
                                 <option value="1">1</option>
                                 <option value="1">2</option>
@@ -173,16 +183,50 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js"
         type="text/javascript"></script>
     <script type="text/javascript">
-        $(function () {
+      
             $(".btn_cloud").click(function () {
                 //alert範例
                 swal("已寄出新密碼", "請至您的信箱查收新的登入密碼", "success");
                 swal("預約成功", "請至會員中心查看您的QR-Code", "success");
             });
-        });
 
-        $$
+        
 
+        // 顯示時段
+        window.addEventListener('load', showInfo)
+        function showInfo(){
+            $.get('php/resv/getTime.php',{data:'time'},function(data){
+                data=$.parseJSON( data );
+                $.each(data,(i,n)=>{
+                    $('.show_data_table').append(
+                        `<div>
+                            <span>場次${n.session_no}</span>
+                            <span class="show_datatime">${n.start_time}</span>
+                            <span >${n.length}</span>
+
+                            <span class="show_datanum">${n.max_capacity}</span>
+                        </div>`);
+                })
+			});
+        }
+
+        // 按下去  顯示當日日期
+        //剩餘人數
+        //下拉式選單可以選
+        function showNumRemain(){
+            $('#show_data_title').text((my_month+1)+"/"+$(this).text()+"日預約導覽時段資訊：");
+            document.getElementById('time_select').disabled=false;
+            document.getElementById('peoplenum_select').disabled=false;
+            $.get('php/resv/getTime.php',{data:'NumRemain'},function(data){
+                console.log(data);  //[{"booking_no":"1","booking_date":"2019-09-06","tour_date":"2019-09-10","number_of_booking":"2","order_status":"0","member_id":"1","session_no":"1"}]
+
+
+            })
+        }
+        
     </script>
 </body>
 </html>
+
+
+
