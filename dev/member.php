@@ -11,21 +11,28 @@ try {
   // $orderItems->bindValue(':user_no',1);//$_POST['user_no']
   // $orderItems->execute();
 
-  $orders=$pdo->prepare('SELECT * FROM `product_order` p where user_no = :user_no');
+  $userItems=$pdo->prepare('SELECT * FROM `user` where user_no = :user_no');
+  $userItems->bindValue(':user_no',1);//$_POST['user_no']
+  $userItems->execute();
+
+  $orders=$pdo->prepare('SELECT * FROM `product_order` where user_no = :user_no');
   $orders->bindValue(':user_no',1);//$_POST['user_no']
   $orders->execute();
 
   $orderItems=$pdo->prepare('SELECT * FROM  order_item o join product pro on pro.product_no = o.product_no where o.order_no = :order_no ');
   // $orderItems->execute();
 
+  $revs=$pdo->prepare('SELECT * FROM resv_session_capacity rc join resv_order r  on r.session_no = rc.session_no where r.member_id = :member_id');
+  $revs->bindValue(':member_id',1);//$_POST['user_no']
+  $revs->execute();
+
+  
 ?>
 <?php
 } catch (PDOException $e) {
 	$errMsg = $errMsg . "錯誤訊息: " . $e->getMessage() . "</br>";
 	$errMsg .= "錯誤行號: " . $e->getLine() . "<br>";
 }
-
-
 
 ?>   
 <!DOCTYPE html>
@@ -70,7 +77,18 @@ try {
 
   </div>
 
+  <?php
 
+if ($errMsg !=""){
+  echo "<center>$errMsg</center>";
+
+}else{
+?>
+
+<?php
+   	while($userRow = $userItems -> fetch(PDO::FETCH_ASSOC)){
+?>
+    
   <section id="member_basic" class="member_basic tabcontent">
 
     <div class="container">
@@ -91,41 +109,42 @@ try {
         </div>
 
 
+
         <div class="col-12 col-md-6">
           <table class="baic_txt" >
 
             <tr>
               <td>帳號</td>
-              <td>aaaAAA</td>
+              <td><?=$userRow["user_id"]?></td>
             </tr>
             <tr>
               <td>姓名</td>
-              <td>王小明</td>
+              <td><?=$userRow["user_name"]?></td>
             </tr>
             <tr>
               <td>密碼</td>
-              <td>****</td>
+              <td><?=$userRow["user_psw"]?></td>
             </tr>
             <tr>
               <td>信箱</td>
-              <td>aaa</td>
+              <td><?=$userRow["user_email"]?></td>
             </tr>
             <tr>
               <td>電話</td>
-              <td>0987987387</td>
+              <td><?=$userRow["user_tel"]?></td>
             </tr>
             <tr>
               <td>密碼提示答案</td>
-              <td>**************</td>
+              <td><?=$userRow["hint_answer"]?></td>
             </tr>
             <tr>
               <td>目前金幣</td>
-              <td>666</td>
+              <td><?=$userRow["game_money"]?></td>
             </tr>
-            <tr>
+            <!-- <tr>
               <td>當日剩餘票數</td>
               <td>3</td>
-            </tr>
+            </tr> -->
           </table>
 
           <div class="baic_btn">
@@ -195,20 +214,40 @@ try {
           </div>
 
         </div>
-
+        <!-- <p>提醒：你所選擇的動物會跟牠的適應力有關。</p> -->
+       
         <div class="col-12 col-md-6">
-          <div class="myanimal_txt">
+        
+          <table class="myanimal_txt">
 
-            <p>動物名稱</p>
-            <p>生存能力</p>
-            <p>跳躍力</p>
-            <p>*****</p>
-            <p>生命力</p>
-            <p>*****</p>
-            <p>適應環境</p>
-            <p>*****</p>
-            <p>提醒：你所選擇的動物會跟牠的適應力有關。</p>
-          </div>
+            <tr>
+              <td>動物名稱</td>
+              <td><?=$userRow["my_animal_name"]?></td>
+            </tr>
+
+            <tr>
+              <td>生存能力</td>
+              <td>**************</td>
+            </tr>
+
+            <tr>
+              <td>跳躍力</td>
+              <td>**************</td>
+            </tr>
+
+            <tr>
+              <td>生命力</td>
+              <td>**************</td>
+            </tr>
+
+            <tr>
+              <td>適應環境</td>
+              <td>**************</td>
+            </tr>
+           
+          </table>
+
+           
 
           <div class="baic_btn">
             <a href="" class="btn_cloud">參加選怪
@@ -232,7 +271,10 @@ try {
 
   </section>
 
-
+  <?php
+    }//while
+  }//else
+   ?>
 
   <section id="member_order" class="member_order tabcontent">
     <div class="container">
@@ -249,7 +291,7 @@ try {
       }else{
         $ordersRow = $orders->fetchAll(PDO::FETCH_ASSOC);
 
-      foreach( $ordersRow as $i => $pdoStatement){
+      foreach( $ordersRow as $i => $pdoOrders){
        ?>
           
         <!-- 未來動態新增 -->
@@ -268,13 +310,13 @@ try {
 
         <div class="item_list">
           <p class="col-6 s_show">訂單編號:</p>
-          <p class="col-6 col-md-1"><?=$pdoStatement["order_no"]?></p>
+          <p class="col-6 col-md-1"><?=$pdoOrders["order_no"]?></p>
           <p class="col-6 s_show">訂購日期:</p>
-          <p class="col-6 col-md-3"><?=$pdoStatement["order_date"]?></p>
+          <p class="col-6 col-md-3"><?=$pdoOrders["order_date"]?></p>
           <p class="col-6 s_show">訂單狀態:</p>
-          <p class="col-6 col-md-2"><?= $pdoStatement["shipping_status"]==1? "已出貨":"處理中" ?></p>
+          <p class="col-6 col-md-2"><?= $pdoOrders["shipping_status"]==1? "已出貨":"處理中" ?></p>
           <p class="col-6 s_show">總金額:</p>
-          <p class="col-6 col-md-2"><?=$pdoStatement["order_sum"]?></p>
+          <p class="col-6 col-md-2"><?=$pdoOrders["order_sum"]?></p>
 
           <p class="col-6 s_show">取消訂單:</p>
           <div class="col-6 col-md-2 baic_btn">
@@ -306,7 +348,7 @@ try {
 
                
         <?php 
-        $orderItems->bindValue(':order_no',$pdoStatement["order_no"]);
+        $orderItems->bindValue(':order_no',$pdoOrders["order_no"]);
           $orderItems->execute();
 
           $ordersItemsRow = $orderItems->fetchAll(PDO::FETCH_ASSOC);
@@ -341,8 +383,7 @@ try {
 
 
         <!-- 未來動態新增 -->
-        <div class="myorder_item">
-
+        <!-- <div class="myorder_item">
 
           <div class="item_title">
               <p class="col-md-1">訂單編號</p>
@@ -388,16 +429,6 @@ try {
 
         <div class="myorder_item_detail">
 
-          <!--   
-          <div class="item_content">
-            <p class="col-6 col-md-2">收件人:</p>
-            <p class="col-6 col-md-10">怪奇小怪獸</p>
-            <p class="col-6 col-md-2">連絡電話:</p>
-            <p class="col-6 col-md-10">03-333-3333</p>
-            <p class="col-6 col-md-2">收件地址:</p>
-            <p class="col-6 col-md-10">桃園市中央路1000號</p>
-          </div> -->
-
           <div class="item_title">
             <p class="col-md-3">商品名稱</p>
             <p class="col-md-3">單價</p>
@@ -431,104 +462,8 @@ try {
           </div>
 
 
-        </div>
+        </div> -->
         <!-- 未來動態新增 -->
-
-
-        
-        <!-- 未來動態新增 -->
-        <div class="myorder_item">
-
-
-            <div class="item_title">
-                <p class="col-md-1">訂單編號</p>
-                <p class="col-md-3">訂購日期</p>
-                <p class="col-md-2">訂單狀態</p>
-                <p class="col-md-2">總金額</p>
-                <p class="col-md-2">取消訂單</p>
-                <p class="col-md-2">備註</p>
-                <div class="clearfix"></div>
-            </div>
-  
-  
-            <div class="item_list">
-              <p class="col-6 s_show">訂單編號:</p>
-              <p class="col-6 col-md-1" id="orderNo">266</p>
-              <p class="col-6 s_show">訂購日期:</p>
-              <p class="col-6 col-md-3">2019-08-26 22:06:39</p>
-              <p class="col-6 s_show">訂單狀態:</p>
-              <p class="col-6 col-md-2">處理中</p>
-              <p class="col-6 s_show">總金額:</p>
-              <p class="col-6 col-md-2">3100元</p>
-  
-              <p class="col-6 s_show">取消訂單:</p>
-              <div class="col-6 col-md-2 baic_btn">
-                <a href="" class="btn_cloud">取消訂單
-                  @@include('template/btn_sp.html')
-                </a>
-              </div>
-  
-              <p class="col-6 s_show">備註:</p>
-              <div class="col-6 col-md-2 baic_btn">
-                <a href="javascript:void(0)" class="btn_cloud js_order_show">訂單明細
-                  @@include('template/btn_sp.html')
-                </a>
-              </div>
-  
-              <div class="clearfix"></div>
-  
-            </div>
-        </div>
-        
-  
-        <div class="myorder_item_detail">
-  
-            <!--   
-            <div class="item_content">
-              <p class="col-6 col-md-2">收件人:</p>
-              <p class="col-6 col-md-10">怪奇小怪獸</p>
-              <p class="col-6 col-md-2">連絡電話:</p>
-              <p class="col-6 col-md-10">03-333-3333</p>
-              <p class="col-6 col-md-2">收件地址:</p>
-              <p class="col-6 col-md-10">桃園市中央路1000號</p>
-            </div> -->
-  
-            <div class="item_title">
-              <p class="col-md-3">商品名稱</p>
-              <p class="col-md-3">單價</p>
-              <p class="col-md-3">數量</p>
-              <p class="col-md-3">小計</p>
-              <div class="clearfix"></div>
-            </div>
-  
-            <div class="item_list">
-              <p class="col-6 s_show">商品名稱:</p>
-              <p class="col-6 col-md-3">怪奇馬克杯</p>
-              <p class="col-6 s_show">單價:</p>
-              <p class="col-6 col-md-3">$300</p>
-              <p class="col-6 s_show">數量:</p>
-              <p class="col-6 col-md-3">1</p>
-              <p class="col-6 s_show">小計</p>
-              <p class="col-6 col-md-3">$300</p>
-              <div class="clearfix"></div>
-            </div>
-  
-            <div class="item_list">
-              <p class="col-6 s_show">商品名稱:</p>
-              <p class="col-6 col-md-3">怪奇馬克杯</p>
-              <p class="col-6 s_show">單價:</p>
-              <p class="col-6 col-md-3">$300</p>
-              <p class="col-6 s_show">數量:</p>
-              <p class="col-6 col-md-3">1</p>
-              <p class="col-6 s_show">小計</p>
-              <p class="col-6 col-md-3">$300</p>
-              <div class="clearfix"></div>
-            </div>
-  
-  
-        </div>
-          <!-- 未來動態新增 -->
-
       </div>
 
 
@@ -545,10 +480,20 @@ try {
 
         <h2>我的預約</h2>
 
-        <!-- 未來動態新增 -->
 
-        <div class="myreceive_item">
+        <?php 
+      if( $errMsg != ""){ //例外
+        echo "<div><center>$errMsg</center></div>";
+      }elseif($revs->rowCount()==0){
+        echo "<div><center>目前無預約資料</center></div>";
+      }else{
+        $revsRow = $revs->fetchAll(PDO::FETCH_ASSOC);
 
+      foreach( $revsRow as $i => $pdoRevs){
+       ?>
+  <!-- 未來動態新增 -->
+
+  <div class="myreceive_item">
             <div class="item_title">
                 <p class="col-md-2">預約編號</p>
                 <p class="col-md-2">預約日期</p>
@@ -561,13 +506,13 @@ try {
 
             <div class="item_list">
                 <p class="col-6 s_show">預約編號:</p>
-                <p class="col-6 col-md-2">266</p>
+                <p class="col-6 col-md-2"><?=$pdoRevs["booking_no"]?></p>
                 <p class="col-6 s_show">預約日期:</p>
-                <p class="col-6 col-md-2">2019-08-26</p>
+                <p class="col-6 col-md-2"><?=$pdoRevs["tour_date"]?></p>
                 <p class="col-6 s_show">預約時段:</p>
-                <p class="col-6 col-md-2">10:30</p>
+                <p class="col-6 col-md-2"><?=$pdoRevs["start_time"]?></p>
                 <p class="col-6 s_show">預約狀態:</p>
-                <p class="col-6 col-md-2">已到場</p>
+                <p class="col-6 col-md-2"><?=$pdoRevs["order_status"]?></p>
     
                 <p class="col-6 s_show">取消訂單:</p>
                 <div class="col-6 col-md-2 baic_btn">
@@ -598,8 +543,15 @@ try {
 
         <!-- 未來動態新增 -->
 
-          <!-- 未來動態新增 -->
+      <?php
+          }//foreach
+        }//else
+      ?>
 
+      
+
+          <!-- 未來動態新增 -->
+<!-- 
           <div class="myreceive_item">
 
               <div class="item_title">
@@ -648,7 +600,7 @@ try {
                   <button class="btn_close">X</button>
                   <img src="img/member/member_pic.png" alt="">
               </div>
-          </div>
+          </div> -->
   
           <!-- 未來動態新增 -->
 
@@ -665,6 +617,7 @@ try {
       <div class="my_love">
         <h2>我的收藏</h2>
 
+        <!-- 動態生成 -->
         <div class="col-6 col-md-3 baic_btn">
           <div><img src="img/member/member_pic.png">
             <p>動物背包</p>
@@ -673,6 +626,7 @@ try {
             @@include('template/btn_sp.html')
           </a>
         </div>
+        <!-- 動態生成 -->
 
         <div class="col-6 col-md-3 baic_btn">
           <div><img src="img/member/member_pic.png">
@@ -700,6 +654,17 @@ try {
             @@include('template/btn_sp.html')
           </a>
         </div>
+
+        <div class="col-6 col-md-3 baic_btn">
+          <div><img src="img/member/member_pic.png">
+            <p>動物背包</p>
+          </div>
+          <a href="" class="btn_cloud">取消收藏
+            @@include('template/btn_sp.html')
+          </a>
+        </div>
+
+
         <div class="clearfix"></div>
 
       </div>

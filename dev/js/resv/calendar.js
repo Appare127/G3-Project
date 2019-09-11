@@ -66,32 +66,25 @@ function refresh_date(date) {
     var firstDay = day_start(my_month, my_year); //獲取該月第一天星期幾
     var myclass; //設置css
     for (var i = 1; i < firstDay; i++) {
-        str += "<li> </li>"; //期使日期之前空白
+        str += "<li> </li>"; //那個禮拜的期使日期之前空白
     }
 
-    console.log(date);
-    console.log(date.length);
-
-    // date.forEach(n => {
-    //     year_lock=n.split('-')[0];
-    //     month_lock=n.split('-')[1];
-    //     day_lock=n.split('-')[2];
-    
-    // });
-    // console.log(day_lock);
+    // console.log(date);
+    var dates=date.map((n,i) =>{
+      return n.split("-");
+    });
+    // console.log(dates)
+    // console.log(dates[0],dates[1]);//0= ["2019", "09", "30"] 1= ["2019", "09", "10"]
     
     
-  
-
     for (var i = 1; i <= totalDay; i++) {
-        for(var j=0;j<date.length;j++){
-            day_lock=date[j].split('-')[2];
-            if(i == day_lock && year_lock == my_date.getFullYear() && month_lock == my_date.getMonth()){
-            // if(i == 1){
+        for(var j=0;j<dates.length;j++){
+            if(i == dates[j][2] && my_year==dates[j][0] && (my_month+1) == dates[j][1]){
                 myclass = " class='lightgrey dispointer'";
+                console.log(i);
+                 str += "<li" + myclass + ">" + i + "</li>"; //創建日期節點
             }
         }
-        
         if ((i < my_day && my_year == my_date.getFullYear() && my_month == my_date.getMonth()) || my_year < my_date.getFullYear() || (my_year == my_date.getFullYear() && my_month < my_date.getMonth())) {
             myclass = " class='lightgrey dispointer'"; //在當日期今天之前，灰色字
         } else if (i == my_day && my_year == my_date.getFullYear() && my_month == my_date.getMonth()) {
