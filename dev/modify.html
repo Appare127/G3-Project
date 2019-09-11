@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css" />
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css" /> -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
-    <script src="js/modify/html2canvas.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script> -->
+    <script src="js/plugin/Chart.js"></script>
+    <script src="js/plugin/html2canvas.js"></script>
     @@include('template/csslink.html')
 
     <title>改造動物</title>
@@ -39,49 +40,50 @@
             <div class="part_box">
                 <div class="text">
                     <p>動物名字:</p>
-                    <input type="text" name="" id="">
+                    <input type="text" name="" id="animal_name">
                 </div>
 
                 <div class="pic_box">
                     <img class="tail_pic" src="img/modify/p_tail_giraffe.png" alt="">
-                    <img class="foot_pic" src="img/modify/p_foot_giraffe.png" alt="">
+                    <img class="leg_pic" src="img/modify/p_leg_giraffe.png" alt="">
                     <img class="body_pic" src="img/modify/p_body_giraffe.png" alt="">
                     <img class="head_pic" src="img/modify/p_head_giraffe.png" alt="">
                 </div>
 
-                <div class="btn_box" id="topic">
-                    <a href="#" class="btn_cloudp">
+                <form class="btn_box" method="post" accept-charset="utf-8" id="form1">
+                    
+                    <input name="hidden_data" id='hidden_data' type="hidden"/>
+                    
+                    <a href="javascript: dopic()" class="btn_cloudp">
                         下一步
                         @@include('template/btn_sp.html')
                     </a>
 
-                    <a href="" class="sss">轉圖檔</a>
-
-                    <a href="#" class="btn_cloudb">
-                        修改
+                    <a href="javascript: random_part()" class="btn_cloudb btn_random">
+                        隨機
                         @@include('template/btn_sp.html')
                     </a>
 
-                    <a href="#" class="btn_cloudy">
+                    <a href="javascript: void(0)" class="btn_cloudy">
                         背景
                         @@include('template/btn_sp.html')
                     </a>
 
-                    <span class="btn_random">隨機</span>
-                </div>
+                    <img src="" alt="" id="testimg">
+                </form>
             </div>
 
 
             <div class="select_box">
                 <ul class="button_ul">
-                    <li class="part_button">
+                    <li class="part_button head_button">
                         <label for="btn_head">頭部</label>
                         <input type="radio" name="partlist" id="btn_head" checked>
                         <ul class="part_wrap">
-                            <li>
+                            <!-- <li>
                                 <img class="picon" class="picon" src="img/modify/head_giraffe.png" alt="">
                                 <input type="text" data-pointa="3" data-pointb="1" data-pointc="0" style="display: none">
-                                <!-- pointa=森林，pointb=高山，pointc=沙漠 -->
+                                pointa=森林，pointb=高山，pointc=沙漠
                                 <p>長頸鹿頭</p>
                             </li>
                             <li>
@@ -98,14 +100,14 @@
                                 <img class="picon" src="img/modify/head_tiger.png" alt="">
                                 <input type="text" data-pointa="1" data-pointb="3" data-pointc="1" style="display: none">
                                 <p>老虎頭</p>
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
-                    <li class="part_button">
+                    <li class="part_button body_button">
                         <label for="btn_body">身體</label>
                         <input type="radio" name="partlist" id="btn_body">
                         <ul class="part_wrap">
-                            <li>
+                            <!-- <li>
                                 <img class="picon" src="img/modify/body_giraffe.png" alt="">
                                 <input type="text" data-pointa="1" data-pointb="2" data-pointc="3" data-health="4" style="display: none">
                                 <p>長頸鹿身體</p>
@@ -124,40 +126,40 @@
                                 <img class="picon" src="img/modify/body_tiger.png" alt="">
                                 <input type="text" data-pointa="2" data-pointb="0" data-pointc="1" data-health="3" style="display: none">
                                 <p>老虎身體</p>
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
-                    <li class="part_button">
-                        <label for="btn_foot">腳部</label>
-                        <input type="radio" name="partlist" id="btn_foot">
+                    <li class="part_button leg_button">
+                        <label for="btn_leg">腳部</label>
+                        <input type="radio" name="partlist" id="btn_leg">
                         <ul class="part_wrap">
-                            <li>
-                                <img class="picon" src="img/modify/foot_giraffe.png" alt="">
+                            <!-- <li>
+                                <img class="picon" src="img/modify/leg_giraffe.png" alt="">
                                 <input type="text" data-pointa="2" data-pointb="1" data-pointc="0" data-jump="2" style="display: none">
                                 <p>長頸鹿腳</p>
                             </li>
                             <li>
-                                <img class="picon" src="img/modify/foot_elephant.png" alt="">
+                                <img class="picon" src="img/modify/leg_elephant.png" alt="">
                                 <input type="text" data-pointa="1" data-pointb="0" data-pointc="2" data-jump="1" style="display: none">
                                 <p>大象腳</p>
                             </li>
                             <li>
-                                <img class="picon" src="img/modify/foot_bird.png" alt="">
+                                <img class="picon" src="img/modify/leg_bird.png" alt="">
                                 <input type="text" data-pointa="0" data-pointb="3" data-pointc="1" data-jump="5" style="display: none">
                                 <p>鳥腳</p>
                             </li>
                             <li>
-                                <img class="picon" src="img/modify/foot_cmel.png" alt="">
+                                <img class="picon" src="img/modify/leg_cmel.png" alt="">
                                 <input type="text" data-pointa="1" data-pointb="0" data-pointc="2" data-jump="3" style="display: none">
                                 <p>駱駝腳</p>
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
-                    <li class="part_button">
+                    <li class="part_button tail_button">
                         <label for="btn_parts">尾巴</label>
                         <input type="radio" name="partlist" id="btn_parts">
                         <ul class="part_wrap">
-                            <li>
+                            <!-- <li>
                                 <img class="picon" src="img/modify/tail_giraffe.png" alt="">
                                 <p>長頸鹿尾巴</p>
                             </li>
@@ -172,10 +174,15 @@
                             <li>
                                 <img class="picon" src="img/modify/tail_tiger.png" alt="">
                                 <p>老虎尾巴</p>
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
                 </ul>
+
+                <!-- <div class="button_ul">
+                    <li class="part_button"></li>
+                    <li class="part_button"></li>
+                </div> -->
             </div>
 
 
@@ -209,6 +216,20 @@
         </div>
     </section>  
 
+    <div class="remind_login">
+        <p>請先登入後<br>才能把您的動物儲存下來</p>
+        <a href="javascript: openlogin()" class="btn_cloudb" >
+            登入
+            @@include('template/btn_sp.html')
+        </a>
+        <div class="close_remind">X</div>
+    </div>
+
+
+    <div class="need_name">
+        <p>請幫動物取個名字</p>
+        <div class="close_remind">X</div>
+    </div>
 
     @@include('template/footer.html')
 
