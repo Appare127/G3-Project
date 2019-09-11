@@ -22,7 +22,7 @@ try {
   $orderItems=$pdo->prepare('SELECT * FROM  order_item o join product pro on pro.product_no = o.product_no where o.order_no = :order_no ');
   // $orderItems->execute();
 
-  $revs=$pdo->prepare('SELECT * FROM resv_session_capacity rc join resv_order r  on r.session_no = rc.session_no where r.member_id = :member_id');
+  $revs=$pdo->prepare('SELECT * FROM resv_order r join resv_session_capacity rc on r.session_no = rc.session_no where r.member_id = :member_id');
   $revs->bindValue(':member_id',1);//$_POST['user_no']
   $revs->execute();
 
@@ -177,16 +177,12 @@ if ($errMsg !=""){
           <table class="gamerecord_txt">
 
             <tr>
-              <td>最高分數</td>
+              <td>最高分數(存活時間)</td>
               <td>0987987387</td>
-            </tr>
-            <tr>
-              <td>存活時間</td>
-              <td>**************</td>
             </tr>
 
             <tr>
-              <td>日期</td>
+              <td>最高分數遊戲日期</td>
               <td>**************</td>
             </tr>
 
