@@ -13,7 +13,8 @@
   h2{
     text-align: center;
     margin-bottom: 20px;
-
+    font-weight: bold;
+    color:$col_btn_blue;
   }
 
   section{
@@ -115,12 +116,12 @@
 }
 
 .my_baic,.my_gamerecord,.my_animal,.my_love , .my_receive ,.my_order{
-  border: 5px solid #fff;
-  background-color: #fde5a4;
+  border: 5px solid $col_btn_blue;//#fff
+  // background-color: $col_white;//#fde5a4
+  background-color: rgba($color: #fff, $alpha: 0.8);
   padding: 10px 0px;
   box-sizing: border-box;
   border-radius: 15px;
-
 }
 
 
@@ -133,10 +134,7 @@
   .upfile{
     margin-top: 10px;
   }
-  .myanimal_txt{
-      text-align: center;
-    }
-
+ 
   .baic_btn{
     margin-top: 10px;
     text-align: center;
@@ -187,7 +185,8 @@
     border-radius: 20px;
     background-repeat:no-repeat;
     background-position:bottom right;
-    background-color: rgba($color: #ffffff, $alpha: 0.5);
+    // background-color: rgba($color: #ffffff, $alpha: 0.5);
+    background-color: rgba($color: $col_btn_blue, $alpha: 0.2);
     
     @include responds(medium){
       margin: 20px 60px;
@@ -285,7 +284,7 @@
 }
 
 
-.baic_txt td , .gamerecord_txt td{
+.baic_txt td , .gamerecord_txt td , .myanimal_txt td{
   width: 10%;
   padding: 10px;
 }
