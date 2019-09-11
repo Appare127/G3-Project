@@ -17,7 +17,6 @@ function Question(question, choices, answer,solution) {
             btn[i].addEventListener('click',getUserChoice);
         } 
     }
-
     this.checkAnswer = function(uChoice){
         if(this.answer == uChoice){
             choicesBar.innerHTML = '';
@@ -45,7 +44,7 @@ function Question(question, choices, answer,solution) {
 
 function getQuestions(){
     var xhr = new XMLHttpRequest();
-    xhr.onload=function (){
+    xhr.onload=function(){
         if( xhr.status == 200 ){ 
             questionData = JSON.parse(xhr.responseText);;
             questions = buildQuestion(questionData, testArr);
@@ -55,7 +54,6 @@ function getQuestions(){
             alert( xhr.status );
         }
     }
-
     var url = "php/game/getQuestions.php";
     xhr.open("Get", url, true);  //readyState : 1
     xhr.send( null );
@@ -70,16 +68,8 @@ function buildQuestion(queArray,questions){
             parseInt(queArray[i].question_ans)-1,
             queArray[i].ans_description);
         questions.push(q);
-        console.log(questions[i]);
-        if(i==queArray.length-1){
-            // questionSet(questions);
-        console.log(questions);
-
-        }
     }
-    console.log(questions);
     return questions;
-
 }
 
 

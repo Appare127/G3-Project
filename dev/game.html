@@ -44,7 +44,8 @@
             <div class="role_value">
                 <div class="info_value">
                     <div class="value_life">
-                    生命力:<img src="img/game/info_life.png" alt="">
+                    生命力:
+                    <img src="img/game/info_life.png" alt="">
                     </div>
                     <div class="value_jump">
                     跳躍力:<img src="img/game/info_jump.png" alt="">
@@ -391,20 +392,12 @@ function chosenArea(area){
                 // alert(JSON.parse(xhr.responseText));
                 userData = JSON.parse(xhr.responseText);
                 sessionStorage['animal_img'] = userData.my_animal_img;
-                sessionStorage['animal_life'] =userData.animal_life;
-                sessionStorage['animal_jump'] =userData.animal_jump;
-                sessionStorage['animal_en1'] =userData.environ_adapt_1;
-                sessionStorage['animal_en2'] =userData.environ_adapt_2;
-                sessionStorage['animal_en3'] =userData.environ_adapt_3;
+                sessionStorage['animal_life'] =userData.health;
+                sessionStorage['animal_jump'] =userData.jump;
+                sessionStorage['animal_en1'] =userData.environment1;
+                sessionStorage['animal_en2'] =userData.environment2;
+                sessionStorage['animal_en3'] =userData.environment3;
 
-
-                // alert(userData.my_animal_img);
-                // alert('session裡的動物圖:'+sessionStorage['animal_img']);
-                // alert('session裡的動物生命:'+sessionStorage['animal_life']);
-                // alert('session裡的動物跳躍力:'+sessionStorage['animal_jump']);
-                // alert('session裡的動物適應力1:'+sessionStorage['animal_en1']);
-                // alert('session裡的動物適應力2:'+sessionStorage['animal_en2']);
-                // alert('session裡的動物適應力3:'+sessionStorage['animal_en3']);
             }else{
                 alert( xhr.status );
             }
@@ -530,11 +523,20 @@ function chosenArea(area){
     function doFirst(){
         getRankingData();
         getCusAnimal();
+        //顯示角色資料
+        $que(".value_life")[0].innerHTML = "生命力:";
+        for(var k=0; k<sessionStorage['animal_life']; k++){
+            $que(".value_life")[0].innerHTML += `<img src="img/game/info_life.png" alt="">`;
+        }
+
+        //幻燈片
         $cls('arrowLeft')[0].addEventListener('click', sliderLeft);
         $cls('arrowRight')[0].addEventListener('click', sliderRight);
+        //地圖指標
         $cls('forest_pointer')[0].addEventListener('click', pointerToMap);
         $cls('desert_pointer')[0].addEventListener('click', pointerToMap);
         $cls('mountain_pointer')[0].addEventListener('click', pointerToMap);
+
         let enterGame=document.querySelectorAll('.playing_window p');
         let closeBtn = document.getElementById('game_closeBtn');
         closeBtn.addEventListener('click', closeIntro);

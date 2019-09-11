@@ -97,12 +97,14 @@
                             .fa-chevron-left {
                                 &:before{
                                     content: "\f053";
+                                    cursor:pointer;
                                 }
                             }
                             // 右側月份切換
                             .fa-chevron-right {
                                 &:before{
                                     content: "\f054";
+                                     cursor:pointer;
                                 }
                             }
                         }
@@ -123,7 +125,7 @@
                                     box-sizing: border-box;
                                     text-align: center;
                                     border-bottom: 1px solid #ab8450;
-                                    cursor: pointer;
+                                    // cursor: pointer;
                                     // float: left;
                                 }
                                 .clearfix{
@@ -150,7 +152,7 @@
                                     box-sizing: border-box;
                                     text-align: center;
                                     border: 1px solid #ab8450;
-                                    cursor: pointer;
+                                    // cursor: pointer;
                                 }
                                 // .unaviable{
                                 //     background: #a8a6a6;
@@ -173,13 +175,14 @@
                             }
                         }
                         .curday_after{
-                            li{
+                           
                                 &:hover{
                                     font-weight: bold;
                                     color: #e5ecec;
                                     background: #e89e4d;
+                                    cursor:pointer;
         
-                                }        
+                        
                             }
                         }
                     }

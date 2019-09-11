@@ -86,19 +86,6 @@ let gaming_monster = document.querySelector('.gaming_monster img');
 
 
 
-// scene[sessionStorage['sceneChoice']].monster
-// let 
-//  cusAnimal = {
-//     pic:'./img/game/0902.png',
-//     life:'',
-//     jumpForce:'',
-//     forestAdapt:Number,
-//     desertAdapt:Number,
-//     mountainAdapt:Number,
-// }
-// gaming_animal.src = cusAnimal.pic;
-// console.log(cusAnimal);
-
 function chosenArea(area){
     if(!sessionStorage['sceneChoice']){
         sessionStorage['sceneChoice'] = area;
@@ -127,7 +114,7 @@ window.addEventListener('resize',function(){
 });
 
 function doFirst(){
- 
+    gaming_animal.src= sessionStorage['animal_img'];
     let retry = document.getElementById('retry');
     retry.addEventListener('click',restartGame);
     getQuestions();

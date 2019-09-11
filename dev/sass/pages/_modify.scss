@@ -82,6 +82,7 @@
             input{
                 display: inline-block;
                 vertical-align: middle;
+                border-radius: 5px;
             }
         }
 
@@ -100,7 +101,7 @@
                 position: absolute;
             }
 
-            .foot_pic{
+            .leg_pic{
                 width: 100%;
             }
 
@@ -310,9 +311,89 @@
 
 }
 
+.remind_login{
+    width: 70%;
+    height: 30%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background-color: $col_white;
+    border: 5px solid $col_btn_orange;
+    border-radius: 15px;
+    text-align: center;
+    display: none;
+    animation: showup .4s linear;
+    p{
+        margin-top: 50px;
+    }
+    .close_remind{
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #faa;
+        cursor: pointer;
+        text-align: center;
+        line-height: 30px;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+    }
+    .btn_cloudb{
+        margin-top: 30px;
+    }
+
+}
+.remind_login.show{
+    display: block;
+}
+
+@keyframes showup {
+    0%{opacity: 0;}
+    100%{opacity: 1;}
+
+}
 
 
 
+
+
+.need_name{
+    width: 200px;
+    height: 120px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background-color: $col_white;
+    border: 5px solid $col_btn_orange;
+    border-radius: 15px;
+    text-align: center;
+    display: none;
+    animation: showup .4s linear;
+    p{
+        margin-top: 50px;
+    }
+    .close_remind{
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #faa;
+        cursor: pointer;
+        text-align: center;
+        line-height: 30px;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+    }
+}
+.need_name.show{
+    display: block;
+}
 
 
 // 平板~平板~平板~平板~平板~平板~平板~平板~
@@ -323,7 +404,6 @@
 // 電腦~電腦~電腦~電腦~電腦~電腦~電腦~電腦~
 @media screen and (min-width:1200px){
     
-
 
     
     .modify_body h1{
@@ -345,7 +425,6 @@
     .modify_banner{
         margin: auto;
         padding-top: 120px;
-        padding-bottom: 30px;
 
         .banner_cloud{
             width: 30%;
@@ -372,7 +451,11 @@
 
     .part_box{
         width: 40%;
-        padding: 20px 10px;
+        // padding: 20px 10px;
+        .pic_box{
+            width: 90%;
+            padding-bottom: 90%;
+        }
         .tool{
             padding-bottom: 20px;
         }
@@ -380,7 +463,7 @@
 
     .select_box{
         width: 30%;
-        padding: 40px 10px 10px 10px;
+        padding: 50px 10px 10px 10px;
         .button_box{
             margin: 0;
         }
@@ -396,7 +479,7 @@
 
     .info_box{
         width: 30%;
-        padding: 40px 20px;
+        padding: 50px 20px 40px 20px;
         margin: 0;
         .evemt_ability{
             .m_canvas{
@@ -408,4 +491,14 @@
         }
     }
     }
+
+    .remind_login{
+        width: 350px;
+        height: 200px;
+    }
+
+    .need_name{
+        width: 300px;
+    }
+
 }
