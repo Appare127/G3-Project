@@ -136,7 +136,7 @@ function updateScoreMoney(){
         }
     }
     // sessionStorage['game_record'] = timer;
-    var url = `php/userUpdateToDb.php?user_no=1&game_record=${timer}&game_money=${money}` ;
+    var url = `php/userUpdateToDb.php?user_no=${sessionStorage['user_no']}&game_record=${timer}&game_money=${money}` ;
     xhr.open("Get", url,true);
     xhr.send(null);
 

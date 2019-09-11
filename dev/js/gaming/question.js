@@ -72,7 +72,6 @@ function buildQuestion(queArray,questions){
     return questions;
 }
 
-
 function getUserChoice(e){    
     questions[n].checkAnswer(btn.indexOf(e.target));
 }

@@ -740,14 +740,26 @@
 
                         .role_pic{
                             width:50%;
+                            
                             .info_pic{
                                 height:120px;
                                 filter: drop-shadow(0px 5px 7px rgba(0, 0, 0, 0.7));
                                 position:absolute;
-                                top:30%;
+                                top:20%;
                                 left:7%;
                                 padding:5px;
+                                animation:animalBreathing 5s infinite;
+                                
                             }
+                            @keyframes animalBreathing{
+                                0%  { transform:translate3D(1%,0%,0);}
+                                25% { transform:translate3D(5%,2%,0);}
+                                50% { transform:translate3D(1%,1%,0);}
+                                75% { transform:translate3D(0%,5%,0);}
+                                // 100% { top:20%;left:7%;}
+                                
+                            }
+                            
                             .info_name{
                                 border-bottom:3px solid #d2d2d2;
                                 width: 200px;
