@@ -31,6 +31,12 @@ let partsobj = [];
 let part_types = 4;
 
 
+let canvas = document.getElementById('pic_box');
+let context = canvas.getContext('2d');
+    canvas.width = "400";
+    canvas.height = "400";
+
+
 // 下一步動作
 function dopic(){
     
@@ -40,22 +46,17 @@ function dopic(){
         let animal_name = document.getElementById('animal_name');
         
         if (animal_name.value != ''){
-            html2canvas(document.getElementsByClassName('pic_box')[0] , {
-                // backgroundColor: '',
-                backgroundColor: 'transparent',
-                allowTaint: true,
-                useCORS: true,
-                logging: true,
-                width: 450,
-                height: 450,
-            }).then(function(canvas){
-    
-                let url = canvas.toDataURL("image/png");
-                document.getElementById('hidden_data').value = url;
-    
-                picsend();
-                // document.body.appendChild(canvas);
-            });
+            // 動物名稱裡不是空的，代表已經有輸入名字了，可繼續做下去
+            
+            canvas = document.getElementById('pic_box');
+            let url = canvas.toDataURL("image/png");
+            // document.getElementById('testimg').src = url;
+            document.getElementById('url_data').value = url;
+            // console.log(document.getElementById('url_data').value);
+            
+            picsend();
+
+            // 如果沒有輸入動物名字，則彈出提示視窗
         }else {
             document.getElementsByClassName('need_name')[0].classList.add('show');
         }
@@ -67,8 +68,62 @@ function dopic(){
 }
 
 
+function drawcanvas(){
+
+    context.clearRect(0,0,canvas.width,canvas.height);
+
+    let pic_width = canvas.width;
+    let pic_height = canvas.height;
+
+    let img1 = new Image();
+    let img2 = new Image();
+    let img3 = new Image();
+    let img4 = new Image();
+
+    img1.src = document.getElementsByClassName('head_pic')[0].src;
+    img2.src = document.getElementsByClassName('body_pic')[0].src;
+    img3.src = document.getElementsByClassName('leg_pic')[0].src;
+    img4.src = document.getElementsByClassName('tail_pic')[0].src;
+
+    img1.onload = function(){
+        context.drawImage(img4,0,0,pic_width,pic_height);
+        context.drawImage(img3,0,0,pic_width,pic_height);
+        context.drawImage(img2,0,0,pic_width,pic_height);
+        context.drawImage(img1,0,0,pic_width,pic_height);
+    };
+    img2.onload = function(){
+        context.drawImage(img4,0,0,pic_width,pic_height);
+        context.drawImage(img3,0,0,pic_width,pic_height);
+        context.drawImage(img2,0,0,pic_width,pic_height);
+        context.drawImage(img1,0,0,pic_width,pic_height);
+    };
+    img3.onload = function(){
+        context.drawImage(img4,0,0,pic_width,pic_height);
+        context.drawImage(img3,0,0,pic_width,pic_height);
+        context.drawImage(img2,0,0,pic_width,pic_height);
+        context.drawImage(img1,0,0,pic_width,pic_height);
+    };
+    img4.onload = function(){
+        context.drawImage(img4,0,0,pic_width,pic_height);
+        context.drawImage(img3,0,0,pic_width,pic_height);
+        context.drawImage(img2,0,0,pic_width,pic_height);
+        context.drawImage(img1,0,0,pic_width,pic_height);
+    };
+}
+
+
 // 發送圖片資料到後台做圖片儲存動作
 function picsend(){
+
+    document.getElementById('myanimal_name').value = document.getElementById('animal_name').value;
+    document.getElementById('user_no').value = sessionStorage['user_no'];
+    
+    document.getElementById('environ_adapt_1').value = total_eml_forest;
+    document.getElementById('environ_adapt_2').value = total_eml_mountain;
+    document.getElementById('environ_adapt_3').value = total_eml_desert;
+    document.getElementById('animal_life').value = total_health;
+    document.getElementById('animal_jump').value = total_jump;
+
 
     let formData = new FormData(document.getElementById("form1"));
     let xhr = new XMLHttpRequest();
@@ -77,18 +132,23 @@ function picsend(){
             if(xhr.responseText == "error"){
             alert("Error");
             }else{
-            alert('Succesfully uploaded');  
             console.log(xhr.responseText);
+            saveok(xhr.responseText);
             }
         }else{
             alert(xhr.status)
         }
     }
-
     xhr.open('POST', 'php/modify/saveimg.php', true);
     xhr.send(formData);
-
 }
+
+
+function saveok(text)){
+    alert('動物儲存成功');
+}
+
+
 
 
 
@@ -154,6 +214,8 @@ function changeParts(e){
     total_eml_mountain = parseInt(head_eml_mountain) + parseInt(body_eml_mountain) + parseInt(leg_eml_mountain);
     total_eml_desert = parseInt(head_eml_desert) + parseInt(body_eml_desert) + parseInt(leg_eml_desert);
     updatechart();      //呼叫更新雷達圖的function
+
+    drawcanvas();
 }
 
 // 更新雷達圖資料
@@ -193,23 +255,40 @@ function rand(min,max){
 // 隨機選擇圖片的函式
 function random_part(){
 
-    // 頭部為picon[0] ~ picon[3]的位址
-    let rand_head = 0 + rand(0,3);
-    // 身體為頭部加4再隨機0~3的位址
-    let rand_body = part_types + rand(0,3);
-    let rand_leg = part_types*2 + rand(0,3);
-    let rand_tail = part_types*3 + rand(0,3);
-    
-    // console.log('rand_head'+ rand_head);
-    // console.log('rand_body'+ rand_body);
-    // console.log('rand_leg'+ rand_leg);
-    // console.log('rand_tail'+ rand_tail);
+    for (let i=1; i<=6; i++){
+        setTimeout(function(){
+            // 頭部為picon[0] ~ picon[3]的位址
+            let rand_head = 0 + rand(0,3);
+            // 身體為頭部加4再隨機0~3的位址
+            let rand_body = part_types + rand(0,3);
+            let rand_leg = part_types*2 + rand(0,3);
+            let rand_tail = part_types*3 + rand(0,3);
+            
+            // console.log('rand_head'+ rand_head);
+            // console.log('rand_body'+ rand_body);
+            // console.log('rand_leg'+ rand_leg);
+            // console.log('rand_tail'+ rand_tail);
+        
+            // 四個圖片物件拿到隨機的位址後，各別做click動作
+            // 因為改用canvas作畫，同時點太多次click觸發時，canvas會來不及清掉上一次的
+            // 會造成舊的圖殘留在上面，所以才把每次click後要延遲50ms再點下一個click
+            setTimeout(function(){
+                picon[rand_head].click();
+                setTimeout(function(){
+                    picon[rand_body].click();
+                    setTimeout(function(){
+                        picon[rand_leg].click();
+                        setTimeout(function(){
+                            picon[rand_tail].click();
+                        },50);
+                    },50)
+                },50);
+            },50);
 
-    // 四個圖片物件拿到隨機的位址後，各別做click動作
-    picon[rand_head].click();
-    picon[rand_body].click();
-    picon[rand_leg].click();
-    picon[rand_tail].click();
+        }, i*i*35);
+    }
+
+
 }
 
 
@@ -365,7 +444,7 @@ function openlogin(){
 function init(){
 
     // 呼叫透過Ajax從PHP抓到資料庫的部件資料
-    getpartlist();
+    // getpartlist();
 
 
     // 抓到下一步按鈕，點了之後做html轉canvas的功能
@@ -380,6 +459,13 @@ function init(){
     document.getElementsByClassName('close_remind')[0].addEventListener('click',remove_show);
     document.getElementsByClassName('close_remind')[1].addEventListener('click',remove_show);
 
+    picon = document.getElementsByClassName('picon');
+
+    for(let i=0; i<picon.length; i++){
+        picon[i].addEventListener('click',changeParts);
+    }
+
+    drawcanvas();
 
 }
 

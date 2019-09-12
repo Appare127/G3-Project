@@ -72,6 +72,7 @@
     }
     .part_box{
         width: 100%;
+        text-align: center;
         .text{
             padding: 10px;
             text-align: center;
@@ -88,15 +89,16 @@
 
         .pic_box{
             position: relative;
-            background-image: url(../img/modify/home_modify_b.png);
-            background-repeat: no-repeat;
-            background-size: 70%;
-            background-position-x: center;
-            background-position-y: bottom;
+            // background-image: url(../img/modify/home_modify_b.png);
+            // background-repeat: no-repeat;
+            // background-size: 70%;
+            // background-position-x: center;
+            // background-position-y: bottom;
             outline: 3px dotted #ccc;
             width: 70%;
             padding-bottom: 70%;
             margin: auto;
+
             img{
                 position: absolute;
             }
