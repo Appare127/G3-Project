@@ -70,7 +70,7 @@
                     <a href="#" id='login_text'></a>
                 </li>
                 <li>
-                    <a href="member.html" class="member_icon"><img src="img/header/icon_member.png" alt=""></a>
+                    <a href="member.php" class="member_icon"><img src="img/header/icon_member.png" alt=""></a>
                 </li>
                 <li>
                     <a href="cart.html" class="member_icon cart_icon">
@@ -167,7 +167,7 @@
             $id("user_id").value = "";
             $id("user_psw").value = "";
             //如果是在會員中心頁面登出，要跳回首頁
-            if (window.location.href == "http://localhost/G3/member.html") {
+            if (window.location.href == "http://localhost/G3/member.php") {
                 window.location.href = "http://localhost/G3/home.html"
             }
             //未登入，無法進入會員中心
