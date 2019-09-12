@@ -67,24 +67,29 @@ function dopic(){
 
 }
 
-
+// 繪製canvas的圖
 function drawcanvas(){
 
+    // 先清掉之前的東西
     context.clearRect(0,0,canvas.width,canvas.height);
 
+    // 設定接下來要進來的圖片大小與canvas相同
     let pic_width = canvas.width;
     let pic_height = canvas.height;
 
+    // 4個部件，所以建立4個圖像物件
     let img1 = new Image();
     let img2 = new Image();
     let img3 = new Image();
     let img4 = new Image();
 
+    // 圖像物件抓到HTML隱藏的img圖檔路徑
     img1.src = document.getElementsByClassName('head_pic')[0].src;
     img2.src = document.getElementsByClassName('body_pic')[0].src;
     img3.src = document.getElementsByClassName('leg_pic')[0].src;
     img4.src = document.getElementsByClassName('tail_pic')[0].src;
 
+    // 四個部件只要有一個更新載入完成，四個就一起重繪一遍
     img1.onload = function(){
         context.drawImage(img4,0,0,pic_width,pic_height);
         context.drawImage(img3,0,0,pic_width,pic_height);
@@ -115,16 +120,18 @@ function drawcanvas(){
 // 發送圖片資料到後台做圖片儲存動作
 function picsend(){
 
+    // 把輸入欄位的動物名稱與session的會員編號抓進form的input裡
     document.getElementById('myanimal_name').value = document.getElementById('animal_name').value;
     document.getElementById('user_no').value = sessionStorage['user_no'];
     
+    // 把動物適應力與生命跳躍力數據抓進form的input裡
     document.getElementById('environ_adapt_1').value = total_eml_forest;
     document.getElementById('environ_adapt_2').value = total_eml_mountain;
     document.getElementById('environ_adapt_3').value = total_eml_desert;
     document.getElementById('animal_life').value = total_health;
     document.getElementById('animal_jump').value = total_jump;
 
-
+    // 建立一個Ajax物件，把form1的資料打包準備傳送給php
     let formData = new FormData(document.getElementById("form1"));
     let xhr = new XMLHttpRequest();
     xhr.onload = function(){
@@ -144,16 +151,12 @@ function picsend(){
 }
 
 
-function saveok(text)){
+function saveok(text){
     alert('動物儲存成功');
 }
 
 
-
-
-
-
-
+// 點圖片清單會做更換動物圖片的函式
 function changeParts(e){
 
     // 從點到的圖片網址裡去抓出部件種類出來
@@ -263,12 +266,7 @@ function random_part(){
             let rand_body = part_types + rand(0,3);
             let rand_leg = part_types*2 + rand(0,3);
             let rand_tail = part_types*3 + rand(0,3);
-            
-            // console.log('rand_head'+ rand_head);
-            // console.log('rand_body'+ rand_body);
-            // console.log('rand_leg'+ rand_leg);
-            // console.log('rand_tail'+ rand_tail);
-        
+
             // 四個圖片物件拿到隨機的位址後，各別做click動作
             // 因為改用canvas作畫，同時點太多次click觸發時，canvas會來不及清掉上一次的
             // 會造成舊的圖殘留在上面，所以才把每次click後要延遲50ms再點下一個click
@@ -287,8 +285,6 @@ function random_part(){
 
         }, i*i*35);
     }
-
-
 }
 
 
@@ -444,7 +440,7 @@ function openlogin(){
 function init(){
 
     // 呼叫透過Ajax從PHP抓到資料庫的部件資料
-    // getpartlist();
+    getpartlist();
 
 
     // 抓到下一步按鈕，點了之後做html轉canvas的功能
@@ -454,17 +450,18 @@ function init(){
     // 隨機按鈕增聽按下去
     // document.getElementsByClassName('btn_random')[0].addEventListener('click',random_part);
 
-    // 抓部件資料庫訊息進HTML架構裡
-    
+
+    // 兩個彈出提示視窗的關閉click事件
     document.getElementsByClassName('close_remind')[0].addEventListener('click',remove_show);
     document.getElementsByClassName('close_remind')[1].addEventListener('click',remove_show);
 
-    picon = document.getElementsByClassName('picon');
 
-    for(let i=0; i<picon.length; i++){
-        picon[i].addEventListener('click',changeParts);
-    }
+    // picon = document.getElementsByClassName('picon');
+    // for(let i=0; i<picon.length; i++){
+    //     picon[i].addEventListener('click',changeParts);
+    // }
 
+    // 剛載進頁面時，先做一次canvas繪製預設的圖片
     drawcanvas();
 
 }
