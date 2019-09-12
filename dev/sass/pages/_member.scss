@@ -22,7 +22,7 @@
 
     img{
       vertical-align: middle;
-      width: 100%;
+      // width: 100%;
       max-width: 300px;
     }
 
@@ -104,9 +104,6 @@
 
 
 
-
-
-
 .my_baic,.my_love , .my_receive ,.my_order{
   margin: 10px 0 0 0px;
 }
@@ -129,7 +126,7 @@
   text-align: center;
 }
 
-
+//基本資料
 .member_basic{
   .upfile{
     margin-top: 10px;
@@ -140,7 +137,31 @@
     text-align: center;
   }
 
+    //==我的動物==
+  .my_animal{
+    .myanimal_pic{
+      position: relative;
+      .animalbg_re{
+        position: relative;
+      }
+      .animalpic_ab{
+        position: absolute;
+        // top: 0;
+        left: 0;
+        right:0;
+        bottom: 0%;
+        margin: auto;
+      }
+    }
+  }
+
 }
+
+
+
+
+
+
 //我的訂單
 
 .member_order{
@@ -172,8 +193,6 @@
   }
 
     
-
-
 
   //訂單明細 點了要打開
   .myorder_item_detail{
