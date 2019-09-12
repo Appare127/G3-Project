@@ -77,28 +77,27 @@ function refresh_date(date) {
     
     
     for (var i = 1; i <= totalDay; i++) {
-        for(var j=0;j<dates.length;j++){
-            if(i == dates[j][2] && my_year==dates[j][0] && (my_month+1) == dates[j][1]){
-                myclass = " class='lightgrey dispointer'";
-                console.log(i);
-                str += "<li" + myclass + ">" + i + "</li>"; //創建日期節點
+            if ((i < my_day && my_year == my_date.getFullYear() && my_month == my_date.getMonth()) || my_year < my_date.getFullYear() || (my_year == my_date.getFullYear() && my_month < my_date.getMonth())) {
+                myclass = " class='lightgrey dispointer'"; //在當日期今天之前，灰色字
+            }else if (i == my_day && my_year == my_date.getFullYear() && my_month == my_date.getMonth()) {
+                myclass = " class='fontColor colorbox pointer'"; //當天日期背景顯示
+                
+            } else if((i > my_day && my_year == my_date.getFullYear() && my_month == my_date.getMonth()) || my_year > my_date.getFullYear() || (my_year == my_date.getFullYear() && my_month > my_date.getMonth())){
+                myclass = " class='curday_after pointer'"; //在當日期今天之後，黑色字
             }
-        }
-        if ((i < my_day && my_year == my_date.getFullYear() && my_month == my_date.getMonth()) || my_year < my_date.getFullYear() || (my_year == my_date.getFullYear() && my_month < my_date.getMonth())) {
-            myclass = " class='lightgrey dispointer'"; //在當日期今天之前，灰色字
-        } else if (i == my_day && my_year == my_date.getFullYear() && my_month == my_date.getMonth()) {
-            myclass = " class='fontColor colorbox pointer'"; //當天日期背景顯示
-        } else {
-            myclass = " class='curday_after pointer'"; //在當日期今天之後，黑色字
+            for(var j=0;j<dates.length;j++){
+                if(i == dates[j][2] && my_year==dates[j][0] && (my_month+1) == dates[j][1])
+                myclass = " class='lightgrey dispointer'";
+              
         }
         str += "<li" + myclass + ">" + i + "</li>"; //創建日期節點
-       
     }
     holder.innerHTML = str; //設置日期顯示
     ctitle.innerHTML = month_name[my_month]; //設置英文月份顯示
     cyear.innerHTML = my_year; //設置年份顯示
 
-     $('.curday_after').click(showNumRemain);
+     $('.curday_after').click(showInfo);
+     
    
 }
 
