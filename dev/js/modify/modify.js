@@ -341,7 +341,7 @@ function buildlist (jsonobj){
         img.src = tail_arr[i].tail_img;
         img.classList = 'picon';
         img.alt = '資料庫圖片遺失';
-        p.innerHTML = tail_arr[i].tail_chname;
+        p.innerHTML = tail_arr[i].tail_ch_name;
 
         li.appendChild(img);
         li.appendChild(p);
@@ -361,7 +361,7 @@ function buildlist (jsonobj){
         input.dataset.pointb = head_arr[i].head_environment2;
         input.dataset.pointc = head_arr[i].head_environment3;
         input.style.display = 'none';
-        p.innerHTML = head_arr[i].head_chname;
+        p.innerHTML = head_arr[i].head_ch_name;
 
         li.appendChild(img);
         li.appendChild(input);
@@ -383,7 +383,7 @@ function buildlist (jsonobj){
         input.dataset.pointc = body_arr[i].body_environment3;
         input.dataset.health = body_arr[i].body_health;
         input.style.display = 'none';
-        p.innerHTML = body_arr[i].body_chname;
+        p.innerHTML = body_arr[i].body_ch_name;
 
         li.appendChild(img);
         li.appendChild(input);
@@ -405,7 +405,7 @@ function buildlist (jsonobj){
         input.dataset.pointc = leg_arr[i].leg_environment3;
         input.dataset.jump = leg_arr[i].leg_jump;
         input.style.display = 'none';
-        p.innerHTML = leg_arr[i].leg_chname;
+        p.innerHTML = leg_arr[i].leg_ch_name;
 
         li.appendChild(img);
         li.appendChild(input);
