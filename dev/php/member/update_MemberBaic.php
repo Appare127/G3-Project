@@ -9,7 +9,7 @@ try {
   $members->bindValue(':user_name',$_GET["user_name"]);
   $members->bindValue(':user_psw',$_GET["user_psw"]);
   $members->bindValue(':user_tel',$_GET["user_tel"]);
-$members->bindValue(':hint_answer',$_GET["hint_answer"]);
+  $members->bindValue(':hint_answer',$_GET["hint_answer"]);
   $members->execute();
   echo "異動成功~" ;
 
