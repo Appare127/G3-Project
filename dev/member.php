@@ -1,5 +1,6 @@
 <?php 
 $errMsg = "";
+
 try {
 	require_once('php/connectg3.php');
     
@@ -100,7 +101,7 @@ if ($errMsg !=""){
 
         <div class="col-12 col-md-6">
           <div class="baic_pic">
-            <img  id="upfile_pic" src="img/member/member_pic.png">
+            <img  id="upfile_pic" src="<?=$userRow["user_img"]?>">
           </div>
 
           <div class="upfile">
@@ -109,13 +110,70 @@ if ($errMsg !=""){
         </div>
 
 
-
         <div class="col-12 col-md-6">
-          <table class="baic_txt" >
 
+            <form action="php/member/update_MemberBaic.php">
+              <table class="baic_txt">
+                
+              <tr>
+                <td>帳號</td>
+                <input type="hidden" name="user_id" value="<?=$userRow["user_id"]?>">
+                <td><?=$userRow["user_id"]?></td>
+              </tr>
+              <tr>
+                <td>姓名</td>
+                <td><input type="text" name="user_name" value="<?=$userRow["user_name"]?>"></td>
+              </tr>
+              <tr>
+                <td>密碼</td>
+                <td><input type="password" name="user_psw" value="<?=$userRow["user_psw"]?>"></td>
+              </tr>
+              <tr>
+                <td>信箱</td>
+                <td><?=$userRow["user_email"]?></td>
+              </tr>
+              <tr>
+                <td>電話</td>
+                <td><input type="tel" name="user_tel" value="<?=$userRow["user_tel"]?>"></td>
+              </tr>
+              <tr>
+                <td>密碼提示答案</td>
+ 
+                <td><input type="text" name="hint_answer" value="<?=$userRow["hint_answer"]?>"></td>
+              </tr>
+              <tr>
+                <td>目前金幣</td>
+                <td><?=$userRow["game_money"]?></td>
+              </tr>
+              <tr>
+                <td>當日剩餘票數</td>
+                <td><?=$userRow["vote_remain"]?></td>
+              </tr> 
+            </table>
+          
+
+            <div class="baic_btn">
+              <a href="" class="btn_cloud">修改
+                @@include('template/btn_sp.html')</a>
+              <a href="" class="btn_cloud"><input type="submit" value="儲存">
+                @@include('template/btn_sp.html')
+              </a>
+             
+            </div>
+
+            </div>
+
+            <div class="clearfix"></div>
+            </div>
+            <form>
+
+        <!-- <div class="col-12 col-md-6">
+
+          <table class="baic_txt" >
             <tr>
               <td>帳號</td>
-              <td><?=$userRow["user_id"]?></td>
+              <td>
+              <?=$userRow["user_id"]?></td>
             </tr>
             <tr>
               <td>姓名</td>
@@ -141,10 +199,10 @@ if ($errMsg !=""){
               <td>目前金幣</td>
               <td><?=$userRow["game_money"]?></td>
             </tr>
-            <!-- <tr>
+            <tr>
               <td>當日剩餘票數</td>
-              <td>3</td>
-            </tr> -->
+              <td><?=$userRow["vote_remain"]?></td>
+            </tr> 
           </table>
 
           <div class="baic_btn">
@@ -158,7 +216,7 @@ if ($errMsg !=""){
         </div>
 
         <div class="clearfix"></div>
-      </div>
+      </div> -->
 
       <div class="my_gamerecord">
         <h2>遊戲紀錄</h2>
@@ -167,7 +225,7 @@ if ($errMsg !=""){
         <div class="col-12 col-md-6">
 
           <div class="gamerecord_pic">
-            <img src="img/member/m_game_pic.png">
+            <img src="<?=$userRow["game_img"]?>">
           </div>
 
         </div>
@@ -178,18 +236,18 @@ if ($errMsg !=""){
 
             <tr>
               <td>最高分數(存活時間)</td>
-              <td>0987987387</td>
+              <td><?=$userRow["game_record"]?>秒</td>
             </tr>
 
             <tr>
               <td>最高分數遊戲日期</td>
-              <td>**************</td>
+              <td><?=$userRow["game_date"]?></td>
             </tr>
 
           </table>
 
           <div class="baic_btn">
-            <a href="" class="btn_cloud">重新挑戰
+            <a href="" class="btn_cloud">挑戰高分去
               @@include('template/btn_sp.html')</a>
           </div>
 
@@ -206,7 +264,10 @@ if ($errMsg !=""){
         <div class="col-12 col-md-6">
 
           <div class="myanimal_pic">
-            <img src="img/member/m_myanimal_pic.png">
+
+            <img class="animalbg_re" src="<?=$userRow["my_animal_bg_img"]?>">
+            <img class="animalpic_ab" src="<?=$userRow["my_animal_img"]?>">
+
           </div>
 
         </div>
@@ -223,16 +284,22 @@ if ($errMsg !=""){
 
             <tr>
               <td>生存能力</td>
-              <td>**************</td>
+            </tr>
+
+
+            <tr>
+              <td>生命力</td>
+              <td>
+                <?php for($i=0; $i<$userRow["animal_life"];$i++){ ?>
+                  <img src="img/game/heart.png" style="width:30px" alt="animal_life">
+                <?php
+                }?>
+                 <!-- <?=$userRow["animal_life"]?> -->
+              </td>
             </tr>
 
             <tr>
               <td>跳躍力</td>
-              <td>**************</td>
-            </tr>
-
-            <tr>
-              <td>生命力</td>
               <td>**************</td>
             </tr>
 
