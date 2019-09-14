@@ -57,7 +57,7 @@ mychart_options =
         {
             display: true,
             fontSize: 18,
-            fontColor: ['#006400', '#2F4F4F', '#FF8C00'],
+            fontColor: ['#006400', '#2F4F4F', '#dd7426'],
             fontFamily: 'Microsoft JhengHei',
         },
         gridLines:      //格線

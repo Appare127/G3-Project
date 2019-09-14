@@ -112,9 +112,10 @@
 @mixin btn_cloudy ($width,$color){
     .btn_cloudy{
         width: $width;
-        color: $col_white;//$col_black
+        color: $col_white;
+        background-color: $col_btn_orange;
         font-size: 16px;
-        border: 2px solid $color;
+        border: 2px solid $col_btn_orange;
         border-radius: 20px;
         font-weight: bold;
         text-align: center;
@@ -129,7 +130,7 @@
             position: absolute;
             width: 25%;
             height: 100%;
-            background-color: $col_white;//$color
+            background-color: $col_white;
             transform: translateY(150%);
             border-radius: 50%;
             transition: 0.3s;
@@ -152,7 +153,7 @@
             }
         }
         &:hover{
-            color: $color;//$col_white
+            color: $color;
         }
         &:hover .btn_cloudeffect{
             transform: translateY(30%) scale(2.2);

@@ -50,10 +50,13 @@
                     <img class="head_pic" src="img/modify/p_head_giraffe.png" alt="">
                 </div>
 
+                <div class="bgimg_box">
+                    <img src="" alt="" class="bgimg">
+                </div>
                 <canvas id="pic_box"></canvas>
 
 
-                <form class="btn_box" method="post" accept-charset="utf-8" id="form1">
+                <form class="btn_box" method="post" accept-charset="utf-8" id="form1" enctype="multipart/form-data">
                     
                     <input name="url_data" id='url_data' type="hidden"/>
                     <input name="user_no" id='user_no' type="hidden"/>
@@ -74,12 +77,15 @@
                         @@include('template/btn_sp.html')
                     </a>
 
-                    <a href="javascript: test()" class="btn_cloudy">
-                        背景
-                        @@include('template/btn_sp.html')
-                    </a>
-
-                    <img src="" alt="" id="testimg">
+                    
+                    <label>
+                        <input type="file" name="up_bg_file" id="up_bg_file" accept="image/*">
+                        <a class="btn_cloudy">
+                            背景
+                            @@include('template/btn_sp.html')
+                        </a>
+                    </label>
+                    
                 </form>
             </div>
 

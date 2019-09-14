@@ -156,6 +156,39 @@ function saveok(text){
 }
 
 
+function read_bgimg(e){
+
+    let fileAccepts = ["bmp", "png", "gif", "jpg"];
+    let fileInfo = getFileInfo(e.target.value);
+    console.log(e.target.value);
+    
+    if( fileAccepts.indexOf(fileInfo.ext.toLowerCase()) == -1){
+        alert("檔案格式不對");
+        e.target.value = "";
+    }else{
+        let file = e.target.files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function(){
+            document.getElementsByClassName('bgimg')[0].src = reader.result;
+        }
+    }
+}
+
+function getFileInfo(fileStr){
+    //回傳一個陣列，索引0放的是主檔名, 索引1放的是副檔名
+	let dotPos = fileStr.lastIndexOf(".");
+	let fileName = fileStr.substring(0, dotPos);
+	let fileExt = fileStr.substr( dotPos+1);
+
+	let file = { 
+		name : fileName,
+		ext : fileExt
+	};
+	return file;
+}
+
+
 // 點圖片清單會做更換動物圖片的函式
 function changeParts(e){
 
@@ -463,6 +496,8 @@ function init(){
 
     // 剛載進頁面時，先做一次canvas繪製預設的圖片
     drawcanvas();
+
+    document.getElementById('up_bg_file').addEventListener('change',read_bgimg);
 
 }
 
