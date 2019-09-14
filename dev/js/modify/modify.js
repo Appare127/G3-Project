@@ -277,7 +277,7 @@ function updatehealth(){
 function updatejump(){
     let jump = document.getElementsByClassName('bar_add')[0];
     let jump_value = document.getElementsByClassName('meter')[0];
-    jump.style.width = `${total_jump}0%`;
+    jump.style.width = `${total_jump *2}0%`;
     jump_value.innerText = total_jump + 'm';
 }
 
