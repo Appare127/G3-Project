@@ -392,21 +392,34 @@ function chosenArea(area){
                 // alert(JSON.parse(xhr.responseText));
                 userData = JSON.parse(xhr.responseText);
                 sessionStorage['animal_img'] = userData.my_animal_img;
-                sessionStorage['animal_name'] = userData.animal_name;
-                sessionStorage['animal_life'] =userData.health;
-                sessionStorage['animal_jump'] =userData.jump;
-                sessionStorage['animal_en1'] =userData.environment1;
-                sessionStorage['animal_en2'] =userData.environment2;
-                sessionStorage['animal_en3'] =userData.environment3;
+                sessionStorage['animal_name'] = userData.my_animal_name;
+                sessionStorage['animal_life'] =userData.animal_life;
+                sessionStorage['animal_jump'] =userData.animal_jump;
+                sessionStorage['game_record'] =userData.game_record;
+                sessionStorage['animal_en1'] =userData.environ_adapt_1;
+                sessionStorage['animal_en2'] =userData.environ_adapt_2;
+                sessionStorage['animal_en3'] =userData.environ_adapt_3;
+
+                //顯示角色資料
+                $que(".info_pic img")[0].src = "";
+                setTimeout(function(){$que(".info_pic img")[0].src = sessionStorage['animal_img'];},200);
+                $que(".value_life")[0].innerHTML = "生命力:";
+                $que(".info_name")[0].innerText = sessionStorage['animal_name'];
+                for(var k=0; k<sessionStorage['animal_life']; k++){
+                    $que(".value_life")[0].innerHTML += `<img src="img/game/heart.png" alt="" >`;
+                }
+
 
             }else{
                 alert( xhr.status );
             }
         }
-
+        if(sessionStorage['user_no']==null){
+            sessionStorage['user_no'] = 1;
+        }
         var url = "php/game/getCusAnimal.php?user_no="+ sessionStorage['user_no'];
         xhr.open("Get", url, true);  //readyState : 1
-
+        console.log(url);
         xhr.send( null );
     }   
   
@@ -469,13 +482,6 @@ function chosenArea(area){
         var url = "php/game/getRankingData.php";
         xhr.open("Get", url, true);  //readyState : 1
         xhr.send( null );
-
-
-       
-       
-
-        
-
         // <div class="chart_top1">
         //     <div class="top1_title">
         //         <img src="img/game/top_pic.png" alt="">
@@ -524,14 +530,6 @@ function chosenArea(area){
     function doFirst(){
         getRankingData();
         getCusAnimal();
-        //顯示角色資料
-        $que(".info_pic img")[0].src = sessionStorage['my_animal_img'];
-        $que(".value_life")[0].innerHTML = "生命力:";
-        for(var k=0; k<sessionStorage['animal_life']; k++){
-            $que(".value_life")[0].innerHTML += `<img src="img/game/info_life.png" alt="">`;
-        }
-        $que(".info_name")[0].innerText = sessionStorage['my_animal_name'];
-
         //幻燈片
         $cls('arrowLeft')[0].addEventListener('click', sliderLeft);
         $cls('arrowRight')[0].addEventListener('click', sliderRight);

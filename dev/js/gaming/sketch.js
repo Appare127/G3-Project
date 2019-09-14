@@ -42,7 +42,6 @@ let scene = {
 
 
 function preload() {
-    console.log('生命:'+sessionStorage['animal_life']);
     if(sessionStorage['sceneChoice'] == null){
         sessionStorage['sceneChoice'] = 'desert';
     }
@@ -75,7 +74,7 @@ function setup() {
     }else {
         var cnv = createCanvas(windowWidth, windowHeight-50);
     }
-
+   
 
     cnv.style('z-index', 1);
     x2 = width;
@@ -187,6 +186,9 @@ function draw() {
                 setTimeout(function(){
                     noLoop();
                 },0.1);
+                if(timer>sessionStorage['game_record']){
+                    saveImage();
+                }
                 questionPage.style.display='block';
                 reward_money.innerHTML = `得到獎金：${money}`;
                 score_time.innerHTML = `生存時間：${timer}秒`;

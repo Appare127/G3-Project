@@ -208,7 +208,7 @@
                 width:100%;
             }
             .forest_pointer {
-                
+                cursor:pointer;                
                 width: 20px;
                 height: 3px;
                 position:absolute;
@@ -230,6 +230,7 @@
                 }
             }
             .desert_pointer {
+                cursor:pointer;
                 width: 20px;
                 height: 3px;
                 position:absolute;
@@ -252,6 +253,7 @@
                 }
             }
             .mountain_pointer {
+                cursor:pointer;
                 width: 20px;
                 height: 3px;
                 position:absolute;
@@ -742,13 +744,17 @@
                             width:50%;
                             
                             .info_pic{
+                                width:50%;
                                 height:120px;
                                 filter: drop-shadow(0px 5px 7px rgba(0, 0, 0, 0.7));
                                 position:absolute;
-                                top:20%;
-                                left:7%;
+                                top:4%;
+                                left:5%;
                                 padding:5px;
                                 animation:animalBreathing 5s infinite;
+                                img {
+                                    width:80%;
+                                }
                                 
                             }
                             @keyframes animalBreathing{
@@ -765,7 +771,7 @@
                                 width: 200px;
                                 position:absolute;
                                 left:8%;
-                                bottom:15%;
+                                bottom:12%;
                                 padding-bottom:10px;
                                 text-align:center;
                             }
@@ -780,6 +786,10 @@
                                 .value_life,.value_jump{
                                     height:30px;
                                     width:80%;
+                                    img {
+                                        width: 25px;
+                                        margin-left:2px;
+                                    }
                                 }
                             }
                             .info_diagram{
@@ -822,6 +832,7 @@
             perspective: 500px;
             transform-style:preserve-3d;
             .forest_pointer {
+                cursor:pointer;
                 position:absolute;
                 left:200px;
                 top:80px;
@@ -843,6 +854,7 @@
                 }
             }
             .desert_pointer {
+                cursor:pointer;
                 position:absolute;
                 transition:0.5s all;
                 left:500px;
@@ -864,6 +876,7 @@
                 }
             }
             .mountain_pointer {
+                cursor:pointer;
                 position:absolute;
                 transition:0.5s all;
                 left:860px;
@@ -1106,7 +1119,7 @@
                         padding-right:5px;
                         text-align:center;
                         img{
-                            width: 65px;
+                            width: 90px;
                         
                         }
                         .top_score{

@@ -67,13 +67,13 @@ gulp.task('default', function () {
   // "./"表示是根目錄底下的 最好都加
 
 
-  // gulp.watch(["dev/*.html" , "dev/**/*.html",'dev/*.php','dev/**/*.php'] , ['template']).on('change', reload);
+  gulp.watch(["dev/*.html" , "dev/**/*.html",'dev/*.php','dev/*/*.php',"dev/php/*/*.php"] , ['template']).on('change', reload);
   gulp.watch(["./dev/js/*.js","./dev/js/**/*.js"] ,['concat'] ).on('change', reload);
   gulp.watch(["./dev/sass/*.scss","./dev/sass/**/*.scss"], ['sass']).on('change', reload);
   gulp.watch(["dev/img/*/*"], ["moveImg"]).on('change', reload);
   // gulp.watch(["dev/php/*"], ["php"]).on('change', reload);
 
-  gulp.watch(["dev/*.html" , "dev/**/*.html" , 'dev/*.php','dev/**/*.php'] , ['template','sass','concat',"moveImg","php","css"]).on('load', reload);
+  gulp.watch(["dev/*.html" , "dev/**/*.html" , 'dev/*.php','dev/**/*.php',"dev/php/*/*.php"] , ['template','sass','concat',"moveImg","php","css"]).on('load', reload);
 
 });
 

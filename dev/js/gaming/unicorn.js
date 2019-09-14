@@ -1,6 +1,6 @@
 class Unicorn {  
     constructor(life,weight=2){
-        this.r = 100;
+        this.r = 150;
         this.x = 50;
         this.y = height-this.r;
         this.vy = 10;
@@ -12,7 +12,7 @@ class Unicorn {
         if(window.innerWidth<=768){
             image(uImg,this.x, this.y, this.r, this.r);
         }else {
-            image(uImg,this.x, this.y, this.r, this.r);
+            image(uImg,this.x, this.y-20, this.r, this.r);
         }
 
     } 

@@ -15,7 +15,4 @@ try {
     $errMsg .= "錯誤行號: " . $e->getLine() . "<br>";
  
 }
-
-
-
 ?>

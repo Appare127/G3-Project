@@ -19,7 +19,10 @@
 </head>
 <body>
 @@include('template/header.html')
-
+<form method="post" accept-charset="utf-8" id="form1">
+    <input name="result_img" id='result_img' type="hidden"/>
+    <input name="user_no" id='user_no' type="hidden">
+</form>
 <div class="gaming">
     <div id="question_page">
         <div class="vsTitle"><h2>動物問答</h2><p>沒有力氣逃跑了...</p></div>
@@ -94,7 +97,30 @@ function chosenArea(area){
     }
 }
 
+function saveImage(){
+    var canvas = document.getElementsByTagName('canvas')[0];
+    var dataURL = canvas.toDataURL("image/png");
+    // console.log('dataURL:'+dataURL);
+    document.getElementById('result_img').value = dataURL;
+    document.getElementById('user_no').value = sessionStorage['user_no'];
+    var formData = new FormData(document.getElementById("form1"));
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function(){
+        if( xhr.status == 200){
+            if(xhr.responseText == "error"){
+    
+            }else{
 
+            }
+        }else{
+            console.log(xhr.status);
+        }
+    }
+    
+    xhr.open('POST', 'php/game/canvas_load_save.php', true);
+    xhr.send(formData);
+
+}
 
 function restartGame(){
     
@@ -126,7 +152,6 @@ function doFirst(){
 }
 
 function updateScoreMoney(){
-
     let xhr = new XMLHttpRequest();
     xhr.onload =function(){
         if(xhr.status == 200){
@@ -136,7 +161,13 @@ function updateScoreMoney(){
         }
     }
     // sessionStorage['game_record'] = timer;
-    var url = `php/userUpdateToDb.php?user_no=${sessionStorage['user_no']}&game_record=${timer}&game_money=${money}` ;
+    if(timer>sessionStorage['game_record']){
+        saveImage();
+        var url = `php/userUpdateToDb.php?user_no=${sessionStorage['user_no']}&game_record=${timer}&game_money=${money}` ;
+    }else {
+        var url = `php/userUpdateToDb.php?user_no=${sessionStorage['user_no']}&game_record=${sessionStorage['game_record']}&game_money=${money}` ;
+    }
+
     xhr.open("Get", url,true);
     xhr.send(null);
 
