@@ -2,7 +2,7 @@
 // 手機~手機~手機~手機~手機~手機~手機~手機~手機~
 
 *{
-    outline: 1px solid red;
+    // outline: 1px solid red;
 }
 
 
@@ -204,7 +204,7 @@
         box-sizing: border-box;
         padding: 20px 10px;
         @include radarinfo();
-        
+
         .hit{
             margin: 10px;
             font-size: $s_fz;
