@@ -177,6 +177,8 @@
         margin: auto;
       }
     }
+    @include radarinfo_member();
+
   }
 
 }

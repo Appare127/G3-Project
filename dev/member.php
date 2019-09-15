@@ -1,9 +1,9 @@
 <?php 
 $errMsg = "";
-
+session_start();
 try {
 	require_once('php/connectg3.php');
-    session_start();
+    
   // $orders=$pdo->prepare('select * from product_order where user_no = :user_no');
   // $orders->bindValue(':user_no',1);//$_POST['user_no']
   // $orders->execute();
@@ -49,6 +49,7 @@ try {
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link rel="stylesheet" href="css/style.css">
+ <script src="js/plugin/Chart.js"></script>
 </head>
 
 <body class="bd_member">
@@ -184,7 +185,7 @@ if ($errMsg !=""){
 
             <div class="clearfix"></div>
             </div>
-            <form>
+      <form>
 
         <!-- <div class="col-12 col-md-6">
 
@@ -293,43 +294,33 @@ if ($errMsg !=""){
         <!-- <p>提醒：你所選擇的動物會跟牠的適應力有關。<p> -->
        
         <div class="col-12 col-md-6">
-        
-          <table class="myanimal_txt">
 
-            <tr>
-              <td>動物名稱</td>
-              <td><?=$userRow["my_animal_name"]?></td>
-            </tr>
+            <div class="info_wrap">
+              <p>體質能力</p>
+              <div class="life_ability">
+                  <p>生命力:</p>
+                  <div class="pic">
+                      <!-- <img src="img/modify/icon_life.png" alt="">-->
+                  </div>
+              </div>
 
-            <tr>
-              <td>生存能力</td>
-            </tr>
+              <div class="jump_ability">
+                  <p>跳躍力:</p>
+                  <div class="pic">
+                      <div class="jump_bar">
+                          <div class="bar_add"></div>
+                          <span class="meter">m</span>
+                      </div>
+                  </div>
+              </div>
 
+              <p>環境適應力</p>
+              <div class="evemt_ability">
+                  <canvas class="chart_canvas">
+                  </canvas>
+              </div>
+            </div>
 
-            <tr>
-              <td>生命力</td>
-              <td>
-                <?php for($i=0; $i<$userRow["animal_life"];$i++){ ?>
-                  <img src="img/game/heart.png" style="width:30px" alt="animal_life">
-                <?php
-                }?>
-                 <!-- <?=$userRow["animal_life"]?> -->
-              </td>
-            </tr>
-
-            <tr>
-              <td>跳躍力</td>
-              <td>**************</td>
-            </tr>
-
-            <tr>
-              <td>適應環境</td>
-              <td>**************</td>
-            </tr>
-           
-          </table>
-
-           
 
           <div class="baic_btn">
             <a href="http://localhost/G3-git/frank.html" class="btn_cloud">參加選怪
@@ -347,9 +338,9 @@ if ($errMsg !=""){
 
         <div class="clearfix"></div>
 
-      </div>
+      </div><!-- mybasic -->
 
-    </div>
+    </div><!-- container -->
 
   </section>
 
@@ -783,7 +774,54 @@ if ($errMsg !=""){
   @@include('template/footer.html')
 
   <script src="js/member/member.js"></script>
+  <script src="js/modify/radar.js"></script>
+  <script>
 
+// 更新生命力
+  function updatehealth(){
+    let total_health = sessionStorage.animal_life;
+
+      let health_box = document.querySelector(".life_ability .pic");
+      // console.log(health_box);
+      health_box.innerHTML = '';
+      for (let i=1; i<=total_health; i++){
+          let hart = document.createElement('img');
+          hart.src = 'img/modify/icon_life.png';
+          health_box.appendChild(hart);
+      }
+  }
+
+  function updatejump(){
+    let total_jump = sessionStorage['animal_jump'];
+
+    let jump = document.getElementsByClassName('bar_add')[0];
+    let jump_value = document.getElementsByClassName('meter')[0];
+
+    if (total_jump == 'null'){
+      jump_value.innerText = 'm';
+    }else{
+      jump.style.width = `${total_jump*2}0%`;
+      console.log(total_jump)
+      jump_value.innerText = total_jump + 'm';
+    }
+
+}
+
+  function updatechart(){
+    let total_eml_forest = sessionStorage.environ_adapt_1;
+    let total_eml_mountain = sessionStorage.environ_adapt_2;
+    let total_eml_desert = sessionStorage.environ_adapt_3;
+
+    myRadarChart.data.datasets[0].data = [total_eml_forest,total_eml_mountain,total_eml_desert];
+    myRadarChart.update();
+  }
+
+
+window.addEventListener('load',updatehealth);
+window.addEventListener('load',updatejump);
+window.addEventListener('load',updatechart);
+
+  </script>
 </body>
 
 </html>
