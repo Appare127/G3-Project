@@ -1,12 +1,8 @@
 <?php 
 $errMsg = "";
 try {
-    require_once('../connectg3.php');
-    
-
-  if( $_FILES["upFile"]["error"] == UPLOAD_ERR_OK){
-
-	  
+	require_once('../connectg3.php');
+	
 	$members=$pdo->prepare('update user set user_name=:user_name,user_psw=:user_psw,user_tel=:user_tel,hint_answer=:hint_answer where user_id=:user_id');
 
 	$members->bindValue(':user_id',$_REQUEST["user_id"]);
@@ -15,9 +11,11 @@ try {
 	$members->bindValue(':user_tel',$_REQUEST["user_tel"]);
 	$members->bindValue(':hint_answer',$_REQUEST["hint_answer"]);
 	$members->execute();
-	// echo "異動成功~" ;
-	header("location:../../member.php");
+	echo "異動成功~" ;
+	// header("location:../../member.php");
+    
 
+  if( $_FILES["upFile"]["error"] == UPLOAD_ERR_OK){
 
 		// $sql = "INSERT INTO `user` (`psn`, `pname`, `price`, `author`, `pages`, `image`) values(null, :pname, :price, :author, :pages, '' )";
 		//為什麼要反斜線 讓他等於字串 不能用"" 
