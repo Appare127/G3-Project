@@ -48,7 +48,15 @@
                     <img src="img/game/info_life.png" alt="">
                     </div>
                     <div class="value_jump">
-                    跳躍力:<img src="img/game/info_jump.png" alt="">
+                        <div class="jump_ability">
+                            <p>跳躍力:</p>
+                            <div class="pic">
+                                <div class="jump_bar">
+                                    <div class="bar_add"></div>
+                                    <span class="meter">1m</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="info_diagram">
@@ -396,13 +404,15 @@ function chosenArea(area){
                 sessionStorage['animal_life'] =userData.animal_life;
                 sessionStorage['animal_jump'] =userData.animal_jump;
                 sessionStorage['game_record'] =userData.game_record;
+                sessionStorage['game_date'] =userData.game_date;
                 sessionStorage['animal_en1'] =userData.environ_adapt_1;
                 sessionStorage['animal_en2'] =userData.environ_adapt_2;
                 sessionStorage['animal_en3'] =userData.environ_adapt_3;
-
+                
                 //顯示角色資料
-                $que(".info_pic img")[0].src = "";
-                setTimeout(function(){$que(".info_pic img")[0].src = sessionStorage['animal_img'];},200);
+                
+                $que(".info_pic img")[0].src = userData.my_animal_img +'?'+ new Date().getTime();
+                console.log($que(".info_pic img")[0].src);
                 $que(".value_life")[0].innerHTML = "生命力:";
                 $que(".info_name")[0].innerText = sessionStorage['animal_name'];
                 for(var k=0; k<sessionStorage['animal_life']; k++){
