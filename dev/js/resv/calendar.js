@@ -96,7 +96,9 @@ function refresh_date(date) {
     ctitle.innerHTML = month_name[my_month]; //設置英文月份顯示
     cyear.innerHTML = my_year; //設置年份顯示
 
-     $('.curday_after').click(showInfo);
+    //  $('.curday_after').click(showInfo);
+     $('.curday_after').click(showNumRemain);
+
      
    
 }
