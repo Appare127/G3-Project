@@ -439,50 +439,34 @@ function chosenArea(area){
         xhr.onload=function (){
             if( xhr.status == 200 ){ 
                 userDataDesc = JSON.parse(xhr.responseText);
-                // alert(userDataDesc[0].my_animal_img);
+
 
                 //塞入前三名照片跟資料
                 $que('.top1_title img')[0].src = userDataDesc[0].my_animal_img;
                 $que('.top1_title .top_score')[0].innerText = userDataDesc[0].game_record + '秒';
-                $que('.top1_title .top_animal')[0].innerText = userDataDesc[0].user_name;
-                $que('.top1_title .top_player')[0].innerText = userDataDesc[0].user_id;
+                $que('.top1_title .top_animal')[0].innerText = userDataDesc[0].my_animal_name;
+                $que('.top1_title .top_player')[0].innerText = userDataDesc[0].user_name;
 
                 $que('.top2_title img')[0].src = userDataDesc[1].my_animal_img;
                 $que('.top2_title .top_score')[0].innerText = userDataDesc[1].game_record + '秒';
-                $que('.top2_title .top_animal')[0].innerText = userDataDesc[1].user_name;
-                $que('.top2_title .top_player')[0].innerText = userDataDesc[1].user_id;
+                $que('.top2_title .top_animal')[0].innerText = userDataDesc[1].my_animal_name;
+                $que('.top2_title .top_player')[0].innerText = userDataDesc[1].user_name;
 
                 $que('.top3_title img')[0].src = userDataDesc[2].my_animal_img;
                 $que('.top3_title .top_score')[0].innerText = userDataDesc[2].game_record + '秒';
-                $que('.top3_title .top_animal')[0].innerText = userDataDesc[2].user_name;
-                $que('.top3_title .top_player')[0].innerText = userDataDesc[2].user_id;
+                $que('.top3_title .top_animal')[0].innerText = userDataDesc[2].my_animal_name;
+                $que('.top3_title .top_player')[0].innerText = userDataDesc[2].user_name;
        
                 HTMLstr = "<tr><td>排名</td><td>動物名稱</td><td>會員名稱</td><td>時間</td></tr>";
                 
                 for(var i=3; i<10; i++ ){
                     
                     HTMLstr += '<tr>';
-                    HTMLstr += `<td>${i+1}</td><td>${userDataDesc[i].user_name}</td><td>${userDataDesc[i].user_id}</td><td>${userDataDesc[i].game_record} 秒</td>`;
+                    HTMLstr += `<td>${i+1}</td><td>${userDataDesc[i].my_animal_name}</td><td>${userDataDesc[i].user_name}</td><td>${userDataDesc[i].game_record} 秒</td>`;
                     HTMLstr += '</tr>';
                 }
                 $que('.chart_ranking .ranking_table')[0].innerHTML =HTMLstr;
-            
 
-                //塞入4-10名
-                // <table class="ranking_table">
-                //         <tr>
-                //             <td>排名</td>
-                //             <td>動物名稱</td>
-                //             <td>會員名稱</td>
-                //             <td>時間</td>
-                //         </tr>
-                //         <tr>
-                //             <td>4</td>
-                //             <td>小白獸</td>
-                //             <td>apple7788</td>
-                //             <td>112秒</td>
-                //         </tr>
-                //     </table>
 
 
             }else{
@@ -492,15 +476,7 @@ function chosenArea(area){
         var url = "php/game/getRankingData.php";
         xhr.open("Get", url, true);  //readyState : 1
         xhr.send( null );
-        // <div class="chart_top1">
-        //     <div class="top1_title">
-        //         <img src="img/game/top_pic.png" alt="">
-        //         <div class="top_score">168秒</div>
-        //         <div class="top_animal">艾咪</div>
-        //         <div class="top_player">AABB</div>
-        //     </div>
-        // </div>
-        
+ 
 
 
     }

@@ -9,6 +9,8 @@
     <script src="./js/gaming/p5.js"></script>
     <script src="./js/gaming/p5.dom.min.js"></script>
     <script src="./js/gaming/collide2d.js"></script>
+    <script src=""></script>
+    <script src=""></script>
     <script src="./js/gaming/unicorn.js" async></script>
     <script src="./js/gaming/sketch.js" async></script>
     <script src="./js/gaming/train.js" async></script>
@@ -107,11 +109,7 @@ function saveImage(){
     var xhr = new XMLHttpRequest();
     xhr.onload = function(){
         if( xhr.status == 200){
-            if(xhr.responseText == "error"){
-    
-            }else{
-
-            }
+            console.log('遊戲截圖成功');
         }else{
             console.log(xhr.status);
         }
@@ -140,10 +138,11 @@ window.addEventListener('resize',function(){
 });
 
 function doFirst(){
+    getQuestions();
     gaming_animal.src= sessionStorage['animal_img']+'?'+ new Date().getTime();
+    gaming_monster.src= scene[sessionStorage['sceneChoice']].monster;
     let retry = document.getElementById('retry');
     retry.addEventListener('click',restartGame);
-    getQuestions();
     questionPage.style.display="none";
     calculation.style.display="none";
     if(sessionStorage['sceneChoice'] == null){
