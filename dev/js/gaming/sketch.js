@@ -19,7 +19,7 @@ let test2 = 999;
 
 let timer=0;
 let money=0;
-
+let cusJump;
 
 
 let scene = {
@@ -45,7 +45,7 @@ function preload() {
     if(sessionStorage['sceneChoice'] == null){
         sessionStorage['sceneChoice'] = 'desert';
     }
-    uImg = loadImage( sessionStorage['animal_img']);
+    uImg = loadImage(sessionStorage['animal_img']+'?'+ new Date().getTime());
 
     tImg = loadImage(scene[sessionStorage['sceneChoice']].monster);
     bgImg = loadImage(scene[sessionStorage['sceneChoice']].area);
@@ -74,13 +74,13 @@ function setup() {
     }else {
         var cnv = createCanvas(windowWidth, windowHeight-50);
     }
-   
 
     cnv.style('z-index', 1);
     x2 = width;
 
     unicorn = new Unicorn(sessionStorage['animal_life'],2); //客製動物 Unicorn(生命值,重力)
     life = unicorn.life;
+    cusJump = sessionStorage['animal_jump'] *(-1)*5 + (-20);
 
     
 }
@@ -97,7 +97,9 @@ function windowResized() {
 }
 
 function touchStarted(){
-    unicorn.jump(-40);
+    unicorn.jump(cusJump);
+    
+    console.log(cusJump);
 }
 
 function draw() {
@@ -164,7 +166,8 @@ function draw() {
         unicorn.x += 10;
     }
     if(keyIsDown(32)){
-        unicorn.jump(-40);
+        unicorn.jump(cusJump);
+        console.log(sessionStorage['animal_jump']);
     }
 
 
@@ -186,9 +189,8 @@ function draw() {
                 setTimeout(function(){
                     noLoop();
                 },0.1);
-                if(timer>sessionStorage['game_record']){
-                    saveImage();
-                }
+
+                updateScoreMoney();
                 questionPage.style.display='block';
                 reward_money.innerHTML = `得到獎金：${money}`;
                 score_time.innerHTML = `生存時間：${timer}秒`;

@@ -140,7 +140,7 @@ window.addEventListener('resize',function(){
 });
 
 function doFirst(){
-    gaming_animal.src= sessionStorage['animal_img'];
+    gaming_animal.src= sessionStorage['animal_img']+'?'+ new Date().getTime();
     let retry = document.getElementById('retry');
     retry.addEventListener('click',restartGame);
     getQuestions();
@@ -155,7 +155,8 @@ function updateScoreMoney(){
     let xhr = new XMLHttpRequest();
     xhr.onload =function(){
         if(xhr.status == 200){
-            alert(xhr.responseText);
+            console.log(xhr.responseText);
+            sessionStorage['response'] = xhr.responseText;
         }else {
             alert(xhr.status);
         }
@@ -163,9 +164,10 @@ function updateScoreMoney(){
     // sessionStorage['game_record'] = timer;
     if(timer>sessionStorage['game_record']){
         saveImage();
-        var url = `php/userUpdateToDb.php?user_no=${sessionStorage['user_no']}&game_record=${timer}&game_money=${money}` ;
+        var url = `php/userUpdateToDb.php?user_no=${sessionStorage['user_no']}&game_record=${timer}&game_money=${money}&game_date=${new Date().toJSON().slice(0, 10)}`;
+        sessionStorage['test'] = url;
     }else {
-        var url = `php/userUpdateToDb.php?user_no=${sessionStorage['user_no']}&game_record=${sessionStorage['game_record']}&game_money=${money}` ;
+        var url = `php/userUpdateToDb.php?user_no=${sessionStorage['user_no']}&game_record=${sessionStorage['game_record']}&game_money=${money}&game_date=${sessionStorage['game_date']}` ;
     }
 
     xhr.open("Get", url,true);

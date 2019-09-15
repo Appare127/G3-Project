@@ -1,3 +1,5 @@
+
+
 class Unicorn {  
     constructor(life,weight=2){
         this.r = 150;
@@ -6,6 +8,7 @@ class Unicorn {
         this.vy = 10;
         this.life=life;
         this.gravity = weight;
+       
     }
     show() {
 
@@ -19,6 +22,7 @@ class Unicorn {
     jump(jumpForce=(-25)) {
         if(this.y==height - this.r){
             this.vy = jumpForce;
+            console.log(this.vy);
         } 
     }
     hits(train){ 
