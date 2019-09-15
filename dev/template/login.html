@@ -81,6 +81,9 @@
             xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
             xhr.send(`user_id=${user_id}&user_psw=${user_psw}`);
 
+            //clear session
+            logOut();
+            
 
             $id('login_text').innerHTML = "登入/註冊";
             $id("show_user_name").innerHTML = "&nbsp;";
@@ -98,7 +101,12 @@
         }
         return false;
     }
-
+    //清session
+    function logOut(){
+        var xhr = new XMLHttpRequest();
+        xhr.open("Get", "php/login/logout.php",true);
+            xhr.send( null );
+    }
     //登入功能
     function sendForm() {
         let user_id = $id('user_id').value;
