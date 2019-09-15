@@ -13,23 +13,23 @@ try {
   // $orderItems->execute();
 
   $userItems=$pdo->prepare('SELECT * FROM `user` where user_no = :user_no');
-  $userItems->bindValue(':user_no',1);//$_POST['user_no']
+  $userItems->bindValue(':user_no',2);//$_POST['user_no']
   $userItems->execute();
 
   $orders=$pdo->prepare('SELECT * FROM `product_order` where user_no = :user_no');
-  $orders->bindValue(':user_no',1);//$_POST['user_no']
+  $orders->bindValue(':user_no',2);//$_POST['user_no']
   $orders->execute();
 
   $orderItems=$pdo->prepare('SELECT * FROM  order_item o join product pro on pro.product_no = o.product_no where o.order_no = :order_no ');
   // $orderItems->execute();
 
   $revs=$pdo->prepare('SELECT * FROM resv_order r join resv_session_capacity rc on r.session_no = rc.session_no where r.member_id = :member_id');
-  $revs->bindValue(':member_id',1);//$_POST['user_no']
+  $revs->bindValue(':member_id',2);//$_POST['user_no']
   $revs->execute();
 
   
-  $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = 1');
-  $loves->bindValue(':user_no',1);//$_POST['user_no']
+  $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = :user_no');
+  $loves->bindValue(':user_no',2);//$_POST['user_no']
   $loves->execute();
 
 ?>
@@ -92,6 +92,7 @@ if ($errMsg !=""){
 
 <?php
    	while($userRow = $userItems -> fetch(PDO::FETCH_ASSOC)){
+       $dir="";
 ?>
     
   <section id="member_basic" class="member_basic tabcontent">
@@ -105,8 +106,18 @@ if ($errMsg !=""){
 
         <div class="col-12 col-md-6">
           <div class="baic_pic">
-            <img id="upfile_pic" src="img/memberimg/<?=$userRow["user_img"]?>">
-            <!-- <img id="upfile_pic" src="img/member/member_pic.png"> -->
+            <?php
+            if($userRow["user_img"]==NULL){
+            ?>
+                <img id="upfile_pic" src="https://api.fnkr.net/testimg/300x300/FFCED1/FFF/?text=A">
+
+            <?php
+            }else{
+            ?>
+              <img id="upfile_pic" src="img/memberimg/<?=$userRow["user_img"]?>">
+            <?php
+            }
+            ?>
           </div>
 
           <div class="upfile">

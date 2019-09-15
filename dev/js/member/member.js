@@ -173,12 +173,3 @@ window.addEventListener('load',initQrcode,false);
 
 // document.getElementById('').innerText=sessionStorage.user_no
 
-
-
-// function getFile(){
-//   x= document.getElementsByName("upFile")[0].value
-// document.getElementsByName("upFile")[0].value = document.getElementById('upfile_pic').src;
-// console.log(document.getElementsByName("upFile")[0].value);
-// console.log(document.getElementById('upfile_pic').src);
-// }
-// window.addEventListener('load',getFile,false);

@@ -52,14 +52,17 @@ try {
 
 		$sql = "update user set user_img=:user_img where user_id=:user_id";
 		$memberImg = $pdo->prepare($sql);
-    $memberImg -> bindValue(":user_img", $fileName);//把9.gif給image
-    $memberImg -> bindValue(':user_id',$_REQUEST["user_id"]);
+    	$memberImg -> bindValue(":user_img", $fileName);//把9.gif給image
+    	$memberImg -> bindValue(':user_id',$_REQUEST["user_id"]);
 		$memberImg -> execute();
 		echo "新增成功~";
 
-	}else{
+	}else if($_FILES["upFile"]["error"] == 4){ //如果未指定上傳檔案
+		header("location:../../member.php");
+	}
+	else{
 		echo "錯誤代碼 : {$_FILES["upFile"]["error"]} <br>";
-		echo "新增失敗<br>";
+		echo "新增失敗";
 	}
 
 
