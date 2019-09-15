@@ -24,14 +24,5 @@ function createcode() {
     }
 }
 
-
-function checkcode() {
-    var codeNum = document.getElementById("code").value;
-    if (codeNum == code) {
-        alert("通過");
-    } else {
-        alert("錯誤");
-    }
-}
 // window.onload = createcode;
 window.addEventListener('load', createcode);
