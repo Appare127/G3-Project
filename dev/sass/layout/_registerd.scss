@@ -1,11 +1,11 @@
 
 
 
-    .login_gary.login_show {
-        display:block;
+    .registered_gary.registered_show {
+            display:block;
     }
 
-.login_gary {
+.registered_gary {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
@@ -15,7 +15,7 @@
     top: 0;
     z-index: 5;
 
-    .login_box {
+    .registered_box {
         @include btn_cloud(30%, $col_btn_pink);
         position: absolute;
         top: 0%;
@@ -24,7 +24,7 @@
         left: 0;
         margin: auto;
         border-radius: 30px;
-        background: url(../img/login/login1.0.jpg) no-repeat bottom center, ;
+        background: url(../img/login/login767.jpg) no-repeat  center 20% ;
         background-size: cover;
         padding-top: 25px;
         padding-bottom: 225px;
@@ -41,8 +41,9 @@
             font-size: $s_fz;
             background: 0%;
             padding: 5px;
+            color:$col_brown;
         }
-        .login_del {
+        .registered_del {
             width: 30px;
             height: 30px;
             cursor: pointer;
@@ -53,10 +54,8 @@
             background: url(../img/login/del.png) no-repeat center center;
         }
 
-        h2 {
-            margin-top: 20px;
-        }
 
+form{
         p {
             position: relative;
             margin-top: 25px;
@@ -70,7 +69,7 @@
                 font-weight: 800;
                 width: 120px
             }
-        }
+        }}
         
         a { 
             line-height: 70px;
@@ -90,12 +89,15 @@
 
 
 @media screen and (min-width: 768px) {
-    .login_gary {
-        .login_box {
+    .registered_gary {
+        .registered_box {
             width: 360px;
             height: 500px;
-            padding-top: 20px;
-            padding-bottom: 40px;
+            padding-top: 15px;
+            padding-bottom: 0px;
+            h2{
+                padding-top: 40px;
+            }
 
             p {
                 input {
