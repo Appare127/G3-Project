@@ -146,10 +146,9 @@
 
     }
     function cancelRegistered() {
-        $id("user_id").value = "";
-        $id("user_psw").value = "";
-        $id('login_gary').style.display = 'none'
-
+      
+        $id('registered_gary').style.display = 'none';
+        $id('login_gary').style.display = 'block';
     }
 
     function registered(){
@@ -174,7 +173,7 @@
         
          $id("registered_del").onclick = cancelRegistered;
         // $id("registered_del").onclick = console.log(123);
-        console.log( $id("registered_del"));
+        
         
         
         
