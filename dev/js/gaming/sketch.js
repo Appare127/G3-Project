@@ -80,7 +80,7 @@ function setup() {
 
     unicorn = new Unicorn(sessionStorage['animal_life'],2); //客製動物 Unicorn(生命值,重力)
     life = unicorn.life;
-    cusJump = sessionStorage['animal_jump'] *(-1)*5 + (-20);
+    cusJump = sessionStorage['animal_jump'] *(-1)*4 + (-20);
 
     
 }
