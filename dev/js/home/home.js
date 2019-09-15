@@ -40,12 +40,21 @@ function animal_item() {
         calss("home_animal_03")[0].style.height = anime_state / 100 * 18 + "px";
         calss("home_animal_03")[0].style.width = anime_state / 100 * 18 + "px";
 
-        calss("home_animal_04")[0].style.height = anime_state / 100 * 20 + "px";
-        calss("home_animal_04")[0].style.width = anime_state / 100 * 20 + "px";
+        calss("home_animal_04")[0].style.height = 0 + "px";
+        calss("home_animal_04")[0].style.width = 0 + "px";
 
 
         calss("home_animal_05")[0].style.height = anime_state / 100 * 20 + "px";
         calss("home_animal_05")[0].style.width = anime_state / 100 * 20 + "px";
+ 
+
+        let x = document.querySelectorAll(".home_animal");
+        
+        for (let i = 0; i < x.length; i++) {
+         x[i].style.display = "block";
+           }
+       
+       
     }
 
 
@@ -62,6 +71,7 @@ function calss(e) {
 var test = 30;
 
 function anime() {
+    
      CustomEase.create("custom", "M0,0,C0.14,0,0.334,0.415,0.364,0.538,0.405,0.705,0.562,0.963,0.57,1,0.578,0.985,0.595,0.968,0.636,0.906,0.684,0.83,0.765,0.868,0.782,0.89,0.784,0.892,0.867,0.998,0.868,1,0.882,0.978,0.918,0.95,0.932,0.95,0.968,0.96,1,1,1,1")
     var home_animal_1 = new TimelineMax({
         repeat: -1,
@@ -73,9 +83,7 @@ function anime() {
    repeat:-1,
       
     });
-    var home_animal_4 = new TimelineMax({
-     
-    });
+ 
     var home_animal_5 = new TimelineMax({
         repeat:-1,
     });
@@ -195,33 +203,6 @@ home_animal_3.to(".home_animal_03", 0, {
 
 //******************************************************** */
 
-
-home_animal_4.to(".home_animal_04", 0, {
-    x: 0,
-    yPercent: -380,
-    // scaleX:-1,
-    rotation:0,
-    rotation:0,
-}, ).to('.home_animal_04', 2, {
-    x: 0,
-    yPercent: 0,
-    // delay: 1,
-     ease: Bounce.easeOut,
-},0.3 )
-.to('.home_animal_04',.8, { 
-    rotation:-740,
-  
-},1)
-.fromTo('.home_animal_04', .6, { 
-    transformOrigin: "50% 60%",
-    rotation:20,
-}
-,{  ease: Power0.easeNone,
-    yoyoease:Power0.easeNone,   
-    rotation:-20,
-    yoyo: true,
-    repeat: -1,
-},1.7)
 
 home_animal_5.to(".home_animal_05", 0, {
     x: 0,
