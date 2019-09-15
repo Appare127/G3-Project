@@ -53,7 +53,7 @@ function init(){
     
    
     
-$("#heart").click(function(e){
+$(".heart").click(function(e){
        
     if(e.target.title == "加入收藏"){
 

@@ -2,7 +2,7 @@
 $errMsg = "";
 try {
 	require_once('php/connectg3.php');
-    $prods  = $pdo->query("select * from product");
+    $prods  = $pdo->query("select * from product where product_status=1");
     $prodsRow=$prods->fetchAll(PDO::FETCH_ASSOC);
     // echo json_encode($prodsRow);
 

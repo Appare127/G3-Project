@@ -194,6 +194,7 @@
     }
     
 }
+
 .frank_top_three{
         width: 100%;
         
@@ -208,20 +209,25 @@
 .frank_top_left{
     width: 33%;
     height:100%;
-    margin: 10% auto auto;
+    margin-top:5%;
     padding:10px;
     box-sizing: border-box;
     position: relative;
+    order: 1;
+   
+   
 }
 .frank_top_middle{
     width: 33%;
     height:100%;
-    margin: 5% auto auto;
+    margin-top:10%;
     padding: 10px;
     box-sizing: border-box;
     position: relative;
+    order: 0;
+   
 }    
-               
+              
 .frank_top_right{
     width: 33%;
     height:100%;
@@ -229,6 +235,7 @@
     padding: 10px;
     box-sizing: border-box;
     position: relative;
+    order: 2;
 }
     
 .frank_top_wraps{
@@ -277,9 +284,9 @@
     }  
 
     .frank_top_background{
-        background-image: url(../img/frank/top_bg.png);
-        background-size: cover;
-        background-repeat: no-repeat;
+        // background-image: url(../img/frank/top_bg.png);
+        // background-size: cover;
+        // background-repeat: no-repeat;
         width: 60%;
         padding-bottom: 80%;
         margin: auto 20%;
@@ -288,6 +295,17 @@
         box-shadow: 5px 3px 2px rgba($col_black, $alpha: 0.2);
         z-index: 1;
         overflow: hidden;
+
+        img{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
     }
 }
 
@@ -303,17 +321,17 @@
     
     left: 0;
     right: 0;
-    bottom: -40%;
+    bottom: -33%;
     margin: auto;
     transition: 1s all;
 
     .frank_items_animal{
-        width: 50%;
-        height: 50%;
-        // position: relative;
-        // left: 0;
-        // right: 0;
-        // bottom: 5px;
+        width: 60%;
+        height: 60%;
+        position: relative;
+        left: 0;
+        right: 0;
+        bottom: 0;
         margin: auto;
     
         img{
@@ -336,13 +354,18 @@
         flex-wrap: wrap;
         margin:auto;
         
+        h3{
+            width: 100%;
+            font-size: 16px;
+        }
+        
     }
 }
 
 .frank_top_left:hover .frank_items_text, 
 .frank_top_middle:hover .frank_items_text, 
 .frank_top_right:hover .frank_items_text{
-    bottom: -16%;
+    bottom: -7.5%;
     
 }
 
@@ -397,23 +420,7 @@
 }
 
 
-.frank_top_middle{
-    width: 33%;
-    height:100%;
-    margin: 5% auto auto;
-    padding: 10px;
-    box-sizing: border-box;
-    position: relative;
-}    
-               
-.frank_top_right{
-    width: 33%;
-    height:100%;
-    margin: 15% auto auto;
-    padding: 10px;
-    box-sizing: border-box;
-    position: relative;
-}
+
 
 
 
@@ -657,6 +664,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        
 
         h2{
             font-weight: 800;
@@ -714,30 +722,37 @@
     position: relative;
 
     .frank_players_title{
-        width: 140px;
-        height: 70px;
+        width: 180px;
+        height: 90px;
         background-image: url(../img/frank/items_title.png);
         background-size: 100%;
         background-repeat: no-repeat;
         text-align: center;
-        padding: 10px;
+        padding: 15px 5px 15px;
         box-sizing: border-box;
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-wrap: wrap;
         position: relative;
-        top: 0;
+        top: 0px;
         left: 0;
         right: 0;
         margin: auto;
         z-index: 2;
 
-        h3{
+        span{
+        color: $col_white;
+        font-weight: 800;
+        font-size: 18px;
+        margin-top: -5px;
+        }
+        span:last-child{
+           
+            font-size: 17px;
             
-          
-            font-weight: 800;
-            color:$col_white;
-        }  
+            
+        }
     }  
 
     .frank_player_card{
@@ -880,12 +895,16 @@
     width: 60%;
     padding-bottom: 80%;
     margin: auto 20%;
-    background-image: url(../img/frank/top_bg.png);
+    // background-image: url(../img/frank/top_bg.png);
     background-size: 100%;
     background-repeat: no-repeat;
     position: relative;
     box-shadow: 5px 4px 2px rgba($col_black, $alpha: 0.2);
-
+    img{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
     .frank_player_animal{
         width: 50%;
         height: 50%;
@@ -973,8 +992,8 @@
 
 
 .frank_message{
-    width: 0%;
-    height: 0%;
+    width: 100%;
+    height: 100%;
     margin: auto;
     position: fixed;
     transition:all 1s ease-out;
@@ -1010,6 +1029,10 @@
         justify-content: center;
         align-items: center;
 
+
+        h3{
+            font-weight: 800;
+        }
         img{
             width: 5%;
             height: 50%;
