@@ -2,7 +2,7 @@
     try{
         $errMsg = "";
         require_once('connectBooks.php');
-        $sql = "select user_name, user_id, game_record , my_animal_img from user order by game_record desc";
+        $sql = "select user_name, user_id, game_record , my_animal_img, my_animal_name from user order by game_record desc";
         $userData = $pdo->query($sql);
         $array = [];
         for($i=0;$i<10;$i++){
