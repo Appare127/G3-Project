@@ -55,12 +55,14 @@ function preload() {
     bgImg = loadImage(scene[sessionStorage['sceneChoice']].area);
     rImg = loadImage(scene[sessionStorage['sceneChoice']].reward);
     
-    if(sessionStorage['sceneChoice']=='forest'){
+    if(sessionStorage['sceneChoice']=='forest'){ //依據選擇的場景決定適用的環境適應能力值
         environ_adapt = sessionStorage['environ_adapt_1']*0.5;
     }else if(sessionStorage['sceneChoice']=='mountain'){
         environ_adapt = sessionStorage['environ_adapt_2']*0.5;
     }else if(sessionStorage['sceneChoice']=='desert'){
         environ_adapt = sessionStorage['environ_adapt_3']*0.5;
+    }else {
+        environ_adapt = 1;
     }
     console.log('實際在該場景適應力:'+environ_adapt);
 
@@ -154,15 +156,16 @@ function draw() {
     fill(0, 102, 153);
 
     //隨機生成障礙物
-    if (random(1) < 0.02) {
+    
+    if (random(1) < (0.03/environ_adapt)) {
         trains.push(new Train(scene[sessionStorage['sceneChoice']].monsterSize));
     }
     //隨機生成肉
-    if (random(1) < 0.01) {
+    if (random(1) < 0.005*environ_adapt) {
         foods.push(new Food());
     }
     //隨機生成金錢
-    if(random(1)<0.03){
+    if(random(1)<0.03*environ_adapt){
         moneys.push(new Money());
     }
 
