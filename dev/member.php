@@ -28,6 +28,10 @@ try {
   $revs->execute();
 
   
+  $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = 1');
+  $loves->bindValue(':user_no',1);//$_POST['user_no']
+  $loves->execute();
+
 ?>
 <?php
 } catch (PDOException $e) {
@@ -66,7 +70,7 @@ try {
     <div class="tab_item">
         <a href="javascript:void(0)" id="default_open" class="btn_cloud tablink">基本資料
             @@include('template/btn_sp.html')</a>
-          <a href="javascript:void(0)" class="btn_cloud tablink">訂單明細
+          <a href="javascript:void(0)" class="btn_cloud tablink">我的訂單
             @@include('template/btn_sp.html')</a>
       
           <a href="javascript:void(0)" class="btn_cloud tablink">我的預約
@@ -97,22 +101,23 @@ if ($errMsg !=""){
       <div class="my_baic">
 
         <h2>基本資料</h2>
-
+        <form action="php/member/update_MemberBaic.php" method="post" enctype="multipart/form-data">
 
         <div class="col-12 col-md-6">
           <div class="baic_pic">
-            <img  id="upfile_pic" src="<?=$userRow["user_img"]?>">
+            <img id="upfile_pic" src="img/memberimg/<?=$userRow["user_img"]?>">
+            <!-- <img id="upfile_pic" src="img/member/member_pic.png"> -->
           </div>
 
           <div class="upfile">
-            <input type="file" name="upFile" id="upFile" accept="image/*"><br>
+            <input type="file" name="upFile" id="upFile" accept="image/*" value=<?=$userRow["user_img"]?>><br>
           </div>
         </div>
 
 
         <div class="col-12 col-md-6">
 
-            <form action="php/member/update_MemberBaic.php">
+ 
               <table class="baic_txt">
                 
               <tr>
@@ -122,11 +127,11 @@ if ($errMsg !=""){
               </tr>
               <tr>
                 <td>姓名</td>
-                <td><input type="text" name="user_name" value="<?=$userRow["user_name"]?>"></td>
+                <td><input type="text" name="user_name" readonly="readonly" value="<?=$userRow["user_name"]?>"></td>
               </tr>
               <tr>
                 <td>密碼</td>
-                <td><input type="password" name="user_psw" value="<?=$userRow["user_psw"]?>"></td>
+                <td><input type="password" name="user_psw" readonly="readonly" value="<?=$userRow["user_psw"]?>"></td>
               </tr>
               <tr>
                 <td>信箱</td>
@@ -134,12 +139,12 @@ if ($errMsg !=""){
               </tr>
               <tr>
                 <td>電話</td>
-                <td><input type="tel" name="user_tel" value="<?=$userRow["user_tel"]?>"></td>
+                <td><input type="tel" name="user_tel" readonly="readonly" value="<?=$userRow["user_tel"]?>"></td>
               </tr>
               <tr>
                 <td>密碼提示答案</td>
  
-                <td><input type="text" name="hint_answer" value="<?=$userRow["hint_answer"]?>"></td>
+                <td><input type="text" name="hint_answer" readonly="readonly" value="<?=$userRow["hint_answer"]?>"></td>
               </tr>
               <tr>
                 <td>目前金幣</td>
@@ -153,11 +158,18 @@ if ($errMsg !=""){
           
 
             <div class="baic_btn">
-              <a href="" class="btn_cloud">修改
-                @@include('template/btn_sp.html')</a>
-              <a href="" class="btn_cloud"><input type="submit" value="儲存">
+              <button type="button" class="btn_cloud" id="btn_edit">修改@@include('template/btn_sp.html')</button>
+              <!-- <a href="#" class="btn_cloud" id="btn_edit">修改
+                @@include('template/btn_sp.html')</a> -->
+
+            <button  class="btn_cloud" id="updated_it" value="submit">儲存@@include('template/btn_sp.html')</button>
+
+
+              <!-- <a href="" class="btn_cloud" id="updated_it"> -->
+              <!-- <button value="submit">儲存</button> -->
+              <!-- <input type="submit" value="儲存" >
                 @@include('template/btn_sp.html')
-              </a>
+              </a> -->
              
             </div>
 
@@ -247,7 +259,7 @@ if ($errMsg !=""){
           </table>
 
           <div class="baic_btn">
-            <a href="" class="btn_cloud">挑戰高分去
+            <a href="http://localhost/G3-git/game.html" class="btn_cloud">挑戰高分去
               @@include('template/btn_sp.html')</a>
           </div>
 
@@ -271,7 +283,7 @@ if ($errMsg !=""){
           </div>
 
         </div>
-        <!-- <p>提醒：你所選擇的動物會跟牠的適應力有關。</p> -->
+        <!-- <p>提醒：你所選擇的動物會跟牠的適應力有關。<p> -->
        
         <div class="col-12 col-md-6">
         
@@ -313,13 +325,13 @@ if ($errMsg !=""){
            
 
           <div class="baic_btn">
-            <a href="" class="btn_cloud">參加選怪
+            <a href="http://localhost/G3-git/frank.html" class="btn_cloud">參加選怪
               @@include('template/btn_sp.html')
             </a>
-            <a href="" class="btn_cloud">參加遊戲
+            <a href="http://localhost/G3-git/game.html" class="btn_cloud">參加遊戲
               @@include('template/btn_sp.html')
             </a>
-            <a href="" class="btn_cloud">修改動物
+            <a href="http://localhost/G3-git/modify.html" class="btn_cloud">修改動物
               @@include('template/btn_sp.html')
             </a>
           </div>
@@ -529,8 +541,6 @@ if ($errMsg !=""){
         <!-- 未來動態新增 -->
       </div>
 
-
-
     </div>
   </section>
 
@@ -575,7 +585,7 @@ if ($errMsg !=""){
                 <p class="col-6 s_show">預約時段:</p>
                 <p class="col-6 col-md-2"><?=$pdoRevs["start_time"]?></p>
                 <p class="col-6 s_show">預約狀態:</p>
-                <p class="col-6 col-md-2"><?=$pdoRevs["order_status"]?></p>
+                <p class="col-6 col-md-2"><?=$pdoRevs["order_status"]==1? "已到場":"未到場"?></p>
     
                 <p class="col-6 s_show">取消訂單:</p>
                 <div class="col-6 col-md-2 baic_btn">
@@ -599,7 +609,7 @@ if ($errMsg !=""){
 
         <div class="qrcode_wrap">
           <div class="qrcode_pic">
-              <button class="btn_close">X</button>
+              <button type="button" class="btn_close">X</button>
               <img src="img/member/QR-Code.png">
           </div>
         </div>
@@ -679,19 +689,45 @@ if ($errMsg !=""){
 
       <div class="my_love">
         <h2>我的收藏</h2>
+      
+        <?php 
+      if( $errMsg != ""){ //例外
+        echo "<div><center>$errMsg</center></div>";
+      }elseif($loves->rowCount()==0){
+        echo "<div><center>目前無收藏清單</center></div>";
+      }else{
+        $lovesRow = $loves->fetchAll(PDO::FETCH_ASSOC);
+
+      foreach( $lovesRow as $i => $pdoloves){
+       ?>
+
 
         <!-- 動態生成 -->
-        <div class="col-6 col-md-3 baic_btn">
-          <div><img src="img/member/member_pic.png">
-            <p>動物背包</p>
+        <div class="col-6 col-md-3 mylove_item">
+
+          <div class="loveanimal_pic">
+            <img class="lovebg_re" src="<?=$pdoloves["bg_img"]?>">
+            <img class="lovepic_ab" src="<?=$pdoloves["cmp_img"]?>">
           </div>
-          <a href="" class="btn_cloud">取消收藏
-            @@include('template/btn_sp.html')
-          </a>
+
+          <p>作品名稱:<?=$pdoloves["work_name"]?></p>
+          <div class="baic_btn">
+            <a href="" class="btn_cloud">取消收藏
+              @@include('template/btn_sp.html')
+            </a>
+          </div>
+
         </div>
+      
         <!-- 動態生成 -->
+        
+      <?php
+          }//foreach
+        }//else
+      ?>
 
-        <div class="col-6 col-md-3 baic_btn">
+
+        <!-- <div class="col-6 col-md-3 baic_btn">
           <div><img src="img/member/member_pic.png">
             <p>動物背包</p>
           </div>
@@ -725,7 +761,7 @@ if ($errMsg !=""){
           <a href="" class="btn_cloud">取消收藏
             @@include('template/btn_sp.html')
           </a>
-        </div>
+        </div> -->
 
 
         <div class="clearfix"></div>
