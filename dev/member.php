@@ -3,7 +3,7 @@ $errMsg = "";
 
 try {
 	require_once('php/connectg3.php');
-    
+    session_start();
   // $orders=$pdo->prepare('select * from product_order where user_no = :user_no');
   // $orders->bindValue(':user_no',1);//$_POST['user_no']
   // $orders->execute();
@@ -13,23 +13,23 @@ try {
   // $orderItems->execute();
 
   $userItems=$pdo->prepare('SELECT * FROM `user` where user_no = :user_no');
-  $userItems->bindValue(':user_no',2);//$_POST['user_no']
+  $userItems->bindValue(':user_no',$_SESSION['user_id']);//
   $userItems->execute();
 
   $orders=$pdo->prepare('SELECT * FROM `product_order` where user_no = :user_no');
-  $orders->bindValue(':user_no',2);//$_POST['user_no']
+  $orders->bindValue(':user_no',$_SESSION['user_id']);//$_POST['user_no']
   $orders->execute();
 
   $orderItems=$pdo->prepare('SELECT * FROM  order_item o join product pro on pro.product_no = o.product_no where o.order_no = :order_no ');
   // $orderItems->execute();
 
   $revs=$pdo->prepare('SELECT * FROM resv_order r join resv_session_capacity rc on r.session_no = rc.session_no where r.member_id = :member_id');
-  $revs->bindValue(':member_id',2);//$_POST['user_no']
+  $revs->bindValue(':member_id',$_SESSION['user_id']);//$_POST['user_no']
   $revs->execute();
 
   
   $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = :user_no');
-  $loves->bindValue(':user_no',2);//$_POST['user_no']
+  $loves->bindValue(':user_no',$_SESSION['user_id']);//$_POST['user_no']
   $loves->execute();
 
 ?>
@@ -59,8 +59,6 @@ try {
 
 
   <div class="member_tab">
-
-
     <div class="banner_cloud">
       <img class="icon_l" src="img/header/banner_icon_l.png" alt="">
       <h1 class="title">會員中心</h1>
