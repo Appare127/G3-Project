@@ -1,3 +1,14 @@
+// window.addEventListener('load',function(){
+// let user_no = sessionStorage.user_no;
+// console.log(user_no)
+// let xhr = new XMLHttpRequest();
+// xhr.open("post", "../../G3/member.php", true);
+// xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+// xhr.send(`user_no=${user_no}`);
+
+// })
+
+
 // <!------ tab open page ----->
 
 function open_page(e, className) {

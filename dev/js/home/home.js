@@ -1,6 +1,6 @@
 function init() {
-
-    animal_item()
+    getRankData();
+    animal_item();
     anime();
     water();
 }
@@ -11,6 +11,31 @@ function reinit() {
 var anime_state;
 addEventListener("load", init);
 addEventListener("resize", reinit);
+
+function getRankData(){
+ 
+    var xhr = new XMLHttpRequest();
+    xhr.onload=function (){
+        if( xhr.status == 200 ){ 
+            userDataDesc = JSON.parse(xhr.responseText);
+            // alert(userDataDesc[0].my_animal_img);
+            console.log(userDataDesc);
+            //塞入前三名照片跟資料
+            for(let j=0; j<3; j++){
+                document.querySelectorAll('.top_animal_img')[j].src = userDataDesc[j].my_animal_img;
+                document.querySelectorAll('.top_score')[j].innerText = userDataDesc[j].game_record + '秒';
+                document.querySelectorAll('.top_animal_name')[j].innerText = userDataDesc[j].my_animal_name;
+            }
+        }else{
+            alert( xhr.status );
+        }
+    }
+    var url = "php/game/getRankingData.php";
+    xhr.open("Get", url, true);  //readyState : 1
+    xhr.send( null );
+
+}
+
 function animal_item() {
     anime_state = (calss("home_header_pic")[0].attributes.class.ownerElement.clientWidth);
     if (window.innerWidth <= 767) {

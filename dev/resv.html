@@ -100,18 +100,20 @@
 
                     <p id='show_data_title'>請選擇日期：</p>
                     <div class="show_data_table">
-                        <div>
+                        <div class='data_table_title'>
                             <span>場次</span>
+                            <span >開始時間</span>
+                            <span>長度</span>
+                            <span >剩餘人數</span>
+                        </div>
+                        <div class='data_table_content'>
+                            <div class="teble_content_row">
+                            <!-- <span>場次</span>
                             <span class="show_datatime">開始時間</span>
                             <span>長度</span>
-                            <span class="show_datanum">剩餘人數</span>
+                            <span class="show_datanum">剩餘人數</span> -->
+                            </div>
                         </div>
-                        <!-- <div class='show_data_row'>
-                            <span ></span>
-                            <span class="show_datatime"></span>
-                            <span class="show_datanum"></span>
-                        </div>  -->
-
                     </div>
                 </div>
                 <img class="wooden" src="img/resv/wooden.png" alt="wooden">
@@ -192,86 +194,87 @@
             swal("預約成功", "請至會員中心查看您的QR-Code", "success");
         });
 
-
-
-        // 顯示時段
-        // window.addEventListener('load', showInfo)
-        // $(document).ready(showInfo);
-        // function showInfo(){
-        //     $.get('php/resv/getTime.php',{data:'time'},function(data){
-        //         data=$.parseJSON( data );
-        //         $.each(data,(i,n)=>{
-        //             $('.show_data_table').append(
-        //                 `<div>
-        //                     <span>場次${n.session_no}</span>
-        //                     <span class="show_datatime">${n.start_time}</span>
-        //                     <span >${n.length}</span>
-
-        //                     <span class="show_datanum">${n.max_capacity}</span>
-        //                 </div>`);
-        //         })
-        // 	});
-        // }
-
         // 按下去  顯示當日日期
         //剩餘人數
         //下拉式選單可以選
-        function showInfo() {
+        function showInfo(dataNum,total) {
+        //    showNumRemain($(this))// 抓剩餘人數
             // alert();
             //抓到場次時間
             $.get('php/resv/getTime.php', { data: 'time' }, function (data) {
                 data = $.parseJSON(data);
-                $('.show_data_table').html("");
+                $('.data_table_content').html("");
+                
                 $.each(data, (i, n) => {
-                    $('.show_data_table').append(
-                        `<div>
+                    $('.data_table_content').append(
+                        `<div class="table_content_row">
                             <span>場次${n.session_no}</span>
-                            <span class="show_datatime">${n.start_time}</span>
+                            <span class="show_datatime">${n.start_time.replace(n.start_time.substr(5),'')}</span>
                             <span >${n.length}</span>
-                            <span class="show_datanum">${n.max_capacity}</span>
                         </div>`);
                 })
+
+                $.each(total,(i,n)=>{
+                        // document.querySelectorAll('.table_content_row')[i].appendChild(
+                        // ` <span class="show_datanum">${20 - n}</span>`
+                        // );
+                        
+                        
+                })
             });
-            $('#show_data_title').text((my_month + 1) + "/" + $(this).text() + "日預約導覽時段資訊：");
-            //不能下拉式選單
+          
+            //顯示當日日期
+            $('#show_data_title').text((my_month + 1) + "/" + $(dataNum).text() + "日預約導覽時段資訊：");
+            //下拉式選單可以選
             $('#time_select').attr('disabled', false);
             $('#peoplenum_select').attr('disabled', false);
-            showNumRemain($(this))// 抓剩餘人數
-
+            
         }
 
-        function showNumRemain(dateNum) {
+        function showNumRemain() {
             //整理傳進去的資料 要變成mysql日期格式
             let date;  //日
             let month; //月
             my_month + 1 < 10 ? month = `0${my_month + 1}` : month = my_month + 1;
-            dateNum.text() < 10 ? date = `0${dateNum.text()}` : date = dateNum.text();
+            this.text() < 10 ? date = `0${this.text()}` : date = this.text();
             let fullDate = `${my_year}-${month}-${date}`;
             console.log(fullDate);
+            //計算剩餘人數
             $.get('php/resv/getTime.php', { data: fullDate }, function (tour_date) {
                 //[{"booking_no":"1","booking_date":"2019-09-06","tour_date":"2019-09-10","number_of_booking":"2","order_status":"0","member_id":"1","session_no":"1"}]
                 //如果有資料傳回來（那一天有人預約）
                 if (tour_date != 'noResv') {
                     tour_date = $.parseJSON(tour_date);
-                    max = 0;
+                    let max = 0;
                     for (let i = 0; i < tour_date.length; i++) {
                         if (max < tour_date[i].session_no) {
                             max = tour_date[i].session_no;
                         }
                     }
-                    total = Array();
+                    let total = Array();
                     for (let i = 0; i < max; i++) {
                         total.push(0);
                     }
+
                     for (let i = 0; i < tour_date.length; i++) {
-                        num = tour_date[i].session_no * 1 - 1;
-                        total[num] += tour_date[i].number_of_booking * 1;
+                        num =  Number(tour_date[i].session_no) - 1;
+                        total[num] += Number(tour_date[i].number_of_booking) ;
                     }
-                    console.log(total);
+
+                    showInfo(this,total);
+                    // $.each(total,(i,n)=>{
+                    //     // document.querySelectorAll('.table_content_row').append()
+                    //     $('.show_datanum')[i].innerText= 20 - n;
+                    //     a++
+                    //     console.log(document.querySelectorAll('.show_datanum')[i].innerText,a);
+                        
+                    // })
+                    // console.log($('.show_datatime'))
+                    // console.log(total);   //[3, 5]
                 }
             })
         }
-        //1
+        
     </script>
 </body>
 </html>
