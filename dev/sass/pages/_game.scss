@@ -169,13 +169,20 @@
                                 padding-left:20%;
                                 margin-top:80px;
                                 display:inline-block;
-                                .value_life,.value_jump{
-                                    height:50px;
+                                .info_value{
                                     width:100%;
-
-                                }
-                                .value_jump {
-                                    
+                                    display:inline-block;
+                                    .value_life,.value_jump{
+                                        height:50px;
+                                        width:100%;
+                                    }
+                                    .value_life {
+                                        img {
+                                            display:none;
+                                            // width: 25px;
+                                            // margin-left:2px;
+                                        }
+                                    }
                                 }
                             }
                             .info_diagram{

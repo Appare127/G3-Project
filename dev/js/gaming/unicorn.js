@@ -27,7 +27,7 @@ class Unicorn {
     }
     hits(train){ 
         
-        return collideCircleCircle(this.x,this.y,this.r,train.x,train.y,train.r);
+        return collideCircleCircle(this.x,this.y,this.r-20,train.x,train.y,train.r);
     }
 
 
