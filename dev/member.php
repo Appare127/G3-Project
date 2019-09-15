@@ -127,8 +127,6 @@ if ($errMsg !=""){
 
 
         <div class="col-12 col-md-6">
-
- 
               <table class="baic_txt">
                 
               <tr>
