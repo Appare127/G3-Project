@@ -20,22 +20,27 @@ let test2 = 999;
 let timer=0;
 let money=0;
 let cusJump;
+let environ_adapt;
 
 
-let scene = {
+
+let scene = { //場景資訊
     desert:{
         area:'img/game/遊戲背景-沙漠.png',
         monster:'img/game/蠍子.png',
+        monsterSize:50,
         reward:'img/game/meat.png',
     },
     mountain:{
         area:'img/game/scene_mountain.png',
         monster:'img/game/lion.png',
+        monsterSize:80,
         reward:'img/game/meat.png',
     },
     forest:{ 
         area:'img/game/scene_forest.png',
         monster:'img/game/lion.png',
+        monsterSize:80,
         reward:'img/game/meat.png',
     }
 }
@@ -43,14 +48,21 @@ let scene = {
 
 function preload() {
     if(sessionStorage['sceneChoice'] == null){
-        sessionStorage['sceneChoice'] = 'desert';
+        sessionStorage['sceneChoice'] = 'desert';//使用者若沒選 預定場景為沙漠
     }
-    uImg = loadImage(sessionStorage['animal_img']+'?'+ new Date().getTime());
-
+    uImg = loadImage(sessionStorage['animal_img']+'?'+ new Date().getTime());//抓取最新的客製動物圖片
     tImg = loadImage(scene[sessionStorage['sceneChoice']].monster);
     bgImg = loadImage(scene[sessionStorage['sceneChoice']].area);
     rImg = loadImage(scene[sessionStorage['sceneChoice']].reward);
     
+    if(sessionStorage['sceneChoice']=='forest'){
+        environ_adapt = sessionStorage['environ_adapt_1']*0.5;
+    }else if(sessionStorage['sceneChoice']=='mountain'){
+        environ_adapt = sessionStorage['environ_adapt_2']*0.5;
+    }else if(sessionStorage['sceneChoice']=='desert'){
+        environ_adapt = sessionStorage['environ_adapt_3']*0.5;
+    }
+    console.log('實際在該場景適應力:'+environ_adapt);
 
     mImg = loadImage('./img/game/coin.png');
     heartImg = loadImage('./img/game/heart.png');
@@ -143,14 +155,14 @@ function draw() {
 
     //隨機生成障礙物
     if (random(1) < 0.02) {
-        trains.push(new Train());
+        trains.push(new Train(scene[sessionStorage['sceneChoice']].monsterSize));
     }
     //隨機生成肉
     if (random(1) < 0.01) {
         foods.push(new Food());
     }
     //隨機生成金錢
-    if(random(1)<0.05){
+    if(random(1)<0.03){
         moneys.push(new Money());
     }
 
@@ -167,7 +179,7 @@ function draw() {
     }
     if(keyIsDown(32)){
         unicorn.jump(cusJump);
-        console.log(sessionStorage['animal_jump']);
+        
     }
 
 

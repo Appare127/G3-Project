@@ -1,6 +1,6 @@
 class Train {
-    constructor(){
-        this.r = 50;
+    constructor(monsterSize=50){
+        this.r = monsterSize;
         this.x = width;
         // this.y = height - this.r;
         this.y = height*0.8;
