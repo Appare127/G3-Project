@@ -84,12 +84,19 @@
         }
     }
 
-}
+  }
 
-.tab_item{
-  display: flex;
-  // justify-content: space-around;
-}
+  .tab_item{
+    display: flex;
+
+    @include responds(small){
+      justify-content: space-around;
+    }
+    .btn_cloud{
+      margin-right: 10px; 
+    }
+
+  }
   .tablink_color{
     background:$col_btn_blue;
     color: $col_white;
@@ -97,13 +104,12 @@
 
 }
 
-//
+//所有的btn
 .baic_btn{
-  @include btn_cloud(100px,$col_btn_orange);
+  @include btn_cloud(100px,$col_btn_pink);
 }
 
-
-
+//與tab攔隔10px
 .my_baic,.my_love , .my_receive ,.my_order{
   margin: 10px 0 0 0px;
 }
@@ -112,6 +118,7 @@
   margin: 20px 0 0 0;
 }
 
+//外框
 .my_baic,.my_gamerecord,.my_animal,.my_love , .my_receive ,.my_order{
   border: 5px solid $col_btn_blue;//#fff
   // background-color: $col_white;//#fde5a4
@@ -120,8 +127,7 @@
   box-sizing: border-box;
   border-radius: 15px;
 }
-
-
+//字體&btn置中
 .baic_pic,.gamerecord_pic,.myanimal_pic,.upfile{
   text-align: center;
 }
@@ -136,7 +142,25 @@
     margin-top: 10px;
     text-align: center;
   }
+.baic_txt{
+  input{
+    outline: none;
+    border: 2px solid $col_btn_blue;
+    border-radius: 5px;
+    // margin: 10px auto 10px auto;
+    padding: 0px 0px 0 5px;
+    font-size: 16px;
+    font-family: Microsoft JhengHei;
+  }
 
+}
+
+// input[type="submit"]{
+//   // background:none;  
+//   outline:none;  
+//   // border:0px;
+// }
+ 
     //==我的動物==
   .my_animal{
     .myanimal_pic{
@@ -234,7 +258,6 @@
 ///我的預約
 .member_receive{
 
-
   .myreceive_item{
     margin-bottom: 10px;
     border-top: 2px dotted #157E8F;
@@ -306,4 +329,28 @@
 .baic_txt td , .gamerecord_txt td , .myanimal_txt td{
   width: 10%;
   padding: 10px;
+}
+
+//我的收藏
+
+.my_love{
+  .loveanimal_pic{
+  // border: 1px solid #f00;
+  position: relative;
+    .lovebg_re{
+      position: relative;
+      width: 100%;
+      height: calc(50vh);
+    }
+
+    .lovepic_ab{
+      position: absolute;
+      // top: 0;
+      left: 0;
+      right:0;
+      bottom: 0%;
+      margin: auto;
+    }
+  
+  }
 }
