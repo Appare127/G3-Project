@@ -378,9 +378,8 @@
                     display:flex;
                     align-items: center;
                     justify-content: center;
-                    h2 {
-                        font-size: 18px;
-                    }
+                    @include btn_cloudb(150px);
+       
                 }
                 img {
                     display:inline-block;
@@ -415,7 +414,8 @@
                 // margin-right:auto;
                 // margin-left:auto;
                 .btn_c_nextpage{
-                    @include btn_cloud(150px, $col_btn_blue);
+                    @include btn_cloud(15
+                    0px, $col_btn_blue);
                     display:inline-block;
                     
                 }
@@ -791,24 +791,80 @@
                         }
                         .role_value{
                             width:50%;
-                            .info_value{
-                                width:80%;
-                                padding-left:20%;
-                                margin-top:100px;
-                                display:inline-block;
-                                .value_life,.value_jump{
-                                    height:30px;
-                                    width:80%;
-                                    img {
-                                        width: 25px;
-                                        margin-left:2px;
+                            .info_wrap{
+                                width: 95%;
+                                box-sizing: border-box;
+                                margin:  auto;
+                                padding: 10px;
+                            
+                                h3{
+                                    font-size: $h3_fz;
+                                    padding: 10px;
+                                }
+                                .jump_ability{
+                                    display: flex;
+                                    padding: 10px 10px 10px 40px;
+                                    p{
+                                        width: 30%;
+                                        align-self: center;
+                                    }
+                                    .pic{
+                                        width: 70%;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                    }
+                                    .jump_bar{
+                                        width: 95%;
+                                        height: 20px;
+                                        background-color: #fff;
+                                        border-radius: 5px;
+                                        position: relative;
+                                
+                                        .bar_add{
+                                            width: 50%;
+                                            height: 20px;
+                                            border-radius: 5px;
+                                            background-color: #ef7b78;
+                                            position: absolute;
+                                            top: 0;
+                                            bottom: 0;
+                                            margin: auto;
+                                            transition: 0.7s;
+                                        }
+                                        .meter{
+                                            position: absolute;
+                                            top: 0;
+                                            bottom: 0;
+                                            right: 5px;
+                                            margin: auto;
+                                            font-size: 14px;
+                                            line-height: 20px;
+                                            color: $col_black;
+                                        }
                                     }
                                 }
+                                .life_ability{
+                                    display: flex;
+                                    padding: 10px 10px 10px 40px;
+                                    p{
+                                        width: 30%;
+                                        align-self: center;
+                                    }
+                                    .pic{
+                                        width: 70%;
+                                        font-size: 0;
+                                        display: flex;
+                                        align-items: center;
+                                        img{
+                                            margin: 0px 5px;
+                                        }
+                                    }
+                                }
+                                .evemt_ability{
+                                    font-size: 0;
+                                }
                             }
-                            .info_diagram{
-                                text-align:center;
-                                padding-top:30px;
-                            }             
                         }
                 }
             }
@@ -977,9 +1033,7 @@
                 display:flex;
                 align-items: center;
                 justify-content: center;
-                h2 {
-                    font-size: 18px;
-                }
+
             }
             img {
                 display:inline-block;
@@ -1020,6 +1074,8 @@
                 position:absolute;
                 top:20%;
                 left:80%;
+                @include btn_cloudb(150px);
+
         
             }
             .arrowLeft,.arrowRight {
@@ -1042,8 +1098,9 @@
                 align-items: center;
                 font-size: 24px;
                 p {
-                    border:1px solid pink;
-                    border-radius:10px;
+                    @include btn_cloudp(100px);
+
+
                 }
             }
     

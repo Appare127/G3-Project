@@ -1,5 +1,6 @@
 let unicorn;
 let trains = [];
+let fallens = [];
 let foods = [];
 let moneys = [];
 let uImg;
@@ -29,18 +30,21 @@ let scene = { //場景資訊
         area:'img/game/遊戲背景-沙漠.png',
         monster:'img/game/蠍子.png',
         monsterSize:50,
+        fallen:'img/game/meteor1.png',
         reward:'img/game/meat.png',
     },
     mountain:{
         area:'img/game/scene_mountain.png',
         monster:'img/game/lion.png',
         monsterSize:80,
+        fallen:'img/game/meteor1.png',
         reward:'img/game/meat.png',
     },
     forest:{ 
         area:'img/game/scene_forest.png',
         monster:'img/game/lion.png',
         monsterSize:80,
+        fallen:'img/game/meteor1.png',
         reward:'img/game/meat.png',
     }
 }
@@ -52,6 +56,7 @@ function preload() {
     }
     uImg = loadImage(sessionStorage['animal_img']+'?'+ new Date().getTime());//抓取最新的客製動物圖片
     tImg = loadImage(scene[sessionStorage['sceneChoice']].monster);
+    fImg = loadImage(scene[sessionStorage['sceneChoice']].fallen)
     bgImg = loadImage(scene[sessionStorage['sceneChoice']].area);
     rImg = loadImage(scene[sessionStorage['sceneChoice']].reward);
     
@@ -157,9 +162,16 @@ function draw() {
 
     //隨機生成障礙物
     
-    if (random(1) < (0.03/environ_adapt)) {
+    if (random(1) < (0.04/environ_adapt)) { 
         trains.push(new Train(scene[sessionStorage['sceneChoice']].monsterSize));
     }
+
+    if(timer>=20){ //20秒後開始掉隕石
+        if (random(1) < (0.04/environ_adapt)) { // 掉隕石
+            fallens.push(new Fallen(scene[sessionStorage['sceneChoice']].monsterSize));
+        }
+    }
+
     //隨機生成肉
     if (random(1) < 0.005*environ_adapt) {
         foods.push(new Food());
@@ -201,6 +213,33 @@ function draw() {
 
             if (life == 0) { //死掉後
                 trains.splice(i-5,15);
+                setTimeout(function(){
+                    noLoop();
+                },0.1);
+
+                updateScoreMoney();
+                questionPage.style.display='block';
+                reward_money.innerHTML = `得到獎金：${money}`;
+                score_time.innerHTML = `生存時間：${timer}秒`;
+
+            }
+        }
+    }
+
+    for (let f of fallens) {
+        f.move();
+        f.show();
+        if (unicorn.hits(f)) {
+            // console.log(life)
+
+            if (fallens.indexOf(f)  != test){
+                life--;
+                test = fallens.indexOf(f);
+            }
+
+
+            if (life == 0) { //死掉後
+                fallens.splice(i-5,15);
                 setTimeout(function(){
                     noLoop();
                 },0.1);

@@ -14,3 +14,19 @@ class Train {
         // rect( this.x, this.y, this.r, this.r);
     }  
 }
+
+class Fallen {
+    constructor(){
+        this.r = 80;
+        this.y = -50;
+        this.x = random(0.3*width, width+20);
+
+    }
+    move(){
+        this.y += 1.3*10;
+        this.x -= 10;
+    }
+    show(){
+        image(fImg, this.x, this.y, this.r, this.r);
+    }
+}

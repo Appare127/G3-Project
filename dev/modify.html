@@ -50,9 +50,7 @@
                     <img class="head_pic" src="img/modify/p_head_giraffe.png" alt="">
                 </div>
 
-                <div class="bgimg_box">
-                    <img src="" alt="" class="bgimg">
-                </div>
+
                 <canvas id="pic_box"></canvas>
 
 
@@ -80,10 +78,10 @@
                     
                     <label>
                         <input type="file" name="up_bg_file" id="up_bg_file" accept="image/*">
-                        <a class="btn_cloudy">
+                        <!-- <a class="btn_cloudy">
                             背景
                             @@include('template/btn_sp.html')
-                        </a>
+                        </a> -->
                     </label>
                     
                 </form>
@@ -195,17 +193,58 @@
                     </li>
                 </ul>
 
-                <div class="bg_box"></div>
+
 
             </div>
 
 
             <div class="info_box">
                 @@include('template/radar.html')
-                <p class="hit">提醒:選擇的不同的部位會有不同的能力</p>
+                <p class="hit">提醒: 選擇的不同的部位會有不同的能力</p>
             </div>
         </div>
     </section>  
+
+    <section class="modify_inputbg">
+        <div class="container">
+
+
+            <div class="showbg_wrap">
+                <div class="bgimg_box">
+                    <img src="img/customize/user2_aml_bg.png"" alt="" class="bgimg">
+                    <img src="img/customize/user2_aml.png" alt="" class="cloneimg">
+                </div>
+            </div>
+
+            <div class="selectbg_wrap">
+                <ul class="button_ul">
+                    <li class="part_button">
+                        <label for="bglist">選擇背景</label>
+                        <input type="radio" name="setbg" id="bglist" checked>
+                        <ul class="part_wrap">
+                            <li>取消</li>
+                            <li><img src="img/modify/top_bg.png" alt=""></li>
+                            <li><img src="img/modify/top_bg.png" alt=""></li>
+                            <li><img src="img/modify/top_bg.png" alt=""></li>
+                        </ul>
+                    </li>
+                    <li class="part_button">
+                        <label for="mdbg">自訂背景</label>
+                        <input type="radio" name="setbg" id="mdbg">
+                        <ul class="part_wrap">
+                            <li>上傳</li>
+                            <li>畫圖</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+    </section>
+
+
+
 
     <div class="remind_login">
         <p>請先登入後<br>才能把您的動物儲存下來</p>
