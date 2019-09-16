@@ -109,6 +109,7 @@ if ($errMsg !=""){
             <?php
             if($userRow["user_img"]==NULL){
             ?>
+                    未有大頭貼
                 <img id="upfile_pic" src="https://api.fnkr.net/testimg/300x300/FFCED1/FFF/?text=wait">
 
             <?php

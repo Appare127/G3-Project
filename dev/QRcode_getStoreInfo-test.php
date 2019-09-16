@@ -1,10 +1,43 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <title></title>
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+*{
+  outline:1px solid #faa;
+}
+.rev_qrcode_msg{
+  max-width:1200px;
+        margin: auto;
+        padding:10px;
+
+}
+.msg_box{
+  width:50%;
+  height:50%;
+  position: fixed;
+
+  top: 0%;
+            bottom: 0%;
+            left: 0%;
+            right: 0%;
+            margin: auto;
+
+       
+        box-sizing: border-box;
+            border: 1px solid #faa;
+            background: #faa;
+            box-shadow: 5px 5px 8px #999;
+        }
+</style>
 </head>
-<body>
+<body class="bd_rev_qrcode">
+
 <?php 
 
   if(isset($_POST['aaa'])){
@@ -30,22 +63,34 @@
 
 
   }else{
-      echo "掃描成功";
-      $aaa = $_GET['booking_no'];
-      echo "您的預約編號是  $aaa "
+    $aaa = $_GET['booking_no'];
+  ?>
 
-      ?>
-      
+    
+<div class="rev_qrcode_msg">
+  <div class="contaniner">
+    <div class="msg_box">
+
+
+    <p><?="您的預約編號是  $aaa";?></p>
+    <p><?="掃描成功";?></p>
+
+
     <form action="" method="post">
     <input type="hidden" name="aaa" value="<?=$aaa?>">
     <input type="submit" value="確定入場">
     </form>
+
+    </div>
+  </div>
+</div>
+
+
+
     
     <?php
   }
 ?>
-
-
 
 
 </body>

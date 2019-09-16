@@ -1,0 +1,16 @@
+.rev_qrcode_msg{
+    .container{
+        max-width:1200px;
+        margin: auto;
+        box-sizing: border-box;
+        padding: 10px;
+
+        .msg_box{
+            border: 1px solid #faa;
+            background: #faa;
+            box-shadow: 5px 5px 8px #999;
+        }
+    }
+   
+    
+}
