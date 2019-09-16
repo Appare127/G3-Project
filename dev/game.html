@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
+    <script src='js/plugin/Chart.js' ></script>
+    
     <title>遊戲導覽</title>
 </head>
 
@@ -42,26 +44,8 @@
                 </div>
             </div>
             <div class="role_value">
-                <div class="info_value">
-                    <div class="value_life">
-                    生命力:
-                    <img src="img/game/info_life.png" alt="">
-                    </div>
-                    <div class="value_jump">
-                        <div class="jump_ability">
-                            <p>跳躍力:</p>
-                            <div class="pic">
-                                <div class="jump_bar">
-                                    <div class="bar_add"></div>
-                                    <span class="meter">1m</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="info_diagram">
-                    <img src="img/game/info_diagram.png" alt="">
-                </div>
+                @@include('template/radar.html')
+  
             </div>
         </div>
     </div>
@@ -100,7 +84,7 @@
         <div class="arrowLeft"><</div>
 
         <div class="playing_intro">
-            <a href="javascript:showIntro();" class="btn_c_nextpage">
+            <a href="javascript:showIntro();" class="btn_c_nextpage btn_cloudb">
                 操作說明
                 @@include('template/btn_sp.html')
             </a>
@@ -109,13 +93,28 @@
         <!-- <a href="gaming.html" onclick="chosenArea('desert')"></a> -->
             <div class="playing_desert playing_window">
                 <input type="hidden" id="userNo" value="1">
-                <p><a href="gaming.html" onclick="chosenArea('desert')">進入遊戲</a></p>
+                <p>
+                    <a href="gaming.html" class="btn_cloudp" onclick="chosenArea('desert')">
+                    進入遊戲
+                    @@include('template/btn_sp.html')
+                </a>
+                </p>
             </div>
             <div class="playing_forest playing_window">
-                <p><a href="gaming.html" onclick="chosenArea('forest')">進入遊戲</a></p>
+                <p>
+                    <a href="gaming.html" class="btn_cloudp" onclick="chosenArea('forest')">
+                    進入遊戲
+                    @@include('template/btn_sp.html')
+                </a>
+                </p>
             </div>
             <div class="playing_mountain playing_window">
-                <p><a href="gaming.html" onclick="chosenArea('mountain')">進入遊戲</a></p>
+                <p>
+                    <a href="gaming.html" class="btn_cloudp" onclick="chosenArea('mountain')">
+                    進入遊戲
+                    @@include('template/btn_sp.html')
+                </a>
+                </p>
             </div>
         <div class="arrowRight">></div>
     </div>
@@ -177,14 +176,49 @@
     </div>
 </div>
 
-
 @@include('template/footer.html')
+<script src="js/modify/radar.js" ></script>
+
 <script>
 
 
 let x,y,z,areaChoice;
 let tempUserNo = 1;
 let userDataDesc = [];
+
+
+// 更新雷達圖資料
+function updatechart(){
+    let total_eml_forest = sessionStorage['environ_adapt_1'];
+    let total_eml_mountain = sessionStorage['environ_adapt_2'];
+    let total_eml_desert = sessionStorage['environ_adapt_3'];
+    myRadarChart.data.datasets[0].data = [total_eml_forest , total_eml_mountain , total_eml_desert];
+    myRadarChart.update();
+}
+
+// 更新生命力
+function updatehealth(){
+    let total_health = sessionStorage['animal_life'];
+    let health_box = document.querySelector(".life_ability .pic");
+    // console.log(health_box);
+    health_box.innerHTML = '';
+    for (let i=1; i<=total_health; i++){
+        let hart = document.createElement('img');
+        hart.src = 'img/modify/icon_life.png';
+        health_box.appendChild(hart);
+    }
+}
+
+// 更新跳躍力
+function updatejump(){
+    let total_jump = sessionStorage['animal_jump'];
+    let jump = document.getElementsByClassName('bar_add')[0];
+    let jump_value = document.getElementsByClassName('meter')[0];
+    jump.style.width = `${total_jump *2}0%`;
+    jump_value.innerText = total_jump + 'm';
+}
+
+
 
 function $id(id){
     return document.getElementById(id);
@@ -412,13 +446,7 @@ function chosenArea(area){
                 //顯示角色資料
                 
                 $que(".info_pic img")[0].src = userData.my_animal_img +'?'+ new Date().getTime();
-                console.log($que(".info_pic img")[0].src);
-                $que(".value_life")[0].innerHTML = "生命力:";
                 $que(".info_name")[0].innerText = sessionStorage['animal_name'];
-                for(var k=0; k<sessionStorage['animal_life']; k++){
-                    $que(".value_life")[0].innerHTML += `<img width="25" src="img/game/heart.png" alt="" >`;
-                }
-
 
             }else{
                 alert( xhr.status );
@@ -514,6 +542,9 @@ function chosenArea(area){
     });
 
     function doFirst(){
+        updatechart();
+        updatehealth();
+        updatejump();
         getRankingData();
         getCusAnimal();
         //幻燈片
