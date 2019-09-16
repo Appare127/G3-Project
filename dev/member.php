@@ -4,29 +4,31 @@ session_start();
 try {
 	require_once('php/connectg3.php');
     
-  // $orders=$pdo->prepare('select * from product_order where user_no = :user_no');
-  // $orders->bindValue(':user_no',1);//$_POST['user_no']
-  // $orders->execute();
-
   // $orderItems=$pdo->prepare('SELECT * FROM `product_order` p  join order_item o on p.order_no = o.order_no join product pro on pro.product_no = o.product_no where user_no = :user_no');
   // $orderItems->bindValue(':user_no',1);//$_POST['user_no']
   // $orderItems->execute();
 
+  //找會員
   $userItems=$pdo->prepare('SELECT * FROM `user` where user_no = :user_no');
   $userItems->bindValue(':user_no',$_SESSION['user_no']);//
   $userItems->execute();
 
+  //找訂單
   $orders=$pdo->prepare('SELECT * FROM `product_order` where user_no = :user_no');
   $orders->bindValue(':user_no',$_SESSION['user_no']);
   $orders->execute();
 
+ //找訂單明細
   $orderItems=$pdo->prepare('SELECT * FROM  order_item o join product pro on pro.product_no = o.product_no where o.order_no = :order_no ');
   // $orderItems->execute();
 
+//找預約
   $revs=$pdo->prepare('SELECT * FROM resv_order r join resv_session_capacity rc on r.session_no = rc.session_no where r.member_id = :member_id');
   $revs->bindValue(':member_id',$_SESSION['user_no']);
   $revs->execute();
 
+
+//找收藏明細 且 狀態等於"1"就是收藏中的
   // $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = :user_no');
 
   $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = :user_no and f.favorite_status = 1');
@@ -59,7 +61,6 @@ try {
   @@include('template/header.html')
 
 
-
   <div class="member_tab">
     <div class="banner_cloud">
       <img class="icon_l" src="img/header/banner_icon_l.png" alt="">
@@ -86,7 +87,6 @@ try {
 
 if ($errMsg !=""){
   echo "<center>$errMsg</center>";
-
 }else{
 ?>
 
@@ -109,12 +109,12 @@ if ($errMsg !=""){
             <?php
             if($userRow["user_img"]==NULL){
             ?>
-                <img id="upfile_pic" src="https://api.fnkr.net/testimg/300x300/FFCED1/FFF/?text=A">
+                <img id="upfile_pic" src="https://api.fnkr.net/testimg/300x300/FFCED1/FFF/?text=wait">
 
             <?php
             }else{
             ?>
-              <img id="upfile_pic" src="img/memberimg/<?=$userRow["user_img"]?>">
+              <img id="upfile_pic" src="<?=$userRow["user_img"]?>">
             <?php
             }
             ?>
@@ -144,7 +144,8 @@ if ($errMsg !=""){
               </tr>
               <tr>
                 <td>信箱</td>
-                <td><?=$userRow["user_email"]?></td>
+                <td><input type="email" name="user_email" value="<?=$userRow["user_email"]?>">
+                 </td>
               </tr>
               <tr>
                 <td>電話</td>
@@ -159,10 +160,10 @@ if ($errMsg !=""){
                 <td>目前金幣</td>
                 <td><?=$userRow["game_money"]?></td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <td>當日剩餘票數</td>
                 <td><?=$userRow["vote_remain"]?></td>
-              </tr> 
+              </tr>  -->
             </table>
           
 
@@ -268,7 +269,7 @@ if ($errMsg !=""){
           </table>
 
           <div class="baic_btn">
-            <a href="http://localhost/G3-git/game.html" class="btn_cloud">挑戰高分去
+            <a href="game.html" class="btn_cloud">挑戰高分去
               @@include('template/btn_sp.html')</a>
           </div>
 
@@ -563,15 +564,15 @@ if ($errMsg !=""){
 
       foreach( $revsRow as $i => $pdoRevs){
        ?>
-  <!-- 未來動態新增 -->
-
-  <div class="myreceive_item">
+        
+        <!-- 未來動態新增 -->
+        <div class="myreceive_item">
             <div class="item_title">
                 <p class="col-md-2">預約編號</p>
                 <p class="col-md-2">預約日期</p>
                 <p class="col-md-2">預約時段</p>
                 <p class="col-md-2">預約狀態</p>
-                <p class="col-md-2">取消訂單</p>
+                <p class="col-md-2">取消預約</p>
                 <p class="col-md-2">顯示</p>
                 <div class="clearfix"></div>
             </div>
@@ -586,9 +587,9 @@ if ($errMsg !=""){
                 <p class="col-6 s_show">預約狀態:</p>
                 <p class="col-6 col-md-2"><?=$pdoRevs["resv_status"]==1? "已到場":"未到場"?></p>
     
-                <p class="col-6 s_show">取消訂單:</p>
+                <p class="col-6 s_show">取消預約:</p>
                 <div class="col-6 col-md-2 baic_btn">
-                  <a href="" class="btn_cloud">取消訂單
+                  <a href="" class="btn_cloud">取消預約
                     @@include('template/btn_sp.html')
                   </a>
                 </div>
@@ -608,15 +609,15 @@ if ($errMsg !=""){
         <div class="qrcode_wrap">
           <div class="qrcode_pic">
               <button type="button" class="btn_close">X</button>
-              <!-- <script>
-              document.getElementById('apple').src = "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=http://140.115.236.71/demo-projects/DD102/DD102G3/QRcode_getStoreInfo-test.php?candy=<?=$pdoRevs["booking_no"]?>&choe=UTF-8";
-              </script> -->
-              <img class="qrcode_pic_js" src="">
+
+              <img class="qrcode_pic_js" src=''>
               
+              <!--  -->
               <script>
-              document.getElementsByClassName('qrcode_pic_js')[<?=$i?>].src ="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=QRcode_getStoreInfo-test.php?candy=<?=$pdoRevs["booking_no"]?>&choe=UTF-8";
+              document.getElementsByClassName('qrcode_pic_js')[<?=$i?>].src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=QRcode_getStoreInfo-test.php?booking_no=<?=$pdoRevs["booking_no"]?>&choe=UTF-8';
               </script>
-              
+            
+            <!-- https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=http://140.115.236.71/demo-projects/DD102/DD102G3/QRcode_getStoreInfo-test.php? -->
               
             </div>
         </div>
@@ -631,7 +632,7 @@ if ($errMsg !=""){
       
 
           <!-- 未來動態新增 -->
-<!-- 
+        <!-- 
           <div class="myreceive_item">
 
               <div class="item_title">
@@ -703,7 +704,7 @@ if ($errMsg !=""){
       if( $errMsg != ""){ //例外
         echo "<div><center>$errMsg</center></div>";
       }elseif($loves->rowCount()==0){
-        echo "<div><center>目前無收藏清單</center></div>";
+        echo "<div><center><p>目前無收藏清單</p></center></div>";
       }else{
         $lovesRow = $loves->fetchAll(PDO::FETCH_ASSOC);
 
@@ -722,7 +723,7 @@ if ($errMsg !=""){
           <p>作品名稱:<?=$pdoloves["work_name"]?></p>
           <div class="baic_btn">
             
-            <p class="btn_cloud bb" id='work_<?=$pdoloves["work_no"]?>'>取消收藏
+            <p class="btn_cloud close_love" id='work_close<?=$pdoloves["work_no"]?>'>取消收藏
               @@include('template/btn_sp.html')
               </p>
             
@@ -737,7 +738,7 @@ if ($errMsg !=""){
         }//else
       ?>
 
-
+         <!-- 動態生成 -->
         <!-- <div class="col-6 col-md-3 baic_btn">
           <div><img src="img/member/member_pic.png">
             <p>動物背包</p>
@@ -746,7 +747,7 @@ if ($errMsg !=""){
             @@include('template/btn_sp.html')
           </a>
         </div> -->
-
+        <!-- 動態生成 -->
 
         <div class="clearfix"></div>
 
@@ -761,53 +762,7 @@ if ($errMsg !=""){
 
   <script src="js/member/member.js"></script>
   <script src="js/modify/radar.js"></script>
-  <script>
 
-// 更新生命力
-  function updatehealth(){
-    let total_health = sessionStorage.animal_life;
-
-      let health_box = document.querySelector(".life_ability .pic");
-      // console.log(health_box);
-      health_box.innerHTML = '';
-      for (let i=1; i<=total_health; i++){
-          let hart = document.createElement('img');
-          hart.src = 'img/modify/icon_life.png';
-          health_box.appendChild(hart);
-      }
-  }
-
-  function updatejump(){
-    let total_jump = sessionStorage['animal_jump'];
-
-    let jump = document.getElementsByClassName('bar_add')[0];
-    let jump_value = document.getElementsByClassName('meter')[0];
-
-    if (total_jump == 'null'){
-      jump_value.innerText = 'm';
-    }else{
-      jump.style.width = `${total_jump*2}0%`;
-      console.log(total_jump)
-      jump_value.innerText = total_jump + 'm';
-    }
-
-}
-
-  function updatechart(){
-    let total_eml_forest = sessionStorage.environ_adapt_1;
-    let total_eml_mountain = sessionStorage.environ_adapt_2;
-    let total_eml_desert = sessionStorage.environ_adapt_3;
-
-    myRadarChart.data.datasets[0].data = [total_eml_forest,total_eml_mountain,total_eml_desert];
-    myRadarChart.update();
-  }
-
-
-window.addEventListener('load',updatehealth);
-window.addEventListener('load',updatejump);
-window.addEventListener('load',updatechart);
-
-  </script>
 </body>
 
 </html>

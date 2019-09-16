@@ -1,13 +1,16 @@
 <?php 
 $errMsg = "";
+session_start();
+
 try {
 	require_once('../connectg3.php');
 	
-	$members=$pdo->prepare('update user set user_name=:user_name,user_psw=:user_psw,user_tel=:user_tel,hint_answer=:hint_answer where user_id=:user_id');
+	$members=$pdo->prepare('update user set user_name=:user_name,user_psw=:user_psw,user_email=:user_email,user_tel=:user_tel,hint_answer=:hint_answer where user_id=:user_id');
 
 	$members->bindValue(':user_id',$_REQUEST["user_id"]);
 	$members->bindValue(':user_name',$_REQUEST["user_name"]);
 	$members->bindValue(':user_psw',$_REQUEST["user_psw"]);
+	$members->bindValue(':user_email',$_REQUEST["user_email"]);
 	$members->bindValue(':user_tel',$_REQUEST["user_tel"]);
 	$members->bindValue(':hint_answer',$_REQUEST["hint_answer"]);
 	$members->execute();
@@ -31,7 +34,7 @@ try {
 		// $psn = $pdo->lastInsertId();
 
 		//先檢查images資料夾存不存在
-		$dir ="../../img/memberimg/";
+		$dir ="../../img/customize//";
 
 		if(!file_exists($dir)){
 			mkdir($dir);
@@ -39,18 +42,22 @@ try {
 		//將檔案copy到要放的路徑
 		$fileInfoArr = pathinfo($_FILES["upFile"]["name"]); //原本使用者放的路徑
 
-		$fileName = "{$_REQUEST["user_id"]}.{$fileInfoArr["extension"]}";  //9.gif
+		$fileName = "{$_SESSION['user_no']}.{$fileInfoArr["extension"]}";  //9.gif
 
 		$from = $_FILES["upFile"]["tmp_name"];//暫存檔的路徑名稱
-		$to = $dir."$fileName";
+		$to = $dir.$fileName;
+
+        $to = $dir. "user_sticker" . $fileName;
 		copy( $from, $to);//從暫存檔的路徑名稱複製到images
 
-    //將檔案名稱寫回資料庫
-    
-
+	//將檔案名稱寫回資料庫
+	
+		$file_src = "img/customize/" . "user_sticker" . $fileName ;
+	
 		$sql = "update user set user_img=:user_img where user_id=:user_id";
 		$memberImg = $pdo->prepare($sql);
-    	$memberImg -> bindValue(":user_img", $fileName);//把9.gif給image
+		$memberImg -> bindValue(":user_img", $file_src);//把9.gif給image
+    	// $memberImg -> bindValue(":user_img", $fileName);
     	$memberImg -> bindValue(':user_id',$_REQUEST["user_id"]);
 		$memberImg -> execute();
 		echo "新增成功~";

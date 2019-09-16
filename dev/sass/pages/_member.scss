@@ -305,10 +305,10 @@
     z-index: 2;
 
     .qrcode_pic{
-        width: 300px;
+        width: 270px;
         position: fixed;
         text-align: center;
-        background-color: lightblue;
+        background-color: $col_btn_blue;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);

@@ -18,7 +18,7 @@
         
       $revItems=$pdo->prepare("UPDATE `resv_order` SET `resv_status` = '1' WHERE `resv_order`.`booking_no` = :booking_no and `resv_order`.`member_id` = :member_id ");
       $revItems->bindValue(':member_id',$_SESSION['user_no']);
-      $revItems->bindValue(':booking_no',$_GET['candy']);
+      $revItems->bindValue(':booking_no',$_GET['booking_no']);
       $revItems->execute();
       echo"異動成功";
 
@@ -31,19 +31,18 @@
 
   }else{
       echo "掃描成功";
-      echo "掃描成功";
-      $aaa = $_GET['candy'];
+      $aaa = $_GET['booking_no'];
+      echo "您的預約編號是  $aaa "
+
       ?>
       
     <form action="" method="post">
     <input type="hidden" name="aaa" value="<?=$aaa?>">
     <input type="submit" value="確定入場">
     </form>
-    <?php
-
     
+    <?php
   }
-
 ?>
 
 
