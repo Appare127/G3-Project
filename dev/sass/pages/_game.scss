@@ -1,7 +1,7 @@
-*{
-    // outline:1px solid red;
+// *{
+//     outline:1px solid red;
   
-}
+// }
 
 /////JS用的class//
 
@@ -413,12 +413,8 @@
                 // width: 200px;
                 // margin-right:auto;
                 // margin-left:auto;
-                .btn_c_nextpage{
-                    @include btn_cloud(15
-                    0px, $col_btn_blue);
-                    display:inline-block;
-                    
-                }
+                @include btn_cloudb(100px);
+
             }
             
 
@@ -451,6 +447,7 @@
                 display:flex;
                 align-items:center;
                 justify-content: center;
+                @include btn_cloudp(100px);
             }
     
             .playing_forest{
@@ -499,12 +496,12 @@
             .rank_chart{
                 // outline:1px solid red;
                 width: 100%;
-                height: 750px;
+                height: 780px;
                 margin-left:auto;
                 margin-right:auto;
                 background-image: url(../img/game/rank_chart.png);
                 background-repeat: no-repeat;
-                background-size: 100%;
+                background-size: 100% 100%;
                 background-position: center center;
                 .rank_top10_title{
                     font-size: 16px;
@@ -521,7 +518,7 @@
                     display:flex;
                     justify-content: space-around;
                     padding-top:20px;
-                    padding-bottom:30px;
+                  
                     font-family:Microsoft JhenHei;
                     .chart_top1,.chart_top2,.chart_top3{
                         background-image: url(../img/game/chart_topx.png);
@@ -599,8 +596,7 @@
                     img {
                         width:100%;
                         position:absolute;
-                        bottom:22%;
-                        
+                        bottom:1%;
                         margin:auto;
                     }
                 }
@@ -613,13 +609,13 @@
 
 
 
-@media all and (min-width:768px){
+@media all and (min-width:768px){ ///桌機版
 
     
     .game_body{
         // padding-top:100px;
         background-image: url(../img/game/body-bg.png);
-        background-position: 0 7%; 
+        background-position: 0% 5%; 
     
         background-repeat:no-repeat;
         background-attachment:fixed;
@@ -727,7 +723,6 @@
                     margin-right:auto;
                     border:8px #41b1d1 solid;
                     border-radius:7%;
-                    // box-shadow:0 0 0 8px #639b9f ;
                     background-color: #e5e5e5;
                     position:relative;
                     display:flex;
@@ -755,26 +750,147 @@
 
                         .role_pic{
                             width:50%;
+                     
+                            .animalHello{
+                                animation: animalSayHello 5s  ;
+                            }
+                            
+                            @keyframes animalSayHello {
+                                    0% {
+                                        -webkit-transform: translate3d(-20%, 0%, 0) scaleX(1); }
+                                    5% {
+                                        -webkit-transform: translate3d(-10%, 10%, 0) scaleX(1); }
+                                    10% {
+                                        -webkit-transform: translate3d(-5%, 0%, 0) scaleX(1); }
+                                    15% {
+                                        -webkit-transform: translate3d(0%, 10%, 0) scaleX(1); }
+                                    20% {
+                                        -webkit-transform: translate3d(15%, 0%, 0) scaleX(1); }
+                                    25% {
+                                        -webkit-transform: translate3d(20%, 10%, 0) scaleX(1); }
+                                    30% {
+                                        -webkit-transform: translate3d(25%, 0%, 0) scaleX(1); }
+                                    35% {
+                                        -webkit-transform: translate3d(30%, 10%, 0) scaleX(1); }
+                                    40% {
+                                        -webkit-transform: translate3d(35%, 0%, 0) scaleX(1); }
+                                    45% {
+                                        -webkit-transform: translate3d(40%, 10%, 0) scaleX(1); }
+                                    50% {
+                                        -webkit-transform: translate3d(45%, 0%, 0) scaleX(1); }
+                                    50.01% {
+                                        -webkit-transform: translate3d(40%, 10%, 0) scaleX(-1); }
+                                    60% {
+                                        -webkit-transform: translate3d(35%, 0%, 0) scaleX(-1); }
+                                    65% {
+                                        -webkit-transform: translate3d(30%, 10%, 0) scaleX(-1); }
+                                    70% {
+                                        -webkit-transform: translate3d(25%, 0%, 0) scaleX(-1); }
+                                    75% {
+                                        -webkit-transform: translate3d(20%, 10%, 0) scaleX(-1); }
+                                    80% {
+                                        -webkit-transform: translate3d(15%, 0%, 0) scaleX(-1); }
+                                    85% {
+                                        -webkit-transform: translate3d(0%, 10%, 0) scaleX(-1); }
+                                    90% {
+                                        -webkit-transform: translate3d(-5%, 0%, 0) scaleX(-1); }
+                                    95% {
+                                        -webkit-transform: translate3d(-10%, 10%, 0) scaleX(-1); }
+                                    100% {
+                                        -webkit-transform: translate3d(-20%, 0%, 0) scaleX(-1); } 
+                                   
+                                  
+                            }
                             
                             .info_pic{
                                 width:50%;
                                 height:120px;
-                                filter: drop-shadow(0px 5px 7px rgba(0, 0, 0, 0.7));
                                 position:absolute;
                                 top:4%;
                                 left:5%;
                                 padding:5px;
-                                animation:animalBreathing 5s infinite;
+                                cursor:pointer;
                                 img {
                                     width:80%;
                                 }
+                                .animalBreathing {
+                                    animation:animalBreathing 5s infinite;
+                                }
+                                .animal_words{
+                                    text-align:center;
+                                    width: 200px;
+                                    height: 150px;
+                                    border-radius:15px;
+                                    background-image: url(../img/game/dialogue.png);
+                                    background-position: 0 0;
+                                    background-size: 100% 100%;
+                                    background-repeat: no-repeat;
+                                    opacity:0.9;
+                                    position:absolute;
+                                    z-index:9;
+                                    top:-45%;
+                                    left:10%;
+                                    p {
+                                        display:inline-block;
+                                        line-height:150px;
+                                    }
+                                }
+                                .animalSayWords {
+                                    animation:animalSayWords 5s ;
+                                }
                                 
                             }
+                            @keyframes animalSayWords {
+                                0% {
+                                    -webkit-transform: translate3d(-20%, 0%, 0) ; }
+                                5% {
+                                    -webkit-transform: translate3d(-10%, 10%, 0) ; }
+                                10% {
+                                    -webkit-transform: translate3d(-5%, 0%, 0) ; }
+                                15% {
+                                    -webkit-transform: translate3d(0%, 10%, 0) ; }
+                                20% {
+                                    -webkit-transform: translate3d(15%, 0%, 0) ; }
+                                25% {
+                                    -webkit-transform: translate3d(20%, 10%, 0) ; }
+                                30% {
+                                    -webkit-transform: translate3d(25%, 0%, 0) }
+                                35% {
+                                    -webkit-transform: translate3d(30%, 10%, 0) }
+                                40% {
+                                    -webkit-transform: translate3d(35%, 0%, 0) ; }
+                                45% {
+                                    -webkit-transform: translate3d(40%, 10%, 0) ; }
+                                50% {
+                                    -webkit-transform: translate3d(45%, 0%, 0) ; }
+                                50.01% {
+                                    -webkit-transform: translate3d(35%, 10%, 0) }
+                                60% {
+                                    -webkit-transform: translate3d(30%, 0%, 0) }
+                                65% {
+                                    -webkit-transform: translate3d(25%, 10%, 0) }
+                                70% {
+                                    -webkit-transform: translate3d(20%, 0%, 0) }
+                                75% {
+                                    -webkit-transform: translate3d(15%, 10%, 0) }
+                                80% {
+                                    -webkit-transform: translate3d(10%, 0%, 0) }
+                                85% {
+                                    -webkit-transform: translate3d(-5%, 10%, 0) }
+                                90% {
+                                    -webkit-transform: translate3d(-10%, 0%, 0) }
+                                95% {
+                                    -webkit-transform: translate3d(-20%, 10%, 0) }
+                                100% {
+                                    -webkit-transform: translate3d(-30%, 0%, 0) } 
+                               
+                              
+                        }
                             @keyframes animalBreathing{
                                 0%  { transform:translate3D(1%,0%,0);}
-                                25% { transform:translate3D(5%,2%,0);}
+                                25% { transform:translate3D(2%,2%,0);}
                                 50% { transform:translate3D(1%,1%,0);}
-                                75% { transform:translate3D(0%,5%,0);}
+                                75% { transform:translate3D(-1%,5%,0);}
                                 // 100% { top:20%;left:7%;}
                                 
                             }
@@ -1074,8 +1190,7 @@
                 position:absolute;
                 top:20%;
                 left:80%;
-                @include btn_cloudb(150px);
-
+                @include btn_cloudb(100px);
         
             }
             .arrowLeft,.arrowRight {
@@ -1173,7 +1288,7 @@
                     display:flex;
                     justify-content: space-around;
                     padding-top:20px;
-                    padding-bottom:30px;
+                    padding-bottom:10px;
                     font-family:Microsoft JhenHei;
                     .chart_top1,.chart_top2,.chart_top3{
                         background-image: url(../img/game/chart_topx.png);

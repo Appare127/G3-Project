@@ -22,7 +22,8 @@ let timer=0;
 let money=0;
 let cusJump;
 let environ_adapt;
-
+let adapt_level;
+var drops = [];
 
 
 let scene = { //場景資訊
@@ -61,6 +62,7 @@ function preload() {
     rImg = loadImage(scene[sessionStorage['sceneChoice']].reward);
     
     if(sessionStorage['sceneChoice']=='forest'){ //依據選擇的場景決定適用的環境適應能力值
+        console.log('environ_adapt:' + environ_adapt);
         environ_adapt = sessionStorage['environ_adapt_1']*0.5;
     }else if(sessionStorage['sceneChoice']=='mountain'){
         environ_adapt = sessionStorage['environ_adapt_2']*0.5;
@@ -85,6 +87,8 @@ function setup() {
     );
 
 
+
+
     if(windowWidth>=768){ //canvas的RWD
         var cnv = createCanvas(1200, 600);
         a=(windowWidth-width)/2;
@@ -101,6 +105,10 @@ function setup() {
     life = unicorn.life;
     cusJump = sessionStorage['animal_jump'] *(-1)*4 + (-20);
 
+
+    for (var k = 0; k < 500; k++) {
+        drops[k] = new Drop();
+    }
     
 }
 
@@ -145,9 +153,22 @@ function draw() {
     //秀出生命值
 
     for(var i=0; i<life; i++){
-        image(heartImg, 50 + 50*i, 50, 40, 40);
+        image(heartImg, 50 + 50*i, 48, 32, 40);
     }
     
+    //秀出環境適應力在右上角
+    
+    if(environ_adapt<3){
+        adapt_level = '低 - 有生命危險';
+    }else if (environ_adapt==3){
+        adapt_level = '中等 平淡的度過';
+    }else if(environ_adapt >3){
+        adapt_level = '高 - 躺著過關';
+    }
+    textSize(16);
+    fill(33);
+    text('環境適應力：'+ adapt_level, 3/5*width, 100);
+
     //秀出時間.金錢在右上角
     if(frameCount%60==0){
         timer++;
@@ -155,10 +176,8 @@ function draw() {
     textSize(24);
     fill(33);
     text('$: '+money + '  生存時間： '+timer, 3/5*width, 80);
-    
 
-    // text(time, 3/4*width, 1/4*height);
-    fill(0, 102, 153);
+    // fill(0, 102, 153);
 
     //隨機生成障礙物
     
@@ -166,10 +185,27 @@ function draw() {
         trains.push(new Train(scene[sessionStorage['sceneChoice']].monsterSize));
     }
 
+
+    if(timer<=25 && timer>=19){
+        textSize(24);
+        fill(33, 99, 100);
+        text("系統提示:有流星~快許願(*￣▽￣)/‧☆*~~~~~~~", 1/3*width, 1.5/3*height);
+    }
     if(timer>=20){ //20秒後開始掉隕石
-        if (random(1) < (0.04/environ_adapt)) { // 掉隕石
+        if (random(1) < (0.06/environ_adapt)) { // 掉隕石
             fallens.push(new Fallen(scene[sessionStorage['sceneChoice']].monsterSize));
         }
+
+    }
+
+
+    
+    if(timer>=40){
+
+        for (var r = 0; r < drops.length; r++) {
+            drops[r].fall();
+            drops[r].show();
+          }
     }
 
     //隨機生成肉
@@ -177,7 +213,7 @@ function draw() {
         foods.push(new Food());
     }
     //隨機生成金錢
-    if(random(1)<0.03*environ_adapt){
+    if(random(1)<0.008*environ_adapt){
         moneys.push(new Money());
     }
 
@@ -226,7 +262,7 @@ function draw() {
         }
     }
 
-    for (let f of fallens) {
+    for (let f of fallens) { //掉下隕石
         f.move();
         f.show();
         if (unicorn.hits(f)) {

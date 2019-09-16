@@ -27,9 +27,9 @@
 
 
 <div class="game_role">
-    <div class="banner_pyramid"><img src="img/game/banner_pyramid.png" alt=""></div>
+    <!-- <div class="banner_pyramid"><img src="img/game/banner_pyramid.png" alt=""></div>
     <div class="banner_tree"><img src="img/game/banner_tree.png" alt=""></div>
-    <div class="banner_mountain"><img src="img/game/banner_mountain.png" alt=""></div>
+    <div class="banner_mountain"><img src="img/game/banner_mountain.png" alt=""></div> -->
     <div class="container">
         <div class="role_title"><h2>參加角色</h2></div>
         <div class="role_info">
@@ -38,10 +38,12 @@
             <div class="role_pic">
                 <div class="info_pic">
                     <img src="img/game/info_pic.png" alt="">
+                    <div class="animal_words"><p></p></div>
                 </div>
                 <div class="info_name">
-                    <h2>鑽向敵人的心臟</h2>
+                    <h2>你的動物名稱</h2>
                 </div>
+
             </div>
             <div class="role_value">
                 @@include('template/radar.html')
@@ -86,7 +88,7 @@
         <div class="playing_intro">
             <a href="javascript:showIntro();" class="btn_c_nextpage btn_cloudb">
                 操作說明
-                @@include('template/btn_sp.html')
+                @@include('template/btn_sp.html') 
             </a>
         
         </div>
@@ -226,9 +228,32 @@ function $id(id){
 function $cls(cls){
     return document.getElementsByClassName(cls);
 }
-
 function $que(css_selector){
     return document.querySelectorAll(css_selector);
+}
+
+
+function animalWalking(){
+   
+    $que(".animal_words")[0].style.display="block";
+    $que(".info_pic img")[0].classList.remove('animalBreathing');
+    $que(".info_pic img")[0].classList.add('animalHello');
+    $que(".animal_words")[0].classList.add('animalSayWords');
+    $que(".animal_words p")[0].innerText = `${sessionStorage['user_name']} 你好啊~~`;
+    setTimeout(function(){
+        $que(".animal_words p")[0].innerText = `我們當好朋友吧~~`;
+    },2500);
+    setTimeout(function(){
+        $que(".info_pic img")[0].classList.remove('animalHello');
+        $que(".animal_words")[0].classList.remove('animalSayWords');
+        $que(".info_pic img")[0].classList.add('animalBreathing');
+        $que(".animal_words")[0].style.display="none";
+    },5000);
+
+    
+
+    // console.log($que(".info_pic img")[0].classList);
+
 }
 
 function showIntro(){
@@ -547,14 +572,15 @@ function chosenArea(area){
         updatejump();
         getRankingData();
         getCusAnimal();
+        animalWalking();
         //幻燈片
         $cls('arrowLeft')[0].addEventListener('click', sliderLeft);
         $cls('arrowRight')[0].addEventListener('click', sliderRight);
-        //地圖指標
+        //地圖指標安裝事件
         $cls('forest_pointer')[0].addEventListener('click', pointerToMap);
         $cls('desert_pointer')[0].addEventListener('click', pointerToMap);
         $cls('mountain_pointer')[0].addEventListener('click', pointerToMap);
-
+        $que(".info_pic img")[0].addEventListener('click', animalWalking);
         let enterGame=document.querySelectorAll('.playing_window p');
         let closeBtn = document.getElementById('game_closeBtn');
         closeBtn.addEventListener('click', closeIntro);

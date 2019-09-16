@@ -23,7 +23,7 @@ class Fallen {
 
     }
     move(){
-        this.y += 1.3*10;
+        this.y += 9;
         this.x -= 10;
     }
     show(){
