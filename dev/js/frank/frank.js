@@ -1,59 +1,16 @@
-console.log("111");
-
-
-
-// function collection(){
-//     let heart = document.getElementById("#heart");
-
-//     if(heart.title == "加入收藏"){
-//         heart.src = "img/frank/plike.png";
-//         heart.title = "取消收藏"
-//     }else{
-//         heart.src = "img/frank/wlike.png";
-//         heart.title = "加入收藏";
-//     }
-// }
-
-
+window.addEventListener("load", init, false);
+window.addEventListener("resize", resize, false);
 function init(){
-    console.log(1);
+       owlCarousel_img();
+       favorite();
+}
+function resize(){
+   owlCarousel_img();
+}
 
-    $(window).resize(function(){
-        var _width = $(window).width(); 
-        if(_width < 768){
-            $('.frank_top_three').addClass('owl-carousel');
-            
-            $(document).ready(function(){  
-                $(".owl-carousel").owlCarousel({
-                    loop: false,
-                    margin: 100,
-                    nav: true,
-                    // dots: true,
-                    dotsEach: true,
-                    responsive: {
-                        0: {
-                            items: 1
-                        },
-                        600: {
-                            items: 1
-                        },
-                        1000: {
-                            items: 7
-                        }
-                    }
-                })
-            })
-        }
-               
-        else{ 
-            $('.frank_top_three').removeClass('owl-carousel');
-     
-        }        
-   });
-    
-   
-    
-$(".heart").click(function(e){
+
+function favorite(){
+ $(".heart").click(function(e){
        
     if(e.target.title == "加入收藏"){
 
@@ -64,27 +21,37 @@ $(".heart").click(function(e){
         this.title = "加入收藏";
     }
 });
-
-    
 }
-
-
-window.addEventListener("load", init, false);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function owlCarousel_img(){
+      var _width = $(window).width(); 
+        if(_width < 768){
+            $('.frank_top_three').addClass('owl-carousel');
+            $(document).ready(function(){  
+                $(".owl-carousel").owlCarousel({
+                    loop: false,//控制輪播
+                    margin: 100,// 與右邊圖片的距離
+                    nav: true,// 導航文字
+                    dots: true,
+                     dotsEach: true,
+                    responsive: {
+                        0: {
+                            items: 1// 一次輪播幾個項目
+                        },
+                        768: {
+                            items: 3// 一次輪播幾個項目
+                        },
+                        1000: {
+                            items: 7// 一次輪播幾個項目 
+                        }
+                    }
+                })
+            })
+        } 
+        else{ 
+                $('.frank_top_three').addClass('owl-carousel');
+                $('.frank_top_three').removeClass('owl-carousel');
+        }        
+}
 
 $(document).ready(function(){
     $('.frank_message_btn').addClass(function(){
@@ -94,34 +61,18 @@ $(document).ready(function(){
 })
 })
 
-
 $(document).ready(function(){
     $('.frank_closs_btn').click(function(){
         $('.frank_message').hide();
     })
 })
-
-
-
-
-
-
-
-
-
-
-
 $(document).ready(function(){
-
         $('.frank_expand_arrow').click(function(){
         console.log($(this).index());   
         $(this).parent().next().animate({bottom:'0px'},1);
         console.log($(this).parent().next());  
-        
- 
 })
 })
-
 $(document).ready(function(){
     $('.frank_expand_button').click(function(){
         console.log($(this).index());
@@ -129,15 +80,6 @@ $(document).ready(function(){
         console.log($(this).parent().next());  
     })
 })
-
-
-
-
-
-
-
-
-
 // $(document).ready(function(){
 //     var COLORS, Confetti, NUM_CONFETTI, PI_2, canvas, confetti, context, drawCircle, i, range, resizeWindow, xpos;
 

@@ -4,6 +4,7 @@ function init() {
     animal_item();
     anime();
     water();
+    collections_rank();
 }
 //resize時啟動
 function reinit() {
@@ -16,7 +17,6 @@ addEventListener("load", init);
 addEventListener("resize", reinit);
 
 function getRankData(){
- 
     var xhr = new XMLHttpRequest();
     xhr.onload=function (){
         if( xhr.status == 200 ){ 
@@ -36,7 +36,36 @@ function getRankData(){
     var url = "php/game/getRankingData.php";
     xhr.open("Get", url, true);  //readyState : 1
     xhr.send( null );
-
+}
+//判斷瀏覽器
+function collections_rank(){
+    if(window.ActiveXObject){
+        xmlHttp_rank= new ActiveXObject('Microsoft.XMLHTTP');
+    }else if(window.XMLHttpRequest) {
+        xmlHttp_rank= new XMLHttpRequest();
+    }
+    collections_rank_refresh(xmlHttp_rank);
+}
+function  collections_rank_refresh(xmlHttp_rank){
+    xmlHttp_rank.open("GET","php/home/collections.php",true);
+    xmlHttp_rank.onreadystatechange = collections;
+    xmlHttp_rank.send(null);
+}
+function collections(){
+   
+    
+    if(xmlHttp_rank.readyState==4){
+    var data= JSON.parse(xmlHttp_rank.responseText);
+    var rank1 =data[0];
+    var rank2 =data[1];
+    var rank3 =data[2];
+    document.getElementById('rank_1_bg').src=rank1.bg_img;
+    document.getElementById('rank_1_img').src=rank1.cmp_img;
+    document.getElementById('rank_2_bg').src=rank2.bg_img;
+    document.getElementById('rank_2_img').src=rank2.cmp_img;
+    document.getElementById('rank_3_bg').src=rank3.bg_img;
+    document.getElementById('rank_3_img').src=rank3.cmp_img;
+    }
 }
 //設定動物寬高
 function animal_item() {

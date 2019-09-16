@@ -17,20 +17,19 @@ try {
   $userItems->execute();
 
   $orders=$pdo->prepare('SELECT * FROM `product_order` where user_no = :user_no');
-  $orders->bindValue(':user_no',$_SESSION['user_no']);
+  $orders->bindValue(':user_no',$_SESSION['user_no']);//$_POST['user_no']
   $orders->execute();
 
   $orderItems=$pdo->prepare('SELECT * FROM  order_item o join product pro on pro.product_no = o.product_no where o.order_no = :order_no ');
   // $orderItems->execute();
 
   $revs=$pdo->prepare('SELECT * FROM resv_order r join resv_session_capacity rc on r.session_no = rc.session_no where r.member_id = :member_id');
-  $revs->bindValue(':member_id',$_SESSION['user_no']);
+  $revs->bindValue(':member_id',$_SESSION['user_no']);//$_POST['user_no']
   $revs->execute();
 
-  // $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = :user_no');
-
-  $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = :user_no and f.favorite_status = 1');
-  $loves->bindValue(':user_no',$_SESSION['user_no']);
+  
+  $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = :user_no');
+  $loves->bindValue(':user_no',$_SESSION['user_no']);//$_POST['user_no']
   $loves->execute();
 
 ?>
@@ -608,16 +607,7 @@ if ($errMsg !=""){
         <div class="qrcode_wrap">
           <div class="qrcode_pic">
               <button type="button" class="btn_close">X</button>
-              <!-- <script>
-              document.getElementById('apple').src = "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=http://140.115.236.71/demo-projects/DD102/DD102G3/QRcode_getStoreInfo-test.php?candy=<?=$pdoRevs["booking_no"]?>&choe=UTF-8";
-              </script> -->
-              <img class="qrcode_pic_js" src="">
-              
-              <script>
-              document.getElementsByClassName('qrcode_pic_js')[<?=$i?>].src ="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=QRcode_getStoreInfo-test.php?candy=<?=$pdoRevs["booking_no"]?>&choe=UTF-8";
-              </script>
-              
-              
+              <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=http://140.115.236.71/demo-projects/DD102/DD102G3/QRcode_getStoreInfo-test.php?<?=$pdoRevs["booking_no"]?>&choe=UTF-8">
             </div>
         </div>
 
@@ -721,11 +711,9 @@ if ($errMsg !=""){
 
           <p>作品名稱:<?=$pdoloves["work_name"]?></p>
           <div class="baic_btn">
-            
-            <p class="btn_cloud bb" id='work_<?=$pdoloves["work_no"]?>'>取消收藏
+            <a href="" class="btn_cloud">取消收藏
               @@include('template/btn_sp.html')
-              </p>
-            
+            </a>
           </div>
 
         </div>
@@ -739,6 +727,33 @@ if ($errMsg !=""){
 
 
         <!-- <div class="col-6 col-md-3 baic_btn">
+          <div><img src="img/member/member_pic.png">
+            <p>動物背包</p>
+          </div>
+          <a href="" class="btn_cloud">取消收藏
+            @@include('template/btn_sp.html')
+          </a>
+        </div>
+
+        <div class="col-6 col-md-3 baic_btn">
+          <div><img src="img/member/member_pic.png">
+            <p>動物背包</p>
+          </div>
+          <a href="" class="btn_cloud">取消收藏
+            @@include('template/btn_sp.html')
+          </a>
+        </div>
+
+        <div class="col-6 col-md-3 baic_btn">
+          <div><img src="img/member/member_pic.png">
+            <p>動物背包</p>
+          </div>
+          <a href="" class="btn_cloud">取消收藏
+            @@include('template/btn_sp.html')
+          </a>
+        </div>
+
+        <div class="col-6 col-md-3 baic_btn">
           <div><img src="img/member/member_pic.png">
             <p>動物背包</p>
           </div>
