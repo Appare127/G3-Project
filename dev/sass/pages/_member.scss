@@ -177,7 +177,16 @@
         margin: auto;
       }
     }
-    @include radarinfo_member();
+    .aa{
+      padding-top:20px;
+      @include radarinfo_member();
+      
+    .baic_btn{
+      margin-top: 30px;
+    }
+    }
+
+
 
   }
 

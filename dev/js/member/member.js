@@ -40,7 +40,7 @@ tablinks[3].addEventListener('click', function () { open_page(event, 'member_lov
 window.addEventListener('load',
   function () {
     document.getElementById("default_open").click();
-    document.getElementById("default_open").classList.add("red")
+    document.getElementById("default_open").classList.add("red");
   }
 );
 
@@ -145,7 +145,6 @@ function initQrcode(){
   }
 
 }
-
 window.addEventListener('load',initQrcode,false);
 
 // <!------ ↑預約qrcode收合↑ ----->
@@ -182,5 +181,74 @@ window.addEventListener('load',initQrcode,false);
 
 
 
-// document.getElementById('').innerText=sessionStorage.user_no
 
+
+function setLove(){
+
+  var xhr = new XMLHttpRequest();
+
+  // xhr.onload = function(){ 
+
+  //   console.log("load :", xhr.readyState); 
+
+  //   if(xhr.status==200){
+
+  //   }else{
+  //     alert(xhr.status);
+  //   }
+
+  // }
+
+  // function removeSpot(e){
+
+  //   var ml = document.getElementsByClassName('bb');
+  //   var my_love = document.getElementsByClassName('my_love')[0];
+
+
+  //   my_love.removeChild(e.target.parentNode.parentNode);
+  //   console.log(e.target.parentNode.parentNode);
+  // }
+
+
+  var ml = document.getElementsByClassName('bb');
+  var my_love = document.getElementsByClassName('my_love')[0];
+
+  for(let i=0;i<ml.length;i++){
+
+    ml[i].addEventListener('click',function(e){
+      e.preventDefault();
+
+      xhr.onload = function(){ 
+        if(xhr.status==200){
+
+          my_love.removeChild(e.target.parentNode.parentNode);
+          console.log(e.target.parentNode.parentNode);
+
+  
+        }else{
+          alert(xhr.status);
+        }
+
+      }
+      
+
+      // my_love.removeChild(e.target.parentNode.parentNode);
+      // console.log(e.target.parentNode.parentNode);
+
+ //設定好所要連結的程式
+  var url = "php/member/update_Workno.php";
+  xhr.open("Post", url, true); 
+  xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+
+
+  //送出資料
+  var data_info = "work_no=" + parseInt(this.id.replace('work_',''));
+  console.log(parseInt(this.id.replace('work_','')));//1.2......
+  xhr.send(data_info);
+
+
+    });
+  }
+
+}
+window.addEventListener('load',setLove,false);
