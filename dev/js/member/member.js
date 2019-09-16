@@ -239,14 +239,14 @@ window.addEventListener('load',updatechart);
 function setLove(){
 
   var xhr = new XMLHttpRequest();
-  var ml = document.getElementsByClassName('bb');
+  var close_love = document.getElementsByClassName('close_love');
   var my_love = document.getElementsByClassName('my_love')[0];
 
 
 
-  for(let i=0;i<ml.length;i++){
+  for(let i=0;i<close_love.length;i++){
 
-    ml[i].addEventListener('click',function(e){
+    close_love[i].addEventListener('click',function(e){
       e.preventDefault();
 
       xhr.onload = function(){ 
@@ -255,7 +255,7 @@ function setLove(){
           //如果資料庫修改成功 在remove掉div
           my_love.removeChild(e.target.parentNode.parentNode);
           console.log(e.target.parentNode.parentNode);
-          alert('取消收藏');
+          // alert('取消收藏');
 
         }else{
           alert(xhr.status);
@@ -269,8 +269,8 @@ function setLove(){
       xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
 
     //送出資料
-      var data_info = "work_no=" + parseInt(this.id.replace('work_',''));
-      console.log(parseInt(this.id.replace('work_','')));//1.2......
+      var data_info = "work_no=" + parseInt(this.id.replace('work_close',''));
+      console.log(parseInt(this.id.replace('work_close','')));//1.2......
       xhr.send(data_info);
 
     });
