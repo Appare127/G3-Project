@@ -703,7 +703,7 @@ if ($errMsg !=""){
       if( $errMsg != ""){ //例外
         echo "<div><center>$errMsg</center></div>";
       }elseif($loves->rowCount()==0){
-        echo "<div><center>目前無收藏清單</center></div>";
+        echo "<div><center><p>目前無收藏清單</p></center></div>";
       }else{
         $lovesRow = $loves->fetchAll(PDO::FETCH_ASSOC);
 
@@ -761,53 +761,7 @@ if ($errMsg !=""){
 
   <script src="js/member/member.js"></script>
   <script src="js/modify/radar.js"></script>
-  <script>
 
-// 更新生命力
-  function updatehealth(){
-    let total_health = sessionStorage.animal_life;
-
-      let health_box = document.querySelector(".life_ability .pic");
-      // console.log(health_box);
-      health_box.innerHTML = '';
-      for (let i=1; i<=total_health; i++){
-          let hart = document.createElement('img');
-          hart.src = 'img/modify/icon_life.png';
-          health_box.appendChild(hart);
-      }
-  }
-
-  function updatejump(){
-    let total_jump = sessionStorage['animal_jump'];
-
-    let jump = document.getElementsByClassName('bar_add')[0];
-    let jump_value = document.getElementsByClassName('meter')[0];
-
-    if (total_jump == 'null'){
-      jump_value.innerText = 'm';
-    }else{
-      jump.style.width = `${total_jump*2}0%`;
-      console.log(total_jump)
-      jump_value.innerText = total_jump + 'm';
-    }
-
-}
-
-  function updatechart(){
-    let total_eml_forest = sessionStorage.environ_adapt_1;
-    let total_eml_mountain = sessionStorage.environ_adapt_2;
-    let total_eml_desert = sessionStorage.environ_adapt_3;
-
-    myRadarChart.data.datasets[0].data = [total_eml_forest,total_eml_mountain,total_eml_desert];
-    myRadarChart.update();
-  }
-
-
-window.addEventListener('load',updatehealth);
-window.addEventListener('load',updatejump);
-window.addEventListener('load',updatechart);
-
-  </script>
 </body>
 
 </html>

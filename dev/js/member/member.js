@@ -9,7 +9,7 @@
 // })
 
 
-// <!------ tab open page ----->
+// <!------ ↓tab open page↓ ----->
 
 function open_page(e, className) {
   var i, tabcontents, tablinks;
@@ -40,14 +40,14 @@ tablinks[3].addEventListener('click', function () { open_page(event, 'member_lov
 window.addEventListener('load',
   function () {
     document.getElementById("default_open").click();
-    document.getElementById("default_open").classList.add("red");
+    // document.getElementById("default_open").classList.add("red");
   }
 );
 
 // <!------ ↑tab open page↑ ----->
 
 
-// <!------ 上傳大頭貼 ----->
+// <!------ ↓上傳大頭貼↓ ----->
 
 function fileChange(){
 
@@ -67,7 +67,7 @@ window.addEventListener('load',function(){
 
 // <!------ ↑上傳大頭貼↑ ----->
 
-// <!------ 修改會員基本資料 ----->
+// <!------ ↓修改會員基本資料↓ ----->
 function  updateBasic(){
   document.getElementById('btn_edit').style.display='none';
   document.getElementById('updated_it').style.display='block';
@@ -84,7 +84,7 @@ window.addEventListener('load',function(){
 
 // <!------ ↑修改會員基本資料↑ ----->
 
-// <!------ 訂單明細收合----->
+// <!------ ↓訂單明細收合↓----->
 var orderbtns=document.getElementsByClassName('js_order_show');
 var orderDetails = document.getElementsByClassName('myorder_item_detail');
   
@@ -115,10 +115,9 @@ window.addEventListener('load',initOrder,false);
 // <!------ ↑訂單明細收合↑ ----->
 
 
-// <!------ 預約qrcode收合 ----->
+// <!------ ↓預約qrcode收合↓ ----->
 
 var qrshowbtns= document.getElementsByClassName('js_qr_show');
-
 var qrcodeWraps=document.getElementsByClassName('qrcode_wrap');
 var qrclosebtns= document.getElementsByClassName('btn_close');
 
@@ -127,8 +126,7 @@ function closeQrcode(e){
 }
 
 function showQrcode(e){
-
-e.target.parentNode.parentNode.parentNode.nextElementSibling.style.display="block";
+  e.target.parentNode.parentNode.parentNode.nextElementSibling.style.display="block";
   // console.log(e.target);
 }
 
@@ -148,6 +146,8 @@ function initQrcode(){
 window.addEventListener('load',initQrcode,false);
 
 // <!------ ↑預約qrcode收合↑ ----->
+
+
 
 // function getOrder(){
 //   let user_no=sessionStorage.user_no;
@@ -181,37 +181,68 @@ window.addEventListener('load',initQrcode,false);
 
 
 
+// <!------ ↓更新我的動物的狀態↓ ----->
+
+    // 更新生命力
+function updatehealth(){
+  let total_health = sessionStorage.animal_life;
+
+    let health_box = document.querySelector(".life_ability .pic");
+    // console.log(health_box);
+    health_box.innerHTML = '';
+    for (let i=1; i<=total_health; i++){
+        let hart = document.createElement('img');
+        hart.src = 'img/modify/icon_life.png';
+        health_box.appendChild(hart);
+    }
+}
+
+window.addEventListener('load',updatehealth);
+
+      // 更新跳躍力
+function updatejump(){
+  let total_jump = sessionStorage['animal_jump'];
+
+  let jump = document.getElementsByClassName('bar_add')[0];
+  let jump_value = document.getElementsByClassName('meter')[0];
+
+  if (total_jump == 'null'){
+    jump_value.innerText = 'm';
+  }else{
+    jump.style.width = `${total_jump*2}0%`;
+    console.log(total_jump);
+    jump_value.innerText = total_jump + 'm';
+  }
+}
+
+window.addEventListener('load',updatejump);
+
+      // 更新環境適應力
+function updatechart(){
+  let total_eml_forest = sessionStorage.environ_adapt_1;
+  let total_eml_mountain = sessionStorage.environ_adapt_2;
+  let total_eml_desert = sessionStorage.environ_adapt_3;
+
+  myRadarChart.data.datasets[0].data = [total_eml_forest,total_eml_mountain,total_eml_desert];
+  myRadarChart.update();
+}
+
+window.addEventListener('load',updatechart);
+
+// <!------ ↑更新我的動物的狀態↑ ----->
+
+
+
+// <!------ ↓取消收藏要消失div以及改資料庫資料↓ ----->
 
 
 function setLove(){
 
   var xhr = new XMLHttpRequest();
-
-  // xhr.onload = function(){ 
-
-  //   console.log("load :", xhr.readyState); 
-
-  //   if(xhr.status==200){
-
-  //   }else{
-  //     alert(xhr.status);
-  //   }
-
-  // }
-
-  // function removeSpot(e){
-
-  //   var ml = document.getElementsByClassName('bb');
-  //   var my_love = document.getElementsByClassName('my_love')[0];
-
-
-  //   my_love.removeChild(e.target.parentNode.parentNode);
-  //   console.log(e.target.parentNode.parentNode);
-  // }
-
-
   var ml = document.getElementsByClassName('bb');
   var my_love = document.getElementsByClassName('my_love')[0];
+
+
 
   for(let i=0;i<ml.length;i++){
 
@@ -221,34 +252,31 @@ function setLove(){
       xhr.onload = function(){ 
         if(xhr.status==200){
 
+          //如果資料庫修改成功 在remove掉div
           my_love.removeChild(e.target.parentNode.parentNode);
           console.log(e.target.parentNode.parentNode);
+          alert('取消收藏');
 
-  
         }else{
           alert(xhr.status);
         }
 
       }
-      
 
-      // my_love.removeChild(e.target.parentNode.parentNode);
-      // console.log(e.target.parentNode.parentNode);
+    //設定好所要連結的程式
+      var url = "php/member/update_Workno.php";
+      xhr.open("Post", url, true); 
+      xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
 
- //設定好所要連結的程式
-  var url = "php/member/update_Workno.php";
-  xhr.open("Post", url, true); 
-  xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
-
-
-  //送出資料
-  var data_info = "work_no=" + parseInt(this.id.replace('work_',''));
-  console.log(parseInt(this.id.replace('work_','')));//1.2......
-  xhr.send(data_info);
-
+    //送出資料
+      var data_info = "work_no=" + parseInt(this.id.replace('work_',''));
+      console.log(parseInt(this.id.replace('work_','')));//1.2......
+      xhr.send(data_info);
 
     });
   }
-
 }
 window.addEventListener('load',setLove,false);
+// <!------ ↑取消收藏要消失div以及改資料庫資料↑ ----->
+
+
