@@ -6,8 +6,8 @@ $sql='insert into resv_order values ( null,';
 foreach ($data as $key => $value) {
     $sql=$sql."'{$value}' ,";
 }
-$sql=$sql.")";
-$sql=str_replace(",)",")",$sql);
+$sql=$sql."'1')";
+// $sql=str_replace(",)",")",$sql);
 $pdo->exec($sql);
 echo $pdo->lastInsertId();
 

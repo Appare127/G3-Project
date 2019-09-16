@@ -6,10 +6,10 @@ function showInfo(dataNum,total) {
     $.get('php/resv/getTime.php', { data: 'time' }, function (data) {
         data = $.parseJSON(data);
         $('.show_data_table').html(`<div class='table_content_row'>
-        <span>場次</span>
-        <span >開始時間</span>
-        <span>長度</span>
-        <span >剩餘人數</span>
+        <span class="show_datano">場次</span>
+        <span class="show_datatime">開始時間</span>
+        <span class="show_datalen">長度</span>
+        <span class="show_datanum">剩餘人數</span>
     </div>`);
         $.each(data, (i, n) => {
             n.peopleNum=n.max_capacity-total[i];
@@ -18,9 +18,9 @@ function showInfo(dataNum,total) {
 
             $('.show_data_table').append(
                 `<div class="table_content_row">
-                    <span>場次${n.session_no}</span>
+                    <span class="show_datano">場次${n.session_no}</span>
                     <span class="show_datatime">${n.start_time}</span>
-                    <span >${n.length}分鐘</span>
+                    <span class="show_datalen">${n.length}min</span>
                     <span class="show_datanum">${n.peopleNum}人</span>
                 </div>`);
         })

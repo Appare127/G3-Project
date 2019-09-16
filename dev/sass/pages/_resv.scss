@@ -231,10 +231,13 @@
                 border: 1px solid #d1c0a5;
                 border-radius: 40px;
                 background-color: #f3edcb;
-                padding: 4.16%;
+                padding: 10px;
                 box-sizing: border-box;
                 // height: 470px;
                 border-width: 4.43px;
+                @media screen and (min-width:992px){
+                    padding: 4.23%;
+                }
             }
                 .show_data{
                     border: 3px dashed #d1c0a5;
@@ -243,16 +246,34 @@
                     background: rgba(240, 240, 240, 0.8);
                     display: inline-block;
                     width: 100%;
-                    padding: 4.16%;
-                }
-                ..show_data_table{
-                    display:flex;
+                    padding: 10px;
+                    @media screen and (min-width:992px){
+                        padding: 4.16%;
+                    }
                 }
                 .show_data_table span{
                     display:block;
-                
+                    // border-right:1px solid grey;
+                    // border-left:1px solid grey;
+                    box-sizing: border-box;
+                    padding: 2px;
                 }
-               
+                .table_content_row{
+                    display:flex;
+                }
+                .show_datano{
+                    width: 20%;
+                }
+                .show_datatime{
+                    width: 29%;
+                }
+                .show_datalen{
+                    width: 24%;
+                }
+                .show_datanum{
+                    width: 28%;
+                }
+
                 .resvform_title{
                     padding: 10px;
                 }
