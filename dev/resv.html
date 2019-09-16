@@ -182,6 +182,10 @@
 
     <script>
     function checkcode() {
+        //驗證登入
+
+        //驗證三input是否為空
+        //驗證碼輸入正確
         var codeNum = document.getElementById("code").value;
         if (codeNum == code) {
             alert("通過");
@@ -191,8 +195,7 @@
         return false;
     }
      $(document).ready(function(){
-         $('#submit').click(checkcode);
-
+         $('#submit').click(submit);
      });
     </script>
 </body>
