@@ -33,8 +33,14 @@ let part_types = 4;
 
 let canvas = document.getElementById('pic_box');
 let context = canvas.getContext('2d');
-    canvas.width = "400";
-    canvas.height = "400";
+    if (window.innerWidth < 996){
+        canvas.width = "250";
+        canvas.height = "250";
+    }else{
+        canvas.width = "400";
+        canvas.height = "400";
+    }
+
 
 
 // 下一步動作
@@ -153,6 +159,14 @@ function picsend(){
 
 function saveok(text){
     alert('動物儲存成功');
+
+    sessionStorage['environ_adapt_1'] = total_eml_forest;
+    sessionStorage['environ_adapt_2'] = total_eml_mountain;
+    sessionStorage['environ_adapt_3'] = total_eml_desert;
+    sessionStorage['animal_life'] = total_health;
+    sessionStorage['animal_jump'] = total_jump;
+
+    
 }
 
 
@@ -249,10 +263,46 @@ function changeParts(e){
     total_eml_forest = parseInt(head_eml_forest) + parseInt(body_eml_forest) + parseInt(leg_eml_forest);
     total_eml_mountain = parseInt(head_eml_mountain) + parseInt(body_eml_mountain) + parseInt(leg_eml_mountain);
     total_eml_desert = parseInt(head_eml_desert) + parseInt(body_eml_desert) + parseInt(leg_eml_desert);
+    
+    
     updatechart();      //呼叫更新雷達圖的function
 
-    drawcanvas();
+    drawcanvas();       //呼叫函式，把選到的圖片繪製到canvas上
 }
+
+
+// // 別的頁面要用的請複製這裡，資料由sessionStorage抓了，不用自己在手動輸入
+// // 更新雷達圖資料
+// function updatechart(){
+//     let total_eml_forest = sessionStorage['environ_adapt_1'];
+//     let total_eml_mountain = sessionStorage['environ_adapt_2'];
+//     let total_eml_desert = sessionStorage['environ_adapt_3'];
+//     myRadarChart.data.datasets[0].data = [total_eml_forest , total_eml_mountain , total_eml_desert];
+//     myRadarChart.update();
+// }
+
+// // 更新生命力
+// function updatehealth(){
+//     let total_health = sessionStorage['animal_life'];
+//     let health_box = document.querySelector(".life_ability .pic");
+//     // console.log(health_box);
+//     health_box.innerHTML = '';
+//     for (let i=1; i<=total_health; i++){
+//         let hart = document.createElement('img');
+//         hart.src = 'img/modify/icon_life.png';
+//         health_box.appendChild(hart);
+//     }
+// }
+
+// // 更新跳躍力
+// function updatejump(){
+//     let total_jump = sessionStorage['animal_jump'];
+//     let jump = document.getElementsByClassName('bar_add')[0];
+//     let jump_value = document.getElementsByClassName('meter')[0];
+//     jump.style.width = `${total_jump *2}0%`;
+//     jump_value.innerText = total_jump + 'm';
+// }
+
 
 // 更新雷達圖資料
 function updatechart(){
