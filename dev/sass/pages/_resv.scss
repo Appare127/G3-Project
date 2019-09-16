@@ -71,14 +71,17 @@
             .resv_calendargroup{
                 .resv_calendar{
                     background-image: url("../img/resv/calendar2.png");
-                    // background-image: url("../img/resv/calendar_bg.png");
                     z-index: 2;
                     background-repeat: no-repeat;
                     background-size: contain;
                     background-position: center;
                     height: 580px;
-                    padding:220px  0 40px;
+                    padding:230px  0 40px;
                     box-sizing: border-box;
+                    @media screen and (min-width:1200px){
+                        background-image: url("../img/resv/calendar_bg.png");
+                        padding:260px  0 40px;
+                    }
 
                     // 日曆主體開始
                     .calendarbox{
@@ -91,7 +94,7 @@
                             color: #776f6f;
                             padding-bottom: 2%;
                             box-sizing: border-box;
-                            font-size: $h1_fz;
+                            font-size: $h2_fz;
                             
                             // 左側月份切換
                             .fa-chevron-left {
@@ -166,7 +169,8 @@
                                 // 今日
                                 .colorbox{
                                     // border:1px solid #FFC300;
-                                    background:#33a1d1;
+                                    // background:#33a1d1;
+                                    color:#f19149;
                                 }
                                 // 今天之前的日期
                                 .lightgrey{
@@ -175,15 +179,17 @@
                             }
                         }
                         .curday_after{
-                           
-                                &:hover{
-                                    font-weight: bold;
-                                    color: #e5ecec;
-                                    background: #e89e4d;
-                                    cursor:pointer;
-        
-                        
+                            &:hover{
+                                font-weight: bold;
+                                color: #e5ecec;
+                                background: #e89e4d;
+                                cursor:pointer;
                             }
+                        }
+                        .curday_after_check{
+                            font-weight: bold;
+                            color: #e5ecec;
+                            background:#A65F16;
                         }
                     }
                     // 日曆主體結束
@@ -199,12 +205,18 @@
                             padding: 5px;
                             // width: 5%;
                         }
+                        .aviable{
+                            background-color:$col_brown;
+                            border-radius: 20px;
+                            margin-left: 10px;
+                        }
+                        
                         .unaviable{
                             background-color: #a8a6a6;
                             border-radius: 20px;
                             margin-left: 10px;
                         }
-                        .full_booked{
+                        .today_date{
                             background-color: #f19149;
                             border-radius: 20px;
                             margin-left: 10px;
@@ -233,9 +245,14 @@
                     width: 100%;
                     padding: 4.16%;
                 }
-                .show_datatime, .show_datanum{
-                    margin-left: 10px;
+                ..show_data_table{
+                    display:flex;
                 }
+                .show_data_table span{
+                    display:block;
+                
+                }
+               
                 .resvform_title{
                     padding: 10px;
                 }
@@ -336,10 +353,6 @@
         .container{
             display: flex;
             flex-wrap: wrap;
-        }
-        .resv_calendar{
-            width: 100%;
-            background-image: url(../img/resv/calendar2.png);
         }
         .resv_desc{
             width: 80%;
@@ -496,15 +509,12 @@
                 width: 100%;
                 .resv_calendargroup{
                     width: 50%;
-                    .resv_calendar{
-                        background-image: url("../img/resv/calendar_bg.png");
                         .resv_desc{
                             p{
                                 font-size: $xs_fz ;
                                 padding: 4px 10px;
                             }
                         }
-                    }
                 }
                 .resv_form{
                     width: 50%;

@@ -16,7 +16,6 @@
 
     <!-- header -->
     @@include('template/header.html')
-
     <!-- 標題/雲朵/左側火車 -->
     <section class="resv_banner">
         <div class="container">
@@ -78,12 +77,12 @@
 
                     <div class="calendar_text">
                         <ul>
-                            <!-- <li class="aviable"></li> -->
+                            <li class="aviable"></li>
                             <li>可預約</li>
                             <li class="unaviable"></li>
                             <li>不可預約</li>
-                            <li class="full_booked"></li>
-                            <li>預約額滿</li>
+                            <li class="today_date"></li>
+                            <li>今日日期</li>
                         </ul>
                     </div>
                 </div>
@@ -98,27 +97,27 @@
 
                 <div class="show_data">
 
-                    <p id='show_data_title'>請選擇日期：</p>
+                    <p id='show_data_title'>請選擇日期以查看詳細資訊：</p>
                     <div class="show_data_table">
-                        <div class='data_table_title'>
+                        <!-- <div class='data_table_title'>
                             <span>場次</span>
                             <span >開始時間</span>
                             <span>長度</span>
                             <span >剩餘人數</span>
-                        </div>
-                        <div class='data_table_content'>
-                            <div class="teble_content_row">
+                        </div> -->
+                        <!-- <div class='data_table_content'> -->
+                            <!-- <div class="teble_content_row"> -->
                             <!-- <span>場次</span>
                             <span class="show_datatime">開始時間</span>
                             <span>長度</span>
                             <span class="show_datanum">剩餘人數</span> -->
-                            </div>
-                        </div>
+                            <!-- </div> -->
+                        <!-- </div> -->
                     </div>
                 </div>
                 <img class="wooden" src="img/resv/wooden.png" alt="wooden">
                 <form action="get.php" method="get">
-                    <h3 class="resvform_title">本園區提供免費「定時導覽解說」服務，若有需要請事前預約。每場約為40分鐘。</h3>
+                    <h3 class="resvform_title">本園區提供免費「定時導覽解說」服務，若有需要請事前預約。</h3>
                     <div class="resvform_users">
                         <div class="time resvform_users">
                             <label for="time_select">時間:</label>
@@ -181,21 +180,72 @@
     <script src='js/resv/showInfo.js'></script>
 
     <script>
-    function checkcode() {
-        //驗證登入
+    function sendOrder(){
+        let tour_date=$('#show_data_title').text().substr(0,10);
+        let booking_date=tour_date.replace(tour_date.substr(8),my_day);
+        let number_of_booking=$('#peoplenum_select').val();
+        let member_no=sessionStorage.user_no;
+        let session_no=$("#time_select option:selected").text().substr(1,1);
 
+        let orderData={
+            booking_date,
+            tour_date,
+            number_of_booking,
+            order_status:0,
+            member_no,
+            session_no,
+        }
+        orderData=JSON.stringify(orderData);
+        console.log(orderData);
+        $.get('php/resv/createOrder.php', { data: orderData },function(orderNo){
+            alert("預約成功，您的訂單編號為： "+orderNo);
+            location.reload();
+           
+        })
+    }
+
+
+    function checkCode(){
+        var codeNum =$('#code').val().toUpperCase();
+        if (codeNum == code) {
+            sendOrder();  //將預約訂單送回資料庫
+        } else {
+            alert("驗證碼輸入錯誤");
+            createcode();
+            $('#code').val('');
+        }
+    }
+
+
+
+
+    function submitCheck(e) {
+        e.preventDefault();
+        //驗證登入
         //驗證三input是否為空
         //驗證碼輸入正確
-        var codeNum = document.getElementById("code").value;
-        if (codeNum == code) {
-            alert("通過");
-        } else {
-            alert("錯誤");
+        if (sessionStorage.user_id) {  //有登入
+            if($('#time_select').val()==''){    
+                alert('請選擇日期與場次')
+            }else if($('#peoplenum_select').val()==''){
+                alert('請選擇人數')
+            }else if($('#code').val()==''){
+                alert('請輸入驗證碼')
+            }else{    //有輸入驗證碼
+                checkCode()  //呼叫函式驗證驗證碼是否正確
+            }
+
+        }else{
+             $('#login_gary').css('display','block');   //未登入，開啟登入燈箱
+            
         }
-        return false;
     }
+
+
+    
      $(document).ready(function(){
-         $('#submit').click(submit);
+         $('#submit').click(submitCheck);
+
      });
     </script>
 </body>

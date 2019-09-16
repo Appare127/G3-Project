@@ -77,18 +77,18 @@ function refresh_date(date) {
     
     
     for (var i = 1; i <= totalDay; i++) {
-            if ((i < my_day && my_year == my_date.getFullYear() && my_month == my_date.getMonth()) || my_year < my_date.getFullYear() || (my_year == my_date.getFullYear() && my_month < my_date.getMonth())) {
-                myclass = " class='lightgrey dispointer'"; //在當日期今天之前，灰色字
+            if ((i < my_day && my_year == my_date.getFullYear() && my_month == my_date.getMonth()) || my_year < my_date.getFullYear() || (my_year == my_date.getFullYear() && my_month < my_date.getMonth())|| (my_year == my_date.getFullYear() && my_month > my_date.getMonth()+1)) {
+                myclass = " class='lightgrey'"; //在當日期今天之前，灰色字
             }else if (i == my_day && my_year == my_date.getFullYear() && my_month == my_date.getMonth()) {
-                myclass = " class='fontColor colorbox pointer'"; //當天日期背景顯示
+                myclass = " class='fontColor colorbox'"; //當天日期背景顯示
                 
             } else if((i > my_day && my_year == my_date.getFullYear() && my_month == my_date.getMonth()) || my_year > my_date.getFullYear() || (my_year == my_date.getFullYear() && my_month > my_date.getMonth())){
-                myclass = " class='curday_after pointer'"; //在當日期今天之後，黑色字
+                myclass = " class='curday_after'"; //在當日期今天之後，黑色字
             }
             for(var j=0;j<dates.length;j++){
                 if(i == dates[j][2] && my_year==dates[j][0] && (my_month+1) == dates[j][1])
-                myclass = " class='lightgrey dispointer'";
-              
+                myclass = " class='lightgrey'";
+            
         }
         str += "<li" + myclass + ">" + i + "</li>"; //創建日期節點
     }
@@ -97,19 +97,12 @@ function refresh_date(date) {
     cyear.innerHTML = my_year; //設置年份顯示
 
     //  $('.curday_after').click(showInfo);
-     $('.curday_after').click(showNumRemain);
-
-     
-   
+    $('.curday_after').click(showNumRemain);  
 }
-//1
-
 
 function getDate(){
     fetch('php/resv/getDate.php').then(date => date.json()).then(date =>{refresh_date(date);} );
 };
-
- 
 
 // window.addEventListener('load', refresh_date) //執行函數
 window.addEventListener('load', getDate) //執行函數
