@@ -30,6 +30,12 @@ function modifyAnimation(){
         //動物跳起來
         document.querySelectorAll('.modify_pic img')[0].classList.add('home_jump');
         console.log(document.querySelectorAll('.modify_pic img')[0]); 
+    }else {
+        for(var j=0; j<3; j++){
+            document.querySelectorAll('.modify_bg_ab img')[j].classList.remove('treeGrow');
+        }
+        document.querySelectorAll('.modify_pic img')[0].classList.remove('home_jump');
+
     }
 }
 

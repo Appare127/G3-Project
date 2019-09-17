@@ -336,15 +336,15 @@ $dblue:#7DC7C5;
                 }
 
                 .home_jump {
-                    animation:home_jump 1.0s;
+                    animation:home_jump 1.0s 3;
                     position:absolute;
                 }
 
                 @keyframes home_jump {
                     0%{ transform:translateY(0%) }
-                    25%{ transform:translateY(5%) }
+                    25%{ transform:translateY(-15%) }
                     50%{ transform:translateY(0%) }
-                    75%{ transform:translateY(5%) }
+                    75%{ transform:translateY(-15%) }
                     100%{ transform:translateY(0%) }
                 }
                 // @include responds(medium){

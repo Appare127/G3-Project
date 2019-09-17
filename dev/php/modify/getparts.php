@@ -7,7 +7,7 @@
         $sql_body = "select * from body where body_status = 1";
         $sql_leg = "select * from leg where leg_status = 1";
         $sql_tail = "select * from tail where tail_status = 1";
-        // $sql_background = "select * from background where bg_status = 1";
+        $sql_background = "select * from background where bg_status = 1";
 
 
         $headdata = $pdo->query($sql_head);
@@ -30,10 +30,10 @@
             $array['tail'][] = $partRows;
         }
 
-        // $bgdata = $pdo->query($sql_background);
-        // while ($partRows = $bgdata -> fetch(PDO::FETCH_ASSOC)){
-        //     $array['bg'][] = $partRows;
-        // }
+        $bgdata = $pdo->query($sql_background);
+        while ($partRows = $bgdata -> fetch(PDO::FETCH_ASSOC)){
+            $array['bg'][] = $partRows;
+        }
 
         echo json_encode( $array );
 
