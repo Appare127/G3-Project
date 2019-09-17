@@ -90,8 +90,10 @@
             $id("user_id").value = "";
             $id("user_psw").value = "";
             //如果是在會員中心頁面登出，要跳回首頁
-            if (window.location.href == "http://localhost/G3/member.php") {
+            if (window.location.href == "http://localhost/G3/member.php" ) {
                 window.location.href = "http://localhost/G3/home.html"
+            }else if(window.location.href == "http://localhost/G3/checkOrder.html"){
+                window.location.href = "http://localhost/G3/cart.php"
             }
             //未登入，無法進入會員中心
             document.getElementsByClassName('member_icon')[0].onclick = function () {
@@ -173,7 +175,7 @@
         //===設定spanLogin.onclick 事件處理程序是 showLoginForm
         $id("login_text").onclick = showLoginForm;
         //===設定btnLogin.onclick 事件處理程序是 sendForm
-        $id("login_btn").onclick = sendForm;
+        $id("login_btn").addEventListener("click",sendForm);
         // //===設定btnLoginCancel.onclick 事件處理程序是 cancelLogin
         $id("login_del").onclick = cancelLogin;
         //===設定registered.onclick 事件處理程序是 registered

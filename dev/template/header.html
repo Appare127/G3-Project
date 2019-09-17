@@ -93,3 +93,15 @@
 </header>
 
 @@include('login.html')
+
+
+
+<script>
+window.addEventListener("load",()=>{
+    if(sessionStorage['shopList'] && sessionStorage['shopList'].length>1){  //購物車裡有東西
+        document.getElementById("cart_num").style.display='block';
+        document.getElementById("cart_num").innerText=sessionStorage['shopList'].split(',').length-1;
+    }
+    
+})
+</script>

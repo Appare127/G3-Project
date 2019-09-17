@@ -50,13 +50,12 @@ $lyellow:#fdf6e7;
           
         }
         div{
-           padding: 10px; 
+        //    padding: 10px; 
            width: 20%;
         }
     }
 //每一列資料
     .list_row{
-        margin-bottom: 20px;
         text-align: left;
         border-bottom: 1px solid #000;
         @include responds(medium){
@@ -68,13 +67,14 @@ $lyellow:#fdf6e7;
     .prod_pic{
         @include responds(medium){
             float: none;
-            width: 20%;
+            width: 15%;
+            padding: 0px;
         }
     }
 //商品圖片的外框
     .pic_item{
         @include responds(medium){
-            width: 35%;
+            width: 30%;
         }
         
         margin: auto;
@@ -94,7 +94,6 @@ $lyellow:#fdf6e7;
             width: 80%;
         }
         div{
-            padding: 10px;
             @include responds(medium){
             width: 25%;
             }
@@ -159,18 +158,14 @@ $lyellow:#fdf6e7;
         .wrap{
             @include responds(medium){
                 display: flex;
-                justify-content: space-around;
+                justify-content: center;
             }
             padding: 10px;
-
-            input{
-                margin: 5px;
-
-            }
            
         }
         .write_info_col{
-            text-align: center;
+            // text-align: center;
+            width: 40%;
         }
 
     
@@ -178,11 +173,11 @@ $lyellow:#fdf6e7;
 
 //信用卡付費
     .creditCard{
-        .wrap{
-            padding: 10px;
-        }
+    //     .wrap{
+    //         padding: 10px;
+    //     }
         input{
-            width: 50px;
+            width: 34px;
         }
     }
    
