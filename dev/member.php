@@ -618,16 +618,17 @@ if ($errMsg !=""){
               <button type="button" class="btn_close">X</button>
 
               <img class="qrcode_pic_js" src=''>
-              
+         
               <!--  -->
-              <!-- <script>
-              document.getElementsByClassName('qrcode_pic_js')[<?=$i?>].src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=QRcode_getStoreInfo-test.php?booking_no=<?=$pdoRevs["booking_no"]?>&choe=UTF-8';
-              </script> -->
+              <script>
+              document.getElementsByClassName('qrcode_pic_js')[<?=$i?>].src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=qrcode_success.php?booking_no=<?=$pdoRevs["booking_no"]?>&choe=UTF-8';
+              <a href="qrcode_success.php?booking_no=<?=$pdoRevs["booking_no"]?>">網址</a>
+              </script>
 
-                <script>
+                <!-- <script>
               document.getElementsByClassName('qrcode_pic_js')[<?=$i?>].src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=http://140.115.236.71/demo-projects/DD102/DD102G3/QRcode_getStoreInfo-test-1.php?booking_no=<?=$pdoRevs["booking_no"]?>&choe=UTF-8';
               </script>
-            
+             -->
             <!-- https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=http://140.115.236.71/demo-projects/DD102/DD102G3/QRcode_getStoreInfo-test.php? -->
               
             </div>
