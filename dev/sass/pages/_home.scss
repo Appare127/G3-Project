@@ -2,7 +2,7 @@ $lblue:#d8ecea;
 $dblue:#7DC7C5;
 
 *{
-    // outline: 1px solid #f00;
+    outline: 1px solid #f00;
 } 
 
 //頁面共用屬性
@@ -354,27 +354,38 @@ $dblue:#7DC7C5;
                 // }
                 width: 100%;    
                text-align: center;
-               background-image: url(../img/home/home_modify_b.png);
-               background-repeat: no-repeat;
-               background-position:bottom;
-               background-size: 80%;
+            //    background-image: url(../img/home/home_modify_b.png);
+            //    background-repeat: no-repeat;
+            //    background-position:bottom;
+            //    background-size: 80%;
                position: relative;
 
                     @include responds(medium){
                     width: 50%;
                     }
-    
+                .head_box{
+                    width: 80%;
+                    height:0;
+                    padding-bottom: 80%;
+                    // background-color: #ccc;
+                    position: relative;
+                    margin: auto;
+                    background-image: url(../img/home/home_modify_b.png);
+                    background-repeat: no-repeat;
+                    background-position:bottom;
+                    background-size: 100%;
+
+                }
                 img{
                     width: 100%;
-
-                    @include responds(medium){
-                        position: absolute;
-                        width: 80%;
-                        left: 0;
-                        right: 0;
-                        bottom: 15%;
-                        margin: auto;
-                        }
+                    // height: 100%;
+                 
+                     position: absolute;
+                     top:0;
+                     left:0;
+                     right: 0;
+                     bottom: 0;
+                     margin: auto;                      
                 }
             }
     

@@ -22,7 +22,11 @@ addEventListener('scroll', modifyAnimation);
 
 function modifyAnimation(){
     if(scrollY>=1300){
+<<<<<<< HEAD
         //樹長出來
+=======
+        // console.log(document.querySelectorAll('.modify_bg_ab img'));
+>>>>>>> nb-lin
         setTimeout(function(){document.querySelectorAll('.modify_bg_ab img')[3].classList.add('treeGrow');},0);
         setTimeout(function(){document.querySelectorAll('.modify_bg_ab img')[2].classList.add('treeGrow');},300);
         setTimeout(function(){document.querySelectorAll('.modify_bg_ab img')[1].classList.add('treeGrow');},600);
@@ -45,7 +49,7 @@ function getRankData(){
         if( xhr.status == 200 ){ 
             userDataDesc = JSON.parse(xhr.responseText);
             // alert(userDataDesc[0].my_animal_img);
-            console.log(userDataDesc);
+            // console.log(userDataDesc);
             //塞入前三名照片跟資料
             for(let j=0; j<3; j++){
                 document.querySelectorAll('.top_animal_img')[j].src = userDataDesc[j].my_animal_img;
@@ -510,3 +514,76 @@ function water() {
         
       },.3)
 }
+
+// 透過Ajax從PHP抓到資料庫的部件資料
+function getpartlist_home(){
+    
+    //產生XMLHttpRequest物件
+    var xhr = new XMLHttpRequest(); //readyState : 0
+
+    //註冊callback function
+    xhr.onload = function(){
+        // console.log( xhr.readyState);
+        if (xhr.status == 200){
+            // console.log(xhr.responseText);
+            partsobj = JSON.parse(xhr.responseText);
+            // console.log(partsobj);
+            // 抓到jason物件資料後，直接丟進建立html的函式裡
+            buildlist(partsobj);
+            
+        }else{
+            alert(xhr.status);
+        };
+    };
+
+    //設定好所要連結的程式
+    var url = "php/modify/getparts.php";
+    xhr.open("Get", url, true);
+
+    //送出資料
+    xhr.send( null );
+}
+
+function buildlist (jsonobj){
+
+    let head_arr = jsonobj.head;
+    let head_div = document.getElementsByClassName("modify_opt")[0];
+    // console.log(head_arr);
+    
+
+//建立頭部HTML架構 
+for (let i=0; i<head_arr.length; i++){
+
+    let div = document.createElement('div');
+    div.classList = 'opt_item';
+    let img = document.createElement('img');
+    img.src = head_arr[i].head_img;
+    console.log(img.src);
+    div.appendChild(img);
+    head_div.appendChild(div);
+    // let li = document.createElement('li');
+    // let img = document.createElement('img');
+    // let input = document.createElement('input');
+    // let p = document.createElement('p');
+
+
+
+    // img.src = head_arr[i].head_img;
+    // img.classList = 'picon';
+    // img.alt = '資料庫圖片遺失';
+    // input.dataset.pointa = head_arr[i].head_environment1;
+    // input.dataset.pointb = head_arr[i].head_environment2;
+    // input.dataset.pointc = head_arr[i].head_environment3;
+    // input.style.display = 'none';
+    // p.innerHTML = head_arr[i].head_ch_name;
+
+    // li.appendChild(img);
+    // li.appendChild(input);
+    // li.appendChild(p);
+    // head_ul.appendChild(li);
+}
+
+
+
+}
+window.addEventListener("load",getpartlist_home,false);
