@@ -36,7 +36,7 @@
                 $upload_dir = "../../img/customize//";
 
                 $from = $_FILES['up_bg_file']['tmp_name'];
-                $to = $upload_dir . "user" . $user_no . "_aml" ."_bg" . ".png";;
+                $to = $upload_dir . "user" . $user_no . "_aml" ."_bg" . ".png";
                 copy($from, $to);
                 // echo "上傳成功<br>";
                 break;	

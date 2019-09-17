@@ -1,0 +1,21 @@
+<?php
+try{
+  require_once("connectg3.php");
+  $sql = "update product_order SET shipping_status=:shipping_status, payment_status=:payment_status WHERE order_no=:order_no";
+  $product_order = $pdo->prepare($sql);
+  $product_order->bindValue(":shipping_status", $_GET["shipping_status"]);
+  $product_order->bindValue(":payment_status", $_GET["payment_status"]);
+  $product_order->bindValue(":order_no", $_GET["order_no"]);
+  $product_order->execute(); 
+
+  if( $product_order->rowCount() == 0 ){ //找不到
+    //傳回空的JSON字串
+    echo "{}";
+  }else{ //找得到
+    echo "修改成功";
+    header('Location:productOrder.php');
+  }	
+}catch(PDOException $e){
+  echo $e->getMessage();
+}
+?>
