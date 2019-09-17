@@ -33,8 +33,13 @@
     <div class="container">
         <div class="role_title"><h2>參加角色</h2></div>
         <div class="role_info">
-            <div class="cloud1"><img src="img/game/role_cloud.png" alt=""></div>
-            <div class="cloud2"><img src="img/game/role_cloud2.png" alt=""></div>
+            <div class="cloud1">
+                <img src="img/game/role_cloud.png" alt="">
+            </div>
+            <div class="cloud2">
+                <div class="food_menu"></div>
+                <img src="img/game/role_cloud2.png" alt="">
+            </div>
             <div class="role_pic">
                 <div class="info_pic">
                     <img src="img/game/info_pic.png" alt="">
@@ -221,6 +226,55 @@ function updatejump(){
 }
 
 
+function rankFadeIn(){
+        // console.log('進來排行榜區');
+    if(scrollY>1491){
+
+        setTimeout(function(){$que('.ranking_table tr')[0].classList.add('trFadeIn');},900);
+        setTimeout(function(){$que('.ranking_table tr')[1].classList.add('trFadeIn');},1200);
+        setTimeout(function(){$que('.ranking_table tr')[2].classList.add('trFadeIn');},1500);
+        setTimeout(function(){$que('.ranking_table tr')[3].classList.add('trFadeIn');},1800);
+        setTimeout(function(){$que('.ranking_table tr')[4].classList.add('trFadeIn');},2100);
+        setTimeout(function(){$que('.ranking_table tr')[5].classList.add('trFadeIn');},2400);
+        setTimeout(function(){$que('.ranking_table tr')[6].classList.add('trFadeIn');},2700);
+        setTimeout(function(){$que('.ranking_table tr')[7].classList.add('trFadeIn');},3000);
+        for(var j=1; j<$que('.ranking_table tr').length; j++){
+            if($que('.ranking_table tr')[j].children[2].innerText == sessionStorage['user_name']){
+                highlight($que('.ranking_table tr')[j].children[2]);
+            }
+        }
+        
+        if($que('.top1_title .top_player')[0].innerText == sessionStorage['user_name']){
+                highlight($que('.top1_title .top_player')[0]);
+        }
+        if($que('.top2_title .top_player')[0].innerText == sessionStorage['user_name']){
+                highlight($que('.top2_title .top_player')[0]);
+        }
+        if($que('.top3_title .top_player')[0].innerText == sessionStorage['user_name']){
+                highlight($que('.top3_title .top_player')[0]);
+        }
+      
+    }
+    function highlight(element){
+        
+        // element.style.color = '#4eb1d1';
+        element.style.fontWeight = '700';
+        // element.parentNode.children[1].style.color = '#4eb1d1';
+        element.parentNode.children[0].style.fontWeight = '700';
+
+        element.parentNode.children[1].style.fontWeight = '700';
+        // element.parentNode.children[2].style.color = '#4eb1d1';
+        element.parentNode.children[2].style.fontWeight = '700';
+        // element.parentNode.children[3].style.color = '#4eb1d1';
+        element.parentNode.children[3].style.fontWeight = '700';
+
+    }
+
+    
+
+}
+
+
 
 function $id(id){
     return document.getElementById(id);
@@ -234,22 +288,25 @@ function $que(css_selector){
 
 
 function animalWalking(){
-   
-    $que(".animal_words")[0].style.display="block";
-    $que(".info_pic img")[0].classList.remove('animalBreathing');
-    $que(".info_pic img")[0].classList.add('animalHello');
-    $que(".animal_words")[0].classList.add('animalSayWords');
-    $que(".animal_words p")[0].innerText = `${sessionStorage['user_name']} 你好啊~~`;
-    setTimeout(function(){
-        $que(".animal_words p")[0].innerText = `我們當好朋友吧~~`;
-    },2500);
-    setTimeout(function(){
-        $que(".info_pic img")[0].classList.remove('animalHello');
-        $que(".animal_words")[0].classList.remove('animalSayWords');
-        $que(".info_pic img")[0].classList.add('animalBreathing');
+    if(sessionStorage['user_name']&&sessionStorage['user_no']){
+        $que(".animal_words")[0].style.display="block";
+        $que(".info_pic img")[0].classList.remove('animalBreathing');
+        $que(".info_pic img")[0].classList.add('animalHello');
+        $que(".animal_words")[0].classList.add('animalSayWords');
+        $que(".animal_words p")[0].innerText = `${sessionStorage['user_name']} 你好啊~~`;
+        setTimeout(function(){
+            $que(".animal_words p")[0].innerText = `我們當好朋友吧~~`;
+        },2500);
+        setTimeout(function(){
+            $que(".info_pic img")[0].classList.remove('animalHello');
+            $que(".animal_words")[0].classList.remove('animalSayWords');
+            $que(".info_pic img")[0].classList.add('animalBreathing');
+            $que(".animal_words")[0].style.display="none";
+        },5000);
+    }else {
         $que(".animal_words")[0].style.display="none";
-    },5000);
 
+    }
     
 
     // console.log($que(".info_pic img")[0].classList);
@@ -565,6 +622,7 @@ function chosenArea(area){
             }
         }
     });
+    window.addEventListener('scroll',rankFadeIn);
 
     function doFirst(){
         updatechart();
@@ -573,6 +631,8 @@ function chosenArea(area){
         getRankingData();
         getCusAnimal();
         animalWalking();
+
+       
         //幻燈片
         $cls('arrowLeft')[0].addEventListener('click', sliderLeft);
         $cls('arrowRight')[0].addEventListener('click', sliderRight);

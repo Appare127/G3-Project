@@ -31,6 +31,8 @@ let scene = { //場景資訊
         area:'img/game/遊戲背景-沙漠.png',
         monster:'img/game/蠍子.png',
         monsterSize:50,
+        mWidth:50,
+        mHeight:50,
         fallen:'img/game/meteor1.png',
         reward:'img/game/meat.png',
     },
@@ -38,6 +40,8 @@ let scene = { //場景資訊
         area:'img/game/scene_mountain.png',
         monster:'img/game/lion.png',
         monsterSize:80,
+        mWidth:100,
+        mHeight:74,
         fallen:'img/game/meteor1.png',
         reward:'img/game/meat.png',
     },
@@ -45,6 +49,8 @@ let scene = { //場景資訊
         area:'img/game/scene_forest.png',
         monster:'img/game/lion.png',
         monsterSize:80,
+        mWidth:100,
+        mHeight:74,
         fallen:'img/game/meteor1.png',
         reward:'img/game/meat.png',
     }
@@ -153,7 +159,7 @@ function draw() {
     //秀出生命值
 
     for(var i=0; i<life; i++){
-        image(heartImg, 50 + 50*i, 48, 32, 40);
+        image(heartImg, 50 + 50*i, 48, 40, 36.8);
     }
     
     //秀出環境適應力在右上角
@@ -237,7 +243,7 @@ function draw() {
     // 碰到障礙物之後的行為
     for (let t of trains) {
         t.move();
-        t.show();
+        t.show(scene[sessionStorage['sceneChoice']].mWidth,scene[sessionStorage['sceneChoice']].mHeight);
         if (unicorn.hits(t)) {
             // console.log(life)
 

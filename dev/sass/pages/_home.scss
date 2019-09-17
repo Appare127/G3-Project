@@ -3,7 +3,7 @@ $dblue:#7DC7C5;
 
 *{
     // outline: 1px solid #f00;
-}
+} 
 
 //頁面共用屬性
 .home_page{
@@ -209,6 +209,18 @@ $dblue:#7DC7C5;
         
         .modify_bg_ab{
             display: none;
+            img{
+                transform:scale(0.1);
+            }
+            .treeGrow{
+                animation:treeGrow 1s forwards;
+            }
+            @keyframes treeGrow {
+                0% { transform:scale(0.1) translateY(3%)}
+                45% {transform:translateY(3%)}
+                100% { transform:scale(1)}
+             
+            }
         }
 
         @include responds(medium){

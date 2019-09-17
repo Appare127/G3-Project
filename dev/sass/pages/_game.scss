@@ -436,6 +436,7 @@
                 z-index:5;
             }
             .playing_window{
+                cursor:pointer;
                 border-radius:5%;
                 position:absolute;
                 background-color: #fff;
@@ -746,6 +747,30 @@
                             position:absolute;
                             bottom:-15%;
                             right:-10%;
+                            img {
+                                transition:0.5s all;
+                            }
+                            .food_menu {
+                                width:0%;
+                                background-color: #d8ecea;
+                                transition:0.5s all;
+                                position:absolute;
+
+                            }
+
+                            &:hover .food_menu{
+                                right:30%;
+                                bottom:2%;
+                                width:650px;
+                                height: 45px;
+                                z-index:1;
+
+                            }
+                            &:hover img {
+                                transform:translateX(-600px);
+                                z-index:99;
+
+                            }
                         }
 
                         .role_pic{
@@ -828,7 +853,7 @@
                                     opacity:0.9;
                                     position:absolute;
                                     z-index:9;
-                                    top:-45%;
+                                    top:-70%;
                                     left:10%;
                                     p {
                                         display:inline-block;
@@ -1198,7 +1223,7 @@
             }
 
             .playing_window{
-    
+                cursor:pointer;    
                 // border:5px #99bf48 solid;
                 border-radius:5%;
                 position:absolute;
@@ -1359,9 +1384,21 @@
                         font-size: 16px;
                         color:#724848;
                         line-height: 40px;
+
                         td {
+                            width:25%;
                             border-bottom:1px solid #aaa;
                         }
+
+                        .trFadeIn{
+                            animation:fadeIn 0.3s forwards;
+                        }
+                        @keyframes fadeIn {
+                            0% {opacity:0; font-size:32px;}
+                            100% {opacity:1.0; font-size:16px;}
+                        }
+         
+
                     }
                     img {
                         position:absolute;
