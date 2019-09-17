@@ -2,7 +2,13 @@
 $errMsg = "";
 session_start();
 try {
-	require_once('php/connectg3.php');
+  // require_once('php/connectg3.php');
+  
+  $dsn = "mysql:host=localhost;port=3306;dbname=dd102g3;charset=utf8";
+  $user = "root";
+  $password = "123456";
+  $options=array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION, PDO::ATTR_CASE=>PDO::CASE_NATURAL);
+  $pdo = new PDO($dsn, $user, $password, $options);
     
   // $orderItems=$pdo->prepare('SELECT * FROM `product_order` p  join order_item o on p.order_no = o.order_no join product pro on pro.product_no = o.product_no where user_no = :user_no');
   // $orderItems->bindValue(':user_no',1);//$_POST['user_no']
@@ -10,12 +16,12 @@ try {
 
   //找會員
   $userItems=$pdo->prepare('SELECT * FROM `user` where user_no = :user_no');
-  $userItems->bindValue(':user_no',$_SESSION['user_no']);//
+  $userItems->bindValue(':user_no',1);//$_SESSION['user_no']
   $userItems->execute();
 
   //找訂單
   $orders=$pdo->prepare('SELECT * FROM `product_order` where user_no = :user_no');
-  $orders->bindValue(':user_no',$_SESSION['user_no']);
+  $orders->bindValue(':user_no',1);
   $orders->execute();
 
  //找訂單明細
@@ -24,7 +30,7 @@ try {
 
 //找預約
   $revs=$pdo->prepare('SELECT * FROM resv_order r join resv_session_capacity rc on r.session_no = rc.session_no where r.member_id = :member_id');
-  $revs->bindValue(':member_id',$_SESSION['user_no']);
+  $revs->bindValue(':member_id',1);//$_SESSION['user_no']
   $revs->execute();
 
 
@@ -32,7 +38,7 @@ try {
   // $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = :user_no');
 
   $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = :user_no and f.favorite_status = 1');
-  $loves->bindValue(':user_no',$_SESSION['user_no']);
+  $loves->bindValue(':user_no',1);//$_SESSION['user_no']
   $loves->execute();
 
 ?>
@@ -614,8 +620,12 @@ if ($errMsg !=""){
               <img class="qrcode_pic_js" src=''>
               
               <!--  -->
-              <script>
+              <!-- <script>
               document.getElementsByClassName('qrcode_pic_js')[<?=$i?>].src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=QRcode_getStoreInfo-test.php?booking_no=<?=$pdoRevs["booking_no"]?>&choe=UTF-8';
+              </script> -->
+
+                <script>
+              document.getElementsByClassName('qrcode_pic_js')[<?=$i?>].src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=http://140.115.236.71/demo-projects/DD102/DD102G3/QRcode_getStoreInfo-test-1.php?booking_no=<?=$pdoRevs["booking_no"]?>&choe=UTF-8';
               </script>
             
             <!-- https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=http://140.115.236.71/demo-projects/DD102/DD102G3/QRcode_getStoreInfo-test.php? -->
