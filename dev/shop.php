@@ -189,7 +189,7 @@ try {
         document.querySelectorAll(".choose_pic .shop_animal")[0].src=sessionStorage.my_animal_img;
     }else{   //如果沒登入，給預設圖片
     document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src='img/shop/animal_bg1.png';
-    document.querySelectorAll(".choose_pic .shop_animal")[0].src='img/shop/animal1.png';
+    document.querySelectorAll(".choose_pic .shop_animal")[0].src='img/shop/animal2.png';
     }
 };
 
@@ -236,8 +236,8 @@ window.addEventListener("load",function(){
             document.querySelectorAll(".shop_animal_bg")[i].style.visibility="visible";
         }
         for(i=0;i<document.querySelectorAll(".prod_img .shop_animal").length;i++){
-            document.querySelectorAll(".prod_img .shop_animal")[i].style.width='50%';
-            document.querySelectorAll(".prod_img .shop_animal")[i].style.transform='translate(-50%,0)';
+            document.querySelectorAll(".prod_img .shop_animal")[i].style.width='100%';
+            document.querySelectorAll(".prod_img .shop_animal")[i].style.transform='translate(-50%,-34%)';
         }
         for(i=0;i<document.querySelectorAll(".bgExist").length;i++){
             document.querySelectorAll(".bgExist")[i].value='1';
