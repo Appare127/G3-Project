@@ -2,7 +2,7 @@
 // 手機~手機~手機~手機~手機~手機~手機~手機~手機~
 
 *{
-    // outline: 1px solid red;
+    outline: 1px solid red;
 }
 
 
@@ -75,15 +75,6 @@
         .text{
             padding: 10px;
             text-align: center;
-            p{
-                display: inline-block;
-                vertical-align: middle;
-            }
-            input{
-                display: inline-block;
-                vertical-align: middle;
-                border-radius: 5px;
-            }
         }
 
 
@@ -215,26 +206,68 @@
     .showbg_wrap{
         width: 100%;
         padding-bottom: 20px;
+
+        .text{
+            text-align: center;
+            padding-bottom: 10px;
+            p{
+                text-align: center;
+                padding-bottom: 10px;
+            }
+            input{
+                display: inline-block;
+                vertical-align: middle;
+                border-radius: 5px;
+            }
+            span{
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+
         .bgimg_box{
-            // width: 180px;
-            // height: 240px;
             width: 50%;
             height: 0;
             padding-bottom: 66.6%;
             border: 3px dotted #ccc;
-            background-color: #aaf;
+            // background-color: #aaf;
             margin: auto;
             position: relative;
-            .bgimg{
+            #bg_canvas{
+                position: absolute;
+                top: 0;
+                left: 0;
+                cursor: crosshair;
+            }
+            .geth{
                 position: absolute;
                 width: 100%;
                 height: 100%;
+                // display: none;
             }
-            .cloneimg{
-                width: 100%;
+            .temp_aml_pic{
                 position: absolute;
+                width: 100%;
                 bottom: 0;
                 left: 0;
+            }
+            .temp_aml_pic.hide{
+                display: none;
+            }
+
+        }
+        .btn_box{
+            display: flex;
+            justify-content: center;
+
+            @include btn_cloudp(100px);
+            .btn_cloudp{
+                margin: 10px 20px;
+            }
+
+            @include btn_cloudb(100px);
+            .btn_cloudb{
+                margin: 10px 20px;
             }
         }
     }
@@ -243,8 +276,9 @@
         width: 100%;
         font-size: 0;
         // padding-bottom: 90%;
+
         .button_ul{
-            width: calc(100% - 20px);
+            width: 100%;
             margin: auto;
             text-align: center;
             position: relative;
@@ -281,7 +315,6 @@
             .part_wrap{
                 position: absolute;
                 width: 95%;
-
                 display: flex;
                 flex-wrap: wrap;
                 top: 45px;
@@ -296,19 +329,214 @@
                 border-bottom: 5px solid $col_modify_box;
                 border-radius: 25px;
                 box-shadow: 2px 2px 0px 3px $col_modify_boxshadow;
-            
+                
+
+
                 li{
                     width: 50%;
                     box-sizing: border-box;
                     padding: 10px;
-                    img{
-                        width: 50%;
-                        cursor: pointer;
-                        margin-top: 10px;
-                        &:hover {
-                            filter: drop-shadow(0px 0px 10px $col_btn_pink);
+                    .img_box{
+                        width: 45%;
+                        padding-bottom: 60%;
+                        position: relative;
+                        margin: auto;
+                        img{
+                            width: 100%;
+                            height: 100%;
+                            position: absolute;
+                            cursor: pointer;
+                            top: 0;
+                            left: 0;
+                            &:hover {
+                                filter: drop-shadow(0px 0px 10px $col_btn_pink);
+                            }
                         }
                     }
+                    p{
+                        margin-top: 5px;
+                    }
+                    @include btn_cloudy(100px, $col_btn_orange);
+                
+                    img[src = "img/modify/bg_blank.png"]{
+                        outline: 1px solid #ccc;
+                    }
+                }
+
+                .upfile_box{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    .upfile{
+                        vertical-align: middle;
+                    }
+                }
+
+                .aml_off{
+                    width: 50%;
+                    .title{
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
+                    #cir_check:checked ~ .btn_bar .btn_cir{
+                        left: 33px;
+                    }
+                    #cir_check:checked ~ .btn_bar{
+                        background-color: yellowgreen;
+                    }
+                    #cir_check:checked ~ .btn_bar .text_OFF{
+                        opacity: 0;
+                    }
+                    #cir_check:checked ~ .btn_bar .text_ON{
+                        opacity: 1;
+                    }
+
+                    .btn_bar{
+                        display: inline-block;
+                        vertical-align: middle;
+                        margin: auto;
+                        width: 60px;
+                        height: 30px;
+                        background-color: $col_modify_box;
+                        border-radius: 15px;
+                        position: relative;
+                        // border: 3px solid $col_modify_boxshadow;
+                        box-shadow: 0px 0px 0px 3px $col_modify_boxshadow inset;
+                        transition: 0.5s;
+                        .btn_cir{
+                            width: 24px;
+                            height: 24px;
+                            background-color: #fa0;
+                            border-radius: 50%;
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 3px;
+                            margin: auto;
+                            box-shadow: 0px 0px 10px #666 inset;
+                            transition: 0.5s;
+                        }
+                        .draw_OFF{
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 6px;
+                            margin: auto;
+                            font-size: 12px;
+                            line-height: 30px;
+                            opacity: 1;
+                            transition: 0.5s;
+                        }
+                        .draw_ON{
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            right: 8px;
+                            margin: auto;
+                            font-size: 12px;
+                            line-height: 30px;
+                            opacity: 0;
+                            transition: 0.5s;
+                        }
+                    }
+                }
+
+
+                .pen_box{
+                    width: 100%;
+                    text-align: center;
+                    font-size: 0;
+                    p{
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                        text-align: left;
+                        padding-left: 5%;
+                    }
+                    .stitle{
+                        padding-top: 0;
+                        padding-bottom: 0;
+                        text-align: center;
+                        padding-left: 0;
+                    }
+                    .createColorBar{
+                        display: inline-block;
+                        vertical-align: middle;
+                        margin: 0px 10px;
+                        background-image: linear-gradient(to right, #F00, #FF0, #0F0, #0FF, #00F, #F0F, #F00);
+                        height: 20px;
+                        width: 70%;
+                        -webkit-appearance: none;
+                        border-radius: 10px;
+                        border:1px solid $col_black;
+                        outline : none;
+                        cursor: pointer;
+                        &::-webkit-slider-thumb{
+                            -webkit-appearance: none;
+                            width:20px;
+                            height:20px;
+                            background:#fff;
+                            box-shadow: 0px 0px 5px #555 inset;
+                            border-radius: 50%;
+                        }
+                    }
+                    #drawsize{
+                        display: inline-block;
+                        vertical-align: middle;
+                        margin: auto;
+                        width: 50%;
+                        height: 20px;
+                        background-image: linear-gradient(to right,#ccc 8%, $col_modify_box 8.1%, $col_modify_box 10%);
+                        background-size:10% 20px;
+                        -webkit-appearance: none;
+                        border-radius: 10px;
+                        border:1px solid $col_black;
+                        outline : none;
+                        cursor: pointer;
+                        &::-webkit-slider-thumb{
+                            -webkit-appearance: none;
+                            width:20px;
+                            height:20px;
+                            background:$col_white;
+                            box-shadow: 0px 0px 5px #555 inset;
+                            border-radius: 50%;
+                        }
+                    }
+                    .sample_box{
+                        height: 25px;
+                        .sample_point{
+                            width: 10px;
+                            height: 10px;
+                            margin: auto;
+                            background-color: #000;
+                            border-radius: 50%;
+                            border: 1px solid #ccc;
+                        }
+                    }
+
+                    span{
+                        display: inline-block;
+                        vertical-align: middle;
+                        margin: 0px 5px;
+                        font-size: $base_fz;
+                    }
+                    .pen_black{
+                        width: 20px;
+                        height: 20px;
+                        background-color: #000;
+                        display: inline-block;
+                        vertical-align: middle;
+                        cursor: pointer;
+                    }
+                    .pen_white{
+                        width: 20px;
+                        height: 20px;
+                        background-color: #fff;
+                        border: 1px solid #ccc;
+                        display: inline-block;
+                        vertical-align: middle;
+                        cursor: pointer;
+                    }
+
                 }
             
             }
@@ -455,7 +683,7 @@
     .part_box{
         width: 40%;
         // padding: 20px 10px;
-        .pic_box{
+        .aml_canvas{
             width: 90%;
             padding-bottom: 90%;
         }
@@ -514,10 +742,11 @@
     .modify_inputbg{
         padding-top: 50px;
         .container{
-            padding-top: 0;
-            padding-bottom: 0;
-            padding-left: 5%;
-            padding-right: 5%;
+            // padding-top: 0;
+            // padding-bottom: 0;
+            // padding-left: 5%;
+            // padding-right: 5%;
+            padding: 0;
             display: flex;
             box-sizing: border-box;
         }
@@ -526,16 +755,20 @@
             width: 50%;
             padding-top: 30px;
             .bgimg_box{
-                margin-right: 10%;
+                // margin-right: 10%;
 
             }
         }
 
         .selectbg_wrap{
             width: 50%;
-            padding: 0px 20px 0px 20px;
+            padding-top: 70px;
+            // padding: 0px 20px 0px 20px;
             .button_ul{
                 padding-bottom: 70%;
+                .part_wrap{
+                    width: 70%;
+                }
             }
         }
 
