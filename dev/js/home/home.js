@@ -22,11 +22,7 @@ addEventListener('scroll', modifyAnimation);
 
 function modifyAnimation(){
     if(scrollY>=1300){
-<<<<<<< HEAD
         //樹長出來
-=======
-        // console.log(document.querySelectorAll('.modify_bg_ab img'));
->>>>>>> nb-lin
         setTimeout(function(){document.querySelectorAll('.modify_bg_ab img')[3].classList.add('treeGrow');},0);
         setTimeout(function(){document.querySelectorAll('.modify_bg_ab img')[2].classList.add('treeGrow');},300);
         setTimeout(function(){document.querySelectorAll('.modify_bg_ab img')[1].classList.add('treeGrow');},600);
