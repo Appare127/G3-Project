@@ -48,7 +48,7 @@ session_start();
                 </div>
 
                 <?php 
-                if(isset($_SESSION['cart'])){
+                if(isset($_SESSION['cart']) && count($_SESSION['cart'])>0 ){
                 foreach ($_SESSION['cart'] as $i => $n) {
                 
                 ?>
@@ -81,27 +81,31 @@ session_start();
                     </div>
                     <div class="clearfix"></div>
                 </div>
-            </div>
-            <div class="total" >
-                <p>商品金額：$<span>100</span></p>
-                <p>+運費：$0</p>
-                <p>總金額為：$<span class="total_money"></span></p>
+           
+            <?php
+                }?>
+                <div class="total" >
+                    <p>商品金額：$<span>100</span></p>
+                    <p>+運費：$0</p>
+                    <p>總金額為：$<span class="total_money"></span></p>
+                </div>
             </div>
             <div class="cart_btn">
-                <a class="btn_cloudy" href="shop.html">繼續購物@@include('template/btn_sp.html')</a>
+                <a class="btn_cloudy" href="shop.php">繼續購物@@include('template/btn_sp.html')</a>
                 <a class="btn_cloudp" href="checkOrder.html">進行結帳@@include('template/btn_sp.html')</a>
             </div>
             <?php
-                }}
+            }
                 else{
             ?>
                 <div class="list_row" >
                     <p class='empty'>您尚未選擇商品</p>
                 </div>
+                </div>
                 <div class="cart_btn">
-                <a class="btn_cloudy" href="shop.html">去購物@@include('template/btn_sp.html')</a>
-                <!-- <a class="btn_cloudp" href="checkOrder.html">進行結帳@@include('template/btn_sp.html')</a> -->
-            </div>
+                    <a class="btn_cloudy" href="shop.php">去購物@@include('template/btn_sp.html')</a>
+                    <!-- <a class="btn_cloudp" href="checkOrder.html">進行結帳@@include('template/btn_sp.html')</a> -->
+                </div>
             <?php
                     }
             ?>
@@ -116,11 +120,11 @@ session_start();
     <script>
 
         function  total(){    //總金額
-            if( sessionStorage['shopList'] !=''){
+            if( sessionStorage['shopList'] && sessionStorage['shopList'] !=''){
                 var cart_total=0;
                 var subTotals=document.getElementsByClassName("subTotal_num");
                 for (i = 0; i < subTotals.length; i++) {
-                    cart_total += Number(subTotals[0].innerText.replace("$",""));
+                    cart_total += Number(subTotals[i].innerText.replace("$",""));
                 }
                 document.getElementsByClassName("total")[0].children[0].innerText=cart_total;
                 document.getElementsByClassName("total_money")[0].innerText = cart_total+60;
@@ -134,7 +138,7 @@ session_start();
                 input.parentNode.parentNode.nextElementSibling.innerHTML='';  //小計清空
 
                 //改session
-                $.get('php/cart/change_num.php',{num:id+","+num});
+                $.get('php/cart/cart_session.php',{num:id+","+num});
     
                 //改sessionStorage
                 let str=JSON.parse(sessionStorage[id]);
@@ -156,10 +160,37 @@ session_start();
             alert("您確定要刪除？");
             
             //清空session
-            let id=input.parentNode.parentNode.parentNode.parentNode.id;
-            input.parentNode.parentNode.nextElementSibling.innerHTML='';
-                $.get('php/cart/change_num.php',{delete:id+","+num});
+            let id=this.parentNode.parentNode.id;
+            console.log(id);
+            $.get('php/cart/cart_session.php',{delete:id});
 
+            //清空sessionStorage
+               //shoplist  +   自己的那一列
+            sessionStorage['shopList']=sessionStorage['shopList'].replace( id+"," , "" );
+            sessionStorage.removeItem(id);
+
+            //刪掉自己那塊html
+            this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+
+            //改total
+            total();
+           
+        
+            //刪到沒東西時，顯示 “您尚未購買”
+            if(sessionStorage['shopList'].length<1){
+                let wrap=document.querySelector(".cart_list .wrap");
+                let checkoutBtn=document.querySelector(".cart_btn .btn_cloudp");
+               
+                //把total那塊刪掉
+                wrap.removeChild(document.querySelector(".total"))
+                //顯示您尚未選擇商品
+                let div=document.createElement("div");
+                div.className='list_row';
+                wrap.appendChild(div);
+                div.innerHTML=`<p class='empty'>您尚未選擇商品</p>`;
+                //把結帳btn拿掉
+                document.querySelector(".cart_btn").removeChild(checkoutBtn)
+            }
         }
 
 
@@ -172,6 +203,7 @@ session_start();
             let addNumButtons = document.querySelectorAll('.add_num');     //加數量
             let prodNumInputs = document.querySelectorAll('.prod_num'); //商品Input的數量
             let deleteButton = document.querySelectorAll('.delete');  //刪除
+            let checkoutBtn=document.querySelector(".cart_btn .btn_cloudp");//結帳btn
            
 
 
@@ -203,15 +235,23 @@ session_start();
             //算total
             total();
 
-            //購物車icon的小圓圓
-            document.getElementById("cart_num").style.display='block';
-            document.getElementById("cart_num").innerText=sessionStorage['shopList'].split(',').length-1;
+            //結帳
+            checkoutBtn.onclick=function(e){
+                if(!sessionStorage['user_no']){
+                    document.getElementById('login_gary').style.display='block';
+                    e.preventDefault();
+
+
+                }
+            }
+
+
+            $id("login_btn").addEventListener("click",function(){
+                window.location.href='http://localhost/G3/checkOrder.html';
+            });
         })
 
         
-
-       
-       
     </script>
 </body>
 

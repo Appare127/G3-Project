@@ -14,10 +14,7 @@ try{
         echo 'loginError';
     }else{
         $userRow=$user->fetchAll(PDO::FETCH_ASSOC);
-      
-        foreach ($userRow[0] as $i => $data) {
-            $_SESSION[$i]=$data;
-        }
+        $_SESSION['user_no']=$userRow[0]['user_no'];
         echo json_encode($userRow);
     };
 
