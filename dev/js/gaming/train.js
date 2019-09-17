@@ -9,8 +9,8 @@ class Train {
     move() {
         this.x -= 1.2*scrollSpeed;
     }
-    show() { 
-        image(tImg, this.x, this.y, this.r, this.r);
+    show(mWidth=this.r,mHeight=this.r) { 
+        image(tImg, this.x, this.y, mWidth, mHeight);
         // rect( this.x, this.y, this.r, this.r);
     }  
 }

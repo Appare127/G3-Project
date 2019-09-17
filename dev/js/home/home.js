@@ -1,10 +1,12 @@
 //執行時啟動
 function init() {
+    
     getRankData();
     animal_item();
     anime();
     water();
     collections_rank();
+    modifyAnimation();
 }
 //resize時啟動
 function reinit() {
@@ -15,6 +17,27 @@ var anime_state;
 
 addEventListener("load", init);
 addEventListener("resize", reinit);
+addEventListener('scroll', modifyAnimation);
+
+
+function modifyAnimation(){
+    if(scrollY>=1300){
+        //樹長出來
+        setTimeout(function(){document.querySelectorAll('.modify_bg_ab img')[3].classList.add('treeGrow');},0);
+        setTimeout(function(){document.querySelectorAll('.modify_bg_ab img')[2].classList.add('treeGrow');},300);
+        setTimeout(function(){document.querySelectorAll('.modify_bg_ab img')[1].classList.add('treeGrow');},600);
+        setTimeout(function(){document.querySelectorAll('.modify_bg_ab img')[0].classList.add('treeGrow');},900);
+        //動物跳起來
+        document.querySelectorAll('.modify_pic img')[0].classList.add('home_jump');
+        console.log(document.querySelectorAll('.modify_pic img')[0]); 
+    }else {
+        for(var j=0; j<3; j++){
+            document.querySelectorAll('.modify_bg_ab img')[j].classList.remove('treeGrow');
+        }
+        document.querySelectorAll('.modify_pic img')[0].classList.remove('home_jump');
+
+    }
+}
 
 function getRankData(){
     var xhr = new XMLHttpRequest();
