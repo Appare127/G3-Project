@@ -284,7 +284,7 @@ window.addEventListener("load",function(){
             data=JSON.stringify(data);
             // {"prodInfo":["cup","img/shop/cup.png","500"],"num":3,"bgExist":"1","animalImg":"http://localhost/G3/img/shop/animal1.png","bgImg":"http://localhost/G3/img/shop/animal_bg1.png"}
             
-            $.get('php/cart/cart_session.php',{data:data});
+            $.get('php/cart/shop_add.php',{data:data});
             // $.get('php/resv/getTime.php', { data: 'time' }, function (data) {
             if(sessionStorage[prodName]){
                 let dataNew;
