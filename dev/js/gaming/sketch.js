@@ -313,7 +313,7 @@ function draw() {
         m.show();
         if ( unicorn.hits(m) ) {
             moneys.splice(m,1);
-                money+=100;
+                money+=1;
         }
     }
 

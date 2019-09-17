@@ -22,11 +22,14 @@ addEventListener('scroll', modifyAnimation);
 
 function modifyAnimation(){
     if(scrollY>=1300){
-        console.log(document.querySelectorAll('.modify_bg_ab img'));
+        //樹長出來
         setTimeout(function(){document.querySelectorAll('.modify_bg_ab img')[3].classList.add('treeGrow');},0);
         setTimeout(function(){document.querySelectorAll('.modify_bg_ab img')[2].classList.add('treeGrow');},300);
         setTimeout(function(){document.querySelectorAll('.modify_bg_ab img')[1].classList.add('treeGrow');},600);
         setTimeout(function(){document.querySelectorAll('.modify_bg_ab img')[0].classList.add('treeGrow');},900);
+        //動物跳起來
+        document.querySelectorAll('.modify_pic img')[0].classList.add('home_jump');
+        console.log(document.querySelectorAll('.modify_pic img')[0]); 
     }
 }
 
