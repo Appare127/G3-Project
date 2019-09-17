@@ -1,0 +1,46 @@
+*{
+    // outline: 1px solid #f0f;
+}
+.bd_rev_qrcode{
+    background-image:url('../img/member/member_bg.png');
+  background-repeat: no-repeat;
+//   background-size: cover;
+//   background-position: center bottom;
+}
+.rev_qrcode_msg{
+        max-width:1200px;
+        margin: auto;
+        box-sizing: border-box;
+ 
+
+        .msg_box{
+            width:80%;
+            // max-width: 400px;
+            // max-height: 400px;
+            height:40%;
+            padding: 10px;
+            position: fixed;
+            top: 0%;
+            bottom: 0%;
+            left: 0%;
+            right: 0%;
+            margin: auto;
+            box-sizing: border-box;
+            text-align: center;
+            // border-radius: 30px;          
+            background: #fff;
+            box-shadow: 5px 5px 8px #999;
+          
+            .success_pic{
+                width: 30%;
+                max-width: 100px;
+            }
+    
+            .qr_btn{
+                @include btn_cloud(100px,$col_btn_blue);
+              }
+
+
+        }
+  
+}

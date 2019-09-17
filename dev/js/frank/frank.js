@@ -3,7 +3,9 @@ window.addEventListener("resize", resize, false);
 function init(){
        owlCarousel_img();
        favorite();
-       frank_rank()
+      // frank_rank();
+      frank_vote_rank2();
+      frank_vote_rank();
 }
 function resize(){
    owlCarousel_img();
@@ -72,7 +74,7 @@ $(document).ready(function(){
 })
 $(document).ready(function(){
     $('.frank_expand_button').click(function(){
-        console.log($(this).index());
+   
         $(this).parent().animate({bottom:'-800px'},1);
         console.log($(this).parent().next());  
     })
@@ -83,23 +85,32 @@ function frank_rank(){
     }else if(window.XMLHttpRequest) {
         xmlHttp= new XMLHttpRequest();
     }
-    frank_vote_refresh(xmlHttp);
+    return xmlHttp;
 }
-function  frank_vote_refresh(xmlHttp){
-    xmlHttp.open("GET","php/frank/frank.php",true);
-    xmlHttp.onreadystatechange = frank_vote;
-
-    xmlHttp.send(null);
+function  frank_vote_rank(){
+    rank1=frank_rank();
+    rank1.open("GET","php/frank/vote_rank.php",true);
+    rank1.onreadystatechange = frank_vote;
+    rank1.send(null);
 }
 function frank_vote(){
-      
-        
-     console.log(xmlHttp.readyState);
-    if(xmlHttp.readyState==4){
+    if(rank1.readyState==4){
+        var vote_rank= JSON.parse(rank1.responseText);
+   
+      console.log(vote_rank);
+     }
+}
 
-        var data= JSON.parse(xmlHttp.responseText);
-    
-     console.log(data);
-    
+function  frank_vote_rank2(){
+    rank2=frank_rank();
+    rank2.open("GET","php/frank/vote_rank2.php",true);
+    rank2.onreadystatechange = frank_vote2;
+    rank2.send(null);
+}
+function frank_vote2(){
+    if(rank2.readyState==4){
+        var vote_rank2= JSON.parse(rank2.responseText);
+          console.log("rank2");
+     console.log(vote_rank2);
     }
 }

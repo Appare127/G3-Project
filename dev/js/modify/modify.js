@@ -31,7 +31,9 @@ let partsobj = [];
 let part_types = 4;
 
 
-let canvas = document.getElementById('pic_box');
+
+// 換動物部件的canvas
+let canvas = document.getElementById('aml_canvas');
 let context = canvas.getContext('2d');
     if (window.innerWidth < 996){
         canvas.width = "250";
@@ -41,39 +43,88 @@ let context = canvas.getContext('2d');
         canvas.height = "400";
     }
 
+// 換背景圖片的canvas寬高動態設定參考值
+let bgimg_box = document.getElementsByClassName('bgimg_box')[0];
+let geth = document.getElementsByClassName('geth')[0];
+let bg_width = parseInt(window.getComputedStyle(bgimg_box).getPropertyValue('width'));
+let bg_height = parseInt(window.getComputedStyle(geth).getPropertyValue('height'));
+// console.log(bg_width);
+// console.log(bg_height);
+
+// 換背景圖片的canvas建立
+let bg_canvas = document.getElementById('bg_canvas');
+let bgcontext = bg_canvas.getContext('2d');
+    bg_canvas.width = bg_width;
+    bg_canvas.height = bg_height;
+
+// 背景canvas畫圖的滑鼠啟動設定
+let draw_start = 0;
+
+// 背景canvas畫圖的編輯啟動設定
+let bgcanvas_switch = 0;
+
+// 背景canvas的開關
+let draw_switch = document.getElementById('cir_check');
+
+// HSV轉RGB後的值
+let hex;
+
+// 畫筆的示範物件
+let sample_point = document.getElementsByClassName('sample_point')[0];
+
+// 背景canvas畫筆大小預設
+let drawsize = 5;
 
 
 // 下一步動作
-function dopic(){
+// function dopic(){
     
-    // 先判斷sessionStorage有沒有會員登入資料，有才往下做轉圖檔工作
-    if (sessionStorage['user_name']){
+//     // 先判斷sessionStorage有沒有會員登入資料，有才往下做轉圖檔工作
+//     if (sessionStorage['user_name']){
 
-        let animal_name = document.getElementById('animal_name');
+//         let animal_name = document.getElementById('animal_name');
         
-        if (animal_name.value != ''){
-            // 動物名稱裡不是空的，代表已經有輸入名字了，可繼續做下去
+//         if (animal_name.value != ''){
+//             // 動物名稱裡不是空的，代表已經有輸入名字了，可繼續做下去
             
-            canvas = document.getElementById('pic_box');
-            let url = canvas.toDataURL("image/png");
-            // document.getElementById('testimg').src = url;
-            document.getElementById('url_data').value = url;
-            // console.log(document.getElementById('url_data').value);
+//             canvas = document.getElementById('aml_canvas');
+//             let url = canvas.toDataURL("image/png");
+//             // document.getElementById('testimg').src = url;
+//             document.getElementById('url_data').value = url;
+//             // console.log(document.getElementById('url_data').value);
             
-            picsend();
+//             picsend();
 
-            // 如果沒有輸入動物名字，則彈出提示視窗
-        }else {
-            document.getElementsByClassName('need_name')[0].classList.add('show');
-        }
-    // 如果sessionStorage沒有登入，則彈出提示登入的視窗
-    }else{
-        document.getElementsByClassName('remind_login')[0].classList.add('show');
-    };
+//             // 如果沒有輸入動物名字，則彈出提示視窗
+//         }else {
+//             document.getElementsByClassName('need_name')[0].classList.add('show');
+//         }
+//     // 如果sessionStorage沒有登入，則彈出提示登入的視窗
+//     }else{
+//         document.getElementsByClassName('remind_login')[0].classList.add('show');
+//     };
+// }
+
+// 下一步動作
+function nextstep(){
+
+
+    canvas = document.getElementById('aml_canvas');
+    let url = canvas.toDataURL("image/png");
+    document.getElementsByClassName('temp_aml_pic')[0].src = url;
+    // document.getElementById('testimg').src = url;
+    document.getElementById('url_data').value = url;
+
 
 }
 
-// 繪製canvas的圖
+
+
+
+
+
+
+// 繪製動物canvas的圖
 function drawcanvas(){
 
     // 先清掉之前的東西
@@ -122,6 +173,32 @@ function drawcanvas(){
     };
 }
 
+// 繪製背景canvas的圖
+function drawbg_canvas(){
+
+    // 先清掉之前的東西
+    bgcontext.clearRect(0,0,bg_canvas.width,bg_canvas.height);
+    
+    // 設定接下來要進來的圖片大小與canvas相同
+    let pic_width = bg_canvas.width;
+    let pic_height = bg_canvas.height;
+
+    // 建立1個圖像物件
+    let img1 = new Image();
+
+    // 圖像物件抓到HTML隱藏的img圖檔路徑
+    img1.src = document.getElementsByClassName('bg_pic')[0].src;
+    
+    // 圖像讀取完成後，把它畫到canvas上
+    img1.onload = function(){
+        bgcontext.drawImage(img1,0,0,pic_width,pic_height);
+    };
+
+}
+
+
+
+
 
 // 發送圖片資料到後台做圖片儲存動作
 function picsend(){
@@ -149,14 +226,14 @@ function picsend(){
             saveok(xhr.responseText);
             }
         }else{
-            alert(xhr.status)
+            alert(xhr.status);
         }
     }
     xhr.open('POST', 'php/modify/saveimg.php', true);
     xhr.send(formData);
 }
 
-
+// 圖片上傳成功後的動作
 function saveok(text){
     alert('動物儲存成功');
 
@@ -165,16 +242,15 @@ function saveok(text){
     sessionStorage['environ_adapt_3'] = total_eml_desert;
     sessionStorage['animal_life'] = total_health;
     sessionStorage['animal_jump'] = total_jump;
-
     
 }
 
-
+// 上傳背景圖的設定
 function read_bgimg(e){
 
     let fileAccepts = ["bmp", "png", "gif", "jpg"];
     let fileInfo = getFileInfo(e.target.value);
-    console.log(e.target.value);
+    // console.log(e.target.value);
     
     if( fileAccepts.indexOf(fileInfo.ext.toLowerCase()) == -1){
         alert("檔案格式不對");
@@ -184,12 +260,19 @@ function read_bgimg(e){
         let reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = function(){
-            document.getElementsByClassName('bgimg')[0].src = reader.result;
+            // 
+            // HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+            document.getElementsByClassName('bg_pic')[0].src = reader.result;
+            drawbg_canvas();
+            // console.log(reader.result);
+            
         }
     }
 }
 
+// 把檔名和副檔名切開的函式
 function getFileInfo(fileStr){
+
     //回傳一個陣列，索引0放的是主檔名, 索引1放的是副檔名
 	let dotPos = fileStr.lastIndexOf(".");
 	let fileName = fileStr.substring(0, dotPos);
@@ -227,8 +310,6 @@ function changeParts(e){
         head_eml_desert = e.target.nextElementSibling.dataset.pointc;
         // console.log(head_eml_forest + ',' + head_eml_mountain + ',' + head_eml_desert);
         
-
-
     }else if (type_name == 'body'){
         document.getElementsByClassName('body_pic')[0].src = `img/modify/p_body_${animal_name}.png`;
         // 抓到選擇的身體三種環境適應力
@@ -240,7 +321,6 @@ function changeParts(e){
         // 以及生命力
         total_health = e.target.nextElementSibling.dataset.health;
         updatehealth();     //呼叫更新生命力的function
-
 
     }else if (type_name == 'leg'){
         document.getElementsByClassName('leg_pic')[0].src = `img/modify/p_leg_${animal_name}.png`;
@@ -257,6 +337,11 @@ function changeParts(e){
 
     }else if (type_name == 'tail'){
         document.getElementsByClassName('tail_pic')[0].src = `img/modify/p_tail_${animal_name}.png`;
+    }else if (type_name == 'bg'){
+        document.getElementsByClassName('bg_pic')[0].src = `img/modify/bg_${animal_name}.png`;
+        drawbg_canvas();    //呼叫函式，把選到的背景繪製到背景的canvas上
+        document.getElementsByClassName('temp_aml_pic')[0].classList.remove('hide');
+        bgcanvas_switch = 0;
     }
 
     // 算適應力的總和
@@ -267,7 +352,7 @@ function changeParts(e){
     
     updatechart();      //呼叫更新雷達圖的function
 
-    drawcanvas();       //呼叫函式，把選到的圖片繪製到canvas上
+    drawcanvas();       //呼叫函式，把選到的圖片繪製到動物的canvas上
 }
 
 
@@ -407,12 +492,14 @@ function buildlist (jsonobj){
     let body_arr = jsonobj.body;
     let leg_arr = jsonobj.leg;
     let tail_arr = jsonobj.tail;
+    let bg_arr = jsonobj.bg;
     // console.log(body_arr);
 
     let head_ul = document.querySelector('.part_button.head_button .part_wrap');
     let body_ul = document.querySelector('.part_button.body_button .part_wrap');
     let leg_ul = document.querySelector('.part_button.leg_button .part_wrap');
     let tail_ul = document.querySelector('.part_button.tail_button .part_wrap');
+    let bg_ul = document.querySelector('.part_button.bg_button .part_wrap');    
     // console.log(body_ul);
 
 
@@ -496,6 +583,27 @@ function buildlist (jsonobj){
         leg_ul.appendChild(li);
     }
 
+    // 建立背景圖HTML架構
+    for (let i=0; i<bg_arr.length; i++){
+        let li = document.createElement('li');
+        let div = document.createElement('div');
+        let img = document.createElement('img');
+        let p = document.createElement('p');
+        div.classList = 'img_box';
+        img.src = bg_arr[i].bg_img;
+        img.classList = 'picon';
+        img.alt = '資料庫圖片遺失';
+        p.innerHTML = bg_arr[i].bg_ch_name;
+
+        // console.log(img.src);
+        
+
+        div.appendChild(img);
+        li.appendChild(div);
+        li.appendChild(p);
+        bg_ul.appendChild(li);
+    }
+
     // 抓到選單的圖片，全部建立click聆聽功能
     picon = document.getElementsByClassName('picon');
     for(let i=0; i<picon.length; i++){
@@ -503,6 +611,145 @@ function buildlist (jsonobj){
     };
 
 };
+
+function switch_bgcanvas(){
+    console.log(draw_switch);
+    
+}
+
+
+
+
+
+
+// 滑鼠在canvas按下時，啟動畫圖設定，並畫出第一個點
+function drawdown(e){
+    if(bgcanvas_switch == 1){
+        draw_start = 1;
+        bgcontext.beginPath();
+        bgcontext.fillStyle = `#${hex}`;
+        // bgcontext.fillRect(e.offsetX,e.offsetY,drawsize,drawsize);
+        bgcontext.arc(e.offsetX, e.offsetY, drawsize, 0, 2 * Math.PI, false);
+        bgcontext.fill();
+    }
+}
+// 滑鼠放開時，關閉畫圖
+function drawup(){
+    draw_start = 0;
+}
+// 滑鼠移動時，如果畫圖設定為啟動時，就持續作畫
+function drawmove(e){
+    if (draw_start == 1){
+        bgcontext.beginPath();
+        bgcontext.fillStyle = `#${hex}`;
+        // bgcontext.fillRect(e.offsetX,e.offsetY,drawsize,drawsize);
+        bgcontext.arc(e.offsetX, e.offsetY, drawsize, 0, 2 * Math.PI, false);
+        bgcontext.fill();
+    }
+}
+
+
+// 色相角度轉成RGB的公式計算，會return一個rgb值或取hex來使用
+function HSV2RGB(in_h,in_s,in_v){
+
+    let h = in_h;
+    let s = in_s;
+    let v = in_v;
+
+    if( in_v == undefined ){
+        h = this.value;
+        s = 75;
+        v = 100;
+    } 
+
+    h = parseFloat(h);
+    s = parseFloat(s);
+    v = parseFloat(v);
+    if( h<0 ) h=0;
+    if( s<0 ) s=0;
+    if( v<0 ) v=0;
+    if( h>=360 ) h=359;
+    if( s>100 ) s=100;
+    if( v>100 ) v=100;
+    s/=100.0;
+    v/=100.0;
+    C = v*s;
+    hh = h/60.0;
+    X = C*(1.0-Math.abs((hh%2)-1.0));
+    r = g = b = 0;
+    if( hh>=0 && hh<1 )
+    {
+        r = C;
+        g = X;
+    }
+    else if( hh>=1 && hh<2 )
+    {
+        r = X;
+        g = C;
+    }
+    else if( hh>=2 && hh<3 )
+    {
+        g = C;
+        b = X;
+    }
+    else if( hh>=3 && hh<4 )
+    {
+        g = X;
+        b = C;
+    }
+    else if( hh>=4 && hh<5 )
+    {
+        r = X;
+        b = C;
+    }
+    else
+    {
+        r = C;
+        b = X;
+    }
+    m = v-C;
+    r += m;
+    g += m;
+    b += m;
+    r *= 255.0;
+    g *= 255.0;
+    b *= 255.0;
+    r = Math.round(r);
+    g = Math.round(g);
+    b = Math.round(b);
+    hex = r*65536+g*256+b;
+    hex = hex.toString(16,6);
+    len = hex.length;
+    if( len<6 )
+        for(i=0; i<6-len; i++)
+            hex = '0'+hex;
+
+    console.log(hex);
+    // document.calcform.hex.value = hex.toUpperCase();
+    // document.calcform.r.value = r;
+    // document.calcform.g.value = g;
+    // document.calcform.b.value = b;
+    // document.calcform.color.style.backgroundColor='#'+hex;
+
+    sample_point.style.backgroundColor = `#${hex}`;
+}
+
+// 點了黑色塊，設定畫筆顏色為黑色
+function pen_black(){
+    HSV2RGB(0,0,0);
+}
+// 點了白色塊，設定畫筆顏色為白色
+function pen_white(){
+    HSV2RGB(0,0,100);
+}
+// 設定畫筆大小
+function pensize(e){
+    // console.log(this.value);
+    sample_point.style.width = this.value*2 + "px";
+    sample_point.style.height = this.value*2 + "px";
+    drawsize = this.value;
+}
+
 
 // 點X後，關閉彈跳提示視窗的函式
 function remove_show (e){
@@ -528,10 +775,13 @@ function init(){
 
     // 抓到下一步按鈕，點了之後做html轉canvas的功能
     // document.getElementById("topic").addEventListener("click",dopic);
-
-
     // 隨機按鈕增聽按下去
     // document.getElementsByClassName('btn_random')[0].addEventListener('click',random_part);
+    
+    // picon = document.getElementsByClassName('picon');
+    // for(let i=0; i<picon.length; i++){
+    //     picon[i].addEventListener('click',changeParts);
+    // }
 
 
     // 兩個彈出提示視窗的關閉click事件
@@ -539,15 +789,31 @@ function init(){
     document.getElementsByClassName('close_remind')[1].addEventListener('click',remove_show);
 
 
-    // picon = document.getElementsByClassName('picon');
-    // for(let i=0; i<picon.length; i++){
-    //     picon[i].addEventListener('click',changeParts);
-    // }
-
     // 剛載進頁面時，先做一次canvas繪製預設的圖片
     drawcanvas();
 
+
+    // 上傳圖片的file事件
     document.getElementById('up_bg_file').addEventListener('change',read_bgimg);
+
+
+    // 背景canvas的滑鼠觸發事件
+    bg_canvas.addEventListener('mousedown',drawdown);
+    bg_canvas.addEventListener('mousemove',drawmove);
+    bg_canvas.addEventListener('mouseup',drawup);
+
+
+    // 顏色條的change觸發事件，把變動的色相轉成RGB值
+    document.getElementsByClassName('createColorBar')[0].addEventListener('change',HSV2RGB);
+    document.getElementsByClassName('pen_black')[0].addEventListener('click',pen_black);
+    document.getElementsByClassName('pen_white')[0].addEventListener('click',pen_white);
+
+    // 畫筆大小調整條的事件觸發
+    document.getElementById('drawsize').addEventListener('change',pensize);
+
+
+    document.getElementById('cir_check').addEventListener('click',switch_bgcanvas);
+
 
 }
 

@@ -142,6 +142,13 @@ $lblue:#d8ecea;
         text-align: center;
         }
     }
+//if 沒選商品
+    .empty{
+        padding: 20px;
+        text-align: center;
+        width: 100%;
+        // font-size: $_fz;
+    }
 //商品圖片的外框
     .pic_item{
         @include responds(medium){
