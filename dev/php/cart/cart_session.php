@@ -5,16 +5,22 @@ try{
     if(isset($_GET['data'])){
         $add=$_GET['data'];
         $add=json_decode($add);
-        $_SESSION['cart'][$add->prodInfo[0]]=$add;
+        if(isset($_SESSION['cart'][$add->name])){
+            $_SESSION['cart'][$add->name]->num= (int)$_SESSION['cart'][$add->name]->num+1;
+          
+        }else{
+            $_SESSION['cart'][$add->name]=$add;
+        }
+       
         print_r( $_SESSION['cart']);
     
     }else if(isset($_GET['num'])){
         $data=$_GET['num'];
         $id=explode(",",$data)[0];
-        $num=explode(",",$data)[1];
+        $num=(int)explode(",",$data)[1];
 
         $_SESSION['cart'][$id]->num=$num;
-        echo  $_SESSION['cart'][$id]->num*$_SESSION['cart'][$id]->prodInfo[2];
+        echo  (int)$_SESSION['cart'][$id]->num *  (int)$_SESSION['cart'][$id]->prodInfo[2];
 
 
     }else if(isset($_GET['delete'])){

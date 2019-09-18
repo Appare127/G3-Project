@@ -151,6 +151,7 @@ $lblue:#d8ecea;
     }
 //商品圖片的外框
     .pic_item{
+        position: relative;
         @include responds(medium){
             width: 40%;
         }
@@ -159,6 +160,14 @@ $lblue:#d8ecea;
         img{
             vertical-align: top;
         }
+        .shop_animal_bg{
+            position: absolute;
+            width: 40%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+
     }
 //商品資訊（name price number subtotal）
     .prod_info{

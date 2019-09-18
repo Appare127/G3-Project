@@ -391,34 +391,14 @@ $lblue:#d8ecea;
     }
 }
 
-@mixin picChosen($top,$left,$right){
-    top: $top;
-    left: $left;
-    right: $right;
-    margin:auto;
-}
-.pic_chosen_bag{
-    position:absolute;
-    width: 30%;
-    @include picChosen(52%,0,0)
-}
 
-.pic_chosen_cup{
+.pic_chosen{
     position:absolute;
-    width: 30%;
-    @include picChosen(37%,0,18%)
-}
-
-.pic_chosen_hat{
-    position:absolute;
-    width: 30%;
-    @include picChosen(21%,0,0)
-}
-
-.pic_chosen_pillow{
-    position:absolute;
-    width: 30%;
-    @include picChosen(34%,0,0)
+    width: 40%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    
 }
 
 .btn{
