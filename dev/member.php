@@ -310,7 +310,15 @@ if ($errMsg !=""){
         <div class="col-12 col-md-6">
 
           <div class="gamerecord_pic">
-            <img src="<?=$userRow["game_img"]?>" alt="user_game">
+            <?php
+             if( $userRow["game_img"] != ""){ 
+            ?>
+              <img src="<?=$userRow["game_img"]?>" alt="user_game">
+            <?php
+            }else{
+              echo "<div><center><p>尚未有遊戲畫面</p></center></div>";
+            }
+            ?>
           </div>
 
         </div>
@@ -350,8 +358,20 @@ if ($errMsg !=""){
 
           <div class="myanimal_pic">
 
+          <?php
+             if( $userRow["my_animal_bg_img"] != "" ||  $userRow["my_animal_img"] != ""){ 
+            ?>
             <img class="animalbg_re" src="<?=$userRow["my_animal_bg_img"]?>" alt="user_animal_bg">
             <img class="animalpic_ab" src="<?=$userRow["my_animal_img"]?>" alt="user_animal">
+
+            <?php
+            }else{
+              echo "<div><center><p>尚未創造動物</p></center></div>";
+            }
+            ?>
+<!--
+            <img class="animalbg_re" src="<?=$userRow["my_animal_bg_img"]?>" alt="user_animal_bg">
+            <img class="animalpic_ab" src="<?=$userRow["my_animal_img"]?>" alt="user_animal"> -->
 
           </div>
 
@@ -422,9 +442,8 @@ if ($errMsg !=""){
 
 
         <?php 
-      if( $errMsg != ""){ //例外
-        echo "<div><center>$errMsg</center></div>";
-      }elseif($orders->rowCount()==0){
+     
+     if($orders->rowCount()==0){
         echo "<div><center><p>目前無訂單資料</p></center></div>";
       }else{
         $ordersRow = $orders->fetchAll(PDO::FETCH_ASSOC);
