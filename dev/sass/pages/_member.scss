@@ -17,6 +17,12 @@
     color:$col_btn_blue;
   }
 
+  .p_title{
+    font-weight: bold;
+    color: $col_black;
+    // color: $col_btn_blue;
+  }
+
   section{
     // padding: 20px 0px;
 
@@ -98,8 +104,8 @@
 
   }
   .tablink_color{
-    background:$col_btn_blue;
-    color: $col_white;
+    background:$col_white;
+    color: $col_btn_blue;
   }
 
 }
@@ -165,6 +171,8 @@
   .my_animal{
     .myanimal_pic{
       position: relative;
+      
+
       .animalbg_re{
         position: relative;
       }
@@ -177,7 +185,7 @@
         margin: auto;
       }
     }
-    .aa{
+    .animal_basic{
       padding-top:20px;
       @include radarinfo_member();
       

@@ -4,6 +4,8 @@
 .bd_rev_qrcode{
     background-image:url('../img/member/member_bg.png');
   background-repeat: no-repeat;
+  background-size: cover;
+  min-height: calc(100vh);
 }
 
 .rev_qrcode_msg{

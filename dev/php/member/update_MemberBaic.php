@@ -15,6 +15,7 @@ try {
 	$members->bindValue(':hint_answer',$_REQUEST["hint_answer"]);
 	$members->execute();
 	echo "異動成功~" ;
+	
 	// header("location:../../member.php");
     
 
@@ -41,28 +42,28 @@ try {
 		}
 		//將檔案copy到要放的路徑
 		$fileInfoArr = pathinfo($_FILES["upFile"]["name"]); //原本使用者放的路徑
-
-		$fileName = "{$_SESSION['user_no']}.{$fileInfoArr["extension"]}";  //9.gif
-
+		
+		$fileName = "user". $_SESSION['user_no'] . "_sticker" . "." . $fileInfoArr["extension"];  //use1_sticker.gif
+		
 		$from = $_FILES["upFile"]["tmp_name"];//暫存檔的路徑名稱
-		$to = $dir.$fileName;
-
-        $to = $dir. "user_sticker" . $fileName;
+	
+		$to = $dir . $fileName;
+		
 		copy( $from, $to);//從暫存檔的路徑名稱複製到images
 
 	//將檔案名稱寫回資料庫
 	
-		$file_src = "img/customize/" . "user_sticker" . $fileName ;
+		$file_src = "img/customize/" . $fileName ;
 	
 		$sql = "update user set user_img=:user_img where user_id=:user_id";
 		$memberImg = $pdo->prepare($sql);
-		$memberImg -> bindValue(":user_img", $file_src);//把9.gif給image
+		$memberImg -> bindValue(":user_img", $file_src);//把路徑use1_sticker.gif給image
     	// $memberImg -> bindValue(":user_img", $fileName);
     	$memberImg -> bindValue(':user_id',$_REQUEST["user_id"]);
 		$memberImg -> execute();
 		echo "新增成功~";
 
-	}else if($_FILES["upFile"]["error"] == 4){ //如果未指定上傳檔案
+	}else if($_FILES["upFile"]["error"] == 4){ //如果未指定上傳檔案,還是跳轉成功
 		header("location:../../member.php");
 	}
 	else{
