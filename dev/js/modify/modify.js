@@ -361,20 +361,20 @@ function changeParts(e){
         head_eml_desert = e.target.nextElementSibling.dataset.pointc;
         // console.log(head_eml_forest + ',' + head_eml_mountain + ',' + head_eml_desert);
         
-        switch (animal_name){
-            case 'giraffe':
-                voice_dog.play();
-                break;
-            case 'elephant':
-                voice_elephant.play();
-                break;
-            case 'lion':
-                voice_lion.play();
-                break;
-            case 'tiger':
-                voice_tiger.play();
-                break;
-        }
+        // switch (animal_name){
+        //     case 'giraffe':
+        //         voice_dog.play();
+        //         break;
+        //     case 'elephant':
+        //         voice_elephant.play();
+        //         break;
+        //     case 'lion':
+        //         voice_lion.play();
+        //         break;
+        //     case 'tiger':
+        //         voice_tiger.play();
+        //         break;
+        // }
 
 
 
