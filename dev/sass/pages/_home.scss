@@ -487,7 +487,7 @@ $dblue:#7DC7C5;
     background-size: cover;
     position: relative;
     background-position: center bottom;
-
+    overflow:hidden;
 
     @include responds(medium){
         padding-bottom: 200px;
@@ -562,7 +562,7 @@ $dblue:#7DC7C5;
             width: 100%;
             margin: auto;
             text-align: center;
-
+            transition:0.5s all;
             @include btn_cloud(110px,$col_btn_pink);
             .btn_cloud{
                 margin-top: 15px;
@@ -609,7 +609,15 @@ $dblue:#7DC7C5;
                 background-size: 100%;
                 background-position: center center;
                 padding: 20px;
-        
+                // .chartSlide{
+                //     animation:chart_slide 2s forwards;
+                //     position:absolute;
+                    
+                // }
+                // @keyframes chart_slide{
+                //     0%{ transform:translateX(-5%);color:red;}
+                //     100%{ transform:translateX(-100%);}
+                // }
                 .bg_top{
                     background-image: url('../img/game/chart_topx.png');
                     background-repeat: no-repeat;
@@ -632,6 +640,7 @@ $dblue:#7DC7C5;
                  
                 }
             }
+            
     
         }
 
@@ -650,29 +659,79 @@ $dblue:#7DC7C5;
                 }
             }
             .camelWalk {
-                position:absolute;
-                animation:camelWalk 5s forwards;
+                // position:absolute;
+                animation:camel_walk 9s infinite;
             }
-            @keyframes camelWalk {
-                // 0% { transform:translateX(20%);}
-                0%{ transform:translate3d(-5%,0%,0%)}
-                0%{ transform:translate3d(-10%,-10%,0%)}
-                0%{ transform:translate3d(-15%,0%,0%)}
-                0%{ transform:translate3d(-20%,-10%,0%)}
-                0%{ transform:translate3d(-30%,0%,0%)}
-                50%{ transform:translate3d(-35%,-10%,0%)}
-                100%{ transform:translate3d(-40%,-15%,0%)}
+            @keyframes camel_walk {
+
+                0% {
+                    -webkit-transform: translate3d(-20%, 0%, 0) scaleX(1); }
+                3% {
+                    -webkit-transform: translate3d(-10%, 5%, 0) scaleX(1); }
+                6% {
+                    -webkit-transform: translate3d(-5%, 0%, 0) scaleX(1); }
+                9% {
+                    -webkit-transform: translate3d(0%, 5%, 0) scaleX(1); }
+                12% {
+                    -webkit-transform: translate3d(15%, 0%, 0) scaleX(1); }
+                15% {
+                    -webkit-transform: translate3d(20%, 5%, 0) scaleX(1); }
+                18% {
+                    -webkit-transform: translate3d(25%, 0%, 0) scaleX(1); }
+                21% {
+                    -webkit-transform: translate3d(30%, 5%, 0) scaleX(1); }
+                24% {
+                    -webkit-transform: translate3d(35%, 0%, 0) scaleX(1); }
+                27% {
+                    -webkit-transform: translate3d(40%, 5%, 0) scaleX(1); }
+                30% {
+                    -webkit-transform: translate3d(45%, 0%, 0) scaleX(1); }
+     
+                33% {
+                    -webkit-transform: translate3d(55%, 0%, 0) scaleX(1); }
+                36% {
+                    -webkit-transform: translate3d(60%, 5%, 0) scaleX(1); }
+                
+                37% {
+                    -webkit-transform: translate3d(65%, 0%, 0) scaleX(-1); }
+                42% {
+                    -webkit-transform: translate3d(55%, 5%, 0) scaleX(-1); }
+                45% {
+                    -webkit-transform: translate3d(50%, 0%, 0) scaleX(-1); }
+                48% {
+                    -webkit-transform: translate3d(45%, 5%, 0) scaleX(-1); }
+                51% {
+                    -webkit-transform: translate3d(40%, 0%, 0) scaleX(-1); }
+                54% {
+                    -webkit-transform: translate3d(35%, 5%, 0) scaleX(-1); }
+                57% {
+                    -webkit-transform: translate3d(30%, 0%, 0) scaleX(-1); } 
+                60% {
+                    -webkit-transform: translate3d(25%, 5%, 0) scaleX(-1); } 
+                63% {
+                    -webkit-transform: translate3d(20%, 0%, 0) scaleX(-1); } 
+                66% {
+                    -webkit-transform: translate3d(15%, 5%, 0) scaleX(-1); } 
+                69% {
+                    -webkit-transform: translate3d(10%, 0%, 0) scaleX(-1); } 
+                72% {
+                    -webkit-transform: translate3d(5%, 5%, 0) scaleX(-1); }
+                75% {
+                    -webkit-transform: translate3d(0%, 0%, 0) scaleX(-1); }  
+                99% {
+                    -webkit-transform: translate3d(0%, 0%, 0) scaleX(-1); } 
             }
 
             img[alt*="chair"]{
                 position: absolute;
                 display:none;
+                transition:0.5s all;
                 @include responds (medium){
                     display: block;
                     width: 10%;
                     bottom: -10%;
                     right:0%;
-                    animation: rotatedesert 2s infinite linear;
+                    // animation: rotatedesert 2s infinite linear;
                 }
             }
            

@@ -46,9 +46,27 @@ function modifyAnimation(){
 
 //生存遊戲的動畫
 function gameAnimation(){
-    if(scrollY>=2200) {
+    if(scrollY>=2000) { 
+        //駱駝走路
         document.querySelectorAll('.game_bg_ab img')[0].classList.add('camelWalk');
+        
+        //排行榜滑動
+        var scrolled1 = (window.pageYOffset - 2395)*0.4;//排行榜滑動的速度
+        document.querySelector('.game_palyrank').style.transform = 'translateX('+scrolled1+'px)';
+        if(scrollY>=2671){
+            var scrolled2 = (window.pageYOffset - 2671)*0.4;
+            if(0.5*scrolled2<=100){
+                document.querySelectorAll('.game_bg_ab img')[1].style.transform = 'rotateZ('+0.5*scrolled2+'deg)';
+            }else if(0.5*scrolled2>30){
+                document.querySelectorAll('.game_bg_ab img')[1].style.transform += 'translateY(-100px)';
+            }
+        }
+
     }else {
+        document.querySelectorAll('.game_bg_ab img')[0].classList.remove('camelWalk');
+
+
+        // document.querySelector('.topwrap').classList.remove('chartSlide');
 
     }
 }
