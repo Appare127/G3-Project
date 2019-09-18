@@ -31,7 +31,6 @@ let partsobj = [];
 let part_types = 4;
 
 
-
 // 換動物部件的canvas
 let canvas = document.getElementById('aml_canvas');
 let context = canvas.getContext('2d');
@@ -347,6 +346,12 @@ function changeParts(e){
     let animal_name = urlstr.substring(type_y +1 ,animal_y);
     // console.log(animal_name);
 
+    let voice_tiger = document.getElementById('voice_tiger');
+    let voice_lion = document.getElementById('voice_lion');
+    let voice_dog = document.getElementById('voice_dog');
+    let voice_elephant = document.getElementById('voice_elephant');
+
+
     // 用if去判斷不同部位選擇要更換相應的圖片
     if (type_name == 'head'){
         document.getElementsByClassName('head_pic')[0].src = `img/modify/p_head_${animal_name}.png`;
@@ -356,6 +361,23 @@ function changeParts(e){
         head_eml_desert = e.target.nextElementSibling.dataset.pointc;
         // console.log(head_eml_forest + ',' + head_eml_mountain + ',' + head_eml_desert);
         
+        switch (animal_name){
+            case 'giraffe':
+                voice_dog.play();
+                break;
+            case 'elephant':
+                voice_elephant.play();
+                break;
+            case 'lion':
+                voice_lion.play();
+                break;
+            case 'tiger':
+                voice_tiger.play();
+                break;
+        }
+
+
+
     }else if (type_name == 'body'){
         document.getElementsByClassName('body_pic')[0].src = `img/modify/p_body_${animal_name}.png`;
         // 抓到選擇的身體三種環境適應力
