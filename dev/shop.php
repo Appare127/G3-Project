@@ -7,7 +7,7 @@ try {
     // echo json_encode($prodsRow);
 
     $imgs  = $pdo->query("select cmp_img,bg_img from collections order by vote desc limit 3");
-    $imgRow=$imgs->fetchAll(PDO::FETCH_ASSOC);
+    
     // echo json_encode($imgRow);
     // print_r($prodsRow);
 ?>
@@ -97,8 +97,23 @@ try {
 
                     <!-- 選美前三名從資料庫撈 -->
                         <?php
-                        $imgName=['選美No.1','選美No.2','選美No.3'];
-                        foreach ($imgName as $i => $value) {
+                        if( $imgs->rowCount() < 3 ){
+                            $imgName=['選美No.1','選美No.2','選美No.3'];
+                            foreach ($imgName as $i => $value) {
+                        ?>
+                         <div class="item">
+                            <div class="pic">
+                                <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
+                                <img class="shop_animal" src='img/shop/animal1.png' alt="">
+                            </div>
+                            <p><?=$value?></p>
+                        </div>
+                        <?php
+                           }
+                        }else{ 
+                            $imgRow=$imgs->fetchAll(PDO::FETCH_ASSOC);
+                             $imgName=['選美No.1','選美No.2','選美No.3'];
+                            foreach ($imgName as $i => $value) {
                         ?>
                         <div class="item">
                             <div class="pic">
@@ -108,6 +123,7 @@ try {
                             <p><?=$value?></p>
                         </div>
                         <?php
+                            }
                         }
                         ?>
 
@@ -189,7 +205,7 @@ try {
         document.querySelectorAll(".choose_pic .shop_animal")[0].src=sessionStorage.my_animal_img;
     }else{   //如果沒登入，給預設圖片
     document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src='img/shop/animal_bg1.png';
-    document.querySelectorAll(".choose_pic .shop_animal")[0].src='img/shop/animal2.png';
+    document.querySelectorAll(".choose_pic .shop_animal")[0].src='img/shop/animal1.png';
     }
 };
 
