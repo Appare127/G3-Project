@@ -3,7 +3,7 @@ $dblue:#7DC7C5;
 
 *{
     // outline: 1px solid #f00;
-}
+} 
 
 //頁面共用屬性
 .home_page{
@@ -40,7 +40,7 @@ $dblue:#7DC7C5;
 
 }
 
-//////////////////////
+//==================================第一屏
 
 .home_header,.home_game{
     img{
@@ -125,23 +125,7 @@ $dblue:#7DC7C5;
         //     z-index: 1;
         // }
         
-    
-        img[alt*="hd_rail"]{
             
-            display: none;
-            @include responds(xlarge){
-                display: block;
-                position: absolute;
-                width: 50%;
-                // left: -33%;
-                // top: 40%;
-                right: -27%;
-                bottom: 27%;
-                
-            }
-        
-        }
-    
         img[alt*="hd_rail_left"]{
             
             display: none;
@@ -155,11 +139,27 @@ $dblue:#7DC7C5;
             }
         
         }
+    
+        img[alt*="hd_rail_right"]{
+            
+            display: none;
+            @include responds(medium){
+                display: block;
+                position: absolute;
+                width: 50%;
+                // left: -33%;
+                // top: 40%;
+                right: -27%;
+                bottom: 27%;
+                
+            }
         
-        img[alt*="hd_train"]{
+        }
+
+        img[alt*="hd_train_right"]{
     
             display: none;
-            @include responds(xlarge){
+            @include responds(medium){
                 
                 display: block;
                 position: absolute;
@@ -171,18 +171,16 @@ $dblue:#7DC7C5;
                 // width: 15%;
                 // left: -25%;
                 // top: 35%;
-                animation:train2 20s infinite;
+                animation:trainMove 5s infinite;
             }
         
         }
     }
     
-    
- 
 
-    @keyframes train2{
+    @keyframes trainMove{
         0%{right: 11%}
-        100%{right:-100%;}
+        100%{right:-50%;}
     };
 
 
@@ -209,6 +207,18 @@ $dblue:#7DC7C5;
         
         .modify_bg_ab{
             display: none;
+            img{
+                transform:scale(0.1);
+            }
+            .treeGrow{
+                animation:treeGrow 1s forwards;
+            }
+            @keyframes treeGrow {
+                0% { transform:scale(0.1) translateY(3%)}
+                45% {transform:translateY(3%)}
+                100% { transform:scale(1)}
+             
+            }
         }
 
         @include responds(medium){
@@ -226,7 +236,7 @@ $dblue:#7DC7C5;
     position: absolute;
     background: linear-gradient(rgb(243, 193, 146), #F6AD56);
     box-shadow: 0 0 40px 6px rgb(255, 254, 254), 0 0 150px 10px rgb(246, 246, 246);
-    animation: rise 24s ease forwards;
+    animation: rise 10s ;
  
 } 
 
@@ -323,6 +333,18 @@ $dblue:#7DC7C5;
                     padding-bottom: 10%;
                 }
 
+                .home_jump {
+                    animation:home_jump 1.0s 3;
+                    position:absolute;
+                }
+
+                @keyframes home_jump {
+                    0%{ transform:translateY(0%) }
+                    25%{ transform:translateY(-15%) }
+                    50%{ transform:translateY(0%) }
+                    75%{ transform:translateY(-15%) }
+                    100%{ transform:translateY(0%) }
+                }
                 // @include responds(medium){
                 //     width: 50%;
                 //     // background-size: 50%;
@@ -330,27 +352,38 @@ $dblue:#7DC7C5;
                 // }
                 width: 100%;    
                text-align: center;
-               background-image: url(../img/home/home_modify_b.png);
-               background-repeat: no-repeat;
-               background-position:bottom;
-               background-size: 80%;
+            //    background-image: url(../img/home/home_modify_b.png);
+            //    background-repeat: no-repeat;
+            //    background-position:bottom;
+            //    background-size: 80%;
                position: relative;
 
                     @include responds(medium){
                     width: 50%;
                     }
-    
+                .head_box{
+                    width: 80%;
+                    height:0;
+                    padding-bottom: 80%;
+                    // background-color: #ccc;
+                    position: relative;
+                    margin: auto;
+                    background-image: url(../img/home/home_modify_b.png);
+                    background-repeat: no-repeat;
+                    background-position:bottom;
+                    background-size: 100%;
+
+                }
                 img{
                     width: 100%;
-
-                    @include responds(medium){
-                        position: absolute;
-                        width: 80%;
-                        left: 0;
-                        right: 0;
-                        bottom: 15%;
-                        margin: auto;
-                        }
+                    // height: 100%;
+                 
+                     position: absolute;
+                     top:0;
+                     left:0;
+                     right: 0;
+                     bottom: 0;
+                     margin: auto;                      
                 }
             }
     
@@ -364,7 +397,7 @@ $dblue:#7DC7C5;
  
     
                 .opt_btn{
-                    margin: 10px 0px;
+                    // margin: 10px 0px;
                     text-align: center;
 
                     .opt_btn_head{
@@ -373,13 +406,18 @@ $dblue:#7DC7C5;
                         // margin: 0 10px;
                         padding: 5px 20px;
                         // width: 80%;
-                        border-radius: 15px;
+                        border-radius: 15px 15px 0px 0px;
+                        border-top: 3px solid #639b9f;
+                        border-left: 3px solid #639b9f;
+                        border-right: 3px solid #639b9f;
+                        border-bottom: 0x solid #639b9f;
+
                         background-color: $col_modify_box;
                         position: relative;
                         text-align: center;
                         color: #333333;
                         text-decoration: none;
-                        box-shadow: 0px 2px 0px 1px $col_modify_boxshadow;
+                        // box-shadow: 0px 2px 0px 1px $col_modify_boxshadow;
         
                         // &:before{
                         //     content: '';
@@ -400,23 +438,27 @@ $dblue:#7DC7C5;
                     width: 100%;
                     box-sizing: border-box;
                     border: 5px solid $col_modify_box;
-                    background-color: #fff;
+                    background-color: #efefef;
                     border-radius: 30px;
                     box-shadow: 2px 2px 0px 3px $col_modify_boxshadow;
         
                     display: flex;
                     flex-wrap: wrap;
                     margin: auto;
-                    // width: 100%;
                     
                     .opt_item{
                         box-sizing: border-box;
                         width: 50%;
-                        height: calc(20vh);
+                        // height: calc(20vh);
                         text-align: center;
                         padding: 20px 0px;
                         img{
-                            height: 100%;
+                            cursor: pointer;
+                            width:50%;
+                            // height: 100%;
+                            &:hover {
+                                filter: drop-shadow(0px 0px 10px $col_btn_pink);
+                            }
                         }
                     }
     
@@ -453,14 +495,21 @@ $dblue:#7DC7C5;
 
 
     .game_rail{
-        width: 10%;
-        position: absolute;
-        left: -2.4%;
-        top: 11%;
-      transform: rotate(0deg);
-    
+        display: none;
+        @include responds(xlarge){
+            display: block;
+            width: 10%;
+            position: absolute;
+            left: -2.4%;
+            top: 11%;
+            transform: rotate(0deg);
+        }
     }
-        .game_train2{
+
+    .game_train{
+        display: none;
+        @include responds(xlarge){
+            display: block;
             width: 9.8%;
             position: absolute;
             left: 0%;
@@ -470,9 +519,12 @@ $dblue:#7DC7C5;
             transform-origin: left 100%;
             animation: spin 5s 3;
         }
-        @keyframes spin {
-           to{transform: rotate(1turn);} 
-        }
+
+    }
+
+    @keyframes spin {
+    to{transform: rotate(1turn);} 
+    }
            
 
     &:before{
@@ -486,6 +538,7 @@ $dblue:#7DC7C5;
         animation: beachWave 8s infinite linear;
         // background-position: 0 100px;
     }
+
     .container{
         position: relative;
         padding-bottom: 100px;

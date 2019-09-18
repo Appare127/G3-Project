@@ -80,8 +80,8 @@
                                 <input type="text" name="head_name" id="">
                             </td>
                             <td>
-                                <input type="file" name="upFile" accept="image/*"><br>
-                                <img src="" id="imgPreview">
+                                <input type="file" name="head_img" accept="image/*"><br>
+                                <!-- <img src="" id="imgPreview"> -->
                             </td>
                             <td>
                                 <input type="text" name="head_environment1" id="">
@@ -119,11 +119,11 @@
                         // echo "</pre>";
                     ?>
                         <!-- 內容列 -->
-                        <form action="updateAnimalHeadData.php">
+                        <form action="updateAnimalHeadData.php" method="post" enctype="multipart/form-data">
                           <tr>
                             <td><?php echo $headRow['head_no'];?><input name="head_no" type="hidden" value="<?= $headRow['head_no']?>"></td>
                             <td><input type="text" name="head_name" value="<?= $headRow['head_name']?>" readonly="true"></td>
-                            <td><img width='150' src="<?= $headRow['head_img']?>" alt=""></td>
+                            <td><img width='75' src="../<?= $headRow['head_img']?>" alt=""><input type="file" id="aa" name="head_img" style="display:none"></td>
                             <!-- <td><input type="text" name="head_img" value="<?= $headRow['head_img']?>" readonly="true"></td> -->
                             <td><input type="text" name="head_environment1" value="<?= $headRow['head_environment1']?>" readonly="true"></td>
                             <td><input type="text" name="head_environment2" value="<?= $headRow['head_environment2']?>" readonly="true"></td>
@@ -188,13 +188,14 @@
   <script>
     function reversechange(e){
     console.log(e.target.parentNode.parentNode.children[1]);   
+    console.log(e.target.parentNode.parentNode.children[2].lastChild);   
     e.target.parentNode.parentNode.children[1].firstChild.removeAttribute("readonly");   
     e.target.parentNode.parentNode.children[2].firstChild.removeAttribute("readonly");   
+    e.target.parentNode.parentNode.children[2].lastChild.style.display='block';
     e.target.parentNode.parentNode.children[3].firstChild.removeAttribute("readonly");   
     e.target.parentNode.parentNode.children[4].firstChild.removeAttribute("readonly");   
     e.target.parentNode.parentNode.children[5].firstChild.removeAttribute("readonly");   
     e.target.parentNode.parentNode.children[6].firstChild.removeAttribute("readonly");   
-    e.target.parentNode.parentNode.children[7].firstChild.removeAttribute("readonly");   
     }
       
     var btn1= document.getElementsByClassName('btn1');

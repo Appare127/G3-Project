@@ -19,13 +19,13 @@
     <div class="registered_box">
             <div id="registered_del" class="registered_del"></div>
         <p>會員註冊</p>
-        <form action="#">
-            <p> <input type="text" placeholder="帳號*"></p>
-            <p> <input type="password" placeholder="密碼*"> </p>
+        <form action="#" id="myForm">
+            <p> <input type="text" name="memId" placeholder="帳號*"></p>
+            <p> <input type="password" name="memPsw" placeholder="密碼*"> </p>
             <p> <input type="password" placeholder="確認密碼*"> </p>
-            <p> <input type="text" placeholder="電子郵件*"></p>
+            <p> <input type="text" name="email" placeholder="電子郵件*"></p>
         </form>
-        <button class="btn_cloud">完成<span class="btn_cloudeffect"></span>
+        <button class="btn_cloud" id="register_finish" >完成<span class="btn_cloudeffect"></span>
             <span class="btn_cloudeffect"></span>
             <span class="btn_cloudeffect"></span>
             <span class="btn_cloudeffect"></span></button>
@@ -167,6 +167,17 @@
         $id('registered_gary').style.display = 'block';   
     }
 
+    function sendRegisteration(){
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function(){
+			console.log( xhr.responseText);
+		}
+
+		xhr.open("post","php/login/register.php",true);
+		var myForm = new FormData(document.getElementById("myForm"))
+		xhr.send(myForm);
+    }
+
 
     window.addEventListener('load', function () {
         //---------檢查使用者是否已登入, 並取回登入資訊
@@ -182,10 +193,11 @@
         $id("registered").onclick =  registered;
         //===設定btnLoginCancel.onclick 事件處理程序是 cancelLogin
         
-         $id("registered_del").onclick = cancelRegistered;
+        $id("registered_del").onclick = cancelRegistered;
         // $id("registered_del").onclick = console.log(123);
-        
-        
+
+        $id("register_finish").onclick = sendRegisteration;
+        //====送出註冊完成的資料        
         
         
     })

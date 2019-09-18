@@ -1,5 +1,5 @@
 <?php
-
+    $errMsg="";
     try {
         require_once("connectg3.php");
         

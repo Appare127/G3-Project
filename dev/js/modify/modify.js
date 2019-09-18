@@ -511,7 +511,7 @@ function getpartlist(){
         if (xhr.status == 200){
             // console.log(xhr.responseText);
             partsobj = JSON.parse(xhr.responseText);
-            // console.log(partsobj);
+            console.log(partsobj);
             // 抓到jason物件資料後，直接丟進建立html的函式裡
             buildlist(partsobj);
             
