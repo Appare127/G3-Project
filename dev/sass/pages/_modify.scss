@@ -237,6 +237,8 @@
                 position: absolute;
                 top: 0;
                 left: 0;
+            }
+            #bg_canvas.ON{
                 cursor: crosshair;
             }
             .geth{
@@ -453,10 +455,18 @@
                         padding-left: 5%;
                     }
                     .stitle{
+                        display: inline-block;
+                        vertical-align: middle;
                         padding-top: 0;
                         padding-bottom: 0;
                         text-align: center;
                         padding-left: 0;
+                        margin-right: 10px;
+                    }
+                    .pen_icon{
+                        display: inline-block;
+                        vertical-align: middle;
+                        width: 30px;
                     }
                     .createColorBar{
                         display: inline-block;

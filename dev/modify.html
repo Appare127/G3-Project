@@ -50,13 +50,22 @@
                     <img class="body_pic" src="img/modify/p_body_giraffe.png" alt="">
                     <img class="head_pic" src="img/modify/p_head_giraffe.png" alt="">
                     <img class="bg_pic" src="img/modify/bg_blank.png" alt="">
+                    <img class="tempbg_pic" src="" alt="">
+                    <img class="amlbg_pic" src="" alt="">
                 </div>
 
                 <canvas id="aml_canvas"></canvas>
 
                 <form class="btn_box" method="post" accept-charset="utf-8" id="form1" enctype="multipart/form-data">
                     
+                    <!-- 動物圖檔 -->
                     <input name="url_data" id='url_data' type="hidden"/>
+                    <!-- 動物背景 -->
+                    <input name="bg_data" id='bg_data' type="hidden"/>
+                    <!-- 動物圖加背景合併 -->
+                    <input name="amlbg_data" id='amlbg_data' type="hidden"/>
+
+                    <!-- 使用者名稱、動物名稱、3個環境參數、動物生命力、動物跳躍力 -->
                     <input name="user_no" id='user_no' type="hidden"/>
                     <input name="myanimal_name" id='myanimal_name' type="hidden"/>
                     <input name="environ_adapt_1" id='environ_adapt_1' type="hidden"/>
@@ -211,13 +220,13 @@
 
                 <div class="bgimg_box">
                     <div class="geth"></div>
-                    <canvas id="bg_canvas"></canvas>
+                    <canvas id="bg_canvas" class=""></canvas>
                     <img class="temp_aml_pic" src="" alt="">
                     <!-- <img src="img/customize/user2_aml.png" alt="" class="cloneimg"> -->
                 </div>
 
                 <div class="btn_box">
-                        <a href="javascript: dopic()" class="btn_cloudb">
+                        <a href="javascript: back()" class="btn_cloudb">
                                 返回
                             @@include('template/btn_sp.html')
                         </a>
@@ -284,12 +293,13 @@
                                 <input type="checkbox" name="btn_cir" id="cir_check">
                                 <label for="cir_check" class="btn_bar">
                                     <div class="btn_cir"></div>
-                                    <p class="draw_OFF">view</p>
-                                    <p class="draw_ON">edit</p>
+                                    <!-- <p class="draw_OFF">view</p>
+                                    <p class="draw_ON">edit</p> -->
                                 </label>
                             </li>
                             <li class="pen_box">
-                                <p class="stitle">手動畫圖</p>
+                                <p class="stitle">手動畫圖_OFF</p>
+                                <img class="pen_icon" src="img/modify/pen_cancel.png" alt="">
                                 <p class="">畫筆顏色:</p>
                                 <div class="pen_white"></div>
                                 <input type="range" name="" id="" class="createColorBar" min="0" max="360" step="1" value="0">
@@ -328,7 +338,11 @@
         <div class="close_remind">X</div>
     </div>
 
-    <!-- <img src="" alt="" id="testimg"> -->
+    <img src="" alt="" id="testimg">
+    <img src="" alt="" id="testimg2">
+
+    <canvas id="amlbg_canvas"></canvas>
+
     @@include('template/footer.html')
 
     <script src="js/modify/radar.js"></script>
