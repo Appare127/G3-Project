@@ -4,7 +4,9 @@
     .login_gary.login_show {
         display:block;
     }
-
+    .login_box_title{
+        font-size: $lg_fz;
+    }
 .login_gary {
     width: 100%;
     height: 100%;
@@ -14,7 +16,7 @@
     position: fixed;
     top: 0;
     z-index: 5;
-
+    
     .login_box {
         @include btn_cloud(30%, $col_btn_pink);
         position: absolute;
@@ -38,8 +40,8 @@
             margin: auto;
             width: 120px;
             margin-top: 25px;
-            font-size: $s_fz;
-            background: 0%;
+            // font-size: $s_fz;
+            font-family: Microsoft JhengHei;
             padding: 5px;
         }
         .login_del {
@@ -62,13 +64,14 @@
             margin-top: 25px;
 
             input {
-                background: #f9f6d2;
+                // background: #f9f6d2;
                 cursor: text;
-                border-radius: 5px;
+                border-radius: 10px;
                 padding: 8px;
                 padding-left: 15px;
                 font-weight: 800;
-                width: 120px
+                width: 120px;
+                outline:none;
             }
         }
         
@@ -115,7 +118,7 @@
 
         
                 margin-top: 20px;
-                font-size: $m_fz;
+                // font-size: $m_fz;
             }
         }
     }
