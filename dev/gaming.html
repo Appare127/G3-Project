@@ -160,9 +160,12 @@ function updateScoreMoney(){
         }
     }
     // sessionStorage['game_record'] = timer;
-    if(timer>sessionStorage['game_record']){
+    if(timer>sessionStorage['game_record'] || sessionStorage['game_record']==''){
         saveImage();
-        var url = `php/game/userUpdateToDb.php?user_no=${sessionStorage['user_no']}&game_record=${timer}&game_money=${money}&game_date=${new Date().toString().replace("GMT+0800 (台北標準時間)","")}`;
+        var now = new Date(); 
+        let playTime = now.getFullYear() +'/'+ (Number(now.getMonth())+1*1) +'/' + now.getDate() + ' ' + now.getHours() +':'+now.getMinutes();
+        console.log(playTime);
+        var url = `php/game/userUpdateToDb.php?user_no=${sessionStorage['user_no']}&game_record=${timer}&game_money=${money}&game_date=${playTime}`;
         sessionStorage['test'] = url;
     }else {
         var url = `php/game/userUpdateToDb.php?user_no=${sessionStorage['user_no']}&game_record=${sessionStorage['game_record']}&game_money=${money}&game_date=${sessionStorage['game_date']}` ;

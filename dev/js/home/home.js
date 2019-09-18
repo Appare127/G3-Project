@@ -37,7 +37,7 @@ function modifyAnimation(){
             document.querySelectorAll('.modify_bg_ab img')[j].classList.remove('treeGrow');
         }
         for(var x=0; x<4; x++){
-            document.querySelectorAll('.modify_pic img')[x].classList.add('home_jump');
+            document.querySelectorAll('.modify_pic img')[x].classList.remove('home_jump');
         }
 
     }
