@@ -23,18 +23,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <title>CoreUI Free Bootstrap Animal Head Template</title>
   <style>
-    input[name="body_img"] {
-      width: 200px;
-    }
-    input[name="body_img_combination"] {
-      width: 180px;
-    }
-    .body_btnimg{
-      padding-top:23px;
-    }
-    .tr_title{
-      border: 2px solid #ccc;
-    }
+    
   </style>
   
   <!-- Icons-->
@@ -271,7 +260,7 @@
     })
 
     // 控制修改選單圖片時的預覽
-    var btnimg=document.getElementsByClassName('btnimg');
+    var btnimg=document.getElementsByClassName('body_btnimg');
 
     function changeImg(e){
       let file = e.target.files[0];
