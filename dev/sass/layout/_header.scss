@@ -54,20 +54,23 @@
         .bar1{
             width: 35px;
             height: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
+            border-radius:5px;
+            background-color: cadetblue;
             margin: 5px 0;
             transition: 0.4s;
         }
         .bar2{
             width: 35px;
             height: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
+            border-radius:5px;
+            background-color: cadetblue;
             margin: 5px 0px 0px 0px;
             transition: 0.4s;
         }
         .bar3{
             width: 35px;
             height: 5px;
+            border-radius:5px;
             background-color: rgba(0, 0, 0, 0);
             margin: 0px 0px 0px 0px ;
             transition: 0.4s;
@@ -75,7 +78,8 @@
         .bar4{
             width: 35px;
             height: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
+            border-radius:5px;
+            background-color: cadetblue;
             margin: 0px 0px 5px 0px ;
             transition: 0.4s;
         }
@@ -100,9 +104,20 @@
             display: flex;
             justify-content: center;
             line-height: 60px;
-            // margin: 10px;
-            border-bottom: 3px solid rgba(240,240,240,0.5);
-        
+            border-bottom: 1px solid rgba(240,240,240,0.5);
+            padding: 10px;
+            &:hover{
+                .menu_icon{
+                    animation: headShake 0.15s linear infinite;
+                }
+            }
+@keyframes headShake {
+    0%{transform: rotate(0deg);}
+    25%{transform: rotate(20deg);}
+    50%{transform: rotate(0deg);}
+    75%{transform: rotate(-20deg);}
+    100%{transform: rotate(0deg);}
+}
             .menu_icon{
                 width: 40px;
                 height: 40px;
@@ -390,6 +405,7 @@
 
             &:hover{
                 border-bottom: 3px solid rgba(0, 0, 0, 0.4);
+               
             }
             
             .text{
