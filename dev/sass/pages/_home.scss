@@ -40,7 +40,7 @@ $dblue:#7DC7C5;
 
 }
 
-//////////////////////
+//==================================第一屏
 
 .home_header,.home_game{
     img{
@@ -125,23 +125,7 @@ $dblue:#7DC7C5;
         //     z-index: 1;
         // }
         
-    
-        img[alt*="hd_rail"]{
             
-            display: none;
-            @include responds(xlarge){
-                display: block;
-                position: absolute;
-                width: 50%;
-                // left: -33%;
-                // top: 40%;
-                right: -27%;
-                bottom: 27%;
-                
-            }
-        
-        }
-    
         img[alt*="hd_rail_left"]{
             
             display: none;
@@ -155,11 +139,27 @@ $dblue:#7DC7C5;
             }
         
         }
+    
+        img[alt*="hd_rail_right"]{
+            
+            display: none;
+            @include responds(medium){
+                display: block;
+                position: absolute;
+                width: 50%;
+                // left: -33%;
+                // top: 40%;
+                right: -27%;
+                bottom: 27%;
+                
+            }
         
-        img[alt*="hd_train"]{
+        }
+
+        img[alt*="hd_train_right"]{
     
             display: none;
-            @include responds(xlarge){
+            @include responds(medium){
                 
                 display: block;
                 position: absolute;
@@ -171,16 +171,16 @@ $dblue:#7DC7C5;
                 // width: 15%;
                 // left: -25%;
                 // top: 35%;
-                animation:train2 10s infinite;
+                animation:trainMove 5s infinite;
             }
         
         }
     }
     
 
-    @keyframes train2{
+    @keyframes trainMove{
         0%{right: 11%}
-        100%{right:-100%;}
+        100%{right:-50%;}
     };
 
 
@@ -397,7 +397,7 @@ $dblue:#7DC7C5;
  
     
                 .opt_btn{
-                    margin: 10px 0px;
+                    // margin: 10px 0px;
                     text-align: center;
 
                     .opt_btn_head{
@@ -406,13 +406,18 @@ $dblue:#7DC7C5;
                         // margin: 0 10px;
                         padding: 5px 20px;
                         // width: 80%;
-                        border-radius: 15px;
+                        border-radius: 15px 15px 0px 0px;
+                        border-top: 3px solid #639b9f;
+                        border-left: 3px solid #639b9f;
+                        border-right: 3px solid #639b9f;
+                        border-bottom: 0x solid #639b9f;
+
                         background-color: $col_modify_box;
                         position: relative;
                         text-align: center;
                         color: #333333;
                         text-decoration: none;
-                        box-shadow: 0px 2px 0px 1px $col_modify_boxshadow;
+                        // box-shadow: 0px 2px 0px 1px $col_modify_boxshadow;
         
                         // &:before{
                         //     content: '';
@@ -433,7 +438,7 @@ $dblue:#7DC7C5;
                     width: 100%;
                     box-sizing: border-box;
                     border: 5px solid $col_modify_box;
-                    background-color: #fff;
+                    background-color: #efefef;
                     border-radius: 30px;
                     box-shadow: 2px 2px 0px 3px $col_modify_boxshadow;
         
@@ -490,14 +495,21 @@ $dblue:#7DC7C5;
 
 
     .game_rail{
-        width: 10%;
-        position: absolute;
-        left: -2.4%;
-        top: 11%;
-      transform: rotate(0deg);
-    
+        display: none;
+        @include responds(xlarge){
+            display: block;
+            width: 10%;
+            position: absolute;
+            left: -2.4%;
+            top: 11%;
+            transform: rotate(0deg);
+        }
     }
-        .game_train2{
+
+    .game_train{
+        display: none;
+        @include responds(xlarge){
+            display: block;
             width: 9.8%;
             position: absolute;
             left: 0%;
@@ -507,9 +519,12 @@ $dblue:#7DC7C5;
             transform-origin: left 100%;
             animation: spin 5s 3;
         }
-        @keyframes spin {
-           to{transform: rotate(1turn);} 
-        }
+
+    }
+
+    @keyframes spin {
+    to{transform: rotate(1turn);} 
+    }
            
 
     &:before{
@@ -523,6 +538,7 @@ $dblue:#7DC7C5;
         animation: beachWave 8s infinite linear;
         // background-position: 0 100px;
     }
+
     .container{
         position: relative;
         padding-bottom: 100px;

@@ -27,14 +27,18 @@ function modifyAnimation(){
         setTimeout(function(){document.querySelectorAll('.modify_bg_ab img')[2].classList.add('treeGrow');},300);
         setTimeout(function(){document.querySelectorAll('.modify_bg_ab img')[1].classList.add('treeGrow');},600);
         setTimeout(function(){document.querySelectorAll('.modify_bg_ab img')[0].classList.add('treeGrow');},900);
-        //動物跳起來
-        document.querySelectorAll('.modify_pic img')[0].classList.add('home_jump');
+        //動物跳起來(有分開4個圖片)
+        for(var x=0; x<4; x++){
+            document.querySelectorAll('.modify_pic img')[x].classList.add('home_jump');
+        }
         // console.log(document.querySelectorAll('.modify_pic img')[0]); 
     }else {
-        for(var j=0; j<3; j++){
+        for(var j=0; j<4; j++){
             document.querySelectorAll('.modify_bg_ab img')[j].classList.remove('treeGrow');
         }
-        document.querySelectorAll('.modify_pic img')[0].classList.remove('home_jump');
+        for(var x=0; x<4; x++){
+            document.querySelectorAll('.modify_pic img')[x].classList.add('home_jump');
+        }
 
     }
 }
