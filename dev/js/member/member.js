@@ -40,7 +40,7 @@ tablinks[3].addEventListener('click', function () { open_page(event, 'member_lov
 window.addEventListener('load',
   function () {
     document.getElementById("default_open").click();
-    // document.getElementById("default_open").classList.add("red");
+    document.getElementById("default_open").classList.add("tablink_color");
   }
 );
 
@@ -67,22 +67,42 @@ window.addEventListener('load',function(){
 
 // <!------ ↑上傳大頭貼↑ ----->
 
-// <!------ ↓修改會員基本資料↓ ----->
-function  updateBasic(){
+//<!------ ↓修改/儲存會員基本資料↓ ----->
+
+//按了修改按鈕要開啟儲存 並且讓input可以修改
+function updateBasic(){
   document.getElementById('btn_edit').style.display='none';
+  document.getElementById('updated_it').style.margin='auto';
   document.getElementById('updated_it').style.display='block';
-  x=document.querySelectorAll("input[readonly='readonly']");
+ 
+  let redonlyOpen = document.querySelectorAll("input[readonly='readonly']");
 
-  for (i = 0; i < x.length; i++) {
-    x[i].readOnly = false;
+  for (let i = 0; i < redonlyOpen.length; i++) {
+    redonlyOpen[i].readOnly = false;//打開可以修改的功能
+  }
 }
 
+//按了儲存按鈕要開啟修改 並且讓input關閉修改
+function stockpileBasic(){
+  document.getElementById('btn_edit').style.display='block';
+  document.getElementById('btn_edit').style.margin='auto';
+  document.getElementById('updated_it').style.display='none';
+  let redonlyOpen = document.querySelectorAll("input[readonly='readonly']");
+
+  for (let i = 0; i < redonlyOpen.length; i++) {
+    redonlyOpen[i].readOnly = true;//關閉可以修改的功能
+  }
 }
-window.addEventListener('load',function(){
-  document.getElementById('btn_edit').onclick = updateBasic});
 
+window.addEventListener('load',
+  function(){
+    document.getElementById('btn_edit').onclick = updateBasic;
+    document.getElementById('updated_it').onclick = stockpileBasic;
+  }
+);
 
-// <!------ ↑修改會員基本資料↑ ----->
+// <!------ ↑修改/儲存會員基本資料↑ ----->
+
 
 // <!------ ↓訂單明細收合↓----->
 var orderbtns=document.getElementsByClassName('js_order_show');
@@ -90,7 +110,7 @@ var orderDetails = document.getElementsByClassName('myorder_item_detail');
   
 function showDetail(e){
   var itemDetails=e.target.parentNode.parentNode.parentNode.nextElementSibling;
-  console.log(itemDetails.classList);
+  // console.log(itemDetails.classList);
 
     if(itemDetails.style.display=='block'){
       itemDetails.style.display = 'none';
@@ -278,5 +298,49 @@ function setLove(){
 }
 window.addEventListener('load',setLove,false);
 // <!------ ↑取消收藏要消失div以及改資料庫資料↑ ----->
+
+
+//<!------ ↓alert訊息↓ ----->
+function alert(e){
+  $(" body").append('<div id="msg"><div id="msg_top">資訊<span class="msg_close">×</span></div><div id="msg_cont">'+e+'</div><div class="msg_close" id="msg_clear">確定</div></div>');
+$(".msg_close").click(function (){
+$("#msg").remove();
+
+});
+}
+
+
+// $(".order_cancel").click(function () {
+//   alert('測試');
+//   e.preventDefault();
+// });
+
+
+function alertcancel(){
+
+var order_cancel = document.getElementsByClassName('order_cancel');
+var rev_cancel = document.getElementsByClassName('rev_cancel');
+
+for(let y=0; y<order_cancel.length; y++){
+  order_cancel[y].addEventListener('click',function(e){
+  alert('您好:<br>已收到訂單取消請求，<br>待客服人員確認中...');
+  // e.preventDefault();
+  });
+};
+
+for(let z=0; z<rev_cancel.length; z++){
+  rev_cancel[z].addEventListener('click',function(e){
+  alert('您好:<br>已收到預約取消請求，<br>待客服人員確認中...');
+  // e.preventDefault();
+  });
+};
+
+
+
+}
+
+window.addEventListener('load',alertcancel,false);
+
+//<!------ ↑alert訊息↑ ----->
 
 
