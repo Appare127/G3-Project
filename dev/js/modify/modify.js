@@ -162,12 +162,13 @@ function drawbg_canvas(){
     img1.onload = function(){
         bgcontext.drawImage(img1,0,0,pic_width,pic_height);
     };
-
 }
 
 
 // 確認完成按下去後
 function dopic(){
+
+    nextstep();
     
     // 先判斷sessionStorage有沒有會員登入資料，有才往下做轉圖檔工作
     if (sessionStorage['user_name']){
@@ -879,20 +880,16 @@ function init(){
     document.getElementsByClassName('close_remind')[0].addEventListener('click',remove_show);
     document.getElementsByClassName('close_remind')[1].addEventListener('click',remove_show);
 
-
     // 剛載進頁面時，先做一次canvas繪製預設的圖片
     drawcanvas();
 
-
     // 上傳圖片的file事件
     document.getElementById('up_bg_file').addEventListener('change',read_bgimg);
-
 
     // 背景canvas的滑鼠觸發事件
     bg_canvas.addEventListener('mousedown',drawdown);
     bg_canvas.addEventListener('mousemove',drawmove);
     bg_canvas.addEventListener('mouseup',drawup);
-
 
     // 顏色條的change觸發事件，把變動的色相轉成RGB值
     document.getElementsByClassName('createColorBar')[0].addEventListener('change',HSV2RGB);
@@ -902,9 +899,11 @@ function init(){
     // 畫筆大小調整條的事件觸發
     document.getElementById('drawsize').addEventListener('change',pensize);
 
-
+    // 手畫畫圖canvas的開關事件觸發
     document.getElementById('cir_check').addEventListener('click',switch_bgcanvas);
 
+    // 下一步按鈕的事件觸發
+    document.getElementById('next_btn').addEventListener('click',nextstep);
 
 }
 
