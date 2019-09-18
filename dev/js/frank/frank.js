@@ -3,9 +3,12 @@ window.addEventListener("resize", resize, false);
 function init(){
        owlCarousel_img();
        favorite();
-      // frank_rank();
-      frank_vote_rank2();
+     
       frank_vote_rank();
+      activity_button();
+
+   
+      
 }
 function resize(){
    owlCarousel_img();
@@ -74,7 +77,6 @@ $(document).ready(function(){
 })
 $(document).ready(function(){
     $('.frank_expand_button').click(function(){
-   
         $(this).parent().animate({bottom:'-800px'},1);
         console.log($(this).parent().next());  
     })
@@ -97,20 +99,48 @@ function frank_vote(){
     if(rank1.readyState==4){
         var vote_rank= JSON.parse(rank1.responseText);
    
-      console.log(vote_rank);
+     
      }
 }
 
-function  frank_vote_rank2(){
-    rank2=frank_rank();
-    rank2.open("GET","php/frank/vote_rank2.php",true);
-    rank2.onreadystatechange = frank_vote2;
-    rank2.send(null);
+function  join_xml(){
+    join_item=frank_rank();
+    join_item.open("GET","php/frank/join.php?user_no="+sessionStorage.user_no,true);
+    join_item.onreadystatechange = join_php;
+    join_item.send(null);
+  
 }
-function frank_vote2(){
-    if(rank2.readyState==4){
-        var vote_rank2= JSON.parse(rank2.responseText);
-          console.log("rank2");
-     console.log(vote_rank2);
+function join_php(){
+    if(join_item.readyState==4  && join_item.status==200){
+        var join_arr= JSON.parse(join_item.responseText);
+   
+         console.log(join_arr);
+         
+        
+  // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }
+}
+function activity_button(){
+$("#activity_join").click(function() {
+join();
+
+
+});
+
+
+}
+ function join(){
+ 
+     
+     
+    // 先判斷sessionStorage有沒有會員登入資料，有才往下做轉圖檔工作
+    if (sessionStorage['user_name']){
+        //要拿到my_animal_img '  my_animal_bg_img ' my_animal_name  '  user_no
+         join_xml();
+        console.log(sessionStorage);
+       
+    }else{
+   //尚未登入
+               $id('login_gary').style.display = 'block';
     }
 }
