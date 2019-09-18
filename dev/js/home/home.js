@@ -29,7 +29,7 @@ function modifyAnimation(){
         setTimeout(function(){document.querySelectorAll('.modify_bg_ab img')[0].classList.add('treeGrow');},900);
         //動物跳起來
         document.querySelectorAll('.modify_pic img')[0].classList.add('home_jump');
-        console.log(document.querySelectorAll('.modify_pic img')[0]); 
+        // console.log(document.querySelectorAll('.modify_pic img')[0]); 
     }else {
         for(var j=0; j<3; j++){
             document.querySelectorAll('.modify_bg_ab img')[j].classList.remove('treeGrow');
@@ -552,11 +552,19 @@ for (let i=0; i<head_arr.length; i++){
 
     let div = document.createElement('div');
     div.classList = 'opt_item';
+
     let img = document.createElement('img');
     img.src = head_arr[i].head_img;
-    console.log(img.src);
+    img.classList = 'picon';
+    // console.log(img.src);
+
+    let p = document.createElement('p');
+    p.innerHTML = head_arr[i].head_ch_name;
+
     div.appendChild(img);
+    div.appendChild(p);
     head_div.appendChild(div);
+
     // let li = document.createElement('li');
     // let img = document.createElement('img');
     // let input = document.createElement('input');
@@ -577,7 +585,39 @@ for (let i=0; i<head_arr.length; i++){
     // li.appendChild(input);
     // li.appendChild(p);
     // head_ul.appendChild(li);
+
+       // 抓到選單的圖片，全部建立click聆聽功能
+       let picon = document.getElementsByClassName('picon');
+       for(let i=0; i<picon.length; i++){
+           picon[i].addEventListener('click',changeParts_home);
+       };
+
 }
+
+
+function changeParts_home(e){
+
+    // 從點到的圖片網址裡去抓出部件種類出來
+    let urlstr = e.target.src;
+    let type_x = urlstr.lastIndexOf('/');
+    // console.log(type_x);
+    let type_y = urlstr.indexOf('_');
+    let type_name = urlstr.substring(type_x +1 ,type_y);
+    // console.log(type_name);
+
+    // // 從點到的圖片網址裡去抓出動物名稱出來
+    let animal_y = urlstr.lastIndexOf('.');
+    let animal_name = urlstr.substring(type_y +1 ,animal_y);
+    // console.log(animal_name);
+
+    // // 用if去判斷不同部位選擇要更換相應的圖片
+    if (type_name == 'head'){
+        document.getElementsByClassName('head_pic')[0].src = `img/modify/p_head_${animal_name}.png`;
+    }
+    
+
+}
+
 
 
 
