@@ -3,12 +3,8 @@ window.addEventListener("resize", resize, false);
 function init(){
        owlCarousel_img();
        favorite();
-     
       frank_vote_rank();
       activity_button();
-
-   
-      
 }
 function resize(){
    owlCarousel_img();
@@ -70,15 +66,15 @@ $(document).ready(function(){
 })
 $(document).ready(function(){
         $('.frank_expand_arrow').click(function(){
-        console.log($(this).index());   
+  
         $(this).parent().next().animate({bottom:'0px'},1);
-        console.log($(this).parent().next());  
+     
 })
 })
 $(document).ready(function(){
     $('.frank_expand_button').click(function(){
         $(this).parent().animate({bottom:'-800px'},1);
-        console.log($(this).parent().next());  
+      
     })
 })
 function frank_rank(){
@@ -98,11 +94,35 @@ function  frank_vote_rank(){
 function frank_vote(){
     if(rank1.readyState==4){
         var vote_rank= JSON.parse(rank1.responseText);
-   
+  //   console.log(vote_rank);
+
+
+for (let i = 0; i < vote_rank.length -4; i++) {
+     $("#frank_player_more").append($("#frank_player_items").clone().attr('id','frank_player_items'+i));
+    
+ 
+     $(`#frank_player_items${i} .frank_players_title span:eq(1)`).attr('id','aid'+(i+3));
+     $(`#frank_player_items${i} h3:eq(0)`).attr('id','id'+(i+3))
+     $(`#frank_player_items${i} .frank_player_text span:eq(1)`).attr('id','vote'+(i+3));
+     $(`#frank_player_items${i} .frank_player_pic img:eq(0)`).attr('id','bg'+(i+3));
+     $(`#frank_player_items${i} .frank_player_pic img:eq(1)`).attr('id','ag'+(i+3));
+}
+ 
+   for (let i = 0; i < vote_rank.length -1; i++) {
+    $id("vote"+`${i}`).innerText=vote_rank[i]["vote"];
+    $id("bg"+`${i}`).src=vote_rank[i]["bg_img"];
+    $id("ag"+`${i}`).src=vote_rank[i]["cmp_img"];
+    $id("aid"+`${i}`).innerText=vote_rank[i]["work_name"];
+    $id("id"+`${i}`).innerText=vote_rank[i]["user_name"];
+    $("input[name='work_no']")[i].value=vote_rank[i]["work_no"];
      
+ }
+  
      }
 }
-
+function $id(e){
+ return document.getElementById(e);
+}
 function  join_xml(){
     join_item=frank_rank();
     join_item.open("GET","php/frank/join.php?user_no="+sessionStorage.user_no,true);
@@ -113,10 +133,7 @@ function  join_xml(){
 function join_php(){
     if(join_item.readyState==4  && join_item.status==200){
         var join_arr= JSON.parse(join_item.responseText);
-   
-         console.log(join_arr);
-         
-        
+      
   // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
     }
 }
@@ -137,7 +154,7 @@ join();
     if (sessionStorage['user_name']){
         //要拿到my_animal_img '  my_animal_bg_img ' my_animal_name  '  user_no
          join_xml();
-        console.log(sessionStorage);
+     
        
     }else{
    //尚未登入
