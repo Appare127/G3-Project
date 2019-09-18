@@ -23,9 +23,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <title>CoreUI Free Bootstrap Animal Head Template</title>
   <style>
-    #imgPreview {
-			width: 100px;
-		}
+    /* input[name="head_img"] {
+      width: 200px;
+    }
+    input[name="head_img_combination"] {
+      width: 180px;
+    }
+    .image{
+      display:block;
+      margin:auto;
+      text-align:center;
+    }
+    .btnimg{
+      padding-top:6px;
+    }
+    .tr_title{
+      border: 2px solid #ccc;
+    } */
+    
   </style>
   <!-- Icons-->
   @@include('../html/layout/inputcss.html')
@@ -61,44 +76,50 @@
                     <tr>
                       <th>頭部編號</th>
                       <th>頭部名稱</th>
-                      <th>圖片</th>
+                      <th>選單圖</th>
+                      <th>組合圖</th>
                       <th>環境1適應力</th>
                       <th>環境2適應力</th>
                       <th>環境3適應力</th>
                       <th>狀態(0:下架; 1:上架)</th>
                       <th>頭部中文名稱</th>
-                      <th colspan="3"></th>
+                      <th colspan="2"></th>
                     </tr>
                   </thead>
                   <tbody>
                     <!-- 新增 -->
                     <form action="addAnimalHeadData.php" method="post" enctype="multipart/form-data">
                         <!-- 標題列 -->
-                        <tr>
+                        <tr class="tr_title">
                             <td></td>
                             <td>
                                 <input type="text" name="head_name" id="">
                             </td>
                             <td>
-                                <input type="file" name="head_img" accept="image/*"><br>
-                                <!-- <img src="" id="imgPreview"> -->
+                                <img width="45%" src="" id="head_img_preview">
+                                <input type="file" id="select_head_img" name="head_img" accept="image/*"><br>
+                                
                             </td>
                             <td>
-                                <input type="text" name="head_environment1" id="">
+                                <img img width='50%' src="" id="head_img_combination_preview">
+                                <input type="file" id="select_head_img_combination" name="head_img_combination" accept="image/*"><br>
                             </td>
                             <td>
-                                <input type="text" name="head_environment2" id="">
+                                <input type="text" name="head_environment1" id="" size="10">
                             </td>
                             <td>
-                                <input type="text" name="head_environment3" id="">
+                                <input type="text" name="head_environment2" id="" size="10">
                             </td>
                             <td>
-                                <input type="text" name="head_status" id="">
+                                <input type="text" name="head_environment3" id="" size="10">
                             </td>
                             <td>
-                                <input type="text" name="head_ch_name" id="">
+                                <input type="text" name="head_status" id="" size="10">
                             </td>
-                            <td colspan="3">
+                            <td>
+                                <input type="text" name="head_ch_name" id="" size="10">
+                            </td>
+                            <td colspan="2">
                                 <input class="btn btn-block btn-outline-primary addbtn" type="submit" value="新增">
                             </td>
                         </tr>
@@ -123,13 +144,13 @@
                           <tr>
                             <td><?php echo $headRow['head_no'];?><input name="head_no" type="hidden" value="<?= $headRow['head_no']?>"></td>
                             <td><input type="text" name="head_name" value="<?= $headRow['head_name']?>" readonly="true"></td>
-                            <td><img width='75' src="../<?= $headRow['head_img']?>" alt=""><input type="file" id="aa" name="head_img" style="display:none"></td>
-                            <!-- <td><input type="text" name="head_img" value="<?= $headRow['head_img']?>" readonly="true"></td> -->
-                            <td><input type="text" name="head_environment1" value="<?= $headRow['head_environment1']?>" readonly="true"></td>
-                            <td><input type="text" name="head_environment2" value="<?= $headRow['head_environment2']?>" readonly="true"></td>
-                            <td><input type="text" name="head_environment3" value="<?= $headRow['head_environment3']?>" readonly="true"></td>
-                            <td><input type="text" name="head_status" value="<?= $headRow['head_status']?>" readonly="true"></td>
-                            <td><input type="text" name="head_ch_name" value="<?= $headRow['head_ch_name']?>" readonly="true"></td>
+                            <td><img width="45%" src="../<?= $headRow['head_img']?>" alt="" class="image"><input type="file" class="btnimg" name="head_img" size="10" style="display:none"></td>
+                            <td><img width='50%' src="../<?= $headRow['head_img_combination']?>" alt=""><input type="file" class="combination_btnimg"name="head_img_combination" size="10" style="display:none"></td>
+                            <td><input type="text" name="head_environment1" value="<?= $headRow['head_environment1']?>" readonly="true" size="10"></td>
+                            <td><input type="text" name="head_environment2" value="<?= $headRow['head_environment2']?>" readonly="true" size="10"></td>
+                            <td><input type="text" name="head_environment3" value="<?= $headRow['head_environment3']?>" readonly="true" size="10"></td>
+                            <td><input type="text" name="head_status" value="<?= $headRow['head_status']?>" readonly="true" size="10"></td>
+                            <td><input type="text" name="head_ch_name" value="<?= $headRow['head_ch_name']?>" readonly="true" size="10"></td>
                             
                             <td>
                                 <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
@@ -184,28 +205,123 @@
   @@include('../html/layout/inputjs.html')
 
   
-  <!-- 控制哪些欄位可修改 -->
+  
   <script>
+
+    function $id(id) {
+			return document.getElementById(id);
+    }
+
+    // 控制哪些欄位可修改start  
     function reversechange(e){
-    console.log(e.target.parentNode.parentNode.children[1]);   
-    console.log(e.target.parentNode.parentNode.children[2].lastChild);   
-    e.target.parentNode.parentNode.children[1].firstChild.removeAttribute("readonly");   
-    e.target.parentNode.parentNode.children[2].firstChild.removeAttribute("readonly");   
-    e.target.parentNode.parentNode.children[2].lastChild.style.display='block';
-    e.target.parentNode.parentNode.children[3].firstChild.removeAttribute("readonly");   
-    e.target.parentNode.parentNode.children[4].firstChild.removeAttribute("readonly");   
-    e.target.parentNode.parentNode.children[5].firstChild.removeAttribute("readonly");   
-    e.target.parentNode.parentNode.children[6].firstChild.removeAttribute("readonly");   
+        console.log(e.target.parentNode.parentNode.children[1]);   
+        console.log(e.target.parentNode.parentNode.children[2].lastChild);   
+        e.target.parentNode.parentNode.children[1].firstChild.removeAttribute("readonly");   
+        e.target.parentNode.parentNode.children[2].firstChild.removeAttribute("readonly");   
+        e.target.parentNode.parentNode.children[2].lastChild.style.display='block';
+        e.target.parentNode.parentNode.children[3].firstChild.removeAttribute("readonly");   
+        e.target.parentNode.parentNode.children[3].lastChild.style.display='block';
+        e.target.parentNode.parentNode.children[4].firstChild.removeAttribute("readonly");   
+        e.target.parentNode.parentNode.children[5].firstChild.removeAttribute("readonly");   
+        e.target.parentNode.parentNode.children[6].firstChild.removeAttribute("readonly");   
+        e.target.parentNode.parentNode.children[7].firstChild.removeAttribute("readonly");   
     }
       
     var btn1= document.getElementsByClassName('btn1');
     function doFirst(){
-
       for(i=0; i<btn1.length;i++){
         btn1[i].addEventListener('click',reversechange,false);
       }
     }
     window.addEventListener('load',doFirst);
+    // 控制哪些欄位可修改end
+
+
+    // 控制新增選單圖片時的預覽
+    window.addEventListener("load", function () {
+      $id("head_img_preview").style.display="none";   
+      $id("select_head_img").onchange = function (e) {
+          let file = e.target.files[0];
+
+          let reader = new FileReader(); //建立新的 FileReader 物件
+          reader.onload = function (e) {
+
+            $id("head_img_preview").style.display="block";   
+            $id("head_img_preview").src = reader.result;
+          }
+
+          reader.readAsDataURL(file);
+        }
+    })
+    
+    // 控制新增組合圖片時的預覽
+    window.addEventListener("load", function () {
+      $id("head_img_combination_preview").style.display="none";   
+      $id("select_head_img_combination").onchange = function (e) {
+          let file = e.target.files[0];
+
+          let reader = new FileReader(); //建立新的 FileReader 物件
+          reader.onload = function (e) {
+
+            // 執行onchange事件後才會顯示
+            $id("head_img_combination_preview").style.display="block";
+
+            $id("head_img_combination_preview").src = reader.result;
+          }
+
+          reader.readAsDataURL(file);
+        }
+    })
+
+    // 控制修改選單圖片時的預覽
+    var btnimg=document.getElementsByClassName('btnimg');
+
+    function changeImg(e){
+      let file = e.target.files[0];
+      //  console.log(e.target.previousSibling); //找點到那一個的上一個節點 就是img  
+
+      let showImg = e.target.previousSibling; //<img.......>
+
+      let reader = new FileReader(); //建立新的 FileReader 物件
+      reader.onload = function() {
+
+        // console.log(e.target);   
+        showImg.src = reader.result;
+      }
+
+      reader.readAsDataURL(file);
+    }
+   
+    window.addEventListener('load',function(){
+        for(i=0; i<btnimg.length;i++){
+        btnimg[i].addEventListener('change',changeImg,false);
+      }
+    });
+
+    // 控制修改組合圖片時的預覽
+    var combination_btnimg = document.getElementsByClassName('combination_btnimg');
+
+    function changeCombinationImg(e){
+      let file = e.target.files[0];
+      //  console.log(e.target.previousSibling); //找點到那一個的上一個節點 就是img  
+
+      let showImg = e.target.previousSibling; //<img.......>
+
+      let reader = new FileReader(); //建立新的 FileReader 物件
+      reader.onload = function() {
+
+        // console.log(e.target);   
+        showImg.src = reader.result;
+      }
+
+      reader.readAsDataURL(file);
+    }
+   
+    window.addEventListener('load',function(){
+        for(i=0; i<combination_btnimg.length;i++){
+        combination_btnimg[i].addEventListener('change',changeCombinationImg,false);
+      }
+    });
     
   </script>
 
