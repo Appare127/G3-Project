@@ -87,7 +87,7 @@ function nextstep(){
     // 把圖片資料檔送到背景的動物預覽圖，讓人預覽用
     document.getElementsByClassName('temp_aml_pic')[0].src = url;
     // 把圖片資料檔送到form裡的隱藏input，做等等存檔用
-    document.getElementById('url_data').value = url;
+    document.getElementById('aml_data').value = url;
 
     switch_bgcanvas("OFF");
 }
@@ -180,7 +180,7 @@ function dopic(){
             // 之前做好動物時，動物圖片資訊已先傳到form1的暫存input裡了
             // 所以這裡只要處理背景圖就好
             let bg_url = bg_canvas.toDataURL("image/png");
-            document.getElementById('testimg').src = bg_url;
+            // document.getElementById('testimg').src = bg_url;
             document.getElementById('bg_data').value = bg_url;
             document.getElementsByClassName('tempbg_pic')[0].src = bg_url;
 
@@ -201,13 +201,17 @@ function dopic(){
     };
 }
 
+
+let amlbg_canvas = document.getElementById('amlbg_canvas');
+let amlbgcontext = amlbg_canvas.getContext('2d');
+amlbg_canvas.width = bg_width;
+amlbg_canvas.height = bg_height;
+
+
+
 // 背景與動物的圖片結合
 function combine_amlbg(){
     // 建立一個新的canvas
-    let amlbg_canvas = document.getElementById('amlbg_canvas');
-    let amlbgcontext = amlbg_canvas.getContext('2d');
-    amlbg_canvas.width = bg_width;
-    amlbg_canvas.height = bg_height;
 
     // 先清掉之前的東西
     amlbgcontext.clearRect(0,0,amlbg_canvas.width,amlbg_canvas.height);
@@ -215,6 +219,7 @@ function combine_amlbg(){
     // 設定接下來要進來的圖片大小與canvas相同
     let pic_width = amlbg_canvas.width;
     let pic_height = amlbg_canvas.height;
+    aml_y = amlbg_canvas.height - (amlbg_canvas.height *3 /4);
 
     // 建立2個圖像物件，1是背景圖，2是動物圖
     let img1 = new Image();
@@ -222,24 +227,21 @@ function combine_amlbg(){
 
     // 圖像物件抓到HTML隱藏的img圖檔路徑
     img1.src = document.getElementsByClassName('tempbg_pic')[0].src;
-    img2.src = document.getElementById('url_data').value;
+    img2.src = document.getElementById('aml_data').value;
 
     // 圖像讀取完成後，把它畫到canvas上
 
-    if (img1.onload && img2.onload){
+    img1.onload = function(){
         amlbgcontext.drawImage(img1,0,0,pic_width,pic_height);
-        amlbgcontext.drawImage(img2,0,0,pic_width,pic_height);
+        amlbgcontext.drawImage(img2,0,aml_y,pic_width,pic_width);
 
-        // let amlbg_url = amlbg_canvas.toDataURL("image/png");
+        let amlbg_url = amlbg_canvas.toDataURL("image/png");
         // document.getElementById('testimg2').src = amlbg_url;
-    }
+        document.getElementById('amlbg_data').value = amlbg_url;
 
-
-    // let amlbg_url = amlbg_canvas.toDataURL("image/png");
-    // document.getElementById('testimg2').src = amlbg_url;
+        picsend();
+    };
 }
-
-
 
 
 
@@ -511,7 +513,7 @@ function getpartlist(){
         if (xhr.status == 200){
             // console.log(xhr.responseText);
             partsobj = JSON.parse(xhr.responseText);
-            console.log(partsobj);
+            // console.log(partsobj);
             // 抓到jason物件資料後，直接丟進建立html的函式裡
             buildlist(partsobj);
             
