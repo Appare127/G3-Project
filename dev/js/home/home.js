@@ -18,8 +18,9 @@ var anime_state;
 addEventListener("load", init);
 addEventListener("resize", reinit);
 addEventListener('scroll', modifyAnimation);
+addEventListener('scroll', gameAnimation);
 
-
+//客製動物的動畫
 function modifyAnimation(){
     if(scrollY>=1300){
         //樹長出來
@@ -43,6 +44,16 @@ function modifyAnimation(){
     }
 }
 
+//生存遊戲的動畫
+function gameAnimation(){
+    if(scrollY>=2200) {
+        document.querySelectorAll('.game_bg_ab img')[0].classList.add('camelWalk');
+    }else {
+
+    }
+}
+
+//生存遊戲抓取排行榜
 function getRankData(){
     var xhr = new XMLHttpRequest();
     xhr.onload=function (){

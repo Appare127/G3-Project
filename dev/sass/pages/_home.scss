@@ -649,6 +649,20 @@ $dblue:#7DC7C5;
                     display: block;
                 }
             }
+            .camelWalk {
+                position:absolute;
+                animation:camelWalk 5s forwards;
+            }
+            @keyframes camelWalk {
+                // 0% { transform:translateX(20%);}
+                0%{ transform:translate3d(-5%,0%,0%)}
+                0%{ transform:translate3d(-10%,-10%,0%)}
+                0%{ transform:translate3d(-15%,0%,0%)}
+                0%{ transform:translate3d(-20%,-10%,0%)}
+                0%{ transform:translate3d(-30%,0%,0%)}
+                50%{ transform:translate3d(-35%,-10%,0%)}
+                100%{ transform:translate3d(-40%,-15%,0%)}
+            }
 
             img[alt*="chair"]{
                 position: absolute;
