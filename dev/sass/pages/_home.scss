@@ -487,7 +487,7 @@ $dblue:#7DC7C5;
     background-size: cover;
     position: relative;
     background-position: center bottom;
-    overflow:hidden;
+    // overflow:hidden;
 
     @include responds(medium){
         padding-bottom: 200px;
@@ -1177,6 +1177,20 @@ $dblue:#7DC7C5;
             background-position: center;
             padding:220px  0 40px;
             box-sizing: border-box;
+            &:hover .sunglasses{
+                opacity:1;
+            }
+            .sunglasses {
+                width:255px;
+                position:absolute;
+                top:24%;
+                left:15%;
+                opacity:0;
+                transition:1.0s all;
+                img {
+                    width:100%;
+                }
+            }
             .calendarbox{
                 width: 90%;
                 @include responds(medium){
