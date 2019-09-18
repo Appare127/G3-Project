@@ -31,7 +31,6 @@ let partsobj = [];
 let part_types = 4;
 
 
-
 // 換動物部件的canvas
 let canvas = document.getElementById('aml_canvas');
 let context = canvas.getContext('2d');
@@ -87,7 +86,7 @@ function nextstep(){
     // 把圖片資料檔送到背景的動物預覽圖，讓人預覽用
     document.getElementsByClassName('temp_aml_pic')[0].src = url;
     // 把圖片資料檔送到form裡的隱藏input，做等等存檔用
-    document.getElementById('url_data').value = url;
+    document.getElementById('aml_data').value = url;
 
     switch_bgcanvas("OFF");
 }
@@ -162,12 +161,13 @@ function drawbg_canvas(){
     img1.onload = function(){
         bgcontext.drawImage(img1,0,0,pic_width,pic_height);
     };
-
 }
 
 
 // 確認完成按下去後
 function dopic(){
+
+    nextstep();
     
     // 先判斷sessionStorage有沒有會員登入資料，有才往下做轉圖檔工作
     if (sessionStorage['user_name']){
@@ -180,7 +180,7 @@ function dopic(){
             // 之前做好動物時，動物圖片資訊已先傳到form1的暫存input裡了
             // 所以這裡只要處理背景圖就好
             let bg_url = bg_canvas.toDataURL("image/png");
-            document.getElementById('testimg').src = bg_url;
+            // document.getElementById('testimg').src = bg_url;
             document.getElementById('bg_data').value = bg_url;
             document.getElementsByClassName('tempbg_pic')[0].src = bg_url;
 
@@ -201,13 +201,17 @@ function dopic(){
     };
 }
 
+
+let amlbg_canvas = document.getElementById('amlbg_canvas');
+let amlbgcontext = amlbg_canvas.getContext('2d');
+amlbg_canvas.width = bg_width;
+amlbg_canvas.height = bg_height;
+
+
+
 // 背景與動物的圖片結合
 function combine_amlbg(){
     // 建立一個新的canvas
-    let amlbg_canvas = document.getElementById('amlbg_canvas');
-    let amlbgcontext = amlbg_canvas.getContext('2d');
-    amlbg_canvas.width = bg_width;
-    amlbg_canvas.height = bg_height;
 
     // 先清掉之前的東西
     amlbgcontext.clearRect(0,0,amlbg_canvas.width,amlbg_canvas.height);
@@ -215,6 +219,7 @@ function combine_amlbg(){
     // 設定接下來要進來的圖片大小與canvas相同
     let pic_width = amlbg_canvas.width;
     let pic_height = amlbg_canvas.height;
+    aml_y = amlbg_canvas.height - (amlbg_canvas.height *3 /4);
 
     // 建立2個圖像物件，1是背景圖，2是動物圖
     let img1 = new Image();
@@ -222,24 +227,21 @@ function combine_amlbg(){
 
     // 圖像物件抓到HTML隱藏的img圖檔路徑
     img1.src = document.getElementsByClassName('tempbg_pic')[0].src;
-    img2.src = document.getElementById('url_data').value;
+    img2.src = document.getElementById('aml_data').value;
 
     // 圖像讀取完成後，把它畫到canvas上
 
-    if (img1.onload && img2.onload){
+    img1.onload = function(){
         amlbgcontext.drawImage(img1,0,0,pic_width,pic_height);
-        amlbgcontext.drawImage(img2,0,0,pic_width,pic_height);
+        amlbgcontext.drawImage(img2,0,aml_y,pic_width,pic_width);
 
-        // let amlbg_url = amlbg_canvas.toDataURL("image/png");
+        let amlbg_url = amlbg_canvas.toDataURL("image/png");
         // document.getElementById('testimg2').src = amlbg_url;
-    }
+        document.getElementById('amlbg_data').value = amlbg_url;
 
-
-    // let amlbg_url = amlbg_canvas.toDataURL("image/png");
-    // document.getElementById('testimg2').src = amlbg_url;
+        picsend();
+    };
 }
-
-
 
 
 
@@ -344,6 +346,12 @@ function changeParts(e){
     let animal_name = urlstr.substring(type_y +1 ,animal_y);
     // console.log(animal_name);
 
+    let voice_tiger = document.getElementById('voice_tiger');
+    let voice_lion = document.getElementById('voice_lion');
+    let voice_dog = document.getElementById('voice_dog');
+    let voice_elephant = document.getElementById('voice_elephant');
+
+
     // 用if去判斷不同部位選擇要更換相應的圖片
     if (type_name == 'head'){
         document.getElementsByClassName('head_pic')[0].src = `img/modify/p_head_${animal_name}.png`;
@@ -353,6 +361,23 @@ function changeParts(e){
         head_eml_desert = e.target.nextElementSibling.dataset.pointc;
         // console.log(head_eml_forest + ',' + head_eml_mountain + ',' + head_eml_desert);
         
+        // switch (animal_name){
+        //     case 'giraffe':
+        //         voice_dog.play();
+        //         break;
+        //     case 'elephant':
+        //         voice_elephant.play();
+        //         break;
+        //     case 'lion':
+        //         voice_lion.play();
+        //         break;
+        //     case 'tiger':
+        //         voice_tiger.play();
+        //         break;
+        // }
+
+
+
     }else if (type_name == 'body'){
         document.getElementsByClassName('body_pic')[0].src = `img/modify/p_body_${animal_name}.png`;
         // 抓到選擇的身體三種環境適應力
@@ -511,7 +536,7 @@ function getpartlist(){
         if (xhr.status == 200){
             // console.log(xhr.responseText);
             partsobj = JSON.parse(xhr.responseText);
-            console.log(partsobj);
+            // console.log(partsobj);
             // 抓到jason物件資料後，直接丟進建立html的函式裡
             buildlist(partsobj);
             
@@ -877,20 +902,16 @@ function init(){
     document.getElementsByClassName('close_remind')[0].addEventListener('click',remove_show);
     document.getElementsByClassName('close_remind')[1].addEventListener('click',remove_show);
 
-
     // 剛載進頁面時，先做一次canvas繪製預設的圖片
     drawcanvas();
 
-
     // 上傳圖片的file事件
     document.getElementById('up_bg_file').addEventListener('change',read_bgimg);
-
 
     // 背景canvas的滑鼠觸發事件
     bg_canvas.addEventListener('mousedown',drawdown);
     bg_canvas.addEventListener('mousemove',drawmove);
     bg_canvas.addEventListener('mouseup',drawup);
-
 
     // 顏色條的change觸發事件，把變動的色相轉成RGB值
     document.getElementsByClassName('createColorBar')[0].addEventListener('change',HSV2RGB);
@@ -900,9 +921,11 @@ function init(){
     // 畫筆大小調整條的事件觸發
     document.getElementById('drawsize').addEventListener('change',pensize);
 
-
+    // 手畫畫圖canvas的開關事件觸發
     document.getElementById('cir_check').addEventListener('click',switch_bgcanvas);
 
+    // 下一步按鈕的事件觸發
+    document.getElementById('next_btn').addEventListener('click',nextstep);
 
 }
 

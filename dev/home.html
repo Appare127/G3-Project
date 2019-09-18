@@ -43,7 +43,7 @@
                 @@include('template/home_animal.html')
                 @@include('template/home_water.html')
             </div>
-
+  
 
         </div>
     </section>
@@ -120,7 +120,7 @@
     <section class="home_game">
 
         <img class="game_rail" src="img/home/3_rail.png" alt="game_rail">
-        <img class="game_train" src="img/home/train2.png" alt=""game_train">
+        <img class="game_train" src="img/home/train2.png" alt="game_train">
 
 
         <div class="container">
@@ -385,6 +385,7 @@
                 <div class="col_calendar">
                     <div class="resv_calendargroup">
                         <div class="resv_calendar">
+                            <div class="sunglasses"><img src="img/home/sunglasses_1.png" alt=""></div>
                             <!-- <img src="img/resv/calendar_bg.png" alt="calendbg"> -->
                             <div class="calendarbox">
                                 <div class="calendar_title">
@@ -569,6 +570,12 @@
     var controller = new ScrollMagic.Controller();
     //創建動畫
 
+    //火車旋轉
+    var animation_train = TweenMax.to('.game_train', 5, {
+    repeat: -1,
+    rotation: 360,
+    transformOrigin: "left 100%",
+    });
 
     var rank_appear = TweenMax.fromTo('.home_rank .wrap', 2, {
         y: 30, opacity: 0
@@ -646,6 +653,18 @@
 
 
     //創建場景
+
+    //火車旋轉
+    var train_scene = new ScrollMagic.Scene({
+    triggerElement: '.home_game', //觸發點
+    reverse:true,   
+    // duration :'50%',//距離
+    offset :' -100px'//偏移上方距離
+    }).setTween(animation_train)
+    .addIndicators()
+    .addTo(controller) 
+
+
     var rank_balloon = new ScrollMagic.Scene({
         triggerElement: '.home_rank .container',
         reverse: true,

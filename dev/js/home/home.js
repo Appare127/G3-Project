@@ -18,8 +18,9 @@ var anime_state;
 addEventListener("load", init);
 addEventListener("resize", reinit);
 addEventListener('scroll', modifyAnimation);
+addEventListener('scroll', gameAnimation);
 
-
+//客製動物的動畫
 function modifyAnimation(){
     if(scrollY>=1300){
         //樹長出來
@@ -37,12 +38,40 @@ function modifyAnimation(){
             document.querySelectorAll('.modify_bg_ab img')[j].classList.remove('treeGrow');
         }
         for(var x=0; x<4; x++){
-            document.querySelectorAll('.modify_pic img')[x].classList.add('home_jump');
+            document.querySelectorAll('.modify_pic img')[x].classList.remove('home_jump');
         }
 
     }
 }
 
+//生存遊戲的動畫
+function gameAnimation(){
+    if(scrollY>=2000 && scrollY<=3147) { 
+        //駱駝走路
+        document.querySelectorAll('.game_bg_ab img')[0].classList.add('camelWalk');
+        
+        //排行榜滑動
+        var scrolled1 = (window.pageYOffset - 2395)*0.4;//排行榜滑動的速度
+        document.querySelector('.game_palyrank').style.transform = 'translateX('+scrolled1+'px)';
+        if(scrollY>=2665){
+            var scrolled2 = (window.pageYOffset - 2671)*0.4;
+            if(0.5*scrolled2<=90){//椅子被旋轉 被撞出去
+                document.querySelectorAll('.game_bg_ab img')[1].style.transform = 'rotateZ('+0.5*scrolled2+'deg)';
+            }else if(0.5*scrolled2>0){
+                document.querySelectorAll('.game_bg_ab img')[1].style.transform += 'translateX(200px)';
+            }
+        }
+
+    }else {
+        document.querySelectorAll('.game_bg_ab img')[0].classList.remove('camelWalk');
+
+
+        // document.querySelector('.topwrap').classList.remove('chartSlide');
+
+    }
+}
+
+//生存遊戲抓取排行榜
 function getRankData(){
     var xhr = new XMLHttpRequest();
     xhr.onload=function (){

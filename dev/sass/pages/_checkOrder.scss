@@ -40,6 +40,7 @@ $lyellow:#fdf6e7;
 //標題
     .list_header{
         display:flex;
+        justify-content: center;
         text-align: center;
         background-color: $orange;
         color:white;
@@ -60,6 +61,7 @@ $lyellow:#fdf6e7;
         border-bottom: 1px solid #000;
         @include responds(medium){
         display:flex;
+        justify-content: center;
         text-align: center;
         }
     }
@@ -67,14 +69,14 @@ $lyellow:#fdf6e7;
     .prod_pic{
         @include responds(medium){
             float: none;
-            width: 15%;
+            width: 20%;
             padding: 0px;
         }
     }
 //商品圖片的外框
     .pic_item{
         @include responds(medium){
-            width: 30%;
+            width: 25%;
         }
         
         margin: auto;
@@ -91,11 +93,11 @@ $lyellow:#fdf6e7;
         @include responds(medium){
             display: flex;
             float: none;
-            width: 80%;
+            width: 60%;
         }
         div{
             @include responds(medium){
-            width: 25%;
+            width: 34%;
             }
         }
     //手機版才出現的標題
@@ -166,6 +168,9 @@ $lyellow:#fdf6e7;
         .write_info_col{
             // text-align: center;
             width: 40%;
+            p{
+                padding: 5px 0;
+            }
         }
 
     
@@ -243,18 +248,14 @@ $lyellow:#fdf6e7;
         @include btn_cloudp (100px);
         @include btn_cloudy (100px,$col_btn_orange);
         .btn_cloudy{
-            background-color: transparent;
             margin: 10px;
         }
         .btn_cloudp{
-            background-color: transparent;
             margin: 10px;
         }
    }
 //粗體字
     .confirm_title{
-        font-weight: bold;
-        font-size: $m_fz;
         padding-top:14px;
     }
 
@@ -303,13 +304,8 @@ $lyellow:#fdf6e7;
         font-weight: bold;
     }
 
-    p{
-        padding: 5px 0;
-    }
-
     @include btn_cloudb (100px);
     .btn_cloudb{
-        background-color: transparent;
         margin: auto;
         display: block;
     }

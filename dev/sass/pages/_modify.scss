@@ -12,7 +12,7 @@
     background-position-x: center;
     background-size: contain;
     background-repeat: no-repeat;
-    // background-color:transparent
+    background-attachment: fixed;
 }
 
 
@@ -642,6 +642,11 @@
 }
 
 
+#amlbg_canvas{
+    display: none;
+}
+
+
 // 電腦~電腦~電腦~電腦~電腦~電腦~電腦~電腦~
 @media screen and (min-width:996px){
     
@@ -750,7 +755,8 @@
 
 
     .modify_inputbg{
-        padding-top: 50px;
+        padding-top: 100px;
+        padding-bottom: 150px;
         .container{
             // padding-top: 0;
             // padding-bottom: 0;
@@ -764,10 +770,6 @@
         .showbg_wrap{
             width: 50%;
             padding-top: 30px;
-            .bgimg_box{
-                // margin-right: 10%;
-
-            }
         }
 
         .selectbg_wrap{
@@ -778,6 +780,13 @@
                 padding-bottom: 70%;
                 .part_wrap{
                     width: 70%;
+                    li{
+                        .img_box{
+                            width: 60%;
+                            padding-bottom: 80%;
+                        }
+                    }
+
                 }
             }
         }

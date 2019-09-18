@@ -6,8 +6,8 @@ try {
     $prodsRow=$prods->fetchAll(PDO::FETCH_ASSOC);
     // echo json_encode($prodsRow);
 
-    $imgs  = $pdo->query("select cmp_img,bg_img from collections order by vote desc limit 3");
-    $imgRow=$imgs->fetchAll(PDO::FETCH_ASSOC);
+    $imgs  = $pdo->query("select cmp_img,amlbg_img from collections order by vote desc limit 3");
+    
     // echo json_encode($imgRow);
     // print_r($prodsRow);
 ?>
@@ -89,7 +89,6 @@ try {
                     <div class="item">
                         <div class="pic">
                             <img class="shop_animal_bg" >
-                            <img class="shop_animal" >
                         </div>
                         <p>我的動物</p>
                     </div>
@@ -97,17 +96,31 @@ try {
 
                     <!-- 選美前三名從資料庫撈 -->
                         <?php
-                        $imgName=['選美No.1','選美No.2','選美No.3'];
-                        foreach ($imgName as $i => $value) {
+                        if( $imgs->rowCount() < 3 ){
+                            $imgName=['選美No.1','選美No.2','選美No.3'];
+                            foreach ($imgName as $i => $value) {
                         ?>
-                        <div class="item">
+                         <div class="item">
                             <div class="pic">
-                                <img class="shop_animal_bg" src=<?=$imgRow[$i]['bg_img'] ?> alt="">
-                                <img class="shop_animal" src=<?=$imgRow[$i]['cmp_img']?> alt="">
+                                <img class="shop_animal_bg" src="img/shop/amlbg.png" alt="">
                             </div>
                             <p><?=$value?></p>
                         </div>
                         <?php
+                           }
+                        }else{ 
+                            $imgRow=$imgs->fetchAll(PDO::FETCH_ASSOC);
+                             $imgName=['選美No.1','選美No.2','選美No.3'];
+                            foreach ($imgName as $i => $value) {
+                        ?>
+                        <div class="item">
+                            <div class="pic">
+                                <img class="shop_animal_bg" src=<?=$imgRow[$i]['amlbg_img'] ?> alt="">
+                            </div>
+                            <p><?=$value?></p>
+                        </div>
+                        <?php
+                            }
                         }
                         ?>
 
@@ -125,17 +138,17 @@ try {
                 <?php 
                 
                 foreach ($prodsRow as $i => $data) {
-                    $name=explode(".",explode("/",$prodsRow[$i]['product_img'])[2])[0];    
-                    $prodData=[$name,$prodsRow[$i]['product_img'],$prodsRow[$i]['product_price']];
+                    $name=explode(".",explode("/",$prodsRow[$i]['product_img'])[2])[0];    //cup/pillow/hat/bag
+                    $prodData=[$name,$prodsRow[$i]['product_name'],$prodsRow[$i]['product_img'],$prodsRow[$i]['product_price']];
                 ?>
                     <div class="item" id=<?=$name?> >
                         <div class="deco deco_top" ></div>
                         <h3><?=$prodsRow[$i]['product_name']?></h3>
                         <div class="prod_img">
                             <img class="prod_plain" src=<?=$prodsRow[$i]['product_img']?> alt="">
-                            <div class=<?="pic_chosen_$name"?>>
-                                <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
-                                <img class="shop_animal" src="img/shop/animal1.png" alt="">
+                            <div class=<?="pic_chosen"?>>
+                                <img class="shop_animal_bg" src=<?=$imgRow[0]['amlbg_img']?>  alt="">
+                                <!-- <img class="shop_animal" src="img/shop/animal1.png" alt=""> -->
                             </div>
                         </div>
                         <p class="price"><?=$prodsRow[$i]['product_price']?></p>
@@ -148,7 +161,7 @@ try {
                             <a class="btn_cloudb view_detail">查看詳情@@include('template/btn_sp.html')</a>
                             <a class="btn_cloudp add_cart">加入購物車@@include('template/btn_sp.html')</a>
                             <input class='prod_data' name='prod_data' type="hidden" value=<?=json_encode($prodData)?>>
-                            <input class='bgExist' name='bgExist' type="hidden" value='1'>
+                            <input class='prod_desc' name='prod_desc' type="hidden" value=<?=$prodsRow[$i]['product_description']?>>
                         </div>
                         <div class="deco deco_bottom"></div>
                     </div>
@@ -169,8 +182,7 @@ try {
                 <div class="prod_img">
                     <img class="prod_plain" src="img/shop/pillow.png" alt="">
                     <div id='detail_pic_chosen' class="pic_chosen">
-                        <img class="shop_animal_bg" src="img/shop/animal_bg1.png" alt="">
-                        <img class="shop_animal" src="img/shop/animal1.png" alt="">
+                        <img class="shop_animal_bg" src="img/shop/amlbg.png" alt="">
                     </div>
                 </div>
                 <div class="prod_text">
@@ -185,20 +197,19 @@ try {
     <script>
     function choosePic(){
     if(sessionStorage.user_id){  //如果登入了  撈session
-        document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src=sessionStorage.my_animal_bg_img;
-        document.querySelectorAll(".choose_pic .shop_animal")[0].src=sessionStorage.my_animal_img;
+        document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src=sessionStorage.my_animalbg_img;
+       
     }else{   //如果沒登入，給預設圖片
-    document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src='img/shop/animal_bg1.png';
-    document.querySelectorAll(".choose_pic .shop_animal")[0].src='img/shop/animal2.png';
+    document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src='img/shop/amlbg.png';
     }
 };
 
 function changePic(e){    //點了會換圖
     let bg=this.children[0].children[0].src;
-    let animal=this.children[0].children[1].src;
+    // let animal=this.children[0].children[1].src;
     document.querySelectorAll('.choose_product .prod_img').forEach((element,i) => {
         element.children[1].children[0].src=bg;
-        element.children[1].children[1].src=animal;
+        // element.children[1].children[1].src=animal;
     });
 };
 
@@ -214,7 +225,7 @@ window.addEventListener("load",function(){
     let prodNumInputs=document.querySelectorAll('.prod_num'); //商品Input的數量
     let changePicBtn=document.querySelectorAll('.choose_pic_wrap .item')  //動物圖片
     if(sessionStorage['shopList'] == null){
-        sessionStorage['shopList'] =''; 
+        sessionStorage['shopList'] =""; 
     }
     
 
@@ -233,28 +244,29 @@ window.addEventListener("load",function(){
 
     bgButtons[0].onclick=function(){   //要背景圖
         for(i=0;i<document.querySelectorAll(".shop_animal_bg").length;i++){
-            document.querySelectorAll(".shop_animal_bg")[i].style.visibility="visible";
-        }
-        for(i=0;i<document.querySelectorAll(".prod_img .shop_animal").length;i++){
-            document.querySelectorAll(".prod_img .shop_animal")[i].style.width='100%';
-            document.querySelectorAll(".prod_img .shop_animal")[i].style.transform='translate(-50%,-34%)';
-        }
-        for(i=0;i<document.querySelectorAll(".bgExist").length;i++){
-            document.querySelectorAll(".bgExist")[i].value='1';
+            let src=document.querySelectorAll(".shop_animal_bg")[i].src;
+            if(src.search("customize") == -1){
+                src=src.replace("_","_amlbg_"),
+                document.querySelectorAll(".shop_animal_bg")[i].src=src;
+            }else{   //是客製的
+                src=src.replace("aml","amlbg"),
+                document.querySelectorAll(".shop_animal_bg")[i].src=src;
+            } 
         }
     }
 
     bgButtons[1].onclick=function(){   //不要背景圖
         for(i=0;i<document.querySelectorAll(".shop_animal_bg").length;i++){
-            document.querySelectorAll(".shop_animal_bg")[i].style.visibility="hidden";
+            let src=document.querySelectorAll(".shop_animal_bg")[i].src;
+            if(src.search("customize") == -1){
+                src=src.replace("amlbg_",""),
+                document.querySelectorAll(".shop_animal_bg")[i].src=src;
+            }else{  //是客製的
+                src=src.replace("bg",""),
+                document.querySelectorAll(".shop_animal_bg")[i].src=src;
+            }
+
         };
-        for(i=0;i<document.querySelectorAll(".prod_img .shop_animal").length;i++){
-            document.querySelectorAll(".prod_img .shop_animal")[i].style.width='100%';
-            document.querySelectorAll(".prod_img .shop_animal")[i].style.transform='translate(-50%,-50%)';
-        };
-        for(i=0;i<document.querySelectorAll(".bgExist").length;i++){
-            document.querySelectorAll(".bgExist")[i].value='0';
-        }
     }
     backButton.onclick=function(){   //關閉視窗
         prodDetail.style.display='none';
@@ -265,36 +277,44 @@ window.addEventListener("load",function(){
             prodDetail.style.display='block';
             document.querySelector('.prod_detail .prod_plain').src=this.parentNode.parentNode.children[2].children[0].src;
             document.querySelector('.prod_detail .shop_animal_bg').src=this.parentNode.parentNode.children[2].children[1].children[0].src;
-            document.querySelector('.prod_detail .shop_animal').src=this.parentNode.parentNode.children[2].children[1].children[1].src;
+            // document.querySelector('.prod_detail .shop_animal').src=this.parentNode.parentNode.children[2].children[1].children[1].src;
             document.getElementById('detail_pic_chosen').className=this.parentNode.parentNode.children[2].children[1].className;
-            document.querySelector('.prod_detail .prod_text p').innerText=JSON.parse(this.nextElementSibling.nextElementSibling.value).product_description;
+            document.querySelector('.prod_detail .prod_text p').innerText=this.nextElementSibling.nextElementSibling.nextElementSibling.value;
         } 
     }
 
     for(i=0;i<addCartButtons.length;i++){  //加入購物車
         addCartButtons[i].onclick=function(){
-            let prodName=JSON.parse(this.nextElementSibling.value)[0]
-            console.log(prodName);
+            let prodName=JSON.parse(this.nextElementSibling.value)[0]    //cup/hat/pillow...
             let data={};
-            data.prodInfo=JSON.parse(this.nextElementSibling.value);
-            data.num=this.parentNode.previousElementSibling.children[1].value
-            data.bgExist=this.nextElementSibling.nextElementSibling.value;
-            data.animalImg=this.parentNode.parentNode.children[2].children[1].children[1].src;
-            data.bgImg=this.parentNode.parentNode.children[2].children[1].children[0].src
+            data.prodInfo=JSON.parse(this.nextElementSibling.value);  //name +商品本人圖片+單價
+            data.num=this.parentNode.previousElementSibling.children[1].value   //數量
+            data.img=this.parentNode.parentNode.children[2].children[1].children[0].src  
+           
+            // console.log(data.Img.lastIndexOf("/"));
+            // console.log(data.Img.lastIndexOf("."));
+
+            let imgName=data.img.substring(data.img.lastIndexOf("/")+1,data.img.lastIndexOf("."));   //圖片檔名
+            let sessionName=prodName+"|"+imgName;  //cup|work_amlbg_5
+
+            data.name=sessionName;
+            // console.log(sessionName)
             data=JSON.stringify(data);
-            // {"prodInfo":["cup","img/shop/cup.png","500"],"num":3,"bgExist":"1","animalImg":"http://localhost/G3/img/shop/animal1.png","bgImg":"http://localhost/G3/img/shop/animal_bg1.png"}
+            console.log(data);
+            // {"prodInfo":["cup","馬克杯","img/shop/cup.png","500"],"num":"1","Img":"http://localhost/G3/img/collections/work_amlbg_5.png","name":"cup|work_amlbg_5"}
             
-            $.get('php/cart/shop_add.php',{data:data});
+            $.get('php/cart/cart_session.php',{data:data});
             // $.get('php/resv/getTime.php', { data: 'time' }, function (data) {
-            if(sessionStorage[prodName]){
+
+            if(sessionStorage[sessionName]){   //買過了  num+1
                 let dataNew;
-                dataNew=JSON.parse(sessionStorage[prodName]);
+                dataNew=JSON.parse(sessionStorage[sessionName]);
                 dataNew.num=Number(dataNew.num)+1;
                 dataNew=JSON.stringify(dataNew);
-                sessionStorage.setItem(prodName,dataNew);  
-            }else{
-                sessionStorage['shopList'] +=prodName + ",";
-                sessionStorage.setItem(prodName,data);  
+                sessionStorage.setItem(sessionName,dataNew);  
+            }else{    //沒買過這個商品
+                sessionStorage['shopList']+=sessionName+",";
+                sessionStorage.setItem(sessionName,data);  
             }
             
 

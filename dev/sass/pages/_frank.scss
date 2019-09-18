@@ -712,7 +712,10 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-}              
+}          
+#frank_player_items{
+    display: none;
+}
 .frank_player_items{
     width: 30%;
     height: 100%;
@@ -720,6 +723,7 @@
     margin: 5% 0.166666% 1%;
     box-sizing: border-box;
     position: relative;
+   
 
     .frank_players_title{
         width: 180px;

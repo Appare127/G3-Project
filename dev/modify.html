@@ -4,13 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css" /> -->
-
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script> -->
     <script src="js/plugin/Chart.js"></script>
-    <!-- <script src="js/plugin/html2canvas.js"></script> -->
     @@include('template/csslink.html')
 
     <title>改造動物</title>
@@ -19,7 +13,7 @@
     
     @@include('template/header.html')
 
-    <section class="modify_banner">
+    <section class="modify_banner" id="banner_M1">
         <div class="container">
             <div class="banner_cloud">
                 <img class="icon_l" src="img/header/banner_icon_l.png" alt="">
@@ -34,7 +28,7 @@
     </section>
 
 
-    <section class="modify">
+    <section class="modify" id="section_M1">
         <div class="container">
 
             <div class="part_box">
@@ -54,12 +48,27 @@
                     <img class="amlbg_pic" src="" alt="">
                 </div>
 
-                <canvas id="aml_canvas"></canvas>
+                <div hidden>
+                    <audio id="voice_tiger">
+                        <source src="img/voice/Tiger.mp3" type="audio/mpeg">
+                    </audio>
+                    <audio id="voice_lion">
+                        <source src="img/voice/lion.mp3" type="audio/mpeg">
+                    </audio>
+                    <audio id="voice_dog">
+                        <source src="img/voice/dog.mp3" type="audio/mpeg">
+                    </audio>
+                    <audio id="voice_elephant">
+                        <source src="img/voice/elephant.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
 
+
+                <canvas id="aml_canvas"></canvas>
                 <form class="btn_box" method="post" accept-charset="utf-8" id="form1" enctype="multipart/form-data">
                     
                     <!-- 動物圖檔 -->
-                    <input name="url_data" id='url_data' type="hidden"/>
+                    <input name="aml_data" id='aml_data' type="hidden"/>
                     <!-- 動物背景 -->
                     <input name="bg_data" id='bg_data' type="hidden"/>
                     <!-- 動物圖加背景合併 -->
@@ -80,12 +89,11 @@
                         隨機
                         @@include('template/btn_sp.html')
                     </a>
-
-                    <a href="javascript: nextstep()" class="btn_cloudp">
+                    <!-- javascript: nextstep() -->
+                    <a href="#section_M2" class="btn_cloudp" id="next_btn">
                         下一步
                         @@include('template/btn_sp.html')
                     </a>
-
                 </form>
             </div>
 
@@ -194,9 +202,6 @@
                         </ul>
                     </li>
                 </ul>
-
-
-
             </div>
 
 
@@ -207,12 +212,10 @@
         </div>
     </section>  
 
-    <section class="modify_inputbg">
+    <section class="modify_inputbg" id="section_M2">
         <div class="container">
 
-
             <div class="showbg_wrap">
-
                 <div class="text">
                     <p>第二步：選擇背景圖</p>
                     <span>請為動物取個名字：</span><input type="text" name="" id="animal_name">
@@ -226,7 +229,7 @@
                 </div>
 
                 <div class="btn_box">
-                        <a href="javascript: back()" class="btn_cloudb">
+                        <a href="#banner_M1" class="btn_cloudb">
                                 返回
                             @@include('template/btn_sp.html')
                         </a>
@@ -235,10 +238,7 @@
                             確認完成
                             @@include('template/btn_sp.html')
                         </a>
-        
                 </div>
-                
-
             </div>
 
             <div class="selectbg_wrap">
@@ -338,8 +338,8 @@
         <div class="close_remind">X</div>
     </div>
 
-    <img src="" alt="" id="testimg">
-    <img src="" alt="" id="testimg2">
+    <!-- <img src="" alt="" id="testimg"> -->
+    <!-- <img src="" alt="" id="testimg2"> -->
 
     <canvas id="amlbg_canvas"></canvas>
 
