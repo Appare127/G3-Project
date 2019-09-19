@@ -44,14 +44,7 @@
     min-height: calc(70vh);
     padding-bottom: 20px;
   }
-  .ifnull{
-
-    width: 300px;
-    height: 300px;
-    background-color: #ccc;
-    color: #157E8F;
-    margin: auto;
-  }
+  
 }
 
 
@@ -178,11 +171,13 @@
   .my_animal{
     .myanimal_pic{
       position: relative;
-      
-
+      width: 100%;
+      min-height: 300px;
+    
       .animalbg_re{
         position: relative;
       }
+
       .animalpic_ab{
         position: absolute;
         // top: 0;
@@ -366,10 +361,11 @@
     .lovebg_re{
       position: relative;
       width: 100%;
-      height: calc(50vh);
+      // height: calc(50vh);
     }
 
     .lovepic_ab{
+      width: 100%;
       position: absolute;
       // top: 0;
       left: 0;

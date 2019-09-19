@@ -2,13 +2,13 @@
 $errMsg = "";
 session_start();
 try {
-  // require_once('php/connectg3.php');
+  require_once('php/connectg3.php');
   
-  $dsn = "mysql:host=localhost;port=3306;dbname=dd102g3;charset=utf8";
-  $user = "root";
-  $password = "123456";
-  $options=array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION, PDO::ATTR_CASE=>PDO::CASE_NATURAL);
-  $pdo = new PDO($dsn, $user, $password, $options);
+  // $dsn = "mysql:host=localhost;port=3306;dbname=dd102g3;charset=utf8";
+  // $user = "root";
+  // $password = "123456";
+  // $options=array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION, PDO::ATTR_CASE=>PDO::CASE_NATURAL);
+  // $pdo = new PDO($dsn, $user, $password, $options);
     
   // $orderItems=$pdo->prepare('SELECT * FROM `product_order` p  join order_item o on p.order_no = o.order_no join product pro on pro.product_no = o.product_no where user_no = :user_no');
   // $orderItems->bindValue(':user_no',1);//$_POST['user_no']
@@ -172,8 +172,9 @@ if ($errMsg !=""){
             <?php
             if($userRow["user_img"]==NULL){
             ?>
-              
-                <img id="upfile_pic" src="https://api.fnkr.net/testimg/300x300/FFCED1/FFF/?text=wait">
+                <div class="ifnull"><p>尚未有個人大頭貼</p>
+                <img id="upfile_pic" src="img/member/member_pic.png">
+                </div>
 
             <?php
             }else{
@@ -319,6 +320,7 @@ if ($errMsg !=""){
               echo '<div class="ifnull"><center><p>尚未有遊戲畫面</p></center></div>';
             }
             ?>
+
           </div>
 
         </div>
@@ -366,9 +368,12 @@ if ($errMsg !=""){
 
             <?php
             }else{
-              echo '<div class="ifnull"><center><p>尚未創造動物</p></center></div>';
+              echo '<div class="ifnull"><p>尚未創造動物</p>
+              <img src="img/member/member_pic.png" alt="">
+              </div>';
             }
             ?>
+            
 <!--
             <img class="animalbg_re" src="<?=$userRow["my_animal_bg_img"]?>" alt="user_animal_bg">
             <img class="animalpic_ab" src="<?=$userRow["my_animal_img"]?>" alt="user_animal"> -->
