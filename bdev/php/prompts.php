@@ -54,24 +54,21 @@
                   <thead>
                     <tr>
                       <th>提示語編號</th>
-                      <th size="35">提示語題目</th>
+                      <th>提示語題目</th>
                       <th></th>
                       
                     </tr>
                   </thead>
                   <tbody>
-                  <form action="addPromptsData.php">
-                    <tr> 
-                      <td>
-      
-                      </td>
-                      <td>
-                        <input type="text" name="hint_question" id="" size="35">
-                      </td>
-                      <td colspan="3">
-                        <input class="btn btn-block btn-outline-primary addbtn" type="submit" value="新增">
-                      </td>
-                    </tr>
+                  <form action="addPromptsData.php" method="post">
+                      <tr> 
+                        <td></td>
+                        <td>
+                          <input type="text" name="hint_question" id="" size="60">
+                        </td>
+                        <td colspan="3">
+                          <input class="btn btn-block btn-outline-primary addbtn" type="submit" value="新增">
+                      </tr> 
                   </form>
 <?php
 if( $errMsg != ""){ //例外
@@ -88,8 +85,8 @@ if( $errMsg != ""){ //例外
 ?>
                   
                     <tr>
-                      <td><?php echo $promptsRow['hint_no'];?><input name="hint_no" type="hidden" value="<?= $promptsRow['hint_no']?>"></td>
-                      <td colspan="2"><input type="text" name="hint_question" size="35" value="<?= $promptsRow['hint_question']?>" readonly="true"></td>
+                      <td><?php echo $promptsRow['hint_no'];?><input class="dissinputstyle" name="hint_no" type="hidden" value="<?= $promptsRow['hint_no']?>"></td>
+                      <td colspan="2"><input type="text"  class="dissinputstyle" name="hint_question" value="<?= $promptsRow['hint_question']?>" readonly="true"></td>
                     </tr>
                  
   <?php

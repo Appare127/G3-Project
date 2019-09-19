@@ -10,9 +10,12 @@ input[name="head_img_combination"] {
     margin:auto;
     text-align:center;
 }
+
+// 頭部選單圖input的padding
 .btnimg{
-    padding-top:49px;
+    padding-top:6px;
 }
+
 .tr_title{
     border: 2px solid #ccc;
 }
@@ -23,6 +26,32 @@ input[name="body_img"] {
 input[name="body_img_combination"] {
     width: 180px;
 }
-.body_btnimg{
-    padding-top:9px;
+
+// 尾巴選單圖input的padding
+.tail_btnimg{
+    padding-top:13px;
 }
+
+//取消input預設樣式
+.dissinputstyle{
+    -webkit-appearance:none;
+    -moz-appearance: none;
+    outline:0;
+    border: 1px solid transparent;
+}
+.productimg_width{
+    width:200px;
+}
+.tr_center{
+    text-align: center;
+    vertical-align: middle;
+}
+#aaa{
+    width: 30px;
+}
+
+// 選怪作品的td寬度設定
+.collections_tr td{
+    width:12.5%;
+}
+

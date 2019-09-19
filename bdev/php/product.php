@@ -71,8 +71,8 @@
                       <td>
                         <input type="text" name="product_name" id="">
                       </td>
-                      <td>
-                        <img width="45%" src="" alt="" id="product_img_preview">
+                      <td class="productimg_width">
+                        <img width="50%" src="" alt="" id="product_img_preview">
                         <input type="file" id="select_product_img" name="product_img" accept="image/*">
                       </td>
                       <td>
@@ -106,19 +106,18 @@ if( $errMsg != ""){ //例外
                   <form action="updateProductData.php" method="post" enctype="multipart/form-data">
                     <tr>
                       <td><?php echo $productRow['product_no'];?><input name="product_no" type="hidden" value="<?= $productRow['product_no']?>"></td>
-                      <td><input type="text" name="product_name" value="<?= $productRow['product_name']?>" readonly="true"></td>
-                      <td><img width="25%" src="../<?= $productRow['product_img']?>" alt="" class="image"><input type="file" class="btnimg" name="product_img" size="10" style="display:none"></td>
-                      <td><input type="text" name="product_price" value="<?= $productRow['product_price']?>" readonly="true"></td>
-                      <td><input type="text" name="product_status" value="<?= $productRow['product_status']?>" readonly="true"></td>
-                      <td><input type="text" name="product_description" value="<?= $productRow['product_description']?>" readonly="true"></td>
+                      <td><input type="text" name="product_name" value="<?= $productRow['product_name']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><img width="50%" src="../<?= $productRow['product_img']?>" alt="" class="image"><input type="file" class="btnimg" name="product_img" size="10" class="dissinputstyle" style="display:none"></td>
+                      <td><input type="text" name="product_price" value="<?= $productRow['product_price']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="product_status" value="<?= $productRow['product_status']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="product_description" value="<?= $productRow['product_description']?>" readonly="true" class="dissinputstyle"></td>
                       <td>
                         <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
                       </td>
                       <td>
                         <input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成">
                       </td>
-                      </form>
-                      
+                  </form>
                     </tr>
                  
   <?php
@@ -178,6 +177,11 @@ if( $errMsg != ""){ //例外
         e.target.parentNode.parentNode.children[3].firstChild.removeAttribute("readonly");   
         e.target.parentNode.parentNode.children[4].firstChild.removeAttribute("readonly");   
         e.target.parentNode.parentNode.children[5].firstChild.removeAttribute("readonly");   
+        e.target.parentNode.parentNode.children[1].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[2].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[3].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[4].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[5].firstChild.classList.remove("dissinputstyle");
       }
       
     
