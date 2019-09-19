@@ -34,11 +34,14 @@
         <div class="role_title"><h2>參加角色</h2></div>
         <div class="role_info">
             <div class="food_menu">
-                <div class="food"><img src="img/game/food_hamburger.png" alt=""></div>
-                <div class="food"><img src="" alt=""></div>
-                <div class="food"><img src="" alt=""></div>
-                <div class="food"><img src="" alt=""></div>
+                <ul>
+                    <li class="food hamburger"  draggable="true" ><img id='hamburger' data-feed='-20' src="img/game/food_hamburger.png" alt=""></li>
+                    <li class="food fruit"  draggable="true" ><img id='fruit' data-feed='10' src="img/game/food_fruit.png" alt=""></li>
+                    <li class="food" draggable="true" data-feed='30'><img src="" alt=""></li>
+                    <li class="food" draggable="true" data-feed='20'><img src="" alt=""></li>
+                </ul>
             </div>
+           
             <div class="cloud1">
                 <img src="img/game/role_cloud.png" alt="">
             </div>
@@ -198,6 +201,7 @@
 let x,y,z,areaChoice;
 let tempUserNo = 1;
 let userDataDesc = [];
+let feed=0;
 
 
 // 更新雷達圖資料
@@ -231,7 +235,7 @@ function updatejump(){
     jump_value.innerText = total_jump + 'm';
 }
 
-
+//排行榜特效
 function rankFadeIn(){
         // console.log('進來排行榜區');
     if(scrollY>1491){
@@ -292,44 +296,53 @@ function $que(css_selector){
     return document.querySelectorAll(css_selector);
 }
 
+//動物走動
+function animalWalking(trigger){
+        if(trigger=='firstTime'){
+            if(sessionStorage['user_name']&&sessionStorage['user_no']){
+                $que(".animal_words")[0].style.display="block";
+                $que(".info_pic img")[0].classList.remove('animalBreathing');
+                $que(".info_pic img")[0].classList.add('animalHello');//動物移動
+                $que(".animal_words")[0].classList.add('animalSayWords');//對話框移動
+                $que(".animal_words p")[0].innerText = `${sessionStorage['user_name']} 你好啊~~`;
+                setTimeout(function(){
+                    $que(".animal_words p")[0].innerText = `我們當好朋友吧~~`;
+                },2500);
+                setTimeout(function(){
+                    $que(".info_pic img")[0].classList.remove('animalHello');
+                    $que(".animal_words")[0].classList.remove('animalSayWords');
+                    $que(".info_pic img")[0].classList.add('animalBreathing');
+                    $que(".animal_words")[0].style.display="none";
+                },5000);
+            }else {
+                $que(".animal_words")[0].style.display="none";
 
-function animalWalking(){
-    if(sessionStorage['user_name']&&sessionStorage['user_no']){
-        $que(".animal_words")[0].style.display="block";
-        $que(".info_pic img")[0].classList.remove('animalBreathing');
-        $que(".info_pic img")[0].classList.add('animalHello');
-        $que(".animal_words")[0].classList.add('animalSayWords');
-        $que(".animal_words p")[0].innerText = `${sessionStorage['user_name']} 你好啊~~`;
-        setTimeout(function(){
-            $que(".animal_words p")[0].innerText = `我們當好朋友吧~~`;
-        },2500);
-        setTimeout(function(){
-            $que(".info_pic img")[0].classList.remove('animalHello');
-            $que(".animal_words")[0].classList.remove('animalSayWords');
-            $que(".info_pic img")[0].classList.add('animalBreathing');
-            $que(".animal_words")[0].style.display="none";
-        },5000);
-    }else {
-        $que(".animal_words")[0].style.display="none";
-
-    }
-    
-
+            }
+        }else if(trigger == 'delicous'){
+            $que(".animal_words")[0].style.display="block";
+            $que(".animal_words p")[0].innerText = `真好吃`;
+            setTimeout(function(){
+                $que(".animal_words")[0].style.display="none";
+            },2500);
+        }
     // console.log($que(".info_pic img")[0].classList);
-
 }
 
+
+
+
+//顯示遊戲說明
 function showIntro(){
     let introWindow = document.getElementsByClassName('game_intro_window')[0];
     introWindow.style.display="block";
 }
-
+//關掉遊戲說明
 function closeIntro(){
     let introWindow = document.getElementsByClassName('game_intro_window')[0];
     introWindow.style.display="none";
 }
 
-
+//選擇區域
 function chosenArea(area){
     if(sessionStorage['sceneChoice'] == null){
         sessionStorage['sceneChoice'] = area;
@@ -340,7 +353,7 @@ function chosenArea(area){
 
 
 
-    
+//地圖指標
     function mapPointer(location){
         $cls('desert_pointer')[0].classList.remove('pointer_shaking');
         $cls('mountain_pointer')[0].classList.remove('pointer_shaking');
@@ -368,8 +381,7 @@ function chosenArea(area){
             sliderRight();
         }else if ( e.target.style.left == z ){
             sliderLeft();
-        }
-        
+        }   
     }
 
     
@@ -597,38 +609,48 @@ function chosenArea(area){
 
     }
 
-    
 
-    window.addEventListener('resize',function(){
-        if(window.innerWidth<=767){
-            for(var i=0; i<$cls('playing_window').length; i++){
-                $cls('playing_window')[i].style.zIndex = i;
-                $cls('playing_window')[i].style.left = 0;
-            }
-        }else{
-            x="-5%"; y= "25%";  z= "55%";
-            for(var i=0; i<$cls('playing_window').length; i++){
-                $cls('playing_window')[i].addEventListener('click', picClicked);
-                $cls('playing_window')[i].style.left = i*30 - 5+ '%';
-                    if($cls('playing_window')[i].style.left== x){ 
-                        $cls('playing_window')[i].style.zIndex = 2; 
-                        $cls('playing_window')[i].classList.add('normalScale');
-                        $cls('playing_window')[i].classList.remove('scaleUp');
-                    }
-                    if($cls('playing_window')[i].style.left== y){ 
-                        $cls('playing_window')[i].style.zIndex = 4;
-                        $cls('playing_window')[i].classList.remove('normalScale'); 
-                        $cls('playing_window')[i].classList.add('scaleUp');
-                    }
-                    if($cls('playing_window')[i].style.left == z){ 
-                        $cls('playing_window')[i].style.zIndex = 2; 
-                        $cls('playing_window')[i].classList.add('normalScale');
-                        $cls('playing_window')[i].classList.remove('scaleUp');
-                    }
-            }
+
+    //餵食的拖拉事件
+    function dragStart(e){
+        this.className += ' hold';
+        // setTimeout(()=> e.target.className = 'invisible',0);
+
+    }
+    function dragEnd(e){
+        this.className = 'food';
+        console.log(e.target);
+  
+        console.log('吃到:'+ e.target.id + ' 飽食度:'+e.target.dataset.feed);
+
+
+        if(e.target.id == 'hamburger'){
+            animalWalking('delicious');
         }
-    });
-    window.addEventListener('scroll',rankFadeIn);
+        console.log(e.target.dataset.feed);
+    }
+
+    function dragOver(e){
+        e.preventDefault();
+        e.target.style.opacity=0.5;
+    }
+
+    function dragEnter(e){
+        e.preventDefault();
+
+        
+    }
+
+    function dragLeave(e){
+        e.target.style.opacity=1;
+    }
+
+    function dragDrop(e){
+        // this.append(food);
+        e.target.style.opacity=1;
+        // console.log('....');
+    }
+
 
     function doFirst(){
         updatechart();
@@ -636,8 +658,23 @@ function chosenArea(area){
         updatejump();
         getRankingData();
         getCusAnimal();
-        animalWalking();
+        animalWalking('firstTime');
 
+        //餵食安裝事件
+        const foods = document.querySelectorAll('.food img');
+        const animal = document.querySelectorAll('.info_pic')[0];
+        var feed =0;
+        //食物及動物都裝上拖放事件
+        for( const food of foods){
+            food.addEventListener('dragstart', dragStart);
+            food.addEventListener('dragend', dragEnd);
+        }
+
+        animal.addEventListener('dragover', dragOver);
+        animal.addEventListener('dragenter', dragEnter);
+        animal.addEventListener('dragleave', dragLeave);
+        animal.addEventListener('drop', dragDrop);
+        
        
         //幻燈片
         $cls('arrowLeft')[0].addEventListener('click', sliderLeft);
@@ -656,7 +693,7 @@ function chosenArea(area){
             introWindow.style.display="none";
         $cls('forest_pointer')[0].classList.add('pointer_shaking');
         $cls('forest_pointer')[0].style.filter ="hue-rotate(180deg)";
-
+        //Slider初始狀態
         if(window.innerWidth>=768){
             x="-5%"; y= "25%";  z= "55%";
             for(var i=0; i<$cls('playing_window').length; i++){
@@ -688,7 +725,36 @@ function chosenArea(area){
         
     }
     window.addEventListener('load', doFirst);
-  
+    window.addEventListener('resize',function(){
+        if(window.innerWidth<=767){
+            for(var i=0; i<$cls('playing_window').length; i++){
+                $cls('playing_window')[i].style.zIndex = i;
+                $cls('playing_window')[i].style.left = 0;
+            }
+        }else{
+            x="-5%"; y= "25%";  z= "55%";
+            for(var i=0; i<$cls('playing_window').length; i++){
+                $cls('playing_window')[i].addEventListener('click', picClicked);
+                $cls('playing_window')[i].style.left = i*30 - 5+ '%';
+                    if($cls('playing_window')[i].style.left== x){ 
+                        $cls('playing_window')[i].style.zIndex = 2; 
+                        $cls('playing_window')[i].classList.add('normalScale');
+                        $cls('playing_window')[i].classList.remove('scaleUp');
+                    }
+                    if($cls('playing_window')[i].style.left== y){ 
+                        $cls('playing_window')[i].style.zIndex = 4;
+                        $cls('playing_window')[i].classList.remove('normalScale'); 
+                        $cls('playing_window')[i].classList.add('scaleUp');
+                    }
+                    if($cls('playing_window')[i].style.left == z){ 
+                        $cls('playing_window')[i].style.zIndex = 2; 
+                        $cls('playing_window')[i].classList.add('normalScale');
+                        $cls('playing_window')[i].classList.remove('scaleUp');
+                    }
+            }
+        }
+    });
+    window.addEventListener('scroll',rankFadeIn);
 
 </script>
     

@@ -24,7 +24,7 @@ echo $success ? $file : 'error';
 <?php
 $errMsg = "";
 try {
-    require_once("connectBooks.php");
+    require_once("../connectg3.php");
 	$sql ="update user set game_img= :game_img where user_no=:user_no";
     $userData = $pdo->prepare( $sql);
     $userData->bindValue(":game_img", $loadPath);

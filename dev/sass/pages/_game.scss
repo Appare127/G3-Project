@@ -10,6 +10,7 @@
 
 .game_body{
     font-family:微軟正黑體;
+    list-style:none;
 }
 
 
@@ -754,10 +755,24 @@
                             margin-left:auto;
                             margin-right:auto;
                             text-align:center;
+                            
+                            img {
+                                width:70%;   
+                            }
+                            .hold {
+                                border:solid #ccc 4px;
+                            }
+                            .hovered {
+                                background-color: pink;
+                                border:1px dashed black;
+                                // border-style:dashed;
+                            }
+                    
+                            .invisible {
+                                display:none;
+                            }
                         }
-                        img {
-                            width:70%;   
-                        }
+
 
                     }
                     @keyframes cloudsMove {
@@ -837,7 +852,7 @@
                             
                             .info_pic{
                                 width:50%;
-                                height:120px;
+                             
                                 position:absolute;
                                 top:4%;
                                 left:5%;

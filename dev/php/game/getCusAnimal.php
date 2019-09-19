@@ -1,7 +1,7 @@
 <?php 
     try{
         $errMsg = "";
-        require_once('connectBooks.php');
+        require_once('../connectg3.php');
         $sql = "select * from user where user_no=:user_no";
         $userData = $pdo->prepare($sql);
         $userData->bindValue(":user_no", $_GET["user_no"]);

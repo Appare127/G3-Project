@@ -55,11 +55,9 @@ function gameAnimation(){
         document.querySelector('.game_palyrank').style.transform = 'translateX('+scrolled1+'px)';
         if(scrollY>=2665){
             var scrolled2 = (window.pageYOffset - 2671)*0.4;
-            if(0.5*scrolled2<=90){//椅子被旋轉 被撞出去
-                document.querySelectorAll('.game_bg_ab img')[1].style.transform = 'rotateZ('+0.5*scrolled2+'deg)';
-            }else if(0.5*scrolled2>0){
-                document.querySelectorAll('.game_bg_ab img')[1].style.transform += 'translateX(200px)';
-            }
+            if(0.5*scrolled2<=80){//椅子被旋轉 被撞出去
+                document.querySelectorAll('.game_bg_ab img')[1].style.transform = 'rotateZ('+1*scrolled2+'deg)';
+            }  
         }
 
     }else {

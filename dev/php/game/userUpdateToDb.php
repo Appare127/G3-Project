@@ -2,7 +2,7 @@
 $errMsg = "";
 
 try {
-    require_once("connectBooks.php");
+    require_once("../connectg3.php");
 	$sql ="update user set game_money= game_money + :game_money, game_record = :game_record, game_date= :game_date where user_no=:user_no";
     $userData = $pdo->prepare($sql);
     $userData->bindValue(":game_money", $_REQUEST["game_money"]);
