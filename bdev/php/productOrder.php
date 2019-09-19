@@ -47,22 +47,20 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">訂單管理</div>
-      
               <div class="card-body">
                 <table class="table table-responsive-sm table-bordered">
                   <thead>
-                    <tr>
-                      <th>訂單編號</th>
+                    <tr class="aaa">
+                      <th width="300px">訂單編號</th>
                       <th>會員編號</th>
                       <th>訂單成立時間</th>
                       <th>訂單總金額</th>
-                      <th>訂單狀態(0:處理中;1:已出貨)</th>
-                      <th>訂單付款狀態(0:未付款;1:已付款)</th>
+                      <th width="280px">訂單狀態<br>(0:處理中;1:已出貨)</th>
+                      <th width="280px">訂單付款狀態<br>(0:未付款;1:已付款)</th>
                       <th>收貨人姓名</th>
                       <th>收貨人手機</th>
                       <th>收貨人地址</th>
                       <th colspan="2"></th>
-                      
                     </tr>
                   </thead>
                   <tbody>
@@ -81,17 +79,17 @@ if( $errMsg != ""){ //例外
     foreach( $productOrderRows as $i => $productOrderRow){
     
 ?>
-                  <form action="updateProductOrderData.php">
+                  <form action="updateProductOrderData.php" method="post">
                     <tr>
                       <td><?php echo $productOrderRow['order_no'];?><input name="order_no" type="hidden" value="<?= $productOrderRow['order_no']?>"></td>
-                      <td><input type="text" name="user_no" value="<?= $productOrderRow['user_no']?>" readonly="true"></td>
-                      <td><input type="text" name="order_date" value="<?= $productOrderRow['order_date']?>" readonly="true"></td>
-                      <td><input type="text" name="order_sum" value="<?= $productOrderRow['order_sum']?>" readonly="true"></td>
-                      <td><input type="text" name="shipping_status" size="14" value="<?= $productOrderRow['shipping_status']?>" readonly="true"></td>
-                      <td><input type="text" name="payment_status" size="14" value="<?= $productOrderRow['payment_status']?>" readonly="true"></td>
-                      <td><input type="text" name="receiver_name" value="<?= $productOrderRow['receiver_name']?>" readonly="true"></td>
-                      <td><input type="text" name="receiver_phone" value="<?= $productOrderRow['receiver_phone']?>" readonly="true"></td>
-                      <td><input type="text" name="receiver_address" value="<?= $productOrderRow['receiver_address']?>" readonly="true"></td>
+                      <td><input type="text" name="user_no" value="<?= $productOrderRow['user_no']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="order_date" value="<?= $productOrderRow['order_date']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="order_sum" value="<?= $productOrderRow['order_sum']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="shipping_status" size="14" value="<?= $productOrderRow['shipping_status']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="payment_status" size="14" value="<?= $productOrderRow['payment_status']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="receiver_name" value="<?= $productOrderRow['receiver_name']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="receiver_phone" value="<?= $productOrderRow['receiver_phone']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="receiver_address" value="<?= $productOrderRow['receiver_address']?>" readonly="true" class="dissinputstyle"></td>
                       <td>
                         <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
                       </td>
@@ -148,7 +146,9 @@ if( $errMsg != ""){ //例外
       function reversechange(e){
         console.log(e.target.parentNode.parentNode.children[1]);   
         e.target.parentNode.parentNode.children[4].firstChild.removeAttribute("readonly");   
-        e.target.parentNode.parentNode.children[5].firstChild.removeAttribute("readonly");   
+        e.target.parentNode.parentNode.children[5].firstChild.removeAttribute("readonly");
+        e.target.parentNode.parentNode.children[4].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[5].firstChild.classList.remove("dissinputstyle");
       }
       
     

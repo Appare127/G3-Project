@@ -83,14 +83,14 @@ if( $errMsg != ""){ //例外
 ?>
                   <form action="updateResvOrderData.php">
                     <tr>
-                      <td><?php echo $resvOrderRow['booking_no'];?><input name="booking_no" type="hidden" value="<?= $resvOrderRow['booking_no']?>"></td>
-                      <td><input type="text" name="booking_date" value="<?= $resvOrderRow['booking_date']?>" readonly="true"></td>
-                      <td><input type="text" name="tour_date" value="<?= $resvOrderRow['tour_date']?>" readonly="true"></td>
-                      <td><input type="text" name="number_of_booking" value="<?= $resvOrderRow['number_of_booking']?>" readonly="true"></td>
-                      <td><input type="text" name="order_status" value="<?= $resvOrderRow['order_status']?>" readonly="true"></td>
-                      <td><input type="text" name="member_id" value="<?= $resvOrderRow['member_id']?>" readonly="true"></td>
-                      <td><input type="text" name="session_no" value="<?= $resvOrderRow['session_no']?>" readonly="true"></td>
-                      <td><input type="text" name="resv_status" value="<?= $resvOrderRow['resv_status']?>" readonly="true"></td>
+                      <td><?php echo $resvOrderRow['booking_no'];?><input name="booking_no" type="hidden" value="<?= $resvOrderRow['booking_no']?>" class="dissinputstyle"></td>
+                      <td><input type="text" name="booking_date" value="<?= $resvOrderRow['booking_date']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="tour_date" value="<?= $resvOrderRow['tour_date']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="number_of_booking" value="<?= $resvOrderRow['number_of_booking']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="order_status" value="<?= $resvOrderRow['order_status']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="member_id" value="<?= $resvOrderRow['member_id']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="session_no" value="<?= $resvOrderRow['session_no']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="resv_status" value="<?= $resvOrderRow['resv_status']?>" readonly="true" class="dissinputstyle"></td>
                       <td>
                         <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
                       </td>
@@ -147,7 +147,9 @@ if( $errMsg != ""){ //例外
       function reversechange(e){
         console.log(e.target.parentNode.parentNode.children[1]);   
         e.target.parentNode.parentNode.children[4].firstChild.removeAttribute("readonly");   
-        e.target.parentNode.parentNode.children[7].firstChild.removeAttribute("readonly");   
+        e.target.parentNode.parentNode.children[7].firstChild.removeAttribute("readonly");
+        e.target.parentNode.parentNode.children[4].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[7].firstChild.classList.remove("dissinputstyle");
       }
       
     

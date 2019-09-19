@@ -57,8 +57,8 @@
                     <tr>
                       <th>尾巴編號</th>
                       <th>尾巴名稱</th>
-                      <th>選單圖</th>
-                      <th>組合圖</th>
+                      <th width="150">選單圖</th>
+                      <th width="150">組合圖</th>
                       <th>狀態(0:下架; 1:上架)</th>
                       <th>尾巴中文名稱</th>
                       <th colspan="2"></th>
@@ -111,11 +111,11 @@
                         <form action="updateAnimalTailData.php" method="post" enctype="multipart/form-data">
                           <tr>
                             <td><?php echo $tailRow['tail_no'];?><input name="tail_no" type="hidden" value="<?= $tailRow['tail_no']?>"></td>
-                            <td><input type="text" name="tail_name" value="<?= $tailRow['tail_name']?>" readonly="true"></td>
+                            <td><input type="text" name="tail_name" value="<?= $tailRow['tail_name']?>" readonly="true" class="dissinputstyle"></td>
                             <td><img width="45%" src="../<?= $tailRow['tail_img']?>" alt="" class="image"><input type="file" class="tail_btnimg" name="tail_img" size="10" style="display:none" readonly="true"></td>
                             <td><img width='50%' src="../<?= $tailRow['tail_img_combination']?>" alt=""><input type="file" class="combination_btnimg"name="tail_img_combination" size="10" style="display:none" readonly="true"></td>
-                            <td><input type="text" name="tail_status" value="<?= $tailRow['tail_status']?>" readonly="true" size="4"></td>
-                            <td><input type="text" name="tail_ch_name" value="<?= $tailRow['tail_ch_name']?>" readonly="true"></td>
+                            <td><input type="text" name="tail_status" value="<?= $tailRow['tail_status']?>" readonly="true" size="4" class="dissinputstyle"></td>
+                            <td><input type="text" name="tail_ch_name" value="<?= $tailRow['tail_ch_name']?>" readonly="true" class="dissinputstyle"></td>
                             <td>
                                 <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
                             </td>
@@ -183,7 +183,11 @@
     e.target.parentNode.parentNode.children[3].firstChild.removeAttribute("readonly");
     e.target.parentNode.parentNode.children[3].lastChild.style.display='block';   
     e.target.parentNode.parentNode.children[4].firstChild.removeAttribute("readonly");    
-    e.target.parentNode.parentNode.children[5].firstChild.removeAttribute("readonly");    
+    e.target.parentNode.parentNode.children[5].firstChild.removeAttribute("readonly");
+    e.target.parentNode.parentNode.children[1].firstChild.classList.remove("dissinputstyle");
+    e.target.parentNode.parentNode.children[3].firstChild.classList.remove("dissinputstyle");
+    e.target.parentNode.parentNode.children[4].firstChild.classList.remove("dissinputstyle");
+    e.target.parentNode.parentNode.children[5].firstChild.classList.remove("dissinputstyle");
     }
       
     var btn1= document.getElementsByClassName('btn1');
