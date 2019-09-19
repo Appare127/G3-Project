@@ -20,7 +20,7 @@ addEventListener("resize", reinit);
 addEventListener('scroll', modifyAnimation);
 addEventListener('scroll', gameAnimation);
 
-//客製動物的動畫
+//客製動物欄位的動畫
 function modifyAnimation(){
     if(scrollY>=1300){
         //樹長出來
@@ -44,7 +44,7 @@ function modifyAnimation(){
     }
 }
 
-//生存遊戲的動畫
+//生存遊戲欄位的動畫
 function gameAnimation(){
     if(scrollY>=2000 && scrollY<=3147) { 
         //駱駝走路
