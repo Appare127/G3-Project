@@ -252,6 +252,7 @@
                     }
                     .show_data_table{
                         display:flex;
+                        flex-wrap: wrap;
                     }
                 }
                 .show_data_table span{
@@ -263,6 +264,7 @@
                 }
                 .table_content_row{
                     display:flex;
+                    width: 100%;
                 }
                 .show_datano{
                     width: 20%;
