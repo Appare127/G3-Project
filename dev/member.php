@@ -3,12 +3,6 @@ $errMsg = "";
 session_start();
 try {
   require_once('php/connectg3.php');
-  
-  // $dsn = "mysql:host=localhost;port=3306;dbname=dd102g3;charset=utf8";
-  // $user = "root";
-  // $password = "123456";
-  // $options=array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION, PDO::ATTR_CASE=>PDO::CASE_NATURAL);
-  // $pdo = new PDO($dsn, $user, $password, $options);
     
   // $orderItems=$pdo->prepare('SELECT * FROM `product_order` p  join order_item o on p.order_no = o.order_no join product pro on pro.product_no = o.product_no where user_no = :user_no');
   // $orderItems->bindValue(':user_no',1);//$_POST['user_no']
@@ -317,7 +311,9 @@ if ($errMsg !=""){
               <img src="<?=$userRow["game_img"]?>" alt="user_game">
             <?php
             }else{
-              echo '<div class="ifnull"><center><p>尚未有遊戲畫面</p></center></div>';
+             echo '<div class="ifnull"><p>尚未有遊戲畫面</p>
+              <img src="img/member/member_pic.png" alt="">
+              </div>';
             }
             ?>
 

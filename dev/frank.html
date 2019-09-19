@@ -13,6 +13,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="js/plugin/owl.carousel.min.js"></script>
   <script src="js/frank/frank.js"></script>
+  <script src="js/frank/msg.js"></script>
+  <script src="js/plugin/Chart.js"></script>
+
   <title>Document</title>
 </head>
 <body class="frank_body">
@@ -26,16 +29,17 @@
             </div>
             <div class="frank_message_content">
               <div class="frank_message_wrap" id="message_wrap">
-                     <figure class="frank_mem_pic">
-                     <img src="" alt="pinkbird">
+                     <figure class="frank_mem_pic" id="frank_bg_pic">
+                     <img src="" alt="pinkbird" id="frank_animal_img">
                     </figure>
                     <div class="frank_mem_text">
                         <div class="frank_megsage_memname">
                             <p id="frank_message_memId"></p>
-                            <p class="frank_message_date"></p> 
+                            <p class="frank_message_date" id="frank_message_date"></p> 
                         </div>
                         <div class="frank_message_box">
-                            <p class="frank_message_text">
+                            <p class="frank_message_text" id="frank_message_text">
+                                    <span id="txtHint"></span>
                             </p>  
                         </div> 
                         <div class="frank_message_btn">
@@ -46,10 +50,10 @@
                     </div>
                 </div> 
             </div>
-            <form action="" method="post" name="formPost" class="message_wrap_input">
-                <input type="text" id="input_text" placeholder="最多30字數" maxlength="30">
+            <form class="message_wrap_input">
+                <input type="text" id="input_text" onkeyup="showHint(this.value)" placeholder="最多30字數" maxlength="30">
                 <div class="message_input_btn">
-                    <input type="submit" value="留言"class="btn_cloudb">
+                    <input type="button" id="msg_btn" value="留言"class="btn_cloudb">
                         @@include('template/btn_sp.html')
                 </div>
             </form> 
@@ -93,17 +97,17 @@
                             <input type="hidden"  name="work_no">
                             <h3>第一名</h3>
                             <span>投票數</span>
-                            <span id="vote0"　></span>
+                            <span id="vote0"></span>
                         </div>
                         <div class="frank_top_background">
-                            <img id="bg0" src="" alt="">
+                            <img src="" alt="" id="bg0">
                             <div class="frank_items_text">
                                 <div class="frank_items_animal">
-                                    <img id="ag0" src="" alt="pinkbird">
+                                    <img src="" alt="pinkbird" id="ag0">
                                 </div>
                                 <div class="frank_items_name">
-                                    <h3 id="aid0">動物：</h3>
-                                    <h3 id="id0">會員：</h3>
+                                    <h3>動物：<sapn id="aid0"></sapn></h3>
+                                    <h3>會員：<sapn id="id0"></sapn></h3>
                                 </div>
                             </div>
                         </div>
@@ -137,14 +141,15 @@
                         <span id="vote1"></span>
                     </div>
                     <div class="frank_top_background">
-                        <img id="bg1"src="" alt="">
+                        <img src="" alt="" id="bg1">
                         <div class="frank_items_text">
                             <div class="frank_items_animal">
-                                <img id="ag1" src="" alt="pinkbird">
+                                <img src="" alt="pinkbird"
+                                id="ag1">
                             </div>
                             <div class="frank_items_name">
-                                <h3 id="aid1">動物：</h3>
-                                <h3 id="id1">會員：</h3>
+                                <h3>動物：<sapn id="aid1"></sapn></h3>
+                                <h3>會員：<sapn id="id1"></sapn></h3>
                             </div>
                         </div>
                     </div>
@@ -153,12 +158,12 @@
                             <img src="img/frank/wlike.png" alt="collection" class="heart" title="加入收藏">
                         </div>
                         <div class="frank_message_btn">
-                            <span href="#" class="btn_cloudp" id="frank_message_btn">留言
+                            <span href="#" class="btn_cloudp" >留言
                                 @@include('template/btn_sp.html')
                             </span>
                         </div>
                         <div class="frank_vote_btn">
-                            <span href="#" class="btn_cloudb">投票
+                            <span href="#"  class="btn_cloudb">投票
                                 @@include('template/btn_sp.html')
                             </span>
                         </div>                                                  
@@ -178,14 +183,14 @@
                             <span id="vote2"></span>
                         </div>
                         <div class="frank_top_background">
-                        <img id="bg2" src="" alt="">
+                        <img src="" alt="" id="bg2">
                         <div class="frank_items_text">
                             <div class="frank_items_animal">
-                                <img id="ag2"src="" alt="pinkbird">
+                                <img src="" alt="pinkbird" id="ag2">
                             </div>
                             <div class="frank_items_name">
-                                <h3 id="aid2">動物：</h3>
-                                <h3 id="id2">會員：</h3>
+                                <h3>動物：<sapn id="aid2"></sapn></h3>
+                                <h3>會員：<sapn id="id2"></sapn></h3>
                             </div>
                         </div>
                     </div>
@@ -228,7 +233,7 @@
                         <div class="frank_activity_description">
                             <div class="frank_description_text">
                                 <h3>參賽條件</h3>
-                                <p>特製自己的動物並且是會員。</h3>
+                                <p>特製自己的動物並且是會員。</p>
                                 <p>會員每日三票。</h3>
                                 <p>前三名將會在商城裡上架販售。</p>
                                 <div class="frank_activity_data">
@@ -281,56 +286,34 @@
                                 <div class="frank_players_title">
                                         <input type="hidden"  name="work_no" >
                                         <span>動物：</span>
-                                        <span ></span>
-                                </div>
-                                <div class="frank_player_card ">
-                                    <div class="frank_player_front">
-                                        <div class="frank_player_pic">
-                                            <img src="" alt="">
+                                        <span id="aid"></span>
+                                    </div>
+                                    <div class="frank_player_card ">
+                                        <div class="frank_player_front">
+                                            <div class="frank_player_pic">
+                                                <img src="" alt="" id="bg">
                                                 <div class="frank_player_animal">
-                                                    <img src="" alt="pinkbird">
+                                                    <img src="" alt="pinkbird" id="ag">
                                                 </div>
                                             </div>
                                             <div class="frank_player_text">
-                                                <h3>會員：</h3>
+                                                <h3>會員：<span id="id"></span></h3>
                                                 <span>目前投票數</span>
-                                                <span></span>
+                                                <span id="vote"></span>
                                             </div>
                                             <div class="frank_expand_arrow">
                                                 <img src="img/frank/expand-arrow.png" alt="expand-arrow">
                                             </div>
                                         </div>
                                         <div class="frank_player_back">
-                                            <div class="frank_back_text">
-                                                <div class="frank_back_top">
-                                                    <h3>生存能力</h3>
-                                                </div>
-                                                <div class="frank_back_jump">
-                                                    <span>跳躍力</span>
-                                                    <img src="img/frank/jump.png" alt="jump">
-                                                </div>
-                                                <div class="frank_back_life">
-                                                    <span>生命力</span>
-                                                    <img src="img/frank/life.png" alt="life">
-                                                </div>
-                                            </div>
-                                            <div class="frank_back_pic">
-                                                <h3>適應環境</h3>
-                                                <p>森林</p>
-                                                <div class="frank_back_img">
-                                                    <img src="img/frank/adapt.png" alt="adpat">
-                                                </div>
-                                                <div class="frank_back_terrain">
-                                                    <span>沙漠</span>
-                                                    <span>平原</span>
-                                                </div>
-                                            </div>
-                                            <div class="frank_back_btn">
-                                                <span class="btn_cloudp">去玩遊戲
-                                                    @@include('template/btn_sp.html')
-                                                </span>
-                                            </div>  
-                                            <div class="frank_expand_button">
+                                          @@include('template/radar.html')
+                                          <div class="frank_back_btn">
+                                             
+                                              <span class="btn_cloudp"> 去玩遊戲
+                                                   @@include('template/btn_sp.html')</span>
+                                           
+                                          </div>
+                                          <div class="frank_expand_button">
                                                 <img src="img/frank/expand-button.png" alt="expand-button">
                                             </div>  
                                         </div>
@@ -353,10 +336,14 @@
                                             </div>
                                         </div>
                                 </div> 
-         
+                  
+                     </div>
             </div>
         </div>
     </section>
      @@include('template/footer.html')
+     
+     <script src="js/modify/radar.js"></script>
+    
 </body>
 </html>
