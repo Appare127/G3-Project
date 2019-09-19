@@ -139,9 +139,11 @@ for (let i = 0; i < vote_rank.length -4; i++) {
      $(`#frank_player_items${i} .frank_players_title span:eq(1)`).attr('id','aid'+(i+3));
      $(`#frank_player_items${i}  input:eq(0)`).attr('name','work_no');
      $(`#frank_player_items${i} h3 span:eq(0)`).attr('id','id'+(i+3));
-      $(`#frank_player_items${i} span span:eq(0)`).attr('id','vote'+(i+3));
+     $(`#frank_player_items${i} span span:eq(0)`).attr('id','vote'+(i+3));
      $(`#frank_player_items${i} .frank_player_pic img:eq(0)`).attr('id','bg'+(i+3));
      $(`#frank_player_items${i} .frank_player_pic img:eq(1)`).attr('id','ag'+(i+3));
+     $(`#frank_player_items${i} .frank_Collection_btn img:eq(0)`).attr('class','heart');
+           
 }
    for (let i = 0; i < vote_rank.length -1; i++) {
     $id("vote"+`${i}`).innerText=vote_rank[i]["vote"];
@@ -179,6 +181,21 @@ function vote_php(){
     if(vote_item.readyState==4  && vote_item.status==200){
         let vote_arr= JSON.parse(vote_item.responseText);
          console.log( vote_arr );
+  // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }}
+
+function  message_xml(){
+    message_item=frank_rank();
+    message_item.open("GET","php/frank/message.php?user_no="+sessionStorage.user_no,true);
+    message_item.onreadystatechange = message_php;
+    message_item.send(null);
+}
+function message_php(){
+    if(message_item.readyState==4  && message_item.status==200){
+        let message_arr= JSON.parse(message_item.responseText);
+         console.log( message_arr );
+        
+         
   // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
     }}
 
@@ -223,13 +240,16 @@ $('.frank_expand_button').click(function(){
     }}
 
     function message_btn(){
+      message_xml()
+   
+    
       $('.frank_message_btn').addClass(function(){
           $('.frank_message').slideDown(50);
       })
     for (let i = 0; i < 4; i++) {
       
-              $("#frank_message_content").append($("#message_wrap").clone(true).attr({id:'message_itme'}));
-    //  $(`#frank_player_items${i} .frank_players_title span:eq(1)`).attr('id','aid'+(i+3));
+              $("#frank_message_content").append($("#message_wrap").clone(true).attr({id:'message_itme'+i}));
+       
      }
 
     
