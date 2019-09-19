@@ -59,7 +59,7 @@
             <div id="message"> 
                 <div id="showReward">
                         <div class="wrap"><img src="img/game/gaming_coin.png" alt=""><p id="reward_money"></p></div>
-                        <div class="wrap"><img src="img/game/gaming_present.png" alt=""><p id="ad_shopping"><a href="shop.html">去動物商城</a></p></div>
+                        <div class="wrap"><img src="img/game/gaming_present.png" alt=""><p id="ad_shopping"><a href="shop.php">去動物商城</a></p></div>
                 </div>
                 <div id="showScore">
                         <div class="wrap"><img src="img/game/gaming_clock.png" alt=""><p id="score_time"></p></div>
@@ -98,26 +98,7 @@ function chosenArea(area){
     }
 }
 
-function saveImage(){
-    var canvas = document.getElementsByTagName('canvas')[0];
-    var dataURL = canvas.toDataURL("image/png");
-    // console.log('dataURL:'+dataURL);
-    document.getElementById('result_img').value = dataURL;
-    document.getElementById('user_no').value = sessionStorage['user_no'];
-    var formData = new FormData(document.getElementById("form1"));
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function(){
-        if( xhr.status == 200){
-            console.log('遊戲截圖成功');
-        }else{
-            console.log(xhr.status);
-        }
-    }
-    
-    xhr.open('POST', 'php/game/canvas_load_save.php', true);
-    xhr.send(formData);
 
-}
 
 function restartGame(){
     
@@ -149,6 +130,32 @@ function doFirst(){
     }
 }
 
+
+//遊戲結束存圖檔
+function saveImage(){
+    var canvas = document.getElementsByTagName('canvas')[0];
+    var dataURL = canvas.toDataURL("image/png");
+    // console.log('dataURL:'+dataURL);
+    document.getElementById('result_img').value = dataURL;
+    console.log(dataURL);
+    document.getElementById('user_no').value = sessionStorage['user_no'];
+    var formData = new FormData(document.getElementById("form1"));
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function(){
+        if( xhr.status == 200){
+            console.log('遊戲截圖成功');
+        }else{
+            console.log(xhr.status);
+        }
+    }
+    
+    xhr.open('POST', 'php/game/canvas_load_save.php', true);
+    xhr.send(formData);
+
+}
+
+
+//遊戲結束更新資料
 function updateScoreMoney(){
     let xhr = new XMLHttpRequest();
     xhr.onload =function(){
