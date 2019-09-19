@@ -21,25 +21,28 @@
 <body class="frank_body">
         <canvas class="world" id="world" width="1920" height="227"></canvas>
     @@include('template/header.html')
+  
+  
+  
     <section class="frank_message" id="frank_message">
         <div class="frank_message_container">   
             <div class="frank_message_title">
                 <h3>留言板</h3> 
                 <img src="img/frank/close-button.png" alt="close" class="frank_closs_btn">
             </div>
-            <div class="frank_message_content">
+            <div id="frank_message_content" class="frank_message_content">
               <div class="frank_message_wrap" id="message_wrap">
                      <figure class="frank_mem_pic" id="frank_bg_pic">
-                     <img src="" alt="pinkbird" id="frank_animal_img">
+                    
                     </figure>
-                    <div class="frank_mem_text">
+                    <div id="frank_mem_text" class="frank_mem_text">
                         <div class="frank_megsage_memname">
-                            <p id="frank_message_memId"></p>
-                            <p class="frank_message_date" id="frank_message_date"></p> 
+                            <p id="frank_message_memId">姓名</p>
+                            <p class="frank_message_date" id="frank_message_date">日期</p> 
                         </div>
                         <div class="frank_message_box">
                             <p class="frank_message_text" id="frank_message_text">
-                                    <span id="txtHint"></span>
+                                留言內容
                             </p>  
                         </div> 
                         <div class="frank_message_btn">
@@ -58,6 +61,8 @@
                 </div>
             </form> 
     </section>
+  
+  
     <section class="franks_banner">
         <div class="container">
             <div class="banner_cloud">
@@ -284,7 +289,7 @@
                     <div class="frank_player_more" id="frank_player_more">
                        <div class="frank_player_items" id="frank_player_items">   
                                 <div class="frank_players_title">
-                                        <input type="hidden"  name="work_no" >
+                                        <input type="hidden"  >
                                         <span>動物：</span>
                                         <span id="aid"></span>
                                     </div>
