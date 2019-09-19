@@ -13,17 +13,86 @@ function resize(){
 function $id(e){
  return document.getElementById(e);
 }
-function favorite(){
- $(".heart").click(function(e){
-       
-    if(e.target.title == "加入收藏"){
 
-        this.src = "img/frank/plike.png";
-        this.title = "取消收藏"
-    }else{
-        this.src = "img/frank/wlike.png";
-        this.title = "加入收藏";
-    }});}
+
+
+
+function favorite(){
+
+    let xhr = new XMLHttpRequest();
+
+    let hearts = document.getElementsByClassName('heart');
+
+    for(let i=0;i<hearts.length;i++){
+        
+        hearts[i].addEventListener('click',function(e){
+            alert(111);
+            xhr.onload = function(){ 
+                if(xhr.status==200){
+                   console.log(xhr.responseText);
+        
+                }else{
+                  alert(xhr.status);
+                }
+        
+              }
+        
+            if(sessionStorage['user_name']){
+                if(e.target.title == "加入收藏"){
+                    option='love';
+                            this.src = "img/frank/plike.png";
+                            this.title = "取消收藏";
+
+                        //設定好所要連結的程式
+                        var url = "php/frank/love.php?user_no="+sessionStorage['user_no']+'&work_no='+this.id.replace('NO_','')+'&option='+option;
+                        //   console.log(url);
+                        xhr.open("GET", url, true); 
+                        //送出資料           
+                        xhr.send(null);
+
+                }else{
+                    option='dislove';
+                            this.src = "img/frank/wlike.png";
+                            this.title = "加入收藏";
+
+                        //設定好所要連結的程式
+                        var url = "php/frank/dislove.php?user_no="+sessionStorage['user_no']+'&work_no='+this.id.replace('NO_','')+'&option='+option;
+                        //   console.log(url);
+                        xhr.open("GET", url, true); 
+                        //送出資料           
+                        xhr.send(null);
+
+
+                    }
+
+                // 如果sessionStorage沒有登入，則彈出提示登入的視窗
+            }else{
+                alert("請先登入會員");
+                // $id('login_gary').style.display = 'block';
+
+            }
+
+        });
+            
+    
+    
+        }
+    }
+
+// function favorite(){
+//  $(".heart").click(function(e){
+       
+//     if(e.target.title == "加入收藏"){
+
+//         this.src = "img/frank/plike.png";
+//         this.title = "取消收藏"
+//     }else{
+//         this.src = "img/frank/wlike.png";
+//         this.title = "加入收藏";
+//     }});}
+
+
+
 function owlCarousel_img(){
       var _width = $(window).width(); 
         if(_width < 768){
@@ -71,18 +140,24 @@ function frank_vote(){
 for (let i = 0; i < vote_rank.length -4; i++) {
      $("#frank_player_more").append($("#frank_player_items").clone(true).attr('id','frank_player_items'+i));
      $(`#frank_player_items${i} .frank_players_title span:eq(1)`).attr('id','aid'+(i+3));
-     $(`#frank_player_items${i} h3:eq(0)`).attr('id','id'+(i+3))
-     $(`#frank_player_items${i} .frank_player_text span:eq(1)`).attr('id','vote'+(i+3));
+     $(`#frank_player_items${i}  input:eq(0)`).attr('name','work_no');
+     $(`#frank_player_items${i} h3 span:eq(0)`).attr('id','id'+(i+3));
+     $(`#frank_player_items${i} span span:eq(0)`).attr('id','vote'+(i+3));
      $(`#frank_player_items${i} .frank_player_pic img:eq(0)`).attr('id','bg'+(i+3));
      $(`#frank_player_items${i} .frank_player_pic img:eq(1)`).attr('id','ag'+(i+3));
+     $(`#frank_player_items${i} .frank_Collection_btn img:eq(0)`).attr('class','heart');
+           
 }
    for (let i = 0; i < vote_rank.length -1; i++) {
     $id("vote"+`${i}`).innerText=vote_rank[i]["vote"];
     $id("bg"+`${i}`).src=vote_rank[i]["bg_img"];
     $id("ag"+`${i}`).src=vote_rank[i]["cmp_img"];
-   $id("aid"+`${i}`).innerText=vote_rank[i]["work_name"];
+    $id("aid"+`${i}`).innerText=vote_rank[i]["work_name"];
     $id("id"+`${i}`).innerText=vote_rank[i]["user_name"];
     $("input[name='work_no']")[i].value=vote_rank[i]["work_no"];
+    $(`.heart:eq(${i})`).attr('id','NO_'+(vote_rank[i]["work_no"]));
+    
+    
  }}}
 
 function  join_xml(){
@@ -112,6 +187,21 @@ function vote_php(){
   // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
     }}
 
+function  message_xml(){
+    message_item=frank_rank();
+    message_item.open("GET","php/frank/message.php?user_no="+sessionStorage.user_no,true);
+    message_item.onreadystatechange = message_php;
+    message_item.send(null);
+}
+function message_php(){
+    if(message_item.readyState==4  && message_item.status==200){
+        let message_arr= JSON.parse(message_item.responseText);
+         console.log( message_arr );
+        
+         
+  // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }}
+
 
 //--------------------按鈕類--------------------------
 function activity_button(){
@@ -127,8 +217,12 @@ $('.frank_closs_btn').click(function(){
         $('.frank_message').hide();
 });
   $('.frank_vote_btn .btn_cloudb').click(function(){
-     
+
 });
+  $('#msg_btn').click(function(){
+   
+});
+
 
 $('.frank_expand_arrow').click(function(){
         $(this).parent().next().animate({bottom:'0px'},1);
@@ -149,9 +243,21 @@ $('.frank_expand_button').click(function(){
     }}
 
     function message_btn(){
-    console.log("132");
+      message_xml()
+   
+    
       $('.frank_message_btn').addClass(function(){
           $('.frank_message').slideDown(50);
-    })}
+      })
+    for (let i = 0; i < 4; i++) {
+      
+              $("#frank_message_content").append($("#message_wrap").clone(true).attr({id:'message_itme'+i}));
+       
+     }
+
+    
+    
+    
+    }
 
 

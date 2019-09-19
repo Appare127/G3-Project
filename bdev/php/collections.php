@@ -4,7 +4,7 @@
   try{
     require_once("connectg3.php");
 
-    $sql = "select * from collections";
+    $sql = "select * from collections order by vote desc";
     $collections  = $pdo->query($sql);
     $collectionsRows = $collections -> fetchAll(PDO::FETCH_ASSOC);
 

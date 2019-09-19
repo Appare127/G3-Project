@@ -196,7 +196,7 @@ try {
     <!-- <script src='js/shop/shop.js'></script> -->
     <script>
     function choosePic(){
-    if(sessionStorage.user_id){  //如果登入了  撈session
+    if(sessionStorage.my_animalbg_img != 'null'){  //如果登入了  撈session
         document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src=sessionStorage.my_animalbg_img;
        
     }else{   //如果沒登入，給預設圖片

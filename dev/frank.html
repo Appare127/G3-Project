@@ -21,25 +21,28 @@
 <body class="frank_body">
         <canvas class="world" id="world" width="1920" height="227"></canvas>
     @@include('template/header.html')
+  a
+  
+  
     <section class="frank_message" id="frank_message">
         <div class="frank_message_container">   
             <div class="frank_message_title">
                 <h3>留言板</h3> 
                 <img src="img/frank/close-button.png" alt="close" class="frank_closs_btn">
             </div>
-            <div class="frank_message_content">
+            <div id="frank_message_content" class="frank_message_content">
               <div class="frank_message_wrap" id="message_wrap">
                      <figure class="frank_mem_pic" id="frank_bg_pic">
-                     <img src="" alt="pinkbird" id="frank_animal_img">
+                    
                     </figure>
-                    <div class="frank_mem_text">
+                    <div id="frank_mem_text" class="frank_mem_text">
                         <div class="frank_megsage_memname">
-                            <p id="frank_message_memId"></p>
-                            <p class="frank_message_date" id="frank_message_date"></p> 
+                            <p id="frank_message_memId">姓名</p>
+                            <p class="frank_message_date" id="frank_message_date">日期</p> 
                         </div>
                         <div class="frank_message_box">
                             <p class="frank_message_text" id="frank_message_text">
-                                    <span id="txtHint"></span>
+                                留言內容
                             </p>  
                         </div> 
                         <div class="frank_message_btn">
@@ -58,6 +61,8 @@
                 </div>
             </form> 
     </section>
+  
+  
     <section class="franks_banner">
         <div class="container">
             <div class="banner_cloud">
@@ -96,8 +101,8 @@
                         <div class="frank_items_title">
                             <input type="hidden"  name="work_no">
                             <h3>第一名</h3>
-                            <span>投票數</span>
-                            <span id="vote0"></span>
+                            <span>投票數<span id="vote0"></span></span>
+                           
                         </div>
                         <div class="frank_top_background">
                             <img src="" alt="" id="bg0">
@@ -113,7 +118,7 @@
                         </div>
                         <div class="frank_top_btn">
                             <div class="frank_Collection_btn">
-                                    <img src="img/frank/wlike.png" alt="collection" class="heart"  title="加入收藏">
+                                    <img src="img/frank/wlike.png" id="" alt="collection" class="heart"  title="加入收藏">
                             </div>
                             <div class="frank_message_btn">
                                 <span class="btn_cloudp" id="frank_message_btn">留言
@@ -137,8 +142,8 @@
                     <div class="frank_items_title">
                         <input type="hidden"  name="work_no">
                         <h3>第二名</h3>
-                        <span>投票數</span>
-                        <span id="vote1"></span>
+                        <span>投票數<span id="vote1"></span></span>
+                        
                     </div>
                     <div class="frank_top_background">
                         <img src="" alt="" id="bg1">
@@ -179,8 +184,8 @@
                         <div class="frank_items_title">
                             <input type="hidden"  name="work_no">
                             <h3>第三名</h3>
-                            <span>投票數</span>
-                            <span id="vote2"></span>
+                            <span>投票數<span id="vote2"></span></span>
+                            
                         </div>
                         <div class="frank_top_background">
                         <img src="" alt="" id="bg2">
@@ -284,7 +289,7 @@
                     <div class="frank_player_more" id="frank_player_more">
                        <div class="frank_player_items" id="frank_player_items">   
                                 <div class="frank_players_title">
-                                        <input type="hidden"  name="work_no" >
+                                        <input type="hidden"  >
                                         <span>動物：</span>
                                         <span id="aid"></span>
                                     </div>
@@ -298,8 +303,8 @@
                                             </div>
                                             <div class="frank_player_text">
                                                 <h3>會員：<span id="id"></span></h3>
-                                                <span>目前投票數</span>
-                                                <span id="vote"></span>
+                                                <span>目前投票數<span id="vote"></span></span>
+                                               
                                             </div>
                                             <div class="frank_expand_arrow">
                                                 <img src="img/frank/expand-arrow.png" alt="expand-arrow">
@@ -331,7 +336,7 @@
                                             </div>
                                             <div class="frank_Collection_btn">
                                                 <span>
-                                                    <img src="img/frank/wlike.png" alt="collection" class="heart" title="加入收藏">
+                                                    <img src="img/frank/wlike.png" alt="collection" title="加入收藏">
                                                 </span>
                                             </div>
                                         </div>

@@ -661,7 +661,7 @@
     // duration :'50%',//距離
     offset :' -100px'//偏移上方距離
     }).setTween(animation_train)
-    .addIndicators()
+    // .addIndicators()
     .addTo(controller) 
 
 
@@ -670,14 +670,14 @@
         reverse: true,
         offset: "-250px"
     }).setTween(rank_balloon)
-        .addIndicators()
+        // .addIndicators()
         .addTo(controller)
 
 
     var rank_appear = new ScrollMagic.Scene({
         triggerElement: '.home_rank .container',
     }).setTween(rank_appear)
-        .addIndicators()
+        // .addIndicators()
         .addTo(controller)
 
     //創建場景
@@ -685,7 +685,7 @@
         triggerElement: '.home_resv ',
         reverse: true,
     }).setTween(resv_balloon)
-        .addIndicators()
+        // .addIndicators()
         .addTo(controller)
 
     var resv_appear = new ScrollMagic.Scene({
@@ -693,7 +693,7 @@
         reverse: true,
         offset: "-200px",
     }).setTween(resv_appear)
-        .addIndicators()
+        // .addIndicators()
         .addTo(controller)
 
     var shop_appear = new ScrollMagic.Scene({
@@ -701,14 +701,14 @@
         reverse: true,
         offset: "-200px",
     }).setTween(shop_appear)
-        .addIndicators()
+        // .addIndicators()
         .addTo(controller)
 
     var shop_balloon = new ScrollMagic.Scene({
         triggerElement: '.home_shop ',
         reverse: true,
     }).setTween(shop_balloon)
-        .addIndicators()
+        // .addIndicators()
         .addTo(controller)
 
          // 先找到場景，最外層的物件 視差
