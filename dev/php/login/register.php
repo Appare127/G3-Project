@@ -7,7 +7,7 @@ if(isset($_POST['data'])){
     $data=json_decode($_POST['data']);
     // print_r($data);
 
-    $sql="INSERT INTO `user` (`user_no`, `user_id`, `user_psw`, `user_name`, `user_email`, `hint_answer`,  `hint_no`, `user_status`) VALUES (null,:id,:psw,:name,:email,:ans,:hint_no,1)";
+    $sql="INSERT INTO `user` (`user_no`, `user_id`, `user_psw`, `user_name`, `user_email`, `hint_answer`,  `hint_no`, `user_status`,`my_animal_img`,`my_animal_bg_img`,`my_animalbg_img`) VALUES (null,:id,:psw,:name,:email,:ans,:hint_no,1,'img/member/user0_bg.png','img/member/user0_aml.png','img/member/user0_amlbg.png')";
 
     
     $user=$pdo->prepare($sql);

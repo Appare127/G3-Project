@@ -1,23 +1,23 @@
 
 
 
-    .login_gary.login_show {
+    .forgetPsw_gary.forgetPsw_show {
         display:block;
     }
-    .login_box_title{
+    .forgetPsw_box_title{
         font-size: $lg_fz;
     }
-.login_gary {
+.forgetPsw_gary {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    display: none;
+    // display: none;
     position: absolute;
     position: fixed;
     top: 0;
     z-index: 5;
     
-    .login_box {
+    .forgetPsw_box {
         @include btn_cloud(30%, $col_btn_pink);
         position: absolute;
         top: 0%;
@@ -44,7 +44,7 @@
             font-family: Microsoft JhengHei;
             padding: 5px;
         }
-        .login_del {
+        .forgetPsw_del {
             width: 30px;
             height: 30px;
             cursor: pointer;
@@ -93,8 +93,8 @@
 
 
 @media screen and (min-width: 768px) {
-    .login_gary {
-        .login_box {
+    .forgetPsw_gary {
+        .forgetPsw_box {
             width: 360px;
             height: 500px;
             padding-top: 20px;
