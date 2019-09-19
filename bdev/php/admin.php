@@ -4,7 +4,7 @@
   try{
     require_once("connectg3.php");
 
-    $sql = "select * from admin";
+    $sql = "select * from admin where admin_no != 1";
     $admins  = $pdo->query($sql);
     $adminRows = $admins -> fetchAll(PDO::FETCH_ASSOC);
 
@@ -64,7 +64,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                  <form action="addAdminData.php">
+                  <form action="addAdminData.php" post="post">
                     <tr> 
                       <td>
       
@@ -107,7 +107,7 @@ if( $errMsg != ""){ //例外
       // print_r($adminRow);
       // echo "</pre>";
 ?>
-                  <form action="updateAdminData.php">
+                  <form action="updateAdminData.php" method="post">
                     <tr>
                       <td><?php echo $adminRow['admin_no'];?><input name="admin_no" type="hidden" value="<?= $adminRow['admin_no']?>"></td>
                       <td><input type="text" name="admin_name" value="<?= $adminRow['admin_name']?>" readonly="true"></td>

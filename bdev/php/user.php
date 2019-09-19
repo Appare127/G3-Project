@@ -4,7 +4,7 @@
   try{
     require_once("connectg3.php");
 
-    $sql = "select user_no, user_id, user_name, user_email, user_img, user_tel, user_status, my_animal_img, my_animal_name, my_animal_bg_img from user";
+    $sql = "select user_no, user_id, user_name, user_email, user_tel, user_status from user";
     $users  = $pdo->query($sql);
     $userRows = $users -> fetchAll(PDO::FETCH_ASSOC);
 
@@ -57,14 +57,9 @@
                       <th>帳號</th>
                       <th>姓名</th>
                       <th>信箱</th>
-                      <th>會員大頭貼</th>
                       <th>行動電話</th>
                       <th>狀態(0:停權; 1:正常)</th>
-                      <th>我的動物圖片</th>
-                      <th>我的動物名稱</th>
-                      <th>我的動物背景圖片</th>
-                      <th></th>
-                      <th></th>
+                      <th colspan=2></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -90,12 +85,8 @@ if( $errMsg != ""){ //例外
                       <td><input name="user_id" value="<?= $userRow['user_id']?>" readonly="true" size="6"></td>
                       <td><input name="user_name" value="<?= $userRow['user_name']?>" readonly="true" size="8"></td>
                       <td><input name="user_email" value="<?= $userRow['user_email']?>" readonly="true" size="16"></td>
-                      <td><input name="user_img" value="<?= $userRow['user_img']?>" readonly="true"></td>
                       <td><input name="user_tel" value="<?= $userRow['user_tel']?>" readonly="true" size="10"></td>
                       <td><input name="user_status" value="<?= $userRow['user_status']?>" readonly="true" size="3"></td>
-                      <td><input name="my_animal_img" value="<?= $userRow['my_animal_img']?>" readonly="true"></td>
-                      <td><input name="my_animal_name" value="<?= $userRow['my_animal_name']?>" readonly="true" size="10"></td>
-                      <td><input name="my_animal_bg_img" value="<?= $userRow['my_animal_bg_img']?>" readonly="true"></td>
                       <td>
                         <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
                       </td>
