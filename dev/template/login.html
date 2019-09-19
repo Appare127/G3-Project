@@ -15,23 +15,198 @@
     </div>
 </section>
 
+
+
+
+
+
 <section id="registered_gary" class="registered_gary">
     <div class="registered_box">
             <div id="registered_del" class="registered_del"></div>
         <p class="login_box_title">會員註冊</p>
         <form action="#" id="myForm">
-            <p> 帳號：<input type="text" name="memId" placeholder="帳號*"></p>
-            <p> 密碼：<input type="password" name="memPsw" placeholder="密碼*"> </p>
-            <p> 確認密碼：<input type="password" name="pswCheck" placeholder="確認密碼*"> </p>
-            <p> 電子郵件：<input type="text" name="email" placeholder="zoo@email.com*"></p>
+            <p> 
+                帳號：
+                <input type="text" v-model="id"  placeholder="帳號*" maxlength="10">
+                <span class="msg">最大長度：10</span>
+            </p>
+            <p> 
+                名字：
+                <input type="text" v-model="name"  placeholder="名稱*" maxlength="10">
+                <span class="msg">最大長度：10</span>
+            </p>
+            <p>
+                密碼：
+                <input type="password" v-model="psw"  placeholder="密碼*" maxlength="10"> 
+                <span class="msg">最大長度：10</span>
+                </p>
+            <p> 
+                確認密碼：
+                <input type="password" v-model="pswConfirm" v-bind:class="{ 'is-invalid':pswError }" placeholder="確認密碼*"> 
+                <span class="msg">{{pswConfirmErrMsg}}</span>
+            </p>
+            <p> 
+                電子郵件：
+                <input type="text" v-model="email" v-bind:class="{ 'is-invalid':emailError }" placeholder="zoo@email.com*">
+                <span class="msg">{{emailErrMsg}}</span>
+            </p>
+            <p> 請選擇密碼提示問題： 
+                <select v-model="qsn">
+                <option value="" >--請選擇--</option>
+                <option v-for="qsn in qsns">{{qsn.hint_no+"."+qsn.hint_question}}</option>
+            </select>
+            <span class="msg">（忘記密碼時使用）</span>
+            </p>
+            <p>請輸入答案：<input v-model="hint" type="text" name="hint" placeholder="密碼提示答案*"></p>
         </form>
-        <button class="btn_cloud" id="register_finish" >完成<span class="btn_cloudeffect"></span>
+        <button class="btn_cloud" id="register_finish" @click="submit">完成<span class="btn_cloudeffect"></span>
             <span class="btn_cloudeffect"></span>
             <span class="btn_cloudeffect"></span>
             <span class="btn_cloudeffect"></span></button>
-        <a href="#" id="backLogin">返回登入</a> <a href="#">忘記密碼</a>
+        <a href="#" id="backLogin">返回登入</a> 
     </div>
 </section>
+
+
+
+
+
+<section  class="forgetPsw_gary">
+    <div class="forgetPsw_box">
+        <div id="forgetPsw_del" class="forgetPsw_del"></div>
+        <p class="forgetPsw_box_title">忘記密碼</p>
+        <form action="#">
+            <p> 帳號：<input type="text" placeholder="請輸入帳號"></p>
+            <p> 密碼：<input type="text" placeholder="請輸入答案"> </p>
+        </form>
+        <button class="btn_cloud" id='login_btn'> 登入<span class="btn_cloudeffect"></span>
+            <span class="btn_cloudeffect"></span>
+            <span class="btn_cloudeffect"></span>
+            <span class="btn_cloudeffect"></span></button>
+    </div>
+</section>
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script>
+    var form = new Vue({
+        data: {
+            id:"aaa",
+
+            name: 'aaa',
+
+            psw: '09871',
+
+            pswConfirm:'09871',
+            pswError:false,
+
+            email: '1@zoo.com',
+            emailError: false,
+
+            qsn:"",
+            qsns:[],
+            // [ { "hint_no": "1", "hint_question": "你喜歡的水果為何？" }, { "hint_no": "2", "hint_question": "你是什麼星座" }, { "hint_no": "3", "hint_question": "你多高" } ]
+            hint:'qqq',
+
+
+        },
+        computed: {
+            pswStrength() {
+                let isText =  /^[0][9][0-9]{8}$/;
+                if (!isText.test(this.phone) && this.phone.length > 0) {
+                    this.phoneError = true;
+                    return '請輸入09開頭的10位數字';
+                }
+                else {
+                    this.phoneError = false;
+                }
+            },
+            pswConfirmErrMsg() {
+                if (this.pswConfirm != this.psw &&  this.pswConfirm.length>0) {
+                    this.pswError = true;
+                    return '與密碼不符';
+                } 
+                else {
+                    this.pswError = false;
+
+                }
+            },
+            emailErrMsg() {
+                let isText = /^\w+@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+                if (!isText.test(this.email) && this.email.length > 0) {
+                    this.emailError = true;
+                    return '請輸入正確email格式';
+                }
+                else {
+                    this.emailError = false;
+                }
+            },
+           
+        },
+        mounted(){
+            fetch('php/login/register.php').then(qsns => qsns.json()).then(qsns => {this.qsns = qsns;});
+        },
+        methods:{
+            submit(e){
+            //驗證資料是否都合法
+                let err=0;
+                for(i in this.$data){
+                    if (this.$data[i] === "" || this.$data[i] === true){
+                        err++;
+                        alert("請輸入完整資料")
+                    }
+                }
+                if(err == 0){
+                    let data={
+                        "id":this.id,
+                        "psw":this.psw,
+                        "name":this.name,
+                        "email":this.email,
+                        "ans":this.hint,
+                        "hint_no":this.qsn.charAt(0),
+                    }
+                    data=JSON.stringify(data);
+                // console.log(JSON.stringify(data));
+                //{"id":"aaa","psw":"09871","name":"aaa","email":"1@zoo.com","ans":"qqq","hint_no":"1"}
+            //送出
+                let xhr = new XMLHttpRequest();
+                    xhr.onload = function () {
+                        if (xhr.status == 200) {//登入成功
+                            //寫入session storage
+                            let userData = JSON.parse(xhr.responseText);
+                            for (i in userData) {
+                                sessionStorage.setItem(i, userData[i]);
+                            }
+                            $id("show_user_name").innerText = "您好，" + userData.user_name;
+                            $id("login_text").innerText = "登出";
+                            $id("login_gary").style.display = "none";
+                            //讓會員中心可以進入
+                            document.getElementsByClassName('member_icon')[0].onclick = null;
+                            cancelRegistered();
+                            
+                        } else {
+                            alert(xhr.statusText);
+                        }
+                    }
+                    xhr.open("post", "php/login/register.php", true);
+                    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+                    xhr.send(`data=${data}`);
+                }
+            }
+        }
+    });
+    form.$mount("#registered_gary");
+</script>
+
+
+
+
+
+
 
 <script>
     function $id(id) {
@@ -68,6 +243,7 @@
                     if (xhr.responseText.indexOf("sysError") != -1) {
                         alert("系統異常,請通知系統維護人員");
                     }else { 
+                        // console.log(xhr.responseText)
                         let userData = JSON.parse(xhr.responseText)[0];
                         for (i in userData) {
                             sessionStorage.removeItem(i);
@@ -163,36 +339,14 @@
         $id('registered_gary').style.display = 'none';
     }
 
-    //送出註冊資料
-    function sendRegisteration(){
-        //驗證資料是否都合法
 
-        //送出
-        var xhr = new XMLHttpRequest();
-        xhr.onload = function(){
-        console.log( xhr.responseText);
-        
-        //清空input
-        
-        //關閉視窗
-        //寫入session/sessionStorage
-        //reload網頁，直接登入
-		}
-
-		xhr.open("post","php/login/register.php",true);
-		var myForm = new FormData(document.getElementById("myForm"))
-		xhr.send(myForm);
-    }
-    //清空註冊input
+    // //清空註冊input
     function clearRegisterInfo(){
-        let memID=document.getElementsByName("memId")[0];
-        let memPsw=document.getElementsByName("memPsw")[0];
-        let pswCheck=document.getElementsByName("pswCheck")[0];
-        let email=document.getElementsByName("email")[0];
-        memID.value="";
-        memPsw.value="";
-        pswCheck.value="";
-        email.value="";
+        let input=document.querySelectorAll("#myForm input")
+        input.forEach((n,i)=>{
+            n.value="";
+        })
+        
     }
 
     window.addEventListener('load', function () {
@@ -218,12 +372,12 @@
         $id("registered_del").onclick = cancelRegistered;  
       
         //送出註冊資料
-        $id("register_finish").onclick = sendRegisteration;
+        // $id("register_finish").onclick = sendRegisteration;
     
         //返回登入  打開視窗
         $id("backLogin").onclick=function(){   
-            $id('registered_gary').style.display = 'none';
-            $id('login_gary').style.display = 'block';
+        $id('registered_gary').style.display = 'none';
+        $id('login_gary').style.display = 'block';
         }
         
     })

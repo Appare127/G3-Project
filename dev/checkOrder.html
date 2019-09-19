@@ -185,17 +185,6 @@
 
             },
             computed: {
-                // nameErrMsg() {
-                //     let isText = /[^0-9]/;
-                //     if (!isText.test(this.name) && this.name.length > 0) {
-                //         this.nameError = true;
-                //         return '請勿包含數字';
-                //     }
-
-                //     else {
-                //         this.nameError = false;
-                //     }
-                // },
                 phoneErrMsg() {
                     let isText =  /^[0][9][0-9]{8}$/;
                     if (!isText.test(this.phone) && this.phone.length > 0) {
@@ -274,7 +263,7 @@
                         // console.log("不完整")
                         console.log(sessionStorage['shopList'])
                     }else{
-                        console.log("done")
+                        // console.log("done")
                         document.querySelector(".checkOrder .order_confirm").style.display = "block";   //購物車頁的送出
                     }
                 },
