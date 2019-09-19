@@ -354,11 +354,6 @@ function changeParts(e){
     let animal_name = urlstr.substring(type_y +1 ,animal_y);
     // console.log(animal_name);
 
-    // 抓到HTML的聲音物件
-    let voice_tiger = document.getElementById('voice_tiger');
-    let voice_lion = document.getElementById('voice_lion');
-    let voice_giraffe = document.getElementById('voice_giraffe');
-    let voice_elephant = document.getElementById('voice_elephant');
 
     // 用if去判斷不同部位選擇要更換相應的圖片
     if (type_name == 'head'){
@@ -369,23 +364,14 @@ function changeParts(e){
         head_eml_desert = e.target.nextElementSibling.dataset.pointc;
         // console.log(head_eml_forest + ',' + head_eml_mountain + ',' + head_eml_desert);
         
-        switch (animal_name){
-            case 'giraffe':
-                voice_giraffe.play();
-                break;
-            case 'elephant':
-                voice_elephant.play();
-                break;
-            case 'lion':
-                voice_lion.play();
-                break;
-            case 'tiger':
-                voice_tiger.play();
-                break;
-        }
-        
+
+        // 依動物名稱再加上字串組合去抓到該動物的audio ID後，再撥放
+        let voice_target = "voice_" + animal_name;
+        document.getElementById(voice_target).play();
+
+        // 把動物名稱更新到外面的全域變數，後面要送資料去後台會用到
         selected_head = animal_name;
-        
+
 
     }else if (type_name == 'body'){
         document.getElementsByClassName('body_pic')[0].src = `img/modify/p_body_${animal_name}.png`;
@@ -954,6 +940,7 @@ function init(){
     // 下一步按鈕的事件觸發
     document.getElementById('next_btn').addEventListener('click',nextstep);
 
+    
 }
 
 
