@@ -24,9 +24,6 @@
                     <div>
                         <p>商品圖片</p>
                     </div>
-                    <!-- <div>
-                        <p>商品名稱</p>
-                    </div> -->
                     <div>
                         <p>單價</p>
                     </div>
@@ -36,8 +33,9 @@
                     <div>
                         <p>小計</p>
                     </div>
-
                 </div>
+                <!-- {"prodInfo":["Tshirt","馬克杯","img/shop/Tshirt.png","500"],"num":"1","img":"http://localhost/G3/img/collections/work_amlbg_5.png","name":"Tshirt|work_amlbg_5"} -->
+                <!-- 動物圖片img  商品圖片prodInfo[2] 單價prodInfo[3] 數量num-->
                 <div class="list_row">
                     <div class="prod_pic col-6">
                         <div class="pic_item">
@@ -45,7 +43,6 @@
                         </div>
                     </div>
                     <div class="prod_info col-6">
-                        <!-- <div class="prod_name "><span class="title_inline">商品名稱：</span>馬克杯</div> -->
                         <div class="price"><span class="title_inline">商品單價：</span>$600</div>
                         <div>
                             <span class="title_inline">商品數量：</span>
@@ -54,8 +51,6 @@
                         <div class="subTotal"><span class="title_inline">商品小計：</span>$600</div>
                     </div>
                     <div class="clearfix"></div>
-
-
                 </div>
                 <div class="list_row">
                     <div class="prod_pic col-6 ">
@@ -178,7 +173,7 @@
     </div>
 
     @@include('template/footer.html')
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
     <script>
         var form_vue = new Vue({
@@ -393,10 +388,6 @@
                 }
                 total()
             }
-           
-
-          
-
         })
 
      

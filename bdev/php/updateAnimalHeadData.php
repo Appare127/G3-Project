@@ -3,10 +3,11 @@ $errMsg = "";
 echo $_REQUEST['head_name'];
 try{
   require_once("connectg3.php");
-  $sql = "update head SET head_name=:head_name, head_img=:head_img, head_environment1=:head_environment1, head_environment2=:head_environment2, head_environment3=:head_environment3, head_status=:head_status , head_ch_name=:head_ch_name WHERE head_no=:head_no";
+  $sql = "update head SET head_name=:head_name, head_img=:head_img, head_img_combination=:head_img_combination, head_environment1=:head_environment1, head_environment2=:head_environment2, head_environment3=:head_environment3, head_status=:head_status , head_ch_name=:head_ch_name WHERE head_no=:head_no";
   $animal_head = $pdo->prepare($sql);
   $animal_head->bindValue(":head_name",$_REQUEST['head_name']);
   $animal_head->bindValue(":head_img","");
+  $animal_head->bindValue(":head_img_combination","");
   $animal_head->bindValue(":head_environment1",$_REQUEST['head_environment1']);
   $animal_head->bindValue(":head_environment2",$_REQUEST['head_environment2']);
   $animal_head->bindValue(":head_environment3",$_REQUEST['head_environment3']);
@@ -31,20 +32,25 @@ try{
 					mkdir("modify");
 				}
 
+				//檔案名稱都要變成head_xxx.png
+				$fileName = "head_" . $head_name .".png";
+				$fileName2 = "p_head_" . $head_name .".png";
 
-				//將檔案copy到要放的路徑
-				$fileInfoArr = pathinfo($_FILES["head_img"]["name"]);
-				$fileName = "{$head_name}.{$fileInfoArr["extension"]}";
-				// $fileName = "{$head_img}";
-
+				//右側選單圖
 				$from = $_FILES["head_img"]["tmp_name"];
 				$to = "$upload_dir" . "$fileName";
 				copy( $from, $to);
 
+				// 左側組合圖
+				$from = $_FILES["head_img_combination"]["tmp_name"];
+				$to = "$upload_dir" . "$fileName2";
+				copy( $from, $to);
+
 				//將檔案名稱寫回資料庫
-				$sql = "update head set head_img = :head_img where head_no = $head_no";
+				$sql = "update head set head_img = :head_img,  head_img_combination= :head_img_combination where head_no = $head_no";
 				$newHead = $pdo->prepare($sql);
 				$newHead -> bindValue(":head_img", "$save_directory"."$fileName");
+				$newHead -> bindValue(":head_img_combination", "$save_directory"."$fileName2");
 				$newHead -> execute();
 				echo "新增成功~";
 			

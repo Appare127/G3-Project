@@ -56,12 +56,13 @@ session_start();
                 <div class="list_row" id='<?=$i?>'>
                     <div class="prod_pic col-6 col-md-2">
                         <div class="pic_item">
-                            <img src="<?=$n->prodInfo[1]?>" alt="">
+                            <img class="shop_animal_bg" src="<?=$n->img?>" >
+                            <img src="<?=$n->prodInfo[2]?>" alt="">
                         </div>
                     </div>
                     <div class="prod_info col-6 col-md-8">
-                        <div class="prod_name "><span class="title_inline">商品名稱：</span><?=$i?></div>
-                        <div class="price"><span class="title_inline">商品單價：</span><?=$n->prodInfo[2]?></div>
+                        <div class="prod_name "><span class="title_inline">商品名稱：</span><?=$n->prodInfo[1]?></div>
+                        <div class="price"><span class="title_inline">商品單價：</span><?=$n->prodInfo[3]?></div>
                         <div class="number">
                             <span class="title_inline">商品數量：</span>
                             <div class="number_input">
@@ -72,7 +73,7 @@ session_start();
                         </div>
                         <div class="subTotal">
                             <span class="title_inline">商品小計：</span>
-                            $<span class="subTotal_num"><?=$n->num*$n->prodInfo[2]?></span>
+                            $<span class="subTotal_num"><?=$n->num*$n->prodInfo[3]?></span>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -86,7 +87,7 @@ session_start();
                 }?>
                 <div class="total" >
                     <p>商品金額：$<span>100</span></p>
-                    <p>+運費：$0</p>
+                    <p>+運費：$60</p>
                     <p>總金額為：$<span class="total_money"></span></p>
                 </div>
             </div>
@@ -134,7 +135,7 @@ session_start();
         function changeNum(input){   //改變數量
             let num = input.value;
             let id=input.parentNode.parentNode.parentNode.parentNode.id;
-                // console.log(id+","+num)
+                console.log(id+","+num)
                 input.parentNode.parentNode.nextElementSibling.innerHTML='';  //小計清空
 
                 //改session
@@ -177,7 +178,7 @@ session_start();
            
         
             //刪到沒東西時，顯示 “您尚未購買”
-            if(sessionStorage['shopList'].length<1){
+            if(sessionStorage['shopList'].indexOf(",") == -1){
                 let wrap=document.querySelector(".cart_list .wrap");
                 let checkoutBtn=document.querySelector(".cart_btn .btn_cloudp");
                
@@ -236,14 +237,15 @@ session_start();
             total();
 
             //結帳
-            checkoutBtn.onclick=function(e){
+            if(checkoutBtn){
+                checkoutBtn.onclick=function(e){
                 if(!sessionStorage['user_no']){
                     document.getElementById('login_gary').style.display='block';
                     e.preventDefault();
-
-
                 }
             }
+            }
+          
 
 
             $id("login_btn").addEventListener("click",function(){

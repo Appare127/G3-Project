@@ -1,1 +1,28 @@
 // Here you can add other styles
+input[name="head_img"] {
+    width: 200px;
+}
+input[name="head_img_combination"] {
+    width: 180px;
+}
+.image{
+    display:block;
+    margin:auto;
+    text-align:center;
+}
+.btnimg{
+    padding-top:49px;
+}
+.tr_title{
+    border: 2px solid #ccc;
+}
+
+input[name="body_img"] {
+    width: 200px;
+}
+input[name="body_img_combination"] {
+    width: 180px;
+}
+.body_btnimg{
+    padding-top:9px;
+}

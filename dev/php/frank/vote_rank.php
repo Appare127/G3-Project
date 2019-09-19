@@ -9,7 +9,7 @@ try {
     session_start();
 
     $sql_user_ctn = 
-    "select u.user_name, u.my_animal_img,u.my_animal_bg_img,c.vote,c.work_name,c.bg_img,c.cmp_img
+    "select u.user_name, u.my_animal_img,u.my_animal_bg_img,c.vote,c.work_name,c.bg_img,c.cmp_img,c.work_no
     from user u,collections c
     where c.user_no=u.user_no and YEAR(work_date) = 2019 
     order by c.vote desc";
