@@ -235,18 +235,31 @@ $lblue:#d8ecea;
     .choose_pic_wrap{
         display:flex;
         flex-wrap:wrap;
-        justify-content: center;
+        justify-content: space-around;
         border-bottom:3px solid brown;
+        min-height:450px;
+
+        @include responds(medium){
+            min-height:252px;
+            justify-content: center;
+
+        }
+        @include responds(large){
+            min-height:320px;
+        }
 
         .item{
             width: 40%;
             box-sizing:border-box;
-            padding: 20px;
+            padding: 5px;
             cursor: pointer;
             text-align: center;
             @include responds(medium){
                 width: 20%;
+            padding: 20px;
+
             }
+           
           
             p{
                 padding: 10px 0;
@@ -265,6 +278,12 @@ $lblue:#d8ecea;
     //包背景&動物圖的外框
         .pic{
             position:relative;
+            bottom: 0px;
+            transition:position 1s;
+            &:hover{
+                // box-shadow: 3px 3px 3px 0px #ccc ;
+                bottom: 20px;
+            }
         }
     }
 
