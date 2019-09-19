@@ -27,6 +27,7 @@
 
 
 <div class="game_role">
+    <audio id='animal_sound'><source src=''></audio>
     <!-- <div class="banner_pyramid"><img src="img/game/banner_pyramid.png" alt=""></div>
     <div class="banner_tree"><img src="img/game/banner_tree.png" alt=""></div>
     <div class="banner_mountain"><img src="img/game/banner_mountain.png" alt=""></div> -->
@@ -298,10 +299,11 @@ function $que(css_selector){
 
 //動物走動
 function animalWalking(trigger){
+    $que(".info_pic img")[0].classList.remove('animalBreathing');
         if(trigger=='firstTime'){
             if(sessionStorage['user_name']&&sessionStorage['user_no']){
+                $id('animal_sound').play();
                 $que(".animal_words")[0].style.display="block";
-                $que(".info_pic img")[0].classList.remove('animalBreathing');
                 $que(".info_pic img")[0].classList.add('animalHello');//動物移動
                 $que(".animal_words")[0].classList.add('animalSayWords');//對話框移動
                 $que(".animal_words p")[0].innerText = `${sessionStorage['user_name']} 你好啊~~`;
@@ -318,12 +320,20 @@ function animalWalking(trigger){
                 $que(".animal_words")[0].style.display="none";
 
             }
-        }else if(trigger == 'delicous'){
+        }else if(trigger == 'delicious'){
             $que(".animal_words")[0].style.display="block";
             $que(".animal_words p")[0].innerText = `真好吃`;
             setTimeout(function(){
                 $que(".animal_words")[0].style.display="none";
-            },2500);
+            },3500);
+        }else if(trigger == 'junk'){
+            $que(".animal_words")[0].style.display="block";
+            $que(".animal_words p")[0].innerText = `咳咳....你餵我吃了什麼...`;
+            setTimeout(function(){
+                $que(".animal_words")[0].style.display="none";
+            },3500);
+            $que(".info_pic img")[0].classList.add('animal_falling_down');
+
         }
     // console.log($que(".info_pic img")[0].classList);
 }
@@ -619,12 +629,14 @@ function chosenArea(area){
     }
     function dragEnd(e){
         this.className = 'food';
-        console.log(e.target);
+        console.log(e.target.id == 'hamburger'); //true
   
         console.log('吃到:'+ e.target.id + ' 飽食度:'+e.target.dataset.feed);
 
 
         if(e.target.id == 'hamburger'){
+            animalWalking('junk');
+        }else if(e.target.id == 'fruit'){
             animalWalking('delicious');
         }
         console.log(e.target.dataset.feed);
@@ -660,6 +672,9 @@ function chosenArea(area){
         getCusAnimal();
         animalWalking('firstTime');
 
+        //安裝聲音檔
+        $que('#animal_sound source')[0].src = sessionStorage['animal_howl']; 
+
         //餵食安裝事件
         const foods = document.querySelectorAll('.food img');
         const animal = document.querySelectorAll('.info_pic')[0];
@@ -683,7 +698,7 @@ function chosenArea(area){
         $cls('forest_pointer')[0].addEventListener('click', pointerToMap);
         $cls('desert_pointer')[0].addEventListener('click', pointerToMap);
         $cls('mountain_pointer')[0].addEventListener('click', pointerToMap);
-        $que(".info_pic img")[0].addEventListener('click', animalWalking);
+        $que(".info_pic img")[0].addEventListener('click', animalWalking('firstTime'));
         let enterGame=document.querySelectorAll('.playing_window p');
         let closeBtn = document.getElementById('game_closeBtn');
         closeBtn.addEventListener('click', closeIntro);

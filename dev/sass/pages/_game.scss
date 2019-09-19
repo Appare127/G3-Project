@@ -772,6 +772,13 @@
                                 display:none;
                             }
                         }
+                        .animal_falling_down{
+                            animation:animal_falling_down 0.5s;
+                        }
+                        @keyframes animal_falling_down {
+                            0%{ transform:rotateZ(15deg) ;}
+                            100% { transform:rotateZ(90deg) ;}
+                        }
 
 
                     }
