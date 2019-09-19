@@ -80,7 +80,7 @@
 
 
     try {
-        require_once("connectg3.php");
+        require_once("../connectg3.php");
 
         $sql ="update user set my_animal_img = :my_animal_img,
         my_animal_name = :my_animal_name,
