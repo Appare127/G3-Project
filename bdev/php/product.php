@@ -63,6 +63,7 @@
                     </tr>
                   </thead>
                   <tbody>
+                  <!-- 新增 -->
                   <form action="addProductData.php">
                     <tr> 
                       <td>
