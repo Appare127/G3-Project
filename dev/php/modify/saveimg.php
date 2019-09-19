@@ -91,7 +91,8 @@
         environ_adapt_2 = :environ_adapt_2,
         environ_adapt_3 = :environ_adapt_3,
         animal_life = :animal_life,
-        animal_jump = :animal_jump  where user_no=:user_no";
+        animal_jump = :animal_jump,
+        attend = :attend where user_no=:user_no";
         $userData = $pdo->prepare( $sql);
         $userData->bindValue(":my_animal_img", $file_aml_src);
         $userData->bindValue(":my_animal_name", $_POST["myanimal_name"]);
@@ -103,6 +104,7 @@
         $userData->bindValue(":environ_adapt_3", $_POST["environ_adapt_3"]);
         $userData->bindValue(":animal_life", $_POST["animal_life"]);
         $userData->bindValue(":animal_jump", $_POST["animal_jump"]);
+        $userData->bindValue(":attend", 0);
         $userData->bindValue(":user_no", $_POST["user_no"]);
         $userData->execute();
         echo "動物存檔成功";
