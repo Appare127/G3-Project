@@ -75,6 +75,7 @@ $lyellow:#fdf6e7;
     }
 //商品圖片的外框
     .pic_item{
+        position:relative;
         @include responds(medium){
             width: 25%;
         }
@@ -82,6 +83,14 @@ $lyellow:#fdf6e7;
         margin: auto;
         img{
             vertical-align: top;
+        }
+
+        .shop_animal_bg{
+            position:absolute;
+            width: 40%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
         }
     }
 //商品資訊（name price number subtotal）
@@ -199,7 +208,7 @@ $lyellow:#fdf6e7;
 
 //黑色的底
 .order_confirm{
-    display:none;
+    // display:none;
     position:fixed;
     width: 100%;
     top: 0;
@@ -301,7 +310,7 @@ $lyellow:#fdf6e7;
         font-size: $lg_fz;
         text-align: center;
         border-bottom: 3px dashed $orange;
-        font-weight: bold;
+        // font-weight: bold;
     }
 
     @include btn_cloudb (100px);

@@ -19,7 +19,7 @@
     <section class="cart_list">
         <div class="container">
             <h2>訂單明細</h2>
-            <div class="wrap">
+            <div class="wrap" id="wrap">
                 <div class="list_header">
                     <div>
                         <p>商品圖片</p>
@@ -39,36 +39,21 @@
                 <div class="list_row">
                     <div class="prod_pic col-6">
                         <div class="pic_item">
-                            <img src="img/shop/cup.png" alt="">
+                            <img class="shop_animal_bg" src="img/shop/aml.png" alt="">
+                            <img class="prod_plain" src="img/shop/cup.png" alt="">
                         </div>
                     </div>
                     <div class="prod_info col-6">
                         <div class="price"><span class="title_inline">商品單價：</span>$600</div>
                         <div>
                             <span class="title_inline">商品數量：</span>
-                            <span>1</span>
+                            <span class="number">1</span>
                         </div>
                         <div class="subTotal"><span class="title_inline">商品小計：</span>$600</div>
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="list_row">
-                    <div class="prod_pic col-6 ">
-                        <div class="pic_item">
-                            <img src="img/shop/cup.png" alt="">
-                        </div>
-                    </div>
-                    <div class="prod_info col-6 ">
-                        <!-- <div class="prod_name "><span class="title_inline">商品名稱：</span>馬克杯</div> -->
-                        <div class="price"><span class="title_inline">商品單價：</span>$600</div>
-                        <div>
-                            <span class="title_inline">商品數量：</span>
-                            <span>1</span>
-                        </div>
-                        <div class="subTotal"><span class="title_inline">商品小計：</span>$600</div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
+                
                 <!-- 點數折抵 -->
                 <div class="discount">
                     <h3>金幣折抵</h3>
@@ -77,7 +62,7 @@
                         <a href="game.html">玩遊戲賺金幣</a>
                     </div>
                     <div class="discount_input">
-                        <p> $ <input type="number" id="enter_discount"></p>
+                        <p> $ <input type="number" id="enter_discount" min="0"></p>
                         <span>金幣$1可折抵現金1元</span>
                     </div>
                     <div class="clearfix"></div>
@@ -100,8 +85,7 @@
             <form class="wrap" >
                 <div class="write_info_col">
                     <h3>收件人資訊</h3>
-                    <p>姓名： <input id="name" type="text" v-model="name"
-                            v-bind:class="{ 'is-invalid':nameError }"><span>{{nameErrMsg}}</span></p>
+                    <p>姓名： <input id="name" type="text" v-model="name"></p>
                     <p>電話： <input type="text" v-model="phone"
                             v-bind:class="{ 'is-invalid':phoneError }"><span>{{phoneErrMsg}}</span></p>
                     <p>地址： <input type="text" v-model="addr"></p>
@@ -133,7 +117,7 @@
 
     <div class="cart_btn">
         <a class="btn_cloudy" href="cart.php">上一步@@include('template/btn_sp.html')</a>
-        <a class="btn_cloudp confirm" href="checkOder.html" @click="submit">送出訂單@@include('template/btn_sp.html')</a>
+        <a class="btn_cloudp confirm" href="checkOder.html" @click="confirm">送出訂單@@include('template/btn_sp.html')</a>
     
     </div>
 
@@ -154,7 +138,7 @@
             <p>有效期限：{{month}}月{{year}}年</p>
             <div class="btn">
                 <a class="btn_cloudy writeAgain">重新填寫@@include('template/btn_sp.html')</a>
-                <a class="btn_cloudp submit" >確認送出@@include('template/btn_sp.html')</a>
+                <a class="btn_cloudp submit" @click="submit">確認送出@@include('template/btn_sp.html')</a>
             </div>
         </div>
     </div>
@@ -165,10 +149,9 @@
         <div class="order_info_container">
             <p class="order_info_title">訂單已成立</p>
             <p>請至會員中心查看訂單詳情。</p>
-            <p>訂單編號：<span>001</span></p>
-            <p>訂單成立時間：<span>2019/01/01 00:00</span></p>
-            <p>訂單狀態：<span>已付款</span></p>
-            <button class="btn_cloudb close"><span>關閉</span>@@include('template/btn_sp.html')</button>
+            <p class="order_no">訂單編號：</p>
+            <p>訂單狀態：已付款</p>
+            <button class="btn_cloudb close">關閉@@include('template/btn_sp.html')</button>
         </div>
     </div>
 
@@ -178,47 +161,46 @@
     <script>
         var form_vue = new Vue({
             data: {
-                name: '',
-                nameError: false,
+                name: 'aaa',
 
-                phone: '',
+                phone: '0987654321',
                 phoneError: false,
 
-                addr:'',
+                addr:'aaa',
     
-                card1: '',
-                card2: '',
-                card3: '',
-                card4: '',
+                card1: '1111',
+                card2: '1111',
+                card3: '1111',
+                card4: '1111',
                 cardError: false,
 
-                code: '',
+                code: '111',
                 codeError: false,
 
-                month: '',
+                month: '1',
                 monthError: false,
 
-                year: '',
+                year: '2001',
                 yearError: false,
 
             },
             computed: {
-                nameErrMsg() {
-                    let isText = /[^0-9]/;
-                    if (!isText.test(this.name) && this.name.length > 0) {
-                        this.nameError = true;
-                        return '請勿包含數字';
-                    }
+                // nameErrMsg() {
+                //     let isText = /[^0-9]/;
+                //     if (!isText.test(this.name) && this.name.length > 0) {
+                //         this.nameError = true;
+                //         return '請勿包含數字';
+                //     }
 
-                    else {
-                        this.nameError = false;
-                    }
-                },
+                //     else {
+                //         this.nameError = false;
+                //     }
+                // },
                 phoneErrMsg() {
-                    let isText = /^\d{6,10}$/;
+                    let isText =  /^[0][9][0-9]{8}$/;
                     if (!isText.test(this.phone) && this.phone.length > 0) {
                         this.phoneError = true;
-                        return '請輸入6-10位數字';
+                        return '請輸入09開頭的10位數字';
                     }
                     else {
                         this.phoneError = false;
@@ -255,11 +237,12 @@
                     }
                 },
                 dateErrMsg() {
-                    let monthText = /^[1-12]$/;
-                    let yearText = /^[20]{2}[0-9]{2}$/;
-                    if (!monthText.test(this.month) && this.month.length > 0) {
+                    let monthText = /[\D]/;
+                    let yearText = /^[2][0][0-9]{2}/;
+                    if (((this.month<1 || this.month*1>12) || monthText.test(this.month))  && this.month.length > 0) {
                         this.monthError = true;
                         return '請輸入：1-12';
+                        // return this.month;
                     } else if (!yearText.test(this.year) && this.year.length > 0) {
                         this.yearError = true;
                         return '請輸入:20XX';
@@ -277,7 +260,7 @@
                 // 'name':{props:['inname'], template:'<p>姓名：{{inname}}</p>' },
             },
             methods:{
-                submit(e){
+                confirm(e){
                     e.preventDefault();
                     document.querySelector(".checkOrder .order_confirm").style.display = "block";
                     let a=0;
@@ -292,12 +275,30 @@
                         console.log(sessionStorage['shopList'])
                     }else{
                         console.log("done")
-                        // document.querySelector(".checkOrder .order_confirm").style.display = "block";   //購物車頁的送出
-               
+                        document.querySelector(".checkOrder .order_confirm").style.display = "block";   //購物車頁的送出
                     }
-                    
-                   
-                    
+                },
+                submit(e){
+                    e.preventDefault();
+                
+                    var data={
+                        "credit":this.card1+"-"+this.card2+"-"+this.card3+"-"+this.card4,
+                        "name":this.name,
+                        "phone":this.phone,
+                        "addr":this.addr,
+                        "total":document.querySelector(".total_money").innerText
+                    }
+
+                    data=JSON.stringify(data);
+                    // {"credit":"1111-1111-1111-1111","name":"aaa","phone":"0987654321","addr":"aaa","total":"2560"}
+
+                    $.post('php/cart/prod_order.php',{data:data},(order_no)=>{
+                        document.querySelector(".checkOrder .order_confirm").style.display = "none";
+                        document.querySelector(".order_info").style.display = "block";
+                        document.querySelector(".order_no").innerText=`訂單編號：${order_no}`;
+                    });
+
+
                 }
             }
         });
@@ -329,6 +330,25 @@
 
 
         window.addEventListener("load", function () {
+             //顯示明細
+             let list_row=$('.list_row').clone();
+             let shopListArr=sessionStorage['shopList'].split(",");
+             shopListArr.pop();
+            //  console.log(shopListArr)
+             shopListArr.forEach((n,i) => {
+                list_row.find(".shop_animal_bg").prop("src",$.parseJSON(sessionStorage[n]).img);
+                list_row.find(".prod_plain").prop("src",$.parseJSON(sessionStorage[n]).prodInfo[2]);
+                list_row.find(".price").html(`<span class="title_inline">商品單價：</span>$${$.parseJSON(sessionStorage[n]).prodInfo[3]}`);
+                list_row.find(".number").text($.parseJSON(sessionStorage[n]).num);
+                list_row.find(".price").text($.parseJSON(sessionStorage[n]).prodInfo[3]);
+                list_row.find(".subTotal").text($.parseJSON(sessionStorage[n]).num * $.parseJSON(sessionStorage[n]).prodInfo[3]);
+                list_row.clone().insertBefore(".discount");
+            });
+           
+               
+                $(".list_row:eq(0)").remove();
+            
+        
               //total
               total();
 
@@ -359,12 +379,12 @@
                 confirmWindow.style.display = "none";
             };
 
-            submitButton.onclick = function () {     //確認資料視窗的確認送出
-                confirmWindow.style.display = "none";
-                document.querySelector(".order_info").style.display = "block";
-                // let formArr=[form_vue.name,form_vue.phone,form_vue.addr,form_vue.card1,form_vue.card2,form_vue.card3,form_vue.card4,form_vue.code,]
+            // submitButton.onclick = function () {     //確認資料視窗的確認送出
+            //     confirmWindow.style.display = "none";
+            //     document.querySelector(".order_info").style.display = "block";
+            //     // let formArr=[form_vue.name,form_vue.phone,form_vue.addr,form_vue.card1,form_vue.card2,form_vue.card3,form_vue.card4,form_vue.code,]
                 
-            }
+            // }
 
             closeButton.onclick = function () {   //訂單成立視窗的關閉
                 document.querySelector(".order_info").style.display = "none";
@@ -388,6 +408,9 @@
                 }
                 total()
             }
+
+
+           
         })
 
      
