@@ -31,7 +31,7 @@ let partsobj = [];
 let part_types = 4;
 
 
-// 換動物部件的canvas
+// 換動物部件的canvas建立
 let canvas = document.getElementById('aml_canvas');
 let context = canvas.getContext('2d');
     if (window.innerWidth < 996){
@@ -56,6 +56,12 @@ let bgcontext = bg_canvas.getContext('2d');
     bg_canvas.width = bg_width;
     bg_canvas.height = bg_height;
 
+// 動物和背景圖片合併用的canvas建立
+let amlbg_canvas = document.getElementById('amlbg_canvas');
+let amlbgcontext = amlbg_canvas.getContext('2d');
+amlbg_canvas.width = bg_width;
+amlbg_canvas.height = bg_height;
+
 // 背景canvas畫圖的滑鼠啟動設定
 let draw_start = 0;
 
@@ -74,8 +80,14 @@ let sample_point = document.getElementsByClassName('sample_point')[0];
 // 背景canvas畫筆大小預設
 let drawsize = 5;
 
+// 動物的聲音
+let animal_howl = '';
 
+// 放聲音路徑的陣列
+let voice_arr = [];
 
+// 最後選到的頭部名稱
+let selected_head = '';
 
 // 下一步動作
 function nextstep(){
@@ -172,10 +184,10 @@ function dopic(){
     // 先判斷sessionStorage有沒有會員登入資料，有才往下做轉圖檔工作
     if (sessionStorage['user_name']){
 
-        let animal_name = document.getElementById('animal_name');
+        let input_amlname = document.getElementById('input_amlname');
         // 判斷是否有輸入動物名字
         // 如果動物名稱裡不是空的，代表已經有輸入名字了，可繼續做下去
-        if (animal_name.value != ''){
+        if (input_amlname.value != ''){
 
             // 之前做好動物時，動物圖片資訊已先傳到form1的暫存input裡了
             // 所以這裡只要處理背景圖就好
@@ -184,12 +196,11 @@ function dopic(){
             document.getElementById('bg_data').value = bg_url;
             document.getElementsByClassName('tempbg_pic')[0].src = bg_url;
 
-            // console.log(document.getElementById('bg_data').value);
-            
+            // 把動物聲音的路徑放進form1的input，與sessionStorage裡
+            document.getElementById('voice_data').value = voice_arr[selected_head];
+            sessionStorage['animal_howl'] = voice_arr[selected_head];
+
             combine_amlbg();
-
-
-            // picsend();
 
             // 如果沒有輸入動物名字，則彈出輸入動物名字的提示視窗
         }else {
@@ -202,10 +213,7 @@ function dopic(){
 }
 
 
-let amlbg_canvas = document.getElementById('amlbg_canvas');
-let amlbgcontext = amlbg_canvas.getContext('2d');
-amlbg_canvas.width = bg_width;
-amlbg_canvas.height = bg_height;
+
 
 
 
@@ -249,7 +257,7 @@ function combine_amlbg(){
 function picsend(){
 
     // 把輸入欄位的動物名稱與session的會員編號抓進form的input裡
-    document.getElementById('myanimal_name').value = document.getElementById('animal_name').value;
+    document.getElementById('myanimal_name').value = document.getElementById('input_amlname').value;
     document.getElementById('user_no').value = sessionStorage['user_no'];
     
     // 把動物適應力與生命跳躍力數據抓進form的input裡
@@ -346,11 +354,11 @@ function changeParts(e){
     let animal_name = urlstr.substring(type_y +1 ,animal_y);
     // console.log(animal_name);
 
+    // 抓到HTML的聲音物件
     let voice_tiger = document.getElementById('voice_tiger');
     let voice_lion = document.getElementById('voice_lion');
-    let voice_dog = document.getElementById('voice_dog');
+    let voice_giraffe = document.getElementById('voice_giraffe');
     let voice_elephant = document.getElementById('voice_elephant');
-
 
     // 用if去判斷不同部位選擇要更換相應的圖片
     if (type_name == 'head'){
@@ -361,22 +369,23 @@ function changeParts(e){
         head_eml_desert = e.target.nextElementSibling.dataset.pointc;
         // console.log(head_eml_forest + ',' + head_eml_mountain + ',' + head_eml_desert);
         
-        // switch (animal_name){
-        //     case 'giraffe':
-        //         voice_dog.play();
-        //         break;
-        //     case 'elephant':
-        //         voice_elephant.play();
-        //         break;
-        //     case 'lion':
-        //         voice_lion.play();
-        //         break;
-        //     case 'tiger':
-        //         voice_tiger.play();
-        //         break;
-        // }
-
-
+        switch (animal_name){
+            case 'giraffe':
+                voice_giraffe.play();
+                break;
+            case 'elephant':
+                voice_elephant.play();
+                break;
+            case 'lion':
+                voice_lion.play();
+                break;
+            case 'tiger':
+                voice_tiger.play();
+                break;
+        }
+        
+        selected_head = animal_name;
+        
 
     }else if (type_name == 'body'){
         document.getElementsByClassName('body_pic')[0].src = `img/modify/p_body_${animal_name}.png`;
@@ -673,6 +682,24 @@ function buildlist (jsonobj){
         li.appendChild(p);
         bg_ul.appendChild(li);
     }
+
+    
+    //建立聲音HTML架構 
+    let voice_box = document.getElementById('voice_box');
+    for (let i=0; i<head_arr.length; i++){
+        let audio_tag = document.createElement('audio');
+        let source_tag = document.createElement('source');
+
+        audio_tag.id = "voice_" + head_arr[i].head_name;
+        source_tag.src = head_arr[i].head_howl;
+        source_tag.type = "audio/mpeg";
+
+        audio_tag.appendChild(source_tag);
+        voice_box.appendChild(audio_tag);
+
+        voice_arr[head_arr[i].head_name] = head_arr[i].head_howl;
+    }
+
 
     // 抓到選單的圖片，全部建立click聆聽功能
     picon = document.getElementsByClassName('picon');

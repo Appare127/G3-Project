@@ -175,7 +175,7 @@
                         cursor: pointer;
                         margin-top: 10px;
                         &:hover {
-                            filter: drop-shadow(0px 0px 10px $col_btn_pink);
+                            filter: drop-shadow(0px 0px 10px #fa0);
                         }
                     }
                 }
@@ -645,6 +645,11 @@
 #amlbg_canvas{
     display: none;
 }
+
+#voice_box{
+    display: none;
+}
+
 
 
 // 電腦~電腦~電腦~電腦~電腦~電腦~電腦~電腦~
