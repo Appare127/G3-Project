@@ -4,8 +4,8 @@ function init(){
        owlCarousel_img();
        favorite();
       frank_vote_rank();
+   //   vote_xml();
       activity_button();
-      vote_xml();
 }
 function resize(){
    owlCarousel_img();
@@ -69,7 +69,7 @@ function frank_vote(){
         var vote_rank= JSON.parse(rank1.responseText);
   //   console.log(vote_rank);
 for (let i = 0; i < vote_rank.length -4; i++) {
-     $("#frank_player_more").append($("#frank_player_items").clone().attr('id','frank_player_items'+i));
+     $("#frank_player_more").append($("#frank_player_items").clone(true).attr('id','frank_player_items'+i));
      $(`#frank_player_items${i} .frank_players_title span:eq(1)`).attr('id','aid'+(i+3));
      $(`#frank_player_items${i} h3:eq(0)`).attr('id','id'+(i+3))
      $(`#frank_player_items${i} .frank_player_text span:eq(1)`).attr('id','vote'+(i+3));
@@ -101,7 +101,7 @@ function join_php(){
         }}}
 function  vote_xml(){
     vote_item=frank_rank();
-    vote_item.open("GET","php/frank/join.php?user_no="+sessionStorage.user_no,true);
+    vote_item.open("GET","php/frank/vote.php?user_no="+sessionStorage.user_no,true);
     vote_item.onreadystatechange = vote_php;
     vote_item.send(null);
 }
@@ -118,12 +118,18 @@ function activity_button(){
 $("#activity_join").click(function() {
 join();
 });
-$('.frank_message_btn').click(function() {
+$('.frank_message_btn .btn_cloudp').click(function() {
         message_btn();
+       
+        
  });
 $('.frank_closs_btn').click(function(){
         $('.frank_message').hide();
 });
+  $('.frank_vote_btn .btn_cloudb').click(function(){
+     
+});
+
 $('.frank_expand_arrow').click(function(){
         $(this).parent().next().animate({bottom:'0px'},1);
 $('.frank_expand_button').click(function(){
@@ -143,6 +149,7 @@ $('.frank_expand_button').click(function(){
     }}
 
     function message_btn(){
+    console.log("132");
       $('.frank_message_btn').addClass(function(){
           $('.frank_message').slideDown(50);
     })}
