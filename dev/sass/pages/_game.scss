@@ -732,7 +732,7 @@
                     margin-right:auto;
                     border:8px #41b1d1 solid;
                     border-radius:7%;
-                    background-color: #e5e5e5;
+                    background-color: #ffffff;
                     position:relative;
                     display:flex;
                     background-image: url(../img/game/role_bg2.png);
@@ -743,24 +743,26 @@
                     animation:cloudsMove 1.0s linear;
                     .food_menu{
                         position:absolute;
-                        left:-38%;
+                        left:-25%;
                         top:0;
-                        width: 200px;
-                        height:360px;
+                        width: 120px;
+                        height:350px;
                         background-color: #e5e5e5;
                         border:8px #41b1d1 solid;
                         border-radius:7%;
+                        z-index:0;
                         .food{
                             width: 80%;
                             margin-left:auto;
                             margin-right:auto;
                             text-align:center;
-                            
                             img {
                                 width:70%;   
                             }
                             .hold {
                                 border:solid #ccc 4px;
+                                border-radius:50%;
+                                
                             }
                             .hovered {
                                 background-color: pink;
@@ -773,12 +775,16 @@
                             }
                         }
                         .animal_falling_down{
-                            animation:animal_falling_down 0.5s;
+                            filter:grayscale(100%);
+                            transform-origin:center bottom;
+                            transform:rotateZ(90deg);
+                            transition:0.5s all;
+                            
                         }
-                        @keyframes animal_falling_down {
-                            0%{ transform:rotateZ(15deg) ;}
-                            100% { transform:rotateZ(90deg) ;}
-                        }
+                        // @keyframes animal_falling_down {
+                        //     0%{ transform:rotateX(15deg) translateX(-100px);}
+                        //     100% { transform:rotateX(90deg) ;}
+                        // }
 
 
                     }
@@ -859,12 +865,14 @@
                             
                             .info_pic{
                                 width:50%;
-                             
                                 position:absolute;
                                 top:4%;
                                 left:5%;
                                 padding:5px;
                                 cursor:pointer;
+                                transition:0.5s;
+
+
                                 img {
                                     width:80%;
                                 }
