@@ -64,16 +64,16 @@
                   </thead>
                   <tbody>
                   <!-- 新增 -->
-                  <form action="addProductData.php">
-                    <tr> 
-                      <td>
-      
-                      </td>
+                  <form action="addProductData.php" method="post" enctype="multipart/form-data">
+                  <!-- 標題列 -->
+                    <tr class="tr_title"> 
+                      <td></td>
                       <td>
                         <input type="text" name="product_name" id="">
                       </td>
                       <td>
-                        <input type="file" name="product_img" id="">
+                        <img width="45%" src="" alt="" id="product_img_preview">
+                        <input type="file" id="select_product_img" name="product_img" accept="image/*">
                       </td>
                       <td>
                         <input type="text" name="product_price" id="">
@@ -103,11 +103,11 @@ if( $errMsg != ""){ //例外
     foreach( $productRows as $i => $productRow){
     
 ?>
-                  <form action="updateProductData.php">
+                  <form action="updateProductData.php" method="post" enctype="multipart/form-data">
                     <tr>
                       <td><?php echo $productRow['product_no'];?><input name="product_no" type="hidden" value="<?= $productRow['product_no']?>"></td>
                       <td><input type="text" name="product_name" value="<?= $productRow['product_name']?>" readonly="true"></td>
-                      <td><input type="text" name="product_img" value="<?= $productRow['product_img']?>" readonly="true"></td>
+                      <td><img width="25%" src="../<?= $productRow['product_img']?>" alt="" class="image"><input type="file" class="btnimg" name="product_img" size="10" style="display:none"></td>
                       <td><input type="text" name="product_price" value="<?= $productRow['product_price']?>" readonly="true"></td>
                       <td><input type="text" name="product_status" value="<?= $productRow['product_status']?>" readonly="true"></td>
                       <td><input type="text" name="product_description" value="<?= $productRow['product_description']?>" readonly="true"></td>
@@ -164,10 +164,17 @@ if( $errMsg != ""){ //例外
   @@include('../html/layout/inputjs.html')
   
   <script>
+
+      function $id(id) {
+        return document.getElementById(id);
+      }
+
+      // 控制哪些欄位可修改start
       function reversechange(e){
         console.log(e.target.parentNode.parentNode.children[1]);   
         e.target.parentNode.parentNode.children[1].firstChild.removeAttribute("readonly");   
-        e.target.parentNode.parentNode.children[2].firstChild.removeAttribute("readonly");   
+        e.target.parentNode.parentNode.children[2].firstChild.removeAttribute("readonly");
+        e.target.parentNode.parentNode.children[2].lastChild.style.display='block';
         e.target.parentNode.parentNode.children[3].firstChild.removeAttribute("readonly");   
         e.target.parentNode.parentNode.children[4].firstChild.removeAttribute("readonly");   
         e.target.parentNode.parentNode.children[5].firstChild.removeAttribute("readonly");   
@@ -182,7 +189,51 @@ if( $errMsg != ""){ //例外
       }
     }
     window.addEventListener('load',doFirst);
+    // 控制哪些欄位可修改end
+
+    // 控制新增商品圖片時的預覽
+    window.addEventListener("load", function () {
+      $id("product_img_preview").style.display="none";   
+      $id("select_product_img").onchange = function (e) {
+          let file = e.target.files[0];
+
+          let reader = new FileReader(); //建立新的 FileReader 物件
+          reader.onload = function (e) {
+
+            $id("product_img_preview").style.display="block";   
+            $id("product_img_preview").src = reader.result;
+          }
+
+          reader.readAsDataURL(file);
+        }
+    })
     
+
+    // 控制修改商品圖片時的預覽
+    var btnimg=document.getElementsByClassName('btnimg');
+
+    function changeImg(e){
+      let file = e.target.files[0];
+      //  console.log(e.target.previousSibling); //找點到那一個的上一個節點 就是img  
+
+      let showImg = e.target.previousSibling; //<img.......>
+
+      let reader = new FileReader(); //建立新的 FileReader 物件
+      reader.onload = function() {
+
+        // console.log(e.target);   
+        showImg.src = reader.result;
+      }
+
+      reader.readAsDataURL(file);
+    }
+   
+    window.addEventListener('load',function(){
+        for(i=0; i<btnimg.length;i++){
+        btnimg[i].addEventListener('change',changeImg,false);
+      }
+    });
+
   </script>
  
   
