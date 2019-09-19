@@ -139,7 +139,7 @@ try {
                 
                 foreach ($prodsRow as $i => $data) {
                     $name=explode(".",explode("/",$prodsRow[$i]['product_img'])[2])[0];    //cup/pillow/hat/bag
-                    $prodData=[$name,$prodsRow[$i]['product_name'],$prodsRow[$i]['product_img'],$prodsRow[$i]['product_price']];
+                    $prodData=[$prodsRow[$i]['product_no'],$prodsRow[$i]['product_name'],$prodsRow[$i]['product_img'],$prodsRow[$i]['product_price']];
                 ?>
                     <div class="item" id=<?=$name?> >
                         <div class="deco deco_top" ></div>
@@ -200,7 +200,7 @@ try {
         document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src=sessionStorage.my_animalbg_img;
        
     }else{   //如果沒登入，給預設圖片
-    document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src='img/shop/amlbg.png';
+    document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src='img/shop/demo_amlbg_0.png';
     }
 };
 
@@ -301,7 +301,7 @@ window.addEventListener("load",function(){
             // console.log(sessionName)
             data=JSON.stringify(data);
             console.log(data);
-            // {"prodInfo":["cup","馬克杯","img/shop/cup.png","500"],"num":"1","Img":"http://localhost/G3/img/collections/work_amlbg_5.png","name":"cup|work_amlbg_5"}
+            // {"prodInfo":["1","馬克杯","img/shop/cup.png","500"],"num":"1","Img":"http://localhost/G3/img/collections/work_amlbg_5.png","name":"cup|work_amlbg_5"}
             
             $.get('php/cart/cart_session.php',{data:data});
             // $.get('php/resv/getTime.php', { data: 'time' }, function (data) {

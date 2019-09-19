@@ -1,7 +1,7 @@
 <?php
     $errMsg="";
     try {
-        require_once("connectg3.php");
+        require_once("../connectg3.php");
         
         $sql_head = "select * from head where head_status = 1";
         $sql_body = "select * from body where body_status = 1";
