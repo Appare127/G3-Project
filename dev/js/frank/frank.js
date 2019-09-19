@@ -5,9 +5,13 @@ function init(){
        favorite();
       frank_vote_rank();
       activity_button();
+      vote_xml();
 }
 function resize(){
    owlCarousel_img();
+}
+function $id(e){
+ return document.getElementById(e);
 }
 function favorite(){
  $(".heart").click(function(e){
@@ -19,9 +23,7 @@ function favorite(){
     }else{
         this.src = "img/frank/wlike.png";
         this.title = "加入收藏";
-    }
-});
-}
+    }});}
 function owlCarousel_img(){
       var _width = $(window).width(); 
         if(_width < 768){
@@ -42,41 +44,12 @@ function owlCarousel_img(){
                         },
                         1000: {
                             items: 7// 一次輪播幾個項目 
-                        }
-                    }
-                })
-            })
-        } 
+                        }}})})} 
         else{ 
                 $('.frank_top_three').addClass('owl-carousel');
                 $('.frank_top_three').removeClass('owl-carousel');
-        }        
-}
-$(document).ready(function(){
-    $('.frank_message_btn').addClass(function(){
-        $('.frank_message_btn').click(function(){
-        $('.frank_message').slideDown(50);
-    })
-})
-})
-$(document).ready(function(){
-    $('.frank_closs_btn').click(function(){
-        $('.frank_message').hide();
-    })
-})
-$(document).ready(function(){
-        $('.frank_expand_arrow').click(function(){
-  
-        $(this).parent().next().animate({bottom:'0px'},1);
-     
-})
-})
-$(document).ready(function(){
-    $('.frank_expand_button').click(function(){
-        $(this).parent().animate({bottom:'-800px'},1);
-      
-    })
-})
+        }}
+
 function frank_rank(){
     if(window.ActiveXObject){
         xmlHttp= new ActiveXObject('Microsoft.XMLHTTP');
@@ -95,40 +68,28 @@ function frank_vote(){
     if(rank1.readyState==4){
         var vote_rank= JSON.parse(rank1.responseText);
   //   console.log(vote_rank);
-
-
 for (let i = 0; i < vote_rank.length -4; i++) {
      $("#frank_player_more").append($("#frank_player_items").clone().attr('id','frank_player_items'+i));
-    
- 
      $(`#frank_player_items${i} .frank_players_title span:eq(1)`).attr('id','aid'+(i+3));
      $(`#frank_player_items${i} h3:eq(0)`).attr('id','id'+(i+3))
      $(`#frank_player_items${i} .frank_player_text span:eq(1)`).attr('id','vote'+(i+3));
      $(`#frank_player_items${i} .frank_player_pic img:eq(0)`).attr('id','bg'+(i+3));
      $(`#frank_player_items${i} .frank_player_pic img:eq(1)`).attr('id','ag'+(i+3));
 }
- 
    for (let i = 0; i < vote_rank.length -1; i++) {
     $id("vote"+`${i}`).innerText=vote_rank[i]["vote"];
     $id("bg"+`${i}`).src=vote_rank[i]["bg_img"];
     $id("ag"+`${i}`).src=vote_rank[i]["cmp_img"];
-    $id("aid"+`${i}`).innerText=vote_rank[i]["work_name"];
+   $id("aid"+`${i}`).innerText=vote_rank[i]["work_name"];
     $id("id"+`${i}`).innerText=vote_rank[i]["user_name"];
     $("input[name='work_no']")[i].value=vote_rank[i]["work_no"];
-     
- }
-  
-     }
-}
-function $id(e){
- return document.getElementById(e);
-}
+ }}}
+
 function  join_xml(){
     join_item=frank_rank();
     join_item.open("GET","php/frank/join.php?user_no="+sessionStorage.user_no,true);
     join_item.onreadystatechange = join_php;
-    join_item.send(null);
-  
+    join_item.send(null);  
 }
 function join_php(){
     if(join_item.readyState==4  && join_item.status==200){
@@ -137,31 +98,53 @@ function join_php(){
             alert("這隻動物參加過了喔");
         }else{
              alert("參加成功");
-        }
-  // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
-    }
+        }}}
+function  vote_xml(){
+    vote_item=frank_rank();
+    vote_item.open("GET","php/frank/join.php?user_no="+sessionStorage.user_no,true);
+    vote_item.onreadystatechange = vote_php;
+    vote_item.send(null);
 }
+function vote_php(){
+    if(vote_item.readyState==4  && vote_item.status==200){
+        let vote_arr= JSON.parse(vote_item.responseText);
+         console.log( vote_arr );
+  // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }}
+
+
+//--------------------按鈕類--------------------------
 function activity_button(){
 $("#activity_join").click(function() {
 join();
-
-
 });
-
+$('.frank_message_btn').click(function() {
+        message_btn();
+ });
+$('.frank_closs_btn').click(function(){
+        $('.frank_message').hide();
+});
+$('.frank_expand_arrow').click(function(){
+        $(this).parent().next().animate({bottom:'0px'},1);
+$('.frank_expand_button').click(function(){
+        $(this).parent().animate({bottom:'-800px'},1);
+    })
+})
 
 }
  function join(){
- 
-     
-     
     // 先判斷sessionStorage有沒有會員登入資料，有才往下做轉圖檔工作
     if (sessionStorage['user_name']){
         //要拿到my_animal_img '  my_animal_bg_img ' my_animal_name  '  user_no
          join_xml();
-     
-       
     }else{
    //尚未登入
                $id('login_gary').style.display = 'block';
-    }
-}
+    }}
+
+    function message_btn(){
+      $('.frank_message_btn').addClass(function(){
+          $('.frank_message').slideDown(50);
+    })}
+
+

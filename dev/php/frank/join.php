@@ -1,13 +1,8 @@
 <?php
 $errMsg = "";
 $user_no=$_GET["user_no"];
-$user_no=13;
 try {
-    $dsn = "mysql:host=localhost;port=3306;dbname=dd102g3;charset=utf8";
-    $user = "root";
-    $password = "123456";
-    $options = array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION, PDO::ATTR_CASE=>PDO::CASE_NATURAL);
-    $pdo = new PDO($dsn, $user, $password, $options);
+    require_once("../connectg3.php");
     session_start();
 //取出動物排行
     $sql_user_ctn = 
@@ -49,14 +44,8 @@ $sql_INSERT =
 (null, 0, 'img/collections/work_{$work_no_box['work_no']}.png', '{$user_ctnRow[0]['my_animal_name']}', '{$time}', 'img/collections/work_bg_{$work_no_box['work_no']}.png', '{$user_ctnRow[0]['user_no']}','img/collections/work_amlbg_{$work_no_box['work_no']}.png');";
 $data_INSERT = $pdo->prepare($sql_INSERT);
 $data_INSERT ->execute();
-
-// $sql_INSERT =
-// "INSERT INTO `collections` (`work_no`, `vote`,`cmp_img`,`work_name`,`work_date`,`bg_img`,`amlbg_img`,`user_no`) VALUES
-// (null, 0, 'img/collections/work_{$work_no_box['work_no']}.png', '{$user_ctnRow[0]['my_animal_name']}', '{$time}', 'img/collections/work_bg_{$work_no_box['work_no']}.png', 'img/collections/work_amlbg_{$work_no_box['work_no']}.png', '{$user_ctnRow[0]['user_no']}');";
-// $data_INSERT = $pdo->prepare($sql_INSERT);
-// $data_INSERT ->execute();
  copy("../../img/customize/user{$user_no}_aml.png", "../../img/collections/work_{$work_no_box['work_no']}.png");	
- copy("../../img/customize/user{$user_no}_aml_bg.png", "../../img/collections/work_bg_{$work_no_box['work_no']}.png");
+ copy("../../img/customize/user{$user_no}_bg.png", "../../img/collections/work_bg_{$work_no_box['work_no']}.png");
  copy("../../img/customize/user{$user_no}_amlbg.png", "../../img/collections/work_amlbg_{$work_no_box['work_no']}.png");	
 
 //sql timestamp not null
