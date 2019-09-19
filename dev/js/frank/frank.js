@@ -71,14 +71,11 @@ function frank_vote(){
 for (let i = 0; i < vote_rank.length -4; i++) {
      $("#frank_player_more").append($("#frank_player_items").clone(true).attr('id','frank_player_items'+i));
      $(`#frank_player_items${i} .frank_players_title span:eq(1)`).attr('id','aid'+(i+3));
-    //  $(`#frank_player_items${i}  input:eq(0)`).attr('name','work_no'));
-    console.log($(`#frank_player_items${i}  input:eq(0)`).attr('name','work_no'));
-    
-     $(`#frank_player_items${i} h3:eq(0)`).attr('id','id'+(i+3))
-     $(`#frank_player_items${i} .frank_player_text span:eq(1)`).attr('id','vote'+(i+3));
+     $(`#frank_player_items${i}  input:eq(0)`).attr('name','work_no');
+     $(`#frank_player_items${i} h3 span:eq(0)`).attr('id','id'+(i+3));
+      $(`#frank_player_items${i} span span:eq(0)`).attr('id','vote'+(i+3));
      $(`#frank_player_items${i} .frank_player_pic img:eq(0)`).attr('id','bg'+(i+3));
      $(`#frank_player_items${i} .frank_player_pic img:eq(1)`).attr('id','ag'+(i+3));
-     
 }
    for (let i = 0; i < vote_rank.length -1; i++) {
     $id("vote"+`${i}`).innerText=vote_rank[i]["vote"];
@@ -87,6 +84,9 @@ for (let i = 0; i < vote_rank.length -4; i++) {
     $id("aid"+`${i}`).innerText=vote_rank[i]["work_name"];
     $id("id"+`${i}`).innerText=vote_rank[i]["user_name"];
     $("input[name='work_no']")[i].value=vote_rank[i]["work_no"];
+    $(`.heart:eq(${i})`).attr('id','NO_'+(vote_rank[i]["work_no"]));
+    
+    
  }}}
 
 function  join_xml(){
@@ -160,9 +160,9 @@ $('.frank_expand_button').click(function(){
       $('.frank_message_btn').addClass(function(){
           $('.frank_message').slideDown(50);
       })
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 4; i++) {
       
-              $("#frank_message_content").append($("#message_wrap").clone(true).attr('id',''+i));
+              $("#frank_message_content").append($("#message_wrap").clone(true).attr({id:'message_itme'}));
     //  $(`#frank_player_items${i} .frank_players_title span:eq(1)`).attr('id','aid'+(i+3));
      }
 

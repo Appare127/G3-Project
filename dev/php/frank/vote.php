@@ -1,6 +1,6 @@
 <?php
 $errMsg = "";
-$user_no=$_GET["user_no"];
+// $user_no=$_GET["user_no"];
 $user_no=13;
 try {
     require_once("../connectg3.php");
