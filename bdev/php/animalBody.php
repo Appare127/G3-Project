@@ -73,7 +73,7 @@
                   </thead>
                   <tbody>
                     <!-- 新增 -->
-                    <form action="addAnimalBodyData.php" method="get">
+                    <form action="addAnimalBodyData.php" method="post" enctype="multipart/form-data">
                         <!-- 標題列 -->
                         <tr class="tr_title">
                             <td></td>
@@ -127,7 +127,7 @@
                         // echo "</pre>";
                     ?>
                         <!-- 內容列 -->
-                        <form action="updateAnimalBodyData.php">
+                        <form action="updateAnimalBodyData.php" method="post" enctype="multipart/form-data">
                           <tr>
                             <td><?php echo $bodyRow['body_no'];?><input name="body_no" type="hidden" value="<?= $bodyRow['body_no']?>"></td>
                             <td><input type="text" name="body_name" value="<?= $bodyRow['body_name']?>" readonly="true"></td>

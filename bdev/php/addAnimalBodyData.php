@@ -19,7 +19,7 @@ try {
 			//取得自動創號的動物頭部號碼
 			$body_no = $pdo->lastInsertId();
 			echo "新增動物身體成功";
-			// header('Location:animalBody.php');
+			header('Location:animalBody.php');
 
 			$body_name = $_REQUEST['body_name'];
 
@@ -64,7 +64,7 @@ try {
 			
 
 			}else{
-				echo "錯誤代碼 : {$_FILES["head_img"]["error"]} <br>";
+				echo "錯誤代碼 : {$_FILES["body_img"]["error"]} <br>";
 				echo "新增失敗<br>";
 			}
 

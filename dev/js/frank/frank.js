@@ -133,7 +133,11 @@ function  join_xml(){
 function join_php(){
     if(join_item.readyState==4  && join_item.status==200){
         var join_arr= JSON.parse(join_item.responseText);
-      
+        if (join_arr=="error") {
+            alert("這隻動物參加過了喔");
+        }else{
+             alert("參加成功");
+        }
   // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
     }
 }

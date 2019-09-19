@@ -316,7 +316,7 @@ if ($errMsg !=""){
               <img src="<?=$userRow["game_img"]?>" alt="user_game">
             <?php
             }else{
-              echo "<div><center><p>尚未有遊戲畫面</p></center></div>";
+              echo '<div class="ifnull"><center><p>尚未有遊戲畫面</p></center></div>';
             }
             ?>
           </div>
@@ -366,7 +366,7 @@ if ($errMsg !=""){
 
             <?php
             }else{
-              echo "<div><center><p>尚未創造動物</p></center></div>";
+              echo '<div class="ifnull"><center><p>尚未創造動物</p></center></div>';
             }
             ?>
 <!--

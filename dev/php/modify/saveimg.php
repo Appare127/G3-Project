@@ -22,7 +22,7 @@
     $data_bg = base64_decode($bgDataStr);
     $data_amlbg = base64_decode($amlbgDataStr);
 
-    
+
 //準備好要存的檔名，抓到user_no
     $user_no = $_POST["user_no"];
     // $aml_name = $_POST["name_data"];
@@ -86,21 +86,25 @@
         my_animal_name = :my_animal_name,
         my_animal_bg_img = :my_animal_bg_img,
         my_animalbg_img = :my_animalbg_img,
+        animal_howl = :animal_howl,
         environ_adapt_1 = :environ_adapt_1,
         environ_adapt_2 = :environ_adapt_2,
         environ_adapt_3 = :environ_adapt_3,
         animal_life = :animal_life,
-        animal_jump = :animal_jump  where user_no=:user_no";
+        animal_jump = :animal_jump,
+        attend = :attend where user_no=:user_no";
         $userData = $pdo->prepare( $sql);
         $userData->bindValue(":my_animal_img", $file_aml_src);
         $userData->bindValue(":my_animal_name", $_POST["myanimal_name"]);
         $userData->bindValue(":my_animal_bg_img", $file_bg_src);
         $userData->bindValue(":my_animalbg_img", $file_amlbg_src);
+        $userData->bindValue(":animal_howl", $_POST["voice_data"]);
         $userData->bindValue(":environ_adapt_1", $_POST["environ_adapt_1"]);
         $userData->bindValue(":environ_adapt_2", $_POST["environ_adapt_2"]);
         $userData->bindValue(":environ_adapt_3", $_POST["environ_adapt_3"]);
         $userData->bindValue(":animal_life", $_POST["animal_life"]);
         $userData->bindValue(":animal_jump", $_POST["animal_jump"]);
+        $userData->bindValue(":attend", 0);
         $userData->bindValue(":user_no", $_POST["user_no"]);
         $userData->execute();
         echo "動物存檔成功";
