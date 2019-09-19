@@ -2,7 +2,7 @@
 session_start();
 
 try{
-    require_once("connectg3.php");
+    require_once("../connectg3.php");
     $sql='select * from user where user_id=:user_id and user_psw=:user_psw;';
     //  $sql='select * from user;';
 
