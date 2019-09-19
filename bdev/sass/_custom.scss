@@ -1,10 +1,18 @@
 // Here you can add other styles
+
 input[name="head_img"] {
     width: 200px;
 }
 input[name="head_img_combination"] {
     width: 180px;
 }
+input[name="body_img"] {
+    width: 200px;
+}
+input[name="body_img_combination"] {
+    width: 180px;
+}
+
 .image{
     display:block;
     margin:auto;
@@ -15,21 +23,14 @@ input[name="head_img_combination"] {
 .btnimg{
     padding-top:6px;
 }
-
-.tr_title{
-    border: 2px solid #ccc;
-}
-
-input[name="body_img"] {
-    width: 200px;
-}
-input[name="body_img_combination"] {
-    width: 180px;
-}
-
 // 尾巴選單圖input的padding
 .tail_btnimg{
     padding-top:13px;
+}
+
+//新增列的border樣式
+.tr_title{
+    border: 2px solid #ccc;
 }
 
 //取消input預設樣式
@@ -39,6 +40,7 @@ input[name="body_img_combination"] {
     outline:0;
     border: 1px solid transparent;
 }
+
 .productimg_width{
     width:200px;
 }
@@ -46,9 +48,9 @@ input[name="body_img_combination"] {
     text-align: center;
     vertical-align: middle;
 }
-#aaa{
-    width: 30px;
-}
+// #aaa{
+//     width: 30px;
+// }
 
 // 選怪作品的td寬度設定
 .collections_tr td{

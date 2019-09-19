@@ -55,14 +55,14 @@
                 <table class="table table-responsive-sm table-bordered">
                   <thead>
                     <tr class="legtr">
-                      <th>腿部編號</th>
+                      <th width="100">腿部編號</th>
                       <th>腿部名稱</th>
                       <th>選單圖</th>
                       <th>組合圖</th>
                       <th>跳躍力</th>
-                      <th>環境1適應力</th>
-                      <th>環境2適應力</th>
-                      <th>環境3適應力</th>
+                      <th>環境1<br>適應力</th>
+                      <th>環境2<br>適應力</th>
+                      <th>環境3<br>適應力</th>
                       <th>狀態(0:下架; 1:上架)</th>
                       <th>腿部中文名稱</th>
                       <th colspan="2"></th>
@@ -79,11 +79,11 @@
                             </td>
                             <td>
                                 <img width="40%" src="" id="leg_img_preview">
-                                <input type="file" id="select_leg_img" name="leg_img" accept="image/*">
+                                <input type="file" id="select_leg_img" name="leg_img" accept="image/*" width="180">
                             </td>
                             <td>
                                 <img img width='50%' src="" id="leg_img_combination_preview">
-                                <input type="file" name="leg_img_combination" id="select_leg_img_combination" size="4" accept="image/*">
+                                <input type="file" name="leg_img_combination" id="select_leg_img_combination" size="4" accept="image/*" width="180">
                             </td>
                             <td>
                                 <input type="text" name="leg_jump" id="" size="6">
