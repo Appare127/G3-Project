@@ -45,10 +45,10 @@ gulp.task('php', function () {
   gulp.src('./dev/php/**/*').pipe(gulp.dest('./dest/php'));
 });
 
+
 //css轉
 gulp.task('css', function () {
-  gulp.src('./dev/plugin/*',).pipe(gulp.dest('./dest/css'));
-  gulp.src('./dev/plugin/**/*').pipe(gulp.dest('./dest/css'));
+  gulp.src('dev/sass/plugin/*.css',).pipe(gulp.dest('dest/css'));
 });
 
 
