@@ -13,17 +13,83 @@ function resize(){
 function $id(e){
  return document.getElementById(e);
 }
-function favorite(){
- $(".heart").click(function(e){
-       
-    if(e.target.title == "加入收藏"){
 
-        this.src = "img/frank/plike.png";
-        this.title = "取消收藏"
-    }else{
-        this.src = "img/frank/wlike.png";
-        this.title = "加入收藏";
-    }});}
+
+
+
+function favorite(){
+
+    let xhr = new XMLHttpRequest();
+
+    let hearts = document.getElementsByClassName('heart');
+
+    for(let i=0;i<hearts.length;i++){
+
+        hearts[i].addEventListener('click',function(e){
+
+
+
+            xhr.onload = function(){ 
+                if(xhr.status==200){
+
+        
+                }else{
+                  alert(xhr.status);
+                }
+        
+              }
+        
+            //設定好所要連結的程式
+              var url = "php/frank/love.php?user_no="+sessionStorage['user_no']+'&work_no='+;
+              xhr.open("GET", url, true); 
+              xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+        
+            //送出資料
+              var data_info = "work_no=" + parseInt(this.id.replace('work_close',''));
+              console.log(parseInt(this.id.replace('work_close','')));//1.2......
+              xhr.send(data_info);
+
+
+
+
+            if(sessionStorage['user_name']){
+                if(e.target.title == "加入收藏"){
+
+                            this.src = "img/frank/plike.png";
+                            this.title = "取消收藏"
+                }else{
+                            this.src = "img/frank/wlike.png";
+                            this.title = "加入收藏";
+                    }
+
+                // 如果sessionStorage沒有登入，則彈出提示登入的視窗
+            }else{
+                alert("請先登入會員");
+                // $id('login_gary').style.display = 'block';
+
+            }
+
+        });
+            
+    
+    
+        }
+    }
+
+// function favorite(){
+//  $(".heart").click(function(e){
+       
+//     if(e.target.title == "加入收藏"){
+
+//         this.src = "img/frank/plike.png";
+//         this.title = "取消收藏"
+//     }else{
+//         this.src = "img/frank/wlike.png";
+//         this.title = "加入收藏";
+//     }});}
+
+
+
 function owlCarousel_img(){
       var _width = $(window).width(); 
         if(_width < 768){
