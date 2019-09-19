@@ -162,7 +162,7 @@ $('.frank_expand_button').click(function(){
       })
     for (let i = 0; i < 2; i++) {
       
-    //           $("#frank_message_content").append($("#message_wrap").clone(true).attr('id','frank_player_items'+i));
+              $("#frank_message_content").append($("#message_wrap").clone(true).attr('id',''+i));
     //  $(`#frank_player_items${i} .frank_players_title span:eq(1)`).attr('id','aid'+(i+3));
      }
 
