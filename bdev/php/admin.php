@@ -58,9 +58,8 @@
                       <th>帳號</th>
                       <th>密碼</th>
                       <th>狀態(0:停權; 1:正常)</th>
-                      <th></th>
-                      <th></th>
-                      <th></th>
+                      <th colspan="3"></th>
+                      
                     </tr>
                   </thead>
                   <tbody>
@@ -110,10 +109,10 @@ if( $errMsg != ""){ //例外
                   <form action="updateAdminData.php" method="post">
                     <tr>
                       <td><?php echo $adminRow['admin_no'];?><input name="admin_no" type="hidden" value="<?= $adminRow['admin_no']?>"></td>
-                      <td><input type="text" name="admin_name" value="<?= $adminRow['admin_name']?>" readonly="true"></td>
-                      <td><input type="text" name="admin_id" value="<?= $adminRow['admin_id']?>" readonly="true"></td>
-                      <td><input type="text" name="admin_psw" value="<?= $adminRow['admin_psw']?>" readonly="true"></td>
-                      <td><input type="text" name="admin_status" value="<?= $adminRow['admin_status']?>" readonly="true"></td>
+                      <td><input type="text" class="dissinputstyle" name="admin_name" value="<?= $adminRow['admin_name']?>" readonly="true"></td>
+                      <td><input type="text" class="dissinputstyle" name="admin_id" value="<?= $adminRow['admin_id']?>" readonly="true"></td>
+                      <td><input type="text" class="dissinputstyle" name="admin_psw" value="<?= $adminRow['admin_psw']?>" readonly="true"></td>
+                      <td><input type="text" class="dissinputstyle" name="admin_status" value="<?= $adminRow['admin_status']?>" readonly="true"></td>
                       <!-- <td>
                         <label class="switch switch-label switch-pill switch-primary">
                           <input class="switch-input" type="checkbox" checked="">
@@ -190,7 +189,10 @@ if( $errMsg != ""){ //例外
         console.log(e.target.parentNode.parentNode.children[1]);   
         e.target.parentNode.parentNode.children[1].firstChild.removeAttribute("readonly");   
         e.target.parentNode.parentNode.children[3].firstChild.removeAttribute("readonly");   
-        e.target.parentNode.parentNode.children[4].firstChild.removeAttribute("readonly");   
+        e.target.parentNode.parentNode.children[4].firstChild.removeAttribute("readonly");
+        e.target.parentNode.parentNode.children[1].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[3].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[4].firstChild.classList.remove("dissinputstyle");
 
         // if (e.target.innerHTML == "編輯"){
 

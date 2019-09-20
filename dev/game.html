@@ -33,8 +33,9 @@
                 <ul>
                     <li class="food hamburger"  draggable="true" ><img id='hamburger' data-feed='-20' src="img/game/food_hamburger.png" alt=""></li>
                     <li class="food fruit"  draggable="true" ><img id='fruit' data-feed='10' src="img/game/food_fruit.png" alt=""></li>
-                    <li class="food" draggable="true" data-feed='30'><img src="" alt=""></li>
+                    <li class="food" draggable="true" data-feed='30'></li>
                     <li class="food" draggable="true" data-feed='20'><img src="" alt=""></li>
+                    <li class="food" id='hand'><img src="img/game/food_hand.png" alt=""></li>
                 </ul>
             </div>
            
@@ -295,11 +296,11 @@ function $que(css_selector){
 //動物走動
 function animalWalking(trigger){
     $que(".info_pic img")[0].classList.remove('animalBreathing');
-
+    $que(".animal_words")[0].classList.remove('animalSayWords');
+    $que(".info_pic img")[0].classList.remove('animalHello');
         if(trigger=='firstTime'){
             if(sessionStorage['user_name']&&sessionStorage['user_no']){
             
-
                 $que(".animal_words")[0].style.display="block";
                 $que(".info_pic img")[0].classList.add('animalHello');//動物移動
                 $que(".animal_words")[0].classList.add('animalSayWords');//對話框移動
@@ -320,26 +321,35 @@ function animalWalking(trigger){
             }
         }else if(trigger == 'delicious'){
             audio.play();//播放聲音
+            $que(".info_pic img")[0].classList.add('animalBreathing');
             $que(".animal_words")[0].style.display="block";
             $que(".animal_words p")[0].innerText = `真好吃`;
                 setTimeout(function(){
                     $que(".animal_words")[0].style.display="none";
-                },3500);
+                },2000);
 
         }else if(trigger == 'junk'){
+            // $que(".info_pic img")[0].classList.add('animalBreathing');
+            // $que(".info_pic img")[0].classList.add('animal_falling_down');
             $que(".animal_words")[0].style.display="block";
             $que(".animal_words p")[0].innerText = `咳咳....你餵我吃了什麼...`;
                 setTimeout(function(){
                     $que(".animal_words")[0].style.display="none";
                     // $que(".info_pic img")[0].classList.add('animal_falling_down');
+                    $que(".info_pic img")[0].style.transition = '0.5s all';
+                    $que(".info_pic img")[0].style.filter = 'grayscale(100%)';
+                    $que(".info_pic img")[0].style.transformOrigin = 'center bottom';
+                    $que(".info_pic img")[0].style.transform = 'rotateZ(90deg)';
+                },2000);
+                setTimeout(function(){
                     $que(".info_pic img")[0].classList.add('animalBreathing');
-                },3500);
+                    $que(".info_pic img")[0].style.transform = 'rotateZ(0deg)';
+                },4000);
 
 
         }
     // console.log($que(".info_pic img")[0].classList);
 }
-
 
 
 
@@ -626,7 +636,7 @@ function chosenArea(area){
     //餵食的拖拉事件
     function dragStart(e){
         this.className += ' hold';
-        // setTimeout(()=> e.target.className = 'invisible',0);
+    
 
     }
     function dragEnd(e){
@@ -656,6 +666,7 @@ function chosenArea(area){
 
     function dragDrop(e){
         // this.append(food);
+        console.log('放置完成');
         e.target.style.opacity=1;
         // console.log('....');
     }
@@ -669,6 +680,7 @@ function chosenArea(area){
         getRankingData();
         getCusAnimal();
         animalWalking('firstTime');
+        
 
         //安裝聲音檔
         audio = new Audio(sessionStorage['animal_howl']);
@@ -677,7 +689,7 @@ function chosenArea(area){
         const foods = document.querySelectorAll('.food img');
         const animal = document.querySelectorAll('.info_pic')[0];
         var feed =0;
-        
+
         //食物及動物都裝上拖放事件
         for( const food of foods){
             food.addEventListener('dragstart', dragStart);
@@ -688,7 +700,13 @@ function chosenArea(area){
         animal.addEventListener('dragenter', dragEnter);
         animal.addEventListener('dragleave', dragLeave);
         animal.addEventListener('drop', dragDrop);
-        
+        //手安裝click事件
+        $id('hand').addEventListener('click', function(e){
+            console.log(111);
+            document.querySelector('.role_info').style.cursor ="url('img/game/cursor3.png'),auto";
+            // 
+            // "url('http://bringerp.free.fr/Files/RotMG/cursor.gif'),auto";
+        });
         //幻燈片
         $cls('arrowLeft')[0].addEventListener('click', sliderLeft);
         $cls('arrowRight')[0].addEventListener('click', sliderRight);

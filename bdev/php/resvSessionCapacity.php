@@ -62,7 +62,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                  <form action="addResvSessionData.php">
+                  <form action="addResvSessionData.php" merhod="post">
                     <tr> 
                       <td>
       
@@ -99,10 +99,10 @@ if( $errMsg != ""){ //例外
 ?>
                   <form action="updateResvSessionData.php">
                     <tr>
-                      <td><?php echo $resvSessionrRow['session_no'];?><input name="session_no" type="hidden" value="<?= $resvSessionrRow['session_no']?>"></td>
-                      <td><input type="text" name="start_time" value="<?= $resvSessionrRow['start_time']?>" readonly="true"></td>
-                      <td><input type="text" name="length" value="<?= $resvSessionrRow['length']?>" readonly="true"></td>
-                      <td><input type="text" name="max_capacity" value="<?= $resvSessionrRow['max_capacity']?>" readonly="true"></td>
+                      <td><?php echo $resvSessionrRow['session_no'];?><input name="session_no" type="hidden" value="<?= $resvSessionrRow['session_no']?>" class="dissinputstyle"></td>
+                      <td><input type="text" name="start_time" value="<?= $resvSessionrRow['start_time']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="length" value="<?= $resvSessionrRow['length']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="max_capacity" value="<?= $resvSessionrRow['max_capacity']?>" readonly="true" class="dissinputstyle"></td>
                       <td>
                         <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
                       </td>
@@ -160,7 +160,10 @@ if( $errMsg != ""){ //例外
         console.log(e.target.parentNode.parentNode.children[1]);   
         e.target.parentNode.parentNode.children[1].firstChild.removeAttribute("readonly");   
         e.target.parentNode.parentNode.children[2].firstChild.removeAttribute("readonly");   
-        e.target.parentNode.parentNode.children[3].firstChild.removeAttribute("readonly");   
+        e.target.parentNode.parentNode.children[3].firstChild.removeAttribute("readonly");
+        e.target.parentNode.parentNode.children[1].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[2].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[3].firstChild.classList.remove("dissinputstyle");
       }
       
     

@@ -1,18 +1,23 @@
-    .registered_gary.registered_show {
-            display:block;
-    }
 
-.registered_gary {
+
+
+    .forgetPsw_gary.forgetPsw_show {
+        display:block;
+    }
+    .forgetPsw_box_title{
+        font-size: $lg_fz;
+    }
+.forgetPsw_gary {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    // display: none;
+    display: none;
     position: absolute;
     position: fixed;
     top: 0;
     z-index: 5;
-
-    .registered_box {
+    
+    .forgetPsw_box {
         @include btn_cloud(30%, $col_btn_pink);
         position: absolute;
         top: 0%;
@@ -21,7 +26,7 @@
         left: 0;
         margin: auto;
         border-radius: 30px;
-        background: url(../img/login/login767.jpg) no-repeat  center ;
+        background: url(../img/login/login1.0.jpg) no-repeat bottom center, ;
         background-size: cover;
         padding-top: 25px;
         padding-bottom: 225px;
@@ -36,10 +41,10 @@
             width: 120px;
             margin-top: 25px;
             // font-size: $s_fz;
-            // background: 0%;
+            font-family: Microsoft JhengHei;
             padding: 5px;
         }
-        .registered_del {
+        .forgetPsw_del {
             width: 30px;
             height: 30px;
             cursor: pointer;
@@ -50,34 +55,31 @@
             background: url(../img/login/del.png) no-repeat center center;
         }
 
+        h2 {
+            margin-top: 20px;
+        }
 
-form{
-    text-align: left;
-    box-sizing: border-box;
-    padding: 20px;
-    width: 80%;
-    margin: auto;
         p {
             position: relative;
-            margin-top: 10px;
+            margin-top: 25px;
 
             input {
                 // background: #f9f6d2;
                 cursor: text;
                 border-radius: 10px;
-                padding: 5px;
+                padding: 8px;
                 padding-left: 15px;
-                outline:none;
-                border:transparent;
-                // font-weight: 800;
+                font-weight: 800;
                 width: 120px;
+                outline:none;
             }
-        }}
+        }
         
         a { 
             line-height: 70px;
             color: #7c7676;
             font-weight: 800;
+           
             text-decoration: underline;
         }
         a~a{
@@ -95,15 +97,12 @@ form{
 
 
 @media screen and (min-width: 768px) {
-    .registered_gary {
-        .registered_box {
-            width: 500px;
+    .forgetPsw_gary {
+        .forgetPsw_box {
+            width: 360px;
             height: 500px;
-            padding-top: 15px;
-            padding-bottom: 0px;
-            h2{
-                padding-top: 40px;
-            }
+            padding-top: 20px;
+            padding-bottom: 40px;
 
             p {
                 input {
@@ -120,6 +119,8 @@ form{
                 }
             }
             .btn_cloud {
+
+        
                 margin-top: 20px;
                 // font-size: $m_fz;
             }

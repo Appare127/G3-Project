@@ -28,7 +28,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>動物商城</title>
-    @@include('template/csslink.html',{"csslink":"css/style.css"})
+    @@include('template/csslink.html')
     <style>
         * {
             /* outline: 1px solid #f00; */
@@ -196,11 +196,11 @@ try {
     <!-- <script src='js/shop/shop.js'></script> -->
     <script>
     function choosePic(){
-    if(sessionStorage.user_id){  //如果登入了  撈session
+    if(sessionStorage.my_animalbg_img){  //如果登入了  撈session
         document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src=sessionStorage.my_animalbg_img;
        
     }else{   //如果沒登入，給預設圖片
-    document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src='img/shop/demo_amlbg_0.png';
+    document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src='img/member/demo_amlbg_0.png';
     }
 };
 
@@ -245,11 +245,12 @@ window.addEventListener("load",function(){
     bgButtons[0].onclick=function(){   //要背景圖
         for(i=0;i<document.querySelectorAll(".shop_animal_bg").length;i++){
             let src=document.querySelectorAll(".shop_animal_bg")[i].src;
-            if(src.search("customize") == -1){
-                src=src.replace("_","_amlbg_"),
-                document.querySelectorAll(".shop_animal_bg")[i].src=src;
-            }else{   //是客製的
+            if(src.search("customize") != -1||src.search("member") != -1){//是客製的或預設的
                 src=src.replace("aml","amlbg"),
+                document.querySelectorAll(".shop_animal_bg")[i].src=src;
+            
+            }else{   
+                src=src.replace("_","_amlbg_"),
                 document.querySelectorAll(".shop_animal_bg")[i].src=src;
             } 
         }
@@ -258,11 +259,11 @@ window.addEventListener("load",function(){
     bgButtons[1].onclick=function(){   //不要背景圖
         for(i=0;i<document.querySelectorAll(".shop_animal_bg").length;i++){
             let src=document.querySelectorAll(".shop_animal_bg")[i].src;
-            if(src.search("customize") == -1){
-                src=src.replace("amlbg_",""),
-                document.querySelectorAll(".shop_animal_bg")[i].src=src;
-            }else{  //是客製的
+            if(src.search("customize") != -1 ||src.search("member") != -1){//是客製的或預設的
                 src=src.replace("bg",""),
+                document.querySelectorAll(".shop_animal_bg")[i].src=src;
+            }else{  
+                src=src.replace("amlbg_",""),
                 document.querySelectorAll(".shop_animal_bg")[i].src=src;
             }
 

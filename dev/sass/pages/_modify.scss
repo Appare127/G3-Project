@@ -152,8 +152,6 @@
                 position: absolute;
                 width: 95%;
 
-                display: flex;
-                flex-wrap: wrap;
                 top: 45px;
                 left: 0;
                 right: 0;
@@ -166,6 +164,14 @@
                 border-bottom: 5px solid $col_modify_box;
                 border-radius: 25px;
                 box-shadow: 2px 2px 0px 3px $col_modify_boxshadow;
+
+                .slick_page{
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin: 0px 30px 20px 30px;
+                }
+
+
                 li{
                     width: 50%;
                     box-sizing: border-box;

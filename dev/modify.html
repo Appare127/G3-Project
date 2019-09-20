@@ -4,8 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="js/plugin/Chart.js"></script>
     @@include('template/csslink.html')
+
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slick-theme.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/plugin/jquery-migrate.min.js"></script>
+    <script src="js/plugin/slick.js"></script>
+    <script src="js/plugin/Chart.js"></script>
+
 
     <title>改造動物</title>
 </head>
@@ -99,41 +107,65 @@
                 </form>
             </div>
 
+            <!-- pointa=森林，pointb=高山，pointc=沙漠 -->
 
             <div class="select_box">
                 <ul class="button_ul">
                     <li class="part_button head_button">
                         <label for="btn_head">頭部</label>
                         <input type="radio" name="partlist" id="btn_head" checked>
-                        <ul class="part_wrap">
-                            <!-- <li>
-                                <img class="picon" class="picon" src="img/modify/head_giraffe.png" alt="">
-                                <input type="text" data-pointa="3" data-pointb="1" data-pointc="0" style="display: none">
-                                pointa=森林，pointb=高山，pointc=沙漠
-                                <p>長頸鹿頭</p>
-                            </li>
-                            <li>
-                                <img class="picon" src="img/modify/head_elephant.png" alt="">
-                                <input type="text" data-pointa="1" data-pointb="0" data-pointc="3" style="display: none">
-                                <p>大象頭</p>
-                            </li>
-                            <li>
-                                <img class="picon" src="img/modify/head_lion.png" alt="">
-                                <input type="text" data-pointa="3" data-pointb="1" data-pointc="3" style="display: none">
-                                <p>獅子頭</p>
-                            </li>
-                            <li>
-                                <img class="picon" src="img/modify/head_tiger.png" alt="">
-                                <input type="text" data-pointa="1" data-pointb="3" data-pointc="1" style="display: none">
-                                <p>老虎頭</p>
-                            </li> -->
+                        <ul class="part_wrap test_slider">
+                            <div class="slick_page">
+                                <li>
+                                    <img class="picon" class="picon" src="img/modify/head_giraffe.png" alt="">
+                                    <input type="text" data-pointa="3" data-pointb="1" data-pointc="0" style="display: none">
+                                    <p>長頸鹿頭</p>
+                                </li>
+                                <li>
+                                    <img class="picon" src="img/modify/head_elephant.png" alt="">
+                                    <input type="text" data-pointa="1" data-pointb="0" data-pointc="3" style="display: none">
+                                    <p>大象頭</p>
+                                </li>
+                                <li>
+                                    <img class="picon" src="img/modify/head_lion.png" alt="">
+                                    <input type="text" data-pointa="3" data-pointb="1" data-pointc="3" style="display: none">
+                                    <p>獅子頭</p>
+                                </li>
+                                <li>
+                                    <img class="picon" src="img/modify/head_tiger.png" alt="">
+                                    <input type="text" data-pointa="1" data-pointb="3" data-pointc="1" style="display: none">
+                                    <p>老虎頭</p>
+                                </li>
+                            </div>
+                            <div class="slick_page">
+                                <li>
+                                    <img class="picon" class="picon" src="img/modify/head_giraffe.png" alt="">
+                                    <input type="text" data-pointa="3" data-pointb="1" data-pointc="0" style="display: none">
+                                    <p>長頸鹿頭</p>
+                                </li>
+                                <li>
+                                    <img class="picon" src="img/modify/head_elephant.png" alt="">
+                                    <input type="text" data-pointa="1" data-pointb="0" data-pointc="3" style="display: none">
+                                    <p>大象頭</p>
+                                </li>
+                                <li>
+                                    <img class="picon" src="img/modify/head_lion.png" alt="">
+                                    <input type="text" data-pointa="3" data-pointb="1" data-pointc="3" style="display: none">
+                                    <p>獅子頭</p>
+                                </li>
+                                <li>
+                                    <img class="picon" src="img/modify/head_tiger.png" alt="">
+                                    <input type="text" data-pointa="1" data-pointb="3" data-pointc="1" style="display: none">
+                                    <p>老虎頭</p>
+                                </li>
+                            </div>
                         </ul>
                     </li>
                     <li class="part_button body_button">
                         <label for="btn_body">身體</label>
                         <input type="radio" name="partlist" id="btn_body">
                         <ul class="part_wrap">
-                            <!-- <li>
+                            <li>
                                 <img class="picon" src="img/modify/body_giraffe.png" alt="">
                                 <input type="text" data-pointa="1" data-pointb="2" data-pointc="3" data-health="4" style="display: none">
                                 <p>長頸鹿身體</p>
@@ -152,7 +184,7 @@
                                 <img class="picon" src="img/modify/body_tiger.png" alt="">
                                 <input type="text" data-pointa="2" data-pointb="0" data-pointc="1" data-health="3" style="display: none">
                                 <p>老虎身體</p>
-                            </li> -->
+                            </li>
                         </ul>
                     </li>
                     <li class="part_button leg_button">
@@ -349,5 +381,6 @@
 
     <script src="js/modify/radar.js"></script>
     <script src="js/modify/modify.js"></script>
+
 </body>
 </html>
