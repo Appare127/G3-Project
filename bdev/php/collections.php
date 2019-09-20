@@ -22,6 +22,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <title>CoreUI Free Bootstrap Admin Template</title>
+  
   <!-- Icons-->
   @@include('../html/layout/inputcss.html')
 </head>
@@ -55,11 +56,12 @@
                     <tr>
                       <th>作品編號</th>
                       <th>投票數</th>
-                      <th>參選圖片</th>
+                      <th>參選動物圖片</th>
                       <th>動物名稱</th>
                       <th>參賽日期</th>
-                      <th>背景圖片</th>
+                      <th>參選背景圖片</th>
                       <th>會員編號</th>
+                      <th>參選合成圖片</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -77,14 +79,16 @@ if( $errMsg != ""){ //例外
     foreach( $collectionsRows as $i => $collectionRow){
     
 ?>
-                    <tr>
+<!-- <div><?= $collectionRow['vote']?></div> -->
+                    <tr class="collections_tr">
                       <td><?php echo $collectionRow['work_no'];?><input name="work_no" type="hidden" value="<?= $collectionRow['work_no']?>"></td>
-                      <td><input type="text" name="vote" value="<?= $collectionRow['vote']?>" readonly="true"></td>
-                      <td><input type="text" name="cmp_img" value="<?= $collectionRow['cmp_img']?>" readonly="true"></td>
-                      <td><input type="text" name="work_name" value="<?= $collectionRow['work_name']?>" readonly="true"></td>
-                      <td><input type="text" name="work_date" value="<?= $collectionRow['work_date']?>" readonly="true"></td>
-                      <td><input type="text" name="bg_img" value="<?= $collectionRow['bg_img']?>" readonly="true"></td>
-                      <td><input type="text" name="user_no" value="<?= $collectionRow['user_no']?>" readonly="true"></td>
+                      <td><input class="dissinputstyle" type="text" name="vote" value="<?= $collectionRow['vote']?>" readonly="true"></td>
+                      <td><img width="100%" class="image"  src="../<?= $collectionRow['cmp_img']?>"></td>
+                      <td><input class="dissinputstyle" type="text" name="work_name" value="<?= $collectionRow['work_name']?>" readonly="true"></td>
+                      <td><input class="dissinputstyle" type="text" name="work_date" value="<?= $collectionRow['work_date']?>" readonly="true"></td>
+                      <td><img class="image" width=75% src="../<?= $collectionRow['bg_img']?>"></td>
+                      <td><input class="dissinputstyle" type="text" name="user_no" value="<?= $collectionRow['user_no']?>" readonly="true"></td>
+                      <td><img width="75%" class="image" width="75%" src="../<?= $collectionRow['amlbg_img']?>"></td>
                     </tr>
                  
   <?php

@@ -74,10 +74,10 @@
                 <table class="table table-responsive-sm table-bordered">
                   <thead>
                     <tr>
-                      <th>頭部編號</th>
+                      <th width="90">頭部編號</th>
                       <th>頭部名稱</th>
                       <th>選單圖</th>
-                      <th>組合圖</th>
+                      <th width="230">組合圖</th>
                       <th>環境1適應力</th>
                       <th>環境2適應力</th>
                       <th>環境3適應力</th>
@@ -98,7 +98,6 @@
                             <td>
                                 <img width="45%" src="" id="head_img_preview">
                                 <input type="file" id="select_head_img" name="head_img" accept="image/*"><br>
-                                
                             </td>
                             <td>
                                 <img img width='50%' src="" id="head_img_combination_preview">
@@ -143,14 +142,14 @@
                         <form action="updateAnimalHeadData.php" method="post" enctype="multipart/form-data">
                           <tr>
                             <td><?php echo $headRow['head_no'];?><input name="head_no" type="hidden" value="<?= $headRow['head_no']?>"></td>
-                            <td><input type="text" name="head_name" value="<?= $headRow['head_name']?>" readonly="true"></td>
+                            <td><input type="text" name="head_name" value="<?= $headRow['head_name']?>" readonly="true" class="dissinputstyle"></td>
                             <td><img width="45%" src="../<?= $headRow['head_img']?>" alt="" class="image"><input type="file" class="btnimg" name="head_img" size="10" style="display:none"></td>
                             <td><img width='50%' src="../<?= $headRow['head_img_combination']?>" alt=""><input type="file" class="combination_btnimg"name="head_img_combination" size="10" style="display:none"></td>
-                            <td><input type="text" name="head_environment1" value="<?= $headRow['head_environment1']?>" readonly="true" size="10"></td>
-                            <td><input type="text" name="head_environment2" value="<?= $headRow['head_environment2']?>" readonly="true" size="10"></td>
-                            <td><input type="text" name="head_environment3" value="<?= $headRow['head_environment3']?>" readonly="true" size="10"></td>
-                            <td><input type="text" name="head_status" value="<?= $headRow['head_status']?>" readonly="true" size="10"></td>
-                            <td><input type="text" name="head_ch_name" value="<?= $headRow['head_ch_name']?>" readonly="true" size="10"></td>
+                            <td><input type="text" name="head_environment1" value="<?= $headRow['head_environment1']?>" readonly="true" size="10" class="dissinputstyle"></td>
+                            <td><input type="text" name="head_environment2" value="<?= $headRow['head_environment2']?>" readonly="true" size="10" class="dissinputstyle"></td>
+                            <td><input type="text" name="head_environment3" value="<?= $headRow['head_environment3']?>" readonly="true" size="10" class="dissinputstyle"></td>
+                            <td><input type="text" name="head_status" value="<?= $headRow['head_status']?>" readonly="true" size="10" class="dissinputstyle"></td>
+                            <td><input type="text" name="head_ch_name" value="<?= $headRow['head_ch_name']?>" readonly="true" size="10" class="dissinputstyle"></td>
                             
                             <td>
                                 <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
@@ -224,7 +223,13 @@
         e.target.parentNode.parentNode.children[4].firstChild.removeAttribute("readonly");   
         e.target.parentNode.parentNode.children[5].firstChild.removeAttribute("readonly");   
         e.target.parentNode.parentNode.children[6].firstChild.removeAttribute("readonly");   
-        e.target.parentNode.parentNode.children[7].firstChild.removeAttribute("readonly");   
+        e.target.parentNode.parentNode.children[7].firstChild.removeAttribute("readonly");
+        e.target.parentNode.parentNode.children[1].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[3].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[4].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[5].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[6].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[7].firstChild.classList.remove("dissinputstyle");
     }
       
     var btn1= document.getElementsByClassName('btn1');

@@ -11,7 +11,7 @@
             <span class="btn_cloudeffect"></span>
             <span class="btn_cloudeffect"></span>
             <span class="btn_cloudeffect"></span></button>
-        <a id="registered" href="#">立即註冊</a> <a href="#">忘記密碼</a>
+        <a id="registered" href="#">立即註冊</a> <a id="forgetPsw" href="#">忘記密碼</a>
     </div>
 </section>
 
@@ -63,7 +63,7 @@
             <span class="btn_cloudeffect"></span>
             <span class="btn_cloudeffect"></span>
             <span class="btn_cloudeffect"></span></button>
-        <a href="#" id="backLogin">返回登入</a> 
+        <a href="#" class="backLogin">返回登入</a> 
     </div>
 </section>
 
@@ -71,18 +71,20 @@
 
 
 
-<section  class="forgetPsw_gary">
+<section  class="forgetPsw_gary" id="forgetPsw_gary">
     <div class="forgetPsw_box">
         <div id="forgetPsw_del" class="forgetPsw_del"></div>
         <p class="forgetPsw_box_title">忘記密碼</p>
         <form action="#">
-            <p> 帳號：<input type="text" placeholder="請輸入帳號"></p>
-            <p> 密碼：<input type="text" placeholder="請輸入答案"> </p>
+            <p> Email：<input v-model="email" type="text" placeholder="請輸入帳號"></p>
+            <p>密碼提示問題：{{a}}</p>
+            <p> 答案：<input type="text" placeholder="請輸入答案"> </p>
         </form>
-        <button class="btn_cloud" id='login_btn'> 登入<span class="btn_cloudeffect"></span>
+        <button class="btn_cloud" id='login_btn' @click="qsn"> 送出<span class="btn_cloudeffect"></span>
             <span class="btn_cloudeffect"></span>
             <span class="btn_cloudeffect"></span>
             <span class="btn_cloudeffect"></span></button>
+            <a href="#" class="backLogin" >返回登入</a> 
     </div>
 </section>
 
@@ -92,6 +94,34 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script>
+let forgetPsw=new Vue({
+    el:"#forgetPsw_gary",
+    data:{
+        email:'sara@gmail.com',
+        a:"ss"
+    },
+    methods:{
+        qsn(){
+            alert()
+            $.get('php/login/forgetPsw.php',{data:this.email},function(a){
+                this.a= a;
+            })
+        }
+        
+    },
+})
+</script>
+
+
+
+
+
+
+
+
+
+
 <script>
     var form = new Vue({
         data: {
@@ -181,12 +211,13 @@
                             for (i in userData) {
                                 sessionStorage.setItem(i, userData[i]);
                             }
+                            sessionStorage.setItem('user_psw', "it's a secret~");
                             $id("show_user_name").innerText = "您好，" + userData.user_name;
                             $id("login_text").innerText = "登出";
                             $id("login_gary").style.display = "none";
                             //讓會員中心可以進入
                             document.getElementsByClassName('member_icon')[0].onclick = null;
-                            cancelRegistered();
+                            cancelForm('registered_gary');
                             
                         } else {
                             alert(xhr.statusText);
@@ -309,6 +340,7 @@
                         for (i in userData) {
                             sessionStorage.setItem(i, userData[i]);
                         }
+                        sessionStorage.setItem('user_psw', "it's a secret~");
                         $id("show_user_name").innerText = "您好，" + userData.user_name;
                         $id("login_text").innerText = "登出";
                         $id("login_gary").style.display = "none";
@@ -325,29 +357,25 @@
         }
     }
 
-    //取消登入,清input+關閉視窗
-    function cancelLogin() {
-        $id("user_id").value = "";
-        $id("user_psw").value = "";
-        $id('login_gary').style.display = 'none'
+    //關閉視窗  清input+
+    function cancelForm(window) {
+        // alert()
+        clearInput('login_gary');
+        clearInput('registered_gary');
+        clearInput('forgetPsw_gary');
+        $id(window).style.display = 'none';
 
     }
-    //叉叉關閉視窗  清input+關閉視窗
-    function cancelRegistered() {
-        cancelLogin();
-        clearRegisterInfo();
-        $id('registered_gary').style.display = 'none';
-    }
 
-
-    // //清空註冊input
-    function clearRegisterInfo(){
-        let input=document.querySelectorAll("#myForm input")
+    // //清空input
+    function clearInput(window){
+        let input=document.querySelectorAll(`#${window} input`)
         input.forEach((n,i)=>{
             n.value="";
         })
-        
     }
+
+
 
     window.addEventListener('load', function () {
         //---------檢查使用者是否已登入, 並取回登入資訊
@@ -359,26 +387,33 @@
         // 送出登入資料
         $id("login_btn").addEventListener("click",sendForm);
         
-        //取消登入,清input+關閉視窗
-        $id("login_del").onclick = cancelLogin;
+        
        
         //打開註冊視窗
         $id("registered").onclick =  function(){  
             $id('login_gary').style.display = 'none';
             $id('registered_gary').style.display = 'block';   
         }
-      
-        //叉叉關閉視窗
-        $id("registered_del").onclick = cancelRegistered;  
-      
-        //送出註冊資料
-        // $id("register_finish").onclick = sendRegisteration;
-    
-        //返回登入  打開視窗
-        $id("backLogin").onclick=function(){   
-        $id('registered_gary').style.display = 'none';
-        $id('login_gary').style.display = 'block';
+         //打開忘記密碼視窗
+         $id("forgetPsw").onclick=function(){  
+            $id('login_gary').style.display = 'none';
+            $id('forgetPsw_gary').style.display = 'block';   
         }
+        //返回登入btn 打開登入視窗
+        document.querySelectorAll(".backLogin").forEach(n=>{
+            n.onclick=function(){   
+                $id('registered_gary').style.display = 'none';
+                $id('login_gary').style.display = 'block';
+                $id('forgetPsw_gary').style.display = 'none';
+            }
+        })
+        
+        //叉叉關閉登入視窗
+        $id("login_del").onclick = ()=>cancelForm("login_gary");
+        //叉叉關閉註冊視窗
+        $id("registered_del").onclick = ()=>cancelForm("registered_gary");  
+        //叉叉關閉忘記密碼視窗
+        $id("forgetPsw_del").onclick = ()=>cancelForm("forgetPsw_gary");  
         
     })
 </script>

@@ -54,15 +54,15 @@
               <div class="card-body">
                 <table class="table table-responsive-sm table-bordered">
                   <thead>
-                    <tr>
-                      <th>腿部編號</th>
+                    <tr class="legtr">
+                      <th width="100">腿部編號</th>
                       <th>腿部名稱</th>
                       <th>選單圖</th>
                       <th>組合圖</th>
                       <th>跳躍力</th>
-                      <th>環境1適應力</th>
-                      <th>環境2適應力</th>
-                      <th>環境3適應力</th>
+                      <th>環境1<br>適應力</th>
+                      <th>環境2<br>適應力</th>
+                      <th>環境3<br>適應力</th>
                       <th>狀態(0:下架; 1:上架)</th>
                       <th>腿部中文名稱</th>
                       <th colspan="2"></th>
@@ -78,12 +78,12 @@
                                 <input type="text" name="leg_name" id="">
                             </td>
                             <td>
-                                <img width="45%" src="" id="leg_img_preview">
-                                <input type="file" id="select_leg_img" name="leg_img" accept="image/*">
+                                <img width="40%" src="" id="leg_img_preview">
+                                <input type="file" id="select_leg_img" name="leg_img" accept="image/*" width="180">
                             </td>
                             <td>
                                 <img img width='50%' src="" id="leg_img_combination_preview">
-                                <input type="file" name="leg_img_combination" id="select_leg_img_combination" size="4" accept="image/*">
+                                <input type="file" name="leg_img_combination" id="select_leg_img_combination" size="4" accept="image/*" width="180">
                             </td>
                             <td>
                                 <input type="text" name="leg_jump" id="" size="6">
@@ -127,15 +127,15 @@
                         <form action="updateAnimalLegData.php" method="post" enctype="multipart/form-data">
                           <tr>
                             <td><?php echo $legRow['leg_no'];?><input name="leg_no" type="hidden" value="<?= $legRow['leg_no']?>"></td>
-                            <td><input type="text" name="leg_name" value="<?= $legRow['leg_name']?>" readonly="true"></td>
-                            <td><img width="45%" src="../<?= $legRow['leg_img']?>" alt="" class="image"><input type="file" class="leg_btnimg" name="leg_img" size="10" style="display:none" readonly="true"></td>
+                            <td><input type="text" name="leg_name" value="<?= $legRow['leg_name']?>" readonly="true" class="dissinputstyle"></td>
+                            <td><img width="45%" src="../<?= $legRow['leg_img']?>" alt="" class="image"><input type="file" class="leg_btnimg" name="leg_img" size="10" style="display:none" readonly="true" ></td>
                             <td><img width='50%' src="../<?= $legRow['leg_img_combination']?>" alt=""><input type="file" class="combination_btnimg"name="leg_img_combination" size="10" style="display:none" readonly="true"></td>
-                            <td><input type="text" name="leg_jump" value="<?= $legRow['leg_jump']?>" readonly="true" size="4"></td>
-                            <td><input type="text" name="leg_environment1" value="<?= $legRow['leg_environment1']?>" readonly="true" size="6"></td>
-                            <td><input type="text" name="leg_environment2" value="<?= $legRow['leg_environment2']?>" readonly="true" size="6"></td>
-                            <td><input type="text" name="leg_environment3" value="<?= $legRow['leg_environment3']?>" readonly="true" size="6"></td>
-                            <td><input type="text" name="leg_status" value="<?= $legRow['leg_status']?>" readonly="true" size="4"></td>
-                            <td><input type="text" name="leg_ch_name" value="<?= $legRow['leg_ch_name']?>" readonly="true"></td>
+                            <td><input type="text" name="leg_jump" value="<?= $legRow['leg_jump']?>" readonly="true" size="4" class="dissinputstyle"></td>
+                            <td><input type="text" name="leg_environment1" value="<?= $legRow['leg_environment1']?>" readonly="true" size="6" class="dissinputstyle"></td>
+                            <td><input type="text" name="leg_environment2" value="<?= $legRow['leg_environment2']?>" readonly="true" size="6" class="dissinputstyle"></td>
+                            <td><input type="text" name="leg_environment3" value="<?= $legRow['leg_environment3']?>" readonly="true" size="6" class="dissinputstyle"></td>
+                            <td><input type="text" name="leg_status" value="<?= $legRow['leg_status']?>" readonly="true" size="4" class="dissinputstyle"></td>
+                            <td><input type="text" name="leg_ch_name" value="<?= $legRow['leg_ch_name']?>" readonly="true" class="dissinputstyle"></td>
                             
                             <td>
                                 <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
@@ -208,7 +208,16 @@
     e.target.parentNode.parentNode.children[6].firstChild.removeAttribute("readonly");   
     e.target.parentNode.parentNode.children[7].firstChild.removeAttribute("readonly");   
     e.target.parentNode.parentNode.children[8].firstChild.removeAttribute("readonly");   
-    e.target.parentNode.parentNode.children[9].firstChild.removeAttribute("readonly");   
+    e.target.parentNode.parentNode.children[9].firstChild.removeAttribute("readonly");
+    e.target.parentNode.parentNode.children[1].firstChild.classList.remove("dissinputstyle");
+    e.target.parentNode.parentNode.children[3].firstChild.classList.remove("dissinputstyle");
+    e.target.parentNode.parentNode.children[4].firstChild.classList.remove("dissinputstyle");
+    e.target.parentNode.parentNode.children[5].firstChild.classList.remove("dissinputstyle");
+    e.target.parentNode.parentNode.children[6].firstChild.classList.remove("dissinputstyle");
+    e.target.parentNode.parentNode.children[7].firstChild.classList.remove("dissinputstyle");
+    e.target.parentNode.parentNode.children[8].firstChild.classList.remove("dissinputstyle");
+    e.target.parentNode.parentNode.children[9].firstChild.classList.remove("dissinputstyle");
+   
     }
       
     var btn1= document.getElementsByClassName('btn1');

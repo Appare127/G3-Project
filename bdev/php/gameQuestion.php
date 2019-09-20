@@ -37,7 +37,6 @@
     <main class="main">
       <!-- Breadcrumb-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item">遊戲管理</li>
         <li class="breadcrumb-item">題庫管理</li>
 
       </ol>
@@ -61,9 +60,7 @@
                       <th>答案</th>
                       <th>狀態(0:下架; 1:上架)</th>
                       <th>答案說明</th>
-                      <th></th>
-                      <th></th>
-                      <th></th>
+                      <th colspan="3"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -117,14 +114,14 @@
                   <form action="updateGameQuestionData.php">
                     <tr>
                       <td><?php echo $gameQuestionRow['question_no'];?><input name="question_no" type="hidden" value="<?= $gameQuestionRow['question_no']?>"></td>
-                      <td><input type="text" name="question_name" value="<?= $gameQuestionRow['question_name']?>" readonly="true"></td>
-                      <td><input type="text" name="question_option1" value="<?= $gameQuestionRow['question_option1']?>" readonly="true"></td>
-                      <td><input type="text" name="question_option2" value="<?= $gameQuestionRow['question_option2']?>" readonly="true"></td>
-                      <td><input type="text" name="question_option3" value="<?= $gameQuestionRow['question_option3']?>" readonly="true"></td>
-                      <td><input type="text" name="question_option4" value="<?= $gameQuestionRow['question_option4']?>" readonly="true"></td>
-                      <td><input type="text" name="question_ans" size="4" value="<?= $gameQuestionRow['question_ans']?>" readonly="true"></td>
-                      <td><input type="text" name="question_status" size="4" value="<?= $gameQuestionRow['question_status']?>" readonly="true"></td>
-                      <td><input type="text" name="ans_description" value="<?= $gameQuestionRow['ans_description']?>" readonly="true"></td>
+                      <td><input type="text" name="question_name" value="<?= $gameQuestionRow['question_name']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="question_option1" value="<?= $gameQuestionRow['question_option1']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="question_option2" value="<?= $gameQuestionRow['question_option2']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="question_option3" value="<?= $gameQuestionRow['question_option3']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="question_option4" value="<?= $gameQuestionRow['question_option4']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="question_ans" size="4" value="<?= $gameQuestionRow['question_ans']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="question_status" size="4" value="<?= $gameQuestionRow['question_status']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="ans_description" value="<?= $gameQuestionRow['ans_description']?>" readonly="true" class="dissinputstyle"></td>
                       <td>
                         <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
                       </td>
@@ -195,6 +192,14 @@
         e.target.parentNode.parentNode.children[6].firstChild.removeAttribute("readonly");
         e.target.parentNode.parentNode.children[7].firstChild.removeAttribute("readonly");
         e.target.parentNode.parentNode.children[8].firstChild.removeAttribute("readonly");
+        e.target.parentNode.parentNode.children[1].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[2].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[3].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[4].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[5].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[6].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[7].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[8].firstChild.classList.remove("dissinputstyle");
       }
       
     

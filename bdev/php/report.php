@@ -77,14 +77,14 @@ if( $errMsg != ""){ //例外
     foreach( $reportRows as $i => $reportRow){
     
 ?>
-                  <form action="updateReportData.php">
+                  <form action="updateReportData.php" method="post">
                     <tr>
                       <td><?php echo $reportRow['report_no'];?><input name="report_no" type="hidden" value="<?= $reportRow['report_no']?>"></td>
-                      <td><input type="text" name="user_no" value="<?= $reportRow['user_no']?>" readonly="true"></td>
-                      <td><input type="text" name="msg_no" value="<?= $reportRow['msg_no']?>" readonly="true"></td>
-                      <td><input type="text" name="report_reason" value="<?= $reportRow['report_reason']?>" readonly="true"></td>
-                      <td><input type="text" name="report_date" value="<?= $reportRow['report_date']?>" readonly="true"></td>
-                      <td><input type="text" name="report_status" value="<?= $reportRow['report_status']?>" readonly="true"></td>
+                      <td><input type="text" name="user_no" value="<?= $reportRow['user_no']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="msg_no" value="<?= $reportRow['msg_no']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="report_reason" value="<?= $reportRow['report_reason']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="report_date" value="<?= $reportRow['report_date']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="text" name="report_status" value="<?= $reportRow['report_status']?>" readonly="true" class="dissinputstyle"></td>
                       <td>
                         <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
                       </td>
@@ -140,7 +140,8 @@ if( $errMsg != ""){ //例外
   <script>
       function reversechange(e){
         console.log(e.target.parentNode.parentNode.children[1]);   
-        e.target.parentNode.parentNode.children[5].firstChild.removeAttribute("readonly");   
+        e.target.parentNode.parentNode.children[5].firstChild.removeAttribute("readonly");
+        e.target.parentNode.parentNode.children[5].firstChild.classList.remove("dissinputstyle");
       }
       
     
