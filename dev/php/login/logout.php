@@ -1,5 +1,9 @@
 <?php 
 session_start();
-unset($_SESSION['user_no']);
+if(isset($_SESSION['cart'])){
+    unset($_SESSION['user_no']);
+}else{
+    session_destroy();
+}
 
 ?>

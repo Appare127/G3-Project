@@ -245,12 +245,7 @@ session_start();
                 }
             }
             }
-          
-
-
-            $id("login_btn").addEventListener("click",function(){
-                window.location.href='http://localhost/G3/checkOrder.html';
-            });
+    
         })
 
         

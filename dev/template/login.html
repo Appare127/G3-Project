@@ -341,28 +341,12 @@ let forgetPsw=new Vue({
             }
             
         } else if ($id('login_text').innerText == '登出') {   //按下去，要登出
-            //clear session storage
-            let user_id = sessionStorage.user_id;
-            let user_psw =  sessionStorage.user_psw;
-            let xhr = new XMLHttpRequest();
-            xhr.onload = function () {
-                if (xhr.status == 200) {
-                    if (xhr.responseText.indexOf("sysError") != -1) {
-                        alert("系統異常,請通知系統維護人員");
-                    }else { 
-                        // console.log(xhr.responseText)
-                        let userData = JSON.parse(xhr.responseText)[0];
-                        for (i in userData) {
-                            sessionStorage.removeItem(i);
-                        }
-                    }
-                } else {
-                    alert(xhr.statusText);
+            fetch("php/login/login.php").then(user=>user.json()).then(userData=>{
+                // console.log(userData)
+                for (i in userData[0]) {
+                    sessionStorage.removeItem(i);
                 }
-            }
-            xhr.open("post", "php/login/login.php", true);
-            xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-            xhr.send(`user_id=${user_id}&user_psw=${user_psw}`);
+        })
 
             //clear session
             logOut();
@@ -373,11 +357,12 @@ let forgetPsw=new Vue({
             $id("user_id").value = "";
             $id("user_psw").value = "";
             //如果是在會員中心頁面登出，要跳回首頁
-            if (window.location.href == "http://localhost/G3/member.php" ) {
+            if (window.location.href == "http://localhost/G3/member.php" || window.location.href == "http://localhost/G3/checkOrder.html") {
                 window.location.href = "http://localhost/G3/home.html"
-            }else if(window.location.href == "http://localhost/G3/checkOrder.html"){
-                window.location.href = "http://localhost/G3/cart.php"
             }
+            // }else if(window.location.href == "http://localhost/G3/checkOrder.html"){
+            //     window.location.href = "http://localhost/G3/cart.php"
+            // }
             //未登入，無法進入會員中心
             document.getElementsByClassName('member_icon')[0].onclick = function () {
                 alert("請登入會員");
@@ -390,7 +375,7 @@ let forgetPsw=new Vue({
     function logOut(){
         var xhr = new XMLHttpRequest();
         xhr.open("Get", "php/login/logout.php",true);
-            xhr.send( null );
+        xhr.send( null );
     }
     
     //登入功能
