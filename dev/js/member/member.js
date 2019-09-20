@@ -74,12 +74,14 @@ function updateBasic(){
   document.getElementById('btn_edit').style.display='none';
   document.getElementById('updated_it').style.margin='auto';
   document.getElementById('updated_it').style.display='block';
- 
+  
+  document.getElementById('upFile').disabled=false; //讓選擇檔案可以按
+  
   let redonlyOpen = document.querySelectorAll("input[readonly='readonly']");
-
   for (let i = 0; i < redonlyOpen.length; i++) {
     redonlyOpen[i].readOnly = false;//打開可以修改的功能
   }
+
 }
 
 //按了儲存按鈕要開啟修改 並且讓input關閉修改
@@ -87,6 +89,7 @@ function stockpileBasic(){
   document.getElementById('btn_edit').style.display='block';
   document.getElementById('btn_edit').style.margin='auto';
   document.getElementById('updated_it').style.display='none';
+
   let redonlyOpen = document.querySelectorAll("input[readonly='readonly']");
 
   for (let i = 0; i < redonlyOpen.length; i++) {
@@ -98,6 +101,7 @@ window.addEventListener('load',
   function(){
     document.getElementById('btn_edit').onclick = updateBasic;
     document.getElementById('updated_it').onclick = stockpileBasic;
+    document.getElementById('upFile').disabled=true; //讓選擇檔案不能按
   }
 );
 

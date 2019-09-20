@@ -29,7 +29,7 @@
     img{
       vertical-align: middle;
       // width: 100%;
-      max-width: 300px;
+      // max-width: 300px;
     }
 
     p[class*="col-"]{
@@ -121,7 +121,7 @@
 }
 
 .my_gamerecord,.my_animal{
-  margin: 20px 0 0 0;
+  margin: 20px 0;
 }
 
 //外框
@@ -129,7 +129,7 @@
   border: 5px solid $col_btn_blue;//#fff
   // background-color: $col_white;//#fde5a4
   background-color: rgba($color: #fff, $alpha: 0.8);
-  padding: 10px 0px;
+  padding: 10px 0px 30px 0;
   box-sizing: border-box;
   border-radius: 15px;
 }
@@ -140,6 +140,15 @@
 
 //基本資料
 .member_basic{
+
+  //==資料==
+  .baic_pic{
+    img{
+      // width: 100%;
+      max-width: 300px;
+      max-height: 400px;
+    }
+  }
   .upfile{
     margin-top: 10px;
   }
@@ -148,18 +157,24 @@
     margin-top: 10px;
     text-align: center;
   }
-.baic_txt{
-  input{
-    outline: none;
-    border: 2px solid $col_btn_blue;
-    border-radius: 5px;
-    // margin: 10px auto 10px auto;
-    padding: 0px 0px 0 5px;
-    font-size: 16px;
-    font-family: Microsoft JhengHei;
-  }
+  .baic_txt{
+    input{
+      outline: none;
+      border: 2px solid $col_btn_blue;
+      border-radius: 5px;
+      // margin: 10px auto 10px auto;
+      padding: 0px 0px 0 5px;
+      font-size: 16px;
+      font-family: Microsoft JhengHei;
+    }
 
-}
+    input:focus{
+      // transition:border linear .2s,box-shadow linear .5s;
+      // box-shadow:0 0 8px rgba(241,39,232,.5);
+      border: 2px solid $col_btn_pink;   
+     }
+
+  }
 
 // input[type="submit"]{
 //   // background:none;  
@@ -167,24 +182,51 @@
 //   // border:0px;
 // }
  
-    //==我的動物==
+//遊戲
+
+.gamerecord_pic{
+  img{
+   max-width: 300px;
+  }
+}
+  //==我的動物==
   .my_animal{
     .myanimal_pic{
       position: relative;
-      width: 100%;
-      min-height: 300px;
+      width: 90%;
+      height: 0;
+      padding-bottom: 120%;
+      margin: auto;
+      box-sizing: border-box;
+
+      // width: 100%;
+      // min-height: 300px;
+
+      @include responds(medium){
+        width: 50%;
+        padding-bottom: 66.66%;
+      }
+
     
       .animalbg_re{
         position: relative;
+        width: 100%;
       }
 
       .animalpic_ab{
         position: absolute;
+        width: 100%;
         // top: 0;
         left: 0;
         right:0;
         bottom: 0%;
         margin: auto;
+      }
+      .ifnull{
+        img{
+          width: 100%;
+        }
+       
       }
     }
     .animal_basic{
@@ -348,33 +390,58 @@
 
 
 .baic_txt td , .gamerecord_txt td , .myanimal_txt td{
-  width: 10%;
+  // width: 10%;
+
+  @include responds(small){
+    width: 42%;
+  }
+
+  @include responds(medium){
+    width: 10%;
+  }
+
+
   padding: 10px;
 }
 
 //我的收藏
 
 .my_love{
-  .loveanimal_pic{
-  // border: 1px solid #f00;
-  position: relative;
-  width: 100%;
-  min-height: 200px;
-    .lovebg_re{
-      position: relative;
-      width: 100%;
-      // height: calc(50vh);
-    }
 
-    .lovepic_ab{
+  .mylove_item{
+    text-align: center;
+
+    .loveanimal_pic{
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      position: relative;
+      // min-height: 200px;
       width: 100%;
-      position: absolute;
-      // top: 0;
-      left: 0;
-      right:0;
-      bottom: 0%;
+      height: 0;
+      padding-bottom: 131%;
       margin: auto;
-    }
-  
+      margin-bottom: 10px;
+      
+        .lovebg_re{
+          position: relative;
+          width: 100%;
+        }
+    
+        .lovepic_ab{
+          width: 100%;
+          position: absolute;
+          // top: 0;
+          left: 0;
+          right:0;
+          bottom: 0%;
+          margin: auto;
+        }
+      
+      }
+      .baic_btn{
+        margin-top:10px;
+      }
+
   }
+  
 }

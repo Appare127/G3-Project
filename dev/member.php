@@ -357,22 +357,24 @@ if ($errMsg !=""){
           <div class="myanimal_pic">
 
           <?php
-             if( $userRow["my_animal_bg_img"] != "" ||  $userRow["my_animal_img"] != ""){ 
-            ?>
-            <img class="animalbg_re" src="<?=$userRow["my_animal_bg_img"]?>" alt="user_animal_bg">
-            <img class="animalpic_ab" src="<?=$userRow["my_animal_img"]?>" alt="user_animal">
-
+            if( $userRow["my_animal_bg_img"] != "" ||  $userRow["my_animal_img"] != ""){
+               if($userRow["my_animal_bg_img"] != "" ){
+               ?>
+                <img class="animalbg_re" src="<?=$userRow["my_animal_bg_img"]?>" alt="user_bg">
+                <img class="animalpic_ab" src="<?=$userRow["my_animal_img"]?>" alt="user_animal">
             <?php
+              }else{
+                ?>
+                  <img class="animalpic_ab" src="<?=$userRow["my_animal_img"]?>" alt="user_animal">
+               <?php
+                }
             }else{
               echo '<div class="ifnull"><p>尚未創造動物</p>
               <img src="img/member/member_pic.png" alt="">
               </div>';
             }
-            ?>
-            
-<!--
-            <img class="animalbg_re" src="<?=$userRow["my_animal_bg_img"]?>" alt="user_animal_bg">
-            <img class="animalpic_ab" src="<?=$userRow["my_animal_img"]?>" alt="user_animal"> -->
+            ?> 
+          
 
           </div>
 
@@ -804,7 +806,7 @@ if ($errMsg !=""){
         <div class="col-6 col-md-3 mylove_item">
 
           <div class="loveanimal_pic">
-            <img class="lovebg_re" src="<?=$pdoloves["bg_img"]?>" alt="user_animal_bg">
+            <img class="lovebg_re" src="<?=$pdoloves["bg_img"]?>" alt="">
             <img class="lovepic_ab" src="<?=$pdoloves["cmp_img"]?>" alt="user_animal">
           </div>
 

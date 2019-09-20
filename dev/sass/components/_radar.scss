@@ -87,7 +87,11 @@
 @mixin radarinfo_member() {
     
     .info_wrap{
-        width: 65%;
+        width: 95%;
+        @include responds(medium){
+            width: 65%;
+        }
+          
         box-sizing: border-box;
         margin:  auto;
         border: 5px solid #fff;

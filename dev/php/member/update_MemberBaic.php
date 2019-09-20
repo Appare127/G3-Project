@@ -14,9 +14,9 @@ try {
 	$members->bindValue(':user_tel',$_REQUEST["user_tel"]);
 	$members->bindValue(':hint_answer',$_REQUEST["hint_answer"]);
 	$members->execute();
-	echo "異動成功~" ;
+	// echo "異動成功~" ;
 	
-	// header("location:../../member.php");
+	header("location:../../member.php");
     
 
   if( $_FILES["upFile"]["error"] == UPLOAD_ERR_OK){
@@ -61,7 +61,8 @@ try {
     	// $memberImg -> bindValue(":user_img", $fileName);
     	$memberImg -> bindValue(':user_id',$_REQUEST["user_id"]);
 		$memberImg -> execute();
-		echo "新增成功~";
+		// echo "新增成功~";
+		header("location:../../member.php");
 
 	}else if($_FILES["upFile"]["error"] == 4){ //如果未指定上傳檔案,還是跳轉成功
 		header("location:../../member.php");
