@@ -1,21 +1,34 @@
 <?php 
 $errMsg = "";
 session_start();
+
+if(!isset ($_SESSION['user_no'])){
+  echo "<div class='error_bd'><center>您好:請先登入會員,將於3秒後跳轉至首頁</center></div>";
+  header("Refresh:3;url=home.html");
+}else{
+
+
 try {
   require_once('php/connectg3.php');
-    
+
+  
+
   // $orderItems=$pdo->prepare('SELECT * FROM `product_order` p  join order_item o on p.order_no = o.order_no join product pro on pro.product_no = o.product_no where user_no = :user_no');
   // $orderItems->bindValue(':user_no',1);//$_POST['user_no']
   // $orderItems->execute();
 
+
+
+  
   //找會員
   $userItems=$pdo->prepare('SELECT * FROM `user` where user_no = :user_no');
-  $userItems->bindValue(':user_no',$_SESSION['user_no']);//$_SESSION['user_no']
+  $userItems->bindValue(':user_no',@$_SESSION['user_no']);//$_SESSION['user_no']
   $userItems->execute();
+
 
   //找訂單
   $orders=$pdo->prepare('SELECT * FROM `product_order` where user_no = :user_no');
-  $orders->bindValue(':user_no',$_SESSION['user_no']);//$_SESSION['user_no']
+  $orders->bindValue(':user_no',@$_SESSION['user_no']);//$_SESSION['user_no']
   $orders->execute();
 
  //找訂單明細
@@ -24,7 +37,7 @@ try {
 
 //找預約
   $revs=$pdo->prepare('SELECT * FROM resv_order r join resv_session_capacity rc on r.session_no = rc.session_no where r.member_id = :member_id');
-  $revs->bindValue(':member_id',$_SESSION['user_no']);//$_SESSION['user_no']
+  $revs->bindValue(':member_id',@$_SESSION['user_no']);//$_SESSION['user_no']
   $revs->execute();
 
 
@@ -32,7 +45,7 @@ try {
   // $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = :user_no');
 
   $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = :user_no and f.favorite_status = 1');
-  $loves->bindValue(':user_no',$_SESSION['user_no']);//$_SESSION['user_no']
+  $loves->bindValue(':user_no',@$_SESSION['user_no']);//$_SESSION['user_no']
   $loves->execute();
 
 ?>
@@ -45,7 +58,6 @@ try {
 ?>   
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -112,11 +124,10 @@ try {
 
 </head>
 
+
 <body class="bd_member">
 
-
   @@include('template/header.html')
-
 
   <div class="member_tab">
     <div class="banner_cloud">
@@ -124,6 +135,8 @@ try {
       <h1 class="title">會員中心</h1>
       <img class="icon_r" src="img/header/banner_icon_r.png" alt="">
     </div>
+
+
 
     <div class="tab_item">
         <a href="javascript:void(0)" id="default_open" class="btn_cloud tablink">基本資料
@@ -145,6 +158,7 @@ try {
 if ($errMsg !=""){
   echo "<center>$errMsg</center>";
 }else{
+
 ?>
 
 <?php
@@ -826,7 +840,10 @@ if ($errMsg !=""){
       <?php
           }//foreach
         }//else
+
+  
       ?>
+
 
          <!-- 動態生成 -->
         <!-- <div class="col-6 col-md-3 baic_btn">
@@ -846,9 +863,12 @@ if ($errMsg !=""){
     </div>
 
   </section>
-
-
   @@include('template/footer.html')
+
+  <?php
+      }
+  ?>
+
 
   <script src="js/member/member.js"></script>
   <script src="js/modify/radar.js"></script>
