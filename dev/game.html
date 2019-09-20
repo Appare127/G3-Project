@@ -702,8 +702,10 @@ function chosenArea(area){
         animal.addEventListener('drop', dragDrop);
         //手安裝click事件
         $id('hand').addEventListener('click', function(e){
-            
-            document.body.style.cursor = "url('img/game/food_hand.png')";
+            console.log(111);
+            document.querySelector('.role_info').style.cursor ="url('img/game/cursor3.png'),auto";
+            // 
+            // "url('http://bringerp.free.fr/Files/RotMG/cursor.gif'),auto";
         });
         //幻燈片
         $cls('arrowLeft')[0].addEventListener('click', sliderLeft);
