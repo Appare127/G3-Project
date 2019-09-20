@@ -73,7 +73,7 @@
               <div class="card-body">
                 <table class="table table-responsive-sm table-bordered">
                   <thead>
-                    <tr>
+                    <tr id='head_title'>
                       <th width="90">頭部編號</th>
                       <th>頭部名稱</th>
                       <th>選單圖</th>
@@ -93,30 +93,30 @@
                         <tr class="tr_title">
                             <td></td>
                             <td>
-                                <input type="text" name="head_name" id="">
+                                <input type="text" name="head_name" id="" required>
                             </td>
                             <td>
-                                <img width="45%" src="" id="head_img_preview">
                                 <input type="file" id="select_head_img" name="head_img" accept="image/*"><br>
+                                <img width="45%" src="" id="head_img_preview">
                             </td>
                             <td>
-                                <img img width='50%' src="" id="head_img_combination_preview">
                                 <input type="file" id="select_head_img_combination" name="head_img_combination" accept="image/*"><br>
+                                <img img width='80%' src="" id="head_img_combination_preview">
                             </td>
                             <td>
-                                <input type="text" name="head_environment1" id="" size="10">
+                                <input type="number" name="head_environment1" id="" size="10" min="1" max="9" required>
                             </td>
                             <td>
-                                <input type="text" name="head_environment2" id="" size="10">
+                                <input type="number" name="head_environment2" id="" size="10" min="1" max="9" required>
                             </td>
                             <td>
-                                <input type="text" name="head_environment3" id="" size="10">
+                                <input type="number" name="head_environment3" id="" size="10" min="1" max="9" required>
                             </td>
                             <td>
-                                <input type="text" name="head_status" id="" size="10">
+                                <input type="number" name="head_status" id="" size="10" min="0" max="1" required>
                             </td>
                             <td>
-                                <input type="text" name="head_ch_name" id="" size="10">
+                                <input type="text" name="head_ch_name" id="" size="10" required>
                             </td>
                             <td colspan="2">
                                 <input class="btn btn-block btn-outline-primary addbtn" type="submit" value="新增">
@@ -142,21 +142,16 @@
                         <form action="updateAnimalHeadData.php" method="post" enctype="multipart/form-data">
                           <tr>
                             <td><?php echo $headRow['head_no'];?><input name="head_no" type="hidden" value="<?= $headRow['head_no']?>"></td>
-                            <td><input type="text" name="head_name" value="<?= $headRow['head_name']?>" readonly="true" class="dissinputstyle"></td>
-                            <td><img width="45%" src="../<?= $headRow['head_img']?>" alt="" class="image"><input type="file" class="btnimg" name="head_img" size="10" style="display:none"></td>
-                            <td><img width='50%' src="../<?= $headRow['head_img_combination']?>" alt=""><input type="file" class="combination_btnimg"name="head_img_combination" size="10" style="display:none"></td>
-                            <td><input type="text" name="head_environment1" value="<?= $headRow['head_environment1']?>" readonly="true" size="10" class="dissinputstyle"></td>
-                            <td><input type="text" name="head_environment2" value="<?= $headRow['head_environment2']?>" readonly="true" size="10" class="dissinputstyle"></td>
-                            <td><input type="text" name="head_environment3" value="<?= $headRow['head_environment3']?>" readonly="true" size="10" class="dissinputstyle"></td>
-                            <td><input type="text" name="head_status" value="<?= $headRow['head_status']?>" readonly="true" size="10" class="dissinputstyle"></td>
-                            <td><input type="text" name="head_ch_name" value="<?= $headRow['head_ch_name']?>" readonly="true" size="10" class="dissinputstyle"></td>
-                            
-                            <td>
-                                <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
-                            </td>
-                            <td>
-                                <input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成">
-                            </td>
+                            <td><input type="text" name="head_name" value="<?= $headRow['head_name']?>" readonly="true" class="dissinputstyle" required></td>
+                            <td><img width="45%" src="../<?= $headRow['head_img']?>?<?php echo time();?>" alt="" class="image"><input type="file" class="btnimg" name="head_img" size="10" style="display:none"></td>
+                            <td><img width='80%' src="../<?= $headRow['head_img_combination']?>?<?php echo time();?>" alt=""><input type="file" class="combination_btnimg"name="head_img_combination" size="10" style="display:none"></td>
+                            <td><input type="number" name="head_environment1" value="<?= $headRow['head_environment1']?>" readonly="true" size="10" class="dissinputstyle" required min="1" max="9"></td>
+                            <td><input type="number" name="head_environment2" value="<?= $headRow['head_environment2']?>" readonly="true" size="10" class="dissinputstyle" required min="1" max="9"></td>
+                            <td><input type="number" name="head_environment3" value="<?= $headRow['head_environment3']?>" readonly="true" size="10" class="dissinputstyle" required min="1" max="9"></td>
+                            <td><input type="number" name="head_status" value="<?= $headRow['head_status']?>" readonly="true" size="10" class="dissinputstyle" required></td>
+                            <td><input type="text" name="head_ch_name" value="<?= $headRow['head_ch_name']?>" readonly="true" size="10" class="dissinputstyle" required></td>
+                            <td><input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯"></td>
+                            <td><input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成" disabled></td>
                           </form>
                         </tr>
                     
@@ -211,25 +206,53 @@
 			return document.getElementById(id);
     }
 
+    
+    // 不用了
+    // // 判斷新增按鈕時，每個欄位是否都有值
+    // function checkValue(e){
+
+    //   var addtr = e.target.parentNode.parentNode;
+    //   // if(Number(magictr.children[7].value) ==0 || Number(magictr.children[7].value) ==1){
+    //   // alert("狀態只能0或1");
+    //   // console.log("狀態只能0或1");
+        
+    //   for(var i=1; i<addtr.children.length-1; i++){
+    //     if(addtr.children[i].firstElementChild.value==''){
+    //       alert('請填入'+$id('head_title').children[i].innerText+'的值!');
+    //       console.log('請填入'+$id('head_title').children[i].innerText+'的值!');
+    //       e.preventDefault();
+    //     }
+    //   }
+    // }
+    
+
     // 控制哪些欄位可修改start  
     function reversechange(e){
-        console.log(e.target.parentNode.parentNode.children[1]);   
-        console.log(e.target.parentNode.parentNode.children[2].lastChild);   
-        e.target.parentNode.parentNode.children[1].firstChild.removeAttribute("readonly");   
-        e.target.parentNode.parentNode.children[2].firstChild.removeAttribute("readonly");   
-        e.target.parentNode.parentNode.children[2].lastChild.style.display='block';
-        e.target.parentNode.parentNode.children[3].firstChild.removeAttribute("readonly");   
-        e.target.parentNode.parentNode.children[3].lastChild.style.display='block';
-        e.target.parentNode.parentNode.children[4].firstChild.removeAttribute("readonly");   
-        e.target.parentNode.parentNode.children[5].firstChild.removeAttribute("readonly");   
-        e.target.parentNode.parentNode.children[6].firstChild.removeAttribute("readonly");   
-        e.target.parentNode.parentNode.children[7].firstChild.removeAttribute("readonly");
-        e.target.parentNode.parentNode.children[1].firstChild.classList.remove("dissinputstyle");
-        e.target.parentNode.parentNode.children[3].firstChild.classList.remove("dissinputstyle");
-        e.target.parentNode.parentNode.children[4].firstChild.classList.remove("dissinputstyle");
-        e.target.parentNode.parentNode.children[5].firstChild.classList.remove("dissinputstyle");
-        e.target.parentNode.parentNode.children[6].firstChild.classList.remove("dissinputstyle");
-        e.target.parentNode.parentNode.children[7].firstChild.classList.remove("dissinputstyle");
+
+        var updatetr = e.target.parentNode.parentNode;
+
+        // console.log(e.target.parentNode.parentNode.children[1]);   
+        // console.log(e.target.parentNode.parentNode.children[2].lastChild);
+
+        updatetr.children[1].firstChild.removeAttribute("readonly");   
+        updatetr.children[2].firstChild.removeAttribute("readonly");   
+        updatetr.children[2].lastChild.style.display='block';
+        updatetr.children[3].firstChild.removeAttribute("readonly");   
+        updatetr.children[3].lastChild.style.display='block';
+        updatetr.children[4].firstChild.removeAttribute("readonly");   
+        updatetr.children[5].firstChild.removeAttribute("readonly");   
+        updatetr.children[6].firstChild.removeAttribute("readonly");   
+        updatetr.children[7].firstChild.removeAttribute("readonly");
+        updatetr.children[8].firstChild.removeAttribute("readonly");
+        updatetr.children[1].firstChild.classList.remove("dissinputstyle");
+        updatetr.children[3].firstChild.classList.remove("dissinputstyle");
+        updatetr.children[4].firstChild.classList.remove("dissinputstyle");
+        updatetr.children[5].firstChild.classList.remove("dissinputstyle");
+        updatetr.children[6].firstChild.classList.remove("dissinputstyle");
+        updatetr.children[7].firstChild.classList.remove("dissinputstyle");
+        updatetr.children[8].firstChild.classList.remove("dissinputstyle");
+        updatetr.children[10].firstChild.removeAttribute("disabled");
+
     }
       
     var btn1= document.getElementsByClassName('btn1');
@@ -237,6 +260,7 @@
       for(i=0; i<btn1.length;i++){
         btn1[i].addEventListener('click',reversechange,false);
       }
+      // document.getElementsByClassName('addbtn')[0].addEventListener('click',checkValue);
     }
     window.addEventListener('load',doFirst);
     // 控制哪些欄位可修改end
