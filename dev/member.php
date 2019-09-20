@@ -51,9 +51,9 @@ try {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>會員中心</title>
-  <link rel="stylesheet" href="css/style.css">
+  @@include('template/csslink.html')
  <script src="js/plugin/Chart.js"></script>
- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+
 
  <style>
         #msg {
@@ -167,7 +167,7 @@ if ($errMsg !=""){
             if($userRow["user_img"]==NULL){
             ?>
                 <div class="ifnull"><p>尚未有個人大頭貼</p>
-                <img id="upfile_pic" src="img/member/member_pic.png">
+                <img id="upfile_pic" src="img/member/user0_aml.png">
                 </div>
 
             <?php
@@ -203,7 +203,7 @@ if ($errMsg !=""){
               </tr>
               <tr>
                 <td><p class="p_title">信箱</p></td>
-                <td><p><input type="email" name="user_email" value="<?=$userRow["user_email"]?>">
+                <td><p><input type="email" name="user_email" readonly="readonly" value="<?=$userRow["user_email"]?>">
                  </p></td>
               </tr>
               <tr>
@@ -312,7 +312,7 @@ if ($errMsg !=""){
             <?php
             }else{
              echo '<div class="ifnull"><p>尚未有遊戲畫面</p>
-              <img src="img/member/member_pic.png" alt="">
+              <img src="img/member/user0_aml.png" alt="">
               </div>';
             }
             ?>
@@ -370,7 +370,7 @@ if ($errMsg !=""){
                 }
             }else{
               echo '<div class="ifnull"><p>尚未創造動物</p>
-              <img src="img/member/member_pic.png" alt="">
+              <img src="img/member/user0_aml.png" alt="">
               </div>';
             }
             ?> 
@@ -417,7 +417,7 @@ if ($errMsg !=""){
             <a href="game.html" class="btn_cloud">參加遊戲
               @@include('template/btn_sp.html')
             </a>
-            <a href="modify.html" class="btn_cloud">修改動物
+            <a href="modify.html" class="btn_cloud">改造動物
               @@include('template/btn_sp.html')
             </a>
           </div>
