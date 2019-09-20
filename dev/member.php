@@ -173,7 +173,7 @@ if ($errMsg !=""){
             <?php
             }else{
             ?>
-              <img id="upfile_pic" src="<?=$userRow["user_img"]?>" alt="user_sticker">
+              <img id="upfile_pic" src="<?=$userRow["user_img"]?>?<?php echo time(); ?>" alt="user_sticker">
             <?php
             }
             ?>

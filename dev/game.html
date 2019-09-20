@@ -32,10 +32,11 @@
             <div class="food_menu">
                 <ul>
                     <li class="food hamburger"  draggable="true" ><img id='hamburger' data-feed='-20' src="img/game/food_hamburger.png" alt=""></li>
+                    <li class="food" draggable="true" data-feed='30'><img src="img/game/food_fries.png" alt=""></li>                    
                     <li class="food fruit"  draggable="true" ><img id='fruit' data-feed='10' src="img/game/food_fruit.png" alt=""></li>
-                    <li class="food" draggable="true" data-feed='30'></li>
-                    <li class="food" draggable="true" data-feed='20'><img src="" alt=""></li>
+                    <li class="food" draggable="true" data-feed='20'><img src="img/game/food_apple.png" alt=""></li>                    
                     <li class="food" id='hand'><img src="img/game/food_hand.png" alt=""></li>
+
                 </ul>
             </div>
            
@@ -295,6 +296,7 @@ function $que(css_selector){
 
 //動物走動
 function animalWalking(trigger){
+    if(window.innerWidth>=768){
     $que(".info_pic img")[0].classList.remove('animalBreathing');
     $que(".animal_words")[0].classList.remove('animalSayWords');
     $que(".info_pic img")[0].classList.remove('animalHello');
@@ -328,14 +330,15 @@ function animalWalking(trigger){
                     $que(".animal_words")[0].style.display="none";
                 },2000);
 
-        }else if(trigger == 'junk'){
+        }
+        
+        if(trigger == 'junk'){
             // $que(".info_pic img")[0].classList.add('animalBreathing');
             // $que(".info_pic img")[0].classList.add('animal_falling_down');
             $que(".animal_words")[0].style.display="block";
             $que(".animal_words p")[0].innerText = `咳咳....你餵我吃了什麼...`;
                 setTimeout(function(){
-                    $que(".animal_words")[0].style.display="none";
-                    // $que(".info_pic img")[0].classList.add('animal_falling_down');
+                    $que(".animal_words")[0].style.display="none";//臉色發灰
                     $que(".info_pic img")[0].style.transition = '0.5s all';
                     $que(".info_pic img")[0].style.filter = 'grayscale(100%)';
                     $que(".info_pic img")[0].style.transformOrigin = 'center bottom';
@@ -345,9 +348,15 @@ function animalWalking(trigger){
                     $que(".info_pic img")[0].classList.add('animalBreathing');
                     $que(".info_pic img")[0].style.transform = 'rotateZ(0deg)';
                 },4000);
-
-
         }
+        if(trigger == 'faceBrush'){
+            $que(".animal_words")[0].style.display="block";
+            $que(".animal_words p")[0].innerText = `討厭~~`;
+            $que(".info_pic img")[0].classList.add('animalBreathing');
+            setTimeout(function(){$que(".animal_words")[0].style.display="none";},2000);
+        }
+    }
+
     // console.log($que(".info_pic img")[0].classList);
 }
 
@@ -680,8 +689,6 @@ function chosenArea(area){
         getRankingData();
         getCusAnimal();
         animalWalking('firstTime');
-        
-
         //安裝聲音檔
         audio = new Audio(sessionStorage['animal_howl']);
 
@@ -702,10 +709,24 @@ function chosenArea(area){
         animal.addEventListener('drop', dragDrop);
         //手安裝click事件
         $id('hand').addEventListener('click', function(e){
-            console.log(111);
+            //更換滑鼠指標圖案
             document.querySelector('.role_info').style.cursor ="url('img/game/cursor3.png'),auto";
-            // 
-            // "url('http://bringerp.free.fr/Files/RotMG/cursor.gif'),auto";
+            //在動物身上裝上按滑鼠事件 按了會臉紅
+            document.querySelector('.info_pic img').addEventListener('mousedown', function(e){
+                this.style.transition = '1.5s';
+                console.log(e.clientX, e.clientY);
+                this.style.filter = 'hue-rotate(290deg)';
+                setTimeout(function(){
+                    animalWalking('faceBrush');
+                },500);
+
+            })
+            //安裝按右鍵取消滑鼠指標圖案的事件
+            document.querySelector('.role_info').addEventListener('mousedown', function(e){
+                if(e.button==2){
+                    document.querySelector('.role_info').style.cursor ="url(''),auto";
+                }
+            });
         });
         //幻燈片
         $cls('arrowLeft')[0].addEventListener('click', sliderLeft);
