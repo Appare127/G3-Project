@@ -254,9 +254,10 @@ function rankFadeIn(){
         $que('.chart_top2')[0].style.opacity =0;
         $que('.chart_top3')[0].style.opacity =0;
 
-        $que('.chart_top1')[0].classList.add('topFadeIn');
-        $que('.chart_top2')[0].classList.add('topFadeIn');
-        $que('.chart_top3')[0].classList.add('topFadeIn');
+        setTimeout(function(){$que('.chart_top1')[0].classList.add('topFadeIn')},0);
+        setTimeout(function(){$que('.chart_top2')[0].classList.add('topFadeIn')},300);
+        setTimeout(function(){$que('.chart_top3')[0].classList.add('topFadeIn')},600);
+
 
         setTimeout(function(){$que('.ranking_table tr')[0].classList.add('trFadeIn');},900);
         setTimeout(function(){$que('.ranking_table tr')[1].classList.add('trFadeIn');},1200);
