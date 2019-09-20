@@ -588,17 +588,47 @@ function buildlist (jsonobj){
     //建立頭部HTML架構 
     for (let i=0; i<head_arr.length; i++){
 
-        page = i % 4;
-        // console.log(page);
+        // page = i % 4;
+        // // console.log(page);
 
-        owlpage_class = 'owl_page' + page;
+        // owlpage_class = 'owl_page' + page;
         
-        let owl_div = '';
+        // let owl_div = '';
 
-        if (page == 0){
-            owl_div = document.createElement('div');
-            owl_div.classList = owlpage_class;
-        }
+        // if (page == 0){
+        //     owl_div = document.createElement('div');
+        //     owl_div.classList = owlpage_class;
+        // }
+
+        // let li = document.createElement('li');
+        // let img = document.createElement('img');
+        // let input = document.createElement('input');
+        // let p = document.createElement('p');
+
+        // img.src = head_arr[i].head_img;
+        // img.classList = 'picon';
+        // img.alt = '資料庫圖片遺失';
+        // input.dataset.pointa = head_arr[i].head_environment1;
+        // input.dataset.pointb = head_arr[i].head_environment2;
+        // input.dataset.pointc = head_arr[i].head_environment3;
+        // input.style.display = 'none';
+        // p.innerHTML = head_arr[i].head_ch_name;
+
+        // if (i % 4 == 0){
+        //     li.appendChild(img);
+        //     li.appendChild(input);
+        //     li.appendChild(p);
+        //     owl_div.appendChild(li);
+        //     head_ul.appendChild(owl_div);
+        // }else {
+        //     let owl_now = document.querySelector(owlpage_class);
+        //     li.appendChild(img);
+        //     li.appendChild(input);
+        //     li.appendChild(p);
+        //     owl_now.appendChild(li);
+        //     head_ul.appendChild(owl_div);
+        // }
+
 
         let li = document.createElement('li');
         let img = document.createElement('img');
@@ -614,20 +644,11 @@ function buildlist (jsonobj){
         input.style.display = 'none';
         p.innerHTML = head_arr[i].head_ch_name;
 
-        if (i % 4 == 0){
             li.appendChild(img);
             li.appendChild(input);
             li.appendChild(p);
-            owl_div.appendChild(li);
-            head_ul.appendChild(owl_div);
-        }else {
-            // let owl_now = document.querySelector(owlpage_class);
-            // li.appendChild(img);
-            // li.appendChild(input);
-            // li.appendChild(p);
-            // owl_now.appendChild(li);
-            // head_ul.appendChild(owl_div);
-        }
+            head_ul.appendChild(li);
+
     }
 
     //建立身體HTML架構 
@@ -718,32 +739,6 @@ function buildlist (jsonobj){
     for(let i=0; i<picon.length; i++){
         picon[i].addEventListener('click',changeParts);
     };
-
-    // $("#owl-demo").owlCarousel({
-    //     navigation : true
-    //   });
-
-
-    // $('.owl-carousel').owlCarousel({
-    //     loop: false,
-    //     margin: 0,
-    //     nav: true,
-    //     responsive:{
-    //         0:{
-    //             items:1
-    //         },
-    //         // 600:{
-    //         //     items:2
-    
-    //         // }
-    //     },
-    // });
-
-    // if(typeof owlCarousel === 'function') { 
-    //     $("#owl-demo").owlCarousel({
-    //       navigation : true
-    //     });
-    //   }
 
 };
 
@@ -952,7 +947,7 @@ function openlogin(){
 function init(){
 
     // 呼叫透過Ajax從PHP抓到資料庫的部件資料
-    // getpartlist();
+    getpartlist();
 
 
 // *************以下為測試用*****************
@@ -1008,10 +1003,6 @@ function init(){
     //         },
     //     },
     // });
-
-
-    $('.test_slider').slick();
-
 
 }
 

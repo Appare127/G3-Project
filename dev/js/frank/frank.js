@@ -146,9 +146,10 @@ for (let i = 0; i < vote_rank.length -4; i++) {
      $(`#frank_player_items${i} .frank_player_pic img:eq(0)`).attr('id','bg'+(i+3));
      $(`#frank_player_items${i} .frank_player_pic img:eq(1)`).attr('id','ag'+(i+3));
      $(`#frank_player_items${i} .frank_Collection_btn img:eq(0)`).attr('class','heart');
-     let $input=$(`<input type="hidden"></input>`);
-     $(`#frank_player_items${i} .frank_player_btn .btn_cloudp`).append($input);
-    // $($input).appendTo(`#frank_player_items${i} .frank_player_btn .btn_cloudb`);
+     let $input=(`<input type="hidden" name="work_no2"></input>`);
+     let $input2=(`<input type="hidden" name="work_no3"></input>`)
+     $(`#frank_player_items${i} .frank_message_btn .btn_cloudp `).append($input);
+     $(`#frank_player_items${i} .frank_player_btn .btn_cloudb`).append($input2);
     
     
            
@@ -160,9 +161,9 @@ for (let i = 0; i < vote_rank.length -4; i++) {
     $id("aid"+`${i}`).innerText=vote_rank[i]["work_name"];
     $id("id"+`${i}`).innerText=vote_rank[i]["user_name"];
     $("input[name='work_no']")[i].value=vote_rank[i]["work_no"];
+    $("input[name='work_no2']")[i].value=vote_rank[i]["work_no"];
+    $("input[name='work_no3']")[i].value=vote_rank[i]["work_no"];
     $(`.heart:eq(${i})`).attr('id','NO_'+(vote_rank[i]["work_no"]));
-
-    
  }
 
  favorite();
@@ -193,20 +194,23 @@ function  vote_xml(){
 function vote_php(){
     if(vote_item.readyState==4  && vote_item.status==200){
         let vote_arr= JSON.parse(vote_item.responseText);
-         console.log( vote_arr );
+   
   // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
     }}
 
-function  message_xml(){
+function  message_xml(e){
     message_item=frank_rank();
-    message_item.open("GET","php/frank/message.php?user_no="+sessionStorage.user_no,true);
+    message_item.open("GET","php/frank/message.php?work_no="+e,true);
     message_item.onreadystatechange = message_php;
     message_item.send(null);
 }
 function message_php(){
+  
+  
     if(message_item.readyState==4  && message_item.status==200){
         let message_arr= JSON.parse(message_item.responseText);
-     
+        console.log(message_arr);
+        
         message_btn(message_arr);
          
   // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
@@ -219,8 +223,10 @@ $("#activity_join").click(function() {
 join();
 });
 $('.frank_message_btn .btn_cloudp').click(function() {
+       let e =$(this).find("input")[0].value;
+      
        
-        message_xml()
+        message_xml(e)
         
  });
 $('.frank_closs_btn').click(function(){
@@ -255,20 +261,26 @@ $('.frank_expand_button').click(function(){
 
     function message_btn(e){
       message_arr=e;
-      console.log(this.text);
       
-   console.log( message_arr );
+
       $('.frank_message_btn').addClass(function(){
           $('.frank_message').slideDown(50);
       })
 
+      msg_btn
     for (let i = 0; i < message_arr.length; i++) {
     $("#frank_message_content").append($("#message_wrap").clone(true).attr({id:'message_itme'+i,class:'message_itme frank_message_wrap'}));
     $(`#message_itme${i}   figure:eq(0)`).css("background",`${message_arr[i]['my_animalbg_img']}`);  
     $(`#message_itme${i}  .frank_megsage_memname p:eq(0)`).text(message_arr[i]['user_name']);
     $(`#message_itme${i}  .frank_megsage_memname p:eq(1)`).text(message_arr[i]['msg_date']);
     $(`#message_itme${i}  .frank_message_box p:eq(0)`).text(message_arr[i]['msg_content']);
-    $(`#message_itme${i}  .frank_message_btn span:eq(0)`).attr('id','message_btn'+(i));
+    let $input=(`<input type="hidden" name="msg_no"></input>`)
+    $(`#message_itme${i}  .frank_message_btn span:eq(0)`).attr('id','message_btn'+(i)).append($input);
+    $(`#message_itme${i}  .frank_message_btn span:eq(0)`).attr('id','message_btn'+(i)).append($input);
+    
+  
+   console.log($(`#message_itme${i}   input`)[0].value=message_arr[i]['msg_no']);
+   
  }
 
 

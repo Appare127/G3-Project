@@ -62,7 +62,7 @@
                         <a href="game.html">玩遊戲賺金幣</a>
                     </div>
                     <div class="discount_input">
-                        <p> $ <input type="number" id="enter_discount" min="0"></p>
+                        <p> $ <input type="number" id="enter_discount" min="0" value="0"></p>
                         <span>金幣$1可折抵現金1元</span>
                     </div>
                     <div class="clearfix"></div>
@@ -281,7 +281,18 @@
                     data=JSON.stringify(data);
                     // {"credit":"1111-1111-1111-1111","name":"aaa","phone":"0987654321","addr":"aaa","total":"2560"}
 
-                    $.post('php/cart/prod_order.php',{data:data},(order_no)=>{
+                    let money=document.getElementById("enter_discount").value;
+
+                    $.post('php/cart/prod_order.php',{data:data,money:money},(order_no)=>{
+                        //清session storage
+                        let shopListArr=sessionStorage['shopList'].split(",");
+                        shopListArr.pop();
+                    
+                        shopListArr.forEach(n=>{
+                            delete sessionStorage[n];
+                        })
+                        delete sessionStorage['shopList']
+
                         document.querySelector(".checkOrder .order_confirm").style.display = "none";
                         document.querySelector(".order_info").style.display = "block";
                         document.querySelector(".order_no").innerText=`訂單編號：${order_no}`;
@@ -377,6 +388,7 @@
 
             closeButton.onclick = function () {   //訂單成立視窗的關閉
                 document.querySelector(".order_info").style.display = "none";
+                window.location.reload();
             }
 
 

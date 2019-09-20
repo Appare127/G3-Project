@@ -152,6 +152,9 @@
                 position: absolute;
                 width: 95%;
 
+                display: flex;
+                flex-wrap: wrap;
+
                 top: 45px;
                 left: 0;
                 right: 0;
@@ -165,11 +168,35 @@
                 border-radius: 25px;
                 box-shadow: 2px 2px 0px 3px $col_modify_boxshadow;
 
-                .slick_page{
-                    display: flex;
-                    flex-wrap: wrap;
-                    margin: 0px 30px 20px 30px;
-                }
+                // .owl_page{
+                //     display: flex;
+                //     flex-wrap: wrap;
+                //     margin: 0px 30px 20px 30px;
+                // }
+
+                // .owl-prev{
+                //     position: absolute;
+                //     top: 30%;
+                //     left: 0;
+                // }
+        
+                // .owl-next{
+                //     position: absolute;
+                //     top: 30%;
+                //     right: 0;
+                // }
+                
+                // .owl-dots{
+                //     position: absolute;
+                //     bottom: 0;
+                //     left: 0;
+                //     right: 0;
+                //     margin: auto;
+                // }
+
+                // .owl-nav{
+                //     font-size: 50px;
+                // }
 
 
                 li{

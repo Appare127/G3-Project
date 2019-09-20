@@ -1,6 +1,7 @@
 <?php
 $errMsg = "";
 $work_no =4;
+$work_no=$_GET["work_no"];
 try {
     require_once("../connectg3.php");
     session_start();
@@ -8,7 +9,11 @@ try {
     $sql_message_ctn = 
    // "SELECT * FROM `message.user_no=user.user_no ;`";
   // "SELECT * FROM `message m ,user u` where `m.user_no=u.user_no` ;";
-   "select m.msg_content,m.msg_date,u.user_name,u.my_animalbg_img
+   "select m.msg_content
+   ,m.msg_date
+   ,u.user_name
+   ,u.my_animalbg_img
+   ,m.work_no,m.msg_no
       from message m,user u
       where m.user_no=u.user_no and m.msg_status=1 and m.work_no= $work_no
       order by m.msg_date desc;";
