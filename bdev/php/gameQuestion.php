@@ -69,28 +69,28 @@
                     <tr> 
                       <td></td>
                       <td>
-                        <input type="text" name="question_name" id="">
+                        <input type="text" name="question_name" id="" required>
                       </td>
                       <td>
-                        <input type="text" name="question_option1" id="">
+                        <input type="text" name="question_option1" id="" required>
                       </td>
                       <td>
-                        <input type="text" name="question_option2" id="">
+                        <input type="text" name="question_option2" id="" required>
                       </td>
                       <td>
-                        <input type="text" name="question_option3" id="">
+                        <input type="text" name="question_option3" id="" required>
                       </td>
                       <td>
-                        <input type="text" name="question_option4" id="">
+                        <input type="text" name="question_option4" id="" required>
                       </td>
                       <td>
                         <input type="text" name="question_ans" id="" size="4">
                       </td>
                       <td>
-                        <input type="text" name="question_status" id="" size="4">
+                        <input type="number" name="question_status" id="" size="4" required min="1" max="1">
                       </td>
                       <td>
-                        <input type="text" name="ans_description" id="">
+                        <input type="text" name="ans_description" id="" required>
                       </td>
                       <td colspan="3">
                         <input class="btn btn-block btn-outline-primary addbtn" type="submit" value="新增">
@@ -114,20 +114,16 @@
                   <form action="updateGameQuestionData.php">
                     <tr>
                       <td><?php echo $gameQuestionRow['question_no'];?><input name="question_no" type="hidden" value="<?= $gameQuestionRow['question_no']?>"></td>
-                      <td><input type="text" name="question_name" value="<?= $gameQuestionRow['question_name']?>" readonly="true" class="dissinputstyle"></td>
-                      <td><input type="text" name="question_option1" value="<?= $gameQuestionRow['question_option1']?>" readonly="true" class="dissinputstyle"></td>
-                      <td><input type="text" name="question_option2" value="<?= $gameQuestionRow['question_option2']?>" readonly="true" class="dissinputstyle"></td>
-                      <td><input type="text" name="question_option3" value="<?= $gameQuestionRow['question_option3']?>" readonly="true" class="dissinputstyle"></td>
-                      <td><input type="text" name="question_option4" value="<?= $gameQuestionRow['question_option4']?>" readonly="true" class="dissinputstyle"></td>
-                      <td><input type="text" name="question_ans" size="4" value="<?= $gameQuestionRow['question_ans']?>" readonly="true" class="dissinputstyle"></td>
-                      <td><input type="text" name="question_status" size="4" value="<?= $gameQuestionRow['question_status']?>" readonly="true" class="dissinputstyle"></td>
-                      <td><input type="text" name="ans_description" value="<?= $gameQuestionRow['ans_description']?>" readonly="true" class="dissinputstyle"></td>
-                      <td>
-                        <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
-                      </td>
-                      <td>
-                        <input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成">
-                      </td>
+                      <td><input type="text" name="question_name" value="<?= $gameQuestionRow['question_name']?>" readonly="true" class="dissinputstyle" required></td>
+                      <td><input type="text" name="question_option1" value="<?= $gameQuestionRow['question_option1']?>" readonly="true" class="dissinputstyle" required></td>
+                      <td><input type="text" name="question_option2" value="<?= $gameQuestionRow['question_option2']?>" readonly="true" class="dissinputstyle" required></td>
+                      <td><input type="text" name="question_option3" value="<?= $gameQuestionRow['question_option3']?>" readonly="true" class="dissinputstyle" required></td>
+                      <td><input type="text" name="question_option4" value="<?= $gameQuestionRow['question_option4']?>" readonly="true" class="dissinputstyle" required></td>
+                      <td><input type="text" name="question_ans" size="4" value="<?= $gameQuestionRow['question_ans']?>" readonly="true" class="dissinputstyle" required></td>
+                      <td><input type="number" name="question_status" size="4" value="<?= $gameQuestionRow['question_status']?>" readonly="true" class="dissinputstyle" required min="0" max="1"></td>
+                      <td><input type="text" name="ans_description" value="<?= $gameQuestionRow['ans_description']?>" readonly="true" class="dissinputstyle" required></td>
+                      <td><input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯"></td>
+                      <td><input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成" disabled></td>
                       </form>
                       <td>
                         <form action="deleteGameQuestionData.php">
@@ -200,6 +196,8 @@
         e.target.parentNode.parentNode.children[6].firstChild.classList.remove("dissinputstyle");
         e.target.parentNode.parentNode.children[7].firstChild.classList.remove("dissinputstyle");
         e.target.parentNode.parentNode.children[8].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[10].firstChild.removeAttribute("disabled");
+        // e.target.parentNode.parentNode.children[11].firstChild.removeAttribute("disabled");
       }
       
     

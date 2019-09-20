@@ -71,21 +71,21 @@
                         <tr class="tr_title">
                             <td></td>
                             <td>
-                                <input type="text" name="tail_name" id="">
+                                <input type="text" name="tail_name" id="" required>
                             </td>
                             <td>
                                 <img width="45%" src="" id="tail_img_preview">
-                                <input type="file" id="select_tail_img" name="tail_img" accept="image/*">
+                                <input type="file" id="select_tail_img" name="tail_img" accept="image/*" required>
                             </td>
                             <td>
                                 <img img width='50%' src="" id="tail_img_combination_preview">
-                                <input type="file" name="tail_img_combination" id="select_tail_img_combination" size="4" accept="image/*">
+                                <input type="file" name="tail_img_combination" id="select_tail_img_combination" size="4" accept="image/*" required>
                             </td>
                             <td>
-                                <input type="text" name="tail_status" id="" size="4">
+                                <input type="number" name="tail_status" id="" size="4" required min="0" max="1">
                             </td>
                             <td>
-                                <input type="text" name="tail_ch_name" id="">
+                                <input type="text" name="tail_ch_name" id="" required>
                             </td>
                             <td colspan="2">
                                 <input class="btn btn-block btn-outline-primary addbtn" type="submit" value="新增">
@@ -111,17 +111,13 @@
                         <form action="updateAnimalTailData.php" method="post" enctype="multipart/form-data">
                           <tr>
                             <td><?php echo $tailRow['tail_no'];?><input name="tail_no" type="hidden" value="<?= $tailRow['tail_no']?>"></td>
-                            <td><input type="text" name="tail_name" value="<?= $tailRow['tail_name']?>" readonly="true" class="dissinputstyle"></td>
-                            <td><img width="45%" src="../<?= $tailRow['tail_img']?>" alt="" class="image"><input type="file" class="tail_btnimg" name="tail_img" size="10" style="display:none" readonly="true"></td>
-                            <td><img width='50%' src="../<?= $tailRow['tail_img_combination']?>" alt=""><input type="file" class="combination_btnimg"name="tail_img_combination" size="10" style="display:none" readonly="true"></td>
-                            <td><input type="text" name="tail_status" value="<?= $tailRow['tail_status']?>" readonly="true" size="4" class="dissinputstyle"></td>
-                            <td><input type="text" name="tail_ch_name" value="<?= $tailRow['tail_ch_name']?>" readonly="true" class="dissinputstyle"></td>
-                            <td>
-                                <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
-                            </td>
-                            <td>
-                                <input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成">
-                            </td>
+                            <td><input type="text" name="tail_name" value="<?= $tailRow['tail_name']?>" readonly="true" class="dissinputstyle" required></td>
+                            <td><img width="45%" src="../<?= $tailRow['tail_img']?>?<?php echo time();?>" alt="" class="image"><input type="file" class="tail_btnimg" name="tail_img" size="10" style="display:none" readonly="true"></td>
+                            <td><img width='50%' src="../<?= $tailRow['tail_img_combination']?>?<?php echo time();?>" alt=""><input type="file" class="combination_btnimg"name="tail_img_combination" size="10" style="display:none" readonly="true"></td>
+                            <td><input type="number" name="tail_status" value="<?= $tailRow['tail_status']?>" readonly="true" size="4" class="dissinputstyle" min="0" max="1" required></td>
+                            <td><input type="text" name="tail_ch_name" value="<?= $tailRow['tail_ch_name']?>" readonly="true" class="dissinputstyle" required></td>
+                            <td><input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯"> </td>
+                            <td><input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成" disabled></td>
                           </form>
                         </tr>
                     
@@ -176,18 +172,21 @@
 
     // 控制哪些欄位可修改start
     function reversechange(e){
-    console.log(e.target.parentNode.parentNode.children[1]);   
-    e.target.parentNode.parentNode.children[1].firstChild.removeAttribute("readonly");   
-    e.target.parentNode.parentNode.children[2].firstChild.removeAttribute("readonly"); 
-    e.target.parentNode.parentNode.children[2].lastChild.style.display='block';   
-    e.target.parentNode.parentNode.children[3].firstChild.removeAttribute("readonly");
-    e.target.parentNode.parentNode.children[3].lastChild.style.display='block';   
-    e.target.parentNode.parentNode.children[4].firstChild.removeAttribute("readonly");    
-    e.target.parentNode.parentNode.children[5].firstChild.removeAttribute("readonly");
-    e.target.parentNode.parentNode.children[1].firstChild.classList.remove("dissinputstyle");
-    e.target.parentNode.parentNode.children[3].firstChild.classList.remove("dissinputstyle");
-    e.target.parentNode.parentNode.children[4].firstChild.classList.remove("dissinputstyle");
-    e.target.parentNode.parentNode.children[5].firstChild.classList.remove("dissinputstyle");
+      
+      var updatetr = e.target.parentNode.parentNode;
+      
+      updatetr.children[1].firstChild.removeAttribute("readonly");   
+      updatetr.children[2].firstChild.removeAttribute("readonly"); 
+      updatetr.children[2].lastChild.style.display='block';   
+      updatetr.children[3].firstChild.removeAttribute("readonly");
+      updatetr.children[3].lastChild.style.display='block';   
+      updatetr.children[4].firstChild.removeAttribute("readonly");    
+      updatetr.children[5].firstChild.removeAttribute("readonly");
+      updatetr.children[1].firstChild.classList.remove("dissinputstyle");
+      updatetr.children[3].firstChild.classList.remove("dissinputstyle");
+      updatetr.children[4].firstChild.classList.remove("dissinputstyle");
+      updatetr.children[5].firstChild.classList.remove("dissinputstyle");
+      updatetr.children[7].firstChild.removeAttribute("disabled");
     }
       
     var btn1= document.getElementsByClassName('btn1');

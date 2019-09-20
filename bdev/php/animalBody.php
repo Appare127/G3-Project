@@ -57,7 +57,7 @@
               <div class="card-body">
                 <table class="table table-responsive-sm table-bordered">
                   <thead>
-                    <tr>
+                    <tr id='body_title'>
                       <th width="90">身體編號</th>
                       <th>身體名稱</th>
                       <th>選單圖</th>
@@ -78,33 +78,33 @@
                         <tr class="tr_title">
                             <td></td>
                             <td>
-                                <input type="text" name="body_name" id="">
+                                <input type="text" name="body_name" id="" required>
                             </td>
                             <td>
+                                <input type="file" id="select_body_img" name="body_img" accept="image/*" required>
                                 <img width="45%" src="" id="body_img_preview">
-                                <input type="file" id="select_body_img" name="body_img" accept="image/*">
                             </td>
                             <td>
+                                <input type="file" id="select_body_img_combination" name="body_img_combination" accept="image/*" required><br>
                                 <img img width='50%' src="" id="body_img_combination_preview">
-                                <input type="file" id="select_body_img_combination" name="body_img_combination" accept="image/*"><br>
                             </td>
                             <td>
-                                <input type="text" name="body_health" id="" size="4">
+                                <input type="number" name="body_health" id="" size="4" min="1" max="5" required>
                             </td>
                             <td>
-                                <input type="text" name="body_environment1" id="" size="10">
+                                <input type="number" name="body_environment1" id="" size="10" min="1" max="9" required>
                             </td>
                             <td>
-                                <input type="text" name="body_environment2" id="" size="10">
+                                <input type="number" name="body_environment2" id="" size="10" min="1" max="9" required>
                             </td>
                             <td>
-                                <input type="text" name="body_environment3" id="" size="10">
+                                <input type="number" name="body_environment3" id="" size="10" min="1" max="9" required>
                             </td>
                             <td>
-                                <input type="text" name="body_status" id="" size="10">
+                                <input type="number" name="body_status" id="" size="10" min="0" max="1" required>
                             </td>
                             <td>
-                                <input type="text" name="body_ch_name" id="">
+                                <input type="text" name="body_ch_name" id="" required>
                             </td>
                             <td colspan="3">
                                 <input class="btn btn-block btn-outline-primary addbtn" type="submit" value="新增">
@@ -130,22 +130,17 @@
                         <form action="updateAnimalBodyData.php" method="post" enctype="multipart/form-data">
                           <tr>
                             <td><?php echo $bodyRow['body_no'];?><input name="body_no" type="hidden" value="<?= $bodyRow['body_no']?>"></td>
-                            <td><input type="text" name="body_name" value="<?= $bodyRow['body_name']?>" readonly="true" class="dissinputstyle"></td>
-                            <td><img width="45%" src="../<?= $bodyRow['body_img']?>" alt="" class="image"><input type="file" class="body_btnimg" name="body_img" size="10" style="display:none"></td>
-                            <td><img width='50%' src="../<?= $bodyRow['body_img_combination']?>" alt=""><input type="file" class="combination_btnimg"name="body_img_combination" size="10" style="display:none"></td>
-                            <td><input type="text" name="body_health" value="<?= $bodyRow['body_health']?>" readonly="true" size="4" class="dissinputstyle"></td>
-                            <td><input type="text" name="body_environment1" value="<?= $bodyRow['body_environment1']?>" readonly="true" size="10" class="dissinputstyle"></td>
-                            <td><input type="text" name="body_environment2" value="<?= $bodyRow['body_environment2']?>" readonly="true" size="10" class="dissinputstyle"></td>
-                            <td><input type="text" name="body_environment3" value="<?= $bodyRow['body_environment3']?>" readonly="true" size="10" class="dissinputstyle"></td>
-                            <td><input type="text" name="body_status" value="<?= $bodyRow['body_status']?>" readonly="true" size="10" class="dissinputstyle"></td>
-                            <td><input type="text" name="body_ch_name" value="<?= $bodyRow['body_ch_name']?>" readonly="true" size="10" class="dissinputstyle"></td>
-                            
-                            <td>
-                                <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
-                            </td>
-                            <td>
-                                <input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成">
-                            </td>
+                            <td><input type="text" name="body_name" value="<?= $bodyRow['body_name']?>" readonly="true" class="dissinputstyle" required></td>
+                            <td><img width="45%" src="../<?= $bodyRow['body_img']?>?<?php echo time();?>" alt="" class="image"><input type="file" class="body_btnimg" name="body_img" size="10" style="display:none"></td>
+                            <td><img width='50%' src="../<?= $bodyRow['body_img_combination']?>?<?php echo time();?>" alt=""><input type="file" class="combination_btnimg"name="body_img_combination" size="10" style="display:none"></td>
+                            <td><input type="number" name="body_health" value="<?= $bodyRow['body_health']?>" readonly="true" size="4" class="dissinputstyle" required min="1" max="5"></td>
+                            <td><input type="number" name="body_environment1" value="<?= $bodyRow['body_environment1']?>" readonly="true" size="10" class="dissinputstyle" required min="1" max="9"></td>
+                            <td><input type="number" name="body_environment2" value="<?= $bodyRow['body_environment2']?>" readonly="true" size="10" class="dissinputstyle" required min="1" max="9"></td>
+                            <td><input type="number" name="body_environment3" value="<?= $bodyRow['body_environment3']?>" readonly="true" size="10" class="dissinputstyle" required min="1" max="9"></td>
+                            <td><input type="number" name="body_status" value="<?= $bodyRow['body_status']?>" readonly="true" size="10" class="dissinputstyle" required min="0" max="1"></td>
+                            <td><input type="text" name="body_ch_name" value="<?= $bodyRow['body_ch_name']?>" readonly="true" size="10" class="dissinputstyle" required></td>
+                            <td><input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯"></td>
+                            <td><input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成" disabled></td>
                           </form>
                         </tr>
                     
@@ -200,25 +195,32 @@
 
     // 控制哪些欄位可修改start  
     function reversechange(e){
-        console.log(e.target.parentNode.parentNode.children[1]);   
-        console.log(e.target.parentNode.parentNode.children[2].lastChild);   
-        e.target.parentNode.parentNode.children[1].firstChild.removeAttribute("readonly");   
-        e.target.parentNode.parentNode.children[2].firstChild.removeAttribute("readonly");   
-        e.target.parentNode.parentNode.children[2].lastChild.style.display='block';
-        e.target.parentNode.parentNode.children[3].firstChild.removeAttribute("readonly");   
-        e.target.parentNode.parentNode.children[3].lastChild.style.display='block';
-        e.target.parentNode.parentNode.children[4].firstChild.removeAttribute("readonly");   
-        e.target.parentNode.parentNode.children[5].firstChild.removeAttribute("readonly");   
-        e.target.parentNode.parentNode.children[6].firstChild.removeAttribute("readonly");   
-        e.target.parentNode.parentNode.children[7].firstChild.removeAttribute("readonly");
-        e.target.parentNode.parentNode.children[1].firstChild.classList.remove("dissinputstyle");
-        e.target.parentNode.parentNode.children[3].firstChild.classList.remove("dissinputstyle");
-        e.target.parentNode.parentNode.children[4].firstChild.classList.remove("dissinputstyle");
-        e.target.parentNode.parentNode.children[5].firstChild.classList.remove("dissinputstyle");
-        e.target.parentNode.parentNode.children[6].firstChild.classList.remove("dissinputstyle");
-        e.target.parentNode.parentNode.children[7].firstChild.classList.remove("dissinputstyle");
-        e.target.parentNode.parentNode.children[8].firstChild.classList.remove("dissinputstyle");
-        e.target.parentNode.parentNode.children[9].firstChild.classList.remove("dissinputstyle");
+
+        var updatetr = e.target.parentNode.parentNode;
+
+        // console.log(e.target.parentNode.parentNode.children[1]);   
+        // console.log(e.target.parentNode.parentNode.children[2].lastChild);   
+        updatetr.children[1].firstChild.removeAttribute("readonly");   
+        updatetr.children[2].firstChild.removeAttribute("readonly");   
+        updatetr.children[2].lastChild.style.display='block';
+        updatetr.children[3].firstChild.removeAttribute("readonly");   
+        updatetr.children[3].lastChild.style.display='block';
+        updatetr.children[4].firstChild.removeAttribute("readonly");   
+        updatetr.children[5].firstChild.removeAttribute("readonly");   
+        updatetr.children[6].firstChild.removeAttribute("readonly");   
+        updatetr.children[7].firstChild.removeAttribute("readonly");
+        updatetr.children[8].firstChild.removeAttribute("readonly");
+        updatetr.children[9].firstChild.removeAttribute("readonly");
+        updatetr.children[1].firstChild.classList.remove("dissinputstyle");
+        updatetr.children[3].firstChild.classList.remove("dissinputstyle");
+        updatetr.children[4].firstChild.classList.remove("dissinputstyle");
+        updatetr.children[5].firstChild.classList.remove("dissinputstyle");
+        updatetr.children[6].firstChild.classList.remove("dissinputstyle");
+        updatetr.children[7].firstChild.classList.remove("dissinputstyle");
+        updatetr.children[8].firstChild.classList.remove("dissinputstyle");
+        updatetr.children[9].firstChild.classList.remove("dissinputstyle");
+        updatetr.children[11].firstChild.removeAttribute("disabled");
+
     }
       
     var btn1= document.getElementsByClassName('btn1');

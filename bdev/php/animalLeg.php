@@ -60,9 +60,9 @@
                       <th>選單圖</th>
                       <th>組合圖</th>
                       <th>跳躍力</th>
-                      <th>環境1<br>適應力</th>
-                      <th>環境2<br>適應力</th>
-                      <th>環境3<br>適應力</th>
+                      <th>環境1適應力</th>
+                      <th>環境2適應力</th>
+                      <th>環境3適應力</th>
                       <th>狀態(0:下架; 1:上架)</th>
                       <th>腿部中文名稱</th>
                       <th colspan="2"></th>
@@ -75,33 +75,33 @@
                         <tr class="tr_title">
                             <td></td>
                             <td>
-                                <input type="text" name="leg_name" id="">
+                                <input type="text" name="leg_name" id="" required> 
                             </td>
                             <td>
+                                <input type="file" id="select_leg_img" name="leg_img" accept="image/*" width="180" required>
                                 <img width="40%" src="" id="leg_img_preview">
-                                <input type="file" id="select_leg_img" name="leg_img" accept="image/*" width="180">
                             </td>
                             <td>
+                                <input type="file" name="leg_img_combination" id="select_leg_img_combination" size="4" accept="image/*" width="180" required>
                                 <img img width='50%' src="" id="leg_img_combination_preview">
-                                <input type="file" name="leg_img_combination" id="select_leg_img_combination" size="4" accept="image/*" width="180">
                             </td>
                             <td>
-                                <input type="text" name="leg_jump" id="" size="6">
+                                <input type="number" name="leg_jump" id="" size="6" required min="1" max="5">
                             </td>
                             <td>
-                                <input type="text" name="leg_environment1" id="" size="6">
+                                <input type="number" name="leg_environment1" id="" size="6" required min="1" max="9">
                             </td>
                             <td>
-                                <input type="text" name="leg_environment2" id="" size="6">
+                                <input type="number" name="leg_environment2" id="" size="6" required min="1" max="9">
                             </td>
                             <td>
-                                <input type="text" name="leg_environment3" id="" size="6">
+                                <input type="number" name="leg_environment3" id="" size="6" required min="1" max="9">
                             </td>
                             <td>
-                                <input type="text" name="leg_status" id="" size="4">
+                                <input type="number" name="leg_status" id="" size="4" required min="0" max="1">
                             </td>
                             <td>
-                                <input type="text" name="leg_ch_name" id="" >
+                                <input type="text" name="leg_ch_name" id="" required>
                             </td>
                             <td colspan="2">
                                 <input class="btn btn-block btn-outline-primary addbtn" type="submit" value="新增">
@@ -127,22 +127,17 @@
                         <form action="updateAnimalLegData.php" method="post" enctype="multipart/form-data">
                           <tr>
                             <td><?php echo $legRow['leg_no'];?><input name="leg_no" type="hidden" value="<?= $legRow['leg_no']?>"></td>
-                            <td><input type="text" name="leg_name" value="<?= $legRow['leg_name']?>" readonly="true" class="dissinputstyle"></td>
-                            <td><img width="45%" src="../<?= $legRow['leg_img']?>" alt="" class="image"><input type="file" class="leg_btnimg" name="leg_img" size="10" style="display:none" readonly="true" ></td>
-                            <td><img width='50%' src="../<?= $legRow['leg_img_combination']?>" alt=""><input type="file" class="combination_btnimg"name="leg_img_combination" size="10" style="display:none" readonly="true"></td>
-                            <td><input type="text" name="leg_jump" value="<?= $legRow['leg_jump']?>" readonly="true" size="4" class="dissinputstyle"></td>
-                            <td><input type="text" name="leg_environment1" value="<?= $legRow['leg_environment1']?>" readonly="true" size="6" class="dissinputstyle"></td>
-                            <td><input type="text" name="leg_environment2" value="<?= $legRow['leg_environment2']?>" readonly="true" size="6" class="dissinputstyle"></td>
-                            <td><input type="text" name="leg_environment3" value="<?= $legRow['leg_environment3']?>" readonly="true" size="6" class="dissinputstyle"></td>
-                            <td><input type="text" name="leg_status" value="<?= $legRow['leg_status']?>" readonly="true" size="4" class="dissinputstyle"></td>
-                            <td><input type="text" name="leg_ch_name" value="<?= $legRow['leg_ch_name']?>" readonly="true" class="dissinputstyle"></td>
-                            
-                            <td>
-                                <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
-                            </td>
-                            <td>
-                                <input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成">
-                            </td>
+                            <td><input type="text" name="leg_name" value="<?= $legRow['leg_name']?>" readonly="true" class="dissinputstyle" required></td>
+                            <td><img width="45%" src="../<?= $legRow['leg_img']?>?<?php echo time();?>" alt="" class="image"><input type="file" class="leg_btnimg" name="leg_img" size="10" style="display:none" readonly="true"></td>
+                            <td><img width='50%' src="../<?= $legRow['leg_img_combination']?>?<?php echo time();?>" alt=""><input type="file" class="combination_btnimg"name="leg_img_combination" size="10" style="display:none" readonly="true"></td>
+                            <td><input type="number" name="leg_jump" value="<?= $legRow['leg_jump']?>" readonly="true" size="4" class="dissinputstyle" min="1" max="5" required></td>
+                            <td><input type="number" name="leg_environment1" value="<?= $legRow['leg_environment1']?>" readonly="true" size="6" class="dissinputstyle" min="1" max="9" required></td>
+                            <td><input type="number" name="leg_environment2" value="<?= $legRow['leg_environment2']?>" readonly="true" size="6" class="dissinputstyle" min="1" max="9" required></td>
+                            <td><input type="number" name="leg_environment3" value="<?= $legRow['leg_environment3']?>" readonly="true" size="6" class="dissinputstyle" min="1" max="9" required></td>
+                            <td><input type="number" name="leg_status" value="<?= $legRow['leg_status']?>" readonly="true" size="4" class="dissinputstyle" min="0" max="1" required></td>
+                            <td><input type="text" name="leg_ch_name" value="<?= $legRow['leg_ch_name']?>" readonly="true" class="dissinputstyle" required></td>
+                            <td><input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯"></td>
+                            <td><input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成" disabled></td>
                           </form>
                         </tr>
                     
@@ -197,26 +192,32 @@
 
     // 控制哪些欄位可修改start
     function reversechange(e){
-    console.log(e.target.parentNode.parentNode.children[1]);   
-    e.target.parentNode.parentNode.children[1].firstChild.removeAttribute("readonly");   
-    e.target.parentNode.parentNode.children[2].firstChild.removeAttribute("readonly");
-    e.target.parentNode.parentNode.children[2].lastChild.style.display='block';   
-    e.target.parentNode.parentNode.children[3].firstChild.removeAttribute("readonly");
-    e.target.parentNode.parentNode.children[3].lastChild.style.display='block';
-    e.target.parentNode.parentNode.children[4].firstChild.removeAttribute("readonly");   
-    e.target.parentNode.parentNode.children[5].firstChild.removeAttribute("readonly");   
-    e.target.parentNode.parentNode.children[6].firstChild.removeAttribute("readonly");   
-    e.target.parentNode.parentNode.children[7].firstChild.removeAttribute("readonly");   
-    e.target.parentNode.parentNode.children[8].firstChild.removeAttribute("readonly");   
-    e.target.parentNode.parentNode.children[9].firstChild.removeAttribute("readonly");
-    e.target.parentNode.parentNode.children[1].firstChild.classList.remove("dissinputstyle");
-    e.target.parentNode.parentNode.children[3].firstChild.classList.remove("dissinputstyle");
-    e.target.parentNode.parentNode.children[4].firstChild.classList.remove("dissinputstyle");
-    e.target.parentNode.parentNode.children[5].firstChild.classList.remove("dissinputstyle");
-    e.target.parentNode.parentNode.children[6].firstChild.classList.remove("dissinputstyle");
-    e.target.parentNode.parentNode.children[7].firstChild.classList.remove("dissinputstyle");
-    e.target.parentNode.parentNode.children[8].firstChild.classList.remove("dissinputstyle");
-    e.target.parentNode.parentNode.children[9].firstChild.classList.remove("dissinputstyle");
+      
+      var updatetr = e.target.parentNode.parentNode;
+
+      // console.log(e.target.parentNode.parentNode.children[1]);
+
+      updatetr.children[1].firstChild.removeAttribute("readonly");   
+      updatetr.children[2].firstChild.removeAttribute("readonly");
+      updatetr.children[2].lastChild.style.display='block';   
+      updatetr.children[3].firstChild.removeAttribute("readonly");
+      updatetr.children[3].lastChild.style.display='block';
+      updatetr.children[4].firstChild.removeAttribute("readonly");   
+      updatetr.children[5].firstChild.removeAttribute("readonly");   
+      updatetr.children[6].firstChild.removeAttribute("readonly");   
+      updatetr.children[7].firstChild.removeAttribute("readonly");   
+      updatetr.children[8].firstChild.removeAttribute("readonly");   
+      updatetr.children[9].firstChild.removeAttribute("readonly");
+      updatetr.children[1].firstChild.classList.remove("dissinputstyle");
+      updatetr.children[3].firstChild.classList.remove("dissinputstyle");
+      updatetr.children[4].firstChild.classList.remove("dissinputstyle");
+      updatetr.children[5].firstChild.classList.remove("dissinputstyle");
+      updatetr.children[6].firstChild.classList.remove("dissinputstyle");
+      updatetr.children[7].firstChild.classList.remove("dissinputstyle");
+      updatetr.children[8].firstChild.classList.remove("dissinputstyle");
+      updatetr.children[9].firstChild.classList.remove("dissinputstyle");
+      updatetr.children[11].firstChild.removeAttribute("disabled");
+
    
     }
       
