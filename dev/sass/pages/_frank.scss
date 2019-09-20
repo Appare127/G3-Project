@@ -1068,7 +1068,9 @@
     }
 
 }
-
+#message_wrap{
+    display: none;
+}
 .frank_message_content{
     width: 100%;
     height:400px;
@@ -1077,7 +1079,7 @@
     // border: 2px solid #000;
     box-sizing: border-box;
     overflow-y: scroll;
-    
+ 
     .frank_message_wrap{
         width: 100%;
         height: 130px;

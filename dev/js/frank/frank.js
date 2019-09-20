@@ -143,6 +143,11 @@ for (let i = 0; i < vote_rank.length -4; i++) {
      $(`#frank_player_items${i} .frank_player_pic img:eq(0)`).attr('id','bg'+(i+3));
      $(`#frank_player_items${i} .frank_player_pic img:eq(1)`).attr('id','ag'+(i+3));
      $(`#frank_player_items${i} .frank_Collection_btn img:eq(0)`).attr('class','heart');
+     let $input=$(`<input type="hidden"></input>`);
+     $(`#frank_player_items${i} .frank_player_btn .btn_cloudp`).append($input);
+    // $($input).appendTo(`#frank_player_items${i} .frank_player_btn .btn_cloudb`);
+    
+    
            
 }
    for (let i = 0; i < vote_rank.length -1; i++) {
@@ -153,7 +158,7 @@ for (let i = 0; i < vote_rank.length -4; i++) {
     $id("id"+`${i}`).innerText=vote_rank[i]["user_name"];
     $("input[name='work_no']")[i].value=vote_rank[i]["work_no"];
     $(`.heart:eq(${i})`).attr('id','NO_'+(vote_rank[i]["work_no"]));
-    
+
     
  }}}
 
@@ -193,8 +198,8 @@ function  message_xml(){
 function message_php(){
     if(message_item.readyState==4  && message_item.status==200){
         let message_arr= JSON.parse(message_item.responseText);
-         console.log( message_arr );
-        
+     
+        message_btn(message_arr);
          
   // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
     }}
@@ -206,12 +211,13 @@ $("#activity_join").click(function() {
 join();
 });
 $('.frank_message_btn .btn_cloudp').click(function() {
-        message_btn();
        
+        message_xml()
         
  });
 $('.frank_closs_btn').click(function(){
         $('.frank_message').hide();
+        $('.message_itme').remove();
 });
   $('.frank_vote_btn .btn_cloudb').click(function(){
 
@@ -239,22 +245,25 @@ $('.frank_expand_button').click(function(){
                $id('login_gary').style.display = 'block';
     }}
 
-    function message_btn(){
-      message_xml()
-   
-    
+    function message_btn(e){
+      message_arr=e;
+      console.log(this.text);
+      
+   console.log( message_arr );
       $('.frank_message_btn').addClass(function(){
           $('.frank_message').slideDown(50);
       })
-    for (let i = 0; i < 4; i++) {
-      
-              $("#frank_message_content").append($("#message_wrap").clone(true).attr({id:'message_itme'+i}));
-       
-     }
 
-    
-    
-    
+    for (let i = 0; i < message_arr.length; i++) {
+    $("#frank_message_content").append($("#message_wrap").clone(true).attr({id:'message_itme'+i,class:'message_itme frank_message_wrap'}));
+    $(`#message_itme${i}   figure:eq(0)`).css("background",`${message_arr[i]['my_animalbg_img']}`);  
+    $(`#message_itme${i}  .frank_megsage_memname p:eq(0)`).text(message_arr[i]['user_name']);
+    $(`#message_itme${i}  .frank_megsage_memname p:eq(1)`).text(message_arr[i]['msg_date']);
+    $(`#message_itme${i}  .frank_message_box p:eq(0)`).text(message_arr[i]['msg_content']);
+    $(`#message_itme${i}  .frank_message_btn span:eq(0)`).attr('id','message_btn'+(i));
+ }
+
+
     }
 
 
