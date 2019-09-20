@@ -2,9 +2,9 @@
 session_start();
 try{
 require_once('../connectg3.php');
-// {"id":"aaa","psw":"09871","name":"aaa","email":"1@zoo.com","ans":"qqq","hint_no":"1"}
-if(isset($_POST['data'])){
+if(isset($_POST['data'])){   //新增一筆資料到資料庫
     $data=json_decode($_POST['data']);
+    // {"id":"aaa","psw":"09871","name":"aaa","email":"1@zoo.com","ans":"qqq","hint_no":"1"}
     // print_r($data);
 
     $sql="INSERT INTO `user` (`user_no`, `user_id`, `user_psw`, `user_name`, `user_email`, `hint_answer`,  `hint_no`, `user_status`,`my_animal_img`,`my_animal_bg_img`,`my_animalbg_img`) VALUES (null,:id,:psw,:name,:email,:ans,:hint_no,1,'img/member/user0_bg.png','img/member/user0_aml.png','img/member/user0_amlbg.png')";
@@ -29,7 +29,16 @@ if(isset($_POST['data'])){
     echo json_encode($loginRow);
 
 
-}else{
+}else if(isset($_GET['id'])){   //比對id是否重複
+    $findId=$pdo->prepare("select * from user where user_id=:user_id");
+    $findId->bindValue(":user_id",$_GET['id']);
+    $findId->execute();
+    if($findId->rowCount()==0){
+        echo "1";
+    }else{
+        echo "0";
+    }
+}else{   //抓提示語，顯示到頁面
     $qsn=$pdo->query("select * from prompts");
     $qsnRow=$qsn->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($qsnRow);
