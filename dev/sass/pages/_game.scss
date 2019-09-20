@@ -598,7 +598,7 @@
                     .ranking_table{
                         margin-left:auto;
                         margin-right:auto;
-                        width:100%;
+                        width:80%;
                         text-align:center;
                         font-size: 16px;
                         color:#724848;
@@ -737,7 +737,7 @@
                     margin-left:auto;
                     margin-right:auto;
                     border:8px #41b1d1 solid;
-                    border-radius:7%;
+                    border-radius:30px;
                     background-color: #ffffff;
                     position:relative;
                     display:flex;
@@ -749,16 +749,16 @@
                     animation:cloudsMove 1.0s linear;
                     .food_menu{
                         position:absolute;
-                        bottom:-30%;
-                
+                        bottom:0%;
                         width: 650px;
-                        height:70px;
-                        background-color: #41b1d1;
-                        // border:8px #41b1d1 solid;
-                        // border-radius:7%;
-                        z-index:0;
+                        height:72px;
+                        background-color:#A9D1FB;
+                        border-bottom-left-radius:20px;
+                        border-bottom-right-radius:20px;
+                        z-index:4;
                         display:flex;
                         justify-content:center;
+                        transition:1s all;
                         ul{
                             display:flex;
                             justify-content:center;
@@ -770,7 +770,14 @@
                                 margin-right:auto;
                                 text-align:center;
                                 img {
-                                    width:100%;   
+                                    width:100%; 
+                                     
+                                }
+                                #fries{
+                                    width:80%;
+                                }
+                                #fruit{
+                                    width:90%;
                                 }
                                 .hold {
                                     border:solid #ccc 4px;
@@ -816,16 +823,11 @@
                             position:absolute;
                             bottom:-15%;
                             right:-10%;
-                            img {
-                                transition:0.5s all;
-                            }
-
-
+                            transition:1.0s all;
                         }
 
                         .role_pic{
                             width:50%;
-                     
                             .animalHello{
                                 animation: animalSayHello 5s  ;
                             }
@@ -908,8 +910,9 @@
                                     top:-40%;
                                     left:10%;
                                     p {
+                                        margin-top:50px;
                                         display:inline-block;
-                                        line-height:150px;
+                                        
                                     }
                                 }
                                 .animalSayWords {
@@ -1366,7 +1369,15 @@
                     justify-content: space-around;
                     padding-top:20px;
                     padding-bottom:10px;
-                    font-family:Microsoft JhenHei;
+                    font-family:微軟正黑體;
+                    .topFadeIn{
+                        animation:topfadeIn 0.5s forwards;
+                    }
+                    @keyframes topfadeIn {
+                        0% {opacity:0; font-size:32px;}
+                        100% {opacity:1.0; font-size:16px;}
+                    }
+                    
                     .chart_top1,.chart_top2,.chart_top3{
                         background-image: url(../img/game/chart_topx.png);
                         background-repeat: no-repeat;

@@ -31,11 +31,21 @@
         <div class="role_info">
             <div class="food_menu">
                 <ul>
-                    <li class="food hamburger"  draggable="true" ><img id='hamburger' data-feed='-20' src="img/game/food_hamburger.png" alt=""></li>
-                    <li class="food" draggable="true" data-feed='30'><img src="img/game/food_fries.png" alt=""></li>                    
-                    <li class="food fruit"  draggable="true" ><img id='fruit' data-feed='10' src="img/game/food_fruit.png" alt=""></li>
-                    <li class="food" draggable="true" data-feed='20'><img src="img/game/food_apple.png" alt=""></li>                    
-                    <li class="food" id='hand'><img src="img/game/food_hand.png" alt=""></li>
+                    <li class="food"  draggable="true" >
+                        <img id='hamburger' data-feed='-20' src="img/game/food_hamburger.png" alt="漢堡">
+                    </li>
+                    <li class="food" draggable="true" data-feed='30'>
+                        <img id='fries' src="img/game/food_fries.png" alt="薯條">
+                    </li>                    
+                    <li class="food"  draggable="true" >
+                        <img id='fruit' data-feed='10' src="img/game/food_fruit.png" alt="楊桃">
+                    </li>
+                    <li class="food" draggable="true" data-feed='20'>
+                        <img id='apple' src="img/game/food_apple.png" alt="蘋果">
+                    </li>                    
+                    <li class="food" id='hand'>
+                        <img src="img/game/food_hand.png" alt="撫摸">
+                    </li>
 
                 </ul>
             </div>
@@ -44,7 +54,6 @@
                 <img src="img/game/role_cloud.png" alt="">
             </div>
             <div class="cloud2">
-               
                 <img src="img/game/role_cloud2.png" alt="">
             </div>
             <div class="role_pic">
@@ -237,6 +246,17 @@ function updatejump(){
 function rankFadeIn(){
         // console.log('進來排行榜區');
     if(scrollY>1491){
+        for(var i=0; i<$que('.ranking_table tr').length; i++){
+            $que('.ranking_table tr')[i].style.opacity =0;
+           
+        }
+        $que('.chart_top1')[0].style.opacity =0;
+        $que('.chart_top2')[0].style.opacity =0;
+        $que('.chart_top3')[0].style.opacity =0;
+
+        $que('.chart_top1')[0].classList.add('topFadeIn');
+        $que('.chart_top2')[0].classList.add('topFadeIn');
+        $que('.chart_top3')[0].classList.add('topFadeIn');
 
         setTimeout(function(){$que('.ranking_table tr')[0].classList.add('trFadeIn');},900);
         setTimeout(function(){$que('.ranking_table tr')[1].classList.add('trFadeIn');},1200);
@@ -246,6 +266,7 @@ function rankFadeIn(){
         setTimeout(function(){$que('.ranking_table tr')[5].classList.add('trFadeIn');},2400);
         setTimeout(function(){$que('.ranking_table tr')[6].classList.add('trFadeIn');},2700);
         setTimeout(function(){$que('.ranking_table tr')[7].classList.add('trFadeIn');},3000);
+
         for(var j=1; j<$que('.ranking_table tr').length; j++){
             if($que('.ranking_table tr')[j].children[2].innerText == sessionStorage['user_name']){
                 highlight($que('.ranking_table tr')[j].children[2]);
@@ -264,16 +285,17 @@ function rankFadeIn(){
       
     }
     function highlight(element){
-        
-        // element.style.color = '#4eb1d1';
-        element.style.fontWeight = '700';
-        // element.parentNode.children[1].style.color = '#4eb1d1';
-        element.parentNode.children[0].style.fontWeight = '700';
+        element.parentNode.style.transition = '0.5s';
 
+        element.style.color = '#4eb1d1';
+        element.style.fontWeight = '700';
+        element.parentNode.children[1].style.color = '#41acfe';
+        element.parentNode.children[0].style.fontWeight = '700';
+        element.parentNode.children[0].style.color = '#41acfe';
         element.parentNode.children[1].style.fontWeight = '700';
-        // element.parentNode.children[2].style.color = '#4eb1d1';
+        element.parentNode.children[2].style.color = '#41acfe';
         element.parentNode.children[2].style.fontWeight = '700';
-        // element.parentNode.children[3].style.color = '#4eb1d1';
+        element.parentNode.children[3].style.color = '#41acfe';
         element.parentNode.children[3].style.fontWeight = '700';
 
     }
@@ -296,65 +318,90 @@ function $que(css_selector){
 
 //動物走動
 function animalWalking(trigger){
-    if(window.innerWidth>=768){
-    $que(".info_pic img")[0].classList.remove('animalBreathing');
-    $que(".animal_words")[0].classList.remove('animalSayWords');
-    $que(".info_pic img")[0].classList.remove('animalHello');
-        if(trigger=='firstTime'){
-            if(sessionStorage['user_name']&&sessionStorage['user_no']){
-            
-                $que(".animal_words")[0].style.display="block";
-                $que(".info_pic img")[0].classList.add('animalHello');//動物移動
-                $que(".animal_words")[0].classList.add('animalSayWords');//對話框移動
-                $que(".animal_words p")[0].innerText = `${sessionStorage['user_name']} 你好啊~~`;
+        $que(".info_pic img")[0].classList.remove('animalBreathing');
+        $que(".animal_words")[0].classList.remove('animalSayWords');
+        $que(".info_pic img")[0].classList.remove('animalHello');
+        $que(".animal_words")[0].style.display="none";
+    
+    if(window.innerWidth>=768 && sessionStorage['animal_img'] && sessionStorage['animal_name']){
 
+            if(trigger=='firstTime'){
+                if(sessionStorage['user_name']&&sessionStorage['user_no']){
+                
+                    $que(".animal_words")[0].style.display="block";
+                    $que(".info_pic img")[0].classList.add('animalHello');//動物移動
+                    $que(".animal_words")[0].classList.add('animalSayWords');//對話框移動
+                    $que(".animal_words p")[0].innerText = `${sessionStorage['user_name']} 你好啊~~`;
+
+                        setTimeout(function(){
+                            $que(".animal_words p")[0].innerText = `我們當好朋友吧~~`;
+                        },2500);
+                        setTimeout(function(){
+                            $que(".info_pic img")[0].classList.remove('animalHello');
+                            $que(".animal_words")[0].classList.remove('animalSayWords');
+                            $que(".info_pic img")[0].classList.add('animalBreathing');
+                            $que(".animal_words")[0].style.display="none";
+                        },5000);
+                }else {
+                    $que(".animal_words")[0].style.display="none";
+
+                }
+            }
+            if(trigger == 'delicious'){
+                audio.play();//播放聲音
+                $que(".info_pic img")[0].classList.add('animalBreathing');
+                $que(".animal_words")[0].style.display="block";
+                $que(".animal_words p")[0].innerText = `真好吃`;
                     setTimeout(function(){
-                        $que(".animal_words p")[0].innerText = `我們當好朋友吧~~`;
-                    },2500);
-                    setTimeout(function(){
-                        $que(".info_pic img")[0].classList.remove('animalHello');
-                        $que(".animal_words")[0].classList.remove('animalSayWords');
-                        $que(".info_pic img")[0].classList.add('animalBreathing');
                         $que(".animal_words")[0].style.display="none";
-                    },5000);
-            }else {
-                $que(".animal_words")[0].style.display="none";
+                    },2000);
 
             }
-        }else if(trigger == 'delicious'){
-            audio.play();//播放聲音
-            $que(".info_pic img")[0].classList.add('animalBreathing');
-            $que(".animal_words")[0].style.display="block";
-            $que(".animal_words p")[0].innerText = `真好吃`;
-                setTimeout(function(){
-                    $que(".animal_words")[0].style.display="none";
-                },2000);
+            
+            if(trigger == 'junk'){
+                // $que(".info_pic img")[0].classList.add('animalBreathing');
+                // $que(".info_pic img")[0].classList.add('animal_falling_down');
+                $que(".animal_words")[0].style.display="block";
+                $que(".animal_words p")[0].innerText = `咳咳....你餵我吃了什麼...`;
+                    setTimeout(function(){
+                        $que(".animal_words")[0].style.display="none";//臉色發灰
+                        $que(".info_pic img")[0].style.transition = '0.5s all';
+                        $que(".info_pic img")[0].style.filter = 'grayscale(100%)';
+                        $que(".info_pic img")[0].style.transformOrigin = 'center bottom';
+                        $que(".info_pic img")[0].style.transform = 'rotateZ(90deg)';
+                    },2000);
+                    setTimeout(function(){
+                        $que(".info_pic img")[0].classList.add('animalBreathing');
+                        $que(".info_pic img")[0].style.transform = 'rotateZ(0deg)';
+                    },4000);
+            }
 
-        }
-        
-        if(trigger == 'junk'){
-            // $que(".info_pic img")[0].classList.add('animalBreathing');
-            // $que(".info_pic img")[0].classList.add('animal_falling_down');
-            $que(".animal_words")[0].style.display="block";
-            $que(".animal_words p")[0].innerText = `咳咳....你餵我吃了什麼...`;
+            if(trigger == 'fries'){
+                $que(".info_pic img")[0].classList.add('animalBreathing');
+                $que(".animal_words")[0].style.display="block";
+                $que(".animal_words p")[0].innerText = `讚啦 我剛好在發育`;
                 setTimeout(function(){
-                    $que(".animal_words")[0].style.display="none";//臉色發灰
-                    $que(".info_pic img")[0].style.transition = '0.5s all';
-                    $que(".info_pic img")[0].style.filter = 'grayscale(100%)';
-                    $que(".info_pic img")[0].style.transformOrigin = 'center bottom';
-                    $que(".info_pic img")[0].style.transform = 'rotateZ(90deg)';
-                },2000);
-                setTimeout(function(){
-                    $que(".info_pic img")[0].classList.add('animalBreathing');
-                    $que(".info_pic img")[0].style.transform = 'rotateZ(0deg)';
-                },4000);
-        }
-        if(trigger == 'faceBrush'){
-            $que(".animal_words")[0].style.display="block";
-            $que(".animal_words p")[0].innerText = `討厭~~`;
-            $que(".info_pic img")[0].classList.add('animalBreathing');
-            setTimeout(function(){$que(".animal_words")[0].style.display="none";},2000);
-        }
+                        $que(".animal_words")[0].style.display="none";
+                    },2000);
+            }
+
+            if(trigger == 'apple'){
+                $que(".info_pic img")[0].classList.add('animalBreathing');
+                $que(".animal_words")[0].style.display="block";
+                $que(".animal_words p")[0].innerText = `An Apple a Day Keeps A Doctor Away.`;
+                setTimeout(function(){ $que(".animal_words")[0].style.display="none"; },2000);
+            }
+
+            //撫摸
+            if(trigger == 'faceBrush'){
+                $que(".animal_words")[0].style.display="block";
+                $que(".animal_words p")[0].innerText = `討厭~~`;
+                $que(".info_pic img")[0].classList.add('animalBreathing');
+                setTimeout(function(){$que(".animal_words")[0].style.display="none";},2000);
+                
+            }
+
+
     }
 
     // console.log($que(".info_pic img")[0].classList);
@@ -652,10 +699,16 @@ function chosenArea(area){
         this.className = 'food';
         if(e.target.id == 'hamburger'){
             animalWalking('junk');
-        }else if(e.target.id == 'fruit'){
+        }
+        if(e.target.id == 'fruit'){
             animalWalking('delicious');
         }
-        console.log(e.target.dataset.feed);
+        if(e.target.id == 'fries'){
+            animalWalking('fries');
+        }
+        if(e.target.id == 'apple'){
+            animalWalking('apple');
+        }
     }
 
     function dragOver(e){
@@ -689,6 +742,7 @@ function chosenArea(area){
         getRankingData();
         getCusAnimal();
         animalWalking('firstTime');
+
         //安裝聲音檔
         audio = new Audio(sessionStorage['animal_howl']);
 
@@ -728,7 +782,21 @@ function chosenArea(area){
                 }
             });
         });
-        //幻燈片
+        //安裝雲朵click 顯示食物選單事件
+        $que('.food_menu')[0].style.opacity = 0;
+        $que('.cloud2')[0].addEventListener('click', function(){
+            this.style.opacity = 0;
+            $que('.food_menu')[0].style.opacity = 1;
+        });
+        //按外面區域就取消食物選單
+        $que('body')[0].addEventListener('mousedown', function(e){
+            if(e.button==2){
+                $que('.food_menu')[0].style.opacity = 0;
+                $que('.cloud2')[0].style.opacity = 1;
+            }
+        });
+
+        //Slider
         $cls('arrowLeft')[0].addEventListener('click', sliderLeft);
         $cls('arrowRight')[0].addEventListener('click', sliderRight);
         //地圖指標安裝事件
