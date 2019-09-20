@@ -28,7 +28,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>動物商城</title>
-    @@include('template/csslink.html',{"csslink":"css/style.css"})
+    @@include('template/csslink.html')
     <style>
         * {
             /* outline: 1px solid #f00; */
