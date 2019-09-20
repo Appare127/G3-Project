@@ -35,6 +35,15 @@ foreach ($_SESSION['cart'] as $i => $n) {  //n=物件
     $item->execute();
 }
 
+//-------減少game_money
+$money=$pdo->prepare('UPDATE `user` SET `game_money` = `game_money` - :game_money WHERE `user`.`user_no` = :user_no; ');
+$money->bindValue(":game_money",(int)$_POST['money']);
+$money->bindValue(":user_no",$_SESSION['user_no']);
+$money->execute();
+
+
+//--清session
+unset($_SESSION['cart']);
 
 
 
