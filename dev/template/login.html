@@ -76,11 +76,15 @@
         <div id="forgetPsw_del" class="forgetPsw_del"></div>
         <p class="forgetPsw_box_title">忘記密碼</p>
         <form action="#">
-            <p> Email：<input v-model="email" type="text" placeholder="請輸入帳號"></p>
-            <p>密碼提示問題：{{a}}</p>
-            <p> 答案：<input type="text" placeholder="請輸入答案"> </p>
+            <p v-if="!qsn"> 帳號：<input v-model="id" @input="idMsg=''" type="text" placeholder="請輸入帳號"></p>
+            <p v-if="!qsn"> {{idMsg}}</p>
+            <p v-if="qsn && !result">{{qsn}}</p>
+            <p v-if="qsn && !result"> 答案：<input v-model="ans" type="text" placeholder="請輸入答案"> </p>
+            <p v-if="result && !done"> 重設密碼<input v-model="psw" type="password" placeholder="請輸入密碼"> </p>
+            <p v-if="result && !done"> 確認密碼<input v-model="pswCheck" type="password" placeholder="請再次輸入密碼"><span>{{pswMsg}}</span> </p>
+            <p v-if="done">{{done}}</p>
         </form>
-        <button class="btn_cloud" id='login_btn' @click="qsn"> 送出<span class="btn_cloudeffect"></span>
+        <button v-if="!done" @click="getQsn" class="btn_cloud" id='login_btn'> {{btn}}<span class="btn_cloudeffect"></span>
             <span class="btn_cloudeffect"></span>
             <span class="btn_cloudeffect"></span>
             <span class="btn_cloudeffect"></span></button>
@@ -98,17 +102,64 @@
 let forgetPsw=new Vue({
     el:"#forgetPsw_gary",
     data:{
-        email:'sara@gmail.com',
-        a:"ss"
+        id:"",
+        idMsg:"",
+        qsn:"",
+        ans:"",
+        btn:"下一步",
+        result:"",
+        psw:"111",
+        pswCheck:"111",
+        done:"",
     },
     methods:{
-        qsn(){
-            alert()
-            $.get('php/login/forgetPsw.php',{data:this.email},function(a){
-                this.a= a;
-            })
+        getQsn(){
+            if(this.btn == "下一步"){
+                if(forgetPsw.id != ""){
+                    $.get('php/login/forgetPsw.php',{data:forgetPsw.id},function(hint){
+                        if(hint== "none"){
+                            // forgetPsw.id="";
+                            forgetPsw.idMsg="找不到該帳號。請輸入正確帳號。";
+                        }else{
+                            forgetPsw.qsn= "密碼提示問題："+hint;
+                            forgetPsw.btn='送出';
+                        }
+                    })
+                }else{
+                    forgetPsw.idMsg="請輸入帳號"
+                }
+            }else if(this.btn == "送出"){
+                $.get('php/login/forgetPsw.php',{ans:forgetPsw.ans,id:forgetPsw.id},function(result){
+                    if(result == "ok"){
+                        forgetPsw.result=result;
+                        forgetPsw.btn='重設密碼';
+                    }else{
+                        alert(result);
+                        forgetPsw.ans="";
+                    }
+                })
+            }else if(this.btn == "重設密碼"){
+                if(this.pswMsg =="密碼符合"){
+                    $.get('php/login/forgetPsw.php',{psw:forgetPsw.psw,id:forgetPsw.id},function(done){
+                        forgetPsw.done=done;
+
+
+                    })
+                }else {
+                    alert("密碼不符，請重新輸入");
+                }
+            }
+            
         }
-        
+    },
+    computed:{
+        pswMsg(){
+            if(this.pswCheck.length>0 && this.pswCheck != this.psw){
+                return "密碼不符";
+            }else if(this.pswCheck.length>0 && this.pswCheck == this.psw){
+                return "密碼符合";
+            }
+        }
     },
 })
 </script>
@@ -263,7 +314,15 @@ let forgetPsw=new Vue({
     //跳出登入視窗功能 + 登出功能  
     function showLoginForm() {
         if ($id('login_text').innerText == '登入/註冊') {  //按下去，跳出視窗
-            $id('login_gary').style.display = 'block'
+            //註冊或忘記密碼打開的時候，login不能開
+            if($id('forgetPsw_gary').style.display == 'block' || $id('registered_gary').style.display == 'block'){
+                $id('login_gary').style.display = 'none'
+            
+            }else{
+                $id('login_gary').style.display = 'block'
+
+            }
+            
         } else if ($id('login_text').innerText == '登出') {   //按下去，要登出
             //clear session storage
             let user_id = sessionStorage.user_id;
@@ -381,8 +440,11 @@ let forgetPsw=new Vue({
         //---------檢查使用者是否已登入, 並取回登入資訊
         getLoginInfo();
 
-        // 登入/註冊 按鍵   /跳出登入視窗功能 + 登出功能  
-        $id("login_text").onclick = showLoginForm;
+        // 登入/註冊 按鍵   /跳出登入視窗功能 + 登出功能 
+    
+            $id("login_text").onclick = showLoginForm;
+
+       
         
         // 送出登入資料
         $id("login_btn").addEventListener("click",sendForm);
@@ -398,10 +460,16 @@ let forgetPsw=new Vue({
          $id("forgetPsw").onclick=function(){  
             $id('login_gary').style.display = 'none';
             $id('forgetPsw_gary').style.display = 'block';   
+            forgetPsw.id="";
+            forgetPsw.qsn="";
+            forgetPsw.ans="";
+            forgetPsw.result="";
+            forgetPsw.btn="下一步";
         }
         //返回登入btn 打開登入視窗
         document.querySelectorAll(".backLogin").forEach(n=>{
-            n.onclick=function(){   
+            n.onclick=function(el){   
+                e.preventDefault();
                 $id('registered_gary').style.display = 'none';
                 $id('login_gary').style.display = 'block';
                 $id('forgetPsw_gary').style.display = 'none';
