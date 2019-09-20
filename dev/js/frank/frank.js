@@ -2,7 +2,7 @@ window.addEventListener("load", init, false);
 window.addEventListener("resize", resize, false);
 function init(){
        owlCarousel_img();
-       favorite();
+       
       frank_vote_rank();
    //   vote_xml();
       activity_button();
@@ -26,7 +26,7 @@ function favorite(){
     for(let i=0;i<hearts.length;i++){
         
         hearts[i].addEventListener('click',function(e){
-            alert(111);
+            // alert(111);
             xhr.onload = function(){ 
                 if(xhr.status==200){
                    console.log(xhr.responseText);
@@ -136,7 +136,8 @@ function  frank_vote_rank(){
 function frank_vote(){
     if(rank1.readyState==4){
         var vote_rank= JSON.parse(rank1.responseText);
-  //   console.log(vote_rank);
+    // console.log(vote_rank);
+
 for (let i = 0; i < vote_rank.length -4; i++) {
      $("#frank_player_more").append($("#frank_player_items").clone(true).attr('id','frank_player_items'+i));
      $(`#frank_player_items${i} .frank_players_title span:eq(1)`).attr('id','aid'+(i+3));
@@ -146,6 +147,8 @@ for (let i = 0; i < vote_rank.length -4; i++) {
      $(`#frank_player_items${i} .frank_player_pic img:eq(0)`).attr('id','bg'+(i+3));
      $(`#frank_player_items${i} .frank_player_pic img:eq(1)`).attr('id','ag'+(i+3));
      $(`#frank_player_items${i} .frank_Collection_btn img:eq(0)`).attr('class','heart');
+
+     
            
 }
    for (let i = 0; i < vote_rank.length -1; i++) {
@@ -158,7 +161,12 @@ for (let i = 0; i < vote_rank.length -4; i++) {
     $(`.heart:eq(${i})`).attr('id','NO_'+(vote_rank[i]["work_no"]));
     
     
- }}}
+ }
+
+ favorite();
+
+
+}}
 
 function  join_xml(){
     join_item=frank_rank();
