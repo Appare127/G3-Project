@@ -6,6 +6,7 @@ function init(){
       frank_vote_rank();
    //   vote_xml();
       activity_button();
+     
 }
 function resize(){
    owlCarousel_img();
@@ -15,7 +16,7 @@ function $id(e){
 }
 
 
-
+//--------頁面載入控制----------------------
 
 function favorite(){
 
@@ -119,20 +120,7 @@ function owlCarousel_img(){
                 $('.frank_top_three').removeClass('owl-carousel');
         }}
 
-function frank_rank(){
-    if(window.ActiveXObject){
-        xmlHttp= new ActiveXObject('Microsoft.XMLHTTP');
-    }else if(window.XMLHttpRequest) {
-        xmlHttp= new XMLHttpRequest();
-    }
-    return xmlHttp;
-}
-function  frank_vote_rank(){
-    rank1=frank_rank();
-    rank1.open("GET","php/frank/vote_rank.php",true);
-    rank1.onreadystatechange = frank_vote;
-    rank1.send(null);
-}
+
 function frank_vote(){
     if(rank1.readyState==4){
         var vote_rank= JSON.parse(rank1.responseText);
@@ -149,10 +137,7 @@ for (let i = 0; i < vote_rank.length -4; i++) {
      let $input=(`<input type="hidden" name="work_no2"></input>`);
      let $input2=(`<input type="hidden" name="work_no3"></input>`)
      $(`#frank_player_items${i} .frank_message_btn .btn_cloudp `).append($input);
-     $(`#frank_player_items${i} .frank_player_btn .btn_cloudb`).append($input2);
-    
-    
-           
+     $(`#frank_player_items${i} .frank_player_btn .btn_cloudb`).append($input2);     
 }
    for (let i = 0; i < vote_rank.length -1; i++) {
     $id("vote"+`${i}`).innerText=vote_rank[i]["vote"];
@@ -165,12 +150,26 @@ for (let i = 0; i < vote_rank.length -4; i++) {
     $("input[name='work_no3']")[i].value=vote_rank[i]["work_no"];
     $(`.heart:eq(${i})`).attr('id','NO_'+(vote_rank[i]["work_no"]));
  }
-
  favorite();
-
-
 }}
 
+
+
+//----------------------PHP導入控制-----------------------------
+function frank_rank(){
+    if(window.ActiveXObject){
+        xmlHttp= new ActiveXObject('Microsoft.XMLHTTP');
+    }else if(window.XMLHttpRequest) {
+        xmlHttp= new XMLHttpRequest();
+    }
+    return xmlHttp;
+}
+function  frank_vote_rank(){
+    rank1=frank_rank();
+    rank1.open("GET","php/frank/vote_rank.php",true);
+    rank1.onreadystatechange = frank_vote;
+    rank1.send(null);
+}
 function  join_xml(){
     join_item=frank_rank();
     join_item.open("GET","php/frank/join.php?user_no="+sessionStorage.user_no,true);
@@ -194,7 +193,6 @@ function  vote_xml(){
 function vote_php(){
     if(vote_item.readyState==4  && vote_item.status==200){
         let vote_arr= JSON.parse(vote_item.responseText);
-   
   // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
     }}
 
@@ -205,17 +203,11 @@ function  message_xml(e){
     message_item.send(null);
 }
 function message_php(){
-  
-  
     if(message_item.readyState==4  && message_item.status==200){
         let message_arr= JSON.parse(message_item.responseText);
-        console.log(message_arr);
-        
-        message_btn(message_arr);
-         
+        message_btn(message_arr); 
   // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
     }}
-
 
 //--------------------按鈕類--------------------------
 function activity_button(){
@@ -224,10 +216,9 @@ join();
 });
 $('.frank_message_btn .btn_cloudp').click(function() {
        let e =$(this).find("input")[0].value;
-      
-       
+ 
+      $('.message_wrap_input input:eq(0)').val(e).attr({name:'work_no'})
         message_xml(e)
-        
  });
 $('.frank_closs_btn').click(function(){
         $('.frank_message').hide();
@@ -237,18 +228,26 @@ $('.frank_closs_btn').click(function(){
 
 });
   $('#msg_btn').click(function(){
-   
 });
-
-
 $('.frank_expand_arrow').click(function(){
         $(this).parent().next().animate({bottom:'0px'},1);
 $('.frank_expand_button').click(function(){
         $(this).parent().animate({bottom:'-800px'},1);
     })
+});
+$('#msg_btn').click(function(){
+   msg_value(); 
 })
 
+
 }
+
+
+
+
+
+
+//-------------------按鈕函式------------------
  function join(){
     // 先判斷sessionStorage有沒有會員登入資料，有才往下做轉圖檔工作
     if (sessionStorage['user_name']){
@@ -259,15 +258,11 @@ $('.frank_expand_button').click(function(){
                $id('login_gary').style.display = 'block';
     }}
 
-    function message_btn(e){
+function message_btn(e){
       message_arr=e;
-      
-
       $('.frank_message_btn').addClass(function(){
           $('.frank_message').slideDown(50);
       })
-
-      msg_btn
     for (let i = 0; i < message_arr.length; i++) {
     $("#frank_message_content").append($("#message_wrap").clone(true).attr({id:'message_itme'+i,class:'message_itme frank_message_wrap'}));
     $(`#message_itme${i}   figure:eq(0)`).css("background",`${message_arr[i]['my_animalbg_img']}`);  
@@ -277,13 +272,34 @@ $('.frank_expand_button').click(function(){
     let $input=(`<input type="hidden" name="msg_no"></input>`)
     $(`#message_itme${i}  .frank_message_btn span:eq(0)`).attr('id','message_btn'+(i)).append($input);
     $(`#message_itme${i}  .frank_message_btn span:eq(0)`).attr('id','message_btn'+(i)).append($input);
-    
-  
-   console.log($(`#message_itme${i}   input`)[0].value=message_arr[i]['msg_no']);
-   
+    $(`#message_itme${i}   input`)[0].value=message_arr[i]['msg_no']
  }
-
-
     }
 
+function msg_value() {
 
+    
+    if ($(`#input_text`).val()==0)
+    { 
+        return ;
+    }
+    let msg_arr= $(`.message_wrap_input`).serializeArray();
+                
+  
+     console.log( sessionStorage['user_no']);
+   
+   
+    msg_xml=frank_rank();
+   msg_xml.onreadystatechange=
+   function()
+    {
+        if (msg_xml.readyState==4 && msg_xml.status==200)
+        {
+            console.log(msg_xml.responseText);
+        }
+    }
+   console.log( sessionStorage['user_no']);
+    
+    msg_xml.open("GET","php/frank/msg.php?work_no="+msg_arr[0]["value"]+"&msg="+msg_arr[1]["value"]+"&user="+sessionStorage['user_no'],true);
+    msg_xml.send();
+}
