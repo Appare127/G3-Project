@@ -22,6 +22,7 @@ addEventListener('scroll', gameAnimation);
 
 //客製動物欄位的動畫
 function modifyAnimation(){
+    
     if(scrollY>=1300){
         //樹長出來
         setTimeout(function(){document.querySelectorAll('.modify_bg_ab img')[3].classList.add('treeGrow');},0);
@@ -32,7 +33,8 @@ function modifyAnimation(){
         for(var x=0; x<4; x++){
             document.querySelectorAll('.modify_pic img')[x].classList.add('home_jump');
         }
-        // console.log(document.querySelectorAll('.modify_pic img')[0]); 
+
+
     }else {
         for(var j=0; j<4; j++){
             document.querySelectorAll('.modify_bg_ab img')[j].classList.remove('treeGrow');

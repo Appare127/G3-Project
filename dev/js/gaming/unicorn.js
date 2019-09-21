@@ -20,9 +20,12 @@ class Unicorn {
 
     } 
     jump(jumpForce=(-25)) {
-        if(this.y==height - this.r){
+        if(flyStatus == true){
             this.vy = jumpForce;
-            console.log(this.vy);
+        }else if(flyStatus ==false){
+            if(this.y==height - this.r){
+                this.vy = jumpForce;
+            }
         } 
     }
     hits(train){ 

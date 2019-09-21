@@ -688,7 +688,6 @@
         
         background-position: 0 0;
         background-repeat: no-repeat;
-        // height:2850px;
         margin-top:100px;
         position:relative;
         padding-bottom:120px;
@@ -817,15 +816,13 @@
                         .cloud1 {
                             position:absolute;
                             top:-8%;
-                            left:-10%;
+                            right:-10%;
                         }
                         .cloud2 {
                             position:absolute;
                             bottom:-15%;
-                            right:-10%;
-                            transition:1.0s all;
-                        }
-
+                            left:-10%;
+                        } 
                         .role_pic{
                             width:50%;
                             .animalHello{
@@ -1237,7 +1234,8 @@
 
             }
             #game_intro_content {
-                width:90%;
+                width:85%;
+                padding:20px;
                 position:absolute;
                 left:0;
                 right:0;

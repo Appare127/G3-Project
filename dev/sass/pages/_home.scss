@@ -80,7 +80,7 @@ $dblue:#7DC7C5;
     }
     .home_header_pic{
         position: relative;
-        margin-top: 100px;
+        margin-top: 100px; 
         animation: beachWave 8s infinite linear;
 
         img[alt*="hd_cloud_s_left"]{
@@ -201,7 +201,15 @@ $dblue:#7DC7C5;
     @include responds(xlarge){
         background-size: contain; 
     }
-
+    .modify_bg {
+        transition:0.5s;
+        position:absolute;
+        // display:none;
+        // filter:drop-shadow(1px -5px 3px red);
+        
+        // border:1px solid red;
+    }
+  
     .container{
         position: relative;
         

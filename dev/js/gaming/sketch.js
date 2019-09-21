@@ -3,12 +3,15 @@ let trains = [];
 let fallens = [];
 let foods = [];
 let moneys = [];
+let wings = [];
+var drops = [];
 let uImg;
 let tImg;
 let rImg;
 let mImg;
 let bgImg;
 let heartImg;
+let flyingTime;
 
 let scrollSpeed = 10; 
 let x1 = 0;
@@ -23,7 +26,7 @@ let money=0;
 let cusJump;
 let environ_adapt;
 let adapt_level;
-var drops = [];
+let flyStatus = false;
 
 
 let scene = { //場景資訊
@@ -66,9 +69,9 @@ function preload() {
     fImg = loadImage(scene[sessionStorage['sceneChoice']].fallen)
     bgImg = loadImage(scene[sessionStorage['sceneChoice']].area);
     rImg = loadImage(scene[sessionStorage['sceneChoice']].reward);
+    wImg = loadImage('img/game/wings.png');
     
     if(sessionStorage['sceneChoice']=='forest'){ //依據選擇的場景決定適用的環境適應能力值
-        console.log('environ_adapt:' + environ_adapt);
         environ_adapt = sessionStorage['environ_adapt_1']*0.5;
     }else if(sessionStorage['sceneChoice']=='mountain'){
         environ_adapt = sessionStorage['environ_adapt_2']*0.5;
@@ -77,7 +80,7 @@ function preload() {
     }else {
         environ_adapt = 1;
     }
-    console.log('實際在該場景適應力:'+environ_adapt);
+
 
     mImg = loadImage('./img/game/coin.png');
     heartImg = loadImage('./img/game/heart.png');
@@ -196,6 +199,7 @@ function draw() {
         textSize(24);
         fill(33, 99, 100);
         text("系統提示:有流星~快許願(*￣▽￣)/‧☆*~~~~~~~", 1/3*width, 1.5/3*height);
+
     }
     if(timer>=20){ //20秒後開始掉隕石
         if (random(1) < (0.06/environ_adapt)) { // 掉隕石
@@ -207,10 +211,14 @@ function draw() {
 
     
     if(timer>=40){
-
+        //40秒後開始下雨
         for (var r = 0; r < drops.length; r++) {
             drops[r].fall();
             drops[r].show();
+            
+            if(drops[r].y >= height + 20){
+                drops.splice(r,1);
+            }
           }
     }
 
@@ -221,6 +229,10 @@ function draw() {
     //隨機生成金錢
     if(random(1)<0.008*environ_adapt){
         moneys.push(new Money());
+    }
+    //隨機生成翅膀
+    if(random(1)<0.0005*environ_adapt){
+        wings.push(new Wing());
     }
 
     //動物的行為
@@ -314,6 +326,26 @@ function draw() {
         if ( unicorn.hits(m) ) {
             moneys.splice(m,1);
                 money+=1;
+        }
+    }
+    //碰到翅膀之後的行為
+    for(let w of wings){
+
+        w.move();
+        w.show();
+        if ( unicorn.hits(w) ) { //吃到翅膀後的行為
+            flyingTime = timer;
+            wings.splice(w,1);
+            textSize(18);
+            fill(33);
+            text(`飛行狀態 秒`, 3/5*width, 120);
+
+ 
+
+            flyStatus = true;
+        }
+        if ( timer >= parseInt(flyingTime)+10 ){
+            flyStatus = false;
         }
     }
 

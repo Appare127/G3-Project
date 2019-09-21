@@ -29,3 +29,17 @@ class Money {
     }
 
 }
+
+class Wing {
+    constructor(){
+        this.r = 40;
+        this.x = width;
+        this.y = height*0.5;
+    }
+    move() {
+        this.x -=scrollSpeed;
+    }
+    show() {
+        image(wImg, this.x, this.y, this.r, this.r);
+    }
+}

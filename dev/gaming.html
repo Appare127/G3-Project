@@ -137,7 +137,7 @@ function saveImage(){
     var dataURL = canvas.toDataURL("image/png");
     // console.log('dataURL:'+dataURL);
     document.getElementById('result_img').value = dataURL;
-    console.log(dataURL);
+    // console.log(dataURL);
     document.getElementById('user_no').value = sessionStorage['user_no'];
     var formData = new FormData(document.getElementById("form1"));
     var xhr = new XMLHttpRequest();
@@ -160,8 +160,8 @@ function updateScoreMoney(){
     let xhr = new XMLHttpRequest();
     xhr.onload =function(){
         if(xhr.status == 200){
-            console.log(xhr.responseText);
-            sessionStorage['response'] = xhr.responseText;
+            // console.log(xhr.responseText);
+            // sessionStorage['response'] = xhr.responseText;
         }else {
             alert(xhr.status);
         }

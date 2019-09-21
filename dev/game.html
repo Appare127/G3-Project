@@ -211,6 +211,11 @@ let userDataDesc = [];
 let feed=0;
 
 
+//隨機函數
+function rand(min, max){
+    return   Math.floor(Math.random()*(max-min+1)) + min;
+}
+
 // 更新雷達圖資料
 function updatechart(){
     let total_eml_forest = sessionStorage['environ_adapt_1'];
@@ -242,9 +247,34 @@ function updatejump(){
     jump_value.innerText = total_jump + 'm';
 }
 
+//角色欄動畫
+function roleInfoAnimation(){
+    if(window.innerWidth>=768){
+        $que('.cloud1')[0].style.transition = '2s';
+        $que('.cloud1')[0].style.transform = 'translateX(-280%)';
+        setTimeout(function(){ $que('.cloud1')[0].style.opacity=0 },100);
+        setTimeout(function(){ $que('.cloud1')[0].style.opacity=0 },700);
+        setTimeout(function(){ $que('.cloud1')[0].style.opacity=1 },1200);
+
+        $que('.cloud2')[0].style.transition = '2s';
+        $que('.cloud2')[0].style.transform = 'translateX(280%)';
+        setTimeout(function(){ $que('.cloud2')[0].style.opacity=0 },100);
+        setTimeout(function(){ $que('.cloud2')[0].style.opacity=0 },700);
+        setTimeout(function(){ $que('.cloud2')[0].style.opacity=1 },1200);
+    }
+}
+
 //排行榜特效
 function rankFadeIn(){
         // console.log('進來排行榜區');
+    
+    // if(window.innerWidth>=768){
+    //     x = 1491;
+    // }else if(window.innerWidth<767){
+    //     x = 1200;
+    // }
+
+if(window.innerWidth>=768){
     if(scrollY>1491){
         for(var i=0; i<$que('.ranking_table tr').length; i++){
             $que('.ranking_table tr')[i].style.opacity =0;
@@ -255,18 +285,18 @@ function rankFadeIn(){
         $que('.chart_top3')[0].style.opacity =0;
 
         setTimeout(function(){$que('.chart_top1')[0].classList.add('topFadeIn')},0);
-        setTimeout(function(){$que('.chart_top2')[0].classList.add('topFadeIn')},300);
-        setTimeout(function(){$que('.chart_top3')[0].classList.add('topFadeIn')},600);
+        setTimeout(function(){$que('.chart_top2')[0].classList.add('topFadeIn')},400);
+        setTimeout(function(){$que('.chart_top3')[0].classList.add('topFadeIn')},800);
 
 
-        setTimeout(function(){$que('.ranking_table tr')[0].classList.add('trFadeIn');},900);
-        setTimeout(function(){$que('.ranking_table tr')[1].classList.add('trFadeIn');},1200);
-        setTimeout(function(){$que('.ranking_table tr')[2].classList.add('trFadeIn');},1500);
-        setTimeout(function(){$que('.ranking_table tr')[3].classList.add('trFadeIn');},1800);
-        setTimeout(function(){$que('.ranking_table tr')[4].classList.add('trFadeIn');},2100);
-        setTimeout(function(){$que('.ranking_table tr')[5].classList.add('trFadeIn');},2400);
-        setTimeout(function(){$que('.ranking_table tr')[6].classList.add('trFadeIn');},2700);
-        setTimeout(function(){$que('.ranking_table tr')[7].classList.add('trFadeIn');},3000);
+        setTimeout(function(){$que('.ranking_table tr')[0].classList.add('trFadeIn');},1200);
+        setTimeout(function(){$que('.ranking_table tr')[1].classList.add('trFadeIn');},1500);
+        setTimeout(function(){$que('.ranking_table tr')[2].classList.add('trFadeIn');},1800);
+        setTimeout(function(){$que('.ranking_table tr')[3].classList.add('trFadeIn');},2100);
+        setTimeout(function(){$que('.ranking_table tr')[4].classList.add('trFadeIn');},2400);
+        setTimeout(function(){$que('.ranking_table tr')[5].classList.add('trFadeIn');},2700);
+        setTimeout(function(){$que('.ranking_table tr')[6].classList.add('trFadeIn');},3000);
+        setTimeout(function(){$que('.ranking_table tr')[7].classList.add('trFadeIn');},3300);
 
         for(var j=1; j<$que('.ranking_table tr').length; j++){
             if($que('.ranking_table tr')[j].children[2].innerText == sessionStorage['user_name']){
@@ -285,6 +315,7 @@ function rankFadeIn(){
         }
       
     }
+}
     function highlight(element){
         element.parentNode.style.transition = '0.5s';
 
@@ -317,32 +348,87 @@ function $que(css_selector){
     return document.querySelectorAll(css_selector);
 }
 
-//動物走動
+//動物走動&對話
 function animalWalking(trigger){
+
         $que(".info_pic img")[0].classList.remove('animalBreathing');
         $que(".animal_words")[0].classList.remove('animalSayWords');
         $que(".info_pic img")[0].classList.remove('animalHello');
         $que(".animal_words")[0].style.display="none";
-    
+
+
     if(window.innerWidth>=768 && sessionStorage['animal_img'] && sessionStorage['animal_name']){
+        var environ = [sessionStorage['environ_adapt_1'],sessionStorage['environ_adapt_2'],sessionStorage['environ_adapt_3']];
+        environ.sort(function(a,b){ return parseInt(b)-parseInt(a) });
+
+        if(environ[0] == sessionStorage['environ_adapt_1']){
+            env = '森林';
+        }else if(environ[0] == sessionStorage['environ_adapt_2']){
+            env = '高山';
+        }else if(environ[0] == sessionStorage['environ_adapt_3']){
+            env = '沙漠';
+        }
+
+        var randomTalk;
+        var n;
 
             if(trigger=='firstTime'){
+                if(sessionStorage['animal_jump']<=2 && sessionStorage['animal_life']<=2){
+                    console.log(1);
+                    randomTalk = [
+                        [`${sessionStorage['user_name']} 你好啊~~`,`我們當好朋友吧~~`],
+                        [`好想去${env}玩啊`,`感覺我在那裡能待很久`],
+                        [`五短必有一長`,`雖然我不擅長跳躍 我還有別的優點`],
+                        [`新身體感覺好不舒服啊`,`感覺體力下滑了`]
+                    ];
+                    n = rand(0,3);
+                }else if(sessionStorage['animal_jump']<=2 && sessionStorage['animal_life']>2){
+                    console.log(2);
+                    randomTalk = [
+                        [`${sessionStorage['user_name']} 你好啊~~`,`我們當好朋友吧~~`],
+                        [`好想去${env}玩啊`,`感覺我在那裡能待很久`],
+                        [`五短必有一長`,`雖然我不擅長跳躍 我還有別的優點`],
+                    ];
+                    n = rand(0,2);
+                }else if(sessionStorage['animal_jump']>2 && sessionStorage['animal_life']>2){
+                    console.log(3);
+
+                    randomTalk = [
+                        [`${sessionStorage['user_name']} 你好啊~~`,`我們當好朋友吧~~`],
+                        [`好想去${env}玩啊`,`感覺我在那裡能待很久`],
+                    ];
+                    n = rand(0,1);
+                }else if(sessionStorage['animal_jump']>2 && sessionStorage['animal_life']<=2) {
+                    console.log(4);
+                    randomTalk = [
+                        [`${sessionStorage['user_name']} 你好啊~~`,`我們當好朋友吧~~`],
+                        [`好想去${env}玩啊`,`感覺我在那裡能待很久`],
+                        [`新身體感覺好不舒服啊`,`感覺體力下滑了`]
+                    ];
+                    n = rand(0,2);
+                    console.log('n:'+n);
+                }
+
+
                 if(sessionStorage['user_name']&&sessionStorage['user_no']){
                 
                     $que(".animal_words")[0].style.display="block";
                     $que(".info_pic img")[0].classList.add('animalHello');//動物移動
                     $que(".animal_words")[0].classList.add('animalSayWords');//對話框移動
-                    $que(".animal_words p")[0].innerText = `${sessionStorage['user_name']} 你好啊~~`;
+                    $que(".animal_words p")[0].innerText = randomTalk[n][0];
+                    // `${sessionStorage['user_name']} 你好啊~~`;
 
                         setTimeout(function(){
-                            $que(".animal_words p")[0].innerText = `我們當好朋友吧~~`;
+                            $que(".animal_words p")[0].innerText = randomTalk[n][1];
                         },2500);
+
                         setTimeout(function(){
                             $que(".info_pic img")[0].classList.remove('animalHello');
                             $que(".animal_words")[0].classList.remove('animalSayWords');
                             $que(".info_pic img")[0].classList.add('animalBreathing');
                             $que(".animal_words")[0].style.display="none";
                         },5000);
+
                 }else {
                     $que(".animal_words")[0].style.display="none";
 
@@ -736,7 +822,7 @@ function chosenArea(area){
 
 
     function doFirst(){
-
+        roleInfoAnimation();
         updatechart();
         updatehealth();
         updatejump();
@@ -786,6 +872,7 @@ function chosenArea(area){
         //安裝雲朵click 顯示食物選單事件
         $que('.food_menu')[0].style.opacity = 0;
         $que('.cloud2')[0].addEventListener('click', function(){
+            this.style.display='block';
             this.style.opacity = 0;
             $que('.food_menu')[0].style.opacity = 1;
         });
@@ -804,7 +891,9 @@ function chosenArea(area){
         $cls('forest_pointer')[0].addEventListener('click', pointerToMap);
         $cls('desert_pointer')[0].addEventListener('click', pointerToMap);
         $cls('mountain_pointer')[0].addEventListener('click', pointerToMap);
-        $que(".info_pic img")[0].addEventListener('click', animalWalking('firstTime'));
+
+        $que(".info_pic img")[0].addEventListener('click', function(){animalWalking('firstTime');});
+
         let enterGame=document.querySelectorAll('.playing_window p');
         let closeBtn = document.getElementById('game_closeBtn');
         closeBtn.addEventListener('click', closeIntro);
@@ -845,7 +934,9 @@ function chosenArea(area){
         }
         
     }
+    
     window.addEventListener('load', doFirst);
+
     window.addEventListener('resize',function(){
         if(window.innerWidth<=767){
             for(var i=0; i<$cls('playing_window').length; i++){
@@ -875,6 +966,7 @@ function chosenArea(area){
             }
         }
     });
+    
     window.addEventListener('scroll',rankFadeIn);
 
 </script>
