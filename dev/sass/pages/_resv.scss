@@ -55,6 +55,163 @@
             }
         }
     }
+}
+.resv_calendargroup{
+    .resv_calendar{
+        background-image: url("../img/resv/calendar2.png");
+        z-index: 2;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        height: 580px;
+        padding:230px  0 40px;
+        box-sizing: border-box;
+        @media screen and (min-width:1200px){
+            background-image: url("../img/resv/calendar_bg.png");
+            padding:260px  0 40px;
+        }
+
+        // 日曆主體開始
+        .calendarbox{
+            width: 80%;
+            margin: auto;
+            background:#f0e4ba;
+            border-radius: 20px;
+            .calendar_title{
+                text-align: center;
+                color: #776f6f;
+                padding-bottom: 2%;
+                box-sizing: border-box;
+                font-size: $h2_fz;
+                
+                // 左側月份切換
+                .fa-chevron-left {
+                    &:before{
+                        content: "\f053";
+                        cursor:pointer;
+                    }
+                }
+                // 右側月份切換
+                .fa-chevron-right {
+                    &:before{
+                        content: "\f054";
+                         cursor:pointer;
+                    }
+                }
+            }
+            .week_group{
+                font-size: $m_fz;
+                font-weight: bold;
+                color:$col_brown;
+                ul{
+                    display: flex;
+                    justify-content: center;
+                    li{
+                        width: 14.2%;
+                        height: 36px;
+                        line-height: 36px;
+                        font-size: 18px;
+                        list-style-type: none;
+                        display: block;
+                        box-sizing: border-box;
+                        text-align: center;
+                        border-bottom: 1px solid #ab8450;
+                        // cursor: pointer;
+                        // float: left;
+                    }
+                    .clearfix{
+                        clear: both;
+                    }
+                }
+            }
+            .day_group{
+                font-size: $m_fz;
+                font-weight: bold;
+                color:$col_brown;
+                ul{
+                    width: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: flex-start;
+                    li{
+                        width: 14.2%;
+                        height: 36px;
+                        line-height: 36px;
+                        font-size: 18px;
+                        list-style-type: none;
+                        display: block;
+                        box-sizing: border-box;
+                        text-align: center;
+                        border: 1px solid #ab8450;
+                        // cursor: pointer;
+                    }
+                    // .unaviable{
+                    //     background: #a8a6a6;
+                    //     border-radius: 10px;
+                    // }
+                    // .full_booked{
+                    //     background: #f19149;
+                    //     border-radius: 10px;
+                    //     border: 1px solid #f19149;
+                    // }
+                    // 今日
+                    .colorbox{
+                        // border:1px solid #FFC300;
+                        // background:#33a1d1;
+                        color:#f19149;
+                    }
+                    // 今天之前的日期
+                    .lightgrey{
+                        color:#AAA;
+                    }                    
+                }
+            }
+            .curday_after{
+                &:hover{
+                    font-weight: bold;
+                    color: #e5ecec;
+                    background: #e89e4d;
+                    cursor:pointer;
+                }
+            }
+            .curday_after_check{
+                font-weight: bold;
+                color: #e5ecec;
+                background:#A65F16;
+            }
+        }
+        // 日曆主體結束
+
+        .calendar_text{
+            display: flex;
+            width: 80%;
+            margin: auto;
+            font-size: 0px;
+            li{
+                display: inline-block;
+                font-size: $s_fz;
+                padding: 5px;
+                // width: 5%;
+            }
+            .aviable{
+                background-color:$col_brown;
+                border-radius: 20px;
+                margin-left: 10px;
+            }
+            
+            .unaviable{
+                background-color: #a8a6a6;
+                border-radius: 20px;
+                margin-left: 10px;
+            }
+            .today_date{
+                background-color: #f19149;
+                border-radius: 20px;
+                margin-left: 10px;
+            }
+        }
+    }
+}
     // 第一個section結束
     
     // 第二個section開始
@@ -68,162 +225,7 @@
             padding: 10px;
             box-sizing: border-box;
             align-items: center;
-            .resv_calendargroup{
-                .resv_calendar{
-                    background-image: url("../img/resv/calendar2.png");
-                    z-index: 2;
-                    background-repeat: no-repeat;
-                    background-size: contain;
-                    background-position: center;
-                    height: 580px;
-                    padding:230px  0 40px;
-                    box-sizing: border-box;
-                    @media screen and (min-width:1200px){
-                        background-image: url("../img/resv/calendar_bg.png");
-                        padding:260px  0 40px;
-                    }
-
-                    // 日曆主體開始
-                    .calendarbox{
-                        width: 80%;
-                        margin: auto;
-                        background:#f0e4ba;
-                        border-radius: 20px;
-                        .calendar_title{
-                            text-align: center;
-                            color: #776f6f;
-                            padding-bottom: 2%;
-                            box-sizing: border-box;
-                            font-size: $h2_fz;
-                            
-                            // 左側月份切換
-                            .fa-chevron-left {
-                                &:before{
-                                    content: "\f053";
-                                    cursor:pointer;
-                                }
-                            }
-                            // 右側月份切換
-                            .fa-chevron-right {
-                                &:before{
-                                    content: "\f054";
-                                     cursor:pointer;
-                                }
-                            }
-                        }
-                        .week_group{
-                            font-size: $m_fz;
-                            font-weight: bold;
-                            color:$col_brown;
-                            ul{
-                                display: flex;
-                                justify-content: center;
-                                li{
-                                    width: 14.2%;
-                                    height: 36px;
-                                    line-height: 36px;
-                                    font-size: 18px;
-                                    list-style-type: none;
-                                    display: block;
-                                    box-sizing: border-box;
-                                    text-align: center;
-                                    border-bottom: 1px solid #ab8450;
-                                    // cursor: pointer;
-                                    // float: left;
-                                }
-                                .clearfix{
-                                    clear: both;
-                                }
-                            }
-                        }
-                        .day_group{
-                            font-size: $m_fz;
-                            font-weight: bold;
-                            color:$col_brown;
-                            ul{
-                                width: 100%;
-                                display: flex;
-                                flex-wrap: wrap;
-                                justify-content: flex-start;
-                                li{
-                                    width: 14.2%;
-                                    height: 36px;
-                                    line-height: 36px;
-                                    font-size: 18px;
-                                    list-style-type: none;
-                                    display: block;
-                                    box-sizing: border-box;
-                                    text-align: center;
-                                    border: 1px solid #ab8450;
-                                    // cursor: pointer;
-                                }
-                                // .unaviable{
-                                //     background: #a8a6a6;
-                                //     border-radius: 10px;
-                                // }
-                                // .full_booked{
-                                //     background: #f19149;
-                                //     border-radius: 10px;
-                                //     border: 1px solid #f19149;
-                                // }
-                                // 今日
-                                .colorbox{
-                                    // border:1px solid #FFC300;
-                                    // background:#33a1d1;
-                                    color:#f19149;
-                                }
-                                // 今天之前的日期
-                                .lightgrey{
-                                    color:#AAA;
-                                }                    
-                            }
-                        }
-                        .curday_after{
-                            &:hover{
-                                font-weight: bold;
-                                color: #e5ecec;
-                                background: #e89e4d;
-                                cursor:pointer;
-                            }
-                        }
-                        .curday_after_check{
-                            font-weight: bold;
-                            color: #e5ecec;
-                            background:#A65F16;
-                        }
-                    }
-                    // 日曆主體結束
-
-                    .calendar_text{
-                        display: flex;
-                        width: 80%;
-                        margin: auto;
-                        font-size: 0px;
-                        li{
-                            display: inline-block;
-                            font-size: $s_fz;
-                            padding: 5px;
-                            // width: 5%;
-                        }
-                        .aviable{
-                            background-color:$col_brown;
-                            border-radius: 20px;
-                            margin-left: 10px;
-                        }
-                        
-                        .unaviable{
-                            background-color: #a8a6a6;
-                            border-radius: 20px;
-                            margin-left: 10px;
-                        }
-                        .today_date{
-                            background-color: #f19149;
-                            border-radius: 20px;
-                            margin-left: 10px;
-                        }
-                    }
-                }
-            }
+            
 
             // 右側表單開始
             .resv_form{
@@ -318,7 +320,7 @@
     }
     // 第二個section結束
 
-}
+
 
 
 @media screen and (max-width: 767px){
