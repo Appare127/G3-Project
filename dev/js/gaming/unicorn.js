@@ -45,10 +45,13 @@ class Unicorn {
         this.y += this.vy; //彈跳力
         this.vy += this.gravity;
         if(strongStatus==true){
-            this.y = constrain(this.y, 0, height-350);            
+            this.y = constrain(this.y, 0, height-350);  
+            this.x = constrain(this.x,this.r-350, width+350);
+
         }else {
             this.y = constrain(this.y, 0, height - this.r);
+            this.x = constrain(this.x,this.r, width+this.r);
+
         }
-        this.x = constrain(this.x,this.r, width+this.r);
     }
 }

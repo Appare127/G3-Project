@@ -2,12 +2,15 @@ class Train {
     constructor(monsterSize=50){
         this.r = monsterSize;
         this.x = width;
-        // this.y = height - this.r;
         this.y = height*0.8;
-        // this.id = 'a'+ID;
+        this.hitStatus = false;
     }   
     move(Vx=scrollSpeed,Vy=0) {
-        if(unicorn.hits(this) && strongStatus == true){
+        if(unicorn.hits(this)){
+            this.hitStatus = true;
+        }
+        
+        if(this.hitStatus == true && strongStatus == true){
             this.x += 1.2*Vx;
             this.y -= 40
         }else{
@@ -26,13 +29,16 @@ class Fallen {
         this.r = 80;
         this.y = -50;
         this.x = random(0.3*width, width+20);
-
+        this.hitStatus = false;
     }
-    move(){
-        if(unicorn.hits(this) && strongStatus == true){
+    move(Vx=40,Vy=60){
+        if(unicorn.hits(this)){
+            this.hitStatus = true;
+        }
+        if(this.hitStatus==true && strongStatus==true){
             console.log('反彈');
-            this.y -= 20;
-            this.x += 60;
+            this.y -= Vy;
+            this.x += Vx;
         }else {
             this.y += 9;
             this.x -= 10;
