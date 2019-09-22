@@ -216,11 +216,6 @@ function dopic(){
             // 呼叫做動物與背景合併的第三圖函式，在這函式做完才做傳到php的picsend();
             combine_amlbg();
 
-            
-            console.log(document.getElementById('bg_data').value);
-            
-
-
             // 如果沒有輸入動物名字，則彈出輸入動物名字的提示視窗
         }else {
             document.getElementsByClassName('need_name')[0].classList.add('show');
