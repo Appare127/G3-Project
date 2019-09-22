@@ -1137,27 +1137,32 @@ $dblue:#7DC7C5;
     background-color: $lblue;
     background-image: url(../img/home/sky.png);
     background-repeat: no-repeat;
-    background-size: 100% 60%;
+    background-size: 100%;
     background-position:bottom;
     width: 100%;
     padding-bottom: 200px;
     position:relative;
-//土地那條線
-@include pseudo(after,'' ,100%,5px ){
-    background-color: #000;
-}
-//說明文字
-.guide_word{
-    padding: 10px;
-    text-align: center;
-    @include responds(medium){
-        width: 40%;
-        position:relative;
-        left: 55%;
-        top: 50px;
-        box-sizing:border-box;
+    //土地那條線
+    @include pseudo(after,'' ,100%,44px ){
+        // background-color: #000;
+        background-image:url("../img/home/resv_rail.png");
+        margin-top:-40px;
+        @include responds(small){
+            display:none;
+        }
     }
-}
+    //說明文字
+    .guide_word{
+        padding: 10px;
+        text-align: center;
+        @include responds(medium){
+            width: 40%;
+            position:relative;
+            left: 55%;
+            top: 50px;
+            box-sizing:border-box;
+        }
+    }
 
 //包日曆和資訊，flex用
     .wrap{
@@ -1173,158 +1178,22 @@ $dblue:#7DC7C5;
         @include responds(medium){
             width: 50%;
         } 
-        .resv_calendar{
-            background-image: url("../img/home/calendar2.png");
-            @include responds(xlarge){
-                background-image: url("../img/resv/calendar_bg.png");
-                // width: 50%;
-            }
-            
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: center;
-            padding:220px  0 40px;
-            box-sizing: border-box;
-            &:hover .sunglasses{
-                opacity:1;
-            }
-            .sunglasses {
-                width:255px;
-                position:absolute;
-                top:24%;
-                left:15%;
-                opacity:0;
-                transition:1.0s all;
-                img {
-                    width:100%;
-                }
-            }
-            .calendarbox{
-                width: 90%;
-                @include responds(medium){
-                    width: 80%;
-                }
-                margin: auto;
-                background:#f0e4ba;
-                border-radius: 20px;
-                .calendar_title{
-                    text-align: center;
-                    color: #776f6f;
-                    padding-bottom: 2%;
-                    box-sizing: border-box;
-                    font-size: $lg_fz;
-                    .fa-chevron-left {
-                        &:before{
-                            content: "\f053";
-                        }
-                    }
-                    .fa-chevron-right {
-                        &:before{
-                            content: "\f054";
-                        }
-                    }
-                }
-                .week_group{
-                    font-size: $m_fz;
-                    font-weight: bold;
-                    color:$col_brown;
-                    ul{
-                        display: flex;
-                        justify-content: center;
-                        li{
-                            width: 14.2%;
-                            height: 36px;
-                            line-height: 36px;
-                            font-size: 18px;
-                            list-style-type: none;
-                            display: block;
-                            box-sizing: border-box;
-                            text-align: center;
-                            border-bottom: 1px solid #ab8450;
-                            cursor: pointer;
-                            // float: left;
-                        }
-                        .clearfix{
-                            clear: both;
-                        }
-                    }
-                }
-                .day_group{
-                    font-size: $m_fz;
-                    font-weight: bold;
-                    color:$col_brown;
-                    ul{
-                        width: 100%;
-                        display: flex;
-                        flex-wrap: wrap;
-                        justify-content: flex-start;
-                        li{
-                            width: 14.2%;
-                            height: 36px;
-                            line-height: 36px;
-                            font-size: 18px;
-                            list-style-type: none;
-                            display: block;
-                            box-sizing: border-box;
-                            text-align: center;
-                            border: 1px solid #ab8450;
-                            cursor: pointer;
-                        }
-                        // .unaviable{
-                        //     background: #a8a6a6;
-                        //     border-radius: 10px;
-                        // }
-                        // .full_booked{
-                        //     background: #f19149;
-                        //     border-radius: 10px;
-                        //     border: 1px solid #f19149;
-                        // }
-                        // 今日
-                        .colorbox{
-                            // border:1px solid #FFC300;
-                            background:#33a1d1;
-                        }
-                        // 今天之前的日期
-                        .lightgrey{
-                            color:#AAA;
-                        }                    
-                    }
-                }
-                .curday_after{
-                    li{
-                        &:hover{
-                            font-weight: bold;
-                            color: #e5ecec;
-                            background: #e89e4d;
-
-                        }        
-                    }
-                }
-            }
-            .calendar_text{
-                display: flex;
-                width: 80%;
-                margin: auto;
-                font-size: 0px;
-                li{
-                    display: inline-block;
-                    font-size: $s_fz;
-                    padding: 5px;
-                    // width: 5%;
-                }
-                .unaviable{
-                    background-color: #a8a6a6;
-                    border-radius: 20px;
-                    margin-left: 10px;
-                }
-                .full_booked{
-                    background-color: #f19149;
-                    border-radius: 20px;
-                    margin-left: 10px;
-                }
-            }
+        .calendar_body{
+            position:relative;
+            z-index: 2;
+        }
+    .sunglasses {
+        width:255px;
+        position:absolute;
+        top:24%;
+        left:15%;
+        opacity:0;
+        transition:1.0s all;
+        img {
+            width:100%;
         }
     }
+}
    
 //顯示資訊的文字區
     .col_info{
@@ -1524,8 +1393,8 @@ $dblue:#7DC7C5;
     .shop_rank_img{
         margin: auto;
         width: 90%;
-        display:flex;
-        justify-content: center;
+        // display:flex;
+        // justify-content: center;
         margin-top: 20px;
 
         img{
@@ -1534,13 +1403,6 @@ $dblue:#7DC7C5;
         .rank_img_item{
             transform:rotate(15deg);
             position:relative;
-            .shop_animal{
-                position:absolute;
-                top: 50%;
-                left: 50%;
-                transform:translate(-50%,0);
-                width: 50%;
-            }
         }
     }
 //商品那個框框 
@@ -1697,16 +1559,6 @@ $dblue:#7DC7C5;
         83.3334%{right:200%}
         100%{right:300%}
 
-    }
-    @mixin picChosen($top,$left,$right){
-        top: $top;
-        left: $left;
-        right: $right;
-        margin:auto;
-    }
-    
-    .pic_chosen_cup{
-        @include picChosen(26%,0,24%)
     }
     
     .main_btn{
