@@ -726,14 +726,10 @@ function chosenArea(area){
             var url = "php/game/getCusAnimal.php?user_no="+ sessionStorage['user_no'];
             xhr.open("Get", url, true);  //readyState : 1
             xhr.send( null );
-        }else{
+        }else{ //沒登入時的預設動物數值
                 sessionStorage['my_animal_img'] = './img/home/1.png';
-                // sessionStorage['my_animal_name'] = userData.my_animal_name;
                 sessionStorage['animal_life'] =2;
                 sessionStorage['animal_jump'] =1;
-                // sessionStorage['game_record'] =userData.game_record;
-                // sessionStorage['game_date'] =userData.game_date;
-                // sessionStorage['animal_howl'] = userData.animal_howl;
                 sessionStorage['environ_adapt_1'] =5;
                 sessionStorage['environ_adapt_2'] =5;
                 sessionStorage['environ_adapt_3'] =5;

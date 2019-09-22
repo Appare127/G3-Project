@@ -302,15 +302,17 @@ function draw() {
         f.move();
         f.show();
         if (unicorn.hits(f)) {
-            // console.log(life)
-            if(strongStatus == true){
 
+            if(strongStatus == true){
                 setTimeout(function(){
                     fallens.splice(f,1);
                 },1000);
             }
 
-
+            if (fallens.indexOf(f)  != test2){//避免重複扣掉生命
+                life--;
+                test2 = fallens.indexOf(f);
+            }
 
             if (life == 0) { //死掉後
                 fallens.splice(i-5,15);
@@ -400,7 +402,7 @@ function draw() {
     if(timer>=parseInt(strongTime) && timer< (strongTime+10) ){
         textSize(20);
         fill(255,69,0);
-        text(`無敵狀態: ${10+strongTime - timer}秒`, 3/5*width, 1/5*height+30);
+        text(`過胖狀態: ${10+strongTime - timer}秒`, 3/5*width, 1/5*height+30);
     }
 }
 
