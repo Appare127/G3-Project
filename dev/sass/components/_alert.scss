@@ -3,7 +3,7 @@
 .msg_alert {
   width: 100%;
   position: fixed;
-  z-index: 2;
+  z-index: 10;
   top: 0%;
   bottom: 0%;
   left: 0%;
@@ -45,6 +45,9 @@
     cursor: pointer;
     /*line-height: 2; */
     text-align: center;
+    span{
+      font-size:$m_fz;
+    }
     }
 
     .msg_title{
@@ -53,10 +56,15 @@
       border-bottom: 3px dashed $linecolor;  
       }
       .msg_cont {
-        padding: 15px 20px 20px;
-        text-align: left;
+        padding: 10px;
+        box-sizing: border-box;
+        // text-align: left;
+   
         @include btn_cloudb(100px);
-
+        p{
+          font-size:$m_fz;
+          margin-bottom: 10px;
+        }
       }
       .msg_alert_close {
         display: inline-block;

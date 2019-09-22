@@ -313,19 +313,30 @@ window.addEventListener('load',setLove,false);
 // });
 // }
 
-
-function alert(title,e){
-$(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>'+title+'</span></div><span class="btn_close msg_clear">×</span><div class="msg_cont" id="msg_cont">'+e+'</div><div class="msg_alert_close msg_clear"><a href="#" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
-$(".msg_clear").click(function (){
-$("#msg").remove();
-
-});
-}
-
 // $(".order_cancel").click(function () {
 //   alert('測試');
 //   e.preventDefault();
 // });
+
+
+
+//alert訊息<<<<請複製>>>>
+function alert(text,title){
+
+  if(!title==""){
+
+  $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>'+title+'</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
+  $(".msg_clear").click(function (){
+  $("#msg").remove();
+      });
+}else{
+
+  $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>提示</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
+  $(".msg_clear").click(function (){
+  $("#msg").remove();
+   });
+}
+}
 
 function alertcancel(){
 var order_cancel = document.getElementsByClassName('order_cancel');
@@ -333,14 +344,14 @@ var rev_cancel = document.getElementsByClassName('rev_cancel');
 
 for(let y=0; y<order_cancel.length; y++){
   order_cancel[y].addEventListener('click',function(e){
-  alert('提示','<p>您好:<br>已收到訂單取消請求，<br>待客服人員確認中...</p>');
+  alert('<p>已收到訂單取消請求，<br>待客服人員確認中...</p>','提示');
   // e.preventDefault();
   });
 };
 
 for(let z=0; z<rev_cancel.length; z++){
   rev_cancel[z].addEventListener('click',function(e){
-  alert('提示','<p>您好:<br>已收到預約取消請求，<br>待客服人員確認中...</p>');
+  alert('提示','<p>已收到預約取消請求，<br>待客服人員確認中...</p>','提示');
   // e.preventDefault();
   });
 };
