@@ -169,6 +169,9 @@ session_start();
                //shoplist  +   自己的那一列
             sessionStorage['shopList']=sessionStorage['shopList'].replace( id+"," , "" );
             sessionStorage.removeItem(id);
+            if(sessionStorage['shopList'].search(",")== -1){
+                sessionStorage.removeItem('shopList');
+            }
 
             //刪掉自己那塊html
             this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
@@ -178,7 +181,7 @@ session_start();
            
         
             //刪到沒東西時，顯示 “您尚未購買”
-            if(sessionStorage['shopList'].indexOf(",") == -1){
+            if( !sessionStorage['shopList']){
                 let wrap=document.querySelector(".cart_list .wrap");
                 let checkoutBtn=document.querySelector(".cart_btn .btn_cloudp");
                

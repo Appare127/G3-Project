@@ -200,7 +200,7 @@ try {
         document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src=sessionStorage.my_animalbg_img;
        
     }else{   //如果沒登入，給預設圖片
-    document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src='img/member/demo_amlbg_0.png';
+    document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src='img/member/user0_amlbg.png';
     }
 };
 
@@ -224,9 +224,7 @@ window.addEventListener("load",function(){
     let addNumButtons=document.querySelectorAll('.add_num');     //加數量
     let prodNumInputs=document.querySelectorAll('.prod_num'); //商品Input的數量
     let changePicBtn=document.querySelectorAll('.choose_pic_wrap .item')  //動物圖片
-    if(sessionStorage['shopList'] == null){
-        sessionStorage['shopList'] =""; 
-    }
+   
     
 
     for(i=0;i<minusNumButtons.length;i++){   //減num
@@ -306,7 +304,9 @@ window.addEventListener("load",function(){
             
             $.get('php/cart/cart_session.php',{data:data});
             // $.get('php/resv/getTime.php', { data: 'time' }, function (data) {
-
+            if(sessionStorage['shopList'] == null){
+                sessionStorage['shopList'] =""; 
+            }
             if(sessionStorage[sessionName]){   //買過了  num+1
                 let dataNew;
                 dataNew=JSON.parse(sessionStorage[sessionName]);
