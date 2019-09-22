@@ -63,22 +63,22 @@
                     </tr>
                   </thead>
                   <tbody>
-                  <form action="addAdminData.php" post="post">
+                  <form action="addAdminData.php" method="post">
                     <tr> 
                       <td>
       
                       </td>
                       <td>
-                        <input type="text" name="admin_name" id="">
+                        <input type="text" name="admin_name" id="" required>
                       </td>
                       <td>
-                        <input type="text" name="admin_id" id="">
+                        <input type="text" name="admin_id" id="" required>
                       </td>
                       <td>
-                        <input type="text" name="admin_psw" id="">
+                        <input type="text" name="admin_psw" id="" required>
                       </td>
                       <td>
-                        <input type="text" name="admin_status" id="">
+                        <input type="number" name="admin_status" id="" required min="0" max="1" required>
                         <!-- <label class="switch switch-label switch-pill switch-primary">
                           <input class="switch-input" type="checkbox" checked="">
                           <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
@@ -109,30 +109,14 @@ if( $errMsg != ""){ //例外
                   <form action="updateAdminData.php" method="post">
                     <tr>
                       <td><?php echo $adminRow['admin_no'];?><input name="admin_no" type="hidden" value="<?= $adminRow['admin_no']?>"></td>
-                      <td><input type="text" class="dissinputstyle" name="admin_name" value="<?= $adminRow['admin_name']?>" readonly="true"></td>
-                      <td><input type="text" class="dissinputstyle" name="admin_id" value="<?= $adminRow['admin_id']?>" readonly="true"></td>
-                      <td><input type="text" class="dissinputstyle" name="admin_psw" value="<?= $adminRow['admin_psw']?>" readonly="true"></td>
-                      <td><input type="text" class="dissinputstyle" name="admin_status" value="<?= $adminRow['admin_status']?>" readonly="true"></td>
-                      <!-- <td>
-                        <label class="switch switch-label switch-pill switch-primary">
-                          <input class="switch-input" type="checkbox" checked="">
-                          <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-                        </label>
-                      </td> -->
-                      <td>
-                        <!-- <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0"> -->
-                        <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
-                        <!-- </div> -->
-                      </td>
-                      <td>
-                        <!-- <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0"> -->
-                        <input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成">
-                        <!-- </div> -->
-                      </td>
+                      <td><input type="text" class="dissinputstyle" name="admin_name" value="<?= $adminRow['admin_name']?>" readonly="true" required></td>
+                      <td><input type="text" class="dissinputstyle" name="admin_id" value="<?= $adminRow['admin_id']?>" readonly="true" required></td>
+                      <td><input type="text" class="dissinputstyle" name="admin_psw" value="<?= $adminRow['admin_psw']?>" readonly="true" required></td>
+                      <td><input type="number" class="dissinputstyle" name="admin_status" value="<?= $adminRow['admin_status']?>" readonly="true" required min="0" max="1"></td>
+                      <td><input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯"></td>
+                      <td><input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成" disabled></td>
                       </form>
                       <td>
-                       
-                        <!-- <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0"> -->
                         <form action="deleteAdminData.php">
                             <input name="admin_no" type="hidden" value="<?= $adminRow['admin_no']?>">
                             <input class="btn btn-block btn-outline-primary" type="submit" value="刪除">
@@ -193,6 +177,7 @@ if( $errMsg != ""){ //例外
         e.target.parentNode.parentNode.children[1].firstChild.classList.remove("dissinputstyle");
         e.target.parentNode.parentNode.children[3].firstChild.classList.remove("dissinputstyle");
         e.target.parentNode.parentNode.children[4].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[6].firstChild.removeAttribute("disabled");
 
         // if (e.target.innerHTML == "編輯"){
 

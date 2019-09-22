@@ -13,9 +13,9 @@ try {
 		$newSession->bindValue(":length",$_REQUEST['length']);
 		$newSession->bindValue(":max_capacity",$_REQUEST['max_capacity']);
 		$newSession->execute();
-		//取得自動創號的管理員號碼
+		//取得自動創號的導覽場次號碼
         $session_no = $pdo->lastInsertId();
-        echo "新增管理員成功";
+        echo "新增導覽場次成功";
     	header('Location:resvSessionCapacity.php');
 	} catch (PDOException $e) {
 		$errMsg = $errMsg . "錯誤訊息: " . $e->getMessage() . "</br>";
