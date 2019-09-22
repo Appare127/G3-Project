@@ -11,39 +11,32 @@ if(!isset ($_SESSION['user_no'])){
 try {
   require_once('php/connectg3.php');
 
-  
-
   // $orderItems=$pdo->prepare('SELECT * FROM `product_order` p  join order_item o on p.order_no = o.order_no join product pro on pro.product_no = o.product_no where user_no = :user_no');
   // $orderItems->bindValue(':user_no',1);//$_POST['user_no']
   // $orderItems->execute();
 
-
-
-  
   //找會員
   $userItems=$pdo->prepare('SELECT * FROM `user` where user_no = :user_no');
   $userItems->bindValue(':user_no',@$_SESSION['user_no']);//$_SESSION['user_no']
   $userItems->execute();
-
 
   //找訂單
   $orders=$pdo->prepare('SELECT * FROM `product_order` where user_no = :user_no');
   $orders->bindValue(':user_no',@$_SESSION['user_no']);//$_SESSION['user_no']
   $orders->execute();
 
- //找訂單明細
+  //找訂單明細
   $orderItems=$pdo->prepare('SELECT * FROM  order_item o join product pro on pro.product_no = o.product_no where o.order_no = :order_no ');
   // $orderItems->execute();
 
-//找預約
+  //找預約
   $revs=$pdo->prepare('SELECT * FROM resv_order r join resv_session_capacity rc on r.session_no = rc.session_no where r.member_id = :member_id');
   $revs->bindValue(':member_id',@$_SESSION['user_no']);//$_SESSION['user_no']
   $revs->execute();
 
 
-//找收藏明細 且 狀態等於"1"就是收藏中的
+  //找收藏明細 且 狀態等於"1"就是收藏中的
   // $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = :user_no');
-
   $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = :user_no and f.favorite_status = 1');
   $loves->bindValue(':user_no',@$_SESSION['user_no']);//$_SESSION['user_no']
   $loves->execute();
@@ -66,21 +59,18 @@ try {
   @@include('template/csslink.html')
  <script src="js/plugin/Chart.js"></script>
 
-
+<!-- 
  <style>
         #msg {
             width: 266px;
             height: 266px;
             position: fixed;
             z-index: 999;
-            /* top: 0%; */
-            /* margin-top: -80px; */
             top: 0%;
             bottom: 0%;
             left: 0%;
             right: 0%;
             margin: auto;
-            /* margin-left: -133px; */
             background: #fff;
             box-shadow: 5px 5px 8px #999;
             font-size: 17px;
@@ -120,7 +110,7 @@ try {
             margin-right: 15px;
             cursor: pointer;
         }
-    </style>
+    </style> -->
 
 </head>
 
@@ -863,11 +853,27 @@ if ($errMsg !=""){
     </div>
 
   </section>
+
+  <!-- <div class="msg_alert" id="msg">
+
+<div class="msg_alert_container">
+
+<div class="msg_title" id="msg_top"><span>提示</span></div>
+<span class="btn_close" id="msg_clear">×</span>
+  
+<div class="msg_cont" id="msg_cont">'+e+'</div>
+<a href="#" class="msg_alert_close" id="msg_clear">關閉</a>
+
+ 
+</div>
+</div> -->
+
   @@include('template/footer.html')
 
   <?php
       }
   ?>
+
 
 
   <script src="js/member/member.js"></script>
