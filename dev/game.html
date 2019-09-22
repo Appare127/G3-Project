@@ -702,8 +702,8 @@ function chosenArea(area){
                 userData = JSON.parse(xhr.responseText);
                 // console.log(userData.animal_howl);
 
-                sessionStorage['animal_img'] = userData.my_animal_img;
-                sessionStorage['animal_name'] = userData.my_animal_name;
+                sessionStorage['my_animal_img'] = userData.my_animal_img;
+                sessionStorage['my_animal_name'] = userData.my_animal_name;
                 sessionStorage['animal_life'] =userData.animal_life;
                 sessionStorage['animal_jump'] =userData.animal_jump;
                 sessionStorage['game_record'] =userData.game_record;

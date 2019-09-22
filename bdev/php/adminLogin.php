@@ -16,7 +16,7 @@ try{
   $_SESSION["memName"] = $memRow["admin_name"];
   $_SESSION["memNo"] = $memRow["admin_no"];
   
-  	echo $memRow["admin_Name"];
+  	echo $memRow["admin_name"];
   }
 }catch(PDOException $e){
   //echo $e->getMessage();
