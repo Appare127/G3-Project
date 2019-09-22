@@ -925,7 +925,7 @@ $dblue:#7DC7C5;
         @include responds(large){
             display:flex;
             margin-top:-100px;
-            padding-left: 50px;
+            // padding-left: 50px;
         }
     }
     
@@ -941,7 +941,7 @@ $dblue:#7DC7C5;
             width: 50%;
         }
         @include responds(large){
-            width: 40%;
+            width: 48%;
             margin: 0px;
         }
     }
@@ -951,7 +951,7 @@ $dblue:#7DC7C5;
             width: 50%;
         }
         @include responds(large){
-            width: 40%;
+            width: 48%;
             margin: 0px;
         }
     }
@@ -960,45 +960,24 @@ $dblue:#7DC7C5;
         position:relative;
         display:flex;
         justify-content: center;
+        &:hover .top_info{
+            opacity:1;
+            transition:opacity 1s ;
+        }
     }
 //對話框
     .top_info{
         z-index: 1;
         position:absolute;
-        top: -52px;
-        left: 0px;
-        background-color: #fff;
-        border: 2px solid cadetblue;
-        box-shadow:2px 2px 0 1px cadetblue;
-        border-radius:5px;
-        padding:3px;
-        transform: rotate(-26deg);
-        @include responds(medium){
-            display:none;
-        }
-        @include responds(large){
-            top: -34px;
-            left: -22px;
-            display:block;
-         }
-        
-        p{
-            font-size: $s_fz;
-        }
-        
-//對話框的三角形
-        @include pseudo(after,'',0px ,0px  ){
-            // background-color: #000;
-            border-top:20px solid cadetblue;
-            border-left:20px solid transparent;
-            border-right:20px solid transparent;
-            position:absolute;
-            bottom: -20px;
-            left: 0;
-            right: 0;
-            margin: auto;
-            
-        }
+        bottom: 0%;
+        left: 50%;
+        transform: translate(-50%,0%);
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        background-color: rgba(0,0,0,0.5);
+        color:#fff;
+        opacity:0;
     }
 //圖片
     .top_img{
@@ -1020,11 +999,11 @@ $dblue:#7DC7C5;
     .top_btn{
         margin-top: auto;
         @include btn_cloud(53px,$col_btn_blue);
-       .btn_cloud{
-           display: block;
-           margin: 5px 0;
-           font-size: 14px;
-       }
+        .btn_cloud{
+            display: block;
+            margin: 5px 0;
+            font-size: 14px;
+        }
     }
 //石頭那塊
     .top_rock{
@@ -1032,44 +1011,13 @@ $dblue:#7DC7C5;
         background-size: contain;
         background-repeat: no-repeat;
         background-position:center;
-        padding-bottom: 38%;
+        padding-bottom: 65%;
         margin-top: -50px;
         @include responds(medium){
             margin-top: -40px;
         }
     }
-//牌子
-    .top_medal{
-        background-image: url(../img/home/medal.png);
-        background-size: contain;
-        background-repeat: no-repeat;
-        width: 30%;
-        margin: auto;
-        text-align: center;
-        height: 0px;
-        padding-bottom: 30%;
-        position:relative;
-        top:110px;
-        @include responds(medium){
-            top:55px;
-        }
-        
-        p{
-            padding: 5px;
-        }
-        .top_medal_content{
-            position:absolute;
-            width: 90%;
-            top: 50%;
-            left: 50%;
-            transform:translate(-50%,-50%);
-        }
-        .vote_rank{
-            color:red;
-            font-size: 3* $base_fz;
-            font-weight: bold;
-        }
-    }
+
 //大button
     .main_btn{
         position:absolute;
@@ -1393,8 +1341,8 @@ $dblue:#7DC7C5;
     .shop_rank_img{
         margin: auto;
         width: 90%;
-        // display:flex;
-        // justify-content: center;
+        display:flex;
+        justify-content: center;
         margin-top: 20px;
 
         img{
@@ -1526,6 +1474,9 @@ $dblue:#7DC7C5;
             position:absolute;
             width: 41%;
             overflow:hidden;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
 
 //做動畫用，包三張圖的
             .pic_chosen_flex{

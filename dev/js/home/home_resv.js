@@ -37,6 +37,12 @@ var resv_appear = new ScrollMagic.Scene({
     // .addIndicators()
     .addTo(controller)
 
+    var resv_appear = TweenMax.fromTo('.home_resv .container', 2, {
+        y: 30, opacity: 0
+    },
+        { y: 0, opacity: 1 }
+
+    );
 
 
 
