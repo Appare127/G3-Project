@@ -10,6 +10,8 @@
   background-size: cover;
   background-position: center bottom;
 
+  @include msgalert();
+
   h2{
     text-align: center;
     margin-bottom: 20px;
@@ -444,4 +446,43 @@
 
   }
   
+}
+
+//
+
+.msg_alert{
+  position:fixed;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin:auto;
+    background-color:rgba(0,0,0,0.6);
+    z-index: 2;
+}
+
+.msg_alert_container{
+    width: 90%;
+    position:fixed;
+    background-color: #faa;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    margin:auto;
+    border-radius:10px;
+    box-sizing:border-box;
+    padding: 10px;
+
+    @include responds(medium){
+      width: 50%;
+  }
+  @include responds(large){
+  width:30%;
+  }
+
+}
+
+.msg_close{
+  @include btn_cloud(100px,$col_btn_blue);
 }
