@@ -10,7 +10,7 @@
   background-size: cover;
   background-position: center bottom;
 
-  @include msgalert();
+  @include msgalert(#fdf6e7,$col_btn_pink,$col_btn_pink);
 
   h2{
     text-align: center;
