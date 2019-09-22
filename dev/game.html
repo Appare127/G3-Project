@@ -374,7 +374,7 @@ function animalWalking(trigger){
 
             if(trigger=='firstTime'){
                 if(sessionStorage['animal_jump']<=2 && sessionStorage['animal_life']<=2){
-                    console.log(1);
+                    // console.log(1);
                     randomTalk = [
                         [`${sessionStorage['user_name']} 你好啊~~`,`我們當好朋友吧~~`],
                         [`好想去${env}玩啊`,`感覺我在那裡能待很久`],
@@ -383,7 +383,7 @@ function animalWalking(trigger){
                     ];
                     n = rand(0,3);
                 }else if(sessionStorage['animal_jump']<=2 && sessionStorage['animal_life']>2){
-                    console.log(2);
+                    // console.log(2);
                     randomTalk = [
                         [`${sessionStorage['user_name']} 你好啊~~`,`我們當好朋友吧~~`],
                         [`好想去${env}玩啊`,`感覺我在那裡能待很久`],
@@ -391,7 +391,7 @@ function animalWalking(trigger){
                     ];
                     n = rand(0,2);
                 }else if(sessionStorage['animal_jump']>2 && sessionStorage['animal_life']>2){
-                    console.log(3);
+                    // console.log(3);
 
                     randomTalk = [
                         [`${sessionStorage['user_name']} 你好啊~~`,`我們當好朋友吧~~`],
@@ -399,14 +399,14 @@ function animalWalking(trigger){
                     ];
                     n = rand(0,1);
                 }else if(sessionStorage['animal_jump']>2 && sessionStorage['animal_life']<=2) {
-                    console.log(4);
+                    // console.log(4);
                     randomTalk = [
                         [`${sessionStorage['user_name']} 你好啊~~`,`我們當好朋友吧~~`],
                         [`好想去${env}玩啊`,`感覺我在那裡能待很久`],
                         [`新身體感覺好不舒服啊`,`感覺體力下滑了`]
                     ];
                     n = rand(0,2);
-                    console.log('n:'+n);
+                    // console.log('n:'+n);
                 }
 
 
@@ -417,7 +417,9 @@ function animalWalking(trigger){
                     $que(".animal_words")[0].classList.add('animalSayWords');//對話框移動
                     $que(".animal_words p")[0].innerText = randomTalk[n][0];
                     // `${sessionStorage['user_name']} 你好啊~~`;
-
+                        // if(n==0){
+                        //     audio.play();//播放聲音
+                        // }
                         setTimeout(function(){
                             $que(".animal_words p")[0].innerText = randomTalk[n][1];
                         },2500);
@@ -696,14 +698,17 @@ function chosenArea(area){
         var xhr = new XMLHttpRequest();
         xhr.onload=function (){
             if( xhr.status == 200 ){ 
-                // alert(JSON.parse(xhr.responseText));
+                // console.log(JSON.parse(xhr.responseText));
                 userData = JSON.parse(xhr.responseText);
+                // console.log(userData.animal_howl);
+
                 sessionStorage['animal_img'] = userData.my_animal_img;
                 sessionStorage['animal_name'] = userData.my_animal_name;
                 sessionStorage['animal_life'] =userData.animal_life;
                 sessionStorage['animal_jump'] =userData.animal_jump;
                 sessionStorage['game_record'] =userData.game_record;
                 sessionStorage['game_date'] =userData.game_date;
+                sessionStorage['animal_howl'] = userData.animal_howl;
                 sessionStorage['environ_adapt_1'] =userData.environ_adapt_1;
                 sessionStorage['environ_adapt_2'] =userData.environ_adapt_2;
                 sessionStorage['environ_adapt_3'] =userData.environ_adapt_3;
@@ -717,13 +722,13 @@ function chosenArea(area){
                 alert( xhr.status );
             }
         }
-        if(sessionStorage['user_no']==null){
-            sessionStorage['user_no'] = 1;
-        }
-        var url = "php/game/getCusAnimal.php?user_no="+ sessionStorage['user_no'];
+        if(sessionStorage['user_no']){
+                    var url = "php/game/getCusAnimal.php?user_no="+ sessionStorage['user_no'];
         xhr.open("Get", url, true);  //readyState : 1
         console.log(url);
         xhr.send( null );
+        }
+
     }   
   
     function getRankingData(){

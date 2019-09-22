@@ -46,7 +46,7 @@
                                         <i class="icon-user"></i>
                                     </span>
                                 </div>
-                                <input class="form-control" type="text" placeholder="Username">
+                                <input class="form-control" type="text" placeholder="Username" id="memId">
                             </div>
                             <div class="input-group mb-4">
                                 <div class="input-group-prepend">
@@ -54,12 +54,12 @@
                                         <i class="icon-lock"></i>
                                     </span>
                                 </div>
-                                <input class="form-control" type="password" placeholder="Password">
+                                <input class="form-control" type="password" placeholder="Password" id="memPsw">
                             </div>
                             <div class="row">
                                 <div class="col-6">
                                     <!-- <button class="btn btn-primary px-4" type="button">Login</button> -->
-                                    <a  href="animal_head.html" class="btn btn-primary px-4" >Login</a>
+                                    <a  href="animal_head.html" class="btn btn-primary px-4" id="loginBtn">Login</a>
 
                                 </div>
                                 <div class="col-6 text-right">
@@ -80,6 +80,81 @@
             Pace.restart()
         });
     </script>
+
+<script>
+function $id(id){
+  return document.getElementById(id);
+} 
+
+
+function sendForm(e){
+
+    var memId = $id("memId").value;
+    var memPsw = $id("memPsw").value;
+
+  //使用Ajax回server端檢查是否已登入
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function(){
+    if(xhr.status == 200){
+      //..................取回server端回傳的使用者資料
+        if(xhr.responseText.indexOf("sysError")!=-1){
+            alert("系統異常,請通知系統維護人員");
+        }else if(xhr.responseText.indexOf("loginError")!=-1){
+            alert("帳密錯誤");
+      }else{ //登入成功
+            console.log(xhr.responseText);
+            // document.getElementById("spanLogin").innerText = "登出";
+            // document.getElementById("lightBox").style.display="none";
+        }
+
+    }else{
+        alert(xhr.status);
+    }
+    }
+
+    xhr.open("post", "adminLogin.php",true);
+    xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+
+    var data_info = `memId=${memId}&memPsw=${memPsw}`;
+    xhr.send(data_info);
+
+    
+}
+
+
+
+function cancelLogin(){
+  //將登入表單上的資料清空，並將燈箱隱藏起來
+  $id("memId").value="";
+  $id("memPsw").value="";
+  $id("lightBox").style.display = "none";
+}
+
+function getLoginInfo(){
+  //----------------------------檢查使用者是否已登入
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function(){
+    if(xhr.status == 200){
+      if( xhr.responseText.indexOf("notLogin") == -1 ){ //已登入
+        document.getElementById("memName").innerText = xhr.responseText;
+        document.getElementById("spanLogin").innerText = "登出";
+      }
+    }else{
+      alert(xhr.status);
+    }
+  }
+  xhr.open("get", "getLoginInfo.php", true);
+  xhr.send(null);  
+}
+
+window.addEventListener("load", function(){
+
+$id("loginBtn").onclick = sendForm;
+  //===設定btnLoginCancel.onclick 事件處理程序是 cancelLogin
+// $id("btnLoginCancel").onclick = cancelLogin;  
+}, false);     
+    
+</script>
 </body>
 
 </html>

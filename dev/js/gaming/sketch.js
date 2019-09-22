@@ -5,6 +5,7 @@ let foods = [];
 let moneys = [];
 let wings = [];
 var drops = [];
+var stones =[];
 let uImg;
 let tImg;
 let rImg;
@@ -70,6 +71,7 @@ function preload() {
     bgImg = loadImage(scene[sessionStorage['sceneChoice']].area);
     rImg = loadImage(scene[sessionStorage['sceneChoice']].reward);
     wImg = loadImage('img/game/wings.png');
+    sImg = loadImage('img/game/gaming_stone.png');
     
     if(sessionStorage['sceneChoice']=='forest'){ //依據選擇的場景決定適用的環境適應能力值
         environ_adapt = sessionStorage['environ_adapt_1']*0.5;
@@ -135,7 +137,7 @@ function windowResized() {
 function touchStarted(){
     unicorn.jump(cusJump);
     
-    console.log(cusJump);
+ 
 }
 
 function draw() {
@@ -207,6 +209,7 @@ function draw() {
         }
 
     }
+
 
 
     
@@ -336,18 +339,19 @@ function draw() {
         if ( unicorn.hits(w) ) { //吃到翅膀後的行為
             flyingTime = timer;
             wings.splice(w,1);
-            textSize(18);
-            fill(33);
-            text(`飛行狀態 秒`, 3/5*width, 120);
-
- 
-
             flyStatus = true;
         }
-        if ( timer >= parseInt(flyingTime)+10 ){
-            flyStatus = false;
-        }
+        
     }
+    if ( timer >= parseInt(flyingTime)+10 ){
+        flyStatus = false;
+    }
+    if(timer>=parseInt(flyingTime) && timer< (flyingTime+10) ){
+        textSize(20);
+        fill(255,69,0);
+        text(`飛行狀態 ${10+flyingTime - timer}秒`, 3/5*width, 1/5*height+10);
+    }
+
 
 }
 

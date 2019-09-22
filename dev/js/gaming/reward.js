@@ -43,3 +43,17 @@ class Wing {
         image(wImg, this.x, this.y, this.r, this.r);
     }
 }
+
+class Stone {
+    constructor(){
+        this.r = 40;
+        this.x = width;
+        this.y = height*0.5;
+    }
+    move() {
+        this.x -=scrollSpeed;
+    }
+    show() {
+        image(sImg, this.x, this.y, this.r, this.r);
+    }
+}
