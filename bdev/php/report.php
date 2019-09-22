@@ -84,13 +84,9 @@ if( $errMsg != ""){ //例外
                       <td><input type="text" name="msg_no" value="<?= $reportRow['msg_no']?>" readonly="true" class="dissinputstyle"></td>
                       <td><input type="text" name="report_reason" value="<?= $reportRow['report_reason']?>" readonly="true" class="dissinputstyle"></td>
                       <td><input type="text" name="report_date" value="<?= $reportRow['report_date']?>" readonly="true" class="dissinputstyle"></td>
-                      <td><input type="text" name="report_status" value="<?= $reportRow['report_status']?>" readonly="true" class="dissinputstyle"></td>
-                      <td>
-                        <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
-                      </td>
-                      <td>
-                        <input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成">
-                      </td>
+                      <td><input type="number" name="report_status" value="<?= $reportRow['report_status']?>" readonly="true" class="dissinputstyle" required min="0" max="1"></td>
+                      <td><input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯"></td>
+                      <td><input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成" disabled></td>
                       </form>
                       
                     </tr>
@@ -142,6 +138,7 @@ if( $errMsg != ""){ //例外
         console.log(e.target.parentNode.parentNode.children[1]);   
         e.target.parentNode.parentNode.children[5].firstChild.removeAttribute("readonly");
         e.target.parentNode.parentNode.children[5].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[7].firstChild.removeAttribute("disabled");
       }
       
     

@@ -64,7 +64,7 @@
                       <tr> 
                         <td></td>
                         <td>
-                          <input type="text" name="hint_question" id="" size="60">
+                          <input type="text" name="hint_question" id="" size="60" required>
                         </td>
                         <td colspan="3">
                           <input class="btn btn-block btn-outline-primary addbtn" type="submit" value="新增">

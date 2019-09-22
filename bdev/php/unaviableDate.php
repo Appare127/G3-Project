@@ -60,13 +60,13 @@
                     </tr>
                   </thead>
                   <tbody>
-                  <form action="addUnavailableDate.php">
+                  <form action="addUnavailableDateData.php">
                     <tr> 
                       <td>
       
                       </td>
                       <td>
-                        <input type="text" name="date_unavailable" id="">
+                        <input type="date" name="date_unavailable" id="" required>
                       </td>
                       <td colspan="3">
                         <input class="btn btn-block btn-outline-primary addbtn" type="submit" value="新增">
@@ -92,13 +92,9 @@ if( $errMsg != ""){ //例外
                   <form action="updateUnavailableDate.php">
                     <tr>
                       <td><?php echo $unavailableDatesRow['date_no'];?><input name="date_no" type="hidden" value="<?= $unavailableDatesRow['date_no']?>"></td>
-                      <td><input type="text" name="date_unavailable" value="<?= $unavailableDatesRow['date_unavailable']?>" readonly="true"></td>
-                      <td>
-                        <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
-                      </td>
-                      <td>
-                        <input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成">
-                      </td>
+                      <td><input class="dissinputstyle" type="date" name="date_unavailable" value="<?= $unavailableDatesRow['date_unavailable']?>" readonly="true" required></td>
+                      <td><input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯"></td>
+                      <td><input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成" disabled></td>
                       </form>
                       
                     </tr>
@@ -148,7 +144,9 @@ if( $errMsg != ""){ //例外
   <script>
       function reversechange(e){
         console.log(e.target.parentNode.parentNode.children[1]);   
-        e.target.parentNode.parentNode.children[1].firstChild.removeAttribute("readonly");   
+        e.target.parentNode.parentNode.children[1].firstChild.removeAttribute("readonly");
+        e.target.parentNode.parentNode.children[1].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[3].firstChild.removeAttribute("disabled");   
       }
       
     
