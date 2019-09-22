@@ -74,9 +74,6 @@ function favorite(){
             }
 
         });
-            
-    
-    
         }
     }
 
@@ -197,6 +194,8 @@ function vote_php(){
     }}
 
 function  message_xml(e){
+ 
+    
     message_item=frank_rank();
     message_item.open("GET","php/frank/message.php?work_no="+e,true);
     message_item.onreadystatechange = message_php;
@@ -205,6 +204,8 @@ function  message_xml(e){
 function message_php(){
     if(message_item.readyState==4  && message_item.status==200){
         let message_arr= JSON.parse(message_item.responseText);
+        console.log( message_arr);
+        
         message_btn(message_arr); 
   // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
     }}
@@ -217,12 +218,14 @@ join();
 $('.frank_message_btn .btn_cloudp').click(function() {
        let e =$(this).find("input")[0].value;
  
-      $('.message_wrap_input input:eq(0)').val(e).attr({name:'work_no'})
+    
+      $('.message_wrap_input input:eq(0)').val(e).attr({name:'work_no',id:'msg_btn_no'})
         message_xml(e)
  });
 $('.frank_closs_btn').click(function(){
         $('.frank_message').hide();
         $('.message_itme').remove();
+        $(`#input_text`)[0].value="";
 });
   $('.frank_vote_btn .btn_cloudb').click(function(){
 
@@ -241,12 +244,6 @@ $('#msg_btn').click(function(){
 
 
 }
-
-
-
-
-
-
 //-------------------按鈕函式------------------
  function join(){
     // 先判斷sessionStorage有沒有會員登入資料，有才往下做轉圖檔工作
@@ -277,29 +274,30 @@ function message_btn(e){
     }
 
 function msg_value() {
-
-    
     if ($(`#input_text`).val()==0)
     { 
         return ;
     }
-    let msg_arr= $(`.message_wrap_input`).serializeArray();
-                
-  
-     console.log( sessionStorage['user_no']);
-   
-   
-    msg_xml=frank_rank();
+   // console.log( sessionStorage['user_no']);
+  msg_xml=frank_rank();
    msg_xml.onreadystatechange=
    function()
     {
         if (msg_xml.readyState==4 && msg_xml.status==200)
         {
-            console.log(msg_xml.responseText);
+         //  console.log(msg_xml.responseText);
         }
     }
-   console.log( sessionStorage['user_no']);
-    
-    msg_xml.open("GET","php/frank/msg.php?work_no="+msg_arr[0]["value"]+"&msg="+msg_arr[1]["value"]+"&user="+sessionStorage['user_no'],true);
-    msg_xml.send();
+  // console.log( sessionStorage['user_no']);
+         let msg_arr= $(`.message_wrap_input`).serializeArray();
+         msg_xml.open("GET","php/frank/msg.php?work_no="+msg_arr[0]["value"]+"&msg="+msg_arr[1]["value"]+"&user="+sessionStorage['user_no'],true);
+          msg_xml.send();
+     $('.message_itme').remove();
+     setTimeout(() => {
+         msg_revalue()
+     }, 100);  
+}
+function msg_revalue(){
+     let e =$(`#msg_btn_no`).val();
+    message_xml(e);
 }
