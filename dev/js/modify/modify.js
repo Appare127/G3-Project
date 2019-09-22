@@ -177,7 +177,7 @@ function drawbg_canvas(){
 
 //alert訊息
 function alert(title,text){
-    $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>'+title+'</span></div><span class="btn_close msg_clear">×</span><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="#" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
+    $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>'+title+'</span></div><span class="btn_close msg_clear">×</span><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
     $(".msg_clear").click(function (){
     $("#msg").remove();
     
@@ -234,10 +234,15 @@ function dopic(){
     }else{
         // document.getElementsByClassName('remind_login')[0].classList.add('show');
         alert("提示",`<p>請先登入後<br>才能把您的動物儲存下來</p>
-        <a href="javascript: openlogin()" class="btn_cloudb" >
+        <a href="javascript:;" class="btn_cloudb login_js">
             登入<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span>
         </a>`);
-    };
+
+        $(".login_js").click(function (){
+            $("#msg").remove();
+            openlogin();
+            });
+        };
 }
 
 
