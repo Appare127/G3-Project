@@ -23,21 +23,32 @@ class Unicorn {
         if(flyStatus == true){
             this.vy = jumpForce;
         }else if(flyStatus ==false){
-            if(this.y==height - this.r){
+            if(strongStatus ==false && this.y==height - this.r){
                 this.vy = jumpForce;
             }
         } 
+        if(strongStatus ==true && this.y==height - 350){
+            this.vy = jumpForce;
+        }
     }
     hits(train){ 
-        
-        return collideCircleCircle(this.x,this.y,this.r-20,train.x,train.y,train.r);
+        if(strongStatus==true){
+            // console.log('近來');
+            return collideCircleCircle(this.x,this.y,600,train.x,train.y,train.r);
+        }else{
+            return collideCircleCircle(this.x,this.y,this.r-20,train.x,train.y,train.r);
+        }
     }
 
 
     move() {
         this.y += this.vy; //彈跳力
         this.vy += this.gravity;
-        this.y = constrain(this.y, 0, height - this.r);
+        if(strongStatus==true){
+            this.y = constrain(this.y, 0, height-350);            
+        }else {
+            this.y = constrain(this.y, 0, height - this.r);
+        }
         this.x = constrain(this.x,this.r, width+this.r);
     }
 }

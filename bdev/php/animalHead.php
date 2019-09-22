@@ -3,7 +3,7 @@
   $errMsg = "";
   try{
     require_once("connectg3.php");
-
+ 
     $sql = "select * from head";
     $heads  = $pdo->query($sql);
     $headRows = $heads -> fetchAll(PDO::FETCH_ASSOC);
@@ -206,7 +206,13 @@
 			return document.getElementById(id);
     }
 
-    
+    //填入使用者名字到右上角
+    function userName(){
+      document.querySelector('.nav-link').innerHTML += `<span>Hi! ${sessionStorage['admin_name']}</span>`
+    }
+
+
+
     // 不用了
     // // 判斷新增按鈕時，每個欄位是否都有值
     // function checkValue(e){
@@ -347,6 +353,7 @@
     }
    
     window.addEventListener('load',function(){
+      userName();
         for(i=0; i<combination_btnimg.length;i++){
         combination_btnimg[i].addEventListener('change',changeCombinationImg,false);
       }

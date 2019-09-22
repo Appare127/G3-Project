@@ -58,7 +58,7 @@
             </div>
             <div class="role_pic">
                 <div class="info_pic">
-                    <img src="img/game/info_pic.png" alt="">
+                    <img src="./img/home/1.png" alt="">
                     <div class="animal_words"><p></p></div>
                 </div>
                 <div class="info_name">
@@ -357,7 +357,7 @@ function animalWalking(trigger){
         $que(".animal_words")[0].style.display="none";
 
 
-    if(window.innerWidth>=768 && sessionStorage['animal_img'] && sessionStorage['animal_name']){
+    if(window.innerWidth>=768 && sessionStorage['my_animal_img'] && sessionStorage['my_animal_name']){//如果有登入
         var environ = [sessionStorage['environ_adapt_1'],sessionStorage['environ_adapt_2'],sessionStorage['environ_adapt_3']];
         environ.sort(function(a,b){ return parseInt(b)-parseInt(a) });
 
@@ -489,9 +489,9 @@ function animalWalking(trigger){
                 setTimeout(function(){$que(".animal_words")[0].style.display="none";},2000);
                 
             }
-
-
     }
+
+
 
     // console.log($que(".info_pic img")[0].classList);
 }
@@ -716,17 +716,28 @@ function chosenArea(area){
                 //顯示角色資料
                 
                 $que(".info_pic img")[0].src = userData.my_animal_img +'?'+ new Date().getTime();
-                $que(".info_name")[0].innerText = sessionStorage['animal_name'];
+                $que(".info_name")[0].innerText = sessionStorage['my_animal_name'];
 
             }else{
                 alert( xhr.status );
             }
         }
         if(sessionStorage['user_no']){
-                    var url = "php/game/getCusAnimal.php?user_no="+ sessionStorage['user_no'];
-        xhr.open("Get", url, true);  //readyState : 1
-        console.log(url);
-        xhr.send( null );
+            var url = "php/game/getCusAnimal.php?user_no="+ sessionStorage['user_no'];
+            xhr.open("Get", url, true);  //readyState : 1
+            xhr.send( null );
+        }else{
+                sessionStorage['my_animal_img'] = './img/home/1.png';
+                // sessionStorage['my_animal_name'] = userData.my_animal_name;
+                sessionStorage['animal_life'] =2;
+                sessionStorage['animal_jump'] =1;
+                // sessionStorage['game_record'] =userData.game_record;
+                // sessionStorage['game_date'] =userData.game_date;
+                // sessionStorage['animal_howl'] = userData.animal_howl;
+                sessionStorage['environ_adapt_1'] =5;
+                sessionStorage['environ_adapt_2'] =5;
+                sessionStorage['environ_adapt_3'] =5;
+            
         }
 
     }   
@@ -741,6 +752,7 @@ function chosenArea(area){
 
                 //塞入前三名照片跟資料
                 $que('.top1_title img')[0].src = userDataDesc[0].my_animal_img;
+                console.log('userDataDesc[0].my_animal_img'+userDataDesc[0].my_animal_img);
                 $que('.top1_title .top_score')[0].innerText = userDataDesc[0].game_record + '秒';
                 $que('.top1_title .top_animal')[0].innerText = userDataDesc[0].my_animal_name;
                 $que('.top1_title .top_player')[0].innerText = userDataDesc[0].user_name;

@@ -13,6 +13,8 @@ let mImg;
 let bgImg;
 let heartImg;
 let flyingTime;
+let strongTime;
+let stoneLife;
 
 let scrollSpeed = 10; 
 let x1 = 0;
@@ -28,6 +30,8 @@ let cusJump;
 let environ_adapt;
 let adapt_level;
 let flyStatus = false;
+let strongStatus = false;
+// let hitStatus = false;
 
 
 let scene = { //場景資訊
@@ -65,7 +69,7 @@ function preload() {
     if(sessionStorage['sceneChoice'] == null){
         sessionStorage['sceneChoice'] = 'desert';//使用者若沒選 預定場景為沙漠
     }
-    uImg = loadImage(sessionStorage['animal_img']+'?'+ new Date().getTime());//抓取最新的客製動物圖片
+    uImg = loadImage(sessionStorage['my_animal_img']+'?'+ new Date().getTime());//抓取最新的客製動物圖片
     tImg = loadImage(scene[sessionStorage['sceneChoice']].monster);
     fImg = loadImage(scene[sessionStorage['sceneChoice']].fallen)
     bgImg = loadImage(scene[sessionStorage['sceneChoice']].area);
@@ -200,7 +204,7 @@ function draw() {
     if(timer<=25 && timer>=19){
         textSize(24);
         fill(33, 99, 100);
-        text("系統提示:有流星~快許願(*￣▽￣)/‧☆*~~~~~~~", 1/3*width, 1.5/3*height);
+        text("系統提示:有流星~快許願(*￣▽￣)/‧☆*~~~~~~~", 1/3*width, 1/3*height);
 
     }
     if(timer>=20){ //20秒後開始掉隕石
@@ -237,6 +241,10 @@ function draw() {
     if(random(1)<0.0005*environ_adapt){
         wings.push(new Wing());
     }
+    //
+    if(random(1)<0.0005*environ_adapt){
+        stones.push(new Stone());
+    }
 
     //動物的行為
     unicorn.show();
@@ -259,10 +267,17 @@ function draw() {
     for (let t of trains) {
         t.move();
         t.show(scene[sessionStorage['sceneChoice']].mWidth,scene[sessionStorage['sceneChoice']].mHeight);
-        if (unicorn.hits(t)) {
-            // console.log(life)
 
-            if (trains.indexOf(t)  != test){
+        
+        if (unicorn.hits(t)) {
+            if(strongStatus == true){
+
+                setTimeout(function(){
+                    trains.splice(t,1);
+                },1000);
+            }
+
+            if (trains.indexOf(t)  != test){//避免重複扣掉生命
                 life--;
                 test = trains.indexOf(t);
             }
@@ -288,11 +303,13 @@ function draw() {
         f.show();
         if (unicorn.hits(f)) {
             // console.log(life)
+            if(strongStatus == true){
 
-            if (fallens.indexOf(f)  != test){
-                life--;
-                test = fallens.indexOf(f);
+                setTimeout(function(){
+                    fallens.splice(f,1);
+                },1000);
             }
+
 
 
             if (life == 0) { //死掉後
@@ -346,12 +363,44 @@ function draw() {
     if ( timer >= parseInt(flyingTime)+10 ){
         flyStatus = false;
     }
+
     if(timer>=parseInt(flyingTime) && timer< (flyingTime+10) ){
         textSize(20);
         fill(255,69,0);
-        text(`飛行狀態 ${10+flyingTime - timer}秒`, 3/5*width, 1/5*height+10);
+        text(`飛行狀態: ${10+flyingTime - timer}秒`, 3/5*width, 1/5*height+10);
     }
 
 
+
+    //石頭的行為
+    for(let s of stones){
+
+        s.move();
+        s.show();
+
+        if ( unicorn.hits(s) ) { //吃到石頭後的行為
+            strongTime = timer;
+            stones.splice(s,1);
+            strongStatus = true;
+            unicorn.r = 400;
+            stoneLife = life;
+            
+            unicorn.y = height-350;
+        }
+    }
+    if(strongStatus == true){
+        life = stoneLife;
+    }
+    if ( timer >= parseInt(strongTime)+10 ){
+        strongStatus = false;
+        unicorn.r = 150;
+        // unicorn.y = height;
+    }
+
+    if(timer>=parseInt(strongTime) && timer< (strongTime+10) ){
+        textSize(20);
+        fill(255,69,0);
+        text(`無敵狀態: ${10+strongTime - timer}秒`, 3/5*width, 1/5*height+30);
+    }
 }
 

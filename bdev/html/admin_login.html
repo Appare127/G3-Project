@@ -99,13 +99,12 @@ function sendForm(e){
             
             if(xhr.responseText.indexOf("查無此人")!=-1){
                 alert("帳號密碼錯誤!");
-                e.preventDefault();
-                
             }else{ 
                 console.log(xhr.responseText);
+                sessionStorage['admin_name'] = xhr.responseText;
                 // document.getElementById("spanLogin").innerText = "登出";
                 // document.getElementById("lightBox").style.display="none";
-                window.location.assign("animal_head.html");
+                window.location.assign("animalHead.php");
             }
 
         }else{                                  
