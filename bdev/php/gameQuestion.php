@@ -69,25 +69,25 @@
                     <tr> 
                       <td></td>
                       <td>
-                        <input type="text" name="question_name" id="" required>
+                        <input type="text" name="question_name" id="" maxlength="255" required>
                       </td>
                       <td>
-                        <input type="text" name="question_option1" id="" required>
+                        <input type="text" name="question_option1" id="" maxlength="255" required>
                       </td>
                       <td>
-                        <input type="text" name="question_option2" id="" required>
+                        <input type="text" name="question_option2" id="" maxlength="255" required>
                       </td>
                       <td>
-                        <input type="text" name="question_option3" id="" required>
+                        <input type="text" name="question_option3" id="" maxlength="255" required>
                       </td>
                       <td>
-                        <input type="text" name="question_option4" id="" required>
+                        <input type="text" name="question_option4" id="" maxlength="255" required>
                       </td>
                       <td>
-                        <input type="text" name="question_ans" id="" size="4">
+                        <input type="number" name="question_ans" id="" size="4" min="1" max="4">
                       </td>
                       <td>
-                        <input type="number" name="question_status" id="" size="4" required min="1" max="1">
+                        <input type="number" name="question_status" id="" size="4" required min="0" max="1">
                       </td>
                       <td>
                         <input type="text" name="ans_description" id="" required>
@@ -114,14 +114,14 @@
                   <form action="updateGameQuestionData.php">
                     <tr>
                       <td><?php echo $gameQuestionRow['question_no'];?><input name="question_no" type="hidden" value="<?= $gameQuestionRow['question_no']?>"></td>
-                      <td><input type="text" name="question_name" value="<?= $gameQuestionRow['question_name']?>" readonly="true" class="dissinputstyle" required></td>
-                      <td><input type="text" name="question_option1" value="<?= $gameQuestionRow['question_option1']?>" readonly="true" class="dissinputstyle" required></td>
-                      <td><input type="text" name="question_option2" value="<?= $gameQuestionRow['question_option2']?>" readonly="true" class="dissinputstyle" required></td>
-                      <td><input type="text" name="question_option3" value="<?= $gameQuestionRow['question_option3']?>" readonly="true" class="dissinputstyle" required></td>
-                      <td><input type="text" name="question_option4" value="<?= $gameQuestionRow['question_option4']?>" readonly="true" class="dissinputstyle" required></td>
-                      <td><input type="text" name="question_ans" size="4" value="<?= $gameQuestionRow['question_ans']?>" readonly="true" class="dissinputstyle" required></td>
+                      <td><input type="text" name="question_name" value="<?= $gameQuestionRow['question_name']?>" readonly="true" class="dissinputstyle" maxlength="255" required></td>
+                      <td><input type="text" name="question_option1" value="<?= $gameQuestionRow['question_option1']?>" readonly="true" class="dissinputstyle" maxlength="255" required></td>
+                      <td><input type="text" name="question_option2" value="<?= $gameQuestionRow['question_option2']?>" readonly="true" class="dissinputstyle" maxlength="255" required></td>
+                      <td><input type="text" name="question_option3" value="<?= $gameQuestionRow['question_option3']?>" readonly="true" class="dissinputstyle" maxlength="255" required></td>
+                      <td><input type="text" name="question_option4" value="<?= $gameQuestionRow['question_option4']?>" readonly="true" class="dissinputstyle" maxlength="255" required></td>
+                      <td><input type="number" name="question_ans" size="4" value="<?= $gameQuestionRow['question_ans']?>" readonly="true" class="dissinputstyle" min="1" max="4" required></td>
                       <td><input type="number" name="question_status" size="4" value="<?= $gameQuestionRow['question_status']?>" readonly="true" class="dissinputstyle" required min="0" max="1"></td>
-                      <td><input type="text" name="ans_description" value="<?= $gameQuestionRow['ans_description']?>" readonly="true" class="dissinputstyle" required></td>
+                      <td><input type="text" name="ans_description" value="<?= $gameQuestionRow['ans_description']?>" readonly="true" class="dissinputstyle" maxlength="255" required></td>
                       <td><input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯"></td>
                       <td><input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成" disabled></td>
                       </form>

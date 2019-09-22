@@ -69,13 +69,13 @@
       
                       </td>
                       <td>
-                        <input type="text" name="admin_name" id="" required>
+                        <input type="text" name="admin_name" id="" maxlength="10" required>
                       </td>
                       <td>
-                        <input type="text" name="admin_id" id="" required>
+                        <input type="text" name="admin_id" id="" maxlength="10" required>
                       </td>
                       <td>
-                        <input type="text" name="admin_psw" id="" required>
+                        <input type="text" name="admin_psw" id="" maxlength="15" required>
                       </td>
                       <td>
                         <input type="number" name="admin_status" id="" required min="0" max="1" required>
@@ -109,9 +109,9 @@ if( $errMsg != ""){ //例外
                   <form action="updateAdminData.php" method="post">
                     <tr>
                       <td><?php echo $adminRow['admin_no'];?><input name="admin_no" type="hidden" value="<?= $adminRow['admin_no']?>"></td>
-                      <td><input type="text" class="dissinputstyle" name="admin_name" value="<?= $adminRow['admin_name']?>" readonly="true" required></td>
-                      <td><input type="text" class="dissinputstyle" name="admin_id" value="<?= $adminRow['admin_id']?>" readonly="true" required></td>
-                      <td><input type="text" class="dissinputstyle" name="admin_psw" value="<?= $adminRow['admin_psw']?>" readonly="true" required></td>
+                      <td><input type="text" class="dissinputstyle" name="admin_name" value="<?= $adminRow['admin_name']?>" readonly="true" maxlength="10" required></td>
+                      <td><input type="text" class="dissinputstyle" name="admin_id" value="<?= $adminRow['admin_id']?>" readonly="true" maxlength="10" required></td>
+                      <td><input type="text" class="dissinputstyle" name="admin_psw" value="<?= $adminRow['admin_psw']?>" readonly="true" maxlength="15" required></td>
                       <td><input type="number" class="dissinputstyle" name="admin_status" value="<?= $adminRow['admin_status']?>" readonly="true" required min="0" max="1"></td>
                       <td><input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯"></td>
                       <td><input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成" disabled></td>

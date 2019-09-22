@@ -75,7 +75,7 @@
                         <tr class="tr_title">
                             <td></td>
                             <td>
-                                <input type="text" name="leg_name" id="" required> 
+                                <input type="text" name="leg_name" id="" maxlength="10" required> 
                             </td>
                             <td>
                                 <input type="file" id="select_leg_img" name="leg_img" accept="image/*" width="180" required>
@@ -101,7 +101,7 @@
                                 <input type="number" name="leg_status" id="" size="4" required min="0" max="1">
                             </td>
                             <td>
-                                <input type="text" name="leg_ch_name" id="" required>
+                                <input type="text" name="leg_ch_name" id="" maxlength="10" required>
                             </td>
                             <td colspan="2">
                                 <input class="btn btn-block btn-outline-primary addbtn" type="submit" value="新增">
@@ -127,7 +127,7 @@
                         <form action="updateAnimalLegData.php" method="post" enctype="multipart/form-data">
                           <tr>
                             <td><?php echo $legRow['leg_no'];?><input name="leg_no" type="hidden" value="<?= $legRow['leg_no']?>"></td>
-                            <td><input type="text" name="leg_name" value="<?= $legRow['leg_name']?>" readonly="true" class="dissinputstyle" required></td>
+                            <td><input type="text" name="leg_name" value="<?= $legRow['leg_name']?>" readonly="true" class="dissinputstyle" maxlength="10" required></td>
                             <td><img width="45%" src="../<?= $legRow['leg_img']?>?<?php echo time();?>" alt="" class="image"><input type="file" class="leg_btnimg" name="leg_img" size="10" style="display:none" readonly="true"></td>
                             <td><img width='50%' src="../<?= $legRow['leg_img_combination']?>?<?php echo time();?>" alt=""><input type="file" class="combination_btnimg"name="leg_img_combination" size="10" style="display:none" readonly="true"></td>
                             <td><input type="number" name="leg_jump" value="<?= $legRow['leg_jump']?>" readonly="true" size="4" class="dissinputstyle" min="1" max="5" required></td>
@@ -135,7 +135,7 @@
                             <td><input type="number" name="leg_environment2" value="<?= $legRow['leg_environment2']?>" readonly="true" size="6" class="dissinputstyle" min="1" max="9" required></td>
                             <td><input type="number" name="leg_environment3" value="<?= $legRow['leg_environment3']?>" readonly="true" size="6" class="dissinputstyle" min="1" max="9" required></td>
                             <td><input type="number" name="leg_status" value="<?= $legRow['leg_status']?>" readonly="true" size="4" class="dissinputstyle" min="0" max="1" required></td>
-                            <td><input type="text" name="leg_ch_name" value="<?= $legRow['leg_ch_name']?>" readonly="true" class="dissinputstyle" required></td>
+                            <td><input type="text" name="leg_ch_name" value="<?= $legRow['leg_ch_name']?>" readonly="true" class="dissinputstyle" maxlength="10" required></td>
                             <td><input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯"></td>
                             <td><input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成" disabled></td>
                           </form>
