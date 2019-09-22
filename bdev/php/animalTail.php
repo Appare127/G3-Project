@@ -71,7 +71,7 @@
                         <tr class="tr_title">
                             <td></td>
                             <td>
-                                <input type="text" name="tail_name" id="" required>
+                                <input type="text" name="tail_name" id="" maxlength="10" required>
                             </td>
                             <td>
                                 <img width="45%" src="" id="tail_img_preview">
@@ -85,7 +85,7 @@
                                 <input type="number" name="tail_status" id="" size="4" required min="0" max="1">
                             </td>
                             <td>
-                                <input type="text" name="tail_ch_name" id="" required>
+                                <input type="text" name="tail_ch_name" id="" maxlength="10" required>
                             </td>
                             <td colspan="2">
                                 <input class="btn btn-block btn-outline-primary addbtn" type="submit" value="新增">
@@ -111,11 +111,11 @@
                         <form action="updateAnimalTailData.php" method="post" enctype="multipart/form-data">
                           <tr>
                             <td><?php echo $tailRow['tail_no'];?><input name="tail_no" type="hidden" value="<?= $tailRow['tail_no']?>"></td>
-                            <td><input type="text" name="tail_name" value="<?= $tailRow['tail_name']?>" readonly="true" class="dissinputstyle" required></td>
+                            <td><input type="text" name="tail_name" value="<?= $tailRow['tail_name']?>" readonly="true" class="dissinputstyle" maxlength="10" required></td>
                             <td><img width="45%" src="../<?= $tailRow['tail_img']?>?<?php echo time();?>" alt="" class="image"><input type="file" class="tail_btnimg" name="tail_img" size="10" style="display:none" readonly="true"></td>
                             <td><img width='50%' src="../<?= $tailRow['tail_img_combination']?>?<?php echo time();?>" alt=""><input type="file" class="combination_btnimg"name="tail_img_combination" size="10" style="display:none" readonly="true"></td>
                             <td><input type="number" name="tail_status" value="<?= $tailRow['tail_status']?>" readonly="true" size="4" class="dissinputstyle" min="0" max="1" required></td>
-                            <td><input type="text" name="tail_ch_name" value="<?= $tailRow['tail_ch_name']?>" readonly="true" class="dissinputstyle" required></td>
+                            <td><input type="text" name="tail_ch_name" value="<?= $tailRow['tail_ch_name']?>" readonly="true" class="dissinputstyle" maxlength="10" required></td>
                             <td><input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯"> </td>
                             <td><input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成" disabled></td>
                           </form>

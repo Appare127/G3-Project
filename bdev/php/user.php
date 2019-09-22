@@ -82,17 +82,13 @@ if( $errMsg != ""){ //例外
                   <form action="updateUserData.php" method="post">
                     <tr> 
                       <td><?php echo $userRow['user_no'];?><input name="user_no" type="hidden" value="<?= $userRow['user_no']?>"></td>
-                      <td><input class="dissinputstyle" name="user_id" value="<?= $userRow['user_id']?>" readonly="true" size="6"></td>
-                      <td><input class="dissinputstyle" name="user_name" value="<?= $userRow['user_name']?>" readonly="true" size="8"></td>
-                      <td><input class="dissinputstyle" name="user_email" value="<?= $userRow['user_email']?>" readonly="true" size="16"></td>
-                      <td><input class="dissinputstyle" name="user_tel" value="<?= $userRow['user_tel']?>" readonly="true" size="10"></td>
-                      <td><input class="dissinputstyle" name="user_status" value="<?= $userRow['user_status']?>" readonly="true" size="3"></td>
-                      <td>
-                        <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
-                      </td>
-                      <td>
-                        <input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成">
-                      </td>
+                      <td><input class="dissinputstyle" name="user_id" value="<?= $userRow['user_id']?>" readonly="true" size="6" maxlength="10"></td>
+                      <td><input class="dissinputstyle" name="user_name" value="<?= $userRow['user_name']?>" readonly="true" size="8" maxlength="10"></td>
+                      <td><input class="dissinputstyle" name="user_email" value="<?= $userRow['user_email']?>" readonly="true" size="16" maxlength="255"></td>
+                      <td><input class="dissinputstyle" name="user_tel" value="<?= $userRow['user_tel']?>" readonly="true" size="10" maxlength="10"></td>
+                      <td><input class="dissinputstyle" name="user_status" value="<?= $userRow['user_status']?>" type="number" readonly="true" size="3" min="0" max="1" required></td>
+                      <td><input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯"></td>
+                      <td><input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成" disabled></td>
                       </form>
                     </tr>
                  
@@ -143,6 +139,7 @@ if( $errMsg != ""){ //例外
         console.log(e.target.parentNode.parentNode.children[1]);   
         e.target.parentNode.parentNode.children[5].firstChild.removeAttribute("readonly");
         e.target.parentNode.parentNode.children[5].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[7].firstChild.removeAttribute("disabled");
       }
       
     

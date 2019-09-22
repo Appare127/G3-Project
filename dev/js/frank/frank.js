@@ -1,10 +1,10 @@
 window.addEventListener("load", init, false);
 window.addEventListener("resize", resize, false);
 function init(){
+  
        owlCarousel_img();
-       
       frank_vote_rank();
-   //   vote_xml();
+      vote_xml();
       activity_button();
      
 }
@@ -23,71 +23,76 @@ function favorite(){
     let xhr = new XMLHttpRequest();
 
     let hearts = document.getElementsByClassName('heart');
-
+    
     for(let i=0;i<hearts.length;i++){
         
+        
         hearts[i].addEventListener('click',function(e){
-            // alert(111);
+            /// alert(111);
             xhr.onload = function(){ 
                 if(xhr.status==200){
                    console.log(xhr.responseText);
-        
                 }else{
                   alert(xhr.status);
                 }
-        
               }
-        
             if(sessionStorage['user_name']){
                 if(e.target.title == "加入收藏"){
                     option='love';
                             this.src = "img/frank/plike.png";
                             this.title = "取消收藏";
-
                         //設定好所要連結的程式
                         var url = "php/frank/love.php?user_no="+sessionStorage['user_no']+'&work_no='+this.id.replace('NO_','')+'&option='+option;
-                        //   console.log(url);
+                           console.log(url);
                         xhr.open("GET", url, true); 
                         //送出資料           
                         xhr.send(null);
-
                 }else{
                     option='dislove';
                             this.src = "img/frank/wlike.png";
                             this.title = "加入收藏";
-
                         //設定好所要連結的程式
                         var url = "php/frank/dislove.php?user_no="+sessionStorage['user_no']+'&work_no='+this.id.replace('NO_','')+'&option='+option;
                         //   console.log(url);
                         xhr.open("GET", url, true); 
                         //送出資料           
                         xhr.send(null);
-
-
                     }
-
                 // 如果sessionStorage沒有登入，則彈出提示登入的視窗
             }else{
                 alert("請先登入會員");
                 // $id('login_gary').style.display = 'block';
-
             }
-
         });
         }
+         heart_xml()
     }
+function heart_item(e){
+    let heart=Array();
+    let hearts = document.getElementsByClassName('heart');
+    for (let i = 0; i < hearts.length; i++) {
+        heart[i]= hearts[i].id.replace('NO_','');
 
-// function favorite(){
-//  $(".heart").click(function(e){
-       
-//     if(e.target.title == "加入收藏"){
 
-//         this.src = "img/frank/plike.png";
-//         this.title = "取消收藏"
-//     }else{
-//         this.src = "img/frank/wlike.png";
-//         this.title = "加入收藏";
-//     }});}
+        for (let j = 0; j < e.length; j++) {
+         if ( e[j]['work_no']==heart[i]) {
+              
+                        hearts[i].src = "img/frank/plike.png";
+                           hearts[i].title = "取消收藏";
+         }}}
+         }
+
+
+
+function heart_item_exit(){
+     let heart=Array();
+    let hearts = document.getElementsByClassName('heart');
+     for (let i = 0; i < hearts.length; i++) {         
+                          hearts[i].src = "img/frank/wlike.png";
+                           hearts[i].title = "加入收藏";  
+                             console.log(hearts[i]);
+         }}
+
 
 
 
@@ -134,7 +139,8 @@ for (let i = 0; i < vote_rank.length -4; i++) {
      let $input=(`<input type="hidden" name="work_no2"></input>`);
      let $input2=(`<input type="hidden" name="work_no3"></input>`)
      $(`#frank_player_items${i} .frank_message_btn .btn_cloudp `).append($input);
-     $(`#frank_player_items${i} .frank_player_btn .btn_cloudb`).append($input2);     
+     $(`#frank_player_items${i} .frank_player_btn .btn_cloudb`).append($input2);   
+                        
 }
    for (let i = 0; i < vote_rank.length -1; i++) {
     $id("vote"+`${i}`).innerText=vote_rank[i]["vote"];
@@ -146,7 +152,9 @@ for (let i = 0; i < vote_rank.length -4; i++) {
     $("input[name='work_no2']")[i].value=vote_rank[i]["work_no"];
     $("input[name='work_no3']")[i].value=vote_rank[i]["work_no"];
     $(`.heart:eq(${i})`).attr('id','NO_'+(vote_rank[i]["work_no"]));
+    
  }
+   heart_item_exit()
  favorite();
 }}
 
@@ -189,13 +197,11 @@ function  vote_xml(){
 }
 function vote_php(){
     if(vote_item.readyState==4  && vote_item.status==200){
-        let vote_arr= JSON.parse(vote_item.responseText);
+     //   let vote_arr= JSON.parse(vote_item.responseText);
   // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
     }}
 
 function  message_xml(e){
- 
-    
     message_item=frank_rank();
     message_item.open("GET","php/frank/message.php?work_no="+e,true);
     message_item.onreadystatechange = message_php;
@@ -205,10 +211,24 @@ function message_php(){
     if(message_item.readyState==4  && message_item.status==200){
         let message_arr= JSON.parse(message_item.responseText);
         console.log( message_arr);
-        
         message_btn(message_arr); 
-  // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
     }}
+
+function heart_xml(){
+    console.log(sessionStorage['user_no']);
+    if (sessionStorage['user_no']) {
+    let e=sessionStorage['user_no'];
+    heart=frank_rank();
+    heart.open("GET","php/frank/hearts.php?user="+e,true);
+    heart.onreadystatechange = heart_php;
+    heart.send(null);
+    }
+}
+function heart_php(){
+    if(heart.readyState==4  && heart.status==200){
+        let heart_arr= JSON.parse(heart.responseText);
+     heart_item(heart_arr);
+    }}    
 
 //--------------------按鈕類--------------------------
 function activity_button(){
@@ -241,6 +261,19 @@ $('.frank_expand_button').click(function(){
 $('#msg_btn').click(function(){
    msg_value(); 
 })
+$('#login_btn').click(function(){
+       setTimeout(() => {
+              if (sessionStorage['user_name']) {
+            heart_xml();
+     }
+     }, 100);  
+})
+$('#login_text').click(function(){
+      heart_item_exit();
+     
+      
+})
+
 
 
 }
@@ -262,7 +295,7 @@ function message_btn(e){
       })
     for (let i = 0; i < message_arr.length; i++) {
     $("#frank_message_content").append($("#message_wrap").clone(true).attr({id:'message_itme'+i,class:'message_itme frank_message_wrap'}));
-    $(`#message_itme${i}   figure:eq(0)`).css("background",`${message_arr[i]['my_animalbg_img']}`);  
+    $(`#message_itme${i}   figure:eq(0)`).css("background-image",`url(${message_arr[i]['my_animal_bg_img']})`);
     $(`#message_itme${i}  .frank_megsage_memname p:eq(0)`).text(message_arr[i]['user_name']);
     $(`#message_itme${i}  .frank_megsage_memname p:eq(1)`).text(message_arr[i]['msg_date']);
     $(`#message_itme${i}  .frank_message_box p:eq(0)`).text(message_arr[i]['msg_content']);
@@ -285,7 +318,7 @@ function msg_value() {
     {
         if (msg_xml.readyState==4 && msg_xml.status==200)
         {
-         //  console.log(msg_xml.responseText);
+          console.log(msg_xml.responseText);
         }
     }
   // console.log( sessionStorage['user_no']);

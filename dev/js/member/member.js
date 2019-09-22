@@ -278,7 +278,7 @@ function setLove(){
 
           //如果資料庫修改成功 在remove掉div
           my_love.removeChild(e.target.parentNode.parentNode);
-          console.log(e.target.parentNode.parentNode);
+          // console.log(e.target.parentNode.parentNode);
           // alert('取消收藏');
 
         }else{
@@ -305,14 +305,13 @@ window.addEventListener('load',setLove,false);
 
 
 //<!------ ↓alert訊息↓ ----->
-function alert(e){
-  $(" body").append('<div id="msg"><div id="msg_top">資訊<span class="msg_close">×</span></div><div id="msg_cont">'+e+'</div><div class="msg_close" id="msg_clear">確定</div></div>');
-$(".msg_close").click(function (){
-$("#msg").remove();
+// function alert(e){
+//   $(" body").append('<div id="msg"><div id="msg_top">資訊<span class="msg_close">×</span></div><div id="msg_cont">'+e+'</div><div class="msg_close" id="msg_clear">確定</div></div>');
+// $(".msg_close").click(function (){
+// $("#msg").remove();
 
-});
-}
-
+// });
+// }
 
 // $(".order_cancel").click(function () {
 //   alert('測試');
@@ -320,25 +319,42 @@ $("#msg").remove();
 // });
 
 
-function alertcancel(){
 
+//alert訊息<<<<請複製>>>>
+function alert(text,title){
+
+  if(!title==""){
+
+  $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>'+title+'</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
+  $(".msg_clear").click(function (){
+  $("#msg").remove();
+      });
+}else{
+
+  $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>提示</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
+  $(".msg_clear").click(function (){
+  $("#msg").remove();
+   });
+}
+}
+
+function alertcancel(){
 var order_cancel = document.getElementsByClassName('order_cancel');
 var rev_cancel = document.getElementsByClassName('rev_cancel');
 
 for(let y=0; y<order_cancel.length; y++){
   order_cancel[y].addEventListener('click',function(e){
-  alert('您好:<br>已收到訂單取消請求，<br>待客服人員確認中...');
+  alert('<p>已收到訂單取消請求，<br>待客服人員確認中...</p>','提示');
   // e.preventDefault();
   });
 };
 
 for(let z=0; z<rev_cancel.length; z++){
   rev_cancel[z].addEventListener('click',function(e){
-  alert('您好:<br>已收到預約取消請求，<br>待客服人員確認中...');
+  alert('提示','<p>已收到預約取消請求，<br>待客服人員確認中...</p>','提示');
   // e.preventDefault();
   });
 };
-
 
 
 }

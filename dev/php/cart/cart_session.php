@@ -26,6 +26,14 @@ try{
     }else if(isset($_GET['delete'])){
         $delete=$_GET['delete'];
         unset($_SESSION['cart'][$delete]);
+        // // print_r( $_SESSION['cart']);
+        // echo count($_SESSION['cart']);
+
+        if(count($_SESSION['cart']) == 0 && isset($_SESSION['user_no'])){
+            unset($_SESSION['cart']);
+        }else if(count($_SESSION['cart']) == 0 && !isset($_SESSION['user_no'])){
+            session_destroy();
+        };
     }
 }catch(PDOException $e){
     $errMsg = $errMsg . "錯誤訊息: " . $e->getMessage() . "</br>";

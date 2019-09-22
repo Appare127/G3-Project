@@ -68,13 +68,13 @@
       
                       </td>
                       <td>
-                        <input type="text" name="start_time" id="">
+                        <input type="time" name="start_time" id="" min="09:00" max="18:00" required>
                       </td>
                       <td>
-                        <input type="text" name="length" id="">
+                        <input type="number" name="length" id="" required>
                       </td>
                       <td>
-                        <input type="text" name="max_capacity" id="">
+                        <input type="number" name="max_capacity" id="" required>
                       </td>
                       <td colspan="3">
                         <input class="btn btn-block btn-outline-primary addbtn" type="submit" value="新增">
@@ -100,15 +100,11 @@ if( $errMsg != ""){ //例外
                   <form action="updateResvSessionData.php">
                     <tr>
                       <td><?php echo $resvSessionrRow['session_no'];?><input name="session_no" type="hidden" value="<?= $resvSessionrRow['session_no']?>" class="dissinputstyle"></td>
-                      <td><input type="text" name="start_time" value="<?= $resvSessionrRow['start_time']?>" readonly="true" class="dissinputstyle"></td>
-                      <td><input type="text" name="length" value="<?= $resvSessionrRow['length']?>" readonly="true" class="dissinputstyle"></td>
-                      <td><input type="text" name="max_capacity" value="<?= $resvSessionrRow['max_capacity']?>" readonly="true" class="dissinputstyle"></td>
-                      <td>
-                        <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
-                      </td>
-                      <td>
-                        <input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成">
-                      </td>
+                      <td><input type="time" name="start_time" value="<?= $resvSessionrRow['start_time']?>" readonly="true" class="dissinputstyle" min="09:00" max="18:00" required></td>
+                      <td><input type="number" name="length" value="<?= $resvSessionrRow['length']?>" readonly="true" class="dissinputstyle" required></td>
+                      <td><input type="number" name="max_capacity" value="<?= $resvSessionrRow['max_capacity']?>" readonly="true" class="dissinputstyle" required></td>
+                      <td><input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯"></td>
+                      <td><input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成" disabled></td>
                       </form>
                       
                     </tr>
@@ -164,6 +160,7 @@ if( $errMsg != ""){ //例外
         e.target.parentNode.parentNode.children[1].firstChild.classList.remove("dissinputstyle");
         e.target.parentNode.parentNode.children[2].firstChild.classList.remove("dissinputstyle");
         e.target.parentNode.parentNode.children[3].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[5].firstChild.removeAttribute("disabled");
       }
       
     

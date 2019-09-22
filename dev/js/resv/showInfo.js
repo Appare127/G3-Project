@@ -25,65 +25,64 @@ function showInfo(dataNum,total) {
                 </div>`);
         })
 
-
-        //清空下拉選單
-        if($('#time_select').children().length>1){
-            for(let i=0;i<$('#time_select').children().length;i++){
-                $('#time_select').children("option:last").remove();
-            }
-        }
-        //讓下拉選單可以按
-        $('#time_select').attr('disabled', false);
-        
-        //加option
-        $.each(data, (i, n) => {
-            $('#time_select').append(
-                `<option value="${n.start_time}">第${n.session_no}場-${n.start_time}</option>`
-            )
-        })
-
-       //清空下拉選單
-        $('#peoplenum_select').html('<option value="">--選擇人數--</option>');
-
-        //第一個選單選了的時候
-        $('#time_select').change(function(){
-            //清空
-            $('#peoplenum_select').html('<option value="">--選擇人數--</option>');
-           
-            //可以按
-            $('#peoplenum_select').attr('disabled', false);
-
-            //找到第一個選單選的是誰
-            var a;
-            $.each(data, (i, n) => {
-                if($("#time_select option:selected").val() == n.start_time){
-                    a=i;
-                }
-            })
-
-            //準備要塞進去字串
-            let str='';
-            for(let i=1;i<= data[a].peopleNum;i++){
-                str+= `<option value="${i}">${i}</option>`
-            }
-            //塞進去
-            $('#peoplenum_select').append(str);
-            //顯示剩餘人數
-
-            if(data[a].peopleNum == '0'){
-                $("#numRemain").text(`已額滿，請選擇別場`);
-            }else{
-                $("#numRemain").text(`剩餘人數：${data[a].peopleNum}`);
-            }
-        });
+        changeSelect(data);
         
     });
 
-  
-    
 }
 
+function changeSelect(data){
+    //清空下拉選單
+    if($('#time_select').children().length>1){
+        for(let i=0;i<$('#time_select').children().length;i++){
+            $('#time_select').children("option:last").remove();
+        }
+    }
+    //讓下拉選單可以按
+    $('#time_select').attr('disabled', false);
+    
+    //加option
+    $.each(data, (i, n) => {
+        $('#time_select').append(
+            `<option value="${n.start_time}">第${n.session_no}場-${n.start_time}</option>`
+        )
+    })
 
+   //清空下拉選單
+    $('#peoplenum_select').html('<option value="">--選擇人數--</option>');
+
+    //第一個選單選了的時候
+    $('#time_select').change(function(){
+        //清空
+        $('#peoplenum_select').html('<option value="">--選擇人數--</option>');
+       
+        //可以按
+        $('#peoplenum_select').attr('disabled', false);
+
+        //找到第一個選單選的是誰
+        var a;
+        $.each(data, (i, n) => {
+            if($("#time_select option:selected").val() == n.start_time){
+                a=i;
+            }
+        })
+
+        //準備要塞進去字串
+        let str='';
+        for(let i=1;i<= data[a].peopleNum;i++){
+            str+= `<option value="${i}">${i}</option>`
+        }
+        //塞進去
+        $('#peoplenum_select').append(str);
+        //顯示剩餘人數
+
+        if(data[a].peopleNum == '0'){
+            $("#numRemain").text(`已額滿，請選擇別場`);
+        }else{
+            $("#numRemain").text(`剩餘人數：${data[a].peopleNum}`);
+        }
+    });
+}
 
 
 function showNumRemain() {

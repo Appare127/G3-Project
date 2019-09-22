@@ -13,6 +13,8 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    @include msgalert(#fdf6e7,$col_btn_pink,$col_btn_pink);
+
 }
 
 
@@ -127,14 +129,13 @@
             display: inline-block;
             font-size: 16px;
             text-align: center;
-            // background-color: $col_modify_box;
             background-color: $col_modify_box;
+            // background-color: $col_white;
             border-radius: 15px 15px 0px 0px;
             border-top: 3px solid $col_modify_boxshadow;
             border-left: 3px solid $col_modify_boxshadow;
             border-right: 3px solid $col_modify_boxshadow;
             border-bottom: 3px solid $col_modify_boxshadow;
-
 
             label{
                 color: $col_black;

@@ -175,6 +175,34 @@ function drawbg_canvas(){
     };
 }
 
+//alert訊息
+// function alert(title,text){
+//     $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>'+title+'</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
+//     $(".msg_clear").click(function (){
+//     $("#msg").remove();
+    
+//     });
+// }
+
+
+function alert(text,title){
+
+    if(!title==""){
+  
+    $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>'+title+'</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
+    $(".msg_clear").click(function (){
+    $("#msg").remove();
+        });
+  }else{
+  
+    $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>提示</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
+    $(".msg_clear").click(function (){
+    $("#msg").remove();
+     });
+  }
+  
+  }
+
 
 // 確認完成按下去後
 function dopic(){
@@ -216,21 +244,25 @@ function dopic(){
             // 呼叫做動物與背景合併的第三圖函式，在這函式做完才做傳到php的picsend();
             combine_amlbg();
 
-            
-            console.log(document.getElementById('bg_data').value);
-            
-
-
             // 如果沒有輸入動物名字，則彈出輸入動物名字的提示視窗
         }else {
-            document.getElementsByClassName('need_name')[0].classList.add('show');
+            // document.getElementsByClassName('need_name')[0].classList.add('show');
+            alert("<p>請幫動物取個名字</p>","提示");
         }
     // 如果sessionStorage沒有登入，則彈出提示登入的視窗
     }else{
-        document.getElementsByClassName('remind_login')[0].classList.add('show');
-    };
-}
+        // document.getElementsByClassName('remind_login')[0].classList.add('show');
+        alert(`<p>請先登入後<br>才能把您的動物儲存下來</p>
+        <a href="javascript:;" class="btn_cloudb login_js">
+            登入<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span>
+        </a>`,"提示");
 
+        $(".login_js").click(function (){
+            $("#msg").remove();
+            openlogin();
+            });
+        };
+}
 
 
 
@@ -308,7 +340,7 @@ function picsend(){
 
 // 圖片上傳成功後的動作
 function saveok(text){
-    alert('動物儲存成功');
+    alert('<p>動物儲存成功</p>','提示');
 
     // 更新sessionStorage的動物生存參數
     sessionStorage['environ_adapt_1'] = total_eml_forest;

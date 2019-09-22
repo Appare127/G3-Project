@@ -78,7 +78,7 @@
                         <tr class="tr_title">
                             <td></td>
                             <td>
-                                <input type="text" name="body_name" id="" required>
+                                <input type="text" name="body_name" id="" maxlength="10" required>
                             </td>
                             <td>
                                 <input type="file" id="select_body_img" name="body_img" accept="image/*" required>
@@ -130,7 +130,7 @@
                         <form action="updateAnimalBodyData.php" method="post" enctype="multipart/form-data">
                           <tr>
                             <td><?php echo $bodyRow['body_no'];?><input name="body_no" type="hidden" value="<?= $bodyRow['body_no']?>"></td>
-                            <td><input type="text" name="body_name" value="<?= $bodyRow['body_name']?>" readonly="true" class="dissinputstyle" required></td>
+                            <td><input type="text" name="body_name" value="<?= $bodyRow['body_name']?>" readonly="true" class="dissinputstyle" maxlength="10" required></td>
                             <td><img width="45%" src="../<?= $bodyRow['body_img']?>?<?php echo time();?>" alt="" class="image"><input type="file" class="body_btnimg" name="body_img" size="10" style="display:none"></td>
                             <td><img width='50%' src="../<?= $bodyRow['body_img_combination']?>?<?php echo time();?>" alt=""><input type="file" class="combination_btnimg"name="body_img_combination" size="10" style="display:none"></td>
                             <td><input type="number" name="body_health" value="<?= $bodyRow['body_health']?>" readonly="true" size="4" class="dissinputstyle" required min="1" max="5"></td>
@@ -138,7 +138,7 @@
                             <td><input type="number" name="body_environment2" value="<?= $bodyRow['body_environment2']?>" readonly="true" size="10" class="dissinputstyle" required min="1" max="9"></td>
                             <td><input type="number" name="body_environment3" value="<?= $bodyRow['body_environment3']?>" readonly="true" size="10" class="dissinputstyle" required min="1" max="9"></td>
                             <td><input type="number" name="body_status" value="<?= $bodyRow['body_status']?>" readonly="true" size="10" class="dissinputstyle" required min="0" max="1"></td>
-                            <td><input type="text" name="body_ch_name" value="<?= $bodyRow['body_ch_name']?>" readonly="true" size="10" class="dissinputstyle" required></td>
+                            <td><input type="text" name="body_ch_name" value="<?= $bodyRow['body_ch_name']?>" readonly="true" size="10" class="dissinputstyle" maxlength="10" required></td>
                             <td><input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯"></td>
                             <td><input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成" disabled></td>
                           </form>

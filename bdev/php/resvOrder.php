@@ -54,8 +54,8 @@
                   <thead>
                     <tr>
                       <th>預約編號</th>
-                      <th>預約日期</th>
-                      <th>預約時段編號</th>
+                      <th>訂購日期</th>
+                      <th>預約時段</th>
                       <th>預約人數</th>
                       <th>訂單狀態(0:已結束;1:未開始)</th>
                       <th>會員編號</th>
@@ -86,17 +86,13 @@ if( $errMsg != ""){ //例外
                       <td><?php echo $resvOrderRow['booking_no'];?><input name="booking_no" type="hidden" value="<?= $resvOrderRow['booking_no']?>" class="dissinputstyle"></td>
                       <td><input type="text" name="booking_date" value="<?= $resvOrderRow['booking_date']?>" readonly="true" class="dissinputstyle"></td>
                       <td><input type="text" name="tour_date" value="<?= $resvOrderRow['tour_date']?>" readonly="true" class="dissinputstyle"></td>
-                      <td><input type="text" name="number_of_booking" value="<?= $resvOrderRow['number_of_booking']?>" readonly="true" class="dissinputstyle"></td>
-                      <td><input type="text" name="order_status" value="<?= $resvOrderRow['order_status']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="number" name="number_of_booking" value="<?= $resvOrderRow['number_of_booking']?>" readonly="true" class="dissinputstyle"></td>
+                      <td><input type="number" name="order_status" value="<?= $resvOrderRow['order_status']?>" readonly="true" class="dissinputstyle" min="0" max="1" required></td>
                       <td><input type="text" name="member_id" value="<?= $resvOrderRow['member_id']?>" readonly="true" class="dissinputstyle"></td>
                       <td><input type="text" name="session_no" value="<?= $resvOrderRow['session_no']?>" readonly="true" class="dissinputstyle"></td>
-                      <td><input type="text" name="resv_status" value="<?= $resvOrderRow['resv_status']?>" readonly="true" class="dissinputstyle"></td>
-                      <td>
-                        <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
-                      </td>
-                      <td>
-                        <input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成">
-                      </td>
+                      <td><input type="number" name="resv_status" value="<?= $resvOrderRow['resv_status']?>" readonly="true" class="dissinputstyle" min="0" max="1" required></td>
+                      <td><input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯"></td>
+                      <td><input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成" disabled></td>
                       </form>
                       
                     </tr>
@@ -150,6 +146,7 @@ if( $errMsg != ""){ //例外
         e.target.parentNode.parentNode.children[7].firstChild.removeAttribute("readonly");
         e.target.parentNode.parentNode.children[4].firstChild.classList.remove("dissinputstyle");
         e.target.parentNode.parentNode.children[7].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[9].firstChild.removeAttribute("disabled");
       }
       
     

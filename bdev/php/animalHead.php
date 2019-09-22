@@ -83,6 +83,7 @@
                       <th>環境3適應力</th>
                       <th>狀態(0:下架; 1:上架)</th>
                       <th>頭部中文名稱</th>
+                      <th>動物聲音</th>
                       <th colspan="2"></th>
                     </tr>
                   </thead>
@@ -93,7 +94,7 @@
                         <tr class="tr_title">
                             <td></td>
                             <td>
-                                <input type="text" name="head_name" id="" required>
+                                <input type="text" name="head_name" id="" maxlength="10" required>
                             </td>
                             <td>
                                 <input type="file" id="select_head_img" name="head_img" accept="image/*"><br>
@@ -117,6 +118,9 @@
                             </td>
                             <td>
                                 <input type="text" name="head_ch_name" id="" size="10" required>
+                            </td>
+                            <td>
+                                <input type="text" name="head_howl" id="" size="10" required>
                             </td>
                             <td colspan="2">
                                 <input class="btn btn-block btn-outline-primary addbtn" type="submit" value="新增">
@@ -142,14 +146,15 @@
                         <form action="updateAnimalHeadData.php" method="post" enctype="multipart/form-data">
                           <tr>
                             <td><?php echo $headRow['head_no'];?><input name="head_no" type="hidden" value="<?= $headRow['head_no']?>"></td>
-                            <td><input type="text" name="head_name" value="<?= $headRow['head_name']?>" readonly="true" class="dissinputstyle" required></td>
+                            <td><input type="text" name="head_name" value="<?= $headRow['head_name']?>" readonly="true" class="dissinputstyle" maxlength="10" required></td>
                             <td><img width="45%" src="../<?= $headRow['head_img']?>?<?php echo time();?>" alt="" class="image"><input type="file" class="btnimg" name="head_img" size="10" style="display:none"></td>
                             <td><img width='80%' src="../<?= $headRow['head_img_combination']?>?<?php echo time();?>" alt=""><input type="file" class="combination_btnimg"name="head_img_combination" size="10" style="display:none"></td>
                             <td><input type="number" name="head_environment1" value="<?= $headRow['head_environment1']?>" readonly="true" size="10" class="dissinputstyle" required min="1" max="9"></td>
                             <td><input type="number" name="head_environment2" value="<?= $headRow['head_environment2']?>" readonly="true" size="10" class="dissinputstyle" required min="1" max="9"></td>
                             <td><input type="number" name="head_environment3" value="<?= $headRow['head_environment3']?>" readonly="true" size="10" class="dissinputstyle" required min="1" max="9"></td>
                             <td><input type="number" name="head_status" value="<?= $headRow['head_status']?>" readonly="true" size="10" class="dissinputstyle" required></td>
-                            <td><input type="text" name="head_ch_name" value="<?= $headRow['head_ch_name']?>" readonly="true" size="10" class="dissinputstyle" required></td>
+                            <td><input type="text" name="head_ch_name" value="<?= $headRow['head_ch_name']?>" readonly="true" size="10" class="dissinputstyle" maxlength="10" required></td>
+                            <td><input type="text" name="head_howl" value="<?= $headRow['head_howl']?>" readonly="true" size="10" required></td>
                             <td><input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯"></td>
                             <td><input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成" disabled></td>
                           </form>

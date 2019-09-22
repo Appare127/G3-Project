@@ -69,20 +69,20 @@
                     <tr class="tr_title"> 
                       <td></td>
                       <td>
-                        <input type="text" name="product_name" id="">
+                        <input type="text" name="product_name" id="" maxlength="10" required>
                       </td>
                       <td class="productimg_width">
                         <img width="50%" src="" alt="" id="product_img_preview">
-                        <input type="file" id="select_product_img" name="product_img" accept="image/*">
+                        <input type="file" id="select_product_img" name="product_img" accept="image/*" required>
                       </td>
                       <td>
-                        <input type="text" name="product_price" id="">
+                        <input type="number" name="product_price" id="" required>
                       </td>
                       <td>
-                        <input type="text" name="product_status" id="">
+                        <input type="number" name="product_status" id="" required min="0" max="1">
                       </td>
                       <td>
-                        <input type="text" name="product_description" id="">
+                        <input type="text" name="product_description" id="" maxlength="255" required>
                       </td>
                       <td colspan="2">
                         <input class="btn btn-block btn-outline-primary addbtn" type="submit" value="新增">
@@ -106,17 +106,13 @@ if( $errMsg != ""){ //例外
                   <form action="updateProductData.php" method="post" enctype="multipart/form-data">
                     <tr>
                       <td><?php echo $productRow['product_no'];?><input name="product_no" type="hidden" value="<?= $productRow['product_no']?>"></td>
-                      <td><input type="text" name="product_name" value="<?= $productRow['product_name']?>" readonly="true" class="dissinputstyle"></td>
-                      <td><img width="50%" src="../<?= $productRow['product_img']?>" alt="" class="image"><input type="file" class="btnimg" name="product_img" size="10" class="dissinputstyle" style="display:none"></td>
-                      <td><input type="text" name="product_price" value="<?= $productRow['product_price']?>" readonly="true" class="dissinputstyle"></td>
-                      <td><input type="text" name="product_status" value="<?= $productRow['product_status']?>" readonly="true" class="dissinputstyle"></td>
-                      <td><input type="text" name="product_description" value="<?= $productRow['product_description']?>" readonly="true" class="dissinputstyle"></td>
-                      <td>
-                        <input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯">
-                      </td>
-                      <td>
-                        <input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成">
-                      </td>
+                      <td><input type="text" name="product_name" value="<?= $productRow['product_name']?>" readonly="true" class="dissinputstyle" maxlength="10" required></td>
+                      <td><img width="50%" src="../<?= $productRow['product_img']?>?<?php echo time();?>" alt="" class="image"><input type="file" class="btnimg" name="product_img" size="10" class="dissinputstyle" style="display:none"></td>
+                      <td><input type="number" name="product_price" value="<?= $productRow['product_price']?>" readonly="true" class="dissinputstyle" required></td>
+                      <td><input type="number" name="product_status" value="<?= $productRow['product_status']?>" readonly="true" class="dissinputstyle" required min="0" max="1"></td>
+                      <td><input type="text" name="product_description" value="<?= $productRow['product_description']?>" readonly="true" class="dissinputstyle" maxlength="255" required></td>
+                      <td><input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯"></td>
+                      <td><input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成" disabled></td>
                   </form>
                     </tr>
                  
@@ -182,6 +178,7 @@ if( $errMsg != ""){ //例外
         e.target.parentNode.parentNode.children[3].firstChild.classList.remove("dissinputstyle");
         e.target.parentNode.parentNode.children[4].firstChild.classList.remove("dissinputstyle");
         e.target.parentNode.parentNode.children[5].firstChild.classList.remove("dissinputstyle");
+        e.target.parentNode.parentNode.children[7].firstChild.removeAttribute("disabled");
       }
       
     
