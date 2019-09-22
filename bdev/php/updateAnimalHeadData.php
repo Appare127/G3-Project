@@ -69,9 +69,48 @@ try{
 		add("head_img_combination");
 	}
 
-    header('Location:animalHead.php');
+	header('Location:animalHead.php');
+
+	// 動物的聲音
+	if( $_FILES["head_howl"]["error"] == UPLOAD_ERR_OK){
+
+		// 後台的存檔路徑
+		$upload_dir = "../img/voice/";
+
+		//實際寫進資料庫，給前台使用的路徑
+		$save_directory = "img/voice/";
+
+		//先檢查voice資料夾存不存在
+		if( file_exists("voice") === false){
+			mkdir("voice");
+		}
+
+		//將檔案copy到要放的路徑
+		$fileInfoArr = pathinfo($_FILES["head_howl"]["name"]);
+
+		//檔案名稱都要變成head_xxx.mp3
+		$fileName = $head_name .".mp3";
+
+		//動物的聲音要複製的路徑
+		$from = $_FILES["head_howl"]["tmp_name"];
+		$to = "$upload_dir" . "$fileName";
+		copy( $from, $to);
+
+		//將檔案名稱寫回資料庫
+		$sql = "update head set head_howl = :head_howl where head_no = $head_no";
+		$newHead = $pdo->prepare($sql);
+		$newHead -> bindValue(":head_howl", "$save_directory"."$fileName");
+		$newHead -> execute();
+		echo "新增成功~";
+		
+	}else{
+		echo "錯誤代碼 : {$_FILES["head_howl"]["error"]} <br>";
+		echo "新增失敗<br>";
+	}
 
 }catch(PDOException $e){
   echo $e->getMessage();
+  echo $e->getLine();
+
 }
 ?>
