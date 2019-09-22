@@ -3,25 +3,25 @@ let parts_icon = document.getElementsByClassName("parts_icon");
 let picon ;
 
 
-// 總能力值初始化0
-let total_eml_forest = 0;       //森林
-let total_eml_mountain = 0;     //高山
-let total_eml_desert = 0;       //沙漠
-let total_health = 0;           //血量
-let total_jump = 0;             //跳躍力
+// 總能力值初始化為長頸鹿的數值，避免沒有選時會為0的情況
+let total_eml_forest = 2;       //森林
+let total_eml_mountain = 2;     //高山
+let total_eml_desert = 2;       //沙漠
+let total_health = 4;           //血量
+let total_jump = 2;             //跳躍力
 
-// 各別部件的能力值初始化0
-let head_eml_forest = 0;
-let head_eml_desert = 0;
-let head_eml_mountain = 0;
+// 各別部件的能力值初始化
+let head_eml_forest = 3;
+let head_eml_desert = 1;
+let head_eml_mountain = 1;
 
-let body_eml_forest = 0;
-let body_eml_desert = 0;
-let body_eml_mountain = 0;
+let body_eml_forest = 1;
+let body_eml_desert = 2;
+let body_eml_mountain = 3;
 
-let leg_eml_forest = 0;
-let leg_eml_desert = 0;
-let leg_eml_mountain = 0;
+let leg_eml_forest = 2;
+let leg_eml_desert = 1;
+let leg_eml_mountain = 1;
 
 // 用ajax從php抓回來的jason物件
 let partsobj = [];
@@ -80,8 +80,8 @@ let sample_point = document.getElementsByClassName('sample_point')[0];
 // 背景canvas畫筆大小預設
 let drawsize = 5;
 
-// 動物的聲音
-let animal_howl = '';
+// 預設的動物聲音
+let animal_howl = 'img/voice/dog.mp3';
 
 // 放聲音路徑的陣列
 let voice_arr = [];
@@ -199,8 +199,14 @@ function dopic(){
             document.getElementsByClassName('tempbg_pic')[0].src = bg_url;
 
             // 把動物聲音的路徑放進form1的input，與sessionStorage裡
-            document.getElementById('voice_data').value = voice_arr[selected_head];
-            sessionStorage['animal_howl'] = voice_arr[selected_head];
+            
+            if (voice_arr[selected_head] == undefined){
+                document.getElementById('voice_data').value = animal_howl;
+                sessionStorage['animal_howl'] = animal_howl;
+            }else{
+                document.getElementById('voice_data').value = voice_arr[selected_head];
+                sessionStorage['animal_howl'] = voice_arr[selected_head];
+            }
 
             // 把動物環境的canvas做成img圖檔存起來
             let chart_canvas =document.getElementsByClassName('chart_canvas')[0];
@@ -209,6 +215,11 @@ function dopic(){
 
             // 呼叫做動物與背景合併的第三圖函式，在這函式做完才做傳到php的picsend();
             combine_amlbg();
+
+            
+            console.log(document.getElementById('bg_data').value);
+            
+
 
             // 如果沒有輸入動物名字，則彈出輸入動物名字的提示視窗
         }else {

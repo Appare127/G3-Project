@@ -18,7 +18,7 @@ Chart.defaults.global.defaultFontColor = 'rgba(0,0,74, 1)';
 let mychart = document.getElementsByClassName('chart_canvas')[0];
 
 
-let inputdata = [0,0,0];
+let inputdata = [6,4,5];
 
 mychart_data = {
     // 設定三個資料
