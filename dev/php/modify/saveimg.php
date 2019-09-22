@@ -18,10 +18,14 @@
     $amlbgDataStr = $_POST['amlbg_data'];
     $amlbgDataStr = str_replace('data:image/png;base64,', '', $amlbgDataStr); //將檔案格式的資訊拿掉
 
+    $radarDataStr = $_POST['chart_data'];
+    $radarDataStr = str_replace('data:image/png;base64,', '', $radarDataStr); //將檔案格式的資訊拿掉
+
+
     $data_aml = base64_decode($amlDataStr);
     $data_bg = base64_decode($bgDataStr);
     $data_amlbg = base64_decode($amlbgDataStr);
-
+    $data_radar = base64_decode($radarDataStr);
 
 //準備好要存的檔名，抓到user_no
     $user_no = $_POST["user_no"];
@@ -32,14 +36,14 @@
     $file_aml = $upload_dir . "user" . $user_no . "_aml" . ".png";
     $file_bg = $upload_dir . "user" . $user_no . "_bg" . ".png";
     $file_amlbg = $upload_dir . "user" . $user_no . "_amlbg" . ".png";
+    $file_radar = $upload_dir . "user" . $user_no . "_radar" . ".png";
 
 // 儲存檔案
     $success_aml = file_put_contents($file_aml, $data_aml);
     $success_bg = file_put_contents($file_bg, $data_bg);
     $success_amlbg = file_put_contents($file_amlbg, $data_amlbg);
-
+    $success_radar = file_put_contents($file_radar, $data_radar);
     // echo $success_aml ? $file : 'error';
-
 
 
 // 以下為儲存背景的部分，用input file的型式送的：
@@ -77,6 +81,8 @@
     $file_bg_src = "img/customize/" . "user" . $user_no . "_bg" . ".png";
 // 要放資料庫的動物加背景圖片路徑
     $file_amlbg_src = "img/customize/" . "user" . $user_no . "_amlbg" . ".png";
+// 要放資料庫的適應力圖片路徑
+    $file_radar_src = "img/customize/" . "user" . $user_no . "_radar" . ".png";
 
 
     try {
@@ -92,7 +98,8 @@
         environ_adapt_3 = :environ_adapt_3,
         animal_life = :animal_life,
         animal_jump = :animal_jump,
-        attend = :attend where user_no=:user_no";
+        attend = :attend,
+        environ_img = :environ_img where user_no=:user_no";
         $userData = $pdo->prepare( $sql);
         $userData->bindValue(":my_animal_img", $file_aml_src);
         $userData->bindValue(":my_animal_name", $_POST["myanimal_name"]);
@@ -105,6 +112,7 @@
         $userData->bindValue(":animal_life", $_POST["animal_life"]);
         $userData->bindValue(":animal_jump", $_POST["animal_jump"]);
         $userData->bindValue(":attend", 0);
+        $userData->bindValue(":environ_img", $file_radar_src);
         $userData->bindValue(":user_no", $_POST["user_no"]);
         $userData->execute();
         echo "動物存檔成功";

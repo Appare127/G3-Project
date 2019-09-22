@@ -99,7 +99,7 @@ function nextstep(){
     document.getElementsByClassName('temp_aml_pic')[0].src = url;
     // 把圖片資料檔送到form裡的隱藏input，做等等存檔用
     document.getElementById('aml_data').value = url;
-
+    // 把canvas畫圖的功能關閉
     switch_bgcanvas("OFF");
 }
 
@@ -179,6 +179,8 @@ function drawbg_canvas(){
 // 確認完成按下去後
 function dopic(){
 
+    // 為了避免有人忘了按下一步，所以這邊再次執行一遍
+    // 因為要按了下一步後，才會把動物圖存起來
     nextstep();
     
     // 先判斷sessionStorage有沒有會員登入資料，有才往下做轉圖檔工作
@@ -200,6 +202,12 @@ function dopic(){
             document.getElementById('voice_data').value = voice_arr[selected_head];
             sessionStorage['animal_howl'] = voice_arr[selected_head];
 
+            // 把動物環境的canvas做成img圖檔存起來
+            let chart_canvas =document.getElementsByClassName('chart_canvas')[0];
+            let chart_url = chart_canvas.toDataURL("image/png");
+            document.getElementById('chart_data').value = chart_url;
+
+            // 呼叫做動物與背景合併的第三圖函式，在這函式做完才做傳到php的picsend();
             combine_amlbg();
 
             // 如果沒有輸入動物名字，則彈出輸入動物名字的提示視窗
@@ -247,6 +255,7 @@ function combine_amlbg(){
         // document.getElementById('testimg2').src = amlbg_url;
         document.getElementById('amlbg_data').value = amlbg_url;
 
+        // 透過ajax發送資料到php的函式
         picsend();
     };
 }
@@ -570,129 +579,210 @@ function buildlist (jsonobj){
 
     // 建立尾巴HTML架構
     for (let i=0; i<tail_arr.length; i++){
-        let li = document.createElement('li');
-        let img = document.createElement('img');
-        let p = document.createElement('p');
-        img.src = tail_arr[i].tail_img;
-        img.classList = 'picon';
-        img.alt = '資料庫圖片遺失';
-        p.innerHTML = tail_arr[i].tail_ch_name;
 
-        li.appendChild(img);
-        li.appendChild(p);
-        tail_ul.appendChild(li);
+        let page_num = i % 4;
+        let page = Math.floor(i/4);
+
+        if (page_num == 0){
+            let wrapper = document.getElementsByClassName('tail_list')[0];
+            let div = document.createElement('div');
+            let li = document.createElement('li');
+            let img = document.createElement('img');
+            let p = document.createElement('p');
+            
+            div.classList = 'swiper-slide' + ' slide_' + page;
+            img.src = tail_arr[i].tail_img;
+            img.classList = 'picon';
+            img.alt = '資料庫圖片遺失';
+            p.innerHTML = tail_arr[i].tail_ch_name;
+    
+            li.appendChild(img);
+            li.appendChild(p);
+            div.appendChild(li);
+            wrapper.appendChild(div);
+        }else {
+            let slide_tar = '.tail_button .slide_' + page;
+            let slide = document.querySelector(slide_tar);
+            let li = document.createElement('li');
+            let img = document.createElement('img');
+            let p = document.createElement('p');
+            img.src = tail_arr[i].tail_img;
+            img.classList = 'picon';
+            img.alt = '資料庫圖片遺失';
+            p.innerHTML = tail_arr[i].tail_ch_name;
+    
+            li.appendChild(img);
+            li.appendChild(p);
+            slide.appendChild(li);
+        }
     }
 
-    let page = 0;
 
     //建立頭部HTML架構 
     for (let i=0; i<head_arr.length; i++){
 
-        // page = i % 4;
-        // // console.log(page);
+        let page_num = i % 4;
+        let page = Math.floor(i/4);
 
-        // owlpage_class = 'owl_page' + page;
-        
-        // let owl_div = '';
-
-        // if (page == 0){
-        //     owl_div = document.createElement('div');
-        //     owl_div.classList = owlpage_class;
-        // }
-
-        // let li = document.createElement('li');
-        // let img = document.createElement('img');
-        // let input = document.createElement('input');
-        // let p = document.createElement('p');
-
-        // img.src = head_arr[i].head_img;
-        // img.classList = 'picon';
-        // img.alt = '資料庫圖片遺失';
-        // input.dataset.pointa = head_arr[i].head_environment1;
-        // input.dataset.pointb = head_arr[i].head_environment2;
-        // input.dataset.pointc = head_arr[i].head_environment3;
-        // input.style.display = 'none';
-        // p.innerHTML = head_arr[i].head_ch_name;
-
-        // if (i % 4 == 0){
-        //     li.appendChild(img);
-        //     li.appendChild(input);
-        //     li.appendChild(p);
-        //     owl_div.appendChild(li);
-        //     head_ul.appendChild(owl_div);
-        // }else {
-        //     let owl_now = document.querySelector(owlpage_class);
-        //     li.appendChild(img);
-        //     li.appendChild(input);
-        //     li.appendChild(p);
-        //     owl_now.appendChild(li);
-        //     head_ul.appendChild(owl_div);
-        // }
-
-
-        let li = document.createElement('li');
-        let img = document.createElement('img');
-        let input = document.createElement('input');
-        let p = document.createElement('p');
-
-        img.src = head_arr[i].head_img;
-        img.classList = 'picon';
-        img.alt = '資料庫圖片遺失';
-        input.dataset.pointa = head_arr[i].head_environment1;
-        input.dataset.pointb = head_arr[i].head_environment2;
-        input.dataset.pointc = head_arr[i].head_environment3;
-        input.style.display = 'none';
-        p.innerHTML = head_arr[i].head_ch_name;
-
+        if (page_num == 0){
+            let wrapper = document.getElementsByClassName('head_list')[0];
+            let div = document.createElement('div');
+            let li = document.createElement('li');
+            let img = document.createElement('img');
+            let input = document.createElement('input');
+            let p = document.createElement('p');
+    
+            div.classList = 'swiper-slide' + ' slide_' + page;
+            img.src = head_arr[i].head_img;
+            img.classList = 'picon';
+            img.alt = '資料庫圖片遺失';
+            input.dataset.pointa = head_arr[i].head_environment1;
+            input.dataset.pointb = head_arr[i].head_environment2;
+            input.dataset.pointc = head_arr[i].head_environment3;
+            input.style.display = 'none';
+            p.innerHTML = head_arr[i].head_ch_name;
+    
             li.appendChild(img);
             li.appendChild(input);
             li.appendChild(p);
-            head_ul.appendChild(li);
-
+            div.appendChild(li);
+            wrapper.appendChild(div);
+        }else {
+            let slide_tar = '.head_button .slide_' + page;
+            let slide = document.querySelector(slide_tar);
+            let li = document.createElement('li');
+            let img = document.createElement('img');
+            let input = document.createElement('input');
+            let p = document.createElement('p');
+    
+            img.src = head_arr[i].head_img;
+            img.classList = 'picon';
+            img.alt = '資料庫圖片遺失';
+            input.dataset.pointa = head_arr[i].head_environment1;
+            input.dataset.pointb = head_arr[i].head_environment2;
+            input.dataset.pointc = head_arr[i].head_environment3;
+            input.style.display = 'none';
+            p.innerHTML = head_arr[i].head_ch_name;
+    
+            li.appendChild(img);
+            li.appendChild(input);
+            li.appendChild(p);
+            slide.appendChild(li);
+        }
     }
 
     //建立身體HTML架構 
     for (let i=0; i<body_arr.length; i++){
-        let li = document.createElement('li');
-        let img = document.createElement('img');
-        let input = document.createElement('input');
-        let p = document.createElement('p');
-        img.src = body_arr[i].body_img;
-        img.classList = 'picon';
-        img.alt = '資料庫圖片遺失';
-        input.dataset.pointa = body_arr[i].body_environment1;
-        input.dataset.pointb = body_arr[i].body_environment2;
-        input.dataset.pointc = body_arr[i].body_environment3;
-        input.dataset.health = body_arr[i].body_health;
-        input.style.display = 'none';
-        p.innerHTML = body_arr[i].body_ch_name;
 
-        li.appendChild(img);
-        li.appendChild(input);
-        li.appendChild(p);
-        body_ul.appendChild(li);
+        
+        let page_num = i % 4;
+        let page = Math.floor(i/4);
+
+        if (page_num == 0){
+            let wrapper = document.getElementsByClassName('body_list')[0];
+            let div = document.createElement('div');
+            let li = document.createElement('li');
+            let img = document.createElement('img');
+            let input = document.createElement('input');
+            let p = document.createElement('p');
+    
+            div.classList = 'swiper-slide' + ' slide_' + page;
+            img.src = body_arr[i].body_img;
+            img.classList = 'picon';
+            img.alt = '資料庫圖片遺失';
+            input.dataset.pointa = body_arr[i].body_environment1;
+            input.dataset.pointb = body_arr[i].body_environment2;
+            input.dataset.pointc = body_arr[i].body_environment3;
+            input.dataset.health = body_arr[i].body_health;
+            input.style.display = 'none';
+            p.innerHTML = body_arr[i].body_ch_name;
+    
+            li.appendChild(img);
+            li.appendChild(input);
+            li.appendChild(p);
+            div.appendChild(li);
+            wrapper.appendChild(div);
+        }else {
+            let slide_tar = '.body_button .slide_' + page;
+            let slide = document.querySelector(slide_tar);
+            let li = document.createElement('li');
+            let img = document.createElement('img');
+            let input = document.createElement('input');
+            let p = document.createElement('p');
+    
+            img.src = body_arr[i].body_img;
+            img.classList = 'picon';
+            img.alt = '資料庫圖片遺失';
+            input.dataset.pointa = body_arr[i].body_environment1;
+            input.dataset.pointb = body_arr[i].body_environment2;
+            input.dataset.pointc = body_arr[i].body_environment3;
+            input.dataset.health = body_arr[i].body_health;
+            input.style.display = 'none';
+            p.innerHTML = body_arr[i].body_ch_name;
+    
+            li.appendChild(img);
+            li.appendChild(input);
+            li.appendChild(p);
+            slide.appendChild(li);
+        }
+
+
     }
 
     //建立腳部HTML架構 
     for (let i=0; i<leg_arr.length; i++){
-        let li = document.createElement('li');
-        let img = document.createElement('img');
-        let input = document.createElement('input');
-        let p = document.createElement('p');
-        img.src = leg_arr[i].leg_img;
-        img.classList = 'picon';
-        img.alt = '資料庫圖片遺失';
-        input.dataset.pointa = leg_arr[i].leg_environment1;
-        input.dataset.pointb = leg_arr[i].leg_environment2;
-        input.dataset.pointc = leg_arr[i].leg_environment3;
-        input.dataset.jump = leg_arr[i].leg_jump;
-        input.style.display = 'none';
-        p.innerHTML = leg_arr[i].leg_ch_name;
 
-        li.appendChild(img);
-        li.appendChild(input);
-        li.appendChild(p);
-        leg_ul.appendChild(li);
+        let page_num = i % 4;
+        let page = Math.floor(i/4);
+
+        if (page_num == 0){
+            let wrapper = document.getElementsByClassName('leg_list')[0];
+            let div = document.createElement('div');
+            let li = document.createElement('li');
+            let img = document.createElement('img');
+            let input = document.createElement('input');
+            let p = document.createElement('p');
+    
+            div.classList = 'swiper-slide' + ' slide_' + page;
+            img.src = leg_arr[i].leg_img;
+            img.classList = 'picon';
+            img.alt = '資料庫圖片遺失';
+            input.dataset.pointa = leg_arr[i].leg_environment1;
+            input.dataset.pointb = leg_arr[i].leg_environment2;
+            input.dataset.pointc = leg_arr[i].leg_environment3;
+            input.dataset.jump = leg_arr[i].leg_jump;
+            input.style.display = 'none';
+            p.innerHTML = leg_arr[i].leg_ch_name;
+    
+            li.appendChild(img);
+            li.appendChild(input);
+            li.appendChild(p);
+            div.appendChild(li);
+            wrapper.appendChild(div);
+        }else {
+            let slide_tar = '.leg_button .slide_' + page;
+            let slide = document.querySelector(slide_tar);
+            let li = document.createElement('li');
+            let img = document.createElement('img');
+            let input = document.createElement('input');
+            let p = document.createElement('p');
+    
+            img.src = leg_arr[i].leg_img;
+            img.classList = 'picon';
+            img.alt = '資料庫圖片遺失';
+            input.dataset.pointa = leg_arr[i].leg_environment1;
+            input.dataset.pointb = leg_arr[i].leg_environment2;
+            input.dataset.pointc = leg_arr[i].leg_environment3;
+            input.dataset.jump = leg_arr[i].leg_jump;
+            input.style.display = 'none';
+            p.innerHTML = leg_arr[i].leg_ch_name;
+    
+            li.appendChild(img);
+            li.appendChild(input);
+            li.appendChild(p);
+            slide.appendChild(li);
+        }
+
     }
 
     // 建立背景圖HTML架構
@@ -739,6 +829,79 @@ function buildlist (jsonobj){
     for(let i=0; i<picon.length; i++){
         picon[i].addEventListener('click',changeParts);
     };
+
+    let mySwiper1 = new Swiper ('.swiper1', {
+        // Optional parameters
+    
+        loop: false,
+    
+        pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets',
+        clickable: true,
+        },
+    
+        // Navigation arrows
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    })
+
+    let mySwiper2 = new Swiper ('.swiper2', {
+        // Optional parameters
+    
+        loop: false,
+    
+        pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets',
+        clickable: true,
+        },
+    
+        // Navigation arrows
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    })
+
+    let mySwiper3 = new Swiper ('.swiper3', {
+        // Optional parameters
+    
+        loop: false,
+    
+        pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets',
+        clickable: true,
+        },
+    
+        // Navigation arrows
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    })
+
+    let mySwiper4 = new Swiper ('.swiper4', {
+        // Optional parameters
+    
+        loop: false,
+    
+        pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets',
+        clickable: true,
+        },
+    
+        // Navigation arrows
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    })
+
 
 };
 
@@ -993,16 +1156,7 @@ function init(){
     document.getElementById('next_btn').addEventListener('click',nextstep);
 
 
-    // $('.owl-carousel').owlCarousel({
-    //     loop: false,
-    //     margin: 0,
-    //     nav: true,
-    //     responsive:{
-    //         0:{
-    //             items:1
-    //         },
-    //     },
-    // });
+    
 
 }
 

@@ -7,9 +7,11 @@
     <!-- <link rel="stylesheet" href="css/swiper.css"> -->
     <!-- <link rel="stylesheet" href="css/owl.carousel.css">
     <link rel="stylesheet" href="css/owl.theme.default.css"> -->
+    <link rel="stylesheet" href="css/swiper.css">
     @@include('template/csslink.html')
     <!-- <script src="js/plugin/owl.carousel.js"></script> -->
-    <!-- <script src="js/plugin/swiper.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+
     <script src="js/plugin/Chart.js"></script>
 
 
@@ -81,6 +83,8 @@
                     <input name="amlbg_data" id='amlbg_data' type="hidden"/>
                     <!-- 動物的叫聲 -->
                     <input name="voice_data" id='voice_data' type="hidden"/>
+                    <!-- 環境雷達圖 -->
+                    <input name="chart_data" id="chart_data" type="hidden">
 
                     <!-- 使用者名稱、動物名稱、3個環境參數、動物生命力、動物跳躍力 -->
                     <input name="user_no" id='user_no' type="hidden"/>
@@ -112,125 +116,147 @@
                     <li class="part_button head_button">
                         <label for="btn_head">頭部</label>
                         <input type="radio" name="partlist" id="btn_head" checked>
-                        <ul class="part_wrap">
-                            <!-- <div class="owl_page">
-                                <li>
-                                    <img class="picon" class="picon" src="img/modify/head_giraffe.png" alt="">
-                                    <input type="text" data-pointa="3" data-pointb="1" data-pointc="0" style="display: none">
-                                    <p>長頸鹿頭</p>
-                                </li>
-                                <li>
-                                    <img class="picon" src="img/modify/head_elephant.png" alt="">
-                                    <input type="text" data-pointa="1" data-pointb="0" data-pointc="3" style="display: none">
-                                    <p>大象頭</p>
-                                </li>
-                                <li>
-                                    <img class="picon" src="img/modify/head_lion.png" alt="">
-                                    <input type="text" data-pointa="3" data-pointb="1" data-pointc="3" style="display: none">
-                                    <p>獅子頭</p>
-                                </li>
-                                <li>
-                                    <img class="picon" src="img/modify/head_tiger.png" alt="">
-                                    <input type="text" data-pointa="1" data-pointb="3" data-pointc="1" style="display: none">
-                                    <p>老虎頭</p>
-                                </li>
+                        <ul class="part_wrap swiper-container swiper1" >
+                            <div class="swiper-wrapper head_list">
+                                <!-- <div class="swiper-slide slide_p0">
+                                    <li>
+                                        <img class="picon" class="picon" src="img/modify/head_giraffe.png" alt="">
+                                        <input type="text" data-pointa="3" data-pointb="1" data-pointc="0" style="display: none">
+                                        <p>長頸鹿頭</p>
+                                    </li>
+                                    <li>
+                                        <img class="picon" src="img/modify/head_elephant.png" alt="">
+                                        <input type="text" data-pointa="1" data-pointb="0" data-pointc="3" style="display: none">
+                                        <p>大象頭</p>
+                                    </li>
+                                    <li>
+                                        <img class="picon" src="img/modify/head_lion.png" alt="">
+                                        <input type="text" data-pointa="3" data-pointb="1" data-pointc="3" style="display: none">
+                                        <p>獅子頭</p>
+                                    </li>
+                                    <li>
+                                        <img class="picon" src="img/modify/head_tiger.png" alt="">
+                                        <input type="text" data-pointa="1" data-pointb="3" data-pointc="1" style="display: none">
+                                        <p>老虎頭</p>
+                                    </li>
+                                </div>
+                                <div class="swiper-slide  slide_p1">
+                                    <li>
+                                        <img class="picon" class="picon" src="img/modify/head_giraffe.png" alt="">
+                                        <input type="text" data-pointa="3" data-pointb="1" data-pointc="0" style="display: none">
+                                        <p>長頸鹿頭</p>
+                                    </li>
+                                    <li>
+                                        <img class="picon" src="img/modify/head_elephant.png" alt="">
+                                        <input type="text" data-pointa="1" data-pointb="0" data-pointc="3" style="display: none">
+                                        <p>大象頭</p>
+                                    </li>
+                                    <li>
+                                        <img class="picon" src="img/modify/head_lion.png" alt="">
+                                        <input type="text" data-pointa="3" data-pointb="1" data-pointc="3" style="display: none">
+                                        <p>獅子頭</p>
+                                    </li>
+                                    <li>
+                                        <img class="picon" src="img/modify/head_tiger.png" alt="">
+                                        <input type="text" data-pointa="1" data-pointb="3" data-pointc="1" style="display: none">
+                                        <p>老虎頭</p>
+                                    </li>
+                                </div> -->
                             </div>
-                            <div class="owl_page">
-                                <li>
-                                    <img class="picon" class="picon" src="img/modify/head_giraffe.png" alt="">
-                                    <input type="text" data-pointa="3" data-pointb="1" data-pointc="0" style="display: none">
-                                    <p>長頸鹿頭</p>
-                                </li>
-                                <li>
-                                    <img class="picon" src="img/modify/head_elephant.png" alt="">
-                                    <input type="text" data-pointa="1" data-pointb="0" data-pointc="3" style="display: none">
-                                    <p>大象頭</p>
-                                </li>
-                                <li>
-                                    <img class="picon" src="img/modify/head_lion.png" alt="">
-                                    <input type="text" data-pointa="3" data-pointb="1" data-pointc="3" style="display: none">
-                                    <p>獅子頭</p>
-                                </li>
-                                <li>
-                                    <img class="picon" src="img/modify/head_tiger.png" alt="">
-                                    <input type="text" data-pointa="1" data-pointb="3" data-pointc="1" style="display: none">
-                                    <p>老虎頭</p>
-                                </li>
-                            </div> -->
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-button-prev"><img src="img/modify/icon_arrow_left.png" alt=""></div>
+                            <div class="swiper-button-next"><img src="img/modify/icon_arrow_right.png" alt=""></div>
                         </ul>
                     </li>
                     <li class="part_button body_button">
                         <label for="btn_body">身體</label>
                         <input type="radio" name="partlist" id="btn_body">
-                        <ul class="part_wrap">
-                            <!-- <li>
-                                <img class="picon" src="img/modify/body_giraffe.png" alt="">
-                                <input type="text" data-pointa="1" data-pointb="2" data-pointc="3" data-health="4" style="display: none">
-                                <p>長頸鹿身體</p>
-                            </li>
-                            <li>
-                                <img class="picon" src="img/modify/body_elephant.png" alt="">
-                                <input type="text" data-pointa="2" data-pointb="2" data-pointc="1" data-health="5" style="display: none">
-                                <p>大象身體</p>
-                            </li>
-                            <li>
-                                <img class="picon" src="img/modify/body_zebar.png" alt="">
-                                <input type="text" data-pointa="3" data-pointb="1" data-pointc="0" data-health="2" style="display: none">
-                                <p>斑馬身體</p>
-                            </li>
-                            <li>
-                                <img class="picon" src="img/modify/body_tiger.png" alt="">
-                                <input type="text" data-pointa="2" data-pointb="0" data-pointc="1" data-health="3" style="display: none">
-                                <p>老虎身體</p>
-                            </li> -->
+                        <ul class="part_wrap swiper-container swiper2">
+                            <div class="swiper-wrapper body_list">
+                                <!-- <li>
+                                    <img class="picon" src="img/modify/body_giraffe.png" alt="">
+                                    <input type="text" data-pointa="1" data-pointb="2" data-pointc="3" data-health="4" style="display: none">
+                                    <p>長頸鹿身體</p>
+                                </li>
+                                <li>
+                                    <img class="picon" src="img/modify/body_elephant.png" alt="">
+                                    <input type="text" data-pointa="2" data-pointb="2" data-pointc="1" data-health="5" style="display: none">
+                                    <p>大象身體</p>
+                                </li>
+                                <li>
+                                    <img class="picon" src="img/modify/body_zebar.png" alt="">
+                                    <input type="text" data-pointa="3" data-pointb="1" data-pointc="0" data-health="2" style="display: none">
+                                    <p>斑馬身體</p>
+                                </li>
+                                <li>
+                                    <img class="picon" src="img/modify/body_tiger.png" alt="">
+                                    <input type="text" data-pointa="2" data-pointb="0" data-pointc="1" data-health="3" style="display: none">
+                                    <p>老虎身體</p>
+                                </li> -->
+                            </div>
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-button-prev"><img src="img/modify/icon_arrow_left.png" alt=""></div>
+                            <div class="swiper-button-next"><img src="img/modify/icon_arrow_right.png" alt=""></div>
                         </ul>
                     </li>
                     <li class="part_button leg_button">
                         <label for="btn_leg">腳部</label>
                         <input type="radio" name="partlist" id="btn_leg">
-                        <ul class="part_wrap">
-                            <!-- <li>
-                                <img class="picon" src="img/modify/leg_giraffe.png" alt="">
-                                <input type="text" data-pointa="2" data-pointb="1" data-pointc="0" data-jump="2" style="display: none">
-                                <p>長頸鹿腳</p>
-                            </li>
-                            <li>
-                                <img class="picon" src="img/modify/leg_elephant.png" alt="">
-                                <input type="text" data-pointa="1" data-pointb="0" data-pointc="2" data-jump="1" style="display: none">
-                                <p>大象腳</p>
-                            </li>
-                            <li>
-                                <img class="picon" src="img/modify/leg_bird.png" alt="">
-                                <input type="text" data-pointa="0" data-pointb="3" data-pointc="1" data-jump="5" style="display: none">
-                                <p>鳥腳</p>
-                            </li>
-                            <li>
-                                <img class="picon" src="img/modify/leg_cmel.png" alt="">
-                                <input type="text" data-pointa="1" data-pointb="0" data-pointc="2" data-jump="3" style="display: none">
-                                <p>駱駝腳</p>
-                            </li> -->
+                        <ul class="part_wrap swiper-container swiper3">
+                            <div class="swiper-wrapper leg_list">
+                                <!-- <li>
+                                    <img class="picon" src="img/modify/leg_giraffe.png" alt="">
+                                    <input type="text" data-pointa="2" data-pointb="1" data-pointc="0" data-jump="2" style="display: none">
+                                    <p>長頸鹿腳</p>
+                                </li>
+                                <li>
+                                    <img class="picon" src="img/modify/leg_elephant.png" alt="">
+                                    <input type="text" data-pointa="1" data-pointb="0" data-pointc="2" data-jump="1" style="display: none">
+                                    <p>大象腳</p>
+                                </li>
+                                <li>
+                                    <img class="picon" src="img/modify/leg_bird.png" alt="">
+                                    <input type="text" data-pointa="0" data-pointb="3" data-pointc="1" data-jump="5" style="display: none">
+                                    <p>鳥腳</p>
+                                </li>
+                                <li>
+                                    <img class="picon" src="img/modify/leg_cmel.png" alt="">
+                                    <input type="text" data-pointa="1" data-pointb="0" data-pointc="2" data-jump="3" style="display: none">
+                                    <p>駱駝腳</p>
+                                </li> -->
+                            </div>
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-button-prev"><img src="img/modify/icon_arrow_left.png" alt=""></div>
+                            <div class="swiper-button-next"><img src="img/modify/icon_arrow_right.png" alt=""></div>
                         </ul>
                     </li>
                     <li class="part_button tail_button">
                         <label for="btn_parts">尾巴</label>
                         <input type="radio" name="partlist" id="btn_parts">
-                        <ul class="part_wrap">
-                            <!-- <li>
-                                <img class="picon" src="img/modify/tail_giraffe.png" alt="">
-                                <p>長頸鹿尾巴</p>
-                            </li>
-                            <li>
-                                <img class="picon" src="img/modify/tail_elephant.png" alt="">
-                                <p>大象尾巴</p>
-                            </li>
-                            <li>
-                                <img class="picon" src="img/modify/tail_skunk.png" alt="">
-                                <p>臭鼬尾巴</p>
-                            </li>
-                            <li>
-                                <img class="picon" src="img/modify/tail_tiger.png" alt="">
-                                <p>老虎尾巴</p>
-                            </li> -->
+                        <ul class="part_wrap swiper-container swiper4">
+                            <div  class="swiper-wrapper tail_list">
+                                <!-- <div class="swiper-slide slide_p0">
+                                    <li>
+                                        <img class="picon" src="img/modify/tail_giraffe.png" alt="">
+                                        <p>長頸鹿尾巴</p>
+                                    </li>
+                                    <li>
+                                        <img class="picon" src="img/modify/tail_elephant.png" alt="">
+                                        <p>大象尾巴</p>
+                                    </li>
+                                    <li>
+                                        <img class="picon" src="img/modify/tail_skunk.png" alt="">
+                                        <p>臭鼬尾巴</p>
+                                    </li>
+                                    <li>
+                                        <img class="picon" src="img/modify/tail_tiger.png" alt="">
+                                        <p>老虎尾巴</p>
+                                    </li>
+                                </div> -->
+                            </div>
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-button-prev"><img src="img/modify/icon_arrow_left.png" alt=""></div>
+                            <div class="swiper-button-next"><img src="img/modify/icon_arrow_right.png" alt=""></div>
                         </ul>
                     </li>
                 </ul>
