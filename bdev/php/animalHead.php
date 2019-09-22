@@ -120,7 +120,7 @@
                                 <input type="text" name="head_ch_name" id="" size="10" required>
                             </td>
                             <td>
-                                <input type="text" name="head_howl" id="" size="10" required>
+                                <input type="file" name="head_howl" id="" size="10" accept="audio/*" required>
                             </td>
                             <td colspan="2">
                                 <input class="btn btn-block btn-outline-primary addbtn" type="submit" value="新增">
@@ -154,7 +154,7 @@
                             <td><input type="number" name="head_environment3" value="<?= $headRow['head_environment3']?>" readonly="true" size="10" class="dissinputstyle" required min="1" max="9"></td>
                             <td><input type="number" name="head_status" value="<?= $headRow['head_status']?>" readonly="true" size="10" class="dissinputstyle" required></td>
                             <td><input type="text" name="head_ch_name" value="<?= $headRow['head_ch_name']?>" readonly="true" size="10" class="dissinputstyle" maxlength="10" required></td>
-                            <td><input type="text" name="head_howl" value="<?= $headRow['head_howl']?>" readonly="true" size="10" required></td>
+                            <td><input type="file" name="head_howl" value="<?= $headRow['head_howl']?>" readonly="true" size="10" accept="audio/*" required style="display:none"><p><?= $headRow['head_howl']?></p></td>
                             <td><input class="btn btn-block btn-outline-primary btn1" type="button" value="編輯"></td>
                             <td><input class="btn btn-block btn-outline-primary" type="submit"  value="修改完成" disabled></td>
                           </form>
@@ -262,7 +262,8 @@
         updatetr.children[6].firstChild.classList.remove("dissinputstyle");
         updatetr.children[7].firstChild.classList.remove("dissinputstyle");
         updatetr.children[8].firstChild.classList.remove("dissinputstyle");
-        updatetr.children[10].firstChild.removeAttribute("disabled");
+        updatetr.children[11].firstChild.removeAttribute("disabled");
+        updatetr.children[9].firstChild.style.display='block';;
 
     }
       
