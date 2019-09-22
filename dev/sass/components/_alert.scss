@@ -1,4 +1,4 @@
-@mixin msgalert() {
+@mixin msgalert($bgcolor,$linecolor,$btncolor) {
 
 .msg_alert {
   width: 100%;
@@ -15,7 +15,7 @@
  .msg_alert_container{
   width: 90%;
   position:fixed;
-  background-color: #fff;
+  background-color: $bgcolor;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
@@ -34,32 +34,31 @@
   .btn_close{
     display: block;
     border-radius: 50%;
-    background-color: #faf;
+    background-color: $linecolor;
     box-shadow: 2px 2px 0 1px #333;
     width: 30px;
     height: 30px;
     position: absolute;
     top: -10px;
     right: -10px;
-    /*           line-height: 2; */
+    color: #fff;
+    cursor: pointer;
+    /*line-height: 2; */
     text-align: center;
     }
 
     .msg_title{
-
       padding: 5px 0;
-        border-bottom: 3px dashed #faa;  
+      font-size: $lg_fz;
+      border-bottom: 3px dashed $linecolor;  
       }
-      
       .msg_cont {
         padding: 15px 20px 20px;
         text-align: left;
       }
-      
       .msg_alert_close {
         display: inline-block;
-        // color: #fff;
-        @include btn_cloud(100px,$col_btn_pink);
+        @include btn_cloud(100px,$btncolor);
       }
 
 }
