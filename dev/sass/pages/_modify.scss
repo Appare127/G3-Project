@@ -13,6 +13,8 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    @include msgalert(#fdf6e7,$col_btn_pink,$col_btn_pink);
+
 }
 
 

@@ -55,6 +55,8 @@
       .msg_cont {
         padding: 15px 20px 20px;
         text-align: left;
+        @include btn_cloudb(100px);
+
       }
       .msg_alert_close {
         display: inline-block;
