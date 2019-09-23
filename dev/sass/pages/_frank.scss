@@ -874,10 +874,10 @@
     }
     .frank_player_animal{
         width: 100%;
-        height: 100%;
+       
         margin: auto;
         position: absolute;
-        top: 125px;
+        top: 65px;
         left: 0;
         right: 0;
         bottom: 0;
@@ -1291,12 +1291,12 @@
     
     
     .frank_items_text{
-        bottom: 24%;
+        bottom: 25%;
     }
     .frank_top_left:hover .frank_items_text, 
     .frank_top_middle:hover .frank_items_text, 
     .frank_top_right:hover .frank_items_text{
-      bottom: 24%;
+      bottom: 25%;
     }
     
 
@@ -1514,7 +1514,7 @@
         
         
         .frank_player_card{
-            height: 420px;
+            height: 380px;
             overflow: hidden;
            
 
@@ -1534,11 +1534,16 @@
 
     .frank_player_pic{
         width: 80%;
-        padding-bottom: 80%;
         margin: auto;
         box-shadow: none;
         
-        
+        img{
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
         // .frank_players_title{
         //     width: 60%;
         //     height: 80px;
@@ -1550,10 +1555,9 @@
 
     
     .frank_player_text{
-            margin: 20px auto 10px;
-            padding-bottom: 45px;
+            margin: 40px auto 10px;
         h3{
-            margin: 20px auto ;
+            margin: 5px auto ;
         }
         span{
             margin: 0 5px;
