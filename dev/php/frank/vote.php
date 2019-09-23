@@ -1,7 +1,7 @@
 <?php
 $errMsg = "";
-// $user_no=$_GET["user_no"];
-$user_no=13;
+ $user_no=$_GET["user_no"];
+//$user_no=13;
 try {
     require_once("../connectg3.php");
     session_start();
@@ -18,17 +18,19 @@ catch (PDOException $e) {
     $errMsg .= "錯誤行號: " . $e->getLine() . "<br>";
 }
 
-$user_ctnRow= $user_ctn -> fetch(PDO::FETCH_ASSOC);
 $time=date("Y-m-d");
+ $user_ctnRow= $user_ctn -> fetch(PDO::FETCH_ASSOC);
+
 if($user_ctnRow['last_vote_date']>$time){
-    echo json_encode( "1");
-}else if($user_ctnRow['last_vote_date']=$time){
-
-
+    echo json_encode( "怪怪的");
+}else if($user_ctnRow['last_vote_date']==$time){
 //sql timestamp not null
-echo json_encode( "2");}
+echo  json_encode( "132");
+//echo  json_encode( $user_ctnRow['last_vote_date']);
+}
 else {
-    echo json_encode( "3");}
-    echo json_encode( "4");
-
+  //  echo json_encode( $user_ctnRow);
+ echo  json_encode( "2");
+}
+    
 ?>

@@ -6,7 +6,7 @@ try {
     session_start();
 //取出動物排行
     $sql_user_ctn = 
-    "select u.user_no,u.my_animal_name,u.my_animal_img, u.my_animal_bg_img,u.attend
+    "select u.user_no,u.my_animal_name,u.my_animal_img, u.my_animal_bg_img,u.attend ,u.my_environ_img,u.animal_life,u.animal_jump
     from user u
     where  u.user_no = {$user_no}  ";
     $user_ctn = $pdo->prepare($sql_user_ctn);
@@ -40,14 +40,14 @@ for ($i=0; $i < 1; $i++) {
 }
 $time=date("Y-m-d");
 $sql_INSERT =
-"INSERT INTO `collections` (`work_no`, `vote`,`cmp_img`,`work_name`,`work_date`,`bg_img`,`user_no`,`amlbg_img`) VALUES
-(null, 0, 'img/collections/work_{$work_no_box['work_no']}.png', '{$user_ctnRow[0]['my_animal_name']}', '{$time}', 'img/collections/work_bg_{$work_no_box['work_no']}.png', '{$user_ctnRow[0]['user_no']}','img/collections/work_amlbg_{$work_no_box['work_no']}.png');";
+"INSERT INTO `collections` (`work_no`, `vote`,`cmp_img`,`work_name`,`work_date`,`bg_img`,`user_no`,`amlbg_img`,`environ_img`,`work_life`,`work_jump`) VALUES
+(null, 0, 'img/collections/work_{$work_no_box['work_no']}.png', '{$user_ctnRow[0]['my_animal_name']}', '{$time}', 'img/collections/work_bg_{$work_no_box['work_no']}.png', '{$user_ctnRow[0]['user_no']}','img/collections/work_amlbg_{$work_no_box['work_no']}.png','img/collections/work_radar_{$work_no_box['work_no']}.png','{$work_no_box['animal_life']}','{$work_no_box['animal_jump']}');";
 $data_INSERT = $pdo->prepare($sql_INSERT);
 $data_INSERT ->execute();
  copy("../../img/customize/user{$user_no}_aml.png", "../../img/collections/work_{$work_no_box['work_no']}.png");	
  copy("../../img/customize/user{$user_no}_bg.png", "../../img/collections/work_bg_{$work_no_box['work_no']}.png");
  copy("../../img/customize/user{$user_no}_amlbg.png", "../../img/collections/work_amlbg_{$work_no_box['work_no']}.png");	
-
+ copy("../../img/customize/user{$user_no}_radar.png", "../../img/collections/work_radar_{$work_no_box['work_no']}.png");
 //sql timestamp not null
 echo json_encode( $work_no_box['work_no']);}
 

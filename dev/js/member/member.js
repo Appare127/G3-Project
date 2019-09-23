@@ -1,3 +1,4 @@
+
 // window.addEventListener('load',function(){
 // let user_no = sessionStorage.user_no;
 // console.log(user_no)
@@ -95,6 +96,11 @@ function stockpileBasic(){
   for (let i = 0; i < redonlyOpen.length; i++) {
     redonlyOpen[i].readOnly = true;//關閉可以修改的功能
   }
+
+  // if(document.getElementsByClassName('user_name')==""){
+  //   alert("請填寫姓名");
+  // }
+
 }
 
 window.addEventListener('load',
@@ -107,6 +113,24 @@ window.addEventListener('load',
 
 // <!------ ↑修改/儲存會員基本資料↑ ----->
 
+// //
+// function rr(){
+//   console.log("請填寫姓名");
+//   if(document.getElemenstByName('user_name')==""){
+//     alert("請填寫姓名");
+//     console.log("請填寫姓名");
+//   }
+
+// }
+
+// window.addEventListener('load',
+//   function(){
+//     document.getElementById('updated_it').onclick = rr;
+//   }
+// );
+
+
+//
 
 // <!------ ↓訂單明細收合↓----->
 var orderbtns=document.getElementsByClassName('js_order_show');
