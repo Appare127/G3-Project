@@ -15,7 +15,7 @@
     position: absolute;
     position: fixed;
     top: 0;
-    z-index: 5;
+    z-index: 11;
     
     .login_box {
         @include btn_cloud(30%, $col_btn_pink);
