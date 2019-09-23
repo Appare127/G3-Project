@@ -188,7 +188,7 @@ $lblue:#d8ecea;
         padding: 50px 10px 10px 10px;
         @include responds(medium){
             padding:100px 10px 10px 10px;
-            border-radius:0 40px;
+            border-radius:0 40px 40px 40px;
             box-shadow: 7px 7px 0 1px #777;
         }
 
