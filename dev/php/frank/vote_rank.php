@@ -20,5 +20,6 @@ $j=0;
 while( $user_ctnRow[$j]= $user_ctn -> fetch(PDO::FETCH_ASSOC)){
    $j++;
 }
+array_splice($user_ctnRow,$j,1);
 echo json_encode( $user_ctnRow );
 ?>

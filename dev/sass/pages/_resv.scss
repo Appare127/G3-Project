@@ -300,6 +300,15 @@
                 #resv_canvas{
                     border: 1px solid #ccc;
                 }
+                // 刷新
+                #refresh{
+                    width: 18px;
+                    opacity: 0.6;
+                    cursor: pointer;
+                    position:relative;
+                    left:3px;
+                    bottom: 1px;
+                }
                 .resv_submit{
                     padding-bottom: 8px;
                     @include btn_cloud (100px,$col_btn_pink);
@@ -365,7 +374,6 @@
         .cloud_buttom{
             display: none;
         }
-        // left train dissaper
         .resv_train{
             display: none;   
         }
@@ -393,7 +401,7 @@
         }
                 
 
-        // 右側表單
+        
         .resv_form{
             width: 100%;
             margin: 50px 10px;
