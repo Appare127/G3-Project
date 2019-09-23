@@ -115,9 +115,9 @@ function owlCarousel_img(){
 function frank_vote(){
     if(rank1.readyState==4){
         var vote_rank= JSON.parse(rank1.responseText);
-  //   console.log(vote_rank);
-for (let i = 0; i < vote_rank.length -4; i++) {
-     $("#frank_player_more").append($("#frank_player_items").clone(true).attr('id','frank_player_items'+i));
+     console.log(vote_rank);
+for (let i = 0; i < vote_rank.length -3; i++) {
+     $("#frank_player_more").append($("#frank_player_items").clone(true).attr({id:'frank_player_items'+i ,Class:'frank_player_items ex_item'}));
      $(`#frank_player_items${i} .frank_players_title span:eq(1)`).attr('id','aid'+(i+3));
      $(`#frank_player_items${i}  input:eq(0)`).attr('name','work_no');
      $(`#frank_player_items${i} h3 span:eq(0)`).attr('id','id'+(i+3));
@@ -130,7 +130,7 @@ for (let i = 0; i < vote_rank.length -4; i++) {
      $(`#frank_player_items${i} .frank_message_btn .btn_cloudp `).append($input);
      $(`#frank_player_items${i} .frank_player_btn .btn_cloudb`).append($input2);               
 }
-   for (let i = 0; i < vote_rank.length -1; i++) {
+   for (let i = 0; i < vote_rank.length ; i++) {
     $id("vote"+`${i}`).innerText=vote_rank[i]["vote"];
     $id("bg"+`${i}`).src=vote_rank[i]["bg_img"];
     $id("ag"+`${i}`).src=vote_rank[i]["cmp_img"];
@@ -141,8 +141,6 @@ for (let i = 0; i < vote_rank.length -4; i++) {
     $("input[name='work_no3']")[i].value=vote_rank[i]["work_no"];
     $(`.heart:eq(${i})`).attr('id','NO_'+(vote_rank[i]["work_no"]));
 } 
-console.log(vote_rank);
-
    heart_item_exit()
  favorite();
 }}
@@ -180,17 +178,47 @@ function join_php(){
         }}}
  //投票       
 function  vote_xml(e){    
-    console.log(e);
-    
     vote_item=frank_rank();
-    vote_item.open("GET","php/frank/vote.php?user_no="+sessionStorage.user_no+"",true);
+    vote_item.open("GET","php/frank/vote.php?user_no="+sessionStorage.user_no+"&work_no="+e,true);
     vote_item.onreadystatechange = vote_php;
     vote_item.send(null);
 }
 function vote_php(){
     if(vote_item.readyState==4  && vote_item.status==200){
         let vote_arr= JSON.parse(vote_item.responseText);
-        console.log( vote_arr);
+        if ( vote_arr==0) {
+                console.log( "沒有票能投");
+                 console.log(vote_arr);
+        }else{
+                console.log( "還剩"+ vote_arr+"張票能投");
+               
+        }
+            
+          setTimeout(() => {
+    vote_in_xml=frank_rank();
+    vote_in_xml.open("GET","php/frank/vote_rank.php",true);
+    vote_in_xml.onreadystatechange =vote_into;
+    function vote_into() {
+        vote_rank_item= JSON.parse(vote_in_xml.responseText);
+        console.log( vote_rank_item);
+              for (let i = 0; i < vote_rank_item.length -1; i++) {
+    $id("vote"+`${i}`).innerText=vote_rank_item[i]["vote"];
+    $id("bg"+`${i}`).src=vote_rank_item[i]["bg_img"];
+    $id("ag"+`${i}`).src=vote_rank_item[i]["cmp_img"];
+    $id("aid"+`${i}`).innerText=vote_rank_item[i]["work_name"];
+    $id("id"+`${i}`).innerText=vote_rank_item[i]["user_name"];
+    $("input[name='work_no']")[i].value=vote_rank_item[i]["work_no"];
+    $("input[name='work_no2']")[i].value=vote_rank_item[i]["work_no"];
+    $("input[name='work_no3']")[i].value=vote_rank_item[i]["work_no"];
+    $(`.heart:eq(${i})`).attr('id','NO_'+(vote_rank_item[i]["work_no"]));
+     } 
+         heart_item_exit()
+      favorite();
+    }
+    vote_in_xml.send(null);  
+     }, 200);
+
+
 }}
 
 //留言
@@ -241,6 +269,7 @@ $('.frank_closs_btn').click(function(){
 });
 //投票
   $('.frank_vote_btn .btn_cloudb').click(function(){
+  //   $('.ex_item').remove();
       
      let e= $(this).find("input")[0].value;
      vote_xml(e);
@@ -320,6 +349,9 @@ function msg_value() {
      setTimeout(() => {
          msg_revalue()
      }, 100);}
+
+
+
 function msg_revalue(){
      let e =$(`#msg_btn_no`).val();
     message_xml(e);
