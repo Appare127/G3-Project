@@ -32,11 +32,12 @@ class Unicorn {
         }
     }
     hits(train){ 
-        if(strongStatus==true){
-            // console.log('近來');
+        if(strongStatus==true && immuneStatus ==false){
             return collideCircleCircle(this.x,this.y,600,train.x,train.y,train.r);
-        }else{
+        }else if(strongStatus == false && immuneStatus == false){
             return collideCircleCircle(this.x,this.y,this.r-20,train.x,train.y,train.r);
+        }else if(immuneStatus==true){
+            return false;
         }
     }
 
