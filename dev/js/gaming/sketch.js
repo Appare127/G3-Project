@@ -406,8 +406,8 @@ function draw() {
 
     if(timer>=parseInt(flyingTime) && timer< (flyingTime+10) ){
 
-        myAudio=document.getElementById('audio2');
-        myAudio.play();
+        // myAudio=document.getElementById('audio2');
+        // myAudio.play();
        
 
         textSize(20);
