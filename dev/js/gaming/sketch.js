@@ -402,6 +402,11 @@ function draw() {
     }
 
     if(timer>=parseInt(flyingTime) && timer< (flyingTime+10) ){
+        <audio id="audio2" 
+            preload="auto" 
+            src="img/game/ImLikeaBird.mp3#t=00:00:53" 
+            oncanplaythrough="this.play();">
+        </audio>
         textSize(20);
         fill(255,69,0);
         text(`飛行狀態: ${10+flyingTime - timer}秒`, 3/5*width, 1/5*height+10);

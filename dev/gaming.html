@@ -170,7 +170,7 @@ function updateScoreMoney(){
     }
     // sessionStorage['game_record'] = timer;
     if(sessionStorage['user_no']){
-        if(timer>sessionStorage['game_record'] || sessionStorage['game_record']==''){
+        if(timer>sessionStorage['game_record'] || sessionStorage['game_record']=='' || sessionStorage['game_record']=="null"){
         saveImage();
         var now = new Date(); 
         let playTime = now.getFullYear() +'/'+ (Number(now.getMonth())+1*1) +'/' + now.getDate() + ' ' + now.getHours() +':'+now.getMinutes();
