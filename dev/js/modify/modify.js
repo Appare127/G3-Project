@@ -1143,11 +1143,27 @@ function openlogin(){
     document.getElementsByClassName('remind_login')[0].classList.remove('show');
 }
 
+// 選到的部件選單頁籤改變顏色
+function change_partli(e){
+    let part_button = document.getElementsByClassName('part_button');
+    for (let i=0; i<=3; i++){
+        part_button[i].classList.remove('now_page');
+    }
+    e.target.parentNode.classList.add('now_page')
+}
+// 選到的背景選單頁籤改變顏色
+function change_bgli(e){
+    let part_button = document.getElementsByClassName('part_button');
+    for (let i=4; i<=5; i++){
+        part_button[i].classList.remove('now_page');
+    }
+    e.target.parentNode.classList.add('now_page')
+}
 
 
-
-
-
+function $id(id){
+    return document.getElementById(id);
+}
 
 
 function init(){
@@ -1168,10 +1184,6 @@ function init(){
     // }
 // **************以上為測試用******************
 
-
-    // 兩個彈出提示視窗的關閉click事件
-    document.getElementsByClassName('close_remind')[0].addEventListener('click',remove_show);
-    document.getElementsByClassName('close_remind')[1].addEventListener('click',remove_show);
 
     // 剛載進頁面時，先做一次canvas繪製預設的圖片
     drawcanvas();
@@ -1198,8 +1210,13 @@ function init(){
     // 下一步按鈕的事件觸發
     document.getElementById('next_btn').addEventListener('click',nextstep);
 
-
-    
+    // 動物部件換頁標籤的變色
+    $id('btn_head').addEventListener('change',change_partli)
+    $id('btn_body').addEventListener('change',change_partli)
+    $id('btn_leg').addEventListener('change',change_partli)
+    $id('btn_parts').addEventListener('change',change_partli)
+    $id('bglist').addEventListener('change',change_bgli)
+    $id('mdbg').addEventListener('change',change_bgli)
 
 }
 

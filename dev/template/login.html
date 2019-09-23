@@ -357,8 +357,8 @@ let forgetPsw=new Vue({
             $id("user_id").value = "";
             $id("user_psw").value = "";
             //如果是在會員中心頁面登出，要跳回首頁
-            if (window.location.href == "http://localhost/G3/member.php" || window.location.href == "http://localhost/G3/checkOrder.html") {
-                window.location.href = "http://localhost/G3/home.html"
+            if (window.location.href.indexOf("member.php") !=-1 || window.location.href.indexOf("checkOrder.html")!=-1) {
+                window.location.href = "home.html"
             }
             // }else if(window.location.href == "http://localhost/G3/checkOrder.html"){
             //     window.location.href = "http://localhost/G3/cart.php"

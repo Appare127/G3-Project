@@ -55,16 +55,16 @@
                 <table class="table table-responsive-sm table-bordered">
                   <thead>
                     <tr class="legtr">
-                      <th width="100">腿部編號</th>
-                      <th>腿部名稱</th>
-                      <th>選單圖</th>
-                      <th>組合圖</th>
-                      <th>跳躍力</th>
-                      <th>環境1適應力</th>
-                      <th>環境2適應力</th>
-                      <th>環境3適應力</th>
-                      <th>狀態(0:下架; 1:上架)</th>
-                      <th>腿部中文名稱</th>
+                      <th class="align-middle" width="100">腿部編號</th>
+                      <th class="align-middle">腿部名稱</th>
+                      <th class="align-middle">選單圖</th>
+                      <th class="align-middle">組合圖</th>
+                      <th class="align-middle">跳躍力</th>
+                      <th class="align-middle">環境1適應力</th>
+                      <th class="align-middle">環境2適應力</th>
+                      <th class="align-middle">環境3適應力</th>
+                      <th class="align-middle">狀態(0:下架; 1:上架)</th>
+                      <th class="align-middle">腿部中文名稱</th>
                       <th colspan="2"></th>
                     </tr>
                   </thead>
@@ -149,26 +149,7 @@
                 </table>
 
                 <!-- 切換頁數 -->
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" href="#">Prev</a>
-                  </li>
-                  <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">4</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                  </li>
-                </ul>
+                
 
               </div>
             </div>

@@ -274,7 +274,17 @@
           @include responds(medium){
             display: none;
           }
+
       }
+
+      p:nth-child(2){
+
+  
+            @include responds(medium){
+              text-align: center;
+            }
+  
+        }
 
     }
 
@@ -343,6 +353,13 @@
           }
       }
 
+      p:nth-child(2){
+        @include responds(medium){
+          padding-left:40px;
+        }
+
+    }
+
     }    
   }
 
@@ -362,7 +379,7 @@
         width: 270px;
         position: fixed;
         text-align: center;
-        background-color: $col_btn_blue;
+        background-color: #fdf6e7;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -372,17 +389,26 @@
         padding: 10px;
     
         .btn_close{
-          display: block;
-          border-radius: 50%;
-          background-color: #ccc;
-          box-shadow: 2px 2px 0 1px #333;
-          width: 30px;
-          height: 30px;
-          position: absolute;
-          top: -10px;
-          right: -10px;
-          line-height: 2;
-          text-align: center;
+        display: block;
+        border-radius: 50%;
+        background-color: $col_btn_pink;
+        box-shadow: 2px 2px 0 1px #333;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        color: #fff;
+        cursor: pointer;
+        font-size:$m_fz;
+        // line-height: 2; 
+        text-align: center;
+
+        }
+        .qrcode_success_url{
+          text-decoration:underline;
+          color: #157E8F;
+
         }
       }
 
@@ -485,4 +511,153 @@
 
 .msg_close{
   @include btn_cloud(100px,$col_btn_blue);
+}
+
+
+///預約取消訊息
+.rev_alertwrap{
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  margin: auto;
+  background-color:rgba(0,0,0,0.6);
+  text-align: center;
+
+ .rev_alert_container{
+  width: 90%;
+  position:fixed;
+  background-color: #fdf6e7;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  margin:auto;
+  border-radius:10px;
+  box-sizing:border-box;
+  padding:10px;
+
+  @include responds(medium){
+    width: 50%;
+  }
+  @include responds(large){
+  width:30%;
+  }
+  }
+  .rev_btn_close{
+    display: block;
+    border-radius: 50%;
+    background-color: $col_btn_pink;
+    box-shadow: 2px 2px 0 1px #333;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    color: #fff;
+    cursor: pointer;
+    /*line-height: 2; */
+    text-align: center;
+    span{
+      font-size:$m_fz;
+    }
+    }
+
+    .rev_title{
+      padding: 5px 0;
+      font-size: $lg_fz;
+      border-bottom: 3px dashed $col_btn_pink;  
+      }
+      .rev_cont {
+        padding: 10px;
+        box-sizing: border-box;
+        // text-align: left;
+   
+        @include btn_cloudb(100px);
+        p{
+          font-size:$m_fz;
+          margin-bottom: 10px;
+        }
+      }
+      .rev_alert_close {
+        display: inline-block;
+        @include btn_cloud(100px,$col_btn_pink);
+      }
+}
+
+
+///訂單取消訊息
+.order_alertwrap{
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  margin: auto;
+  background-color:rgba(0,0,0,0.6);
+  text-align: center;
+
+ .order_alert_container{
+  width: 90%;
+  position:fixed;
+  background-color: #fdf6e7;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  margin:auto;
+  border-radius:10px;
+  box-sizing:border-box;
+  padding:10px;
+
+  @include responds(medium){
+    width: 50%;
+  }
+  @include responds(large){
+  width:30%;
+  }
+  }
+  .order_btn_close{
+    display: block;
+    border-radius: 50%;
+    background-color: $col_btn_pink;
+    box-shadow: 2px 2px 0 1px #333;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    color: #fff;
+    cursor: pointer;
+    /*line-height: 2; */
+    text-align: center;
+    span{
+      font-size:$m_fz;
+    }
+    }
+
+    .order_title{
+      padding: 5px 0;
+      font-size: $lg_fz;
+      border-bottom: 3px dashed $col_btn_pink;  
+      }
+      .order_cont {
+        padding: 10px;
+        box-sizing: border-box;
+        // text-align: left;
+   
+        @include btn_cloudb(100px);
+        p{
+          font-size:$m_fz;
+          margin-bottom: 10px;
+        }
+      }
+      .order_alert_close {
+        display: inline-block;
+        @include btn_cloud(100px,$col_btn_pink);
+      }
+
 }

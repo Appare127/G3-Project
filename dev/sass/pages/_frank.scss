@@ -817,9 +817,30 @@
         .frank_player_back{
             transform: rotateY(180deg);
             @include radarinfo_frank();
-            .evemt_ability{
-                img{
-                    width: 100%;
+            .info_wrap{
+                .life_ability{
+                    padding: 10px;
+                    p{
+                        font-size: 15px;
+                    }
+                    .life{
+                        display: flex;
+                        align-items: center;
+                        img{
+                            margin: 5px;
+                        }
+                    }
+                }
+                .jump_ability{
+                    padding: 10px;
+                    p{
+                        font-size: 15px;
+                    }
+                } 
+                .evemt_ability{
+                    img{
+                        width: 100%;
+                    }
                 }
             }
         }

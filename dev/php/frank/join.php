@@ -39,9 +39,18 @@ for ($i=0; $i < 1; $i++) {
     $work_no_box['work_no'] =$work_no_box['work_no']+1;
 }
 $time=date("Y-m-d");
+
 $sql_INSERT =
-"INSERT INTO `collections` (`work_no`, `vote`,`cmp_img`,`work_name`,`work_date`,`bg_img`,`user_no`,`amlbg_img`,`environ_img`,`work_life`,`work_jump`) VALUES
-(null, 0, 'img/collections/work_{$work_no_box['work_no']}.png', '{$user_ctnRow[0]['my_animal_name']}', '{$time}', 'img/collections/work_bg_{$work_no_box['work_no']}.png', '{$user_ctnRow[0]['user_no']}','img/collections/work_amlbg_{$work_no_box['work_no']}.png','img/collections/work_radar_{$work_no_box['work_no']}.png','{$work_no_box['animal_life']}','{$work_no_box['animal_jump']}');";
+"INSERT INTO `collections` (`work_no`, `vote`,`cmp_img`,`work_name`,`work_date`,`bg_img`,`user_no`,`amlbg_img`,`environ_img`,`work_jump`,`work_life`) VALUES
+(null, 0, 'img/collections/work_{$work_no_box['work_no']}.png', 
+'{$user_ctnRow[0]['my_animal_name']}', 
+'{$time}',
+'img/collections/work_bg_{$work_no_box['work_no']}.png',
+'{$user_ctnRow[0]['user_no']}',
+'img/collections/work_amlbg_{$work_no_box['work_no']}.png',
+'img/collections/work_radar_{$work_no_box['work_no']}.png',
+'{$user_ctnRow[0]['animal_life']}',
+'{$user_ctnRow[0]['animal_jump']}');";
 $data_INSERT = $pdo->prepare($sql_INSERT);
 $data_INSERT ->execute();
  copy("../../img/customize/user{$user_no}_aml.png", "../../img/collections/work_{$work_no_box['work_no']}.png");	
