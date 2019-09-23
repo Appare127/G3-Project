@@ -147,27 +147,22 @@ function owlCarousel_img(){
             $(`.heart:eq(${i})`).attr('id','NO_'+(vote_rank[i]["work_no"]));
          }       
           
-         for (let i = 3; i < vote_rank.length; i++) {
-           
-            $id("evemt_ability"+`${i}`).src=vote_rank[i]["environ_img"];
-        
-            
+for (let i = 3; i <=vote_rank.length; i++){
             let  total_health = vote_rank[i]["work_life"];
-            for (let i=1; i<=total_health; i++){
+            for (let l=0; l<total_health; l++){
                 let hart = document.createElement('img');
                 hart.src = 'img/modify/icon_life.png';
                 $("#life"+`${i}`).append(hart);
-              
             }
-                vote_rank[i]["work_jump"];
-                    let add = $id("add"+`${i}`);
+
+                    var add = $id("add"+`${i}`);
                     let meter = $id("meter"+`${i}`);
                     let number = vote_rank[i]["work_jump"];
-                    add.style.width = `${number *2}0%`;
+                    add.style.width =`${number * 2}0%`;
                     meter.innerText = number + 'm';
-            
-            
-         }
+                
+                    $id("evemt_ability"+`${i}`).src=vote_rank[i]["environ_img"];
+        }
            heart_item_exit()
          favorite();
         }}
