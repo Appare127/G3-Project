@@ -30,7 +30,7 @@ var shop_balloon = new ScrollMagic.Scene({
 //===============================================
 
 
-fetch("php/home/home_shop.php").then(data=>data.json()).then(data=>{
+fetch("../../php/home/home_shop.php").then(data=>data.json()).then(data=>{
     // console.log(data);
     let img=JSON.parse(data[1]);
     // console.log(img);

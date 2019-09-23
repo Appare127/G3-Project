@@ -255,28 +255,29 @@ function draw() {
 
 
 
-    // //隨機生成小丸子
+//     //隨機生成小丸子
     
-    // if(random(1)<0.008 && angels.length == 0){
-    //     angels.push(new Angel());
-    // }
-    // conso
-    // //小丸子的行為
-    // for (let a of angels) {
-    //     a.show();
-    //     a.move();
-    // }
+//     if(random(1)<0.1 && angels.length == 0){
+//         angels.push(new Angel());
+//     }
+//    console.log(angels[0]);
 
-    // //隨機生成書本
-    // if(random(1)<0.1 && angels[0].readyStatus==true){
-    //     books.push(new Book(angels[0].posX,angels[0].posY));
-    // }
+//     //小丸子的行為
+//     for (let a of angels) {
+//         a.show();
+//         a.move();
+//     }
 
-    // for (let b of books) { //掉下書本
-    //     b.move();
-    //     b.show();
+//     //隨機生成書本
+//     if(random(1)<0.1 && angels[0].readyStatus==true){
+//         books.push(new Book(angels[0].posX,angels[0].posY));
+//     }
 
-    // }
+//     for (let b of books) { //掉下書本
+//         b.move();
+//         b.show();
+
+//     }
 
 
     //動物的行為
@@ -398,9 +399,17 @@ function draw() {
     }
     if ( timer >= parseInt(flyingTime)+10 ){
         flyStatus = false;
+        myAudio.pause();
+        myAudio.currentTime = 1;
+
     }
 
     if(timer>=parseInt(flyingTime) && timer< (flyingTime+10) ){
+
+        myAudio=document.getElementById('audio2');
+        myAudio.play();
+       
+
         textSize(20);
         fill(255,69,0);
         text(`飛行狀態: ${10+flyingTime - timer}秒`, 3/5*width, 1/5*height+10);

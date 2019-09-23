@@ -373,6 +373,7 @@ function animalWalking(trigger){
         var n;
 
             if(trigger=='firstTime'){
+                
                 if(sessionStorage['animal_jump']<=2 && sessionStorage['animal_life']<=2){
                     // console.log(1);
                     randomTalk = [
@@ -411,7 +412,7 @@ function animalWalking(trigger){
 
 
                 if(sessionStorage['user_name']&&sessionStorage['user_no']){
-                
+                    
                     $que(".animal_words")[0].style.display="block";
                     $que(".info_pic img")[0].classList.add('animalHello');//動物移動
                     $que(".animal_words")[0].classList.add('animalSayWords');//對話框移動
