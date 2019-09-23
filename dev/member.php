@@ -189,7 +189,7 @@ if ($errMsg !=""){
         </div>
 
 
-        <div class="col-12 col-md-6">
+        <div id="app" class="col-12 col-md-6">
               <table class="baic_txt">
                 
               <tr>
@@ -199,7 +199,7 @@ if ($errMsg !=""){
               </tr>
               <tr>
                 <td><p class="p_title">姓名</p></td>
-                <td><p><input type="text" name="user_name" readonly="readonly" value="<?=$userRow["user_name"]?>"></p></td>
+                <td><p><input type="text" class="user_name" name="user_name" readonly="readonly" value="<?=$userRow["user_name"]?>"></p></td>
               </tr>
               <tr>
                 <td><p class="p_title">密碼</p></td>
@@ -207,7 +207,7 @@ if ($errMsg !=""){
               </tr>
               <tr>
                 <td><p class="p_title">信箱</p></td>
-                <td><p><input type="email" name="user_email" readonly="readonly" value="<?=$userRow["user_email"]?>">
+                <td><p><input type="email"  name="user_email" readonly="readonly" value="<?=$userRow["user_email"]?>">
                  </p></td>
               </tr>
               <tr>
@@ -716,6 +716,29 @@ if ($errMsg !=""){
             </div>
         </div>
 
+<!-- alert -->
+        <div class="msg_alert" id="msg">
+
+          <div class="msg_alert_container">
+
+            <div class="msg_title" id="msg_top">
+              <span><?=$pdoRevs["booking_no"]?></span>
+            </div>
+
+              <div class="btn_close msg_clear"><span>×</span></div>
+
+              <div class="msg_cont" id="msg_cont">'+text+'</div>
+
+              <div class="msg_alert_close msg_clear">
+                <a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span>
+                <span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span>
+                <span class="btn_cloudeffect"></span></a>
+              </div>
+              
+            </div>
+        </div>
+<!-- alert -->
+        
         <!-- 未來動態新增 -->
 
       <?php
@@ -854,7 +877,9 @@ if ($errMsg !=""){
 
   </section>
 
-  <!-- <div class="msg_alert" id="msg">
+
+
+<!-- <div class="msg_alert" id="msg">
 
 <div class="msg_alert_container">
 
@@ -874,10 +899,21 @@ if ($errMsg !=""){
       }
   ?>
 
-
-
   <script src="js/member/member.js"></script>
   <script src="js/modify/radar.js"></script>
+
+  <script>
+  
+  // var email = document.getElementsByName("user_email")[0];
+  // console.log("email:"+email.value);
+  // console.log("emailErrMsg"+app.emailErrMsg);
+  // email.onchange=function(){
+  //     if(app.emailErrMsg ==""){
+  //     $("#updated_it").prop("disabled",false)
+  //   }
+  // }
+  
+  </script>
 
 </body>
 
