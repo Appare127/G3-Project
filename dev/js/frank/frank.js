@@ -1,7 +1,6 @@
 window.addEventListener("load", init, false);
 window.addEventListener("resize", resize, false);
 function init(){
-        vote_xml();
         owlCarousel_img();
       frank_vote_rank();
       activity_button();
@@ -225,10 +224,10 @@ function vote_php(){
           setTimeout(() => {
     vote_in_xml=frank_rank();
     vote_in_xml.open("GET","php/frank/vote_rank.php",true);
-    vote_in_xml.onreadystatechange =vote_into;
+    // vote_in_xml.onreadystatechange =vote_into;
+    vote_in_xml.onload =vote_into;
     function vote_into() {
         vote_rank_item= JSON.parse(vote_in_xml.responseText);
-        console.log( vote_rank_item);
               for (let i = 0; i < vote_rank_item.length -1; i++) {
     $id("vote"+`${i}`).innerText=vote_rank_item[i]["vote"];
     $id("bg"+`${i}`).src=vote_rank_item[i]["bg_img"];
