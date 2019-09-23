@@ -1,10 +1,11 @@
 window.addEventListener("load", init, false);
 window.addEventListener("resize", resize, false);
 function init(){
+        vote_xml();
         owlCarousel_img();
       frank_vote_rank();
       activity_button();
-  
+   
      
 }
 function resize(){
@@ -42,7 +43,7 @@ function favorite(){
                             this.title = "取消收藏";
                         //設定好所要連結的程式
                         var url = "php/frank/love.php?user_no="+sessionStorage['user_no']+'&work_no='+this.id.replace('NO_','')+'&option='+option;
-                           console.log(url);
+                          
                         xhr.open("GET", url, true); 
                         //送出資料           
                         xhr.send(null);
@@ -115,7 +116,7 @@ function owlCarousel_img(){
         function frank_vote(){
             if(rank1.readyState==4){
                 var vote_rank= JSON.parse(rank1.responseText);
-            
+        
         for (let i = 0; i < vote_rank.length -3; i++) {
              $("#frank_player_more").append($("#frank_player_items").clone(true).attr('id','frank_player_items'+i));
              $(`#frank_player_items${i} .frank_players_title span:eq(1)`).attr('id','aid'+(i+3));
@@ -135,7 +136,7 @@ function owlCarousel_img(){
              $(`#frank_player_items${i} .jump_bar .meter`).attr('id','meter'+(i+3));
              $(`#frank_player_items${i} .evemt_ability img`).attr('id','evemt_ability'+(i+3));                      
         }
-           for (let i = 0; i < vote_rank.length ; i++) {
+           for (let i = 0; i < vote_rank.length; i++) {
             $id("vote"+`${i}`).innerText=vote_rank[i]["vote"];
             $id("bg"+`${i}`).src=vote_rank[i]["bg_img"];
             $id("ag"+`${i}`).src=vote_rank[i]["cmp_img"];
@@ -146,8 +147,9 @@ function owlCarousel_img(){
             $("input[name='work_no3']")[i].value=vote_rank[i]["work_no"];
             $(`.heart:eq(${i})`).attr('id','NO_'+(vote_rank[i]["work_no"]));
          }       
-          
-for (let i = 3; i <=vote_rank.length; i++){
+      
+         
+         for (let i = 3; i <=vote_rank.length; i++){
             let  total_health = vote_rank[i]["work_life"];
             for (let l=0; l<total_health; l++){
                 let hart = document.createElement('img');
@@ -200,47 +202,17 @@ function join_php(){
         }}}
  //投票       
 function  vote_xml(e){    
+
+    
     vote_item=frank_rank();
-    vote_item.open("GET","php/frank/vote.php?user_no="+sessionStorage.user_no+"&work_no="+e,true);
+    vote_item.open("GET","php/frank/vote.php?user_no="+sessionStorage.user_no+"",true);
     vote_item.onreadystatechange = vote_php;
     vote_item.send(null);
 }
 function vote_php(){
     if(vote_item.readyState==4  && vote_item.status==200){
         let vote_arr= JSON.parse(vote_item.responseText);
-        if ( vote_arr==0) {
-                console.log( "沒有票能投");
-                 console.log(vote_arr);
-        }else{
-                console.log( "還剩"+ vote_arr+"張票能投");
-               
-        }
-            
-          setTimeout(() => {
-    vote_in_xml=frank_rank();
-    vote_in_xml.open("GET","php/frank/vote_rank.php",true);
-    // vote_in_xml.onreadystatechange =vote_into;
-    vote_in_xml.onload =vote_into;
-    function vote_into() {
-        vote_rank_item= JSON.parse(vote_in_xml.responseText);
-              for (let i = 0; i < vote_rank_item.length -1; i++) {
-    $id("vote"+`${i}`).innerText=vote_rank_item[i]["vote"];
-    $id("bg"+`${i}`).src=vote_rank_item[i]["bg_img"];
-    $id("ag"+`${i}`).src=vote_rank_item[i]["cmp_img"];
-    $id("aid"+`${i}`).innerText=vote_rank_item[i]["work_name"];
-    $id("id"+`${i}`).innerText=vote_rank_item[i]["user_name"];
-    $("input[name='work_no']")[i].value=vote_rank_item[i]["work_no"];
-    $("input[name='work_no2']")[i].value=vote_rank_item[i]["work_no"];
-    $("input[name='work_no3']")[i].value=vote_rank_item[i]["work_no"];
-    $(`.heart:eq(${i})`).attr('id','NO_'+(vote_rank_item[i]["work_no"]));
-     } 
-         heart_item_exit()
-      favorite();
-    }
-    vote_in_xml.send(null);  
-     }, 200);
-
-
+    
 }}
 
 //留言
@@ -291,11 +263,7 @@ $('.frank_closs_btn').click(function(){
 });
 //投票
   $('.frank_vote_btn .btn_cloudb').click(function(){
-          if (!sessionStorage['user_no']) {
-       
-         $id('login_gary').style.display = 'block';
-         return ;
-    } 
+      
      let e= $(this).find("input")[0].value;
      vote_xml(e);
 });
@@ -303,7 +271,7 @@ $('.frank_closs_btn').click(function(){
 $('.frank_expand_arrow').click(function(){
         $(this).parent().next().animate({bottom:'0px'},1);
 $('.frank_expand_button').click(function(){
-        $(this).parent().animate({bottom:'-850px'},1);
+        $(this).parent().animate({bottom:'-800px'},1);
     })
 });
 //留言按鈕
@@ -338,7 +306,7 @@ function message_btn(e){
       $('.frank_message_btn').addClass(function(){
           $('.frank_message').slideDown(50);
       })
-      console.log();
+      
       
     for (let i = 0; i < message_arr.length; i++) {
     $("#frank_message_content").append($("#message_wrap").clone(true).attr({id:'message_itme'+i,class:'message_itme frank_message_wrap'}));
@@ -357,13 +325,7 @@ function msg_value() {
     { 
         return ;
     }
-    if (!sessionStorage['user_no']) {
-       
-         $id('login_gary').style.display = 'block';
-         return ;
-    } 
    // console.log( sessionStorage['user_no']);
-    login_in_out();
   msg_xml=frank_rank();
    msg_xml.onreadystatechange=
    function()
@@ -380,10 +342,260 @@ function msg_value() {
      setTimeout(() => {
          msg_revalue()
      }, 100);}
-
-
-
 function msg_revalue(){
      let e =$(`#msg_btn_no`).val();
     message_xml(e);
 }
+
+
+
+
+
+$(document).ready(function(){
+    var COLORS, Confetti, NUM_CONFETTI, PI_2, canvas, confetti, context, drawCircle, i, range, resizeWindow, xpos;
+
+    NUM_CONFETTI = 30;
+
+    COLORS = [[244,164,96]];
+
+    PI_2 = 1 * Math.PI;
+
+    canvas = document.getElementById("world");
+
+    context = canvas.getContext("2d");
+
+    window.w = 0;
+
+    window.h = 0;
+
+    resizeWindow = function() {
+    window.w = canvas.width = window.innerWidth;
+    return window.h = canvas.height = window.innerHeight;
+    };
+
+    window.addEventListener('resize', resizeWindow, false);
+
+    window.onload = function() {
+    return setTimeout(resizeWindow, 0);
+    };
+
+    range = function(a, b) {
+    return (b - a) * Math.random() + a;
+    };
+
+    drawCircle = function(x, y, r, style) {
+    context.beginPath();
+    context.arc(x, y, r, 0, PI_2, false);
+    context.fillStyle = style;
+    return context.fill();
+    };
+
+    xpos = 1;
+
+    document.onmousemove = function(e) {
+    return xpos = e.pageX / w;
+    };
+
+    window.requestAnimationFrame = (function() {
+    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(callback) {
+        return window.setTimeout(callback, 1000 / 60);
+    };
+    })();
+
+    Confetti = class Confetti {
+    constructor() {
+    this.style = COLORS[~~range(0)];
+        this.rgb = `rgba(${this.style[0]},${this.style[1]},${this.style[2]}`;
+        this.r = ~~range(2, 4);
+        this.r2 = 2 * this.r;
+        this.replace();
+    }
+
+    replace() {
+        this.opacity = 1;
+        this.dop = 0.01 * range(1, 0.1);
+        this.x = range(-this.r2, w - this.r2);
+        this.y = range(-20, h - this.r2);
+        this.xmax = w - this.r;
+        this.ymax = h - this.r;
+        this.vx = range(0, 2) + 8 * xpos - 5;
+        return this.vy = 0.7 * this.r + range(-1, 1);
+    }
+
+    draw() {
+        var ref;
+        this.x += this.vx;
+        this.y += this.vy;
+        this.opacity += this.dop;
+        if (this.opacity > 1) {
+        this.opacity = 1;
+        this.dop *= -1;
+        }
+        if (this.opacity < 0 || this.y > this.ymax) {
+        this.replace();
+        }
+        if (!((0 < (ref = this.x) && ref < this.xmax))) {
+        this.x = (this.x + this.xmax) % this.xmax;
+        }
+        return drawCircle(~~this.x, ~~this.y, this.r, `${this.rgb},${this.opacity})`);
+    }
+
+    };
+
+    confetti = (function() {
+    var j, ref, results;
+    results = [];
+    for (i = j = 1, ref = NUM_CONFETTI; (1 <= ref ? j <= ref : j >= ref); i = 1 <= ref ? ++j : --j) {
+        results.push(new Confetti);
+    }
+    return results;
+    })();
+
+    window.step = function() {
+    var c, j, len, results;
+    requestAnimationFrame(step);
+    context.clearRect(1, 1, w, h);
+    results = [];
+    for (j = 0, len = confetti.length; j < len; j++) {
+        c = confetti[j];
+        results.push(c.draw());
+    }
+    return results;
+    };
+
+    step();
+
+})
+
+
+
+
+
+
+
+
+$(document).ready(function() {
+    $('.frank_message_title').iosParallax({
+      movementFactor: 500
+    });
+  });
+
+
+//沙塵
+
+
+$(document).ready(function(){
+    var COLORS, Confetti, NUM_CONFETTI, PI_2, canvas, confetti, context, drawCircle, i, range, resizeWindow, xpos;
+
+    NUM_CONFETTI = 30;
+
+    COLORS = [[244,164,96]];
+
+    PI_2 = 1.5 * Math.PI;
+
+    canvas = document.getElementById("world");
+
+    context = canvas.getContext("2d");
+
+    window.w = 0;
+
+    window.h = 0;
+
+    resizeWindow = function() {
+    window.w = canvas.width = window.innerWidth;
+    return window.h = canvas.height = window.innerHeight;
+    };
+
+    window.addEventListener('resize', resizeWindow, false);
+
+    window.onload = function() {
+    return setTimeout(resizeWindow, 0);
+    };
+
+    range = function(a, b) {
+    return (b - a) * Math.random() + a;
+    };
+
+    drawCircle = function(x, y, r, style) {
+    context.beginPath();
+    context.arc(x, y, r, 0, PI_2, false);
+    context.fillStyle = style;
+    return context.fill();
+    };
+
+    xpos = 1;
+
+    document.onmousemove = function(e) {
+    return xpos = e.pageX / w;
+    };
+
+    window.requestAnimationFrame = (function() {
+    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(callback) {
+        return window.setTimeout(callback, 99999 / 10);
+    };
+    })();
+
+    Confetti = class Confetti {
+    constructor() {
+    this.style = COLORS[~~range(0)];
+        this.rgb = `rgba(${this.style[0]},${this.style[1]},${this.style[2]}`;
+        this.r = ~~range(2, 4);
+        this.r2 = 2 * this.r;
+        this.replace();
+    }
+
+    replace() {
+        this.opacity = 1;
+        this.dop = 0.01 * range(1, 0.1);
+        this.x = range(-this.r2, w - this.r2);
+        this.y = range(-20, h - this.r2);
+        this.xmax = w - this.r;
+        this.ymax = h - this.r;
+        this.vx = range(0, 2) + 8 * xpos - 5;
+        return this.vy = 0.7 * this.r + range(-1, 1);
+    }
+
+    draw() {
+        var ref;
+        this.x += this.vx;
+        this.y += this.vy;
+        this.opacity += this.dop;
+        if (this.opacity > 1) {
+        this.opacity = 1;
+        this.dop *= -1;
+        }
+        if (this.opacity < 0 || this.y > this.ymax) {
+        this.replace();
+        }
+        if (!((0 < (ref = this.x) && ref < this.xmax))) {
+        this.x = (this.x + this.xmax) % this.xmax;
+        }
+        return drawCircle(~~this.x, ~~this.y, this.r, `${this.rgb},${this.opacity})`);
+    }
+
+    };
+
+    confetti = (function() {
+    var j, ref, results;
+    results = [];
+    for (i = j = 1, ref = NUM_CONFETTI; (1 <= ref ? j <= ref : j >= ref); i = 1 <= ref ? ++j : --j) {
+        results.push(new Confetti);
+    }
+    return results;
+    })();
+
+    window.step = function() {
+    var c, j, len, results;
+    requestAnimationFrame(step);
+    context.clearRect(1, 1, w, h);
+    results = [];
+    for (j = 0, len = confetti.length; j < len; j++) {
+        c = confetti[j];
+        results.push(c.draw());
+    }
+    return results;
+    };
+
+    step();
+
+})
