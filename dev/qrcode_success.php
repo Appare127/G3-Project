@@ -14,11 +14,7 @@
 session_start();
 try{
   //------------------------------------連線資料庫
-  $dsn = "mysql:host=localhost;port=3306;dbname=dd102g3;charset=utf8";
-  $user = "root";
-  $password = "123456";
-  $options=array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION, PDO::ATTR_CASE=>PDO::CASE_NATURAL);
-  $pdo = new PDO($dsn, $user, $password, $options);
+  require_once('php/connectg3.php');
 
   //假如有收到資料  就是改變資料庫(送來的訂單編號&狀態改成1(已入場)))
   if(isset($_POST['booking_no'])){
