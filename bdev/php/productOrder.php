@@ -51,15 +51,15 @@
                 <table class="table table-responsive-sm table-bordered">
                   <thead>
                     <tr class="aaa">
-                      <th width="300px">訂單編號</th>
-                      <th>會員編號</th>
-                      <th>訂單成立時間</th>
-                      <th>訂單總金額</th>
-                      <th width="280px">訂單狀態<br>(0:處理中;1:已出貨)</th>
-                      <th width="280px">訂單付款狀態<br>(0:未付款;1:已付款)</th>
-                      <th>收貨人姓名</th>
-                      <th>收貨人手機</th>
-                      <th>收貨人地址</th>
+                      <th class="align-middle" width="300px">訂單編號</th>
+                      <th class="align-middle">會員編號</th>
+                      <th class="align-middle">訂單成立時間</th>
+                      <th class="align-middle">訂單總金額</th>
+                      <th class="align-middle" width="280px">訂單狀態<br>(0:處理中;1:已出貨)</th>
+                      <th class="align-middle" width="280px">訂單付款狀態<br>(0:未付款;1:已付款)</th>
+                      <th class="align-middle">收貨人姓名</th>
+                      <th class="align-middle">收貨人手機</th>
+                      <th class="align-middle">收貨人地址</th>
                       <th colspan="2"></th>
                     </tr>
                   </thead>

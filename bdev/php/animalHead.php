@@ -74,16 +74,16 @@
                 <table class="table table-responsive-sm table-bordered">
                   <thead>
                     <tr id='head_title'>
-                      <th width="90">頭部編號</th>
-                      <th>頭部名稱</th>
-                      <th>選單圖</th>
-                      <th width="230">組合圖</th>
-                      <th>環境1適應力</th>
-                      <th>環境2適應力</th>
-                      <th>環境3適應力</th>
-                      <th>狀態(0:下架; 1:上架)</th>
-                      <th>頭部中文名稱</th>
-                      <th>動物聲音</th>
+                      <th class="align-middle" width="90">頭部編號</th>
+                      <th class="align-middle">頭部名稱</th>
+                      <th class="align-middle">選單圖</th>
+                      <th class="align-middle" width="230">組合圖</th>
+                      <th class="align-middle">環境1適應力</th>
+                      <th class="align-middle">環境2適應力</th>
+                      <th class="align-middle">環境3適應力</th>
+                      <th class="align-middle">狀態(0:下架; 1:上架)</th>
+                      <th class="align-middle">頭部中文名稱</th>
+                      <th class="align-middle">動物聲音</th>
                       <th colspan="2"></th>
                     </tr>
                   </thead>
@@ -168,26 +168,7 @@
                 </table>
 
                 <!-- 切換頁數 -->
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" href="#">Prev</a>
-                  </li>
-                  <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">4</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                  </li>
-                </ul>
+                
 
               </div>
             </div>
