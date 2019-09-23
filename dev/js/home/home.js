@@ -59,13 +59,15 @@ function gameAnimation(){
         document.querySelectorAll('.game_bg_ab img')[0].classList.add('camelWalk');
         
         //排行榜滑動
-        var scrolled1 = (window.pageYOffset - 2395)*0.4;//排行榜滑動的速度
-        document.querySelector('.game_palyrank').style.transform = 'translateX('+scrolled1+'px)';
-        if(scrollY>=2665){
-            var scrolled2 = (window.pageYOffset - 2671)*0.4;
-            if(0.5*scrolled2<=80){//椅子被旋轉 被撞出去
-                document.querySelectorAll('.game_bg_ab img')[1].style.transform = 'rotateZ('+1*scrolled2+'deg)';
-            }  
+        if(window.innerWidth>=768){
+            var scrolled1 = (window.pageYOffset - 2395)*0.4;//排行榜滑動的速度
+            document.querySelector('.game_palyrank').style.transform = 'translateX('+scrolled1+'px)';
+            if(scrollY>=2665){
+                var scrolled2 = (window.pageYOffset - 2671)*0.4;
+                if(0.5*scrolled2<=80){//椅子被旋轉 被撞出去
+                    document.querySelectorAll('.game_bg_ab img')[1].style.transform = 'rotateZ('+1*scrolled2+'deg)';
+                }  
+            }
         }
 
     }else {
