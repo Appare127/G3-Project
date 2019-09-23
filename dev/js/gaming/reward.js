@@ -57,3 +57,20 @@ class Stone {
         image(sImg, this.x, this.y, this.r, this.r);
     }
 }
+
+class Angel {
+    constructor(){
+        this.r = 140;
+        this.x = width;
+        this.y = height*0.4;
+        
+    }   
+    move(Vx=scrollSpeed,Vy=0) {
+            this.x -= 15;
+        
+    }
+    show() { 
+        image(aImg, this.x, this.y, 226, 398);
+        // rect( this.x, this.y, this.r, this.r);
+    }  
+}
