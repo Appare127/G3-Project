@@ -7,6 +7,7 @@ let wings = [];
 var drops = [];
 var stones =[];
 let angels=[];
+let books= [];
 let uImg;
 let tImg;
 let rImg;
@@ -16,6 +17,7 @@ let heartImg;
 let flyingTime;
 let strongTime;
 let stoneLife;
+let angel;
 
 let scrollSpeed = 10; 
 let x1 = 0;
@@ -96,13 +98,13 @@ function preload() {
 }
 
 function setup() {
-    button = createButton('full screen'); //全螢幕按鈕
-    button.mousePressed(
-        function(){
-                let fs = fullscreen();
-                fullscreen(!fs);
-        }
-    );
+    // button = createButton('full screen'); //全螢幕按鈕
+    // button.mousePressed(
+    //     function(){
+    //             let fs = fullscreen();
+    //             fullscreen(!fs);
+    //     }
+    // );
 
 
 
@@ -251,16 +253,31 @@ function draw() {
         stones.push(new Stone());
     }
 
-    //隨機生成小丸子
+
+
+    // //隨機生成小丸子
     
-    if(random(1)<0.008){
-        angels.push(new Angel());
-    }
-    //小丸子的行為
-    for (let a of angels) {
-        a.show();
-        a.move();
-    }
+    // if(random(1)<0.008 && angels.length == 0){
+    //     angels.push(new Angel());
+    // }
+    // conso
+    // //小丸子的行為
+    // for (let a of angels) {
+    //     a.show();
+    //     a.move();
+    // }
+
+    // //隨機生成書本
+    // if(random(1)<0.1 && angels[0].readyStatus==true){
+    //     books.push(new Book(angels[0].posX,angels[0].posY));
+    // }
+
+    // for (let b of books) { //掉下書本
+    //     b.move();
+    //     b.show();
+
+    // }
+
 
     //動物的行為
     unicorn.show();
@@ -344,9 +361,10 @@ function draw() {
             }
         }
     }
+
     //碰到肉之後的行為
     for(let f of foods){
-        console.log('碰到肉');
+        // console.log('碰到肉');
         f.move();
         f.show();
 
