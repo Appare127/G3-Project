@@ -116,7 +116,7 @@ function owlCarousel_img(){
         function frank_vote(){
             if(rank1.readyState==4){
                 var vote_rank= JSON.parse(rank1.responseText);
-          //   console.log(vote_rank);
+             console.log(vote_rank);
         for (let i = 0; i < vote_rank.length -3; i++) {
              $("#frank_player_more").append($("#frank_player_items").clone(true).attr('id','frank_player_items'+i));
              $(`#frank_player_items${i} .frank_players_title span:eq(1)`).attr('id','aid'+(i+3));
@@ -136,7 +136,7 @@ function owlCarousel_img(){
              $(`#frank_player_items${i} .jump_bar .meter`).attr('id','meter'+(i+3));
              $(`#frank_player_items${i} .evemt_ability img`).attr('id','evemt_ability'+(i+3));                      
         }
-           for (let i = 0; i < vote_rank.length -1; i++) {
+           for (let i = 0; i < vote_rank.length ; i++) {
             $id("vote"+`${i}`).innerText=vote_rank[i]["vote"];
             $id("bg"+`${i}`).src=vote_rank[i]["bg_img"];
             $id("ag"+`${i}`).src=vote_rank[i]["cmp_img"];
@@ -149,7 +149,7 @@ function owlCarousel_img(){
          }       
           
          for (let i = 3; i < vote_rank.length; i++) {
-            console.log(vote_rank[i])
+           
             $id("evemt_ability"+`${i}`).src=vote_rank[i]["environ_img"];
         
             
@@ -158,7 +158,7 @@ function owlCarousel_img(){
                 let hart = document.createElement('img');
                 hart.src = 'img/modify/icon_life.png';
                 $("#life"+`${i}`).append(hart);
-                console.log("#life"+`${i}`);
+              
             }
                 vote_rank[i]["work_jump"];
                     let add = $id("add"+`${i}`);
