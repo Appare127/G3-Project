@@ -3,7 +3,7 @@
   try{
     require_once("connectg3.php");
 
-    $sql = "select * from game_question";
+    $sql = "select * from game_question limit 15";
     $gameQuestions  = $pdo->query($sql);
     $gameQuestionRows = $gameQuestions -> fetchAll(PDO::FETCH_ASSOC);
 
@@ -51,15 +51,15 @@
                 <table class="table table-responsive-sm table-bordered">
                   <thead>
                     <tr>
-                      <th>題目編號</th>
-                      <th>題目名稱</th>
-                      <th>選項1</th>
-                      <th>選項2</th>
-                      <th>選項3</th>
-                      <th>選項4</th>
-                      <th>答案</th>
-                      <th>狀態(0:下架; 1:上架)</th>
-                      <th>答案說明</th>
+                      <th class="align-middle">題目編號</th>
+                      <th class="align-middle">題目名稱</th>
+                      <th class="align-middle">選項1</th>
+                      <th class="align-middle">選項2</th>
+                      <th class="align-middle">選項3</th>
+                      <th class="align-middle">選項4</th>
+                      <th class="align-middle">答案</th>
+                      <th class="align-middle">狀態(0:下架; 1:上架)</th>
+                      <th class="align-middle">答案說明</th>
                       <th colspan="3"></th>
                     </tr>
                   </thead>
@@ -142,7 +142,8 @@
                   </tbody>
                 </table>
                 <!-- 切換頁數 -->
-                <ul class="pagination">
+                
+                <!-- <ul class="pagination">
                   <li class="page-item">
                     <a class="page-link" href="#">Prev</a>
                   </li>
@@ -150,7 +151,7 @@
                     <a class="page-link" href="#">1</a>
                   </li>
                   <li class="page-item">
-                    <a class="page-link" href="#">2</a>
+                    <a class="page-link" href="#" onclick="forward()">2</a>
                   </li>
                   <li class="page-item">
                     <a class="page-link" href="#">3</a>
@@ -161,7 +162,7 @@
                   <li class="page-item">
                     <a class="page-link" href="#">Next</a>
                   </li>
-                </ul>
+                </ul> -->
       
               </div>
             </div>
@@ -177,6 +178,7 @@
   <!-- CoreUI and necessary plugins-->
   @@include('../html/layout/inputjs.html')
   
+
   <script>
       function reversechange(e){
         console.log(e.target.parentNode.parentNode.children[1]);   

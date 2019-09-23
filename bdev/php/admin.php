@@ -79,10 +79,6 @@
                       </td>
                       <td>
                         <input type="number" name="admin_status" id="" required min="0" max="1" required>
-                        <!-- <label class="switch switch-label switch-pill switch-primary">
-                          <input class="switch-input" type="checkbox" checked="">
-                          <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-                        </label> -->
                       </td>
                       <td colspan="3">
                         <input class="btn btn-block btn-outline-primary addbtn" type="submit" value="新增">
@@ -133,26 +129,7 @@ if( $errMsg != ""){ //例外
                   </tbody>
                 </table>
                 <!-- 切換頁數 -->
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" href="#">Prev</a>
-                  </li>
-                  <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">4</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                  </li>
-                </ul>
+                
       
               </div>
             </div>

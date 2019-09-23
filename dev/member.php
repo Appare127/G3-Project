@@ -307,12 +307,12 @@ if ($errMsg !=""){
             if( $userRow["my_animal_bg_img"] != "" ||  $userRow["my_animal_img"] != ""){
                if($userRow["my_animal_bg_img"] != "" ){
                ?>
-                <img class="animalbg_re" src="<?=$userRow["my_animal_bg_img"]?>" alt="user_bg">
-                <img class="animalpic_ab" src="<?=$userRow["my_animal_img"]?>" alt="user_animal">
+                <img class="animalbg_re" src="<?=$userRow["my_animal_bg_img"]?>?<?php echo time(); ?>" alt="user_bg">
+                <img class="animalpic_ab" src="<?=$userRow["my_animal_img"]?>?<?php echo time(); ?>" alt="user_animal">
             <?php
               }else{
                 ?>
-                  <img class="animalpic_ab" src="<?=$userRow["my_animal_img"]?>" alt="user_animal">
+                  <img class="animalpic_ab" src="<?=$userRow["my_animal_img"]?>?<?php echo time(); ?>" alt="user_animal">
                <?php
                 }
             }else{
@@ -682,18 +682,14 @@ if ($errMsg !=""){
               <div type="button" class="btn_close">x</div>
 
               <img class="qrcode_pic_js" src=''>
-              <a href="qrcode_success.php?booking_no=<?=$pdoRevs["booking_no"]?>">網址</a>
+              <p>若無法正常顯示，請點
+              <a class="qrcode_success_url" href="qrcode_success.php?booking_no=<?=$pdoRevs["booking_no"]?>">網址</a>
+              </p>
               
               <!--  -->
               <script>
-              document.getElementsByClassName('qrcode_pic_js')[<?=$i?>].src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=qrcode_success.php?booking_no=<?=$pdoRevs["booking_no"]?>&choe=UTF-8';
+              document.getElementsByClassName('qrcode_pic_js')[<?=$i?>].src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=http://140.115.236.71/demo-projects/DD102/DD102G3/qrcode_success.php?booking_no=<?=$pdoRevs["booking_no"]?>&choe=UTF-8';
               </script>
-
-                <!-- <script>
-              document.getElementsByClassName('qrcode_pic_js')[<?=$i?>].src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=http://140.115.236.71/demo-projects/DD102/DD102G3/QRcode_getStoreInfo-test-1.php?booking_no=<?=$pdoRevs["booking_no"]?>&choe=UTF-8';
-              </script>
-             -->
-            <!-- https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=http://140.115.236.71/demo-projects/DD102/DD102G3/QRcode_getStoreInfo-test.php? -->
               
             </div>
         </div>
@@ -821,7 +817,7 @@ if ($errMsg !=""){
           <p>作品名稱:<?=$pdoloves["work_name"]?></p>
           <div class="baic_btn">
             
-            <p class="btn_cloud close_love" id='work_close<?=$pdoloves["work_no"]?>'>取消收藏
+            <p class="btn_cloud close_love" id='work_close_<?=$pdoloves["work_no"]?>'>取消收藏
               @@include('template/btn_sp.html')
               </p>
             
