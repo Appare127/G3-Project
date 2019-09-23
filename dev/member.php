@@ -17,12 +17,12 @@ try {
 
   //找會員
   $userItems=$pdo->prepare('SELECT * FROM `user` where user_no = :user_no');
-  $userItems->bindValue(':user_no',@$_SESSION['user_no']);//$_SESSION['user_no']
+  $userItems->bindValue(':user_no',@$_SESSION['user_no']);
   $userItems->execute();
 
   //找訂單
   $orders=$pdo->prepare('SELECT * FROM `product_order` where user_no = :user_no');
-  $orders->bindValue(':user_no',@$_SESSION['user_no']);//$_SESSION['user_no']
+  $orders->bindValue(':user_no',@$_SESSION['user_no']);
   $orders->execute();
 
   //找訂單明細
@@ -31,14 +31,12 @@ try {
 
   //找預約
   $revs=$pdo->prepare('SELECT * FROM resv_order r join resv_session_capacity rc on r.session_no = rc.session_no where r.member_id = :member_id');
-  $revs->bindValue(':member_id',@$_SESSION['user_no']);//$_SESSION['user_no']
+  $revs->bindValue(':member_id',@$_SESSION['user_no']);
   $revs->execute();
 
-
   //找收藏明細 且 狀態等於"1"就是收藏中的
-  // $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = :user_no');
   $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = :user_no and f.favorite_status = 1');
-  $loves->bindValue(':user_no',@$_SESSION['user_no']);//$_SESSION['user_no']
+  $loves->bindValue(':user_no',@$_SESSION['user_no']);
   $loves->execute();
 
 ?>
@@ -58,60 +56,6 @@ try {
   <title>會員中心</title>
   @@include('template/csslink.html')
  <script src="js/plugin/Chart.js"></script>
-
-<!-- 
- <style>
-        #msg {
-            width: 266px;
-            height: 266px;
-            position: fixed;
-            z-index: 999;
-            top: 0%;
-            bottom: 0%;
-            left: 0%;
-            right: 0%;
-            margin: auto;
-            background: #fff;
-            box-shadow: 5px 5px 8px #999;
-            font-size: 17px;
-            color: #666;
-            border: 1px solid #f8f8f8;
-            text-align: center;
-            line-height: 2rem;
-            display: inline-block;
-            padding-bottom: 20px;
-            border-radius: 2px;
-        }
-
-        #msg_top {
-            background: #f8f8f8;
-            padding: 5px 15px 5px 20px;
-            text-align: left;
-        }
-
-        #msg_top span {
-            font-size: 22px;
-            float: right;
-            cursor: pointer;
-        }
-
-        #msg_cont {
-            padding: 15px 20px 20px;
-            text-align: left;
-        }
-
-        #msg_clear {
-            display: inline-block;
-            color: #fff;
-            padding: 1px 15px;
-            background: #8fc31f;
-            border-radius: 2px;
-            float: right;
-            margin-right: 15px;
-            cursor: pointer;
-        }
-    </style> -->
-
 </head>
 
 
@@ -125,7 +69,6 @@ try {
       <h1 class="title">會員中心</h1>
       <img class="icon_r" src="img/header/banner_icon_r.png" alt="">
     </div>
-
 
 
     <div class="tab_item">
@@ -447,7 +390,6 @@ if ($errMsg !=""){
       <div class="my_order">
         <h2>我的訂單</h2>
 
-
         <?php 
      
      if($orders->rowCount()==0){
@@ -461,90 +403,123 @@ if ($errMsg !=""){
         <!-- 未來動態新增 -->
         <div class="myorder_item">
 
-        <div class="item_title">
-            <p class="col-md-1 p_title">訂單編號</p>
-            <p class="col-md-3 p_title">訂購日期</p>
-            <p class="col-md-2 p_title">訂單狀態</p>
-            <p class="col-md-2 p_title">總金額</p>
-            <p class="col-md-2 p_title">取消訂單</p>
-            <p class="col-md-2 p_title">備註</p>
+          <div class="item_title">
+              <p class="col-md-1 p_title">訂單編號</p>
+              <p class="col-md-3 p_title">訂購日期</p>
+              <p class="col-md-2 p_title">訂單狀態</p>
+              <p class="col-md-2 p_title">總金額</p>
+              <p class="col-md-2 p_title">取消訂單</p>
+              <p class="col-md-2 p_title">備註</p>
+              <div class="clearfix"></div>
+          </div>
+
+          <div class="item_list">
+            <p class="col-6 s_show p_title">訂單編號:</p>
+            <p class="col-6 col-md-1"><?=$pdoOrders["order_no"]?></p>
+            <p class="col-6 s_show p_title">訂購日期:</p>
+            <p class="col-6 col-md-3"><?=$pdoOrders["order_date"]?></p>
+            <p class="col-6 s_show p_title">訂單狀態:</p>
+            <p class="col-6 col-md-2 shop_status"><?php
+                if($pdoOrders["shipping_status"]==1){
+                  echo"已出貨";
+                }elseif($pdoOrders["shipping_status"]==2){
+                  echo"已取消";
+                }else{
+                  echo"處理中";
+                }
+                ?></p>
+            <p class="col-6 s_show p_title">總金額:</p>
+            <p class="col-6 col-md-2"><?=$pdoOrders["order_sum"]?></p>
+
+            <p class="col-6 s_show p_title">取消訂單:</p>
+            <div class="col-6 col-md-2 baic_btn">
+              <p class="btn_cloud order_cancel">取消訂單
+                @@include('template/btn_sp.html')
+              </p>
+            </div>
+
+            <p class="col-6 s_show p_title">備註:</p>
+            <div class="col-6 col-md-2 baic_btn">
+              <a href="javascript:void(0)" class="btn_cloud js_order_show">訂單明細
+                @@include('template/btn_sp.html')
+              </a>
+            </div>
+
             <div class="clearfix"></div>
-        </div>
 
-
-        <div class="item_list">
-          <p class="col-6 s_show p_title">訂單編號:</p>
-          <p class="col-6 col-md-1"><?=$pdoOrders["order_no"]?></p>
-          <p class="col-6 s_show p_title">訂購日期:</p>
-          <p class="col-6 col-md-3"><?=$pdoOrders["order_date"]?></p>
-          <p class="col-6 s_show p_title">訂單狀態:</p>
-          <p class="col-6 col-md-2"><?= $pdoOrders["shipping_status"]==1? "已出貨":"處理中" ?></p>
-          <p class="col-6 s_show p_title">總金額:</p>
-          <p class="col-6 col-md-2"><?=$pdoOrders["order_sum"]?></p>
-
-          <p class="col-6 s_show p_title">取消訂單:</p>
-          <div class="col-6 col-md-2 baic_btn">
-            <a href="javascript:;" class="btn_cloud order_cancel">取消訂單
-              @@include('template/btn_sp.html')
-            </a>
           </div>
-
-          <p class="col-6 s_show p_title">備註:</p>
-          <div class="col-6 col-md-2 baic_btn">
-            <a href="javascript:void(0)" class="btn_cloud js_order_show">訂單明細
-              @@include('template/btn_sp.html')
-            </a>
-          </div>
-
-          <div class="clearfix"></div>
-
         </div>
-        </div>
+
+    
+
         <div class="myorder_item_detail">
 
-        <div class="item_title">
-          <p class="col-md-3 p_title">商品名稱</p>
-          <p class="col-md-3 p_title">單價</p>
-          <p class="col-md-3 p_title">數量</p>
-          <p class="col-md-3 p_title">小計</p>
-          <div class="clearfix"></div>
-        </div>
+          <div class="item_title">
+            <p class="col-md-3 p_title">商品名稱</p>
+            <p class="col-md-3 p_title">單價</p>
+            <p class="col-md-3 p_title">數量</p>
+            <p class="col-md-3 p_title">小計</p>
+            <div class="clearfix"></div>
+          </div>
+     
+          <?php 
+          $orderItems->bindValue(':order_no',$pdoOrders["order_no"]);
+            $orderItems->execute();
 
-               
-        <?php 
-        $orderItems->bindValue(':order_no',$pdoOrders["order_no"]);
-          $orderItems->execute();
+            $ordersItemsRow = $orderItems->fetchAll(PDO::FETCH_ASSOC);
+            foreach( $ordersItemsRow as $i => $pdoItems){
+              //跑order_item
+          ?>
+       
+          <div class="item_list">
+            <p class="col-6 s_show p_title">商品名稱:</p>
+            <p class="col-6 col-md-3"><?=$pdoItems["product_name"]?></p>
+            <p class="col-6 s_show p_title">單價:</p>
+            <p class="col-6 col-md-3"><?=$pdoItems["product_price"]?></p>
+            <p class="col-6 s_show p_title">數量:</p>
+            <p class="col-6 col-md-3"><?=$pdoItems["product_number"]?></p>
+            <p class="col-6 s_show p_title">小計</p>
+            <p class="col-6 col-md-3"><?=$pdoItems["price"]?></p>
+            <div class="clearfix"></div>
+          </div>
 
-          $ordersItemsRow = $orderItems->fetchAll(PDO::FETCH_ASSOC);
-          foreach( $ordersItemsRow as $i => $pdoItems){
-            //跑order_item
-        ?>
-
-        
-        <div class="item_list">
-          <p class="col-6 s_show p_title">商品名稱:</p>
-          <p class="col-6 col-md-3"><?=$pdoItems["product_name"]?></p>
-          <p class="col-6 s_show p_title">單價:</p>
-          <p class="col-6 col-md-3"><?=$pdoItems["product_price"]?></p>
-          <p class="col-6 s_show p_title">數量:</p>
-          <p class="col-6 col-md-3"><?=$pdoItems["product_number"]?></p>
-          <p class="col-6 s_show p_title">小計</p>
-          <p class="col-6 col-md-3"><?=$pdoItems["price"]?></p>
-          <div class="clearfix"></div>
-        </div>
         <?php
          }//for items
          ?>
 
+      
         </div>
+
+
+        <!-- alert -->
+      <div class="order_alertwrap" style="display:none">
+
+<div class="order_alert_container">
+
+  <div class="order_title" id="order_top">
+    <span>您的訂單編號為<?=$pdoOrders["order_no"]?></span>
+  </div>
+
+  <div class="order_btn_close">×</div>
+
+  <div class="order_cont" id="order_cont"><p>是否確定要取消訂單?</p>
+    <p class="btn_cloudb order_true" id='order_cancel_<?=$pdoOrders["order_no"]?>'>確定@@include('template/btn_sp.html')</p>
+  </div>
+
+  <div class="order_alert_close">
+    <p class="btn_cloud">取消@@include('template/btn_sp.html')</p>
+  </div>
+  
+</div>
+</div>
+<!-- alert -->
+
         <!-- 未來動態新增 -->
 
       <?php
         } //for
       }
       ?>
-
-
 
         <!-- 未來動態新增 -->
         <!-- <div class="myorder_item">
@@ -674,8 +649,15 @@ if ($errMsg !=""){
                 <p class="col-6 s_show p_title">預約時段:</p>
                 <p class="col-6 col-md-2"><?=$pdoRevs["start_time"]?></p>
                 <p class="col-6 s_show p_title">預約狀態:</p>
-                <p class="col-6 col-md-2"><?=$pdoRevs["resv_status"]==1? "已到場":"未到場"?></p>
-    
+                <p class="col-6 col-md-2 resv_status"><?php
+                if($pdoRevs["resv_status"]==1){
+                  echo"已到場";
+                }elseif($pdoRevs["resv_status"]==2){
+                  echo"已取消";
+                }else{
+                  echo"未到場";
+                }
+                ?></p>
                 <p class="col-6 s_show p_title">取消預約:</p>
                 <div class="col-6 col-md-2 baic_btn">
                   <a href="javascript:;" class="btn_cloud rev_cancel">取消預約
@@ -697,7 +679,7 @@ if ($errMsg !=""){
 
         <div class="qrcode_wrap">
           <div class="qrcode_pic">
-              <button type="button" class="btn_close">X</button>
+              <div type="button" class="btn_close">x</div>
 
               <img class="qrcode_pic_js" src=''>
               <a href="qrcode_success.php?booking_no=<?=$pdoRevs["booking_no"]?>">網址</a>
@@ -716,23 +698,24 @@ if ($errMsg !=""){
             </div>
         </div>
 
+        
 <!-- alert -->
-        <div class="msg_alert" id="msg">
+        <div class="rev_alertwrap" id="rev_alertwrap" style="display:none">
 
-          <div class="msg_alert_container">
+          <div class="rev_alert_container">
 
-            <div class="msg_title" id="msg_top">
-              <span><?=$pdoRevs["booking_no"]?></span>
+            <div class="rev_title" id="msg_top">
+              <span>您的預約編號為<?=$pdoRevs["booking_no"]?></span>
             </div>
 
-              <div class="btn_close msg_clear"><span>×</span></div>
+              <div class="rev_btn_close">×</div>
 
-              <div class="msg_cont" id="msg_cont">'+text+'</div>
+              <div class="rev_cont" id="rev_cont"><p>是否確定要取消預約?</p>
+                <p class="btn_cloudb rev_true" id='rev_cancel_<?=$pdoRevs["booking_no"]?>'>確定@@include('template/btn_sp.html')</p>
+            </div>
 
-              <div class="msg_alert_close msg_clear">
-                <a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span>
-                <span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span>
-                <span class="btn_cloudeffect"></span></a>
+              <div class="rev_alert_close">
+                <p class="btn_cloud">取消@@include('template/btn_sp.html')</p>
               </div>
               
             </div>
@@ -811,8 +794,6 @@ if ($errMsg !=""){
 
   <section id="member_love" class="member_love tabcontent">
     <div class="container">
-
-
 
       <div class="my_love">
         <h2>我的收藏</h2>
