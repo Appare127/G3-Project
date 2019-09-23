@@ -59,4 +59,19 @@ input[name="head_howl"] {
 .collections_tr td{
     width:12.5%;
 }
+.sidebar-nav{
+    background: #439bb7;
+}
+.sidebar .nav-link.active{
+    background: #e6b575;
+}
+.sidebar .nav-link:hover{
+    background:#64c7e6;
+}
+.sidebar .nav-link .nav-icon{
+    color:#fff;
+}
+.sidebar .nav-dropdown.open{
+    background: rgba(0, 0, 0, 0.2);
+}
 
