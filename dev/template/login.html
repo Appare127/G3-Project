@@ -27,36 +27,36 @@
         <form action="#" id="myForm">
             <p> 
                 帳號：
-                <input  @change="idErrMsg" type="text" v-model="id"  placeholder="帳號*" maxlength="10">
-                <span class="msg" >最大長度：10</span>
+                <input  @change="idErrMsg" type="text" v-model="id"  placeholder="最大長度：10*" maxlength="10">
+               
             </p>
-            <p>{{idMsg}}</p>
+            <p class="msg">{{idMsg}}</p>
             <p> 
                 名字：
-                <input type="text" v-model="name"  placeholder="名稱*" maxlength="10">
-                <span class="msg">最大長度：10</span>
+                <input type="text" v-model="name"  placeholder="最大長度：10*" maxlength="10">
+                
             </p>
             <p>
                 密碼：
-                <input type="password" v-model="psw"  placeholder="密碼*" maxlength="10"> 
-                <span class="msg">最大長度：10</span>
+                <input type="password" v-model="psw"  placeholder="最大長度：10" maxlength="10"> 
+                
                 </p>
             <p> 
                 確認密碼：
-                <input type="password" v-model="pswConfirm"  placeholder="確認密碼*"> 
+                <input type="password" v-model="pswConfirm"  placeholder="確認密碼*"><br>
                 <span class="msg">{{pswConfirmErrMsg}}</span>
             </p>
             <p> 
                 電子郵件：
-                <input type="text" v-model="email"  placeholder="zoo@email.com*">
+                <input type="text" v-model="email"  placeholder="zoo@email.com*"><br>
                 <span class="msg">{{emailErrMsg}}</span>
             </p>
-            <p> 請選擇密碼提示問題： 
+            <p> 請選擇提示語： 
                 <select v-model="qsn">
                 <option value="" >--請選擇--</option>
                 <option v-for="qsn in qsns">{{qsn.hint_no+"."+qsn.hint_question}}</option>
             </select>
-            <span class="msg">（忘記密碼時使用）</span>
+            <!-- <span class="msg">（忘記密碼時使用）</span> -->
             </p>
             <p>請輸入答案：<input v-model="hint" type="text" name="hint" placeholder="密碼提示答案*"></p>
         </form>
@@ -112,8 +112,8 @@ let forgetPsw=new Vue({
         ansMsg:"",
         btn:"下一步",
         result:"",
-        psw:"111",
-        pswCheck:"111",
+        psw:"",
+        pswCheck:"",
         done:"",
     },
     methods:{
@@ -189,20 +189,20 @@ let forgetPsw=new Vue({
             idError:false,
             idMsg:"",
 
-            name: 'aaa',
+            name: '',
 
-            psw: '09871',
+            psw: '',
 
-            pswConfirm:'09871',
+            pswConfirm:'',
             pswError:false,
 
-            email: '1@zoo.com',
+            email: '',
             emailError: false,
 
             qsn:"",
             qsns:[],
             // [ { "hint_no": "1", "hint_question": "你喜歡的水果為何？" }, { "hint_no": "2", "hint_question": "你是什麼星座" }, { "hint_no": "3", "hint_question": "你多高" } ]
-            hint:'qqq',
+            hint:'',
 
 
         },

@@ -712,7 +712,7 @@ function buildlist (jsonobj){
     
 
 //建立頭部HTML架構 
-for (let i=0; i<head_arr.length; i++){
+for (let i=0; i<4; i++){
 
     let div = document.createElement('div');
     div.classList = 'opt_item';
