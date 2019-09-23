@@ -1,4 +1,5 @@
 <?php
+$errMsg="";
 try {
     session_start();
     $dsn = "mysql:host=localhost;port=3306;dbname=dd102g3;charset=utf8";
@@ -17,7 +18,7 @@ try {
 
     $errMsg = $errMsg . "錯誤訊息: " . $e->getMessage() . "</br>";
     $errMsg .= "錯誤行號: " . $e->getLine() . "<br>";
-    echo $e;
+    echo $errMsg;
 }
 
 ?>

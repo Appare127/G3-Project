@@ -510,7 +510,6 @@ function setLove(){
   var my_love = document.getElementsByClassName('my_love')[0];
 
   for(let i=0;i<close_love.length;i++){
-
     close_love[i].addEventListener('click',function(e){
       e.preventDefault();
 
@@ -520,13 +519,15 @@ function setLove(){
           //如果資料庫修改成功 在remove掉div
           my_love.removeChild(e.target.parentNode.parentNode);
           // console.log(e.target.parentNode.parentNode);
-          // alert('取消收藏');
+          // console.log(xhr.responseText);
 
         }else{
           alert(xhr.status);
         }
 
       }
+    console.log(111);
+
 
     //設定好所要連結的程式
       var url = "php/member/update_Workno.php";
@@ -534,9 +535,10 @@ function setLove(){
       xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
 
     //送出資料
-      var data_info = "work_no=" + parseInt(this.id.replace('work_close_',''));
-      console.log(parseInt(this.id.replace('work_close','')));//1.2......
+      var data_info = `work_no=${this.id.replace('work_close_','')}`;
+      // console.log(parseInt(this.id.replace('work_close_','')));//1.2......
       xhr.send(data_info);
+      // console.log('datainfo:'+data_info);
 
     });
   }

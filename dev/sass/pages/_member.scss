@@ -274,7 +274,17 @@
           @include responds(medium){
             display: none;
           }
+
       }
+
+      p:nth-child(2){
+
+  
+            @include responds(medium){
+              text-align: center;
+            }
+  
+        }
 
     }
 
@@ -343,6 +353,13 @@
           }
       }
 
+      p:nth-child(2){
+        @include responds(medium){
+          padding-left:40px;
+        }
+
+    }
+
     }    
   }
 
@@ -386,6 +403,11 @@
         font-size:$m_fz;
         // line-height: 2; 
         text-align: center;
+
+        }
+        .qrcode_success_url{
+          text-decoration:underline;
+          color: #157E8F;
 
         }
       }
