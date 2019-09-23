@@ -1,10 +1,11 @@
 window.addEventListener("load", init, false);
 window.addEventListener("resize", resize, false);
 function init(){
-  
-       owlCarousel_img();
+        vote_xml();
+        owlCarousel_img();
       frank_vote_rank();
       activity_button();
+   
      
 }
 function resize(){
@@ -112,38 +113,65 @@ function owlCarousel_img(){
                 $('.frank_top_three').addClass('owl-carousel');
                 $('.frank_top_three').removeClass('owl-carousel');
         }}
-function frank_vote(){
-    if(rank1.readyState==4){
-        var vote_rank= JSON.parse(rank1.responseText);
-     console.log(vote_rank);
-for (let i = 0; i < vote_rank.length -3; i++) {
-     $("#frank_player_more").append($("#frank_player_items").clone(true).attr({id:'frank_player_items'+i ,Class:'frank_player_items ex_item'}));
-     $(`#frank_player_items${i} .frank_players_title span:eq(1)`).attr('id','aid'+(i+3));
-     $(`#frank_player_items${i}  input:eq(0)`).attr('name','work_no');
-     $(`#frank_player_items${i} h3 span:eq(0)`).attr('id','id'+(i+3));
-     $(`#frank_player_items${i} span span:eq(0)`).attr('id','vote'+(i+3));
-     $(`#frank_player_items${i} .frank_player_pic img:eq(0)`).attr('id','bg'+(i+3));
-     $(`#frank_player_items${i} .frank_player_pic img:eq(1)`).attr('id','ag'+(i+3));
-     $(`#frank_player_items${i} .frank_Collection_btn img:eq(0)`).attr('class','heart');
-     let $input=(`<input type="hidden" name="work_no2"></input>`);
-     let $input2=(`<input type="hidden" name="work_no3"></input>`)
-     $(`#frank_player_items${i} .frank_message_btn .btn_cloudp `).append($input);
-     $(`#frank_player_items${i} .frank_player_btn .btn_cloudb`).append($input2);               
-}
-   for (let i = 0; i < vote_rank.length ; i++) {
-    $id("vote"+`${i}`).innerText=vote_rank[i]["vote"];
-    $id("bg"+`${i}`).src=vote_rank[i]["bg_img"];
-    $id("ag"+`${i}`).src=vote_rank[i]["cmp_img"];
-    $id("aid"+`${i}`).innerText=vote_rank[i]["work_name"];
-    $id("id"+`${i}`).innerText=vote_rank[i]["user_name"];
-    $("input[name='work_no']")[i].value=vote_rank[i]["work_no"];
-    $("input[name='work_no2']")[i].value=vote_rank[i]["work_no"];
-    $("input[name='work_no3']")[i].value=vote_rank[i]["work_no"];
-    $(`.heart:eq(${i})`).attr('id','NO_'+(vote_rank[i]["work_no"]));
-} 
-   heart_item_exit()
- favorite();
-}}
+        function frank_vote(){
+            if(rank1.readyState==4){
+                var vote_rank= JSON.parse(rank1.responseText);
+          //   console.log(vote_rank);
+        for (let i = 0; i < vote_rank.length -3; i++) {
+             $("#frank_player_more").append($("#frank_player_items").clone(true).attr('id','frank_player_items'+i));
+             $(`#frank_player_items${i} .frank_players_title span:eq(1)`).attr('id','aid'+(i+3));
+             $(`#frank_player_items${i}  input:eq(0)`).attr('name','work_no');
+             $(`#frank_player_items${i} h3 span:eq(0)`).attr('id','id'+(i+3));
+             $(`#frank_player_items${i} span span:eq(0)`).attr('id','vote'+(i+3));
+             $(`#frank_player_items${i} .frank_player_pic img:eq(0)`).attr('id','bg'+(i+3));
+             $(`#frank_player_items${i} .frank_player_pic img:eq(1)`).attr('id','ag'+(i+3));
+             $(`#frank_player_items${i} .frank_Collection_btn img:eq(0)`).attr('class','heart');
+             let $input=(`<input type="hidden" name="work_no2"></input>`);
+             let $input2=(`<input type="hidden" name="work_no3"></input>`)
+             $(`#frank_player_items${i} .frank_message_btn .btn_cloudp `).append($input);
+             $(`#frank_player_items${i} .frank_player_btn .btn_cloudb`).append($input2); 
+             $(`#frank_player_items${i} .life_ability .life`).attr('id','life'+(i+3)); 
+             $(`#frank_player_items${i} .jump_ability .jump`).attr('id','jump'+(i+3));
+             $(`#frank_player_items${i} .jump_bar .bar_add`).attr('id','add'+(i+3));
+             $(`#frank_player_items${i} .jump_bar .meter`).attr('id','meter'+(i+3));
+             $(`#frank_player_items${i} .evemt_ability img`).attr('id','evemt_ability'+(i+3));                      
+        }
+           for (let i = 0; i < vote_rank.length -1; i++) {
+            $id("vote"+`${i}`).innerText=vote_rank[i]["vote"];
+            $id("bg"+`${i}`).src=vote_rank[i]["bg_img"];
+            $id("ag"+`${i}`).src=vote_rank[i]["cmp_img"];
+            $id("aid"+`${i}`).innerText=vote_rank[i]["work_name"];
+            $id("id"+`${i}`).innerText=vote_rank[i]["user_name"];
+            $("input[name='work_no']")[i].value=vote_rank[i]["work_no"];
+            $("input[name='work_no2']")[i].value=vote_rank[i]["work_no"];
+            $("input[name='work_no3']")[i].value=vote_rank[i]["work_no"];
+            $(`.heart:eq(${i})`).attr('id','NO_'+(vote_rank[i]["work_no"]));
+         }       
+          
+         for (let i = 3; i < vote_rank.length; i++) {
+            console.log(vote_rank[i])
+            $id("evemt_ability"+`${i}`).src=vote_rank[i]["environ_img"];
+        
+            
+            let  total_health = vote_rank[i]["work_life"];
+            for (let i=1; i<=total_health; i++){
+                let hart = document.createElement('img');
+                hart.src = 'img/modify/icon_life.png';
+                $("#life"+`${i}`).append(hart);
+                console.log("#life"+`${i}`);
+            }
+                vote_rank[i]["work_jump"];
+                    let add = $id("add"+`${i}`);
+                    let meter = $id("meter"+`${i}`);
+                    let number = vote_rank[i]["work_jump"];
+                    add.style.width = `${number *2}0%`;
+                    meter.innerText = number + 'm';
+            
+            
+         }
+           heart_item_exit()
+         favorite();
+        }}
 //----------------------PHP導入控制-----------------------------
 //判斷瀏覽器
 function frank_rank(){
@@ -269,7 +297,6 @@ $('.frank_closs_btn').click(function(){
 });
 //投票
   $('.frank_vote_btn .btn_cloudb').click(function(){
-  //   $('.ex_item').remove();
       
      let e= $(this).find("input")[0].value;
      vote_xml(e);
@@ -278,7 +305,7 @@ $('.frank_closs_btn').click(function(){
 $('.frank_expand_arrow').click(function(){
         $(this).parent().next().animate({bottom:'0px'},1);
 $('.frank_expand_button').click(function(){
-        $(this).parent().animate({bottom:'-800px'},1);
+        $(this).parent().animate({bottom:'-850px'},1);
     })
 });
 //留言按鈕
