@@ -3,9 +3,8 @@ $errMsg = "";
 try {
     require_once("../connectg3.php");
     session_start();
-
     $sql_user_ctn = 
-    "select u.user_name, u.my_animal_img,u.my_animal_bg_img,c.vote,c.work_name,c.bg_img,c.cmp_img,c.work_no
+    "select u.user_name, u.my_animal_img,u.my_animal_bg_img,c.vote,c.work_name,c.bg_img,c.cmp_img,c.work_no,c.environ_img,c.work_life,c.work_jump
     from user u,collections c
     where c.user_no=u.user_no and YEAR(work_date) = 2019 
     order by c.vote desc";
