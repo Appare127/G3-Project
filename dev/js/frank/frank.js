@@ -4,7 +4,7 @@ function init(){
         owlCarousel_img();
       frank_vote_rank();
       activity_button();
-   
+  
      
 }
 function resize(){
@@ -115,7 +115,7 @@ function owlCarousel_img(){
         function frank_vote(){
             if(rank1.readyState==4){
                 var vote_rank= JSON.parse(rank1.responseText);
-             console.log(vote_rank);
+            
         for (let i = 0; i < vote_rank.length -3; i++) {
              $("#frank_player_more").append($("#frank_player_items").clone(true).attr('id','frank_player_items'+i));
              $(`#frank_player_items${i} .frank_players_title span:eq(1)`).attr('id','aid'+(i+3));
@@ -296,7 +296,11 @@ $('.frank_closs_btn').click(function(){
 });
 //投票
   $('.frank_vote_btn .btn_cloudb').click(function(){
-      
+          if (!sessionStorage['user_no']) {
+       
+         $id('login_gary').style.display = 'block';
+         return ;
+    } 
      let e= $(this).find("input")[0].value;
      vote_xml(e);
 });
@@ -358,7 +362,13 @@ function msg_value() {
     { 
         return ;
     }
+    if (!sessionStorage['user_no']) {
+       
+         $id('login_gary').style.display = 'block';
+         return ;
+    } 
    // console.log( sessionStorage['user_no']);
+    login_in_out();
   msg_xml=frank_rank();
    msg_xml.onreadystatechange=
    function()
