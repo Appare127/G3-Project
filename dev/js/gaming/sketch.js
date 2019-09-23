@@ -255,28 +255,29 @@ function draw() {
 
 
 
-    // //隨機生成小丸子
+//     //隨機生成小丸子
     
-    // if(random(1)<0.008 && angels.length == 0){
-    //     angels.push(new Angel());
-    // }
-    // conso
-    // //小丸子的行為
-    // for (let a of angels) {
-    //     a.show();
-    //     a.move();
-    // }
+//     if(random(1)<0.1 && angels.length == 0){
+//         angels.push(new Angel());
+//     }
+//    console.log(angels[0]);
 
-    // //隨機生成書本
-    // if(random(1)<0.1 && angels[0].readyStatus==true){
-    //     books.push(new Book(angels[0].posX,angels[0].posY));
-    // }
+//     //小丸子的行為
+//     for (let a of angels) {
+//         a.show();
+//         a.move();
+//     }
 
-    // for (let b of books) { //掉下書本
-    //     b.move();
-    //     b.show();
+//     //隨機生成書本
+//     if(random(1)<0.1 && angels[0].readyStatus==true){
+//         books.push(new Book(angels[0].posX,angels[0].posY));
+//     }
 
-    // }
+//     for (let b of books) { //掉下書本
+//         b.move();
+//         b.show();
+
+//     }
 
 
     //動物的行為

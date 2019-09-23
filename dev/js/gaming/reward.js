@@ -85,7 +85,7 @@ class Angel {
             console.log(this.x, this.y);
             this.posX = this.x;
             this.posY = this.y;
-        }else if (this.x == 0.5*width && this.y == 60){
+        }else if (this.y == 60){
             this.readyStatus =true;
         }
     }
