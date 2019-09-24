@@ -4,6 +4,7 @@ function init(){
         owlCarousel_img();
       frank_vote_rank();
       activity_button();
+  //console.log(sessionStorage);
   
      
 }
@@ -150,8 +151,7 @@ function owlCarousel_img(){
       
          
          for (let i = 3; i <vote_rank.length; i++){
-             console.log(vote_rank);
-              console.log(vote_rank[i]);
+             
               
             let  total_health = vote_rank[i]["work_life"];
             for (let l=0; l<total_health; l++){
@@ -512,17 +512,6 @@ $(document).ready(function(){
 })
 
 
-
-
-
-
-
-
-$(document).ready(function() {
-    $('.frank_message_title').iosParallax({
-      movementFactor: 500
-    });
-  });
 
 
 //沙塵
