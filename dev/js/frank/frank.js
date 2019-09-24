@@ -23,6 +23,7 @@ function favorite(){
 
     let hearts = document.getElementsByClassName('heart');
     
+    
     for(let i=0;i<hearts.length;i++){
         
         
@@ -148,7 +149,10 @@ function owlCarousel_img(){
          }       
       
          
-         for (let i = 3; i <=vote_rank.length; i++){
+         for (let i = 3; i <vote_rank.length; i++){
+             console.log(vote_rank);
+              console.log(vote_rank[i]);
+              
             let  total_health = vote_rank[i]["work_life"];
             for (let l=0; l<total_health; l++){
                 let hart = document.createElement('img');
@@ -354,17 +358,18 @@ function message_btn(e){
 }}
 
 function msg_value() {
-    if ($(`#input_text`).val()==0)
-    { 
-        return ;
-    }
-    if (!sessionStorage['user_no']) {
+        if (!sessionStorage['user_no']) {
        
          $id('login_gary').style.display = 'block';
          return ;
     } 
+    if ($(`#input_text`).val()==0)
+    {  alert("請輸入文字");
+        return ;
+    }
+
    // console.log( sessionStorage['user_no']);
-    login_in_out();
+   
   msg_xml=frank_rank();
    msg_xml.onreadystatechange=
    function()
