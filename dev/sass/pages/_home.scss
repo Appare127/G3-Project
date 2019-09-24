@@ -1170,10 +1170,11 @@ $dblue:#7DC7C5;
 //每一列資訊
     .text_row{
         display:flex;
-        justify-content: center;
+        justify-content: space-around;
         padding:5px 10px;
         p{
-            padding:0 10px;
+            // padding:0 10px;
+            width: 68px;
         }
     }
 //button
