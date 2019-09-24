@@ -102,8 +102,12 @@ function showInfo(dataNum,total) {
 //-----------------------------------------------
 
 function showNumRemain() {
-    //把剩餘人數清空
-    // $("#numRemain").text(``);
+    // $(".sunglasses").css("opacity","0");
+    // $(".sunglasses").css("opacity","24%");
+
+    // //戴墨鏡動畫
+    $(".sunglasses").css("opacity","1");
+    $(".sunglasses").css("opacity","30%");
 
     //把日曆上已點過的底色拿掉
     $(".curday_after").removeClass('curday_after_check');
@@ -184,7 +188,7 @@ var my_date = new Date(); //獲取當前時間
 var my_year = my_date.getFullYear(); //獲取當前年份
 var my_month = my_date.getMonth(); //獲取當前月份
 var my_day = my_date.getDate(); //獲取當前日期  
-console.log(my_date);
+// console.log(my_date);
 
 //獲取某年某月的第一天是星期幾
 function day_start(month, year) {
@@ -268,7 +272,7 @@ function refresh_date(date) {
     cyear.innerHTML = my_year; //設置年份顯示
 
     //  $('.curday_after').click(showInfo);
-    $('.curday_after').click(showNumRemain);  
+    $('.curday_after').click(showNumRemain); 
 }
 
 function getDate(){

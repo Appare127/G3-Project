@@ -1131,6 +1131,14 @@ $dblue:#7DC7C5;
             position:relative;
             z-index: 2;
         }
+    .curday_after{
+        &:hover{
+            .sunglasses {
+                opacity:1;
+
+            }
+        }
+    }
     .sunglasses {
         width:255px;
         position:absolute;
@@ -1138,6 +1146,7 @@ $dblue:#7DC7C5;
         left:15%;
         opacity:0;
         transition:1.0s all;
+
         img {
             width:100%;
         }
