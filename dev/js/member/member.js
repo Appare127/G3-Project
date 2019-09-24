@@ -125,13 +125,15 @@ function updateBasic(){
   document.getElementById('btn_edit').style.display='none';
   document.getElementById('updated_it').style.margin='auto';
   document.getElementById('updated_it').style.display='block';
-  
-  document.getElementById('upFile').disabled=false; //讓選擇檔案可以按
+  // document.getElementById('upFile').disabled=false; //讓選擇檔案可以按
+  document.getElementById('upFile').style.display='block'; 
+  document.getElementById('upFile').style.margin='auto';
   
   let redonlyOpen = document.querySelectorAll("input[readonly='readonly']");
   for (let i = 0; i < redonlyOpen.length; i++) {
     redonlyOpen[i].readOnly = false;//打開可以修改的功能
   }
+
 
 }
 
@@ -157,7 +159,8 @@ window.addEventListener('load',
   function(){
     document.getElementById('btn_edit').onclick = updateBasic;
     document.getElementById('updated_it').onclick = stockpileBasic;
-    document.getElementById('upFile').disabled=true; //讓選擇檔案不能按
+    // document.getElementById('upFile').disabled=true; //讓選擇檔案不能按
+    document.getElementById('upFile').style.display='none'; 
   }
 );
 
