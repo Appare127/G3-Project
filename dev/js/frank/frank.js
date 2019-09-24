@@ -273,6 +273,19 @@ function heart_php(){
      heart_item(heart_arr);
 }}    
 
+function  report_xml(u,m,r){
+    report_item=frank_rank();
+    report_item.open("GET","php/frank/report.php?user_no="+u+"&msg_no="+m+"&report_reason="+r,true);
+    report_item.onreadystatechange = report_php;
+    report_item.send(null);
+}
+function report_php(){
+    if(report_item.readyState==4  && report_item.status==200){
+        let report_arr= JSON.parse(report_item.responseText);
+      console.log(report_arr);
+       
+}}
+
 //--------------------按鈕類--------------------------
 function activity_button(){
     //參加選怪
@@ -312,6 +325,32 @@ $('.frank_expand_button').click(function(){
 $('#msg_btn').click(function(){
    msg_value(); 
 })
+//檢舉
+$('.frank_message_btn .btn_cloudb ').click(function(){
+     if (!sessionStorage['user_no']) {
+         $id('login_gary').style.display = 'block';
+         return ;
+    } 
+       let m= $(this).find("input").val();
+       let u =sessionStorage['user_no'];
+       let r = prompt("為什麼你檢舉他了呢", "");
+       report_re();
+       function report_re(){
+            if (r != null) {
+        if (r =="") {
+            alert(`請再次輸入檢舉內容`);
+            r = prompt("為什麼你檢舉他了呢", "");
+            console.log(133);
+             report_re()
+        }else{
+         alert(`我們確實收到你的檢舉了`);
+         report_xml(u,m,r)
+        }
+  }
+       }
+
+
+});
 //登入按鈕
 $('#login_btn').click(function(){
        setTimeout(() => {
@@ -324,18 +363,16 @@ $('#login_btn').click(function(){
 $('#login_text').click(function(){
       heart_item_exit();
 })}
+
 //-------------------按鈕函式------------------
  function join(){
     // 先判斷sessionStorage有沒有會員登入資料，有才往下做轉圖檔工作
     if (sessionStorage['user_name']){
         if (sessionStorage['attend']=="null") {
             alert("你還沒有製作動物喔")
-        }else {
-           
+        }else {  
                 join_xml();
         }
-      
-         
     }else{
    //尚未登入
                $id('login_gary').style.display = 'block';
@@ -355,7 +392,6 @@ function message_btn(e){
     $(`#message_itme${i}  .frank_megsage_memname p:eq(1)`).text(message_arr[i]['msg_date']);
     $(`#message_itme${i}  .frank_message_box p:eq(0)`).text(message_arr[i]['msg_content']);
     let $input=(`<input type="hidden" name="msg_no"></input>`)
-    $(`#message_itme${i}  .frank_message_btn span:eq(0)`).attr('id','message_btn'+(i)).append($input);
     $(`#message_itme${i}  .frank_message_btn span:eq(0)`).attr('id','message_btn'+(i)).append($input);
     $(`#message_itme${i}   input`)[0].value=message_arr[i]['msg_no']
 }}

@@ -22,11 +22,11 @@
   .p_title{
     font-weight: bold;
     color: $col_black;
-    // color: $col_btn_blue;
   }
 
   section{
-    // padding: 20px 0px;
+    min-height: calc(70vh);
+    padding-bottom: 20px;
 
     img{
       vertical-align: middle;
@@ -42,13 +42,7 @@
 
   }
 
-  section{
-    min-height: calc(70vh);
-    padding-bottom: 20px;
-  }
-  
 }
-
 
 //主畫面切換
 .member_tab{
@@ -121,7 +115,7 @@
 .my_baic,.my_love , .my_receive ,.my_order{
   margin: 10px 0 0 0px;
 }
-
+//與上方間格20px
 .my_gamerecord,.my_animal{
   margin: 20px 0;
 }
@@ -135,8 +129,9 @@
   box-sizing: border-box;
   border-radius: 15px;
 }
+
 //字體&btn置中
-.baic_pic,.gamerecord_pic,.myanimal_pic,.upfile{
+.baic_pic,.gamerecord_pic,.myanimal_pic,.upfile_wrap{
   text-align: center;
 }
 
@@ -145,16 +140,25 @@
 
   //==資料==
   .baic_pic{
+    @include responds(medium){
+      line-height: 300px;
+    }
+
     img{
       // width: 100%;
       max-width: 300px;
       max-height: 400px;
     }
   }
-  .upfile{
+  .upfile_wrap{
     margin-top: 10px;
   }
+
+  #upFile{
+    display: none;
+  }
  
+
   .baic_btn{
     margin-top: 10px;
     text-align: center;
@@ -162,6 +166,7 @@
   .baic_txt{
     input{
       outline: none;
+      // border: 2px solid transparent;
       border: 2px solid $col_btn_blue;
       border-radius: 5px;
       // margin: 10px auto 10px auto;
@@ -171,8 +176,6 @@
     }
 
     input:focus{
-      // transition:border linear .2s,box-shadow linear .5s;
-      // box-shadow:0 0 8px rgba(241,39,232,.5);
       border: 2px solid $col_btn_pink;   
      }
 
@@ -188,7 +191,22 @@
 
 .gamerecord_pic{
   img{
-   max-width: 300px;
+    max-width: 300px;
+
+      @include responds(medium){
+        max-width: 400px;
+        cursor: pointer;
+        transition: 2s transform;
+      }
+    }
+
+
+  
+ 
+  &:hover .user_game{
+    @include responds(medium){
+      transform: scale(1.4);
+    }
   }
 }
   //==我的動物==
