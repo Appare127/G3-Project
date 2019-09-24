@@ -4,7 +4,8 @@ function init(){
         owlCarousel_img();
       frank_vote_rank();
       activity_button();
-  //console.log(sessionStorage);
+  console.log(sessionStorage);
+  console.log(null==null);
   
      
 }
@@ -331,8 +332,14 @@ $('#login_text').click(function(){
  function join(){
     // 先判斷sessionStorage有沒有會員登入資料，有才往下做轉圖檔工作
     if (sessionStorage['user_name']){
-        //要拿到my_animal_img '  my_animal_bg_img ' my_animal_name  '  user_no
-         join_xml();
+        if (sessionStorage['attend']=="null") {
+            alert("你還沒有製作動物喔")
+        }else {
+           
+                join_xml();
+        }
+      
+         
     }else{
    //尚未登入
                $id('login_gary').style.display = 'block';
