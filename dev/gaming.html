@@ -20,8 +20,15 @@
  
 </head>
 if( !sessionStorage['shopList']){
-    <body>
+<body class='gaming_page'>
 @@include('template/header.html')
+
+<audio 
+    id="audio2" 
+    preload="auto" 
+    src="img/game/flytoyou.mp3" 
+>
+</audio>
 <form method="post" accept-charset="utf-8" id="form1">
     <input name="result_img" id='result_img' type="hidden"/>
     <input name="user_no" id='user_no' type="hidden">
@@ -170,7 +177,7 @@ function updateScoreMoney(){
     }
     // sessionStorage['game_record'] = timer;
     if(sessionStorage['user_no']){
-        if(timer>sessionStorage['game_record'] || sessionStorage['game_record']==''){
+        if(timer>sessionStorage['game_record'] || sessionStorage['game_record']=='' || sessionStorage['game_record']=="null"){
         saveImage();
         var now = new Date(); 
         let playTime = now.getFullYear() +'/'+ (Number(now.getMonth())+1*1) +'/' + now.getDate() + ' ' + now.getHours() +':'+now.getMinutes();

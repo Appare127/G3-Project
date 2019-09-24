@@ -55,12 +55,12 @@
                 <table class="table table-responsive-sm table-bordered">
                   <thead>
                     <tr>
-                      <th>尾巴編號</th>
-                      <th>尾巴名稱</th>
-                      <th width="150">選單圖</th>
-                      <th width="150">組合圖</th>
-                      <th>狀態(0:下架; 1:上架)</th>
-                      <th>尾巴中文名稱</th>
+                      <th class="align-middle">尾巴編號</th>
+                      <th class="align-middle">尾巴名稱</th>
+                      <th class="align-middle" width="150">選單圖</th>
+                      <th class="align-middle" width="150">組合圖</th>
+                      <th class="align-middle">狀態(0:下架; 1:上架)</th>
+                      <th class="align-middle">尾巴中文名稱</th>
                       <th colspan="2"></th>
                     </tr>
                   </thead>
@@ -129,26 +129,7 @@
                 </table>
 
                 <!-- 切換頁數 -->
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" href="#">Prev</a>
-                  </li>
-                  <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">4</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                  </li>
-                </ul>
+                
 
               </div>
             </div>

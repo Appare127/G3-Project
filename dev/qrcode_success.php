@@ -14,11 +14,7 @@
 session_start();
 try{
   //------------------------------------連線資料庫
-  $dsn = "mysql:host=localhost;port=3306;dbname=dd102g3;charset=utf8";
-  $user = "root";
-  $password = "123456";
-  $options=array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION, PDO::ATTR_CASE=>PDO::CASE_NATURAL);
-  $pdo = new PDO($dsn, $user, $password, $options);
+  require_once('php/connectg3.php');
 
   //假如有收到資料  就是改變資料庫(送來的訂單編號&狀態改成1(已入場)))
   if(isset($_POST['booking_no'])){
@@ -103,19 +99,6 @@ try{
       <p class="big_p"><?="掃描成功";?></p>
 
 
-      <form action="" method="post">
-      <input type="hidden" name="booking_no" value="<?=$booking_no?>">
-
-      <div class="qr_btn">
-
-      <button class="btn_cloud" value="submit">
-        <span>確定入場</span>
-        @@include('template/btn_sp.html')</button>
-
-      </div>
-    
-      </form>
-
       <div class="qr_btn_back">
           <a href="member.php" class="btn_cloud">
             <span>回會員中心
@@ -123,8 +106,23 @@ try{
             </span>
           </a>
       </div>
-          
 
+
+      <form action="" method="post">
+      <input type="hidden" name="booking_no" value="<?=$booking_no?>">
+
+      <div class="qr_btn">
+
+      <button class="btn_cloud" value="submit">
+        <span>確定入場(店員操作用)</span>
+        @@include('template/btn_sp.html')</button>
+
+      </div>
+    
+      </form>
+
+
+          
 
   </div>
 

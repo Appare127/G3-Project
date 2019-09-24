@@ -13,12 +13,11 @@
   @@include('template/csslink.html')
   <script src="js/plugin/owl.carousel.min.js"></script>
   <script src="js/frank/frank.js"></script>
-  <script src="js/frank/msg.js"></script>
   <script src="js/plugin/Chart.js"></script>
 
  
 
-  <title>Document</title>
+  <title>怪奇排行</title>
 </head>
 <body class="frank_body">
         <canvas class="world" id="world" width="1920" height="227"></canvas>
@@ -320,7 +319,28 @@
                                             </div>
                                         </div>
                                         <div class="frank_player_back">
-                                          @@include('template/radar.html')
+                                            <div class="info_wrap">
+                                                <h3>體質能力</h3>
+                                                <div class="life_ability">
+                                                    <p>生命力:</p>
+                                                    <div class="life" id="life">
+                                                        <img src="" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="jump_ability">
+                                                    <p>跳躍力:</p>
+                                                    <div class="pic jump">
+                                                        <div class="jump_bar">
+                                                            <div class="bar_add" ></div>
+                                                            <span class="meter" id="meter"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <h3>環境適應力</h3>
+                                                <div class="evemt_ability" id="">
+                                                    <img id="evemt_ability" src="" alt="">
+                                                </div>
+                                            </div>
                                           <div class="frank_back_btn">
                                              
                                               <span class="btn_cloudp"> 去玩遊戲

@@ -280,7 +280,7 @@
         left: 0;
         right: 0;
         margin: auto;
-        z-index: 5;
+        z-index: 1;
 
         h3{
             width: 100%;
@@ -817,87 +817,37 @@
         .frank_player_back{
             transform: rotateY(180deg);
             @include radarinfo_frank();
-
+            .info_wrap{
+                .life_ability{
+                    padding: 10px;
+                    p{
+                        font-size: 15px;
+                    }
+                    .life{
+                        display: flex;
+                        align-items: center;
+                        img{
+                            margin: 5px;
+                        }
+                    }
+                }
+                .jump_ability{
+                    padding: 10px;
+                    p{
+                        font-size: 15px;
+                    }
+                } 
+                .evemt_ability{
+                    img{
+                        width: 100%;
+                    }
+                }
+            }
         }
     }
 }
                             
-.frank_back_text{
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px auto;
-    text-align: left;
-    box-sizing: border-box;
 
-    .frank_back_top{
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        
-        h3{
-        font-weight: 800;
-        color: $col_black;
-        }
-        .frank_expand_button{
-            display: none;
-        }
-    }
-
-    
-    
-
-    .frank_back_jump{
-        width: 60%;
-        margin: 5px auto;
-        display: flex;
-        justify-content: left;
-        align-items: center;
-    }
-    .frank_back_life{
-        width: 60%;
-        margin: auto;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: left;
-        align-items: center;
-    }
-}
-
-.frank_back_pic{
-    width: 100%;
-    padding: 10px;
-    margin: 5px auto;
-    text-align: left;
-    box-sizing: border-box;
-
-    h3{
-       
-        
-        font-weight: 800;
-        color: $col_black;
-        margin: 0px auto 5px;
-    }
-    p{
-        text-align: center;
-    }
-
-    .frank_back_img{
-        max-width: 100px;
-        width: 100%;
-        max-width: 100px;
-        height: 100%;
-        margin: 5px auto;
-        img{
-            width: 100%;
-            height: 100%;
-        }
-    }
-    .frank_back_terrain{
-        display: flex;
-        justify-content: space-between;
-        padding: 0px 40px;
-    }
-}
 
 .frank_back_btn{
     width: 100%;
@@ -920,20 +870,19 @@
     img{
         position: absolute;
         width: 100%;
-        height: 100%;
+        
     }
     .frank_player_animal{
         width: 100%;
-        height: 100%;
+       
         margin: auto;
         position: absolute;
+        top: 65px;
         left: 0;
         right: 0;
         bottom: 0;
-
         img{
             width: 100%;
-            height: 100%;
         }
         
     }
@@ -1331,7 +1280,8 @@
     .frank_top_wraps{
 
         .frank_items_title{
-            height: 100px;
+            height: 70px;
+            top: 10px;
         }
 
         .frank_top_background{
@@ -1341,12 +1291,12 @@
     
     
     .frank_items_text{
-        bottom: 20%;
+        bottom: 25%;
     }
     .frank_top_left:hover .frank_items_text, 
     .frank_top_middle:hover .frank_items_text, 
     .frank_top_right:hover .frank_items_text{
-      bottom: 20%;
+      bottom: 25%;
     }
     
 
@@ -1564,7 +1514,7 @@
         
         
         .frank_player_card{
-            height: 420px;
+            height: 380px;
             overflow: hidden;
            
 
@@ -1584,11 +1534,16 @@
 
     .frank_player_pic{
         width: 80%;
-        padding-bottom: 80%;
         margin: auto;
         box-shadow: none;
         
-        
+        img{
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
         // .frank_players_title{
         //     width: 60%;
         //     height: 80px;
@@ -1600,9 +1555,9 @@
 
     
     .frank_player_text{
-            margin: 5px auto 10px;
+            margin: 40px auto 10px;
         h3{
-            margin: 0px auto 5px;
+            margin: 5px auto ;
         }
         span{
             margin: 0 5px;
@@ -1630,65 +1585,19 @@
         bottom: -950px;
         transition: .3s bottom;
         z-index: 5;
+        
     }
         
     
     
     
-    .frank_back_text{
-      
-
-        
-        .frank_back_jump{
-          
-            margin: 5px auto;
-            
-         
-
-            
-            img{
-                width: 60%;
-                
-            }
-        }
-        .frank_back_life{
-        
-            margin: auto;
-            
-            img{
-                width: 10%;
-                margin: 5px;
-            }
-    
-        }
-    }
+  
     
     
     
     
 
-    .frank_back_pic{
-     
-        margin: auto;
-
-        h3{
-            text-align: left;
-            margin: auto;
-        }
-        p{
-            margin: 5px auto;
-        }
-        .frank_back_img{
-            width: 70%;
-            height: 80%;
-            margin: 5px auto;
-        }
-        .frank_back_terrain{
-            justify-content: space-around;
-            width: 100%;
-            padding: 0;
-        }
-    }
+    
     .frank_back_btn{
         margin-top: 5px;
         @include btn_cloudp (80%);

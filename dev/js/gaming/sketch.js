@@ -6,6 +6,8 @@ let moneys = [];
 let wings = [];
 var drops = [];
 var stones =[];
+let angels=[];
+let books= [];
 let uImg;
 let tImg;
 let rImg;
@@ -15,6 +17,7 @@ let heartImg;
 let flyingTime;
 let strongTime;
 let stoneLife;
+let angel;
 
 let scrollSpeed = 10; 
 let x1 = 0;
@@ -31,6 +34,7 @@ let environ_adapt;
 let adapt_level;
 let flyStatus = false;
 let strongStatus = false;
+let immuneStatus = false;
 // let hitStatus = false;
 
 
@@ -76,6 +80,7 @@ function preload() {
     rImg = loadImage(scene[sessionStorage['sceneChoice']].reward);
     wImg = loadImage('img/game/wings.png');
     sImg = loadImage('img/game/gaming_stone.png');
+    aImg = loadImage('img/game/gaming_maruko.png');
     
     if(sessionStorage['sceneChoice']=='forest'){ //依據選擇的場景決定適用的環境適應能力值
         environ_adapt = sessionStorage['environ_adapt_1']*0.5;
@@ -93,13 +98,13 @@ function preload() {
 }
 
 function setup() {
-    button = createButton('full screen'); //全螢幕按鈕
-    button.mousePressed(
-        function(){
-                let fs = fullscreen();
-                fullscreen(!fs);
-        }
-    );
+    // button = createButton('full screen'); //全螢幕按鈕
+    // button.mousePressed(
+    //     function(){
+    //             let fs = fullscreen();
+    //             fullscreen(!fs);
+    //     }
+    // );
 
 
 
@@ -176,7 +181,7 @@ function draw() {
     if(environ_adapt<3){
         adapt_level = '低 - 有生命危險';
     }else if (environ_adapt==3){
-        adapt_level = '中等 平淡的度過';
+        adapt_level = '中等 - 平淡的度過';
     }else if(environ_adapt >3){
         adapt_level = '高 - 躺著過關';
     }
@@ -195,10 +200,12 @@ function draw() {
     // fill(0, 102, 153);
 
     //隨機生成障礙物
-    
-    if (random(1) < (0.04/environ_adapt)) { 
-        trains.push(new Train(scene[sessionStorage['sceneChoice']].monsterSize));
-    }
+    setTimeout(function(){
+        if (random(1) < (0.04/environ_adapt)) { 
+            trains.push(new Train(scene[sessionStorage['sceneChoice']].monsterSize));
+        }
+    }, 10);
+
 
 
     if(timer<=25 && timer>=19){
@@ -241,10 +248,37 @@ function draw() {
     if(random(1)<0.0005*environ_adapt){
         wings.push(new Wing());
     }
-    //
+    //隨機生成寶石
     if(random(1)<0.0005*environ_adapt){
         stones.push(new Stone());
     }
+
+
+
+//     //隨機生成小丸子
+    
+//     if(random(1)<0.1 && angels.length == 0){
+//         angels.push(new Angel());
+//     }
+//    console.log(angels[0]);
+
+//     //小丸子的行為
+//     for (let a of angels) {
+//         a.show();
+//         a.move();
+//     }
+
+//     //隨機生成書本
+//     if(random(1)<0.1 && angels[0].readyStatus==true){
+//         books.push(new Book(angels[0].posX,angels[0].posY));
+//     }
+
+//     for (let b of books) { //掉下書本
+//         b.move();
+//         b.show();
+
+//     }
+
 
     //動物的行為
     unicorn.show();
@@ -259,7 +293,7 @@ function draw() {
     }
     if(keyIsDown(32)){
         unicorn.jump(cusJump);
-        
+
     }
 
 
@@ -270,14 +304,14 @@ function draw() {
 
         
         if (unicorn.hits(t)) {
-            if(strongStatus == true){
 
+            if(strongStatus == true){
                 setTimeout(function(){
                     trains.splice(t,1);
                 },1000);
             }
 
-            if (trains.indexOf(t)  != test){//避免重複扣掉生命
+            if (trains.indexOf(t)!= test && strongStatus==false){//避免重複扣掉生命
                 life--;
                 test = trains.indexOf(t);
             }
@@ -309,7 +343,7 @@ function draw() {
                 },1000);
             }
 
-            if (fallens.indexOf(f)  != test2){//避免重複扣掉生命
+            if (fallens.indexOf(f) != test2 && strongStatus==false){//避免重複扣掉生命
                 life--;
                 test2 = fallens.indexOf(f);
             }
@@ -328,9 +362,10 @@ function draw() {
             }
         }
     }
+
     //碰到肉之後的行為
     for(let f of foods){
-        
+        // console.log('碰到肉');
         f.move();
         f.show();
 
@@ -364,9 +399,17 @@ function draw() {
     }
     if ( timer >= parseInt(flyingTime)+10 ){
         flyStatus = false;
+        myAudio.pause();
+        myAudio.currentTime = 1;
+
     }
 
     if(timer>=parseInt(flyingTime) && timer< (flyingTime+10) ){
+
+        myAudio=document.getElementById('audio2');
+        myAudio.play();
+       
+
         textSize(20);
         fill(255,69,0);
         text(`飛行狀態: ${10+flyingTime - timer}秒`, 3/5*width, 1/5*height+10);
@@ -390,13 +433,12 @@ function draw() {
             unicorn.y = height-350;
         }
     }
-    if(strongStatus == true){
-        life = stoneLife;
-    }
+    // if(strongStatus == true){
+    //     life = stoneLife;
+    // }
     if ( timer >= parseInt(strongTime)+10 ){
         strongStatus = false;
         unicorn.r = 150;
-        // unicorn.y = height;
     }
 
     if(timer>=parseInt(strongTime) && timer< (strongTime+10) ){

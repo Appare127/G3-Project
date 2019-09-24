@@ -1,12 +1,18 @@
+//import { log } from "util";
+
 //執行時啟動
 function init() {
-    
+   frank_vote_rank();
+ 
+    frank_img();
     getRankData();
     animal_item();
     anime();
     water();
     collections_rank();
     modifyAnimation();
+    message_xml()
+    
 }
 //resize時啟動
 function reinit() {
@@ -53,13 +59,15 @@ function gameAnimation(){
         document.querySelectorAll('.game_bg_ab img')[0].classList.add('camelWalk');
         
         //排行榜滑動
-        var scrolled1 = (window.pageYOffset - 2395)*0.4;//排行榜滑動的速度
-        document.querySelector('.game_palyrank').style.transform = 'translateX('+scrolled1+'px)';
-        if(scrollY>=2665){
-            var scrolled2 = (window.pageYOffset - 2671)*0.4;
-            if(0.5*scrolled2<=80){//椅子被旋轉 被撞出去
-                document.querySelectorAll('.game_bg_ab img')[1].style.transform = 'rotateZ('+1*scrolled2+'deg)';
-            }  
+        if(window.innerWidth>=768){
+            var scrolled1 = (window.pageYOffset - 2395)*0.4;//排行榜滑動的速度
+            document.querySelector('.game_palyrank').style.transform = 'translateX('+scrolled1+'px)';
+            if(scrollY>=2665){
+                var scrolled2 = (window.pageYOffset - 2671)*0.4;
+                if(0.5*scrolled2<=80){//椅子被旋轉 被撞出去
+                    document.querySelectorAll('.game_bg_ab img')[1].style.transform = 'rotateZ('+1*scrolled2+'deg)';
+                }  
+            }
         }
 
     }else {
@@ -70,6 +78,129 @@ function gameAnimation(){
 
     }
 }
+
+
+
+
+
+//怪奇排行榜
+function frank_vote(){
+
+    if(rank1.readyState==4){
+        var vote_rank= JSON.parse(rank1.responseText);
+console.log(vote_rank);
+
+   for (let i = 0; i <1; i++) {
+    $id("vote_num1").innerText=vote_rank[i]["vote"];
+    $id("aml_bg1").src=vote_rank[i]["amlbg_img"];
+    $id("top_animalName1").innerText=vote_rank[i]["work_name"];
+    $id("top_memId1").innerText=vote_rank[i]["user_name"];
+
+ }
+ for (let i = 1; i <2; i++) {
+    $id("vote_num2").innerText=vote_rank[i]["vote"];
+    $id("aml_bg2").src=vote_rank[i]["amlbg_img"];
+    $id("top_animalName2").innerText=vote_rank[i]["work_name"];
+    $id("top_memId2").innerText=vote_rank[i]["user_name"];
+  
+ }
+ 
+ for (let i = 2; i <3; i++) {
+    $id("vote_num3").innerText=vote_rank[i]["vote"];
+    $id("aml_bg3").src=vote_rank[i]["amlbg_img"];
+    $id("top_animalName3").innerText=vote_rank[i]["work_name"];
+    $id("top_memId3").innerText=vote_rank[i]["user_name"];
+
+ }
+ 
+ 
+}}
+
+function frank_rank(){
+    if(window.ActiveXObject){
+        xmlHttp= new ActiveXObject('Microsoft.XMLHTTP');
+    }else if(window.XMLHttpRequest) {
+        xmlHttp= new XMLHttpRequest();
+    }
+    return xmlHttp;
+}
+function frank_vote_rank(){
+    rank1=frank_rank();
+    rank1.open("GET","php/frank/vote_rank.php",true);
+    rank1.onreadystatechange = frank_vote;
+    rank1.send(null);
+}
+
+
+
+function  message_xml(){
+    message_item=frank_rank();
+    message_item.open("GET","php/home/message.php",true);
+    message_item.onreadystatechange =message_php;
+    message_item.send(null);
+}
+
+
+
+
+function message_php(){
+   
+ 
+   
+    
+    if(message_item.readyState==4  && message_item.status==200){
+        let message_arr= JSON.parse(message_item.responseText);
+        // console.log( message_arr);
+        
+
+  for (let i = 0; i <1; i++){
+    //   $("#frank_message_content").append($("#message_wrap").clone(true).attr({id:'message_itme'+i,class:'message_itme frank_message_wrap'}));
+   console.log(1);
+   
+    $id("msg_animal_bg1").src=message_arr[i]["my_animal_bg_img"];
+    $id("msg_animal1").src=message_arr[i]["my_animal_img"];
+    $id("msg_id1").innerText=message_arr[i]["user_name"]; 
+    $id("msg_date1").innerText=message_arr[i]["msg_date"];
+    $id("msg_text1").innerText=message_arr[i]["msg_content"];
+    }
+    for (let i = 1; i <2; i++){
+        //   $("#frank_message_content").append($("#message_wrap").clone(true).attr({id:'message_itme'+i,class:'message_itme frank_message_wrap'}));
+       console.log(2);
+       
+        $id("msg_animal_bg2").src=message_arr[i]["my_animal_bg_img"];
+        $id("msg_animal2").src=message_arr[i]["my_animal_img"];
+        $id("msg_id2").innerText=message_arr[i]["user_name"]; 
+        $id("msg_date2").innerText=message_arr[i]["msg_date"];
+        $id("msg_text2").innerText=message_arr[i]["msg_content"];
+        }
+    for (let i = 2; i <3; i++){
+        //   $("#frank_message_content").append($("#message_wrap").clone(true).attr({id:'message_itme'+i,class:'message_itme frank_message_wrap'}));
+        console.log(3);
+        
+        $id("msg_animal_bg3").src=message_arr[i]["my_animal_bg_img"];
+        $id("msg_animal3").src=message_arr[i]["my_animal_img"];
+        $id("msg_id3").innerText=message_arr[i]["user_name"]; 
+        $id("msg_date3").innerText=message_arr[i]["msg_date"];
+        $id("msg_text3").innerText=message_arr[i]["msg_content"];
+        }
+}
+
+
+}
+
+
+
+
+function frank_img(){
+       $('#rank_col_top').click(function(){
+            window.location.href ="frank.html"});
+    };
+        
+    
+    
+
+
+
 
 //生存遊戲抓取排行榜
 function getRankData(){
@@ -115,6 +246,8 @@ function collections(){
     var rank1 =data[0];
     var rank2 =data[1];
     var rank3 =data[2];
+    console.log(rank1.bg_img);
+    
     document.getElementById('rank_1_bg').src=rank1.bg_img;
     document.getElementById('rank_1_img').src=rank1.cmp_img;
     document.getElementById('rank_2_bg').src=rank2.bg_img;
@@ -581,7 +714,7 @@ function buildlist (jsonobj){
     
 
 //建立頭部HTML架構 
-for (let i=0; i<head_arr.length; i++){
+for (let i=0; i<4; i++){
 
     let div = document.createElement('div');
     div.classList = 'opt_item';

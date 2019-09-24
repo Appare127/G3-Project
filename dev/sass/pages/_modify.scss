@@ -200,6 +200,9 @@
                 }
             }
         }
+        .part_button.now_page{
+            background-color: $col_white;
+        }
     }
     .info_box{
         box-sizing: border-box;
@@ -570,6 +573,9 @@
                 }
             
             }
+        }
+        .part_button.now_page{
+            background-color: $col_white;
         }
     }
 }
