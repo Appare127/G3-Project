@@ -1126,6 +1126,11 @@ $dblue:#7DC7C5;
     .col_calendar{
         @include responds(medium){
             width: 50%;
+        }
+        .calendar_title{
+            span #prev, #next{
+                cursor: pointer;
+            }
         } 
         .calendar_body{
             position:relative;
@@ -1134,9 +1139,9 @@ $dblue:#7DC7C5;
     .sunglasses {
         width:255px;
         position:absolute;
-        top:24%;
+        top:26%;
         left:15%;
-        opacity:0;
+        // opacity:0;
         transition:1.0s all;
         img {
             width:100%;
