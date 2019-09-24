@@ -126,7 +126,7 @@ if ($errMsg !=""){
             ?>
           </div>
 
-          <div class="upfile">
+          <div class="upfile_wrap">
             <input type="file" name="upFile" id="upFile" accept="image/*" value=<?=$userRow["user_img"]?>>
           </div>
         </div>
@@ -146,8 +146,7 @@ if ($errMsg !=""){
               </tr>
               <tr>
                 <td><p class="p_title">密碼</p></td>
-                <td><p><input type="password" name="user_psw" readonly="readonly" value="<?=$userRow["user_psw"]?>"></p><p class="baic_error">長度需大為10<p></td>
-      
+                <td><p><input type="password" name="user_psw" readonly="readonly" value="<?=$userRow["user_psw"]?>"></p><p class="baic_error"><p></td>
               </tr>
               <tr>
                 <td><p class="p_title">信箱</p></td>
@@ -256,11 +255,11 @@ if ($errMsg !=""){
             <?php
              if( $userRow["game_img"] != ""){ 
             ?>
-              <img src="<?=$userRow["game_img"]?>" alt="user_game">
+              <img class="user_game" src="<?=$userRow["game_img"]?>" alt="user_game">
             <?php
             }else{
              echo '<div class="ifnull"><p>尚未有遊戲畫面</p>
-              <img src="img/member/user0_aml.png" alt="">
+              <img src="img/member/user0_aml.png" alt="user_game">
               </div>';
             }
             ?>
