@@ -20,7 +20,8 @@ try{
   if(isset($_POST['booking_no'])){
 
   //找資料庫的資料 
-    $revs=$pdo->prepare("select * from `resv_order` WHERE `resv_order`.`booking_no` = :booking_no");
+    $revs=$pdo->prepare("select * from `resv_order` WHERE `resv_order`.`booking_no` = :booking_no and `resv_order`.`member_id` = :member_id ");
+    $revs->bindValue(':member_id',$_SESSION['user_no']);//$_SESSION['user_no']
     $revs->bindValue(':booking_no',$_GET['booking_no']);
     $revs->execute();
     // if( $revs->rowCount() == 0){
@@ -55,7 +56,8 @@ try{
     }else{
 
     //更新資料庫的資料 將狀態0改為為1(已入場) 秀出資料已確認
-    $revItems=$pdo->prepare("UPDATE `resv_order` SET `resv_status` = '1' WHERE `resv_order`.`booking_no` = :booking_no");
+    $revItems=$pdo->prepare("UPDATE `resv_order` SET `resv_status` = '1' WHERE `resv_order`.`booking_no` = :booking_no and `resv_order`.`member_id` = :member_id");
+    $revItems->bindValue(':member_id',$_SESSION['user_no']);//$_SESSION['user_no']
     $revItems->bindValue(':booking_no',$_GET['booking_no']);
     $revItems->execute();
   ?>

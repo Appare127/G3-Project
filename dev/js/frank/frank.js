@@ -3,10 +3,7 @@ window.addEventListener("resize", resize, false);
 function init(){
         owlCarousel_img();
       frank_vote_rank();
-      activity_button();
-  //console.log(sessionStorage);
-  
-     
+      activity_button();     
 }
 function resize(){
    owlCarousel_img();
@@ -214,10 +211,10 @@ function vote_php(){
     if(vote_item.readyState==4  && vote_item.status==200){
         let vote_arr= JSON.parse(vote_item.responseText);
         if ( vote_arr==0) {
-                console.log( "沒有票能投");
-                 console.log(vote_arr);
+                alert( "沒有票能投");
+              
         }else{
-                console.log( "還剩"+ vote_arr+"張票能投");
+                alert( "還剩"+ vote_arr+"張票能投");
                
         }
             
@@ -331,8 +328,14 @@ $('#login_text').click(function(){
  function join(){
     // 先判斷sessionStorage有沒有會員登入資料，有才往下做轉圖檔工作
     if (sessionStorage['user_name']){
-        //要拿到my_animal_img '  my_animal_bg_img ' my_animal_name  '  user_no
-         join_xml();
+        if (sessionStorage['attend']=="null") {
+            alert("你還沒有製作動物喔")
+        }else {
+           
+                join_xml();
+        }
+      
+         
     }else{
    //尚未登入
                $id('login_gary').style.display = 'block';
@@ -347,7 +350,7 @@ function message_btn(e){
       
     for (let i = 0; i < message_arr.length; i++) {
     $("#frank_message_content").append($("#message_wrap").clone(true).attr({id:'message_itme'+i,class:'message_itme frank_message_wrap'}));
-    $(`#message_itme${i}   figure:eq(0)`).css("background-image",`url(${message_arr[0]['my_animalbg_img']})`);
+    $(`#message_itme${i}   figure:eq(0)`).css("background-image",`url(${message_arr[i]['my_animalbg_img']})`);
     $(`#message_itme${i}  .frank_megsage_memname p:eq(0)`).text(message_arr[i]['user_name']);
     $(`#message_itme${i}  .frank_megsage_memname p:eq(1)`).text(message_arr[i]['msg_date']);
     $(`#message_itme${i}  .frank_message_box p:eq(0)`).text(message_arr[i]['msg_content']);
