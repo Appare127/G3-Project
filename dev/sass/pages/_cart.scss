@@ -1,6 +1,12 @@
 $lblue:#d8ecea;
 .cart{
     background-color:$lblue ;
+    @include msgalert(#fdf6e7,$col_btn_pink,$col_btn_pink);
+    @media screen and (min-width:992px){
+        .msg_alert .msg_alert_container{
+            width: 19%;
+        }
+    }
     
     .container{
         max-width:1200px;
@@ -128,9 +134,7 @@ $lblue:#d8ecea;
             display:none;
           
         }
-        h2{
-            
-        }
+       
     }
 //每一列資料
     .list_row{

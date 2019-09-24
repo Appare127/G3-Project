@@ -8,6 +8,7 @@ $dblue:#7DC7C5;
 //頁面共用屬性
 .home_page{
     background: linear-gradient(120deg, #cdeaf5 0%, #c2e9fb 100%);
+    @include msgalert(#fdf6e7,$col_btn_pink,$col_btn_pink);
     h2{
         background-image: url(../img/home/title.png);
         background-repeat: no-repeat;
@@ -1130,6 +1131,14 @@ $dblue:#7DC7C5;
             position:relative;
             z-index: 2;
         }
+    .curday_after{
+        &:hover{
+            .sunglasses {
+                opacity:1;
+
+            }
+        }
+    }
     .sunglasses {
         width:255px;
         position:absolute;
@@ -1137,6 +1146,7 @@ $dblue:#7DC7C5;
         left:15%;
         opacity:0;
         transition:1.0s all;
+
         img {
             width:100%;
         }
@@ -1170,10 +1180,11 @@ $dblue:#7DC7C5;
 //每一列資訊
     .text_row{
         display:flex;
-        justify-content: center;
+        justify-content: space-around;
         padding:5px 10px;
         p{
-            padding:0 10px;
+            // padding:0 10px;
+            width: 68px;
         }
     }
 //button
@@ -1514,7 +1525,10 @@ $dblue:#7DC7C5;
     
     .main_btn{
         text-align: right;
-        margin: 40px;
+        margin:40px 40px 40px 0;
+        @include responds (large){
+         margin:0px 140px 40px 0;            
+        }
         @include btn_cloud(75px,$col_btn_pink);
     }
 

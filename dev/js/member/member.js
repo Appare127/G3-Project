@@ -12,7 +12,7 @@
 
 
 
-//alert訊息<<<<請複製>>>>
+//alert訊息<<<<請從這邊複製>>>>
 function alert(text,title){
 
   if(!title==""){
@@ -29,6 +29,12 @@ function alert(text,title){
    });
 }
 }
+
+//範例 // alert('<p>已收到訂單取消請求，<br>待客服人員確認中...</p>','提示');
+//alert訊息<<<<請複製到這>>>>
+
+
+
 
 function alertcancel(){
 var order_cancel = document.getElementsByClassName('order_cancel');
@@ -119,13 +125,15 @@ function updateBasic(){
   document.getElementById('btn_edit').style.display='none';
   document.getElementById('updated_it').style.margin='auto';
   document.getElementById('updated_it').style.display='block';
-  
-  document.getElementById('upFile').disabled=false; //讓選擇檔案可以按
+  // document.getElementById('upFile').disabled=false; //讓選擇檔案可以按
+  document.getElementById('upFile').style.display='block'; 
+  document.getElementById('upFile').style.margin='auto';
   
   let redonlyOpen = document.querySelectorAll("input[readonly='readonly']");
   for (let i = 0; i < redonlyOpen.length; i++) {
     redonlyOpen[i].readOnly = false;//打開可以修改的功能
   }
+
 
 }
 
@@ -151,7 +159,8 @@ window.addEventListener('load',
   function(){
     document.getElementById('btn_edit').onclick = updateBasic;
     document.getElementById('updated_it').onclick = stockpileBasic;
-    document.getElementById('upFile').disabled=true; //讓選擇檔案不能按
+    // document.getElementById('upFile').disabled=true; //讓選擇檔案不能按
+    document.getElementById('upFile').style.display='none'; 
   }
 );
 
@@ -249,9 +258,10 @@ window.addEventListener('load',initcancelOdrer,false);
 
 function setorder(){
   var order_true = document.getElementsByClassName('order_true');
+  var shop_status = document.getElementsByClassName('shop_status');
 
   for(let i=0;i<order_true.length;i++){
-    order_true[i].addEventListener('click',function(){
+    order_true[i].addEventListener('click',function(e){
 
       $(".order_alertwrap").hide();
 
@@ -267,8 +277,8 @@ function setorder(){
             alert("已出貨，無法取消!");
 
           }else{
-            alert("已取消!");
-            document.getElementsByClassName('shop_status')[0].innerText="已取消";
+            alert('已取消!');
+            document.getElementsByClassName('shop_status')[i].innerText="已取消";
           }
 
         }else{
@@ -380,7 +390,9 @@ function setrev(){
       xhr.onload = function(){ 
         if(xhr.status==200){
           console.log(xhr.responseText);
-          if(xhr.responseText.indexOf("已取消過")!=-1){
+          if(xhr.responseText.indexOf("日期已過，無法取消")!=-1){
+            alert("日期已過，無法取消!");
+          }else if(xhr.responseText.indexOf("已取消過")!=-1){
             alert("您已取消過!");
       
           }else if(xhr.responseText.indexOf("已到場過，無法取消")!=-1){
@@ -388,7 +400,7 @@ function setrev(){
 
           }else{
             alert("已取消!");
-            document.getElementsByClassName('resv_status')[0].innerText="已取消";
+            document.getElementsByClassName('resv_status')[i].innerText="已取消";
           }
 
         }else{

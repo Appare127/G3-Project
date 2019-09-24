@@ -1193,8 +1193,11 @@ function init(){
 
     // 背景canvas的滑鼠觸發事件
     bg_canvas.addEventListener('mousedown',drawdown);
+    bg_canvas.addEventListener('touchstart',drawdown);
     bg_canvas.addEventListener('mousemove',drawmove);
+    bg_canvas.addEventListener('touchmove',drawmove);
     bg_canvas.addEventListener('mouseup',drawup);
+    bg_canvas.addEventListener('touchend',drawup);
 
     // 顏色條的change觸發事件，把變動的色相轉成RGB值
     document.getElementsByClassName('createColorBar')[0].addEventListener('change',HSV2RGB);

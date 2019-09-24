@@ -3,9 +3,7 @@ window.addEventListener("resize", resize, false);
 function init(){
         owlCarousel_img();
       frank_vote_rank();
-      activity_button();
-  
-     
+      activity_button();     
 }
 function resize(){
    owlCarousel_img();
@@ -22,6 +20,7 @@ function favorite(){
     let xhr = new XMLHttpRequest();
 
     let hearts = document.getElementsByClassName('heart');
+    
     
     for(let i=0;i<hearts.length;i++){
         
@@ -148,7 +147,9 @@ function owlCarousel_img(){
          }       
       
          
-         for (let i = 3; i <=vote_rank.length; i++){
+         for (let i = 3; i <vote_rank.length; i++){
+             
+              
             let  total_health = vote_rank[i]["work_life"];
             for (let l=0; l<total_health; l++){
                 let hart = document.createElement('img');
@@ -210,10 +211,10 @@ function vote_php(){
     if(vote_item.readyState==4  && vote_item.status==200){
         let vote_arr= JSON.parse(vote_item.responseText);
         if ( vote_arr==0) {
-                console.log( "沒有票能投");
-                 console.log(vote_arr);
+                alert( "沒有票能投");
+              
         }else{
-                console.log( "還剩"+ vote_arr+"張票能投");
+                alert( "還剩"+ vote_arr+"張票能投");
                
         }
             
@@ -272,6 +273,19 @@ function heart_php(){
      heart_item(heart_arr);
 }}    
 
+function  report_xml(u,m,r){
+    report_item=frank_rank();
+    report_item.open("GET","php/frank/report.php?user_no="+u+"&msg_no="+m+"&report_reason="+r,true);
+    report_item.onreadystatechange = report_php;
+    report_item.send(null);
+}
+function report_php(){
+    if(report_item.readyState==4  && report_item.status==200){
+        let report_arr= JSON.parse(report_item.responseText);
+      console.log(report_arr);
+       
+}}
+
 //--------------------按鈕類--------------------------
 function activity_button(){
     //參加選怪
@@ -311,6 +325,32 @@ $('.frank_expand_button').click(function(){
 $('#msg_btn').click(function(){
    msg_value(); 
 })
+//檢舉
+$('.frank_message_btn .btn_cloudb ').click(function(){
+     if (!sessionStorage['user_no']) {
+         $id('login_gary').style.display = 'block';
+         return ;
+    } 
+       let m= $(this).find("input").val();
+       let u =sessionStorage['user_no'];
+       let r = prompt("為什麼你檢舉他了呢", "");
+       report_re();
+       function report_re(){
+            if (r != null) {
+        if (r =="") {
+            alert(`請再次輸入檢舉內容`);
+            r = prompt("為什麼你檢舉他了呢", "");
+            console.log(133);
+             report_re()
+        }else{
+         alert(`我們確實收到你的檢舉了`);
+         report_xml(u,m,r)
+        }
+  }
+       }
+
+
+});
 //登入按鈕
 $('#login_btn').click(function(){
        setTimeout(() => {
@@ -323,12 +363,16 @@ $('#login_btn').click(function(){
 $('#login_text').click(function(){
       heart_item_exit();
 })}
+
 //-------------------按鈕函式------------------
  function join(){
     // 先判斷sessionStorage有沒有會員登入資料，有才往下做轉圖檔工作
     if (sessionStorage['user_name']){
-        //要拿到my_animal_img '  my_animal_bg_img ' my_animal_name  '  user_no
-         join_xml();
+        if (sessionStorage['attend']=="null") {
+            alert("你還沒有製作動物喔")
+        }else {  
+                join_xml();
+        }
     }else{
    //尚未登入
                $id('login_gary').style.display = 'block';
@@ -343,28 +387,28 @@ function message_btn(e){
       
     for (let i = 0; i < message_arr.length; i++) {
     $("#frank_message_content").append($("#message_wrap").clone(true).attr({id:'message_itme'+i,class:'message_itme frank_message_wrap'}));
-    $(`#message_itme${i}   figure:eq(0)`).css("background-image",`url(${message_arr[0]['my_animalbg_img']})`);
+    $(`#message_itme${i}   figure:eq(0)`).css("background-image",`url(${message_arr[i]['my_animalbg_img']})`);
     $(`#message_itme${i}  .frank_megsage_memname p:eq(0)`).text(message_arr[i]['user_name']);
     $(`#message_itme${i}  .frank_megsage_memname p:eq(1)`).text(message_arr[i]['msg_date']);
     $(`#message_itme${i}  .frank_message_box p:eq(0)`).text(message_arr[i]['msg_content']);
     let $input=(`<input type="hidden" name="msg_no"></input>`)
     $(`#message_itme${i}  .frank_message_btn span:eq(0)`).attr('id','message_btn'+(i)).append($input);
-    $(`#message_itme${i}  .frank_message_btn span:eq(0)`).attr('id','message_btn'+(i)).append($input);
     $(`#message_itme${i}   input`)[0].value=message_arr[i]['msg_no']
 }}
 
 function msg_value() {
-    if ($(`#input_text`).val()==0)
-    { 
-        return ;
-    }
-    if (!sessionStorage['user_no']) {
+        if (!sessionStorage['user_no']) {
        
          $id('login_gary').style.display = 'block';
          return ;
     } 
+    if ($(`#input_text`).val()==0)
+    {  alert("請輸入文字");
+        return ;
+    }
+
    // console.log( sessionStorage['user_no']);
-    login_in_out();
+   
   msg_xml=frank_rank();
    msg_xml.onreadystatechange=
    function()
@@ -507,17 +551,6 @@ $(document).ready(function(){
 })
 
 
-
-
-
-
-
-
-$(document).ready(function() {
-    $('.frank_message_title').iosParallax({
-      movementFactor: 500
-    });
-  });
 
 
 //沙塵
