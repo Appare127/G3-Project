@@ -348,6 +348,14 @@ function saveok(text){
     sessionStorage['environ_adapt_3'] = total_eml_desert;
     sessionStorage['animal_life'] = total_health;
     sessionStorage['animal_jump'] = total_jump;
+
+    // 更新sessionStorage的動物相關圖片路徑
+    let member_no = sessionStorage['user_no'];
+    sessionStorage['my_animal_img'] = `img/customize/user${member_no}_aml.png`;
+    sessionStorage['my_animal_bg_img'] = `img/customize/user${member_no}_bg.png`;
+    sessionStorage['my_animalbg_img'] = `img/customize/user${member_no}_amlbg.png`;
+    // 更新sessionStorage的動物參選資格
+    sessionStorage['attend'] = 0;
 }
 
 // 上傳背景圖的設定

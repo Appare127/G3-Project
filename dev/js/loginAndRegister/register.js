@@ -38,11 +38,11 @@ var form = new Vue({
                 if(Number(same) ==1){
                     form.idMsg= "帳號通過";
                     form.idError = false;
-                    console.log(form.idMsg,form.idError)
+                    // console.log(form.idMsg,form.idError)
                 }else {
                     form.idError = true;
                     form.idMsg= "帳號已存在，請重新輸入";
-                    console.log(form.idMsg,form.idError)
+                    // console.log(form.idMsg,form.idError)
                 }
             })
         },
