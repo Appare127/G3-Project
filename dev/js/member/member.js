@@ -12,7 +12,7 @@
 
 
 
-//alert訊息<<<<請複製>>>>
+//alert訊息<<<<請從這邊複製>>>>
 function alert(text,title){
 
   if(!title==""){
@@ -29,6 +29,12 @@ function alert(text,title){
    });
 }
 }
+
+//範例 // alert('<p>已收到訂單取消請求，<br>待客服人員確認中...</p>','提示');
+//alert訊息<<<<請複製到這>>>>
+
+
+
 
 function alertcancel(){
 var order_cancel = document.getElementsByClassName('order_cancel');
@@ -249,9 +255,10 @@ window.addEventListener('load',initcancelOdrer,false);
 
 function setorder(){
   var order_true = document.getElementsByClassName('order_true');
+  var shop_status = document.getElementsByClassName('shop_status');
 
   for(let i=0;i<order_true.length;i++){
-    order_true[i].addEventListener('click',function(){
+    order_true[i].addEventListener('click',function(e){
 
       $(".order_alertwrap").hide();
 
@@ -267,8 +274,8 @@ function setorder(){
             alert("已出貨，無法取消!");
 
           }else{
-            alert("已取消!");
-            document.getElementsByClassName('shop_status')[0].innerText="已取消";
+            alert('已取消!');
+            document.getElementsByClassName('shop_status')[i].innerText="已取消";
           }
 
         }else{
@@ -388,7 +395,7 @@ function setrev(){
 
           }else{
             alert("已取消!");
-            document.getElementsByClassName('resv_status')[0].innerText="已取消";
+            document.getElementsByClassName('resv_status')[i].innerText="已取消";
           }
 
         }else{
