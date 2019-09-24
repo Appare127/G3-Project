@@ -8,6 +8,7 @@ $dblue:#7DC7C5;
 //頁面共用屬性
 .home_page{
     background: linear-gradient(120deg, #cdeaf5 0%, #c2e9fb 100%);
+    @include msgalert(#fdf6e7,$col_btn_pink,$col_btn_pink);
     h2{
         background-image: url(../img/home/title.png);
         background-repeat: no-repeat;

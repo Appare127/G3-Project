@@ -4,6 +4,14 @@
     background-image: url(../img/resv/bg.png);
     background-repeat: no-repeat;
     background-position: bottom;
+    @include msgalert(#fdf6e7,$col_btn_pink,$col_btn_pink);
+    @media screen and (min-width:992px){
+        .msg_alert .msg_alert_container{
+            width: 19%;
+        }
+    }
+    
+
     
     // 第一個section開始 標題/雲朵/左側火車
     .resv_banner{
@@ -218,6 +226,13 @@
     .resv_info{
         width: 100%;
         min-height:67vh;
+        .resv_desc{
+            // width: 0%;
+            margin: auto;
+            font-size: $xs_fz ;
+
+            padding-top:50px;
+        }
         .container{
             display: flex;
             margin: auto;
@@ -391,20 +406,15 @@
             flex-wrap: wrap;
         }
         .resv_desc{
-            width: 80%;
-            margin: auto;
-            p{
-                font-size: $s_fz ;
-                line-height: 1.8;
-                padding: 8px 12px;
-            }
+            width: 90%;
+            padding-bottom:20px;
         }
                 
 
         
         .resv_form{
             width: 100%;
-            margin: 50px 10px;
+            margin: 20px 10px;
         }
         .wooden{
             position: absolute;
@@ -545,12 +555,6 @@
                 width: 100%;
                 .resv_calendargroup{
                     width: 50%;
-                        .resv_desc{
-                            p{
-                                font-size: $xs_fz ;
-                                padding: 4px 10px;
-                            }
-                        }
                 }
                 .resv_form{
                     width: 50%;

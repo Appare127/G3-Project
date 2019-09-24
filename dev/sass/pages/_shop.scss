@@ -4,6 +4,13 @@ $lblue:#d8ecea;
 // ====================================
 .shop{
     background-color:$lblue ;
+    @include msgalert(#fdf6e7,$col_btn_pink,$col_btn_pink);
+    @media screen and (min-width:992px){
+        .msg_alert .msg_alert_container{
+            width: 19%;
+        }
+    }
+    
     .container{
         max-width:1200px;
         box-sizing:border-box;
@@ -448,11 +455,9 @@ $lblue:#d8ecea;
     display:none;
     position:fixed;
     width: 100%;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin:auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-30%);
     background-color:rgba(0,0,0,0.5);
     z-index: 2;
    .detail_container{
@@ -477,12 +482,13 @@ $lblue:#d8ecea;
 .back_button{
     display:block;
     border-radius:50%;
-    background-color: #ccc;
-    box-shadow:2px 2px 0 1px #333;
+    background-color: $col_btn_pink;
+    // box-shadow:2px 2px 0 1px #333;
+    border:none;
     width: 30px;
     height: 30px;
     position:absolute;
-    top: 10px;
+    top: 20px;
     right: 10px;
     line-height: 2;
     text-align: center;
@@ -529,8 +535,9 @@ $lblue:#d8ecea;
         border-left:10px solid #a08d7c;
         border-right:10px solid #a08d7c;
         width: 90%;
-        margin: auto;
-        padding: 50px 10px 10px;
+        margin: 50px auto auto;
+        // padding: 10px;
+        position:relative;
     }
     .prod_text{
         background-color: #f7d5b3;
@@ -538,7 +545,10 @@ $lblue:#d8ecea;
         position:relative;
         background-image: url(../img/shop/wood_pattern.png);
         p{
-            padding:30px 10px ;
+            padding:10px 10px ;
+            @include responds(medium){
+                padding:30px 10px ;
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ var my_date = new Date(); //獲取當前時間
 var my_year = my_date.getFullYear(); //獲取當前年份
 var my_month = my_date.getMonth(); //獲取當前月份
 var my_day = my_date.getDate(); //獲取當前日期  
-console.log(my_date);
+// console.log(my_date);
 
 //獲取某年某月的第一天是星期幾
 function day_start(month, year) {

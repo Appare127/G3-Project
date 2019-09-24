@@ -3,6 +3,12 @@ $orange:#d28058;
 $lyellow:#fdf6e7;
 .checkOrder{
     background-color:$lblue ;
+    @include msgalert(#fdf6e7,$col_btn_pink,$col_btn_pink);
+    @media screen and (min-width:992px){
+        .msg_alert .msg_alert_container{
+            width: 19%;
+        }
+    }
     
     .container{
         max-width:1200px;
@@ -175,10 +181,16 @@ $lyellow:#fdf6e7;
            
         }
         .write_info_col{
-            // text-align: center;
-            width: 40%;
+            width: 100%;
+            @include responds(medium){
+                width: 40%;
+            }
             p{
                 padding: 5px 0;
+            }
+            .msg{
+                color: #f00;
+                font-size: $xs_fz;
             }
         }
 
@@ -187,12 +199,10 @@ $lyellow:#fdf6e7;
 
 //信用卡付費
     .creditCard{
-    //     .wrap{
-    //         padding: 10px;
-    //     }
         input{
             width: 34px;
         }
+       
     }
    
 //大的btn
