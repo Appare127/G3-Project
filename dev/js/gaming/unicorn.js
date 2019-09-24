@@ -27,9 +27,16 @@ class Unicorn {
                 this.vy = jumpForce;
             }
         } 
-        if(strongStatus ==true && this.y==height - 350){
-            this.vy = jumpForce;
+        if(window.innerWidth>=768){
+            if(strongStatus ==true && this.y==height - 350){
+                this.vy = jumpForce;
+            }
+        }else {
+            if(strongStatus ==true && this.y==height - this.r+30){
+                this.vy = jumpForce;
+            }
         }
+
     }
     hits(train){ 
         if(strongStatus==true && immuneStatus ==false){
@@ -45,14 +52,27 @@ class Unicorn {
     move() {
         this.y += this.vy; //彈跳力
         this.vy += this.gravity;
-        if(strongStatus==true){
-            this.y = constrain(this.y, 0, height-350);  
-            this.x = constrain(this.x,this.r-350, width+350);
 
-        }else {
-            this.y = constrain(this.y, 0, height - this.r);
-            this.x = constrain(this.x,this.r, width+this.r);
+            if(strongStatus==true && window.innerWidth>=768){ //如果吃到寶石螢幕又是桌機
+                this.y = constrain(this.y, 0, height-350);  
+                this.x = constrain(this.x,this.r-350, width+350);
 
-        }
+            }else if(strongStatus==true && window.innerWidth<768){//如果吃到寶石但螢幕是手機
+                this.y = constrain(this.y, 0, height - this.r+30);
+                this.x = constrain(this.x,this.r-300, width+this.r-400);
+
+            }else {//如果沒吃到寶石的情況
+                if(window.innerWidth>=768){
+                    this.y = constrain(this.y, 0, height-this.r);
+                    this.x = constrain(this.x,this.r, width+this.r);
+                }else{
+                    this.y = constrain(this.y, 0, height-this.r);
+                    this.x = constrain(this.x,this.r-100, width+this.r);
+                }
+
+
+            }
+
     }
+    
 }

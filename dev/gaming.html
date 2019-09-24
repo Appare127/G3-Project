@@ -23,12 +23,33 @@ if( !sessionStorage['shopList']){
 <body class='gaming_page'>
 @@include('template/header.html')
 
-<audio 
-    id="audio2" 
+<!-- <audio 
+    id="flytoyou" 
     preload="auto" 
     src="img/game/flytoyou.mp3" 
 >
 </audio>
+<audio 
+    id="dontgrow" 
+    preload="auto" 
+    src="img/game/S.H.E不想長大.mp3" 
+>
+</audio>
+<audio 
+    id="battle" 
+    preload="auto" 
+    src="img/game/WildPokemonBattle.mp3" 
+>
+</audio>
+
+
+<audio 
+    id="route1" 
+    preload="auto" 
+    src="img/game/pokemon-Route1.mp3" 
+>
+</audio> -->
+
 <form method="post" accept-charset="utf-8" id="form1">
     <input name="result_img" id='result_img' type="hidden"/>
     <input name="user_no" id='user_no' type="hidden">
@@ -126,18 +147,7 @@ window.addEventListener('resize',function(){
         questionPage.style.display="none";
 });
 
-function doFirst(){
-    getQuestions();
-    gaming_animal.src= sessionStorage['my_animal_img']+'?'+ new Date().getTime();
-    gaming_monster.src= scene[sessionStorage['sceneChoice']].monster;
-    let retry = document.getElementById('retry');
-    retry.addEventListener('click',restartGame);
-    questionPage.style.display="none";
-    calculation.style.display="none";
-    if(sessionStorage['sceneChoice'] == null){
-        sessionStorage['sceneChoice'] = chosenArea('desert');
-    }
-}
+
 
 
 //遊戲結束存圖檔
@@ -193,6 +203,25 @@ function updateScoreMoney(){
     }
 
 
+
+}
+
+
+function doFirst(){
+    getQuestions();
+    gaming_animal.src= sessionStorage['my_animal_img']+'?'+ new Date().getTime();
+    gaming_monster.src= scene[sessionStorage['sceneChoice']].monster;
+    let retry = document.getElementById('retry');
+    retry.addEventListener('click',restartGame);
+    questionPage.style.display="none";
+    calculation.style.display="none";
+    if(sessionStorage['sceneChoice'] == null){
+        sessionStorage['sceneChoice'] = chosenArea('desert');
+    }
+    flytoyou = new Audio("img/game/flytoyou.mp3");
+    dontgrow = new Audio("img/game/S.H.E不想長大.mp3" );
+    battle = new Audio("img/game/WildPokemonBattle.mp3");
+    route1 = new Audio("img/game/pokemon-Route1.mp3");
 
 }
 

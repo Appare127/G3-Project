@@ -36,7 +36,7 @@ class Fallen {
             this.hitStatus = true;
         }
         if(this.hitStatus==true && strongStatus==true){
-            console.log('反彈');
+            // console.log('反彈');
             this.y -= Vy;
             this.x += Vx;
         }else {
