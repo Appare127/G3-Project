@@ -1,12 +1,14 @@
-    .registered_gary.registered_show {
-            display:block;
-    }
+.registered_gary.registered_show {
+    display:block;
+}
 
 .registered_gary {
+
+
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    display: none;
+    // display: none;
     position: absolute;
     position: fixed;
     top: 0;
@@ -21,7 +23,7 @@
         left: 0;
         margin: auto;
         border-radius: 30px;
-        background: url(../img/login/login767.jpg) no-repeat  center top;
+        background: url(../img/login/login767.jpg) no-repeat  center 17%;
         background-size: cover;
         padding-top: 25px;
         padding-bottom: 225px;
@@ -34,9 +36,6 @@
             display: block;
             margin: auto;
             width: 120px;
-            // margin-top: 25px;    
-            // font-size: $s_fz;
-            // background: 0%;
             padding: 5px;
         }
         .registered_del {
@@ -59,18 +58,18 @@ form{
     margin: auto;
         p {
             position: relative;
-            margin-top: 10px;
+            margin-top: 15px;
 
-            input {
-                // background: #f9f6d2;
-                cursor: text;
+            input,select,option {
                 border-radius: 10px;
                 padding: 5px;
-                padding-left: 15px;
                 outline:none;
                 border:transparent;
-                // font-weight: 800;
-                width: 120px;
+            }
+            
+            input{
+                cursor: text;
+
             }
         }}
         
@@ -86,6 +85,7 @@ form{
 
         .msg{
             font-size: $xs_fz;
+            color:red;
         }
     }
 
@@ -97,20 +97,15 @@ form{
 @media screen and (min-width: 768px) {
     .registered_gary {
         .registered_box {
-            width: 500px;
+            width: 360px;
             height: 500px;
             padding-top: 15px;
             padding-bottom: 0px;
             h2{
                 padding-top: 40px;
             }
-
             p {
-                input {
-                    width: 150px;
-                }
-
-         
+                text-align: center;
             }
             a {
                 text-decoration: none;
@@ -120,8 +115,7 @@ form{
                 }
             }
             .btn_cloud {
-                margin-top: 20px;
-                // font-size: $m_fz;
+                margin-top: 15px;
             }
         }
     }
