@@ -1,11 +1,10 @@
 window.addEventListener("load", init, false);
 window.addEventListener("resize", resize, false);
 function init(){
-        vote_xml();
         owlCarousel_img();
       frank_vote_rank();
       activity_button();
-   
+  
      
 }
 function resize(){
@@ -202,17 +201,47 @@ function join_php(){
         }}}
  //投票       
 function  vote_xml(e){    
-
-    
     vote_item=frank_rank();
-    vote_item.open("GET","php/frank/vote.php?user_no="+sessionStorage.user_no+"",true);
+    vote_item.open("GET","php/frank/vote.php?user_no="+sessionStorage.user_no+"&work_no="+e,true);
     vote_item.onreadystatechange = vote_php;
     vote_item.send(null);
 }
 function vote_php(){
     if(vote_item.readyState==4  && vote_item.status==200){
         let vote_arr= JSON.parse(vote_item.responseText);
-    
+        if ( vote_arr==0) {
+                console.log( "沒有票能投");
+                 console.log(vote_arr);
+        }else{
+                console.log( "還剩"+ vote_arr+"張票能投");
+               
+        }
+            
+          setTimeout(() => {
+    vote_in_xml=frank_rank();
+    vote_in_xml.open("GET","php/frank/vote_rank.php",true);
+    // vote_in_xml.onreadystatechange =vote_into;
+    vote_in_xml.onload =vote_into;
+    function vote_into() {
+        vote_rank_item= JSON.parse(vote_in_xml.responseText);
+              for (let i = 0; i < vote_rank_item.length -1; i++) {
+    $id("vote"+`${i}`).innerText=vote_rank_item[i]["vote"];
+    $id("bg"+`${i}`).src=vote_rank_item[i]["bg_img"];
+    $id("ag"+`${i}`).src=vote_rank_item[i]["cmp_img"];
+    $id("aid"+`${i}`).innerText=vote_rank_item[i]["work_name"];
+    $id("id"+`${i}`).innerText=vote_rank_item[i]["user_name"];
+    $("input[name='work_no']")[i].value=vote_rank_item[i]["work_no"];
+    $("input[name='work_no2']")[i].value=vote_rank_item[i]["work_no"];
+    $("input[name='work_no3']")[i].value=vote_rank_item[i]["work_no"];
+    $(`.heart:eq(${i})`).attr('id','NO_'+(vote_rank_item[i]["work_no"]));
+     } 
+         heart_item_exit()
+      favorite();
+    }
+    vote_in_xml.send(null);  
+     }, 200);
+
+
 }}
 
 //留言
@@ -263,7 +292,11 @@ $('.frank_closs_btn').click(function(){
 });
 //投票
   $('.frank_vote_btn .btn_cloudb').click(function(){
-      
+          if (!sessionStorage['user_no']) {
+       
+         $id('login_gary').style.display = 'block';
+         return ;
+    } 
      let e= $(this).find("input")[0].value;
      vote_xml(e);
 });
@@ -325,7 +358,13 @@ function msg_value() {
     { 
         return ;
     }
+    if (!sessionStorage['user_no']) {
+       
+         $id('login_gary').style.display = 'block';
+         return ;
+    } 
    // console.log( sessionStorage['user_no']);
+    login_in_out();
   msg_xml=frank_rank();
    msg_xml.onreadystatechange=
    function()
