@@ -116,17 +116,12 @@ function preload() {
 }
 
 function setup() {
-    button = createButton('暫停遊戲'); //全螢幕按鈕
-    button.mousePressed(
-        function(){
-            noLoop();
-        }
-    );
+
+
     flytoyou = new Audio("img/game/flytoyou.mp3");
     dontgrow = new Audio("img/game/S.H.E不想長大.mp3" );
     battle = new Audio("img/game/WildPokemonBattle.mp3");
     route1 = new Audio("img/game/pokemon-Route1.mp3");
-
 
     if(windowWidth>=768){ //canvas的RWD
         cnv = createCanvas(1200, 600);
@@ -150,6 +145,20 @@ function setup() {
     }
     
 }
+
+
+
+function keyPressed() {
+    if (keyCode === TAB) {
+        if(gamePlaying==true){
+            noLoop();
+            gamePlaying=false;
+        }else if(gamePlaying==false){
+            loop();
+            gamePlaying=true;
+        }
+    } 
+  }
 
 function musicPlay(songName, playStatus){
 
@@ -205,25 +214,14 @@ function touchStarted(){
     unicorn.jump(cusJump);
 }
 
-function pauseGame() {
-    if(gamePlaying==true){
-        noLoop();
-        gamePlaying=false;
-    }else {
-        loop();
-        gamePlaying=true;
-    }
-}
+
 
 
 function draw() {
-    //建立暫停遊戲的標籤
-    button = createButton("暫停遊戲");
-    button.style('font-size', '24px');
-    button.style('z-index',20);
-    button.style('border',0);
-    button.position(150, height+80);
-    button.mousePressed(pauseGame);
+
+
+    
+
 
     //阻擋空白鍵跟左右鍵的預設行為
     window.onkeydown = function (event) {
@@ -231,6 +229,9 @@ function draw() {
             event.preventDefault();
         }
     };
+
+
+    
     //背景移動
     rate++;
     image(bgImg, x1, 0, width, height);
@@ -546,5 +547,11 @@ function draw() {
 
         textFont('微軟正黑體');
     }
+
+        //顯示暫停遊戲鍵的說明
+        textSize(20);
+        fill(250);
+        text('按TAB鍵暫停遊戲', 50 , height-20);
+        textFont('微軟正黑體');
 }
 
