@@ -2,12 +2,6 @@
 $errMsg = "";
 session_start();
 
-// if(!isset ($_SESSION['user_no'])){
-//   echo "<div class='error_bd'><center>您好:請先登入會員,將於3秒後跳轉至首頁</center></div>";
-//   header("Refresh:3;url=home.html");
-// }else{
-
-
 try {
   require_once('php/connectg3.php');
 
@@ -152,7 +146,8 @@ if ($errMsg !=""){
               </tr>
               <tr>
                 <td><p class="p_title">密碼</p></td>
-                <td><p><input type="password" name="user_psw" readonly="readonly" value="<?=$userRow["user_psw"]?>"></p></td>
+                <td><p><input type="password" name="user_psw" readonly="readonly" value="<?=$userRow["user_psw"]?>"></p><p class="baic_error">長度需大為10<p></td>
+      
               </tr>
               <tr>
                 <td><p class="p_title">信箱</p></td>
@@ -628,7 +623,7 @@ if ($errMsg !=""){
       if( $errMsg != ""){ //例外
         echo "<div><center>$errMsg</center></div>";
       }elseif($revs->rowCount()==0){
-        echo "<div><center>目前無預約資料</center></div>";
+        echo "<div><center><p>目前無預約資料</p></center></div>";
       }else{
         $revsRow = $revs->fetchAll(PDO::FETCH_ASSOC);
 

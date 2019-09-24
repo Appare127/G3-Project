@@ -387,7 +387,9 @@ function setrev(){
       xhr.onload = function(){ 
         if(xhr.status==200){
           console.log(xhr.responseText);
-          if(xhr.responseText.indexOf("已取消過")!=-1){
+          if(xhr.responseText.indexOf("日期已過，無法取消")!=-1){
+            alert("日期已過，無法取消!");
+          }else if(xhr.responseText.indexOf("已取消過")!=-1){
             alert("您已取消過!");
       
           }else if(xhr.responseText.indexOf("已到場過，無法取消")!=-1){
