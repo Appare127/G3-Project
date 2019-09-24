@@ -2,10 +2,10 @@
 $errMsg = "";
 session_start();
 
-if(!isset ($_SESSION['user_no'])){
-  echo "<div class='error_bd'><center>您好:請先登入會員,將於3秒後跳轉至首頁</center></div>";
-  header("Refresh:3;url=home.html");
-}else{
+// if(!isset ($_SESSION['user_no'])){
+//   echo "<div class='error_bd'><center>您好:請先登入會員,將於3秒後跳轉至首頁</center></div>";
+//   header("Refresh:3;url=home.html");
+// }else{
 
 
 try {
@@ -58,6 +58,12 @@ try {
  <script src="js/plugin/Chart.js"></script>
 </head>
 
+<?php
+if(!isset ($_SESSION['user_no'])){
+  echo "<div class='error_bd'><center>您好:請先登入會員,<br>頁面將於3秒後跳轉至首頁</center></div>";
+  header("Refresh:3;url=home.html");
+}else{
+?>
 
 <body class="bd_member">
 
