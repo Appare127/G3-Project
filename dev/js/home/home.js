@@ -88,7 +88,7 @@ function frank_vote(){
 
     if(rank1.readyState==4){
         var vote_rank= JSON.parse(rank1.responseText);
-console.log(vote_rank);
+// console.log(vote_rank);
 
    for (let i = 0; i <1; i++) {
     $id("vote_num1").innerText=vote_rank[i]["vote"];
@@ -155,7 +155,7 @@ function message_php(){
 
   for (let i = 0; i <1; i++){
     //   $("#frank_message_content").append($("#message_wrap").clone(true).attr({id:'message_itme'+i,class:'message_itme frank_message_wrap'}));
-   console.log(1);
+//    console.log(1);
    
     $id("msg_animal_bg1").src=message_arr[i]["my_animal_bg_img"];
     $id("msg_animal1").src=message_arr[i]["my_animal_img"];
@@ -165,7 +165,7 @@ function message_php(){
     }
     for (let i = 1; i <2; i++){
         //   $("#frank_message_content").append($("#message_wrap").clone(true).attr({id:'message_itme'+i,class:'message_itme frank_message_wrap'}));
-       console.log(2);
+    //    console.log(2);
        
         $id("msg_animal_bg2").src=message_arr[i]["my_animal_bg_img"];
         $id("msg_animal2").src=message_arr[i]["my_animal_img"];
@@ -175,7 +175,7 @@ function message_php(){
         }
     for (let i = 2; i <3; i++){
         //   $("#frank_message_content").append($("#message_wrap").clone(true).attr({id:'message_itme'+i,class:'message_itme frank_message_wrap'}));
-        console.log(3);
+        // console.log(3);
         
         $id("msg_animal_bg3").src=message_arr[i]["my_animal_bg_img"];
         $id("msg_animal3").src=message_arr[i]["my_animal_img"];
@@ -235,27 +235,27 @@ function collections_rank(){
 }
 function  collections_rank_refresh(xmlHttp_rank){
     xmlHttp_rank.open("GET","php/home/collections.php",true);
-    xmlHttp_rank.onreadystatechange = collections;
+    // xmlHttp_rank.onreadystatechange = collections;
     xmlHttp_rank.send(null);
 }
-function collections(){
+// function collections(){
    
     
-    if(xmlHttp_rank.readyState==4){
-    var data= JSON.parse(xmlHttp_rank.responseText);
-    var rank1 =data[0];
-    var rank2 =data[1];
-    var rank3 =data[2];
-    console.log(rank1.bg_img);
+//     if(xmlHttp_rank.readyState==4){
+//     var data= JSON.parse(xmlHttp_rank.responseText);
+//     var rank1 =data[0];
+//     var rank2 =data[1];
+//     var rank3 =data[2];
+//     console.log(rank1.bg_img);
     
-    document.getElementById('rank_1_bg').src=rank1.bg_img;
-    document.getElementById('rank_1_img').src=rank1.cmp_img;
-    document.getElementById('rank_2_bg').src=rank2.bg_img;
-    document.getElementById('rank_2_img').src=rank2.cmp_img;
-    document.getElementById('rank_3_bg').src=rank3.bg_img;
-    document.getElementById('rank_3_img').src=rank3.cmp_img;
-    }
-}
+//     document.getElementById('rank_1_bg').src=rank1.bg_img;
+//     document.getElementById('rank_1_img').src=rank1.cmp_img;
+//     document.getElementById('rank_2_bg').src=rank2.bg_img;
+//     document.getElementById('rank_2_img').src=rank2.cmp_img;
+//     document.getElementById('rank_3_bg').src=rank3.bg_img;
+//     document.getElementById('rank_3_img').src=rank3.cmp_img;
+//     }
+// }
 //設定動物寬高
 function animal_item() {
     anime_state = (calss("home_header_pic")[0].attributes.class.ownerElement.clientWidth);
