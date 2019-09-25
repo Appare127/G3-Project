@@ -1,3 +1,7 @@
+.gaming_page{
+    @include msgalert(#fdf6e7,$col_btn_pink,$col_btn_pink);
+}
+
 @media all and (min-width:768px){
     .gaming_page{
         background-image: url(../img/game/body-bg.png);
