@@ -512,6 +512,7 @@ function closeIntro(){
 
 //選擇區域
 function chosenArea(area){
+    alert("<p>手機版請先把螢幕轉成橫屏!!</p>");
     if(sessionStorage['sceneChoice'] == null){
         sessionStorage['sceneChoice'] = area;
     }else{
@@ -519,6 +520,25 @@ function chosenArea(area){
     }
 }
 
+
+
+//alert訊息
+function alert(text,title){
+    if(window.innerWidth<=375){ //如果手機版不是橫屏
+        
+        if(!title==""){
+        $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>'+title+'</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
+        $(".msg_clear").click(function (){
+        $("#msg").remove();
+            });
+        }else{
+        $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>提示</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
+        $(".msg_clear").click(function (){
+        $("#msg").remove();
+        });
+        }
+    }
+}
 
 
 //地圖指標

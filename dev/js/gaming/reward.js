@@ -3,7 +3,7 @@
 
 class Food {
     constructor(){
-        this.r = 30;
+        this.r = 40;
         this.x = width;
         // this.y = height - this.r;
         this.y = height*0.6;
@@ -12,8 +12,11 @@ class Food {
         this.x -= scrollSpeed;
     }
     show() {
-        
-        image(rImg, this.x, this.y, this.r, this.r);
+        if(window.innerWidth<=767){
+            image(rImg, this.x, this.y, this.r, this.r);
+        }else{
+            image(rImg, this.x, this.y, this.r, this.r);
+        }
         // rect( this.x, this.y, this.r, this.r);
     } 
 }
@@ -29,7 +32,11 @@ class Money {
         this.y += Vy;
     }
     show() {
-        image(mImg, this.x, this.y, this.r, this.r);
+        if(window.innerWidth<=767){
+            image(rImg, this.x, this.y, this.r, this.r);
+        }else{
+            image(rImg, this.x, this.y, this.r, this.r);
+        }
     }
 
 }
@@ -110,11 +117,11 @@ class Book {
     move(){
         this.y += 9;
             // this.x -= 10;
-        this.y = constrain(this.y, 0, height-this.r-50);
+        this.y = constrain(this.y, 0, height-168);
         this.x = constrain(this.x,this.r-100, width+this.r);
     }
     show(){
-        image(bImg, this.x, this.y, this.r, this.r);
+        image(bImg, this.x, this.y, 120, 168);
     }
 
     
