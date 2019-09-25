@@ -8,55 +8,48 @@ html{overflow: hidden;
         width: 100%;
         height: 100%;
         overflow: hidden;
+
+        #home_box{
+            position: absolute;
+            top: 35%;
+            left: 25%;
+            transform: translate(-50%,-50%);
+            width: 200px;
+            height:200px;
+            @media screen and (max-width: 767px){
+                width: 60%;
+                width: 150px;
+                height:150px;
+                }
+     
+        }
+        #back_box{
+            position: absolute;
+            top: 35%;
+            left: 75%;
+            width: 200px;
+            height:200px;
+            transform: translate(-50%,-50%);
+            @media screen and (max-width: 767px){
+                width: 60%;
+                width: 150px;
+                height:150px;
+                }
+        }
+  #zoo_svg{
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      @media screen and (max-width: 767px){
+        top: 20%;
+      width: 80%;
+      }
+  }
     }
 }
 
-  .svg_text {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    z-index: 0;
-  }
-  
-  .input {
-    position: absolute;
-    z-index: 1;
-    bottom: 0px;
-    font-size: 20px;
-    text-align: center;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: Microsoft JhengHei;
-    bottom: 20px;
-    background: none;
-    border: 1px solid #ddd;
-    color: #eee; 
-  }
-  
-  .text, .offscreen-text {
-    background: rgb(231, 183, 79);
-    height: 150%;
-    width: 50%;
-    top: 45%;
-    left: 50%;
-    transform: translateY(-50%);
-    transform: translateX(-50%);
-    display: block;
-    position: absolute;
-    margin: 0;
-  }
-  
-  .offscreen-text {
-    text-align: center;
-    top: -9999px;
-  }
-  
-  .text span {
-    position: absolute;
-  }
-  
+ 
   
 
 @media screen and (min-width: 992px){
@@ -68,10 +61,10 @@ html{overflow: hidden;
 }
  svg {
     display: block;
-    
     position: relative;
     top: 0%;
     left: 0%;
+
     #yopick #skin path {
         fill: #8c5c3b;
     }
@@ -826,21 +819,20 @@ html{overflow: hidden;
 
     #home {
         #path1 {
-            fill: #dd7426;
-            opacity: 0.7;
+            fill: rgba(245, 231, 35, 0.849);
         }
 
         #path2 {
-            fill: rgba(1, 231, 22, .6);
+            fill: rgba(245, 231, 35, 0.849);
             ;
         }
 
         #path3 {
-            fill: rgba(108, 243, 225, .6)
+            fill: rgba(245, 231, 35, 0.849);
         }
 
         #path4 {
-            fill: rgb(240, 226, 5);
+            fill: rgba(255, 255, 255, 0.8);
             /* mix-blend-mode:   hard-light ; */
         }
 
@@ -853,25 +845,25 @@ html{overflow: hidden;
 
         &:hover {
             text {
-                fill: #efefef;
+                fill: #333333;
             }
 
             #path1 {
-                fill: rgba(45, 51, 185, .7);
+                fill: rgba(245, 231, 35, 0.849);
 
             }
 
             #path2 {
-                fill: rgb(202, 18, 89);
+              fill: rgba(245, 231, 35, 0.849);
 
             }
 
             #path3 {
-                fill: rgb(247, 211, 219);
+                fill: rgba(221, 214, 121, 0.849);
             }
 
             #path4 {
-                fill: #4c3223;
+                fill: rgba(255, 255, 255, 0.8);
 
             }
         }
@@ -880,24 +872,19 @@ html{overflow: hidden;
 
     #back {
         #path5 {
-            fill: #dd7426;
-            opacity: 0.7;
+            fill: rgba(70, 145, 230, 0.849);
         }
 
         #path6 {
-            fill: rgba(1, 231, 22, .6);
-            ;
+            fill: rgba(70, 145, 230, 0.849);
         }
 
         #path7 {
-            fill: rgba(108, 243, 225, .6);
-
-
+            fill: rgba(70, 145, 230, 0.849);
         }
 
         #path8 {
-            fill: rgb(198, 36, 3);
-
+            fill: rgba(255, 255, 255, .6);
         }
 
         text {
@@ -908,26 +895,23 @@ html{overflow: hidden;
 
         &:hover {
             text {
-                fill: #efefef;
+                fill: #333333;
             }
 
             #path5 {
-                fill: rgba(45, 51, 185, .7);
-
+                fill: rgba(70, 145, 230, 0.849);
             }
 
             #path6 {
-                fill: rgb(202, 18, 89);
-
+                fill: rgba(70, 145, 230, 0.849);
             }
 
             #path7 {
-                fill: rgb(247, 211, 219);
+                fill: rgba(70, 145, 230, 0.849);
             }
 
             #path8 {
-                fill: #4c3223;
-
+                fill: rgba(255, 255, 255, .6);
             }
         }
     }

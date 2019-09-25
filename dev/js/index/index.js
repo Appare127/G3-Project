@@ -3,6 +3,7 @@ tl = new TimelineMax({
     repeat: -1,
     repeatDelay: 2
 });
+
 var road1 = MorphSVGPlugin.pathDataToBezier("#chemin1", {
     align: "relative",
     offsetX: -50,
@@ -87,17 +88,9 @@ var htmlWidth = window.innerWidth;
 var htmlHeight = window.innerHeight;
 
 var svgX = document.getElementsByTagName("svg")[0].viewBox.baseVal.x;
-let homeX = document.getElementsByTagName("text")[0].attributes.x.nodeValue - (-12);
-let homeY = document.getElementsByTagName("text")[0].attributes.y.nodeValue - 7;
-let backX = document.getElementsByTagName("text")[1].attributes.x.nodeValue - (-12);
-let backY = document.getElementsByTagName("text")[1].attributes.y.nodeValue - 7;
-document.getElementsByTagName("text")[0].attributes.x.textContent = homeX - 16;
-document.getElementsByTagName("text")[1].attributes.x.textContent = backX - 16;
 window.addEventListener("resize", reHw, false);
 window.addEventListener("load", init, false);
 function reHw() {
-    
-    
     htmlWidth = window.innerWidth;
     htmlHeight = window.innerHeight;
 
@@ -105,46 +98,46 @@ function reHw() {
     document.getElementsByTagName("svg")[0].style.height="";
     document.getElementsByTagName("svg")[0].viewBox.baseVal.x=35;
     document.getElementsByTagName("svg")[0].viewBox.baseVal.width=490;
-    document.getElementsByTagName("text")[0].attributes.x.nodeValue=156;
-    homeX =172;
-    document.getElementsByTagName("text")[1].attributes.x.nodeValue =369;
-    backX=385;
+
      if (736>htmlWidth){    
         document.getElementsByTagName("svg")[0].style.height="";
         document.getElementsByTagName("svg")[0].viewBox.baseVal.x =35;
-        document.getElementsByTagName("svg")[0].viewBox.baseVal.width=490;
-        document.getElementsByTagName("text")[0].attributes.x.nodeValue=156;
-        homeX = document.getElementsByTagName("text")[0].attributes.x.nodeValue - (-16);
-        document.getElementsByTagName("text")[1].attributes.x.nodeValue = 369;
-        backX = document.getElementsByTagName("text")[1].attributes.x.nodeValue - (-16);
-     
-        
+        document.getElementsByTagName("svg")[0].viewBox.baseVal.width=490;        
     }
          if(document.getElementsByTagName("svg")[0].height.animVal.value<htmlHeight){
            document.getElementsByTagName("svg")[0].style.weight="";
            document.getElementsByTagName("svg")[0].style.height=htmlHeight;
-           console.log(23);
-           document.getElementsByTagName("text")[0].attributes.x.nodeValue=htmlWidth/100*13;
-           homeX = document.getElementsByTagName("text")[0].attributes.x.nodeValue - (-16);
-           document.getElementsByTagName("text")[1].attributes.x.nodeValue =htmlWidth/100*25;
-           backX = document.getElementsByTagName("text")[1].attributes.x.nodeValue - (-16);
              }
      if (htmlWidth < 415) {
-    
         document.getElementsByTagName("svg")[0].style.height="auto ";
         document.getElementsByTagName("svg")[0].viewBox.baseVal.x = 100;
         document.getElementsByTagName("svg")[0].viewBox.baseVal.width = 160;
-        document.getElementsByTagName("text")[0].attributes.x.nodeValue = 124;
-        homeX = document.getElementsByTagName("text")[0].attributes.x.nodeValue - (-16);
-        document.getElementsByTagName("text")[1].attributes.x.nodeValue = 207;
-        backX = document.getElementsByTagName("text")[1].attributes.x.nodeValue - (-16);
-    }
+    }       
+
+  
+
+
+   let  homeX  =  70/2;
+   let  homeY  =  70/2;
+   let  backX  =  70/2;
+   let  backY  =  70/2;
+console.log(document.getElementsByTagName('body'));
+
+console.log(htmlWidth );
+console.log(htmlHeight);
+
+
+
+document.getElementsByTagName('text')[0].x.baseVal[0]["value"]=homeX-16;
+document.getElementsByTagName('text')[0].y.baseVal[0]["value"]=homeY+6;
+document.getElementsByTagName('text')[1].x.baseVal[0]["value"]=backX-16;
+document.getElementsByTagName('text')[1].y.baseVal[0]["value"]=backY+6;
     blob1 = createBlob({
         element: document.querySelector("#path1"),
         numPoints: 10,
-        centerX: homeX ,
-        centerY: homeY,
-        minRadius: 22,
+        centerX:homeX,
+        centerY:homeY,
+        minRadius: 24,
         maxRadius: 28,
         minDuration: 1,
         maxDuration: 2
@@ -152,28 +145,28 @@ function reHw() {
     blob2 = createBlob({
         element: document.querySelector("#path2"),
         numPoints: 10,
-        centerX: homeX ,
-        centerY: homeY,
-        minRadius: 22,
+        centerX:homeX,
+        centerY:homeY,
+        minRadius: 24,
         maxRadius: 28,
         minDuration: 2,
         maxDuration: 3
     });
     blob3 = createBlob({
         element: document.querySelector("#path3"),
-        numPoints: 20,
-        centerX: homeX,
-        centerY: homeY,
-        minRadius: 22,
+        numPoints: 10,
+        centerX:homeX,
+        centerY:homeY,
+        minRadius: 24,
         maxRadius: 28,
         minDuration: 1.5,
         maxDuration: 2.5
     });
     blob4 = createBlob({
         element: document.querySelector("#path4"),
-        numPoints: 100,
-        centerX: homeX,
-        centerY: homeY,
+        numPoints: 10,
+        centerX:homeX,
+        centerY:homeY,
         minRadius: 20,
         maxRadius: 22,
         minDuration: 1.5,
@@ -184,7 +177,7 @@ function reHw() {
         numPoints: 10,
         centerX: backX,
         centerY: backY,
-        minRadius: 22,
+        minRadius: 24,
         maxRadius: 28,
         minDuration: 1,
         maxDuration: 2
@@ -194,25 +187,25 @@ function reHw() {
         numPoints: 10,
         centerX: backX,
         centerY: backY,
-        minRadius: 22,
-        maxRadius: 30,
+        minRadius: 24,
+        maxRadius: 28,
         minDuration: 2,
         maxDuration: 3
     });
     blob7 = createBlob({
         element: document.querySelector("#path7"),
-        numPoints: 20,
+        numPoints: 10,
         centerX: backX,
         centerY: backY,
-        minRadius: 22,
+        minRadius: 24,
         maxRadius: 28,
         minDuration: 3,
         maxDuration: 4
     });
     blob8 = createBlob({
         element: document.querySelector("#path8"),
-        numPoints:100,
-        centerX: backX ,
+        numPoints:10,
+        centerX: backX,
         centerY: backY,
         minRadius: 20,
         maxRadius: 22,
