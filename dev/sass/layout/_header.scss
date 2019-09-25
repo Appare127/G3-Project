@@ -151,8 +151,8 @@
             }
             .cart_num{
                 position:absolute;
-                top: 50%;
-                right: -80%;
+                top: 43%;
+                right: 60%;
                 background-color: #fcc;
                 border-radius:50%;
                 width: 25px;
@@ -160,6 +160,11 @@
                 line-height: 1.5;
                 text-align: center;
                 display:none;
+                @media screen and (min-width:768px){
+                    right: -20%;
+                    top: 20%;
+
+                }
             }
             .member_icon.cart_icon{
                 position:relative;

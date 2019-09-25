@@ -101,17 +101,17 @@ try {
                             $imgName=['選美No.1','選美No.2','選美No.3'];
                             foreach ($imgName as $i => $value) {
                         ?>
-                         <div class="item">
+                        <div class="item">
                             <div class="pic">
                                 <img class="shop_animal_bg" src="img/member/user0_amlbg.png" alt="">
                             </div>
                             <p><?=$value?></p>
                         </div>
                         <?php
-                           }
+                            }
                         }else{ 
                             $imgRow=$imgs->fetchAll(PDO::FETCH_ASSOC);
-                             $imgName=['選美No.1','選美No.2','選美No.3'];
+                            $imgName=['選美No.1','選美No.2','選美No.3'];
                             foreach ($imgName as $i => $value) {
                         ?>
                         <div class="item">
