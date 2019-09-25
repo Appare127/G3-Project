@@ -62,12 +62,12 @@ class Unicorn {
                 this.x = constrain(this.x,this.r-300, width+this.r-400);
 
             }else {//如果沒吃到寶石的情況
-                if(window.innerWidth>=768){
+                if(window.innerWidth>=768 && strongStatus==false){
                     this.y = constrain(this.y, 0, height-this.r);
-                    this.x = constrain(this.x,this.r, width+this.r);
+                    this.x = constrain(this.x, 0, width-this.r);
                 }else{
                     this.y = constrain(this.y, 0, height-this.r);
-                    this.x = constrain(this.x,this.r-100, width+this.r);
+                    this.x = constrain(this.x,this.r-150, width+this.r);
                 }
 
 

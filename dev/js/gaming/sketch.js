@@ -350,15 +350,15 @@ function draw() {
     }
 
     //隨機生成書本
-    if(random(1)<0.008 ){
-        books.push(new Book(angels[0].x,angels[0].y));
-    }
+    // if(random(1)<0.008 && angels.length==1){
+    //     books.push(new Book(angels[0].x,angels[0].y));
+    // }
 
-    for (let b of books) { //掉下書本
-        b.move();
-        b.show();
+    // for (let b of books) { //掉下書本
+    //     b.move();
+    //     b.show();
 
-    }
+    // }
 
 
     //動物的行為

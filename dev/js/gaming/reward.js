@@ -69,25 +69,29 @@ class Angel {
         this.y = 10;
         this.posX;
         this.posY;
-        this.step1Over = false;
-        this.step2Over = false;
         this.readyStatus = false;
+        this.bornTime;
+        this.displace;
+        this.direction = 'right';
     }   
 
     move(Vx=scrollSpeed,Vy=0) {
             
-        if(this.x <= 0.5*width -10 &&this.step1Over == false ){ //step1
-            this.x += 10; 
+        if(this.x <width && this.direction == 'right'){ 
+            this.displace = 5;
         }
-        if(this.x == 0.5*width && this.y <60){ //step2
-            this.step1Over = true;
-            this.y +=5;
-            console.log(this.x, this.y);
-            this.posX = this.x;
-            this.posY = this.y;
-        }else if (this.y == 60){
-            this.readyStatus =true;
+        if(this.x>=width ){
+            this.displace = -5;
+            this.direction = 'left';
         }
+        if(this.x<=0){ 
+            this.displace = 5;
+            this.direction = 'right';
+        }
+
+        this.x += this.displace;
+
+
     }
 
     show() { 
