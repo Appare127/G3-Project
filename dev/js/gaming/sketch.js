@@ -91,7 +91,7 @@ function preload() {
     wImg = loadImage('img/game/wings.png');
     sImg = loadImage('img/game/gaming_stone.png');
     aImg = loadImage('img/game/gaming_maruko.png');
-    
+    bImg = loadImage('img/game/gaming_book.gif');
     if(sessionStorage['sceneChoice']=='forest'){ //依據選擇的場景決定適用的環境適應能力值
         environ_adapt = sessionStorage['environ_adapt_1']*0.5;
     }else if(sessionStorage['sceneChoice']=='mountain'){
@@ -336,29 +336,29 @@ function draw() {
 
 
 
-//     //隨機生成小丸子
+    //隨機生成小丸子
     
-//     if(random(1)<0.1 && angels.length == 0){
-//         angels.push(new Angel());
-//     }
-//    console.log(angels[0]);
+    if(random(1)<0.1 && angels.length == 0){
+        angels.push(new Angel());
+    }
+   console.log(angels[0]);
 
-//     //小丸子的行為
-//     for (let a of angels) {
-//         a.show();
-//         a.move();
-//     }
+    //小丸子的行為
+    for (let a of angels) {
+        a.show();
+        a.move();
+    }
 
-//     //隨機生成書本
-//     if(random(1)<0.1 && angels[0].readyStatus==true){
-//         books.push(new Book(angels[0].posX,angels[0].posY));
-//     }
+    //隨機生成書本
+    if(random(1)<0.008 ){
+        books.push(new Book(angels[0].x,angels[0].y));
+    }
 
-//     for (let b of books) { //掉下書本
-//         b.move();
-//         b.show();
+    for (let b of books) { //掉下書本
+        b.move();
+        b.show();
 
-//     }
+    }
 
 
     //動物的行為
@@ -549,9 +549,12 @@ function draw() {
     }
 
         //顯示暫停遊戲鍵的說明
-        textSize(20);
-        fill(250);
-        text('按TAB鍵暫停遊戲', 50 , height-20);
-        textFont('微軟正黑體');
+        if(window.innerWidth>=768){
+            textSize(20);
+            fill(250);
+            text('按TAB鍵暫停遊戲', 50 , height-20);
+            textFont('微軟正黑體');
+        }
+
 }
 
