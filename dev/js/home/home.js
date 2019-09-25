@@ -189,10 +189,10 @@ function message_php(){
 }
 
 
-
+//點動物跳轉頁面
 
 function frank_img(){
-       $('#rank_col_top').click(function(){
+       $('#top_one,#top_two,#top_three').click(function(){
             window.location.href ="frank.html"});
     };
         
