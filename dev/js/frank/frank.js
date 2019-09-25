@@ -225,7 +225,7 @@ function vote_php(){
     vote_in_xml.onload =vote_into;
     function vote_into() {
         vote_rank_item= JSON.parse(vote_in_xml.responseText);
-              for (let i = 0; i < vote_rank_item.length -1; i++) {
+              for (let i = 0; i < vote_rank_item.length ; i++) {
     $id("vote"+`${i}`).innerText=vote_rank_item[i]["vote"];
     $id("bg"+`${i}`).src=vote_rank_item[i]["bg_img"];
     $id("ag"+`${i}`).src=vote_rank_item[i]["cmp_img"];
@@ -235,7 +235,11 @@ function vote_php(){
     $("input[name='work_no2']")[i].value=vote_rank_item[i]["work_no"];
     $("input[name='work_no3']")[i].value=vote_rank_item[i]["work_no"];
     $(`.heart:eq(${i})`).attr('id','NO_'+(vote_rank_item[i]["work_no"]));
+    console.log(vote_rank_item.length);
+    
      } 
+     console.log(200);
+     
          heart_item_exit()
       favorite();
     }
