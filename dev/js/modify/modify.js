@@ -89,6 +89,16 @@ let voice_arr = [];
 // 最後選到的頭部名稱
 let selected_head = '';
 
+// 各部件的變數，後面隨機會用到
+let head_parts;
+let body_parts;
+let leg_parts;
+let tail_parts;
+
+
+
+
+
 // 下一步動作
 function nextstep(){
     // 抓到動物canvas
@@ -348,6 +358,14 @@ function saveok(text){
     sessionStorage['environ_adapt_3'] = total_eml_desert;
     sessionStorage['animal_life'] = total_health;
     sessionStorage['animal_jump'] = total_jump;
+
+    // 更新sessionStorage的動物相關圖片路徑
+    let member_no = sessionStorage['user_no'];
+    sessionStorage['my_animal_img'] = `img/customize/user${member_no}_aml.png`;
+    sessionStorage['my_animal_bg_img'] = `img/customize/user${member_no}_bg.png`;
+    sessionStorage['my_animalbg_img'] = `img/customize/user${member_no}_amlbg.png`;
+    // 更新sessionStorage的動物參選資格
+    sessionStorage['attend'] = 0;
 }
 
 // 上傳背景圖的設定
@@ -541,26 +559,30 @@ function rand(min,max){
 // 隨機選擇圖片的函式
 function random_part(){
 
+    head_parts = document.getElementsByClassName('head_parts');
+    body_parts = document.getElementsByClassName('body_parts');
+    leg_parts = document.getElementsByClassName('leg_parts');
+    tail_parts = document.getElementsByClassName('tail_parts');
+
     for (let i=1; i<=6; i++){
         setTimeout(function(){
-            // 頭部為picon[0] ~ picon[3]的位址
-            let rand_head = 0 + rand(0,3);
-            // 身體為頭部加4再隨機0~3的位址
-            let rand_body = part_types + rand(0,3);
-            let rand_leg = part_types*2 + rand(0,3);
-            let rand_tail = part_types*3 + rand(0,3);
+            // 各部位隨機的範圍
+            let rand_head = rand(0 , head_parts.length -1);
+            let rand_body = rand(0 , body_parts.length -1);
+            let rand_leg = rand(0, leg_parts.length -1);
+            let rand_tail = rand(0, tail_parts.length -1);
 
             // 四個圖片物件拿到隨機的位址後，各別做click動作
             // 因為改用canvas作畫，同時點太多次click觸發時，canvas會來不及清掉上一次的
             // 會造成舊的圖殘留在上面，所以才把每次click後要延遲50ms再點下一個click
             setTimeout(function(){
-                picon[rand_head].click();
+                head_parts[rand_head].click();
                 setTimeout(function(){
-                    picon[rand_body].click();
+                    body_parts[rand_body].click();
                     setTimeout(function(){
-                        picon[rand_leg].click();
+                        leg_parts[rand_leg].click();
                         setTimeout(function(){
-                            picon[rand_tail].click();
+                            tail_parts[rand_tail].click();
                         },50);
                     },50)
                 },50);
@@ -635,7 +657,7 @@ function buildlist (jsonobj){
             
             div.classList = 'swiper-slide' + ' slide_' + page;
             img.src = tail_arr[i].tail_img;
-            img.classList = 'picon';
+            img.classList = 'picon tail_parts';
             img.alt = '資料庫圖片遺失';
             p.innerHTML = tail_arr[i].tail_ch_name;
     
@@ -650,7 +672,7 @@ function buildlist (jsonobj){
             let img = document.createElement('img');
             let p = document.createElement('p');
             img.src = tail_arr[i].tail_img;
-            img.classList = 'picon';
+            img.classList = 'picon tail_parts';
             img.alt = '資料庫圖片遺失';
             p.innerHTML = tail_arr[i].tail_ch_name;
     
@@ -677,7 +699,7 @@ function buildlist (jsonobj){
     
             div.classList = 'swiper-slide' + ' slide_' + page;
             img.src = head_arr[i].head_img;
-            img.classList = 'picon';
+            img.classList = 'picon head_parts';
             img.alt = '資料庫圖片遺失';
             input.dataset.pointa = head_arr[i].head_environment1;
             input.dataset.pointb = head_arr[i].head_environment2;
@@ -699,7 +721,7 @@ function buildlist (jsonobj){
             let p = document.createElement('p');
     
             img.src = head_arr[i].head_img;
-            img.classList = 'picon';
+            img.classList = 'picon head_parts';
             img.alt = '資料庫圖片遺失';
             input.dataset.pointa = head_arr[i].head_environment1;
             input.dataset.pointb = head_arr[i].head_environment2;
@@ -731,7 +753,7 @@ function buildlist (jsonobj){
     
             div.classList = 'swiper-slide' + ' slide_' + page;
             img.src = body_arr[i].body_img;
-            img.classList = 'picon';
+            img.classList = 'picon body_parts';
             img.alt = '資料庫圖片遺失';
             input.dataset.pointa = body_arr[i].body_environment1;
             input.dataset.pointb = body_arr[i].body_environment2;
@@ -754,7 +776,7 @@ function buildlist (jsonobj){
             let p = document.createElement('p');
     
             img.src = body_arr[i].body_img;
-            img.classList = 'picon';
+            img.classList = 'picon body_parts';
             img.alt = '資料庫圖片遺失';
             input.dataset.pointa = body_arr[i].body_environment1;
             input.dataset.pointb = body_arr[i].body_environment2;
@@ -788,7 +810,7 @@ function buildlist (jsonobj){
     
             div.classList = 'swiper-slide' + ' slide_' + page;
             img.src = leg_arr[i].leg_img;
-            img.classList = 'picon';
+            img.classList = 'picon leg_parts';
             img.alt = '資料庫圖片遺失';
             input.dataset.pointa = leg_arr[i].leg_environment1;
             input.dataset.pointb = leg_arr[i].leg_environment2;
@@ -811,7 +833,7 @@ function buildlist (jsonobj){
             let p = document.createElement('p');
     
             img.src = leg_arr[i].leg_img;
-            img.classList = 'picon';
+            img.classList = 'picon leg_parts';
             img.alt = '資料庫圖片遺失';
             input.dataset.pointa = leg_arr[i].leg_environment1;
             input.dataset.pointb = leg_arr[i].leg_environment2;

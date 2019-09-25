@@ -318,7 +318,7 @@ $('.frank_closs_btn').click(function(){
 $('.frank_expand_arrow').click(function(){
         $(this).parent().next().animate({bottom:'0px'},1);
 $('.frank_expand_button').click(function(){
-        $(this).parent().animate({bottom:'-800px'},1);
+        $(this).parent().animate({bottom:'-900px'},1);
     })
 });
 //留言按鈕

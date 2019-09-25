@@ -836,14 +836,14 @@ function chosenArea(area){
 
 
     function doFirst(){
+
+        getRankingData();
+        getCusAnimal();
+        animalWalking('firstTime');
         roleInfoAnimation();
         updatechart();
         updatehealth();
         updatejump();
-        getRankingData();
-        getCusAnimal();
-        animalWalking('firstTime');
-
         //安裝聲音檔
         audio = new Audio(sessionStorage['animal_howl']);
 

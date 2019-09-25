@@ -97,13 +97,13 @@ try {
 
                     <!-- 選美前三名從資料庫撈 -->
                         <?php
-                        if( $imgs->rowCount() < 3 ){
+                        if( $imgs->rowCount() == 0 ){
                             $imgName=['選美No.1','選美No.2','選美No.3'];
                             foreach ($imgName as $i => $value) {
                         ?>
                          <div class="item">
                             <div class="pic">
-                                <img class="shop_animal_bg" src="img/shop/amlbg.png" alt="">
+                                <img class="shop_animal_bg" src="img/member/user0_amlbg.png" alt="">
                             </div>
                             <p><?=$value?></p>
                         </div>

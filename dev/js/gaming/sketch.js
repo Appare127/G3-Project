@@ -1,3 +1,5 @@
+
+
 let unicorn;
 let trains = [];
 let fallens = [];
@@ -18,6 +20,7 @@ let flyingTime;
 let strongTime;
 let stoneLife;
 let angel;
+var cnv;
 
 let scrollSpeed = 10; 
 let x1 = 0;
@@ -35,7 +38,14 @@ let adapt_level;
 let flyStatus = false;
 let strongStatus = false;
 let immuneStatus = false;
-// let hitStatus = false;
+let gamePlaying = true;
+
+
+// let flytoyou=document.getElementById('flytoyou');
+// let dontgrow=document.getElementById('dontgrow');
+// let battle=document.getElementById('battle');
+// let route1=document.getElementById('route1');
+
 
 
 let scene = { //場景資訊
@@ -95,27 +105,31 @@ function preload() {
 
     mImg = loadImage('./img/game/coin.png');
     heartImg = loadImage('./img/game/heart.png');
+
+    
+    flytoyou = new Audio("img/game/flytoyou.mp3");
+    dontgrow = new Audio("img/game/S.H.E不想長大.mp3" );
+    battle = new Audio("img/game/WildPokemonBattle.mp3");
+    route1 = new Audio("img/game/pokemon-Route1.mp3");
+
+
 }
 
 function setup() {
-    // button = createButton('full screen'); //全螢幕按鈕
-    // button.mousePressed(
-    //     function(){
-    //             let fs = fullscreen();
-    //             fullscreen(!fs);
-    //     }
-    // );
 
 
-
+    flytoyou = new Audio("img/game/flytoyou.mp3");
+    dontgrow = new Audio("img/game/S.H.E不想長大.mp3" );
+    battle = new Audio("img/game/WildPokemonBattle.mp3");
+    route1 = new Audio("img/game/pokemon-Route1.mp3");
 
     if(windowWidth>=768){ //canvas的RWD
-        var cnv = createCanvas(1200, 600);
+        cnv = createCanvas(1200, 600);
         a=(windowWidth-width)/2;
         b=(windowHeight-height)/2;
         cnv.position(a,b);
     }else {
-        var cnv = createCanvas(windowWidth, windowHeight-50);
+        cnv = createCanvas(windowWidth, windowHeight-50);
     }
 
     cnv.style('z-index', 1);
@@ -134,6 +148,59 @@ function setup() {
 
 
 
+function keyPressed() {
+    if (keyCode === TAB) {
+        if(gamePlaying==true){
+            noLoop();
+            gamePlaying=false;
+        }else if(gamePlaying==false){
+            loop();
+            gamePlaying=true;
+        }
+    } 
+  }
+
+function musicPlay(songName, playStatus){
+
+    flytoyou.pause();
+    dontgrow.pause();
+    battle.pause();
+    route1.pause();
+
+    //飛起來音樂
+    if(songName == 'flytoyou' && playStatus ==  'play'){
+        flytoyou.currentTime = 1;
+        flytoyou.play();
+    }else if(songName == 'flytoyou' && playStatus ==  'pause'){
+        flytoyou.pause();
+    }
+
+    //長大音樂
+    if(songName == 'dontgrow' && playStatus ==  'play'){
+        dontgrow.currentTime = 60;
+        dontgrow.play();
+    }else if(songName == 'dontgrow' && playStatus ==  'pause'){
+        dontgrow.pause();
+       
+    }
+
+
+    //問答音樂
+    if(songName == 'battle' && playStatus ==  'play'){
+        battle.play();
+    }else if(songName == 'battle' && playStatus ==  'pause'){
+        battle.pause();
+    }
+
+    //問答音樂
+    if(songName == 'route1' && playStatus ==  'play'){
+        route1.play();
+    }else if(songName == 'route1' && playStatus ==  'pause'){
+        route1.pause();
+    }
+        
+}
+
 function windowResized() {
     if(window.innerWidth>=768){
         resizeCanvas(windowWidth, windowHeight*3/5);
@@ -145,17 +212,26 @@ function windowResized() {
 
 function touchStarted(){
     unicorn.jump(cusJump);
-    
- 
 }
 
+
+
+
 function draw() {
+
+
+    
+
+
     //阻擋空白鍵跟左右鍵的預設行為
     window.onkeydown = function (event) {
         if (event.keyCode === 32||event.keyCode===37||event.keyCode===39) {
             event.preventDefault();
         }
     };
+
+
+    
     //背景移動
     rate++;
     image(bgImg, x1, 0, width, height);
@@ -188,6 +264,7 @@ function draw() {
     textSize(16);
     fill(33);
     text('環境適應力：'+ adapt_level, 3/5*width, 100);
+    textFont('微軟正黑體');
 
     //秀出時間.金錢在右上角
     if(frameCount%60==0){
@@ -196,7 +273,7 @@ function draw() {
     textSize(24);
     fill(33);
     text('$: '+money + '  生存時間： '+timer, 3/5*width, 80);
-
+    textFont('微軟正黑體');
     // fill(0, 102, 153);
 
     //隨機生成障礙物
@@ -211,8 +288,12 @@ function draw() {
     if(timer<=25 && timer>=19){
         textSize(24);
         fill(33, 99, 100);
-        text("系統提示:有流星~快許願(*￣▽￣)/‧☆*~~~~~~~", 1/3*width, 1/3*height);
-
+        if(window.innerWidth >=768){
+            text("系統提示:有流星~快許願(*￣▽￣)/‧☆*~~~~~~~", 1/3*width, 1/3*height);
+        }else{
+            text("系統提示:有流星~快許願(*￣▽￣)/‧☆*~~~~~~~", 1/7*width, 1/2*height);
+        }
+        textFont('微軟正黑體');
     }
     if(timer>=20){ //20秒後開始掉隕石
         if (random(1) < (0.06/environ_adapt)) { // 掉隕石
@@ -323,6 +404,7 @@ function draw() {
                     noLoop();
                 },0.1);
 
+
                 updateScoreMoney();
                 questionPage.style.display='block';
                 reward_money.innerHTML = `得到獎金：${money}`;
@@ -353,6 +435,8 @@ function draw() {
                 setTimeout(function(){
                     noLoop();
                 },0.1);
+
+
 
                 updateScoreMoney();
                 questionPage.style.display='block';
@@ -397,22 +481,26 @@ function draw() {
         }
         
     }
-    if ( timer >= parseInt(flyingTime)+10 ){
+    if ( timer >= parseInt(flyingTime)+10 || life == 0){
         flyStatus = false;
-        myAudio.pause();
-        myAudio.currentTime = 1;
+        // musicPlay('battle', 'play');
+
 
     }
 
     if(timer>=parseInt(flyingTime) && timer< (flyingTime+10) ){
+        // musicPlay('flytoyou', 'play');
+        if(window.innerWidth>=768){
+            textSize(20);
+            fill(255,69,0);
+            text(`飛行狀態: ${10+flyingTime - timer}秒`, 3/5*width, 1/5*height+10);
+        }else{
+            textSize(14);
+            fill(255,69,0);
+            text(`飛行狀態: ${10+flyingTime - timer}秒`, 50, 1/5*height+40);
+        }
 
-        myAudio=document.getElementById('audio2');
-        myAudio.play();
-       
-
-        textSize(20);
-        fill(255,69,0);
-        text(`飛行狀態: ${10+flyingTime - timer}秒`, 3/5*width, 1/5*height+10);
+        textFont('微軟正黑體');
     }
 
 
@@ -424,13 +512,18 @@ function draw() {
         s.show();
 
         if ( unicorn.hits(s) ) { //吃到石頭後的行為
+            // musicPlay('dontgrow','play');
             strongTime = timer;
             stones.splice(s,1);
             strongStatus = true;
-            unicorn.r = 400;
-            stoneLife = life;
-            
-            unicorn.y = height-350;
+            if(innerWidth>=768){
+                unicorn.r = 400;
+                unicorn.y = height-350;
+            }else{
+                unicorn.r = 250;
+                unicorn.y = height+100;
+            }
+
         }
     }
     // if(strongStatus == true){
@@ -442,9 +535,23 @@ function draw() {
     }
 
     if(timer>=parseInt(strongTime) && timer< (strongTime+10) ){
-        textSize(20);
-        fill(255,69,0);
-        text(`過胖狀態: ${10+strongTime - timer}秒`, 3/5*width, 1/5*height+30);
+        if(window.innerWidth>=768){//桌機版的字
+            textSize(20);
+            fill(255,69,0);
+            text(`無敵狀態: ${10+strongTime - timer}秒`, 3/5*width, 1/5*height+30);
+        }else {//手機版的字
+            textSize(14);
+            fill(255,69,0);
+            text(`無敵狀態: ${10+strongTime - timer}秒`, 50, 1/5*height+60);
+        }
+
+        textFont('微軟正黑體');
     }
+
+        //顯示暫停遊戲鍵的說明
+        textSize(20);
+        fill(250);
+        text('按TAB鍵暫停遊戲', 50 , height-20);
+        textFont('微軟正黑體');
 }
 
