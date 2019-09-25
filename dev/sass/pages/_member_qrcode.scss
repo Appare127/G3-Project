@@ -16,7 +16,7 @@
         .msg_box{
             width:80%;
             max-width: 400px;
-            height:45%;
+            height:48%;
             padding: 40px 10px 0 10px;
             position: fixed;
             top: 0%;
@@ -45,10 +45,12 @@
             .success_pic{
                 width: 30%;
                 max-width: 100px;
+                margin-bottom: 20px;
             }
             .exclamation_pic{
                 width: 30%;
                 max-width: 100px;
+                margin-bottom: 20px;
             }
             .big_p{
                 font-size: $h2_fz;

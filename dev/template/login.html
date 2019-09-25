@@ -26,6 +26,7 @@
         <p class="login_box_title">會員註冊</p>
         <form action="#" id="myForm">
             <p> 
+<<<<<<< HEAD
                 帳號：
                 <input  @change="idErrMsg" type="text" v-model="id"  placeholder="最大長度：10*" maxlength="10">
                
@@ -35,17 +36,30 @@
                 名字：
                 <input type="text" v-model="name"  placeholder="最大長度：10*" maxlength="10">
                 
+=======
+                會員帳號：
+                <input  @change="idErrMsg" type="text" v-model="id"  placeholder="最大長度：10*" maxlength="10">
+                <br><span class="msg">{{idMsg}}</span>
+>>>>>>> dev
             </p>
+
+            
             <p>
+<<<<<<< HEAD
                 密碼：
                 <input type="password" v-model="psw"  placeholder="最大長度：10" maxlength="10"> 
                 
+=======
+                會員密碼：
+                <input type="password" v-model="psw"  placeholder="最大長度：10" maxlength="10"> 
+>>>>>>> dev
                 </p>
             <p> 
                 確認密碼：
                 <input type="password" v-model="pswConfirm"  placeholder="確認密碼*"><br>
                 <span class="msg">{{pswConfirmErrMsg}}</span>
             </p>
+<<<<<<< HEAD
             <p> 
                 電子郵件：
                 <input type="text" v-model="email"  placeholder="zoo@email.com*"><br>
@@ -57,8 +71,15 @@
                 <option v-for="qsn in qsns">{{qsn.hint_no+"."+qsn.hint_question}}</option>
             </select>
             <!-- <span class="msg">（忘記密碼時使用）</span> -->
+=======
+            <p> 選擇提示語： 
+                <select v-model="qsn">
+                <option value="" >--請選擇--</option>
+                <option v-for="qsn in qsns">{{qsn.hint_no+"."+qsn.hint_question}}</option>
+            </select><br>
+>>>>>>> dev
             </p>
-            <p>請輸入答案：<input v-model="hint" type="text" name="hint" placeholder="密碼提示答案*"></p>
+            <p>輸入答案：<input v-model="hint" type="text" name="hint" placeholder="密碼提示答案*"></p>
         </form>
         <button class="btn_cloud" id="register_finish" @click="submit">完成<span class="btn_cloudeffect"></span>
             <span class="btn_cloudeffect"></span>
@@ -97,6 +118,7 @@
 
 
 
+<<<<<<< HEAD
 <!-- 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script> -->
@@ -486,4 +508,8 @@ let forgetPsw=new Vue({
         $id("forgetPsw_del").onclick = ()=>cancelForm("forgetPsw_gary");  
         
     })
+=======
+
+<script>
+>>>>>>> dev
 </script>

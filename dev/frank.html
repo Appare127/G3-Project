@@ -38,12 +38,11 @@
                     </figure>
                     <div id="frank_mem_text" class="frank_mem_text">
                         <div class="frank_megsage_memname">
-                            <p id="frank_message_memId">姓名</p>
-                            <p class="frank_message_date" id="frank_message_date">日期</p> 
+                            <p id="frank_message_memId"></p>
+                            <p class="frank_message_date" id="frank_message_date"></p> 
                         </div>
                         <div class="frank_message_box">
                             <p class="frank_message_text" id="frank_message_text">
-                                留言內容
                             </p>  
                         </div> 
                         <div class="frank_message_btn">
@@ -56,7 +55,7 @@
             </div>
             <form class="message_wrap_input">
                 <input type="hidden" id="msg_btn_no">
-                <input type="text" id="input_text" name="msg" placeholder="最多30字數" maxlength="30">
+                <input type="text" id="input_text" name="msg" placeholder="最多10字數" maxlength="10">
                 <div class="message_input_btn">
                     <input type="button" id="msg_btn" value="留言"class="btn_cloudb">
                         @@include('template/btn_sp.html')
@@ -90,12 +89,12 @@
                 <div class="frank_top_title">
                     <h2>每月前三名</h2>
                 </div>
-                <div class="frank_top_content">
+                <!-- <div class="frank_top_content">
                     <select class="frank_search_month">
                         <option value="2019_9" selected>2019年9月</option>
                         <option value="2019_8">2019年8月</option>
                     </select>
-                </div>
+                </div> -->
             </div>
             <div class="frank_top_three owl-theme" id="owl-demo">
                 <div class="frank_top_left item" id="frank_top_left">
@@ -267,14 +266,14 @@
                             </span>
                         </div>
                         <div class="frank_activity_buy">
-                            <span href="#" class="btn_cloudp">購買前三名商品
+                            <a href="shop.php" class="btn_cloudp">購買前三名商品
                                 @@include('template/btn_sp.html')   
-                            </span>
+                            </a>
                         </div>
                         <div class="frank_activity_customization">
-                            <span href="#" class="btn_cloudp">前往客製動物
+                            <a href="modify.html" class="btn_cloudp">前往客製動物
                                 @@include('template/btn_sp.html') 
-                            </span>
+                            </a>
                         </div>
                     </div>          
                 </div>
@@ -286,13 +285,13 @@
                 <div class="frank_player_title">
                     <h2>更多參賽者</h2>
                 </div>
-                <div class="frank_player_content">    
+                <!-- <div class="frank_player_content">    
                     <select class="frank_player_search">
                         <option value="" selected>參賽日期</option>
                         <option value="2019_9" >2019年9月</option>
                         <option value="2019_8">2019年8月</option>
                     </select> 
-                </div>
+                </div> -->
             </div>
                     <div class="frank_player_more" id="frank_player_more">
                        <div class="frank_player_items" id="frank_player_items">   
@@ -331,20 +330,28 @@
                                                     <p>跳躍力:</p>
                                                     <div class="pic jump">
                                                         <div class="jump_bar">
+<<<<<<< HEAD
                                                             <div class="bar_add" ></div>
+=======
+                                                            <div class="bar_add"></div>
+>>>>>>> dev
                                                             <span class="meter" id="meter"></span>
                                                         </div>
                                                     </div>
                                                 </div>
+<<<<<<< HEAD
                                                 <h3>環境適應力</h3>
+=======
+                                                <h3 class="surroundings">環境適應力</h3>
+>>>>>>> dev
                                                 <div class="evemt_ability" id="">
                                                     <img id="evemt_ability" src="" alt="">
                                                 </div>
                                             </div>
                                           <div class="frank_back_btn">
                                              
-                                              <span class="btn_cloudp"> 去玩遊戲
-                                                   @@include('template/btn_sp.html')</span>
+                                              <a href="game.html" class="btn_cloudp"> 去玩遊戲
+                                                   @@include('template/btn_sp.html')</a>
                                            
                                           </div>
                                           <div class="frank_expand_button">
@@ -376,8 +383,5 @@
         </div>
     </section>
      @@include('template/footer.html')
-     
-     <script src="js/modify/radar.js"></script>
-    
 </body>
 </html>

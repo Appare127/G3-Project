@@ -104,10 +104,23 @@ class Book {
         this.hitStatus = false;
     }
     move(){
+<<<<<<< HEAD
             this.y += 9;
             this.x -= 10;
     }
     show(){
         image(fImg, this.x, this.y, this.r, this.r);
     }
+=======
+        this.y += 9;
+            // this.x -= 10;
+        this.y = constrain(this.y, 0, height-this.r-50);
+        this.x = constrain(this.x,this.r-100, width+this.r);
+    }
+    show(){
+        image(bImg, this.x, this.y, this.r, this.r);
+    }
+
+    
+>>>>>>> dev
 }

@@ -21,19 +21,6 @@ try {
 
   if( $_FILES["upFile"]["error"] == UPLOAD_ERR_OK){
 
-		// $sql = "INSERT INTO `user` (`psn`, `pname`, `price`, `author`, `pages`, `image`) values(null, :pname, :price, :author, :pages, '' )";
-		//為什麼要反斜線 讓他等於字串 不能用"" 
-		//讓image先為''
-		// $products = $pdo->prepare( $sql );
-		// $products -> bindValue(":pname", $_POST["pname"]);
-		// $products -> bindValue(":price", $_POST["price"]);
-		// $products -> bindValue(":author", $_POST["author"]);
-		// $products -> bindValue(":pages", $_POST["pages"]);
-		// $products -> execute();
-
-		//取得自動創號的key值
-		// $psn = $pdo->lastInsertId();
-
 		//先檢查images資料夾存不存在
 		$dir ="../../img/customize//";
 

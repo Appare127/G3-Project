@@ -2,12 +2,6 @@
 $errMsg = "";
 session_start();
 
-if(!isset ($_SESSION['user_no'])){
-  echo "<div class='error_bd'><center>您好:請先登入會員,將於3秒後跳轉至首頁</center></div>";
-  header("Refresh:3;url=home.html");
-}else{
-
-
 try {
   require_once('php/connectg3.php');
 
@@ -34,8 +28,13 @@ try {
   $revs->bindValue(':member_id',@$_SESSION['user_no']);
   $revs->execute();
 
+<<<<<<< HEAD
   //找收藏明細 且 狀態等於"1"就是收藏中的
   $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = :user_no and f.favorite_status = 1');
+=======
+  //找收藏明細 且 狀態等於"1"就是收藏中的 根據排序
+  $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = :user_no and f.favorite_status = 1 ORDER BY `f`.`favorite_date` ASC');
+>>>>>>> dev
   $loves->bindValue(':user_no',@$_SESSION['user_no']);
   $loves->execute();
 
@@ -58,6 +57,12 @@ try {
  <script src="js/plugin/Chart.js"></script>
 </head>
 
+<?php
+if(!isset ($_SESSION['user_no'])){
+  echo "<div class='error_bd'><center>您好:請先登入會員,<br>頁面將於3秒後跳轉至首頁</center></div>";
+  header("Refresh:3;url=home.html");
+}else{
+?>
 
 <body class="bd_member">
 
@@ -126,7 +131,7 @@ if ($errMsg !=""){
             ?>
           </div>
 
-          <div class="upfile">
+          <div class="upfile_wrap">
             <input type="file" name="upFile" id="upFile" accept="image/*" value=<?=$userRow["user_img"]?>>
           </div>
         </div>
@@ -146,7 +151,7 @@ if ($errMsg !=""){
               </tr>
               <tr>
                 <td><p class="p_title">密碼</p></td>
-                <td><p><input type="password" name="user_psw" readonly="readonly" value="<?=$userRow["user_psw"]?>"></p></td>
+                <td><p><input type="password" name="user_psw" readonly="readonly" value="<?=$userRow["user_psw"]?>"></p><p class="baic_error"><p></td>
               </tr>
               <tr>
                 <td><p class="p_title">信箱</p></td>
@@ -255,11 +260,11 @@ if ($errMsg !=""){
             <?php
              if( $userRow["game_img"] != ""){ 
             ?>
-              <img src="<?=$userRow["game_img"]?>" alt="user_game">
+              <img class="user_game" src="<?=$userRow["game_img"]?>" alt="user_game">
             <?php
             }else{
              echo '<div class="ifnull"><p>尚未有遊戲畫面</p>
-              <img src="img/member/user0_aml.png" alt="">
+              <img src="img/member/user0_aml.png" alt="user_game">
               </div>';
             }
             ?>
@@ -622,7 +627,7 @@ if ($errMsg !=""){
       if( $errMsg != ""){ //例外
         echo "<div><center>$errMsg</center></div>";
       }elseif($revs->rowCount()==0){
-        echo "<div><center>目前無預約資料</center></div>";
+        echo "<div><center><p>目前無預約資料</p></center></div>";
       }else{
         $revsRow = $revs->fetchAll(PDO::FETCH_ASSOC);
 

@@ -11,7 +11,7 @@
 </head>
 <body class="bd_rev_qrcode">
 <?php
-session_start();
+// session_start();
 try{
   //------------------------------------連線資料庫
   require_once('php/connectg3.php');
@@ -19,34 +19,79 @@ try{
   //假如有收到資料  就是改變資料庫(送來的訂單編號&狀態改成1(已入場)))
   if(isset($_POST['booking_no'])){
 
-  //找資料庫的資料 
-    $revs=$pdo->prepare("select * from `resv_order` WHERE `resv_order`.`booking_no` = :booking_no and `resv_order`.`member_id` = :member_id ");
-    $revs->bindValue(':member_id',$_SESSION['user_no']);//$_SESSION['user_no']
-    $revs->bindValue(':booking_no',$_GET['booking_no']);
-    $revs->execute();
-    // if( $revs->rowCount() == 0){
-    //   exit( "not found");
-    // }
-    $revsRow = $revs->fetchObject(); 
+ //找預約日期<目前日期
+  $revstime=$pdo->prepare("select * from `resv_order` WHERE `resv_order`.`tour_date` < CURRENT_DATE AND `resv_order`.`booking_no` = :booking_no;");
+  $revstime->bindValue(':booking_no',$_GET['booking_no']);
+  $revstime->execute();
 
-    //更新資料庫的資料 假如狀態以為1 就說您已入場過
-    if($revsRow->resv_status=="1"){
+  //找資料庫的資料 
+  $revs=$pdo->prepare("select * from `resv_order` WHERE `resv_order`.`booking_no` = :booking_no");
+  $revs->bindValue(':booking_no',$_GET['booking_no']);
+  $revs->execute();
+  // if( $revs->rowCount() == 0){
+  //   exit( "not found");
+  // }
+  $revsRow = $revs->fetchObject(); 
+
+
+
+//假如有找到那筆欄位資料 表示日期已過
+  if(! $revstime->rowCount()==0){
+?>
+    <div class="rev_qrcode_msg">
+      <div class="msg_box">
+      <div class="color_box"></div>
+      <img class="exclamation_pic" src="img/member/exclamation-mark.png" alt="exclamation_pic">
+
+      <p>此會員預約時間已超過，無法入場</p>
+      <p>若有問題請洽客服人員</p>
+
+      </div>
+    </div>
+
+<?php
+  }else if($revsRow->resv_status=="1"){ //更新資料庫的資料 假如狀態以為1 就說您已入場過
+      ?>
+
+
+    <div class="rev_qrcode_msg">
+      <div class="msg_box">
+      <div class="color_box"></div>
+      <img class="exclamation_pic" src="img/member/exclamation-mark.png" alt="exclamation_pic">
+
+      <p>此會員已入場過</p>
+      <p>若有問題請洽客服人員</p>
+
+      <!-- <div class="qr_btn_back">
+          <a href="home.html" class="btn_cloud">
+            <span>回首頁
+            @@include('template/btn_sp.html')
+            </span>
+          </a>
+      </div> -->
+
+    </div>
+
+    </div>
+   
+  <?php //更新資料庫的資料 假如狀態以為2 就說預約取消過
+    } else if($revsRow->resv_status=="2"){
       ?>
     <div class="rev_qrcode_msg">
       <div class="msg_box">
       <div class="color_box"></div>
       <img class="exclamation_pic" src="img/member/exclamation-mark.png" alt="exclamation_pic">
 
-      <p>您好，此會員已入場過</p>
+      <p>此會員已將預約取消</p>
       <p>若有問題請洽客服人員</p>
 
-      <div class="qr_btn_back">
+      <!-- <div class="qr_btn_back">
           <a href="home.html" class="btn_cloud">
             <span>回首頁
             @@include('template/btn_sp.html')
             </span>
           </a>
-      </div>
+      </div> -->
 
     </div>
 
@@ -56,8 +101,7 @@ try{
     }else{
 
     //更新資料庫的資料 將狀態0改為為1(已入場) 秀出資料已確認
-    $revItems=$pdo->prepare("UPDATE `resv_order` SET `resv_status` = '1' WHERE `resv_order`.`booking_no` = :booking_no and `resv_order`.`member_id` = :member_id");
-    $revItems->bindValue(':member_id',$_SESSION['user_no']);//$_SESSION['user_no']
+    $revItems=$pdo->prepare("UPDATE `resv_order` SET `resv_status` = '1' WHERE `resv_order`.`booking_no` = :booking_no");
     $revItems->bindValue(':booking_no',$_GET['booking_no']);
     $revItems->execute();
   ?>
@@ -71,13 +115,13 @@ try{
           <p>資料已確認</p>
           <p>預約已到場</p>
 
-          <div class="qr_btn_back">
+          <!-- <div class="qr_btn_back">
                   <a href="home.html" class="btn_cloud">
                   <span>回首頁
             @@include('template/btn_sp.html')
             </span>
                   </a>
-              </div>
+            </div> -->
 
           </div>
 
@@ -95,17 +139,25 @@ try{
     <div class="msg_box">
     <div class="color_box"></div>
       <img class="success_pic" src="img/member/success.png" alt="success_pic">
-      <p><?="您的預約編號是  $booking_no";?></p>
+      <p><?="預約編號為  $booking_no";?></p>
       <p class="big_p"><?="掃描成功";?></p>
 
 
+<<<<<<< HEAD
       <div class="qr_btn_back">
+=======
+      <!-- <div class="qr_btn_back">
+>>>>>>> dev
           <a href="member.php" class="btn_cloud">
             <span>回會員中心
             @@include('template/btn_sp.html')
             </span>
           </a>
+<<<<<<< HEAD
       </div>
+=======
+      </div> -->
+>>>>>>> dev
 
 
       <form action="" method="post">
@@ -121,9 +173,12 @@ try{
     
       </form>
 
+<<<<<<< HEAD
 
           
 
+=======
+>>>>>>> dev
   </div>
 
 </div>
