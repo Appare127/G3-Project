@@ -9,7 +9,7 @@
 </head>
 <body>
     <!-- viewport="50 50 0 0"  viewBox="-17 0 549 300" -->
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="35 0 490 300" preserveAspectRatio="xMidYMin" >
+    <svg id="test" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="35 0 490 300" preserveAspectRatio="xMidYMin" >
         <defs>
             <linearGradient id="linear-gradient" x1="282.33" y1="202.67" x2="282.33" gradientUnits="userSpaceOnUse">
                 <stop offset="0" stop-color="#f0d7a3" />
@@ -1344,26 +1344,26 @@
                 </g>
             </g>
         </g>
-        <g id="home">
-                <path id="path1"></path>
-                <path id="path2"></path>
-                <path id="path3"></path>
-                <path id="path4"></path>
-                <a class="index_font" href="home.html"><text  x="160" y="105">前台</text></a>
-                
-            </g>
-
-            <g id="back">
-                    <path id="path5"></path>
-                    <path id="path6"></path>
-                    <path id="path7"></path>
-                    <path id="path8"></path>
-                    
-                    <a href="admin/admin_login.html"><text x="373" y="106">後台</text></a>
-                </g>
     </svg>
-
-
+    <svg id="home_box" viewBox="0 0 70 70" >
+        <g id="home">
+            <path id="path1"></path>
+            <path id="path2"></path>
+            <path id="path3"></path>
+            <path id="path4"></path>
+            <a class="index_font" href="home.html"><text x="0"y="0" >前台</text></a>
+        </g>
+     </svg>
+     <svg id="back_box"viewBox="0 0 70 70" >
+        <g id="back">
+            <path id="path5"></path>
+            <path id="path6"></path>
+            <path id="path7"></path>
+            <path id="path8"></path>
+            <a href="admin/admin_login.html"><text x="50%" y="50%">後台</text></a>
+        </g>
+     </svg>
+     <embed id="zoo_svg" src="img/index/zoo.svg" type="image/svg+xml" />
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"> </script>

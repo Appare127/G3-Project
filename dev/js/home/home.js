@@ -3,7 +3,7 @@
 //執行時啟動
 function init() {
    frank_vote_rank();
- 
+    vote_button();
     frank_img();
     getRankData();
     animal_item();
@@ -14,6 +14,7 @@ function init() {
     message_xml()
     
 }
+
 //resize時啟動
 function reinit() {
     animal_item();
@@ -190,9 +191,78 @@ function message_php(){
 
 
 
+//投票
+
+function  frank_vote_rank(){
+    rank1=frank_rank();
+    rank1.open("GET","php/frank/vote_rank.php",true);
+    rank1.onreadystatechange = frank_vote;
+    rank1.send(null);
+}
+function  vote_xml(e){    
+    vote_item=frank_rank();
+    vote_item.open("GET","php/frank/vote.php?user_no="+sessionStorage.user_no+"&work_no="+e,true);
+    vote_item.onreadystatechange = vote_php;
+    vote_item.send(null);
+}
+function vote_php(){
+    if(vote_item.readyState==4  && vote_item.status==200){
+        let vote_arr= JSON.parse(vote_item.responseText);
+        if ( vote_arr==0) {
+                alert( "沒有票能投");
+              
+        }else{
+                alert( "還剩"+ vote_arr+"張票能投");
+               
+        }
+        setTimeout(() => {
+            vote_in_xml=frank_rank();
+            vote_in_xml.open("GET","php/frank/vote_rank.php",true);
+            // vote_in_xml.onreadystatechange =vote_into;
+            vote_in_xml.onload =vote_into;
+            function vote_into() {
+                vote_rank_item= JSON.parse(vote_in_xml.responseText);
+                      for (let i = 0; i < vote_rank_item.length; i++) {
+            $id("vote_num"+`${i}`).innerText=vote_rank_item[i]["vote"];
+            $id("aml_bg"+`${i}`).src=vote_rank_item[i]["amlbg_img"];
+            $id("top_animalName"+`${i}`).innerText=vote_rank_item[i]["work_name"];
+            $id("top_memId"+`${i}`).innerText=vote_rank_item[i]["user_name"];
+            // $id("vote_num2"+`${i}`).innerText=vote_rank_item[i]["vote"];
+            // $id("aml_bg2"+`${i}`).src=vote_rank_item[i]["bg_img"];
+            // $id("top_animalName2"+`${i}`).innerText=vote_rank_item[i]["work_name"];
+            // $id("top_memId2"+`${i}`).innerText=vote_rank_item[i]["user_name"];
+            // $id("vote_num3"+`${i}`).innerText=vote_rank_item[i]["vote"];
+            // $id("aml_bg3"+`${i}`).src=vote_rank_item[i]["bg_img"];
+            // $id("top_animalName3"+`${i}`).innerText=vote_rank_item[i]["work_name"];
+            // $id("top_memId3"+`${i}`).innerText=vote_rank_item[i]["user_name"];
+            $("input[name='work_no']")[i].value=vote_rank_item[i]["work_no"];
+            $("input[name='work_no3']")[i].value=vote_rank_item[i]["work_no"];
+             } 
+            }
+            vote_in_xml.send(null);  
+             }, 200);
+        
+        
+        }};
+        
+
+function vote_button(){
+
+$('.top_btn .btn_cloud').click(function(){
+    if (!sessionStorage['user_no']) {
+    
+    $id('login_gary').style.display = 'block';
+    return ;
+} 
+let e= $(this).find("input")[0].value;
+vote_xml(e);
+});
+}
+
+//點動物跳轉頁面
 
 function frank_img(){
-       $('#rank_col_top').click(function(){
+       $('#top_one,#top_two,#top_three').click(function(){
             window.location.href ="frank.html"});
     };
         
