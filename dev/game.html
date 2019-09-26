@@ -512,7 +512,7 @@ function closeIntro(){
 
 //選擇區域
 function chosenArea(area){
-    alert("<p>手機版請先把螢幕轉成橫屏!!</p>");
+    alertGame("<p>手機版請先把螢幕轉成橫屏!!</p>");
     if(sessionStorage['sceneChoice'] == null){
         sessionStorage['sceneChoice'] = area;
     }else{
@@ -523,7 +523,8 @@ function chosenArea(area){
 
 
 //alert訊息
-function alert(text,title){
+function alertGame(text,title){
+
     if(window.innerWidth<=375){ //如果手機版不是橫屏
         
         if(!title==""){

@@ -23,7 +23,7 @@ class Food {
 
 class Money {
     constructor(inX=width,inY=height*0.6){
-        this.r = 40;
+        this.r = 50;
         this.x = inX;
         this.y = inY;
     }
@@ -33,9 +33,9 @@ class Money {
     }
     show() {
         if(window.innerWidth<=767){
-            image(rImg, this.x, this.y, this.r, this.r);
+            image(mImg, this.x, this.y, this.r, this.r);
         }else{
-            image(rImg, this.x, this.y, this.r, this.r);
+            image(mImg, this.x, this.y, this.r, this.r);
         }
     }
 
@@ -48,7 +48,7 @@ class Wing {
         this.y = height*0.5;
     }
     move() {
-        this.x -=scrollSpeed;
+        this.x -=5;
     }
     show() {
         image(wImg, this.x, this.y, this.r, this.r);
@@ -91,7 +91,7 @@ class Angel {
             this.displace = -5;
             this.direction = 'left';
         }
-        if(this.x<=0){ 
+        if(this.x<=0 && books.length==0 &&fireStatus==false){ 
             this.displace = 5;
             this.direction = 'right';
         }
@@ -117,12 +117,34 @@ class Book {
     move(){
         this.y += 9;
             // this.x -= 10;
-        this.y = constrain(this.y, 0, height-168);
-        this.x = constrain(this.x,this.r-100, width+this.r);
+        this.y = constrain(this.y, 0, height*0.5);
+        this.x = constrain(this.x,this.r, width-this.r);
     }
     show(){
-        image(bImg, this.x, this.y, 120, 168);
+        image(bImg, this.x, this.y, 120, 75);
     }
+}
 
+
+class Weapon {
+    constructor(x,y){
+        this.r = 50;
+        this.x = x;
+        this.y = y;
+        this.hitStatus = false;
+    }   
+    move() {
+        // if(unicorn.hits(this)){
+        //     this.hitStatus = true;
+        // }
+            this.x += 12;
     
+    }
+    show() { 
+        image(wpImg, this.x, this.y, 22,22);
+        // rect( this.x, this.y, this.r, this.r);
+    }  
+    hits(monster){ 
+        return collideCircleCircle(this.x,this.y,this.r,monster.x,monster.y,monster.r);
+    }
 }
