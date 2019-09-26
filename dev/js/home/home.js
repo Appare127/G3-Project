@@ -3,7 +3,7 @@
 //執行時啟動
 function init() {
    frank_vote_rank();
- 
+    vote_button();
     frank_img();
     getRankData();
     animal_item();
@@ -12,8 +12,8 @@ function init() {
     collections_rank();
     modifyAnimation();
     message_xml()
-    
 }
+
 //resize時啟動
 function reinit() {
     animal_item();
@@ -80,7 +80,32 @@ function gameAnimation(){
 }
 
 
+//怪奇遊戲火車動畫
 
+    //scrollMagic
+    //啟動ScrollMagic控制器
+    var controller = new ScrollMagic.Controller();
+    //創建動畫
+
+    //火車旋轉
+    var animation_train = TweenMax.to('.game_train', 5, {
+    repeat: -1,
+    rotation: 360,
+    transformOrigin: "left 100%",
+    });
+
+
+    //創建場景
+
+    //火車旋轉
+    var train_scene = new ScrollMagic.Scene({
+    triggerElement: '.home_game', //觸發點
+    reverse:true,   
+    // duration :'50%',//距離
+    offset :' -100px'//偏移上方距離
+    }).setTween(animation_train)
+    // .addIndicators()
+    .addTo(controller) 
 
 
 //怪奇排行榜
@@ -148,10 +173,7 @@ function  message_xml(){
 
 
 function message_php(){
-   
- 
-   
-    
+      
     if(message_item.readyState==4  && message_item.status==200){
         let message_arr= JSON.parse(message_item.responseText);
         // console.log( message_arr);
@@ -206,17 +228,83 @@ function message_php(){
 
 
 
+//投票
+
+function  frank_vote_rank(){
+    rank1=frank_rank();
+    rank1.open("GET","php/frank/vote_rank.php",true);
+    rank1.onreadystatechange = frank_vote;
+    rank1.send(null);
+}
+function  vote_xml(e){    
+    vote_item=frank_rank();
+    vote_item.open("GET","php/frank/vote.php?user_no="+sessionStorage.user_no+"&work_no="+e,true);
+    vote_item.onreadystatechange = vote_php;
+    vote_item.send(null);
+}
+function vote_php(){
+    if(vote_item.readyState==4  && vote_item.status==200){
+        let vote_arr= JSON.parse(vote_item.responseText);
+        if ( vote_arr==0) {
+                alert( "沒有票能投");
+              
+        }else{
+                alert( "還剩"+ vote_arr+"張票能投");
+               
+        }
+        setTimeout(() => {
+            vote_in_xml=frank_rank();
+            vote_in_xml.open("GET","php/frank/vote_rank.php",true);
+            // vote_in_xml.onreadystatechange =vote_into;
+            vote_in_xml.onload =vote_into;
+            function vote_into() {
+                vote_rank_item= JSON.parse(vote_in_xml.responseText);
+                      for (let i = 0; i < vote_rank_item.length; i++) {
+            $id("vote_num"+`${i}`).innerText=vote_rank_item[i]["vote"];
+            $id("aml_bg"+`${i}`).src=vote_rank_item[i]["amlbg_img"];
+            $id("top_animalName"+`${i}`).innerText=vote_rank_item[i]["work_name"];
+            $id("top_memId"+`${i}`).innerText=vote_rank_item[i]["user_name"];
+            // $id("vote_num2"+`${i}`).innerText=vote_rank_item[i]["vote"];
+            // $id("aml_bg2"+`${i}`).src=vote_rank_item[i]["bg_img"];
+            // $id("top_animalName2"+`${i}`).innerText=vote_rank_item[i]["work_name"];
+            // $id("top_memId2"+`${i}`).innerText=vote_rank_item[i]["user_name"];
+            // $id("vote_num3"+`${i}`).innerText=vote_rank_item[i]["vote"];
+            // $id("aml_bg3"+`${i}`).src=vote_rank_item[i]["bg_img"];
+            // $id("top_animalName3"+`${i}`).innerText=vote_rank_item[i]["work_name"];
+            // $id("top_memId3"+`${i}`).innerText=vote_rank_item[i]["user_name"];
+            $("input[name='work_no']")[i].value=vote_rank_item[i]["work_no"];
+            $("input[name='work_no3']")[i].value=vote_rank_item[i]["work_no"];
+             } 
+            }
+            vote_in_xml.send(null);  
+             }, 200);
+        
+        
+        }};
+        
+
+function vote_button(){
+
+$('.top_btn .btn_cloud').click(function(){
+    if (!sessionStorage['user_no']) {
+    
+    $id('login_gary').style.display = 'block';
+    return ;
+} 
+let e= $(this).find("input")[0].value;
+vote_xml(e);
+});
+}
+
+//點動物跳轉頁面
 
 function frank_img(){
-       $('#rank_col_top').click(function(){
+       $('#top_one,#top_two,#top_three').click(function(){
             window.location.href ="frank.html"});
     };
         
     
     
-
-
-
 
 //生存遊戲抓取排行榜
 function getRankData(){
@@ -765,32 +853,11 @@ for (let i=0; i<4; i++){
     div.appendChild(p);
     head_div.appendChild(div);
 
-    // let li = document.createElement('li');
-    // let img = document.createElement('img');
-    // let input = document.createElement('input');
-    // let p = document.createElement('p');
-
-
-
-    // img.src = head_arr[i].head_img;
-    // img.classList = 'picon';
-    // img.alt = '資料庫圖片遺失';
-    // input.dataset.pointa = head_arr[i].head_environment1;
-    // input.dataset.pointb = head_arr[i].head_environment2;
-    // input.dataset.pointc = head_arr[i].head_environment3;
-    // input.style.display = 'none';
-    // p.innerHTML = head_arr[i].head_ch_name;
-
-    // li.appendChild(img);
-    // li.appendChild(input);
-    // li.appendChild(p);
-    // head_ul.appendChild(li);
-
-       // 抓到選單的圖片，全部建立click聆聽功能
-       let picon = document.getElementsByClassName('picon');
-       for(let i=0; i<picon.length; i++){
-           picon[i].addEventListener('click',changeParts_home);
-       };
+    // 抓到選單的圖片，全部建立click聆聽功能
+    let picon = document.getElementsByClassName('picon');
+    for(let i=0; i<picon.length; i++){
+        picon[i].addEventListener('click',changeParts_home);
+    };
 
 }
 
@@ -817,8 +884,6 @@ function changeParts_home(e){
     
 
 }
-
-
 
 
 }

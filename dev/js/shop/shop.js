@@ -32,8 +32,13 @@ document.querySelectorAll(".choose_pic .shop_animal_bg")[0].src='img/member/user
 
 
 function changePic(e){    //點了會換圖
+let p=document.querySelectorAll('.choose_pic_wrap p');
+for(let i=0;i<p.length;i++){
+    p[i].className="";
+}
+this.children[1].classList.add("check");
 let bg=this.children[0].children[0].src;
-// let animal=this.children[0].children[1].src;
+
 document.querySelectorAll('.choose_product .prod_img').forEach((element,i) => {
     element.children[1].children[0].src=bg;
     // element.children[1].children[1].src=animal;

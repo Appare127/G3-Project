@@ -59,7 +59,6 @@ function favorite(){
                 // 如果sessionStorage沒有登入，則彈出提示登入的視窗
             }else{
                 alert("請先登入會員");
-                // $id('login_gary').style.display = 'block';
             }
         });
         }
@@ -225,7 +224,7 @@ function vote_php(){
     vote_in_xml.onload =vote_into;
     function vote_into() {
         vote_rank_item= JSON.parse(vote_in_xml.responseText);
-              for (let i = 0; i < vote_rank_item.length -1; i++) {
+              for (let i = 0; i < vote_rank_item.length ; i++) {
     $id("vote"+`${i}`).innerText=vote_rank_item[i]["vote"];
     $id("bg"+`${i}`).src=vote_rank_item[i]["bg_img"];
     $id("ag"+`${i}`).src=vote_rank_item[i]["cmp_img"];
@@ -235,7 +234,11 @@ function vote_php(){
     $("input[name='work_no2']")[i].value=vote_rank_item[i]["work_no"];
     $("input[name='work_no3']")[i].value=vote_rank_item[i]["work_no"];
     $(`.heart:eq(${i})`).attr('id','NO_'+(vote_rank_item[i]["work_no"]));
+    console.log(vote_rank_item.length);
+    
      } 
+     console.log(200);
+     
          heart_item_exit()
       favorite();
     }
@@ -333,23 +336,40 @@ $('.frank_message_btn .btn_cloudb ').click(function(){
     } 
        let m= $(this).find("input").val();
        let u =sessionStorage['user_no'];
-       let r = prompt("為什麼你檢舉他了呢", "");
-       report_re();
-       function report_re(){
-            if (r != null) {
-        if (r =="") {
-            alert(`請再次輸入檢舉內容`);
-            r = prompt("為什麼你檢舉他了呢", "");
-            console.log(133);
-             report_re()
-        }else{
-         alert(`我們確實收到你的檢舉了`);
-         report_xml(u,m,r)
+    //    let r = prompt("為什麼你檢舉他了呢", "");
+       alert(`<p>為什麼你檢舉他了呢?</p><input type="text" id="report_msg" value="" style="width:80%;"><br><a href="javascript:;" class="btn_cloudb report_true">確認<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a>`);
+     let r;
+        document.getElementsByClassName('report_true')[0].addEventListener('click',send_report);
+        
+
+        function send_report(){
+            r= document.getElementById("report_msg").value;
+            console.log(r);
+            // 假如r不等於空字串再送出資料庫 else alert 請再次輸入
+            if (r != "") {
+                $("#hmsg").hide();
+                report_xml(u,m,r);
+                alert(`我們確實收到你的檢舉了`);
+               
+
+            }
         }
-  }
-       }
+    //    console.log(report_msg_value);
 
-
+//        report_re();
+//        function report_re(){
+//             if (r != null) {
+//         if (r =="") {
+//             alert(`請再次輸入檢舉內容`);
+//             r = prompt("為什麼你檢舉他了呢", "");
+//             console.log(133);
+//              report_re()
+//         }else{
+//          alert(`我們確實收到你的檢舉了`);
+//          report_xml(u,m,r)
+//         }
+//   }
+// }
 });
 //登入按鈕
 $('#login_btn').click(function(){

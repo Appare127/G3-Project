@@ -28,7 +28,8 @@
     width: 50%;
   }
   @include responds(large){
-  width:30%;
+  // width:30%;
+  width:23%;
   }
   }
   .btn_close{
@@ -43,7 +44,6 @@
     right: -10px;
     color: #fff;
     cursor: pointer;
-    /*line-height: 2; */
     text-align: center;
     span{
       font-size:$m_fz;
@@ -58,7 +58,7 @@
       .msg_cont {
         padding: 10px;
         box-sizing: border-box;
-        // text-align: left;
+        margin-bottom: 10px;//
    
         @include btn_cloudb(100px);
         p{
@@ -73,9 +73,6 @@
 
 }
 }
-
-
-
 
 
 @mixin hmsgalert($bgcolor,$linecolor,$btncolor) {
@@ -115,14 +112,16 @@
         .hmsg_cont {
           padding: 10px;
           box-sizing: border-box;
-          margin-bottom: 20px;
-          // text-align: left;
+          margin-bottom: 10px;
      
           @include btn_cloudb(100px);
           p{
             font-size:$m_fz;
             margin-bottom: 10px;
           }
+          .report_true{
+            margin-top: 10px;
+          }//
         }
         .hmsg_alert_close {
           display: inline-block;

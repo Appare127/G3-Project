@@ -64,7 +64,7 @@ if( !sessionStorage['shopList']){
 </form>
 <div class="gaming">
     <div id="question_page">
-        <div class="vsTitle"><h2>動物問答</h2><p>沒有力氣逃跑了...</p></div>
+        <div class="vsTitle"><h2>動物問答</h2><p>沒有力氣逃跑了...回答正確才可繼續進行遊戲</p></div>
         <div class="gaming_cloud1"><img src="img/game/gaming_cloud.png" alt=""></div>
         <div class="gaming_cloud2"><img src="img/game/gaming_cloud.png" alt=""></div>
         <div class="gaming_cloud3"><img src="img/game/gaming_cloud.png" alt=""></div>
@@ -214,22 +214,40 @@ function updateScoreMoney(){
 
 }
 
-//alert訊息<<<<請從這邊複製>>>>
-function alert(text,title){
+//alert訊息
+function alertGameOver(text,title){
 
-if(!title==""){
-
-$(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>'+title+'</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
-$(".msg_clear").click(function (){
-$("#msg").remove();
+    if(!title==""){
+    $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>'+title+'</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
+    $(".msg_clear").click(function (){
+    $("#msg").remove();
+        });
+    }else{
+    $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>提示</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud ">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
+    $(".msg_clear").click(function (){
+    $("#msg").remove();
     });
-}else{
+    }
 
-$(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>提示</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
-$(".msg_clear").click(function (){
-$("#msg").remove();
- });
 }
+
+
+
+//alert訊息<<<<請從這邊複製>>>>
+function alertGaming(text,title){
+    if(window.innerWidth<=415){
+        if(!title==""){
+        $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>'+title+'</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
+        $(".msg_clear").click(function (){
+        $("#msg").remove();
+            });
+        }else{
+        $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>提示</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
+        $(".msg_clear").click(function (){
+        $("#msg").remove();
+        });
+        }
+    }
 }
 
 //範例 // alert('<p>已收到訂單取消請求，<br>待客服人員確認中...</p>','提示');
@@ -238,7 +256,7 @@ $("#msg").remove();
 
 function doFirst(){
 
-    alert("<p>哈囉哈</p>");
+    alertGaming("<p>手機版請先把螢幕轉成橫屏,並重新整理!</p>");
     
     getQuestions();
     gaming_animal.src= sessionStorage['my_animal_img']+'?'+ new Date().getTime();

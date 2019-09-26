@@ -99,7 +99,7 @@ window.addEventListener("load",function(){
                 if(a != 0){
                     alert("請輸入完整正確資訊。");
                 }else{
-                    console.log("done")
+                    // console.log("done")
                     document.querySelector(".checkOrder .order_confirm").style.display = "block";   //購物車頁的送出
                 }
             },
@@ -235,28 +235,15 @@ window.addEventListener("load", function () {
     let closeButton = document.querySelector(".order_info .close");
 
 
-
-    // confirm.onclick = function () {
-        // confirmWindow.style.display = "block";   //購物車頁的送出
-        // return false;
-        // console.log(form_vue.$data);
-        // consolle.log(document.getElementById("name").value)
-    // };
-
     writeAgain.onclick = function () {   //重新填寫btn
         confirmWindow.style.display = "none";
     };
 
-    // submitButton.onclick = function () {     //確認資料視窗的確認送出
-    //     confirmWindow.style.display = "none";
-    //     document.querySelector(".order_info").style.display = "block";
-    //     // let formArr=[form_vue.name,form_vue.phone,form_vue.addr,form_vue.card1,form_vue.card2,form_vue.card3,form_vue.card4,form_vue.code,]
-        
-    // }
+
 
     closeButton.onclick = function () {   //訂單成立視窗的關閉
         document.querySelector(".order_info").style.display = "none";
-        window.location.reload();
+        window.location.href="shop.php";
     }
 
 

@@ -16,11 +16,6 @@
     <script src="js/home/CustomEase.min.js"></script>
     <script src="js/home/EasePack.min.js"></script>
     <title>怪奇動物園</title>
-    <style>
-        * {
-            /* outline: 1px solid #f00; */
-        }
-    </style>
 </head>
 
 <body class="home_page">
@@ -42,8 +37,6 @@
                 <img src="img/home/pyramid.png" alt="pyramid">
                 <img src="img/home/hd_island_up.png" alt="island_up">
                 <img src="img/home/hd_island.png" alt="island">
-                <!-- <img src="img/home/hd_water.png" alt="hd_water"> -->
-                <!-- <img src="img/home/hd_train.png" alt="hd_train_left"> -->
                 <img src="img/home/hd_rail.png" alt="hd_rail_left">
                 <img src="img/home/hd_rail.png" alt="hd_rail_right">
                 <img src="img/home/hd_train.png" alt="hd_train_right">
@@ -301,16 +294,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="rank_col_top" id="rank_col_top">
+                <div class="rank_col_top">
                     <!-- <div class="title_bg">
                          <h3>排行榜</h3> -
                     </div> -->
-                    <div class="top_item top_one">
+                    <div class="top_item top_one" >
                         <div class="top_rank_title">
+                            <input type="hidden"  name="work_no">
                             <h3>第一名</h3>
                         </div>
                         <div class="top_content">
-                            <div class="top_img">
+                            <div class="top_img" id="top_one">
                                 <div class="top_info">
                                     <p class="top_animalName">動物名稱：<span id="top_animalName1"></p>
                                     <p class="top_memId">會員名稱：<span id="top_memId1"></p>
@@ -318,8 +312,17 @@
                                 </div>
                                 <img class="animal_bg" id="aml_bg1"src="" alt="">
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 
 =======
+>>>>>>> dev
+=======
+                    
+                            </div>
+                            <div class="top_btn">
+                                <span class="btn_cloud">投票@@include('template/btn_sp.html')
+                                    <input type="hidden" name="work_no3"></input>
+                                </span>
 >>>>>>> dev
                             </div>
                 
@@ -329,10 +332,11 @@
                     <div class="top_row">
                         <div class="top_item top_two">
                             <div class="top_rank_title">
+                                <input type="hidden"  name="work_no">
                                 <h3>第二名</h3>
                             </div>
                             <div class="top_content">
-                                <div class="top_img">
+                                <div class="top_img" id="top_two">
                                     <div class="top_info">
                                         <p class="top_animalName">動物名稱：<span id="top_animalName2"></p>
                                         <p class="top_memId">會員名稱：<span id="top_memId2"></p>
@@ -344,25 +348,37 @@
 =======
 >>>>>>> dev
                                 </div>
+<<<<<<< HEAD
                         
+=======
+                                <div class="top_btn">
+                                    <span class="btn_cloud">投票@@include('template/btn_sp.html')
+                                            <input type="hidden" name="work_no3"></input>
+                                    </span>
+                                </div>
+>>>>>>> dev
                             </div>
                             <div class="top_rock"> </div>
                         </div>
                         <div class="top_item top_three">
                             <div class="top_rank_title">
+                                <input type="hidden"  name="work_no">
                                 <h3>第三名</h3>
                             </div>
                             <div class="top_content">
-                                <div class="top_img">
+                                <div class="top_img" id="top_three">
                                     <div class="top_info">
                                         <p class="top_animalName">動物名稱：<span id="top_animalName3"></p>
                                         <p class="top_memId">會員名稱：<span id="top_memId3"></span></p>
                                         <p class="vote_num">票數：<span id="vote_num3"></span></p>
                                     </div>
                                     <img class="animal_bg" id="aml_bg3"src="" alt="">
-                                   
                                 </div>
-                                
+                                <div class="top_btn">
+                                    <span class="btn_cloud">投票@@include('template/btn_sp.html')
+                                            <input type="hidden" name="work_no3"></input>
+                                    </span>
+                                </div>
                             </div>
                             <div class="top_rock"></div>
                         </div>
@@ -488,6 +504,7 @@
             <p class="intro">可以將自己的動物和選怪排行榜前三名的動物印製在商品上喔！</p>
 
             <div class="wrap">
+                    
                 <div class="col_shop shop_rank">
                     <div class="p_bg">
                         <p>選怪前三名</p>
@@ -497,7 +514,12 @@
                             <img  class="shop_animal_bg" alt="">
                         </div>-->
                     </div>
+                    <div class="main_btn">
+                        <a class="btn_cloud" href="shop.php">去逛逛@@include('template/btn_sp.html')</a>
+                    </div>
                 </div>
+                
+               
                 <div class="col_shop shop_product">
                     <div class="item">
                         <div class="deco deco_top"></div>
@@ -521,56 +543,19 @@
                         <div class="deco deco_bottom"></div>
                     </div>
                 </div>
-
+                
             </div>
-            <div class="main_btn">
-                <a class="btn_cloud" href="shop.php">去逛逛@@include('template/btn_sp.html')</a>
-            </div>
+            
         </div>
     </div>
     @@include('template/footer.html')
 
 </body>
 
-
-
-
 <script src="js/home/home.js"></script>
 <script src="js/home/home_rank.js"></script>
 <script src="js/home/home_resv.js"></script>
 <script src="js/home/home_shop.js"></script>
 
-
-<script>
-
-    //scrollMagic
-    //啟動ScrollMagic控制器
-    var controller = new ScrollMagic.Controller();
-    //創建動畫
-
-    //火車旋轉
-    var animation_train = TweenMax.to('.game_train', 5, {
-    repeat: -1,
-    rotation: 360,
-    transformOrigin: "left 100%",
-    });
-
-
-    //創建場景
-
-    //火車旋轉
-    var train_scene = new ScrollMagic.Scene({
-    triggerElement: '.home_game', //觸發點
-    reverse:true,   
-    // duration :'50%',//距離
-    offset :' -100px'//偏移上方距離
-    }).setTween(animation_train)
-    // .addIndicators()
-    .addTo(controller) 
-
-
-    
-
-</script>
 
 </html>

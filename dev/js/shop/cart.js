@@ -27,10 +27,14 @@ function  total(){    //總金額
     }
 }
 
+
+
+
+
 function changeNum(input){   //改變數量
-    let num = input.value;
+    let num = Number(input.value);
     let id=input.parentNode.parentNode.parentNode.parentNode.id;
-        console.log(id+","+num)
+        // console.log(id+","+num)
         input.parentNode.parentNode.nextElementSibling.innerHTML='';  //小計清空
 
         //改session
@@ -42,8 +46,10 @@ function changeNum(input){   //改變數量
         sessionStorage[id]=JSON.stringify(str);
 
         //改subtotal
-        let price=input.parentNode.parentNode.previousElementSibling.innerText;       
+        let price=JSON.parse(sessionStorage[id]).prodInfo[3];       
+
         let subTotal=price*num
+        // console.log(price,num,subTotal);
         input.parentNode.parentNode.nextElementSibling.innerHTML=
             `<span class="title_inline">商品小計：</span>
             $<span class="subTotal_num">${subTotal}</span> `
@@ -52,12 +58,15 @@ function changeNum(input){   //改變數量
          total();
 }
 
+
+
+
+
 function deleteItem(){   //刪除
-    alert("您確定要刪除？");
     
     //清空session
     let id=this.parentNode.parentNode.id;
-    console.log(id);
+    // console.log(id);
     $.get('php/cart/cart_session.php',{delete:id});
 
     //清空sessionStorage

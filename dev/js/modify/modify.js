@@ -195,23 +195,23 @@ function drawbg_canvas(){
 // }
 
 
-function alert(text,title){
+// function alert(text,title){
 
-    if(!title==""){
+//     if(!title==""){
   
-    $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>'+title+'</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
-    $(".msg_clear").click(function (){
-    $("#msg").remove();
-        });
-  }else{
+//     $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>'+title+'</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
+//     $(".msg_clear").click(function (){
+//     $("#msg").remove();
+//         });
+//   }else{
   
-    $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>提示</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
-    $(".msg_clear").click(function (){
-    $("#msg").remove();
-     });
-  }
+//     $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>提示</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
+//     $(".msg_clear").click(function (){
+//     $("#msg").remove();
+//      });
+//   }
   
-  }
+//   }
 
 
 // 確認完成按下去後
@@ -268,7 +268,7 @@ function dopic(){
         </a>`,"提示");
 
         $(".login_js").click(function (){
-            $("#msg").remove();
+            $("#hmsg").remove();
             openlogin();
             });
         };
@@ -424,7 +424,6 @@ function changeParts(e){
     let animal_name = urlstr.substring(type_y +1 ,animal_y);
     // console.log(animal_name);
 
-
     // 用if去判斷不同部位選擇要更換相應的圖片
     if (type_name == 'head'){
         document.getElementsByClassName('head_pic')[0].src = `img/modify/p_head_${animal_name}.png`;
@@ -433,15 +432,13 @@ function changeParts(e){
         head_eml_mountain = e.target.nextElementSibling.dataset.pointb;
         head_eml_desert = e.target.nextElementSibling.dataset.pointc;
         // console.log(head_eml_forest + ',' + head_eml_mountain + ',' + head_eml_desert);
-        
 
-        // 依動物名稱再加上字串組合去抓到該動物的audio ID後，再撥放
+        // 依動物名稱再加上字串組合去抓到該動物的audio ID後，再撥放聲音
         let voice_target = "voice_" + animal_name;
         document.getElementById(voice_target).play();
 
         // 把動物名稱更新到外面的全域變數，後面要送資料去後台會用到
         selected_head = animal_name;
-
 
     }else if (type_name == 'body'){
         document.getElementsByClassName('body_pic')[0].src = `img/modify/p_body_${animal_name}.png`;
@@ -466,7 +463,6 @@ function changeParts(e){
         // 以及跳躍力
         total_jump = e.target.nextElementSibling.dataset.jump;
         updatejump();       //呼叫更新跳躍力的function
-
 
     }else if (type_name == 'tail'){
         document.getElementsByClassName('tail_pic')[0].src = `img/modify/p_tail_${animal_name}.png`;
@@ -739,7 +735,6 @@ function buildlist (jsonobj){
     //建立身體HTML架構 
     for (let i=0; i<body_arr.length; i++){
 
-        
         let page_num = i % 4;
         let page = Math.floor(i/4);
 
@@ -790,8 +785,6 @@ function buildlist (jsonobj){
             li.appendChild(p);
             slide.appendChild(li);
         }
-
-
     }
 
     //建立腳部HTML架構 
@@ -847,7 +840,6 @@ function buildlist (jsonobj){
             li.appendChild(p);
             slide.appendChild(li);
         }
-
     }
 
     // 建立背景圖HTML架構
@@ -861,9 +853,6 @@ function buildlist (jsonobj){
         img.classList = 'picon';
         img.alt = '資料庫圖片遺失';
         p.innerHTML = bg_arr[i].bg_ch_name;
-
-        // console.log(img.src);
-        
 
         div.appendChild(img);
         li.appendChild(div);
@@ -895,79 +884,63 @@ function buildlist (jsonobj){
         picon[i].addEventListener('click',changeParts);
     };
 
+    // 使用swiper:建立頭部的slider與設定
+    // 因為我的階層很多層，所以貓頭鷹套件的話效率速度會慢很多，
+    // 再加上貓頭鷹要吃jQuery，且設定相容性較差，故不使用，
+    // 而另一套slick，則因為要吃舊版的jQuery，無法相容現在jQuery3，也不能使用
+    // 故選擇了swiper，他是使用javascript語法，相容性與效率快上很多
     let mySwiper1 = new Swiper ('.swiper1', {
-        // Optional parameters
-    
         loop: false,
-    
         pagination: {
         el: '.swiper-pagination',
         type: 'bullets',
         clickable: true,
         },
-    
-        // Navigation arrows
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
     })
-
+    // 使用swiper:建立身體的slider與設定
+    // 同一個頁面上要有複數個slider，則要建立相對應的套件物件，且container的class名稱要分開
     let mySwiper2 = new Swiper ('.swiper2', {
-        // Optional parameters
-    
         loop: false,
-    
         pagination: {
         el: '.swiper-pagination',
         type: 'bullets',
         clickable: true,
         },
-    
-        // Navigation arrows
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
     })
-
+    // 使用swiper:建立腳部的slider與設定
     let mySwiper3 = new Swiper ('.swiper3', {
-        // Optional parameters
-    
         loop: false,
-    
         pagination: {
         el: '.swiper-pagination',
         type: 'bullets',
         clickable: true,
         },
-    
-        // Navigation arrows
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
     })
-
+    // 使用swiper:建立尾巴的slider與設定
     let mySwiper4 = new Swiper ('.swiper4', {
-        // Optional parameters
-    
         loop: false,
-    
         pagination: {
         el: '.swiper-pagination',
         type: 'bullets',
         clickable: true,
         },
-    
-        // Navigation arrows
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
     })
-
-
 };
 
 // 畫筆的瀏覽/編輯模式設定
@@ -1018,34 +991,82 @@ function switch_bgcanvas(onoff){
         pen_icon.src = "img/modify/pen_cancel.png";
         draw_switch.checked = false;
     }
-
 }
 
+function mouseDown(e){
+    if (bgcanvas_switch == 1){
+        this.draw=true;
+        bgcontext.strokeStyle=`#${hex}`;
+        bgcontext.lineWidth=drawsize;
+        bgcontext.lineCap='round';
+    
+        var o=this;
+        this.offsetX=this.offsetLeft;
+        this.offsetY=this.offsetTop;
+    
+        while(o.offsetParent){
+            o=o.offsetParent;
+            this.offsetX+=o.offsetLeft;
+            this.offsetY+=o.offsetTop;
+        }
+    
+        bgcontext.beginPath();
+        bgcontext.moveTo(e.pageX-this.offsetX,e.pageY-this.offsetY);
+    }
+}
 
-// 滑鼠在canvas按下時，啟動畫圖設定，並畫出第一個點
-function drawdown(e){
+// 滑鼠移動，線跟著畫到座標位置
+function mouseMove(e){
+    if (this.draw){
+        bgcontext.lineTo(e.pageX-this.offsetX,e.pageY-this.offsetY);
+        bgcontext.stroke();
+    }
+}
+// 滑鼠左鍵放開時，關閉畫圖功能
+function mouseUp(e){
+    this.draw=false;
+}
+// 手機touch按下去時
+function touchStart(e){
     if(bgcanvas_switch == 1){
-        draw_start = 1;
+        this.draw=true;
+        bgcontext=this.getContext("2d");
+        this.touch=e.targetTouches[0];
+        bgcontext.strokeStyle=`#${hex}`;
+        bgcontext.lineWidth=drawsize;
+        bgcontext.lineCap='round';
+    
+        var o=this;
+        this.offsetX=this.offsetLeft;
+        this.offsetY=this.offsetTop;
+    
+        while(o.offsetParent){
+            o=o.offsetParent;
+            this.offsetX+=o.offsetLeft;
+            this.offsetY+=o.offsetTop;
+        }
         bgcontext.beginPath();
-        bgcontext.fillStyle = `#${hex}`;
-        // bgcontext.fillRect(e.offsetX,e.offsetY,drawsize,drawsize);
-        bgcontext.arc(e.offsetX, e.offsetY, drawsize, 0, 2 * Math.PI, false);
-        bgcontext.fill();
+        bgcontext.moveTo(this.touch.pageX-this.offsetX,this.touch.pageY-this.offsetY);
+        e.preventDefault();
+    
     }
 }
-// 滑鼠放開時，關閉畫圖
-function drawup(){
-    draw_start = 0;
-}
-// 滑鼠移動時，如果畫圖設定為啟動時，就持續作畫
-function drawmove(e){
-    if (draw_start == 1){
-        bgcontext.beginPath();
-        bgcontext.fillStyle = `#${hex}`;
-        // bgcontext.fillRect(e.offsetX,e.offsetY,drawsize,drawsize);
-        bgcontext.arc(e.offsetX, e.offsetY, drawsize, 0, 2 * Math.PI, false);
-        bgcontext.fill();
+// 手機touch滑動
+function touchMove(e){
+    this.touch=e.targetTouches[0];
+    if (this.draw){
+        bgcontext.lineTo(this.touch.pageX-this.offsetX,this.touch.pageY-this.offsetY);
+        bgcontext.stroke();
     }
+    e.preventDefault();
+}
+// 手機touch放開
+function touchEnd(e){
+    this.draw=false;
+    e.preventDefault();
+}
+function cleardraw(){
+    bgcontext.clearRect(0,0,bg_canvas.width,bg_canvas.height);
 }
 
 
@@ -1150,19 +1171,9 @@ function pensize(e){
     drawsize = this.value;
 }
 
-
-// 點X後，關閉彈跳提示視窗的函式
-function remove_show (e){
-    // console.log(e.target);
-    let obj = e.target.parentNode;
-    // console.log(obj);
-    obj.classList.remove('show');
-}
-
 // 開啟登入視窗
 function openlogin(){
-    document.getElementById('login_gary').classList.add('login_show');
-    document.getElementsByClassName('remind_login')[0].classList.remove('show');
+    document.getElementById('login_gary').style.display = 'block';
 }
 
 // 選到的部件選單頁籤改變顏色
@@ -1193,33 +1204,20 @@ function init(){
     // 呼叫透過Ajax從PHP抓到資料庫的部件資料
     getpartlist();
 
-
-// *************以下為測試用*****************
-    // 抓到下一步按鈕，點了之後做html轉canvas的功能
-    // document.getElementById("topic").addEventListener("click",dopic);
-    // 隨機按鈕增聽按下去
-    // document.getElementsByClassName('btn_random')[0].addEventListener('click',random_part);
-    
-    // picon = document.getElementsByClassName('picon');
-    // for(let i=0; i<picon.length; i++){
-    //     picon[i].addEventListener('click',changeParts);
-    // }
-// **************以上為測試用******************
-
-
     // 剛載進頁面時，先做一次canvas繪製預設的圖片
     drawcanvas();
 
     // 上傳圖片的file事件
     document.getElementById('up_bg_file').addEventListener('change',read_bgimg);
 
-    // 背景canvas的滑鼠觸發事件
-    bg_canvas.addEventListener('mousedown',drawdown);
-    bg_canvas.addEventListener('touchstart',drawdown);
-    bg_canvas.addEventListener('mousemove',drawmove);
-    bg_canvas.addEventListener('touchmove',drawmove);
-    bg_canvas.addEventListener('mouseup',drawup);
-    bg_canvas.addEventListener('touchend',drawup);
+    // 背景canvas畫圖的觸發事件
+    bg_canvas.addEventListener('mousedown',mouseDown);
+    bg_canvas.addEventListener('touchstart',touchStart);
+    bg_canvas.addEventListener('mousemove',mouseMove);
+    bg_canvas.addEventListener('touchmove',touchMove);
+    bg_canvas.addEventListener('mouseup',mouseUp);
+    bg_canvas.addEventListener('touchend',touchEnd);
+    document.getElementsByClassName('icon_eraser')[0].addEventListener('click',cleardraw);
 
     // 顏色條的change觸發事件，把變動的色相轉成RGB值
     document.getElementsByClassName('createColorBar')[0].addEventListener('change',HSV2RGB);

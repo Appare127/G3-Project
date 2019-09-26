@@ -30,6 +30,8 @@ $dblue:#7DC7C5;
         font-weight: bold;
         text-align: center;
         padding:60px 0px 60px;
+       
+        
     }
 
     .container{
@@ -215,6 +217,17 @@ $dblue:#7DC7C5;
     .container{
         position: relative;
         
+        .intro{
+            color:cadetblue;
+            font-size: $lg_fz;
+            font-weight: bold;
+            text-align: center;
+            padding:60px 0px 60px;
+            @include responds(small){
+                color: #eee;
+            
+            }
+        }
         .modify_bg_ab{
             display: none;
             img{
@@ -241,13 +254,13 @@ $dblue:#7DC7C5;
     width: 100px;
     height: 100px;
     border-radius: 50%;
+    top: 15%;
     right: 0%;
     z-index: -1;
     position: absolute;
     background: linear-gradient(rgb(243, 193, 146), #F6AD56);
     box-shadow: 0 0 40px 6px rgb(255, 254, 254), 0 0 150px 10px rgb(246, 246, 246);
-    animation: rise 10s ;
- 
+    animation: rise 4s linear ;
 } 
 
   
@@ -257,9 +270,8 @@ $dblue:#7DC7C5;
       transform: scale(1);
     }
     50% {
-        top: 40%;
+        top: 45%;
         transform: scale(1.2);
-
       }
     100% {
       top: 15%;
@@ -483,6 +495,10 @@ $dblue:#7DC7C5;
         .modify_txt{
             text-align: center;
             padding: 10px 0 0 0;
+            p{
+                font-size: 18px;
+                font-weight: bold;
+            }
             @include btn_cloud(110px,$col_btn_pink);
             .btn_cloud{
                 margin: 15px 0;
@@ -596,7 +612,8 @@ $dblue:#7DC7C5;
                 align-items: center;
                 justify-content: center;
                 position:relative;
-                top: 40px;
+                top: 30px;
+                margin: auto;
                 @include responds(small){
                     margin: auto;
                 }
@@ -739,7 +756,7 @@ $dblue:#7DC7C5;
                 @include responds (medium){
                     display: block;
                     width: 10%;
-                    bottom: -10%;
+                    bottom: -15%;
                     right:0%;
                     // animation: rotatedesert 2s infinite linear;
                 }
@@ -818,7 +835,6 @@ $dblue:#7DC7C5;
     }
     .rank_col_top{
         width: 100%;
-        cursor: pointer;
         @include responds(medium){
             width: 50%;
             box-sizing:border-box;
@@ -913,6 +929,7 @@ $dblue:#7DC7C5;
     .top_item{
         width:90%;
         margin:100px auto 0;
+       
         
         @include responds(medium){
             margin: 0 auto 0;
@@ -1021,6 +1038,7 @@ $dblue:#7DC7C5;
         width: 60%;
         margin:0 5px;
         position:relative;
+        cursor: pointer;
         img{
             width:100%;
         }
@@ -1034,12 +1052,18 @@ $dblue:#7DC7C5;
     }
 //btn
     .top_btn{
-        margin-top: auto;
+        position: absolute;
+        right: 2.5%;
+        bottom: 0;
+        @include responds(small){
+            right: 1%;
+        }
         @include btn_cloud(53px,$col_btn_blue);
         .btn_cloud{
             display: block;
             margin: 5px 0;
             font-size: 14px;
+            
         }
     }
 //石頭那塊
@@ -1173,19 +1197,27 @@ $dblue:#7DC7C5;
             z-index: 2;
         }
     }
-    .sunglasses {
+    .sunglasses{
         width:255px;
         position:absolute;
-        top:26%;
+        top:28%;
         left:15%;
-        // opacity:0;
-        transition:1.0s all;
+        transform: rotateX(30deg);
+        // transition:1 1s all;
+        @include responds(small){
+            top: 41%;
+            left: 23%
+        }
 
         img {
             width:100%;
+            @include responds(small){
+                width: 75%;
+            }
+            
         }
     }
-
+}
    
 //顯示資訊的文字區
     .col_info{
@@ -1319,7 +1351,8 @@ $dblue:#7DC7C5;
             display:block;
         }
     }
-}
+
+
 @keyframes train{
     0%{right:100%}
     50%{right:0}
@@ -1350,7 +1383,7 @@ $dblue:#7DC7C5;
             width: 100%;
             align-self: center;
             @include responds(medium){
-                width: 30%;
+                width: 40%;
             }
         }
 
@@ -1374,6 +1407,7 @@ $dblue:#7DC7C5;
         display:flex;
         align-items: center;
         justify-content: center;
+        margin: auto;
         @include responds(small){
             margin: auto;
         }
@@ -1385,17 +1419,21 @@ $dblue:#7DC7C5;
     }
     .shop_rank_img{
         margin: auto;
-        width: 90%;
+        width: 85%;
         display:flex;
         justify-content: center;
-        margin-top: 20px;
+        margin-top: 35px;
 
         img{
-            width:100%
+            width:100%;
+            border: 5px solid#fff;
+            margin: 5px;
+            box-shadow: 2px 3px 3px #999;
         }
         .rank_img_item{
             transform:rotate(15deg);
             position:relative;
+            margin: 1px;
         }
     }
 //商品那個框框 
@@ -1558,10 +1596,12 @@ $dblue:#7DC7C5;
     }
     
     .main_btn{
-        text-align: right;
-        margin:40px 40px 40px 0;
+        text-align:center;
+       
+        padding-top: 40px; 
         @include responds (large){
-         margin:0px 140px 40px 0;            
+            text-align: right;
+         padding-top: 80px;           
         }
         @include btn_cloud(75px,$col_btn_pink);
     }

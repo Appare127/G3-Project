@@ -10,6 +10,7 @@ var drops = [];
 var stones =[];
 let angels=[];
 let books= [];
+let weapons = [];
 let uImg;
 let tImg;
 let rImg;
@@ -32,6 +33,7 @@ let rate = 0;
 let life; 
 let test = 999;
 let test2 = 999;
+let showTime;
 
 let timer=0;
 let money=0;
@@ -42,8 +44,13 @@ let flyStatus = false;
 let strongStatus = false;
 let immuneStatus = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 // let hitStatus = false;
 =======
+=======
+let fireStatus = false;
+let rainStatus = false;
+>>>>>>> dev
 let gamePlaying = true;
 
 
@@ -96,12 +103,20 @@ function preload() {
     bgImg = loadImage(scene[sessionStorage['sceneChoice']].area);
     rImg = loadImage(scene[sessionStorage['sceneChoice']].reward);
     wImg = loadImage('img/game/wings.png');
+    mImg = loadImage('img/game/coin.png');
     sImg = loadImage('img/game/gaming_stone.png');
     aImg = loadImage('img/game/gaming_maruko.png');
+<<<<<<< HEAD
 <<<<<<< HEAD
     
 =======
     bImg = loadImage('img/game/gaming_book.gif');
+>>>>>>> dev
+=======
+    wpImg = loadImage('img/game/gaming_missle.png');
+
+
+    bImg = loadImage('img/game/gaming_javascript.png');
 >>>>>>> dev
     if(sessionStorage['sceneChoice']=='forest'){ //依據選擇的場景決定適用的環境適應能力值
         environ_adapt = sessionStorage['environ_adapt_1']*0.5;
@@ -179,8 +194,19 @@ function keyPressed() {
             loop();
             gamePlaying=true;
         }
-    } 
-  }
+    }
+}
+
+
+function keyTyped() { //發射飛彈
+    if (key === 'f'  && fireStatus == true) {
+        if(strongStatus == true){
+            weapons.push(new Weapon(unicorn.x+230, unicorn.y+80));
+        }else{
+            weapons.push(new Weapon(unicorn.x+50, unicorn.y+40));
+        }
+    }
+}
 
 function musicPlay(songName, playStatus){
 
@@ -240,11 +266,6 @@ function touchStarted(){
 
 
 function draw() {
-
-
-    
-
-
     //阻擋空白鍵跟左右鍵的預設行為
     window.onkeydown = function (event) {
         if (event.keyCode === 32||event.keyCode===37||event.keyCode===39) {
@@ -252,8 +273,6 @@ function draw() {
         }
     };
 
-
-    
     //背景移動
     rate++;
     image(bgImg, x1, 0, width, height);
@@ -303,11 +322,11 @@ function draw() {
         if (random(1) < (0.04/environ_adapt)) { 
             trains.push(new Train(scene[sessionStorage['sceneChoice']].monsterSize));
         }
-    }, 10);
+    }, 30);
 
 
 
-    if(timer<=25 && timer>=19){
+    if(timer<=35 && timer>=28){
         textSize(24);
         fill(33, 99, 100);
         if(window.innerWidth >=768){
@@ -317,24 +336,24 @@ function draw() {
         }
         textFont('微軟正黑體');
     }
-    if(timer>=20){ //20秒後開始掉隕石
+    if(timer>=30){ //30秒後開始掉隕石
         if (random(1) < (0.06/environ_adapt)) { // 掉隕石
             fallens.push(new Fallen(scene[sessionStorage['sceneChoice']].monsterSize));
         }
 
     }
 
-
+console.log(drops.length);
 
     
-    if(timer>=40){
+    if(timer>=40 && rainStatus==false){
         //40秒後開始下雨
         for (var r = 0; r < drops.length; r++) {
             drops[r].fall();
             drops[r].show();
             
-            if(drops[r].y >= height + 20){
-                drops.splice(r,1);
+            if(drops[r].y >= height){
+                drops.splice(drops[r],1);
             }
           }
     }
@@ -385,28 +404,79 @@ function draw() {
 =======
     //隨機生成小丸子
     
-    if(random(1)<0.1 && angels.length == 0){
+    if(random(1)<0.1 && angels.length == 0 && timer>=10 && window.innerWidth>=768){
         angels.push(new Angel());
-    }
-   console.log(angels[0]);
 
+        // rainStatus = true;
+    }
+//    console.log(angels[0]);
+
+
+    if(angels[0] && angels[0].x>0 && angels[0].x< width){
+        textSize(24);
+        fill(33, 99, 100);
+         if(window.innerWidth >=768){
+            text("系統提示:董董老師到此一遊", 1/3*width, 1.5/3*height);
+         }else{
+            text("系統提示:董董老師到此一遊", 1/7*width, 1/2*height);
+         }
+        textFont('微軟正黑體');
+    }
     //小丸子的行為
     for (let a of angels) {
         a.show();
         a.move();
     }
 
-    //隨機生成書本
-    if(random(1)<0.008 ){
+    // 隨機生成JS圖
+    if(random(1)<0.008 && angels.length==1 && books.length==0 && fireStatus==false &&angels[0].direction == 'left'){
         books.push(new Book(angels[0].x,angels[0].y));
     }
 
-    for (let b of books) { //掉下書本
-        b.move();
-        b.show();
+    if(books.length>0){
+      for (let b of books) { //掉下JS圖
+         b.move();
+         b.show();
+        if ( unicorn.hits(b) ) { //吃到JS圖後的行為
+            showTime = timer;
+            books.splice(b,1);
+            fireStatus = true;
 
+        }
+      }
+    }
+
+    // if(timer>=parseInt(showTime) && timer< (showTime+5) ){
+    //     if(window.innerWidth>=768){
+    //         textSize(20);
+    //         fill(255,255,255);
+    //         text(`獲得老師JS密笈`, 4/5*width, 1/5*height+50);
+    //     }else{
+    //         textSize(14);
+    //         fill(255,255,255);
+    //         text(`獲得老師JS密笈`, 50, 1/5*height+40);
+    //     }
+
+    //     textFont('微軟正黑體');
+    // }
+
+
+
+
+    for(let w of wings){
+
+        w.move();
+        w.show();
+        if ( unicorn.hits(w) ) { //吃到翅膀後的行為
+            flyingTime = timer;
+            wings.splice(w,1);
+            flyStatus = true;
+        }
+        
     }
 >>>>>>> dev
+
+
 
 
     //動物的行為
@@ -414,6 +484,7 @@ function draw() {
     unicorn.move();
 
     //操作動物的行為
+
     if(keyIsDown(LEFT_ARROW)){
         unicorn.x -= 10;
     }
@@ -422,8 +493,27 @@ function draw() {
     }
     if(keyIsDown(32)){
         unicorn.jump(cusJump);
-
     }
+
+
+    if(weapons.length>=1){
+        for(let p of weapons){
+            p.move();
+            p.show();
+            for (let t of trains) {
+                if (p.hits(t)) {//飛彈撞到怪 怪就消失
+                    trains.splice(t,1);
+                    setTimeout(function(){weapons.splice(p,1);},50);
+                }
+            }
+            if(p.x>width){//離開螢幕的飛彈就清除掉
+                weapons.splice(p,1);
+            }
+        }
+    }
+
+ 
+
 
 
     // 碰到障礙物之後的行為
@@ -431,33 +521,27 @@ function draw() {
         t.move();
         t.show(scene[sessionStorage['sceneChoice']].mWidth,scene[sessionStorage['sceneChoice']].mHeight);
 
-        
-        if (unicorn.hits(t)) {
-
+        if (unicorn.hits(t)) { //客製動物撞到障礙物後
             if(strongStatus == true){
                 setTimeout(function(){
                     trains.splice(t,1);
                 },1000);
             }
-
             if (trains.indexOf(t)!= test && strongStatus==false){//避免重複扣掉生命
                 life--;
                 test = trains.indexOf(t);
             }
-
-
             if (life == 0) { //死掉後
                 trains.splice(i-5,15);
+                fireStatus = false;
                 setTimeout(function(){
                     noLoop();
                 },0.1);
-
 
                 updateScoreMoney();
                 questionPage.style.display='block';
                 reward_money.innerHTML = `得到獎金：${money}`;
                 score_time.innerHTML = `生存時間：${timer}秒`;
-
             }
         }
     }
@@ -479,6 +563,7 @@ function draw() {
             }
 
             if (life == 0) { //死掉後
+                fireStatus = false;
                 fallens.splice(i-5,15);
                 setTimeout(function(){
                     noLoop();
@@ -615,10 +700,21 @@ function draw() {
         //顯示暫停遊戲鍵的說明
         if(window.innerWidth>=768){
             textSize(20);
-            fill(250);
+            fill(33);
             text('按TAB鍵暫停遊戲', 50 , height-20);
             textFont('微軟正黑體');
+
+            textSize(20);
+            fill(33);
+            text('左右鍵移動/空白鍵跳躍', 800, height-20);
+            textFont('微軟正黑體');
         }
+    if(fireStatus==true){
+            textSize(20);
+            fill(255,69,0);
+            text('獲得老師JS密笈=>按F鍵可以發射怪奇飛彈了', width*0.3 , height-20);
+            textFont('微軟正黑體');
+    }
 
 }
 

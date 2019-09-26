@@ -3,7 +3,7 @@
 
 class Food {
     constructor(){
-        this.r = 30;
+        this.r = 40;
         this.x = width;
         // this.y = height - this.r;
         this.y = height*0.6;
@@ -12,15 +12,18 @@ class Food {
         this.x -= scrollSpeed;
     }
     show() {
-        
-        image(rImg, this.x, this.y, this.r, this.r);
+        if(window.innerWidth<=767){
+            image(rImg, this.x, this.y, this.r, this.r);
+        }else{
+            image(rImg, this.x, this.y, this.r, this.r);
+        }
         // rect( this.x, this.y, this.r, this.r);
     } 
 }
 
 class Money {
     constructor(inX=width,inY=height*0.6){
-        this.r = 40;
+        this.r = 50;
         this.x = inX;
         this.y = inY;
     }
@@ -29,7 +32,11 @@ class Money {
         this.y += Vy;
     }
     show() {
-        image(mImg, this.x, this.y, this.r, this.r);
+        if(window.innerWidth<=767){
+            image(mImg, this.x, this.y, this.r, this.r);
+        }else{
+            image(mImg, this.x, this.y, this.r, this.r);
+        }
     }
 
 }
@@ -41,7 +48,7 @@ class Wing {
         this.y = height*0.5;
     }
     move() {
-        this.x -=scrollSpeed;
+        this.x -=5;
     }
     show() {
         image(wImg, this.x, this.y, this.r, this.r);
@@ -69,25 +76,29 @@ class Angel {
         this.y = 10;
         this.posX;
         this.posY;
-        this.step1Over = false;
-        this.step2Over = false;
         this.readyStatus = false;
+        this.bornTime;
+        this.displace;
+        this.direction = 'right';
     }   
 
     move(Vx=scrollSpeed,Vy=0) {
             
-        if(this.x <= 0.5*width -10 &&this.step1Over == false ){ //step1
-            this.x += 10; 
+        if(this.x <width && this.direction == 'right'){ 
+            this.displace = 5;
         }
-        if(this.x == 0.5*width && this.y <60){ //step2
-            this.step1Over = true;
-            this.y +=5;
-            console.log(this.x, this.y);
-            this.posX = this.x;
-            this.posY = this.y;
-        }else if (this.y == 60){
-            this.readyStatus =true;
+        if(this.x>=width ){
+            this.displace = -5;
+            this.direction = 'left';
         }
+        if(this.x<=0 && books.length==0 &&fireStatus==false){ 
+            this.displace = 5;
+            this.direction = 'right';
+        }
+
+        this.x += this.displace;
+
+
     }
 
     show() { 
@@ -114,13 +125,38 @@ class Book {
 =======
         this.y += 9;
             // this.x -= 10;
-        this.y = constrain(this.y, 0, height-this.r-50);
-        this.x = constrain(this.x,this.r-100, width+this.r);
+        this.y = constrain(this.y, 0, height*0.5);
+        this.x = constrain(this.x,this.r, width-this.r);
     }
     show(){
-        image(bImg, this.x, this.y, this.r, this.r);
+        image(bImg, this.x, this.y, 120, 75);
     }
+}
 
+
+class Weapon {
+    constructor(x,y){
+        this.r = 50;
+        this.x = x;
+        this.y = y;
+        this.hitStatus = false;
+    }   
+    move() {
+        // if(unicorn.hits(this)){
+        //     this.hitStatus = true;
+        // }
+            this.x += 12;
     
+<<<<<<< HEAD
+>>>>>>> dev
+=======
+    }
+    show() { 
+        image(wpImg, this.x, this.y, 22,22);
+        // rect( this.x, this.y, this.r, this.r);
+    }  
+    hits(monster){ 
+        return collideCircleCircle(this.x,this.y,this.r,monster.x,monster.y,monster.r);
+    }
 >>>>>>> dev
 }
