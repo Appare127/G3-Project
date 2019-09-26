@@ -195,11 +195,11 @@ function showDetail(e){
 
     if(itemDetails.style.display=='block'){
       itemDetails.style.display = 'none';
-    e.target.innerText="訂單詳細";
+    e.target.innerHTML=`訂單詳細<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span>`;
     itemDetails.classList.remove('show_detail');
     }else{
       itemDetails.style.display = 'block';
-    e.target.innerText="收合";
+    e.target.innerHTML=`收合<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span>`;
     itemDetails.classList.add('show_detail');
   }
 

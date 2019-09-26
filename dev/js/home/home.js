@@ -12,7 +12,6 @@ function init() {
     collections_rank();
     modifyAnimation();
     message_xml()
-    
 }
 
 //resize時啟動
@@ -81,7 +80,32 @@ function gameAnimation(){
 }
 
 
+//怪奇遊戲火車動畫
 
+    //scrollMagic
+    //啟動ScrollMagic控制器
+    var controller = new ScrollMagic.Controller();
+    //創建動畫
+
+    //火車旋轉
+    var animation_train = TweenMax.to('.game_train', 5, {
+    repeat: -1,
+    rotation: 360,
+    transformOrigin: "left 100%",
+    });
+
+
+    //創建場景
+
+    //火車旋轉
+    var train_scene = new ScrollMagic.Scene({
+    triggerElement: '.home_game', //觸發點
+    reverse:true,   
+    // duration :'50%',//距離
+    offset :' -100px'//偏移上方距離
+    }).setTween(animation_train)
+    // .addIndicators()
+    .addTo(controller) 
 
 
 //怪奇排行榜
@@ -145,10 +169,7 @@ function  message_xml(){
 
 
 function message_php(){
-   
- 
-   
-    
+      
     if(message_item.readyState==4  && message_item.status==200){
         let message_arr= JSON.parse(message_item.responseText);
         // console.log( message_arr);
@@ -268,9 +289,6 @@ function frank_img(){
         
     
     
-
-
-
 
 //生存遊戲抓取排行榜
 function getRankData(){
@@ -801,32 +819,11 @@ for (let i=0; i<4; i++){
     div.appendChild(p);
     head_div.appendChild(div);
 
-    // let li = document.createElement('li');
-    // let img = document.createElement('img');
-    // let input = document.createElement('input');
-    // let p = document.createElement('p');
-
-
-
-    // img.src = head_arr[i].head_img;
-    // img.classList = 'picon';
-    // img.alt = '資料庫圖片遺失';
-    // input.dataset.pointa = head_arr[i].head_environment1;
-    // input.dataset.pointb = head_arr[i].head_environment2;
-    // input.dataset.pointc = head_arr[i].head_environment3;
-    // input.style.display = 'none';
-    // p.innerHTML = head_arr[i].head_ch_name;
-
-    // li.appendChild(img);
-    // li.appendChild(input);
-    // li.appendChild(p);
-    // head_ul.appendChild(li);
-
-       // 抓到選單的圖片，全部建立click聆聽功能
-       let picon = document.getElementsByClassName('picon');
-       for(let i=0; i<picon.length; i++){
-           picon[i].addEventListener('click',changeParts_home);
-       };
+    // 抓到選單的圖片，全部建立click聆聽功能
+    let picon = document.getElementsByClassName('picon');
+    for(let i=0; i<picon.length; i++){
+        picon[i].addEventListener('click',changeParts_home);
+    };
 
 }
 
@@ -853,8 +850,6 @@ function changeParts_home(e){
     
 
 }
-
-
 
 
 }

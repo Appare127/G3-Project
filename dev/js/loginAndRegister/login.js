@@ -5,16 +5,28 @@ var userData;
 
 //進網頁or刷新時，聯結php，去sessionStorage撈資料，判斷使用者是否已登入
 function getLoginInfo() {
-    if (sessionStorage.user_id) {   //已登入
-        $id("show_user_name").innerText = "您好，" + sessionStorage.user_name;
-        $id("login_text").innerText = "登出";
-    } else {
-        $id("login_text").innerText = "登入/註冊";    //尚未登入
-        document.getElementsByClassName('member_icon')[0].onclick = function () {
-            alert("請登入會員");
-            return false;
+    fetch("php/login/loginInfo.php").then(loginInfo=>loginInfo.text()).then(loginInfo=>{
+        if (loginInfo != "not login"){   //已登入
+            $id("show_user_name").innerText = "您好，" + sessionStorage.user_name;
+            $id("login_text").innerText = "登出";
+        }else{
+            $id("login_text").innerText = "登入/註冊";    //尚未登入
+            document.getElementsByClassName('member_icon')[0].onclick = function () {
+                alert("請登入會員");
+                return false;
+            }
         }
-    }
+    })
+    // if (sessionStorage.user_id) {  
+    //     $id("show_user_name").innerText = "您好，" + sessionStorage.user_name;
+    //     $id("login_text").innerText = "登出";
+    // } else {
+    //     $id("login_text").innerText = "登入/註冊";    //尚未登入
+    //     document.getElementsByClassName('member_icon')[0].onclick = function () {
+    //         alert("請登入會員");
+    //         return false;
+    //     }
+    // }
 }
 
 
@@ -144,12 +156,14 @@ window.addEventListener('load', function () {
     
    
     //打開註冊視窗
-    $id("registered").onclick =  function(){  
+    $id("registered").onclick =  function(e){  
+        e.preventDefault();
         $id('login_gary').style.display = 'none';
         $id('registered_gary').style.display = 'block';   
     }
      //打開忘記密碼視窗
-     $id("forgetPsw").onclick=function(){  
+     $id("forgetPsw").onclick=function(e){  
+         e.preventDefault();
         $id('login_gary').style.display = 'none';
         $id('forgetPsw_gary').style.display = 'block';   
         forgetPsw.title="重設密碼";
