@@ -16,11 +16,6 @@
     <script src="js/home/CustomEase.min.js"></script>
     <script src="js/home/EasePack.min.js"></script>
     <title>怪奇動物園</title>
-    <style>
-        * {
-            /* outline: 1px solid #f00; */
-        }
-    </style>
 </head>
 
 <body class="home_page">
@@ -42,8 +37,6 @@
                 <img src="img/home/pyramid.png" alt="pyramid">
                 <img src="img/home/hd_island_up.png" alt="island_up">
                 <img src="img/home/hd_island.png" alt="island">
-                <!-- <img src="img/home/hd_water.png" alt="hd_water"> -->
-                <!-- <img src="img/home/hd_train.png" alt="hd_train_left"> -->
                 <img src="img/home/hd_rail.png" alt="hd_rail_left">
                 <img src="img/home/hd_rail.png" alt="hd_rail_right">
                 <img src="img/home/hd_train.png" alt="hd_train_right">
@@ -508,45 +501,10 @@
 
 </body>
 
-
-
-
 <script src="js/home/home.js"></script>
 <script src="js/home/home_rank.js"></script>
 <script src="js/home/home_resv.js"></script>
 <script src="js/home/home_shop.js"></script>
 
-
-<script>
-
-    //scrollMagic
-    //啟動ScrollMagic控制器
-    var controller = new ScrollMagic.Controller();
-    //創建動畫
-
-    //火車旋轉
-    var animation_train = TweenMax.to('.game_train', 5, {
-    repeat: -1,
-    rotation: 360,
-    transformOrigin: "left 100%",
-    });
-
-
-    //創建場景
-
-    //火車旋轉
-    var train_scene = new ScrollMagic.Scene({
-    triggerElement: '.home_game', //觸發點
-    reverse:true,   
-    // duration :'50%',//距離
-    offset :' -100px'//偏移上方距離
-    }).setTween(animation_train)
-    // .addIndicators()
-    .addTo(controller) 
-
-
-    
-
-</script>
 
 </html>

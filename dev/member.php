@@ -440,9 +440,9 @@ if ($errMsg !=""){
 
             <p class="col-6 s_show p_title">備註:</p>
             <div class="col-6 col-md-2 baic_btn">
-              <a href="javascript:void(0)" class="btn_cloud js_order_show">訂單明細
+              <p class="btn_cloud js_order_show">訂單明細
                 @@include('template/btn_sp.html')
-              </a>
+              </p>
             </div>
 
             <div class="clearfix"></div>
@@ -682,8 +682,8 @@ if ($errMsg !=""){
               <div type="button" class="btn_close">x</div>
 
               <img class="qrcode_pic_js" src=''>
-              <p>若無法正常顯示，請點
-              <a class="qrcode_success_url" href="qrcode_success.php?booking_no=<?=$pdoRevs["booking_no"]?>">網址</a>
+              <p class="qrcode_pic_p">入園時請出示此條碼
+              <!-- <a class="qrcode_success_url" href="qrcode_success.php?booking_no=<?=$pdoRevs["booking_no"]?>">網址</a> -->
               </p>
               
               <!--  -->
