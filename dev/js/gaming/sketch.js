@@ -632,6 +632,11 @@ console.log(drops.length);
             fill(33);
             text('按TAB鍵暫停遊戲', 50 , height-20);
             textFont('微軟正黑體');
+
+            textSize(20);
+            fill(33);
+            text('左右鍵移動/空白鍵跳躍', 800, height-20);
+            textFont('微軟正黑體');
         }
     if(fireStatus==true){
             textSize(20);
