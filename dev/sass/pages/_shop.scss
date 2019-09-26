@@ -324,6 +324,9 @@ $lblue:#d8ecea;
     margin: 30px 0;
     .intro{
         padding: 10px;
+        input{
+            cursor: pointer;
+        }
         @include responds(small){
             text-align: center;
         }
@@ -385,6 +388,7 @@ $lblue:#d8ecea;
             border-radius: 5px;
             outline:none;
             line-height: 1;
+            cursor: pointer;
         }
         input{
             padding:5px 5px;  border:0 none;
@@ -505,6 +509,7 @@ $lblue:#d8ecea;
     right: 10px;
     line-height: 2;
     text-align: center;
+    cursor: pointer;
 }
 .prod_detail{
     img{
