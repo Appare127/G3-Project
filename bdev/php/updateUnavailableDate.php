@@ -7,13 +7,10 @@ try{
   $unavailable_date->bindValue(":date_no", $_REQUEST["date_no"]);
   $unavailable_date->execute(); 
 
-  if( $unavailable_date->rowCount() == 0 ){ //找不到
-    //傳回空的JSON字串
-    echo "{}";
-  }else{ //找得到
+  
     echo "修改成功";
     header('Location:unaviableDate.php');
-  }	
+  	
 }catch(PDOException $e){
   echo $e->getMessage();
 }

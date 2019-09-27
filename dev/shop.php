@@ -184,7 +184,7 @@ try {
                 <div class="prod_img">
                     <img class="prod_plain" src="img/shop/pillow.png" alt="">
                     <div id='detail_pic_chosen' class="pic_chosen">
-                        <!-- <img class="shop_animal_bg" src="img/shop/amlbg.png" alt=""> -->
+                        <img class="shop_animal_bg"  alt="">
                     </div>
                 </div>
                 <div class="prod_text">

@@ -9,13 +9,10 @@ try{
   $resvOrder->bindValue(":booking_no",$_REQUEST['booking_no']);
   $resvOrder->execute(); 
 
-  if( $resvOrder->rowCount() == 0 ){ //找不到
-    //傳回空的JSON字串
-    echo "{}";
-  }else{ //找得到
+  
     echo "修改成功";
     header('Location:resvOrder.php');
-  }	
+  
 }catch(PDOException $e){
   echo $e->getMessage();
 }

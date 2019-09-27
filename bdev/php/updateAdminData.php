@@ -9,13 +9,10 @@ try{
   $admin_member->bindValue(":admin_no", $_REQUEST["admin_no"]);
   $admin_member->execute(); 
 
-  if( $admin_member->rowCount() == 0 ){ //找不到
-    //傳回空的JSON字串
-    echo "{}";
-  }else{ //找得到
+  
     echo "修改成功";
     header('Location:admin.php');
-  }	
+  	
 }catch(PDOException $e){
   echo $e->getMessage();
 }
