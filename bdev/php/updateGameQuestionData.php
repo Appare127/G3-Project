@@ -15,13 +15,10 @@ try{
   $gameQues->bindValue(":question_no", $_REQUEST["question_no"]);
   $gameQues->execute(); 
 
-  if( $gameQues->rowCount() == 0 ){ //找不到
-    //傳回空的JSON字串
-    echo "{}";
-  }else{ //找得到
+  
     echo "修改成功";
     header('Location:gameQuestion.php');
-  }	
+  	
 }catch(PDOException $e){
   echo $e->getMessage();
 }

@@ -3,7 +3,7 @@
   try{
     require_once("connectg3.php");
 
-    $sql = "select * from game_question limit 15";
+    $sql = "select * from game_question";
     $gameQuestions  = $pdo->query($sql);
     $gameQuestionRows = $gameQuestions -> fetchAll(PDO::FETCH_ASSOC);
 

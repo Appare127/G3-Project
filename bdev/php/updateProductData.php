@@ -28,7 +28,7 @@ try{
     }
 
     //檔案名稱都要變 `$product_name.png`
-    $fileName = $product_name .".png";
+    $fileName = $product_no .".png";
 
     //商品圖片
     $from = $_FILES["product_img"]["tmp_name"];
