@@ -21,7 +21,10 @@ let flyingTime;
 let strongTime;
 let stoneLife;
 let angel;
+<<<<<<< HEAD
+=======
 var cnv;
+>>>>>>> dev
 
 let scrollSpeed = 10; 
 let x1 = 0;
@@ -40,8 +43,14 @@ let adapt_level;
 let flyStatus = false;
 let strongStatus = false;
 let immuneStatus = false;
+<<<<<<< HEAD
+<<<<<<< HEAD
+// let hitStatus = false;
+=======
+=======
 let fireStatus = false;
 let rainStatus = false;
+>>>>>>> dev
 let gamePlaying = true;
 
 
@@ -50,6 +59,7 @@ let gamePlaying = true;
 // let battle=document.getElementById('battle');
 // let route1=document.getElementById('route1');
 
+>>>>>>> dev
 
 
 let scene = { //場景資訊
@@ -96,10 +106,18 @@ function preload() {
     mImg = loadImage('img/game/coin.png');
     sImg = loadImage('img/game/gaming_stone.png');
     aImg = loadImage('img/game/gaming_maruko.png');
+<<<<<<< HEAD
+<<<<<<< HEAD
+    
+=======
+    bImg = loadImage('img/game/gaming_book.gif');
+>>>>>>> dev
+=======
     wpImg = loadImage('img/game/gaming_missle.png');
 
 
     bImg = loadImage('img/game/gaming_javascript.png');
+>>>>>>> dev
     if(sessionStorage['sceneChoice']=='forest'){ //依據選擇的場景決定適用的環境適應能力值
         environ_adapt = sessionStorage['environ_adapt_1']*0.5;
     }else if(sessionStorage['sceneChoice']=='mountain'){
@@ -124,6 +142,17 @@ function preload() {
 }
 
 function setup() {
+<<<<<<< HEAD
+    // button = createButton('full screen'); //全螢幕按鈕
+    // button.mousePressed(
+    //     function(){
+    //             let fs = fullscreen();
+    //             fullscreen(!fs);
+    //     }
+    // );
+
+=======
+>>>>>>> dev
 
 
     flytoyou = new Audio("img/game/flytoyou.mp3");
@@ -348,6 +377,31 @@ console.log(drops.length);
 
 
 
+<<<<<<< HEAD
+//     //隨機生成小丸子
+    
+//     if(random(1)<0.1 && angels.length == 0){
+//         angels.push(new Angel());
+//     }
+//    console.log(angels[0]);
+
+//     //小丸子的行為
+//     for (let a of angels) {
+//         a.show();
+//         a.move();
+//     }
+
+//     //隨機生成書本
+//     if(random(1)<0.1 && angels[0].readyStatus==true){
+//         books.push(new Book(angels[0].posX,angels[0].posY));
+//     }
+
+//     for (let b of books) { //掉下書本
+//         b.move();
+//         b.show();
+
+//     }
+=======
     //隨機生成小丸子
     
     if(random(1)<0.1 && angels.length == 0 && timer>=10 && window.innerWidth>=768){
@@ -420,6 +474,7 @@ console.log(drops.length);
         }
         
     }
+>>>>>>> dev
 
 
 
@@ -561,12 +616,27 @@ console.log(drops.length);
     }
     if ( timer >= parseInt(flyingTime)+10 || life == 0){
         flyStatus = false;
+<<<<<<< HEAD
+        myAudio.pause();
+        myAudio.currentTime = 1;
+=======
         // musicPlay('battle', 'play');
 
+>>>>>>> dev
 
     }
 
     if(timer>=parseInt(flyingTime) && timer< (flyingTime+10) ){
+<<<<<<< HEAD
+
+        myAudio=document.getElementById('audio2');
+        myAudio.play();
+       
+
+        textSize(20);
+        fill(255,69,0);
+        text(`飛行狀態: ${10+flyingTime - timer}秒`, 3/5*width, 1/5*height+10);
+=======
         // musicPlay('flytoyou', 'play');
         if(window.innerWidth>=768){
             textSize(20);
@@ -579,6 +649,7 @@ console.log(drops.length);
         }
 
         textFont('微軟正黑體');
+>>>>>>> dev
     }
 
 

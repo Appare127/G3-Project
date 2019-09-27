@@ -26,26 +26,58 @@
         <p class="login_box_title">會員註冊</p>
         <form action="#" id="myForm">
             <p> 
+<<<<<<< HEAD
+                帳號：
+                <input  @change="idErrMsg" type="text" v-model="id"  placeholder="最大長度：10*" maxlength="10">
+               
+            </p>
+            <p class="msg">{{idMsg}}</p>
+            <p> 
+                名字：
+                <input type="text" v-model="name"  placeholder="最大長度：10*" maxlength="10">
+                
+=======
                 會員帳號：
                 <input  @change="idErrMsg" type="text" v-model="id"  placeholder="最大長度：10*" maxlength="10">
                 <br><span class="msg">{{idMsg}}</span>
+>>>>>>> dev
             </p>
 
             
             <p>
+<<<<<<< HEAD
+                密碼：
+                <input type="password" v-model="psw"  placeholder="最大長度：10" maxlength="10"> 
+                
+=======
                 會員密碼：
                 <input type="password" v-model="psw"  placeholder="最大長度：10" maxlength="10"> 
+>>>>>>> dev
                 </p>
             <p> 
                 確認密碼：
                 <input type="password" v-model="pswConfirm"  placeholder="確認密碼*"><br>
                 <span class="msg">{{pswConfirmErrMsg}}</span>
             </p>
+<<<<<<< HEAD
+            <p> 
+                電子郵件：
+                <input type="text" v-model="email"  placeholder="zoo@email.com*"><br>
+                <span class="msg">{{emailErrMsg}}</span>
+            </p>
+            <p> 請選擇提示語： 
+                <select v-model="qsn">
+                <option value="" >--請選擇--</option>
+                <option v-for="qsn in qsns">{{qsn.hint_no+"."+qsn.hint_question}}</option>
+            </select>
+            <!-- <span class="msg">（忘記密碼時使用）</span> -->
+=======
             <p> 選擇提示語： 
                 <select v-model="qsn">
                 <option value="" >--請選擇--</option>
                 <option v-for="qsn in qsns">{{qsn.hint_no+"."+qsn.hint_question}}</option>
             </select><br>
+>>>>>>> dev
             </p>
             <p>輸入答案：<input v-model="hint" type="text" name="hint" placeholder="密碼提示答案*"></p>
         </form>
@@ -86,6 +118,398 @@
 
 
 
+<<<<<<< HEAD
+<!-- 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script> -->
+<script>
+let forgetPsw=new Vue({
+    el:"#forgetPsw_gary",
+    data:{
+        title:"重設密碼",
+        id:"",
+        idMsg:"",
+        qsn:"",
+        ans:"",
+        ansMsg:"",
+        btn:"下一步",
+        result:"",
+        psw:"",
+        pswCheck:"",
+        done:"",
+    },
+    methods:{
+        getQsn(){
+            if(this.btn == "下一步"){
+                if(forgetPsw.id != ""){
+                    $.get('php/login/forgetPsw.php',{data:forgetPsw.id},function(hint){
+                        if(hint== "none"){
+                            
+                            forgetPsw.idMsg="找不到該帳號。請輸入正確帳號。";
+                        }else{
+                            forgetPsw.title="請輸入正確答案"
+                            forgetPsw.qsn= "密碼提示問題："+hint;
+                            forgetPsw.btn='送出';
+                        }
+                    })
+                }else{
+                    forgetPsw.idMsg="請輸入帳號"
+                }
+            }else if(this.btn == "送出"){
+                if(forgetPsw.ans != ""){
+                    $.get('php/login/forgetPsw.php',{ans:forgetPsw.ans,id:forgetPsw.id},function(result){
+                        if(result == "ok"){
+                            forgetPsw.result=result;
+                            forgetPsw.btn='重設密碼';
+                            forgetPsw.title="答案正確，請重設密碼"
+                        }else{
+                            alert("答案錯誤。請重新輸入或聯繫客服人員。");
+                            forgetPsw.ans="";
+                        }
+                    })
+                }else{
+                    forgetPsw.ansMsg="請輸入答案";
+                }
+            }else if(this.btn == "重設密碼"){
+                if(this.pswMsg =="密碼符合"){
+                    $.get('php/login/forgetPsw.php',{psw:forgetPsw.psw,id:forgetPsw.id},function(done){
+                        forgetPsw.title="";
+                        forgetPsw.done=done;
+                    })
+                }else {
+                    alert("密碼不符，請重新輸入");
+                }
+            }
+            
+        }
+    },
+    computed:{
+        pswMsg(){
+            if(this.pswCheck.length>0 && this.pswCheck != this.psw){
+                return "密碼不符";
+            }else if(this.pswCheck.length>0 && this.pswCheck == this.psw){
+                return "密碼符合";
+            }
+        }
+    },
+})
+</script>
+
+
+
+
+
+
+
+
+
 
 <script>
+    var form = new Vue({
+        data: {
+            id:"",
+            idError:false,
+            idMsg:"",
+
+            name: '',
+
+            psw: '',
+
+            pswConfirm:'',
+            pswError:false,
+
+            email: '',
+            emailError: false,
+
+            qsn:"",
+            qsns:[],
+            // [ { "hint_no": "1", "hint_question": "你喜歡的水果為何？" }, { "hint_no": "2", "hint_question": "你是什麼星座" }, { "hint_no": "3", "hint_question": "你多高" } ]
+            hint:'',
+
+
+        },
+        computed: {
+            
+            pswConfirmErrMsg() {
+                if (this.pswConfirm != this.psw &&  this.pswConfirm.length>0) {
+                    this.pswError = true;
+                    return '與密碼不符';
+                } 
+                else {
+                    this.pswError = false;
+
+                }
+            },
+            emailErrMsg() {
+                let isText = /^\w+@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+                if (!isText.test(this.email) && this.email.length > 0) {
+                    this.emailError = true;
+                    return '請輸入正確email格式';
+                }
+                else {
+                    this.emailError = false;
+                }
+            },
+        },
+        mounted(){
+            fetch('php/login/register.php').then(qsns => qsns.json()).then(qsns => {this.qsns = qsns;});
+        },
+        methods:{
+            idErrMsg(){
+                $.get('php/login/register.php',{id:form.id},function(same){
+                    if(Number(same) ==1){
+                        form.idMsg= "帳號通過";
+                        form.idError = false;
+                        console.log(form.idMsg,form.idError)
+                    }else {
+                        form.idError = true;
+                        form.idMsg= "帳號已存在，請重新輸入";
+                        console.log(form.idMsg,form.idError)
+                    }
+                })
+            },
+            submit(e){
+            //驗證資料是否都合法
+                let err=0;
+                for(i in this.$data){
+                    if (this.$data[i] === "" || this.$data[i] === true){
+                        err++;
+                    }
+                }
+                if(err !=0){
+                    alert("請輸入完整的正確資料")
+                    
+                }else{
+                    let data={
+                        "id":this.id,
+                        "psw":this.psw,
+                        "name":this.name,
+                        "email":this.email,
+                        "ans":this.hint,
+                        "hint_no":this.qsn.charAt(0),
+                    }
+                    data=JSON.stringify(data);
+                // console.log(JSON.stringify(data));
+                //{"id":"aaa","psw":"09871","name":"aaa","email":"1@zoo.com","ans":"qqq","hint_no":"1"}
+                //送出
+                    let xhr = new XMLHttpRequest();
+                    xhr.onload = function () {
+                        if (xhr.status == 200) {//登入成功
+                            //寫入session storage
+                            let userData = JSON.parse(xhr.responseText);
+                            for (i in userData) {
+                                sessionStorage.setItem(i, userData[i]);
+                            }
+                            sessionStorage.setItem('user_psw', "it's a secret~");
+                            $id("show_user_name").innerText = "您好，" + userData.user_name;
+                            $id("login_text").innerText = "登出";
+                            $id("login_gary").style.display = "none";
+                            //讓會員中心可以進入
+                            document.getElementsByClassName('member_icon')[0].onclick = null;
+                            cancelForm('registered_gary');
+                            
+                        } else {
+                            alert(xhr.statusText);
+                        }
+                    }
+                    xhr.open("post", "php/login/register.php", true);
+                    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+                    xhr.send(`data=${data}`);
+                    alert("註冊成功");
+                }
+            }
+        }
+    });
+    form.$mount("#registered_gary");
+</script>
+
+
+
+
+
+
+
+<script>
+    function $id(id) {
+        return document.getElementById(id);
+    };
+    var userData;
+
+    //進網頁or刷新時，聯結php，去sessionStorage撈資料，判斷使用者是否已登入
+    function getLoginInfo() {
+        if (sessionStorage.user_id) {   //已登入
+            $id("show_user_name").innerText = "您好，" + sessionStorage.user_name;
+            $id("login_text").innerText = "登出";
+        } else {
+            $id("login_text").innerText = "登入/註冊";    //尚未登入
+            document.getElementsByClassName('member_icon')[0].onclick = function () {
+                alert("請登入會員");
+                return false;
+            }
+        }
+    }
+
+
+    //跳出登入視窗功能 + 登出功能  
+    function showLoginForm() {
+        if ($id('login_text').innerText == '登入/註冊') {  //按下去，跳出視窗
+            //註冊或忘記密碼打開的時候，login不能開
+            if($id('forgetPsw_gary').style.display == 'block' || $id('registered_gary').style.display == 'block'){
+                $id('login_gary').style.display = 'none'
+            
+            }else{
+                $id('login_gary').style.display = 'block'
+
+            }
+            
+        } else if ($id('login_text').innerText == '登出') {   //按下去，要登出
+            fetch("php/login/login.php").then(user=>user.json()).then(userData=>{
+                // console.log(userData)
+                for (i in userData[0]) {
+                    sessionStorage.removeItem(i);
+                }
+        })
+
+            //clear session
+            logOut();
+            
+
+            $id('login_text').innerHTML = "登入/註冊";
+            $id("show_user_name").innerHTML = "&nbsp;";
+            $id("user_id").value = "";
+            $id("user_psw").value = "";
+            //如果是在會員中心頁面登出，要跳回首頁
+            if (window.location.href.indexOf("member.php") !=-1 || window.location.href.indexOf("checkOrder.html")!=-1) {
+                window.location.href = "home.html"
+            }
+            // }else if(window.location.href == "http://localhost/G3/checkOrder.html"){
+            //     window.location.href = "http://localhost/G3/cart.php"
+            // }
+            //未登入，無法進入會員中心
+            document.getElementsByClassName('member_icon')[0].onclick = function () {
+                alert("請登入會員");
+                return false;
+            }
+        }
+        return false;
+    }
+    //清session
+    function logOut(){
+        var xhr = new XMLHttpRequest();
+        xhr.open("Get", "php/login/logout.php",true);
+        xhr.send( null );
+    }
+    
+    //登入功能
+    function sendForm() {
+        let user_id = $id('user_id').value;
+        let user_psw = $id('user_psw').value;
+        //如果沒打字，不給登入
+        if (user_id == '' || user_psw == '') {
+            alert('帳號及密碼不可為空');
+            //如果都打字了，才去判斷
+        } else {
+            let xhr = new XMLHttpRequest();
+
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    if (xhr.responseText.indexOf("sysError") != -1) {
+                        alert("系統異常,請通知系統維護人員");
+                    } else if (xhr.responseText.indexOf("loginError") != -1) {
+                        alert("帳密錯誤");
+                    } else { //登入成功
+                        //寫入session storage
+                        let userData = JSON.parse(xhr.responseText)[0];
+                        for (i in userData) {
+                            sessionStorage.setItem(i, userData[i]);
+                        }
+                        sessionStorage.setItem('user_psw', "it's a secret~");
+                        $id("show_user_name").innerText = "您好，" + userData.user_name;
+                        $id("login_text").innerText = "登出";
+                        $id("login_gary").style.display = "none";
+                        //讓會員中心可以進入
+                        document.getElementsByClassName('member_icon')[0].onclick = null;
+                    }
+                } else {
+                    alert(xhr.statusText);
+                }
+            }
+            xhr.open("post", "php/login/login.php", true);
+            xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+            xhr.send(`user_id=${user_id}&user_psw=${user_psw}`);
+        }
+    }
+
+    //關閉視窗  清input+
+    function cancelForm(window) {
+        // alert()
+        clearInput('login_gary');
+        clearInput('registered_gary');
+        clearInput('forgetPsw_gary');
+        $id(window).style.display = 'none';
+
+    }
+
+    // //清空input
+    function clearInput(window){
+        let input=document.querySelectorAll(`#${window} input`)
+        input.forEach((n,i)=>{
+            n.value="";
+        })
+    }
+
+
+
+    window.addEventListener('load', function () {
+        //---------檢查使用者是否已登入, 並取回登入資訊
+        getLoginInfo();
+
+        // 登入/註冊 按鍵   /跳出登入視窗功能 + 登出功能 
+    
+            $id("login_text").onclick = showLoginForm;
+
+       
+        
+        // 送出登入資料
+        $id("login_btn").addEventListener("click",sendForm);
+        
+        
+       
+        //打開註冊視窗
+        $id("registered").onclick =  function(){  
+            $id('login_gary').style.display = 'none';
+            $id('registered_gary').style.display = 'block';   
+        }
+         //打開忘記密碼視窗
+         $id("forgetPsw").onclick=function(){  
+            $id('login_gary').style.display = 'none';
+            $id('forgetPsw_gary').style.display = 'block';   
+            forgetPsw.id="";
+            forgetPsw.qsn="";
+            forgetPsw.ans="";
+            forgetPsw.result="";
+            forgetPsw.btn="下一步";
+        }
+        //返回登入btn 打開登入視窗
+        document.querySelectorAll(".backLogin").forEach(n=>{
+            n.onclick=function(e){   
+                e.preventDefault();
+                $id('registered_gary').style.display = 'none';
+                $id('login_gary').style.display = 'block';
+                $id('forgetPsw_gary').style.display = 'none';
+            }
+        })
+        
+        //叉叉關閉登入視窗
+        $id("login_del").onclick = ()=>cancelForm("login_gary");
+        //叉叉關閉註冊視窗
+        $id("registered_del").onclick = ()=>cancelForm("registered_gary");  
+        //叉叉關閉忘記密碼視窗
+        $id("forgetPsw_del").onclick = ()=>cancelForm("forgetPsw_gary");  
+        
+    })
+=======
+
+<script>
+>>>>>>> dev
 </script>

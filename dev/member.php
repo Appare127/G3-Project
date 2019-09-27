@@ -28,8 +28,13 @@ try {
   $revs->bindValue(':member_id',@$_SESSION['user_no']);
   $revs->execute();
 
+<<<<<<< HEAD
+  //找收藏明細 且 狀態等於"1"就是收藏中的
+  $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = :user_no and f.favorite_status = 1');
+=======
   //找收藏明細 且 狀態等於"1"就是收藏中的 根據排序
   $loves=$pdo->prepare('SELECT * FROM  favorite f join collections c on f.work_no = c.work_no where f.user_no = :user_no and f.favorite_status = 1 ORDER BY `f`.`favorite_date` ASC');
+>>>>>>> dev
   $loves->bindValue(':user_no',@$_SESSION['user_no']);
   $loves->execute();
 

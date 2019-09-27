@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 window.addEventListener("load",()=>{
     if(sessionStorage['shopList'] && sessionStorage['shopList'].length>1){  //購物車裡有東西
         document.getElementById("cart_num").style.display='block';
@@ -61,3 +63,4 @@ window.addEventListener("load",()=>{
     }
 })
 
+>>>>>>> dev
