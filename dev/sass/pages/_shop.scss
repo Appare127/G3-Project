@@ -139,16 +139,17 @@ $lblue:#d8ecea;
         width: 100px;
         position:absolute;
         top: 50%;
-        // animation: floating 10s infinite;
+        left:5%;
+        animation: floating 10s linear infinite;
         @include responds (small){
             display:none;
         }
     }
-    // @keyframes floating{
-    //     0%{left:0}
-    //     50%{left:100%}
-    //     0%{left:0}
-    // }
+    @keyframes floating{
+        0%{left:5%}
+        50%{left:8%}
+        0%{left:5%}
+    }
 }
 
 // ===========================
@@ -253,7 +254,7 @@ $lblue:#d8ecea;
 
         }
         @include responds(large){
-            min-height:320px;
+            min-height:339px;
         }
 
         .item{
@@ -273,7 +274,7 @@ $lblue:#d8ecea;
                 padding: 20px;
             }
             p{
-                padding: 10px 0;
+                padding-top: 10px;
                 text-align: center;
                 display:flex;
                 align-items: center;
@@ -284,6 +285,10 @@ $lblue:#d8ecea;
                     width: 80%;
                 }
                 
+            }
+            a[href='modify.html']{
+                text-decoration: underline;
+                font-size: 14px
             }
             .check{
                 &:before{
@@ -324,6 +329,9 @@ $lblue:#d8ecea;
     margin: 30px 0;
     .intro{
         padding: 10px;
+        input{
+            cursor: pointer;
+        }
         @include responds(small){
             text-align: center;
         }
@@ -385,6 +393,7 @@ $lblue:#d8ecea;
             border-radius: 5px;
             outline:none;
             line-height: 1;
+            cursor: pointer;
         }
         input{
             padding:5px 5px;  border:0 none;
@@ -472,7 +481,7 @@ $lblue:#d8ecea;
     left: 50%;
     transform: translate(-50%,-30%);
     background-color:rgba(0,0,0,0.5);
-    z-index: 2;
+    z-index: 10;
    .detail_container{
        width: 90%;
        position:fixed;
@@ -505,6 +514,7 @@ $lblue:#d8ecea;
     right: 10px;
     line-height: 2;
     text-align: center;
+    cursor: pointer;
 }
 .prod_detail{
     img{
@@ -519,6 +529,7 @@ $lblue:#d8ecea;
     }
     .title{
         background-image: url(../img/shop/tent_small.png);
+        // background-color:#fff;
         background-repeat:no-repeat;
         background-size: contain;
         position:relative;
@@ -549,7 +560,6 @@ $lblue:#d8ecea;
         border-right:10px solid #a08d7c;
         width: 90%;
         margin: 50px auto auto;
-        // padding: 10px;
         position:relative;
     }
     .prod_text{

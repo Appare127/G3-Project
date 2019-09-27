@@ -121,17 +121,13 @@ function reHw() {
    let  homeY  =  70/2;
    let  backX  =  70/2;
    let  backY  =  70/2;
-console.log(document.getElementsByTagName('body'));
-
-console.log(htmlWidth );
-console.log(htmlHeight);
-
-
-
-document.getElementsByTagName('text')[0].x.baseVal[0]["value"]=homeX-16;
-document.getElementsByTagName('text')[0].y.baseVal[0]["value"]=homeY+6;
-document.getElementsByTagName('text')[1].x.baseVal[0]["value"]=backX-16;
-document.getElementsByTagName('text')[1].y.baseVal[0]["value"]=backY+6;
+// console.log(document.getElementsByTagName('body'));
+// console.log(htmlWidth );
+// console.log(htmlHeight);
+// document.getElementsByTagName('text')[0].x.baseVal[0]["value"]=homeX-16;
+// document.getElementsByTagName('text')[0].y.baseVal[0]["value"]=homeY+6;
+// document.getElementsByTagName('text')[1].x.baseVal[0]["value"]=backX-16;
+// document.getElementsByTagName('text')[1].y.baseVal[0]["value"]=backY+6;
     blob1 = createBlob({
         element: document.querySelector("#path1"),
         numPoints: 10,

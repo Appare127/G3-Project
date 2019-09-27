@@ -195,23 +195,23 @@ function drawbg_canvas(){
 // }
 
 
-function alert(text,title){
+// function alert(text,title){
 
-    if(!title==""){
+//     if(!title==""){
   
-    $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>'+title+'</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
-    $(".msg_clear").click(function (){
-    $("#msg").remove();
-        });
-  }else{
+//     $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>'+title+'</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
+//     $(".msg_clear").click(function (){
+//     $("#msg").remove();
+//         });
+//   }else{
   
-    $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>提示</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
-    $(".msg_clear").click(function (){
-    $("#msg").remove();
-     });
-  }
+//     $(" body").append('<div class="msg_alert" id="msg"><div class="msg_alert_container"><div class="msg_title" id="msg_top"><span>提示</span></div><div class="btn_close msg_clear"><span>×</span></div><div class="msg_cont" id="msg_cont">'+text+'</div><div class="msg_alert_close msg_clear"><a href="javascript:;" class="btn_cloud">關閉<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span></a></div></div></div>');
+//     $(".msg_clear").click(function (){
+//     $("#msg").remove();
+//      });
+//   }
   
-  }
+//   }
 
 
 // 確認完成按下去後
@@ -268,7 +268,7 @@ function dopic(){
         </a>`,"提示");
 
         $(".login_js").click(function (){
-            $("#msg").remove();
+            $("#hmsg").remove();
             openlogin();
             });
         };
@@ -1171,19 +1171,9 @@ function pensize(e){
     drawsize = this.value;
 }
 
-
-// 點X後，關閉彈跳提示視窗的函式
-function remove_show (e){
-    // console.log(e.target);
-    let obj = e.target.parentNode;
-    // console.log(obj);
-    obj.classList.remove('show');
-}
-
 // 開啟登入視窗
 function openlogin(){
-    document.getElementById('login_gary').classList.add('login_show');
-    document.getElementsByClassName('remind_login')[0].classList.remove('show');
+    document.getElementById('login_gary').style.display = 'block';
 }
 
 // 選到的部件選單頁籤改變顏色

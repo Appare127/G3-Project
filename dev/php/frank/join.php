@@ -1,6 +1,13 @@
 <?php
 $errMsg = "";
 $user_no=$_GET["user_no"];
+
+$upload_dir = "../../img/collections//";  
+if( ! file_exists($upload_dir )){
+    mkdir($upload_dir);
+}
+
+
 try {
     require_once("../connectg3.php");
     session_start();

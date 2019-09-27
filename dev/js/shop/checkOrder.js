@@ -1,26 +1,26 @@
 window.addEventListener("load",function(){
     var form_vue = new Vue({
         data: {
-            name: 'aaa',
+            name: '',
     
-            phone: '0987654321',
+            phone: '',
             phoneError: false,
     
-            addr:'aaa',
+            addr:'',
     
-            card1: '1111',
-            card2: '1111',
-            card3: '1111',
-            card4: '1111',
+            card1: '',
+            card2: '',
+            card3: '',
+            card4: '',
             cardError: false,
     
-            code: '111',
+            code: '',
             codeError: false,
     
-            month: '1',
+            month: '',
             monthError: false,
     
-            year: '2001',
+            year: '',
             yearError: false,
     
         },
@@ -245,16 +245,16 @@ window.addEventListener("load", function () {
         document.querySelector(".order_info").style.display = "none";
         window.location.href="shop.php";
     }
-
-
-    //顯示金幣
-    if (sessionStorage['game_money'].length > 1) {
-        document.querySelector(".discount_info p span").innerText = sessionStorage['game_money']
-    }
-
     //輸入折扣金幣
     //輸入金幣的input
     let discountInput = document.getElementById("enter_discount");
+
+    //顯示金幣
+    if (sessionStorage['game_money'].length > 1) {
+        document.querySelector(".discount_info p span").innerText =sessionStorage['game_money'];
+    }
+
+    
     discountInput.max = Number(sessionStorage['game_money']);
 
     discountInput.onchange = function () {
@@ -263,6 +263,9 @@ window.addEventListener("load", function () {
             alert("您目前持有金幣不足");
         }
         total()
+        //重顯示剩餘金幣
+        document.querySelector(".discount_info p span").innerText = Number(sessionStorage['game_money'])-Number(discountInput.value);
+
     }
 
 
