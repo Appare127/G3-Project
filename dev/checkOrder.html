@@ -66,8 +66,8 @@
                 <div class="total">
                     <p></p>
                     <p>+運費：$60</p>
-                    <p>-點數折抵：$<span>10</span></p>
-                    <p>總金額為：$<span class="total_money">100</span></p>
+                    <p>-點數折抵：$<span id="show_discount">0</span></p>
+                    <p>總金額為：$<span class="total_money"></span></p>
                 </div>
             </div>
     </section>
@@ -96,8 +96,8 @@
                     </p>
                     <p>
                         有效期限：
-                        <input type="text" v-model="month">
-                        <input type="text" v-model="year" >
+                        <input type="text" v-model="month"> 月
+                        <input type="text" v-model="year" > 年
                         <span class="msg">{{dateErrMsg}}</span>
                     </p>
                     <p>

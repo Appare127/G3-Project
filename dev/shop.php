@@ -92,6 +92,7 @@ try {
                             <img class="shop_animal_bg" >
                         </div>
                         <p>我的動物</p>
+                        <span><a href="modify.html">立即創造動物</a></span>
                     </div>
 
 
@@ -183,7 +184,7 @@ try {
                 <div class="prod_img">
                     <img class="prod_plain" src="img/shop/pillow.png" alt="">
                     <div id='detail_pic_chosen' class="pic_chosen">
-                        <img class="shop_animal_bg" src="img/shop/amlbg.png" alt="">
+                        <!-- <img class="shop_animal_bg" src="img/shop/amlbg.png" alt=""> -->
                     </div>
                 </div>
                 <div class="prod_text">
