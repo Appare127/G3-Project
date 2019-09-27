@@ -4,8 +4,6 @@ session_start();
 try {
   require_once('../connectg3.php');
 
-<<<<<<< HEAD
-=======
 
   //找預約日期<目前日期
   $revstime=$pdo->prepare("select * from `resv_order` WHERE `resv_order`.`tour_date` < CURRENT_DATE AND `resv_order`.`booking_no` = :booking_no;");
@@ -17,17 +15,12 @@ try {
     exit();
   }
 
->>>>>>> dev
   $revs=$pdo->prepare("select * from `resv_order` WHERE `resv_order`.`member_id` = :member_id AND `resv_order`.`booking_no` = :booking_no;");
   $revs->bindValue(':member_id',$_SESSION['user_no']);
   $revs->bindValue(':booking_no',$_POST['booking_no']);
   $revs->execute();
-<<<<<<< HEAD
-  $revsRow = $revs->fetchObject(); 
-=======
   $revsRow = $revs->fetchObject();
 
->>>>>>> dev
 
   if($revsRow->resv_status=="2"){
     echo"已取消過";

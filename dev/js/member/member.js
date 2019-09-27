@@ -12,11 +12,7 @@
 
 
 
-<<<<<<< HEAD
-//alert訊息<<<<請複製>>>>
-=======
 //alert訊息<<<<請從這邊複製>>>>
->>>>>>> dev
 function alert(text,title){
 
   if(!title==""){
@@ -34,15 +30,12 @@ function alert(text,title){
 }
 }
 
-<<<<<<< HEAD
-=======
 //範例 // alert('<p>已收到訂單取消請求，<br>待客服人員確認中...</p>','提示');
 //alert訊息<<<<請複製到這>>>>
 
 
 
 
->>>>>>> dev
 function alertcancel(){
 var order_cancel = document.getElementsByClassName('order_cancel');
 var rev_cancel = document.getElementsByClassName('rev_cancel');
@@ -265,16 +258,10 @@ window.addEventListener('load',initcancelOdrer,false);
 
 function setorder(){
   var order_true = document.getElementsByClassName('order_true');
-<<<<<<< HEAD
-
-  for(let i=0;i<order_true.length;i++){
-    order_true[i].addEventListener('click',function(){
-=======
   var shop_status = document.getElementsByClassName('shop_status');
 
   for(let i=0;i<order_true.length;i++){
     order_true[i].addEventListener('click',function(e){
->>>>>>> dev
 
       $(".order_alertwrap").hide();
 
@@ -290,13 +277,8 @@ function setorder(){
             alert("已出貨，無法取消!");
 
           }else{
-<<<<<<< HEAD
-            alert("已取消!");
-            document.getElementsByClassName('shop_status')[0].innerText="已取消";
-=======
             alert('已取消!');
             document.getElementsByClassName('shop_status')[i].innerText="已取消";
->>>>>>> dev
           }
 
         }else{
@@ -408,13 +390,9 @@ function setrev(){
       xhr.onload = function(){ 
         if(xhr.status==200){
           console.log(xhr.responseText);
-<<<<<<< HEAD
-          if(xhr.responseText.indexOf("已取消過")!=-1){
-=======
           if(xhr.responseText.indexOf("日期已過，無法取消")!=-1){
             alert("日期已過，無法取消!");
           }else if(xhr.responseText.indexOf("已取消過")!=-1){
->>>>>>> dev
             alert("您已取消過!");
       
           }else if(xhr.responseText.indexOf("已到場過，無法取消")!=-1){
@@ -422,11 +400,7 @@ function setrev(){
 
           }else{
             alert("已取消!");
-<<<<<<< HEAD
-            document.getElementsByClassName('resv_status')[0].innerText="已取消";
-=======
             document.getElementsByClassName('resv_status')[i].innerText="已取消";
->>>>>>> dev
           }
 
         }else{

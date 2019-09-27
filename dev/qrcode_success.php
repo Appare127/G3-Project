@@ -143,21 +143,13 @@ try{
       <p class="big_p"><?="掃描成功";?></p>
 
 
-<<<<<<< HEAD
-      <div class="qr_btn_back">
-=======
       <!-- <div class="qr_btn_back">
->>>>>>> dev
           <a href="member.php" class="btn_cloud">
             <span>回會員中心
             @@include('template/btn_sp.html')
             </span>
           </a>
-<<<<<<< HEAD
-      </div>
-=======
       </div> -->
->>>>>>> dev
 
 
       <form action="" method="post">
@@ -173,12 +165,6 @@ try{
     
       </form>
 
-<<<<<<< HEAD
-
-          
-
-=======
->>>>>>> dev
   </div>
 
 </div>

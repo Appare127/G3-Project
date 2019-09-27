@@ -115,14 +115,6 @@ class Book {
         this.hitStatus = false;
     }
     move(){
-<<<<<<< HEAD
-            this.y += 9;
-            this.x -= 10;
-    }
-    show(){
-        image(fImg, this.x, this.y, this.r, this.r);
-    }
-=======
         this.y += 9;
             // this.x -= 10;
         this.y = constrain(this.y, 0, height*0.5);
@@ -147,9 +139,6 @@ class Weapon {
         // }
             this.x += 12;
     
-<<<<<<< HEAD
->>>>>>> dev
-=======
     }
     show() { 
         image(wpImg, this.x, this.y, 22,22);
@@ -158,5 +147,4 @@ class Weapon {
     hits(monster){ 
         return collideCircleCircle(this.x,this.y,this.r,monster.x,monster.y,monster.r);
     }
->>>>>>> dev
 }
