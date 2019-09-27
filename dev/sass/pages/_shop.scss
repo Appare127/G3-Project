@@ -529,6 +529,7 @@ $lblue:#d8ecea;
     }
     .title{
         background-image: url(../img/shop/tent_small.png);
+        // background-color:#fff;
         background-repeat:no-repeat;
         background-size: contain;
         position:relative;
@@ -559,7 +560,6 @@ $lblue:#d8ecea;
         border-right:10px solid #a08d7c;
         width: 90%;
         margin: 50px auto auto;
-        // padding: 10px;
         position:relative;
     }
     .prod_text{
