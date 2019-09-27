@@ -245,6 +245,7 @@ window.addEventListener("load", function () {
         document.querySelector(".order_info").style.display = "none";
         window.location.href="shop.php";
     }
+
     //輸入折扣金幣
     //輸入金幣的input
     let discountInput = document.getElementById("enter_discount");
@@ -265,7 +266,7 @@ window.addEventListener("load", function () {
         total()
         //重顯示剩餘金幣
         document.querySelector(".discount_info p span").innerText = Number(sessionStorage['game_money'])-Number(discountInput.value);
-
+        document.getElementById("show_discount").innerText=discountInput.value
     }
 
 
