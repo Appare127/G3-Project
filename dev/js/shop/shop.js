@@ -112,6 +112,7 @@ backButton.onclick=function(){   //關閉視窗
 
 for(i=0;i<detailButtons.length;i++){   //點btn查看詳情
     detailButtons[i].onclick=function(){
+        console.log(this.parentNode.parentNode.children[2].children[1].children[0])
         prodDetail.style.display='block';
         document.querySelector('.prod_detail .prod_plain').src=this.parentNode.parentNode.children[2].children[0].src;
         document.querySelector('.prod_detail .shop_animal_bg').src=this.parentNode.parentNode.children[2].children[1].children[0].src;
