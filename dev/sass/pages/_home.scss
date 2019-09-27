@@ -1205,15 +1205,16 @@ $dblue:#7DC7C5;
         transform: rotateX(30deg);
         // transition:1 1s all;
         @include responds(small){
-            top: 41%;
-            left: 23%
+            width: 50%;
+            top: 40.5%;
+            left: 24%;
         }
 
         img {
             width:100%;
-            @include responds(small){
-                width: 75%;
-            }
+            // @include responds(small){
+            //     width: 75%;
+            // }
             
         }
     }
