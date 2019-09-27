@@ -850,21 +850,22 @@ html{overflow: hidden;
             }
 
             #path1 {
-                fill: rgba(221, 214, 121, 0.6);
+                fill: rgba(175, 109, 70, 0.6);
+                filter: blur()
             }
 
             #path2 {
-                fill: rgba(221, 214, 121, 0.6);
-
+                fill: rgba(175, 109, 70, 0.6);
+                filter: blur()
             }
 
             #path3 {
-                fill: rgba(221, 214, 121, 0.6);
+                fill: rgba(175, 109, 70, 0.6);
+                filter: blur()
             }
 
             #path4 {
                 fill: rgba(255, 255, 255, 0.8);
-
             }
         }
     }
@@ -874,7 +875,6 @@ html{overflow: hidden;
 
         #path5 {
             fill:   rgba(59,92,66,.6);
-       
         }
 
         #path6 {
@@ -903,19 +903,19 @@ html{overflow: hidden;
             }
 
             #path5 {
-                fill: rgba(70, 145, 230, 0.6);
+                fill:   rgba(59,92,66,.6);
             }
 
             #path6 {
-                fill: rgba(255, 255, 255, 0.6);
+                fill:   rgba(59,92,66,.6);
             }
 
             #path7 {
-                fill: rgba(255, 255, 255, 0.6);
+                fill:   rgba(59,92,66,.6);
             }
 
             #path8 {
-                fill: rgba(255, 255, 255, .6);
+                fill: rgba(255, 255, 255, 0.6);
             }
         }
     }
