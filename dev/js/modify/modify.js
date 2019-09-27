@@ -899,6 +899,7 @@ function buildlist (jsonobj){
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
+            disabledClass: 	'swiper-button-disabled'
         },
     })
     // 使用swiper:建立身體的slider與設定
