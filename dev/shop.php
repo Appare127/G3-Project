@@ -92,6 +92,7 @@ try {
                             <img class="shop_animal_bg" >
                         </div>
                         <p>我的動物</p>
+                        <span><a href="modify.html">立即創造動物</a></span>
                     </div>
 
 

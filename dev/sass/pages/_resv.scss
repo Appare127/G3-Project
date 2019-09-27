@@ -274,8 +274,6 @@
                 }
                 .show_data_table span{
                     display:block;
-                    // border-right:1px solid grey;
-                    // border-left:1px solid grey;
                     box-sizing: border-box;
                     padding: 2px;
                 }
@@ -295,7 +293,6 @@
                 .show_datanum{
                     width: 28%;
                 }
-
                 .resvform_title{
                     padding: 10px;
                 }
@@ -309,6 +306,12 @@
                         font-size: $xs_fz;
                         color: #c92626;
                         font-weight: bold;
+                    }
+                    input,select{
+                        padding: 5px;
+                        border-radius:8px;
+                        outline:none;
+                        border:2px solid #d1c0a5;
                     }
                 }
                 // 驗證碼
@@ -530,22 +533,22 @@
                 width: 9.8%;
                 position: absolute;
                 left: 0%;
-                top: 28%;
+                top: 20%;
                 z-index: 3;
                 transform: rotate(-4deg);
                 transform-origin: left 100%;
-                animation: spin 5s 3;   
+                animation: spin 5s infinite;   
             }
             // left train
             .rail{
                 width: 10%;
                 position: absolute;
                 left: -2.4%;
-                top: 33%;
+                top: 25%;
                 transform: rotate(0deg);
             }
             .cloud_animal{
-                top: 80%;
+                top: 75%;
                 right: 8%;
                 width: 14%;
             }  

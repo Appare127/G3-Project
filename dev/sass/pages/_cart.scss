@@ -90,17 +90,18 @@ $lblue:#d8ecea;
     .balloon{
         width: 100px;
         position:absolute;
-        top: 50%;
-        // animation: floating 10s infinite;
+        top: 27%;
+        left:3%;
+        animation: floating 3s linear infinite;
         @include responds (small){
             display:none;
         }
     }
-    // @keyframes floating{
-    //     0%{left:0}
-    //     50%{left:100%}
-    //     0%{left:0}
-    // }
+    @keyframes floating{
+        0%{top:27%}
+        50%{top:29%}
+        0%{top:27%}
+    }
 }
 
 .cart{

@@ -139,16 +139,17 @@ $lblue:#d8ecea;
         width: 100px;
         position:absolute;
         top: 50%;
-        // animation: floating 10s infinite;
+        left:5%;
+        animation: floating 10s linear infinite;
         @include responds (small){
             display:none;
         }
     }
-    // @keyframes floating{
-    //     0%{left:0}
-    //     50%{left:100%}
-    //     0%{left:0}
-    // }
+    @keyframes floating{
+        0%{left:5%}
+        50%{left:8%}
+        0%{left:5%}
+    }
 }
 
 // ===========================
@@ -253,7 +254,7 @@ $lblue:#d8ecea;
 
         }
         @include responds(large){
-            min-height:320px;
+            min-height:339px;
         }
 
         .item{
@@ -273,7 +274,7 @@ $lblue:#d8ecea;
                 padding: 20px;
             }
             p{
-                padding: 10px 0;
+                padding-top: 10px;
                 text-align: center;
                 display:flex;
                 align-items: center;
@@ -284,6 +285,10 @@ $lblue:#d8ecea;
                     width: 80%;
                 }
                 
+            }
+            a[href='modify.html']{
+                text-decoration: underline;
+                font-size: 14px
             }
             .check{
                 &:before{
