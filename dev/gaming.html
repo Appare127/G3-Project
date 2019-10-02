@@ -187,6 +187,7 @@ function updateScoreMoney(){
     }
     // sessionStorage['game_record'] = timer;
     if(sessionStorage['user_no']){
+        sessionStorage['game_money']=money;
         if(timer>sessionStorage['game_record'] || sessionStorage['game_record']=='' || sessionStorage['game_record']=="null"){
         saveImage();
         var now = new Date(); 
@@ -201,7 +202,7 @@ function updateScoreMoney(){
         xhr.open("Get", url,true);
         xhr.send(null);
     }
-
+  
 
 
 }

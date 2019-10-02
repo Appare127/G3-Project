@@ -46,6 +46,14 @@ try{
       <p>此會員預約時間已超過，無法入場</p>
       <p>若有問題請洽客服人員</p>
 
+      <div class="qr_btn_back">
+          <a href="home.html" class="btn_cloud">
+            <span>回首頁
+            @@include('template/btn_sp.html')
+            </span>
+          </a>
+      </div>
+
       </div>
     </div>
 
@@ -62,13 +70,13 @@ try{
       <p>此會員已入場過</p>
       <p>若有問題請洽客服人員</p>
 
-      <!-- <div class="qr_btn_back">
+      <div class="qr_btn_back">
           <a href="home.html" class="btn_cloud">
             <span>回首頁
             @@include('template/btn_sp.html')
             </span>
           </a>
-      </div> -->
+      </div>
 
     </div>
 
@@ -85,13 +93,13 @@ try{
       <p>此會員已將預約取消</p>
       <p>若有問題請洽客服人員</p>
 
-      <!-- <div class="qr_btn_back">
+      <div class="qr_btn_back">
           <a href="home.html" class="btn_cloud">
             <span>回首頁
             @@include('template/btn_sp.html')
             </span>
           </a>
-      </div> -->
+      </div>
 
     </div>
 
@@ -115,13 +123,13 @@ try{
           <p>資料已確認</p>
           <p>預約已到場</p>
 
-          <!-- <div class="qr_btn_back">
+          <div class="qr_btn_back">
                   <a href="home.html" class="btn_cloud">
                   <span>回首頁
             @@include('template/btn_sp.html')
             </span>
                   </a>
-            </div> -->
+            </div>
 
           </div>
 

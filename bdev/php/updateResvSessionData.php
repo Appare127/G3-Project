@@ -9,13 +9,10 @@ try{
   $resvSession->bindValue(":session_no", $_REQUEST["session_no"]);
   $resvSession->execute(); 
 
-  if( $resvSession->rowCount() == 0 ){ //找不到
-    //傳回空的JSON字串
-    echo "{}";
-  }else{ //找得到
+  
     echo "修改成功";
     header('Location:resvSessionCapacity.php');
-  }	
+  	
 }catch(PDOException $e){
   echo $e->getMessage();
 }

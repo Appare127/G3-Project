@@ -348,9 +348,22 @@ function picsend(){
     xhr.send(formData);
 }
 
+
+
+
+
 // 圖片上傳成功後的動作
 function saveok(text){
-    alert('<p>動物儲存成功</p>','提示');
+    // alert('<p>動物儲存成功</p>','提示');
+
+    alert(`<p>動物儲存成功</p>
+    <a href="game.html" class="btn_cloudb torank">
+        進行遊戲<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span>
+    </a>
+    <a href="frank.html" class="btn_cloudb ">
+        參加選怪<span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span><span class="btn_cloudeffect"></span>
+    </a>
+    `,"提示");
 
     // 更新sessionStorage的動物生存參數
     sessionStorage['environ_adapt_1'] = total_eml_forest;
@@ -899,6 +912,7 @@ function buildlist (jsonobj){
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
+            disabledClass: 	'swiper-button-disabled'
         },
     })
     // 使用swiper:建立身體的slider與設定

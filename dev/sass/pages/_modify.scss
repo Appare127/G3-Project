@@ -15,6 +15,11 @@
     background-attachment: fixed;
     // @include msgalert(#fdf6e7,$col_btn_pink,$col_btn_pink);
 
+
+    .torank{
+        margin-right: 20px;
+    }
+
 }
 
 
@@ -176,6 +181,12 @@
                     flex-wrap: wrap;
                     box-sizing: border-box;
                     padding: 0px 30px 30px 30px;
+                }
+                .swiper-button-next{
+                    color: transparent;
+                }
+                .swiper-button-prev{
+                    color: transparent;
                 }
                 .swiper-button-prev img{
                     width: 80%;
