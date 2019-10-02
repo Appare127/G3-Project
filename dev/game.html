@@ -51,6 +51,7 @@
             </div>
            
             <div class="cloud1">
+                <p></p>
                 <img src="img/game/role_cloud.png" alt="">
             </div>
             <div class="cloud2">
@@ -58,8 +59,10 @@
             </div>
             <div class="role_pic">
                 <div class="info_pic">
+                    <div class="leftArrow"><</div>
                     <img src="./img/home/1.png" alt="">
                     <div class="animal_words"><p></p></div>
+                    <div class="rightArrow">></div>
                 </div>
                 <div class="info_name">
                     <h2>你的動物名稱</h2>
@@ -357,7 +360,7 @@ function animalWalking(trigger){
         $que(".animal_words")[0].style.display="none";
 
 
-    if(window.innerWidth>=768 && sessionStorage['my_animal_img'] && sessionStorage['my_animal_name']){//如果有登入
+    if(window.innerWidth>=768 && sessionStorage['my_animal_img'] && sessionStorage['my_animal_name']!='董董'){//如果有登入
         var environ = [sessionStorage['environ_adapt_1'],sessionStorage['environ_adapt_2'],sessionStorage['environ_adapt_3']];
         environ.sort(function(a,b){ return parseInt(b)-parseInt(a) });
 
@@ -483,7 +486,8 @@ function animalWalking(trigger){
             }
 
             //撫摸
-            if(trigger == 'faceBrush'){
+            if(trigger == 'faceBrush' && sessionStorage['my_animal_name']!='小丸子'){
+                console.log(sessionStorage['my_animal_name']!='小丸子');
                 $que(".animal_words")[0].style.display="block";
                 $que(".animal_words p")[0].innerText = `討厭~~`;
                 $que(".info_pic img")[0].classList.add('animalBreathing');
@@ -734,6 +738,31 @@ function alertGame(text,title){
                 sessionStorage['environ_adapt_1'] =userData.environ_adapt_1;
                 sessionStorage['environ_adapt_2'] =userData.environ_adapt_2;
                 sessionStorage['environ_adapt_3'] =userData.environ_adapt_3;
+
+                if(sessionStorage['game_record']>=100){ //大於100秒就解鎖新的角色
+                    $cls('rightArrow')[0].onclick = function(){
+                        sessionStorage['my_animal_img'] ='img/game/gaming_maruko.png';
+                        sessionStorage['animal_life'] =9;
+                        sessionStorage['animal_jump'] =3;
+                        sessionStorage['my_animal_name'] = '小丸子'; 
+                        flyStatus = true;
+                        $que(".info_pic img")[0].style.transition = '0.5s';
+                        $que(".info_pic img")[0].src = 'img/game/gaming_maruko.png';
+                        $que(".info_pic img")[0].style.width= '60%';
+                        $que(".info_name")[0].innerText = '一百秒解鎖角色--小丸子';
+                    }
+                    if(sessionStorage['my_animal_name'] == '小丸子' ){
+                        $cls('leftArrow')[0].onclick = function(){
+                            sessionStorage['my_animal_img'] = userData.my_animal_img;
+                            sessionStorage['my_animal_name'] = userData.my_animal_name;
+                            sessionStorage['animal_life'] =userData.animal_life;
+                            sessionStorage['animal_jump'] =userData.animal_jump;
+                            $que(".info_pic img")[0].src = userData.my_animal_img +'?'+ new Date().getTime();
+                            $que(".info_pic img")[0].style.width= '80%';
+                            $que(".info_name")[0].innerText = sessionStorage['my_animal_name'];
+                        }
+                    }
+                }
                 
                 //顯示角色資料
                 
@@ -885,6 +914,10 @@ function alertGame(text,title){
         animal.addEventListener('dragenter', dragEnter);
         animal.addEventListener('dragleave', dragLeave);
         animal.addEventListener('drop', dragDrop);
+        //拿掉按右鍵會出現的選單
+        $que('.game_role')[0].addEventListener("contextmenu", function(e){
+            e.preventDefault();
+        }, false);
         //手安裝click事件
         $id('hand').addEventListener('click', function(e){
             //更換滑鼠指標圖案
@@ -893,7 +926,9 @@ function alertGame(text,title){
             document.querySelector('.info_pic img').addEventListener('mousedown', function(e){
                 this.style.transition = '1.5s';
                 console.log(e.clientX, e.clientY);
-                this.style.filter = 'hue-rotate(290deg)';
+                if(sessionStorage['my_animal_name']!='小丸子'){
+                    this.style.filter = 'hue-rotate(290deg)';
+                }
                 setTimeout(function(){
                     animalWalking('faceBrush');
                 },500);
@@ -912,12 +947,15 @@ function alertGame(text,title){
             this.style.display='block';
             this.style.opacity = 0;
             $que('.food_menu')[0].style.opacity = 1;
+            $que('.cloud1 p')[0].innerHTML = `園長也不知的~秘密餵食區`;
+            $que('.cloud1 p')[0].style.color='red';
         });
         //按外面區域就取消食物選單
         $que('body')[0].addEventListener('mousedown', function(e){
             if(e.button==2){
                 $que('.food_menu')[0].style.opacity = 0;
                 $que('.cloud2')[0].style.opacity = 1;
+                $que('.cloud1 p')[0].innerHTML = ``;
             }
         });
 

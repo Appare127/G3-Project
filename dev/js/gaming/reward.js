@@ -137,11 +137,11 @@ class Weapon {
         // if(unicorn.hits(this)){
         //     this.hitStatus = true;
         // }
-            this.x += 12;
+            this.x += 15;
     
     }
     show() { 
-        image(wpImg, this.x, this.y, 22,22);
+        image(wpImg, this.x, this.y, 40,40);
         // rect( this.x, this.y, this.r, this.r);
     }  
     hits(monster){ 

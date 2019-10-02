@@ -817,6 +817,15 @@
                             position:absolute;
                             top:-8%;
                             right:-10%;
+                            width:207px;
+                            height: 65px;
+                            p{
+                                position:absolute;
+                                left:50%;
+                                top:50%;
+                                transform: translate(-50%,-50%);
+                                display:inline-block;
+                            }
                         }
                         .cloud2 {
                             position:absolute;
@@ -884,7 +893,20 @@
                                 padding:5px;
                                 // cursor:pointer;
                                 transition:0.5s;
-
+                                .leftArrow{
+                                    position:absolute;
+                                    font-size: 32px;
+                                    top:50%;
+                                    left:0%;
+                                    transform:translateY(-50%);
+                                }
+                                .rightArrow{
+                                    position:absolute;
+                                    font-size: 32px;
+                                    top:50%;
+                                    right:15%;
+                                    transform:translateY(-50%);
+                                }
 
                                 img {
                                     width:80%;
