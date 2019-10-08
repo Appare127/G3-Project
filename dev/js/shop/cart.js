@@ -82,7 +82,13 @@ function deleteItem(){   //刪除
 
     //改total
     total();
-   
+
+    //改購物車icon
+    if(sessionStorage['shopList']){
+        document.getElementById("cart_num").innerText=sessionStorage['shopList'].split(',').length-1;
+    }else{
+        document.getElementById("cart_num").style.display='none';
+    }
 
     //刪到沒東西時，顯示 “您尚未購買”
     if( !sessionStorage['shopList']){

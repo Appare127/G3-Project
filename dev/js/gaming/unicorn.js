@@ -8,19 +8,26 @@ class Unicorn {
         this.vy = 10;
         this.life=life;
         this.gravity = weight;
+        if(sessionStorage['animal_name']=='董董'){
+            
+        }
        
     }
     show() {
 
         if(window.innerWidth<=768){
             image(uImg,this.x, this.y, this.r, this.r);
-        }else {
-            image(uImg,this.x, this.y-20, this.r, this.r);
+        }else {// >=768
+            if(sessionStorage['animal_name']=='董董'&&strongStatus!=true){
+                image(uImg,this.x, this.y-20, 150, 189);
+            }else{
+                image(uImg,this.x, this.y-20, this.r, this.r);
+            }
         }
 
     } 
     jump(jumpForce=(-25)) {
-        if(flyStatus == true){
+        if(flyStatus == true || sessionStorage['animal_name']=='董董'){
             this.vy = jumpForce;
         }else if(flyStatus ==false){
             if(strongStatus ==false && this.y==height - this.r){

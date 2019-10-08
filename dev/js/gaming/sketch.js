@@ -52,6 +52,7 @@ let gamePlaying = true;
 
 
 
+
 let scene = { //場景資訊
     desert:{
         area:'img/game/遊戲背景-沙漠.png',
@@ -293,7 +294,7 @@ function draw() {
         if (random(1) < (0.04/environ_adapt)) { 
             trains.push(new Train(scene[sessionStorage['sceneChoice']].monsterSize));
         }
-    }, 30);
+    },1000);
 
 
 
@@ -308,9 +309,10 @@ function draw() {
         textFont('微軟正黑體');
     }
     if(timer>=30){ //30秒後開始掉隕石
-        if (random(1) < (0.06/environ_adapt)) { // 掉隕石
+        setTimeout(function(){if (random(1) < (0.06/environ_adapt)) { // 掉隕石
             fallens.push(new Fallen(scene[sessionStorage['sceneChoice']].monsterSize));
         }
+        },1000)
 
     }
 
@@ -324,7 +326,9 @@ console.log(drops.length);
             drops[r].show();
             
             if(drops[r].y >= height){
+
                 drops.splice(drops[r],1);
+                console.log('刪除雨水');
             }
           }
     }
@@ -392,20 +396,6 @@ console.log(drops.length);
       }
     }
 
-    // if(timer>=parseInt(showTime) && timer< (showTime+5) ){
-    //     if(window.innerWidth>=768){
-    //         textSize(20);
-    //         fill(255,255,255);
-    //         text(`獲得老師JS密笈`, 4/5*width, 1/5*height+50);
-    //     }else{
-    //         textSize(14);
-    //         fill(255,255,255);
-    //         text(`獲得老師JS密笈`, 50, 1/5*height+40);
-    //     }
-
-    //     textFont('微軟正黑體');
-    // }
-
 
 
 
@@ -431,7 +421,7 @@ console.log(drops.length);
     //操作動物的行為
 
     if(keyIsDown(LEFT_ARROW)){
-        unicorn.x -= 10;
+        unicorn.x -= 15;
     }
     if(keyIsDown(RIGHT_ARROW)){
         unicorn.x += 10;
@@ -442,14 +432,20 @@ console.log(drops.length);
 
 
     if(weapons.length>=1){
-        for(let p of weapons){
+        for(let p of weapons){ // 飛彈的行為
             p.move();
             p.show();
             for (let t of trains) {
                 if (p.hits(t)) {//飛彈撞到怪 怪就消失
                     trains.splice(t,1);
-                    setTimeout(function(){weapons.splice(p,1);},50);
+                    setTimeout(function(){weapons.splice(p,1);},200);
                 }
+            }
+            for (let f of fallens){
+                if (p.hits(f)){//飛彈撞到隕石 隕石消失
+                    fallens.splice(f,1);
+                    setTimeout(function(){weapons.splice(p,1);},200);
+                };
             }
             if(p.x>width){//離開螢幕的飛彈就清除掉
                 weapons.splice(p,1);
@@ -549,7 +545,7 @@ console.log(drops.length);
     }
     //碰到翅膀之後的行為
     for(let w of wings){
-
+        // musicPlay('flytoyou', 'play');
         w.move();
         w.show();
         if ( unicorn.hits(w) ) { //吃到翅膀後的行為
@@ -561,6 +557,8 @@ console.log(drops.length);
     }
     if ( timer >= parseInt(flyingTime)+10 || life == 0){
         flyStatus = false;
+        // musicPlay('flytoyou', 'pause');
+
         // musicPlay('battle', 'play');
 
 
@@ -640,8 +638,8 @@ console.log(drops.length);
         }
     if(fireStatus==true){
             textSize(20);
-            fill(255,69,0);
-            text('獲得老師JS密笈=>按F鍵可以發射怪奇飛彈了', width*0.3 , height-20);
+            fill(156,163,0);
+            text('獲得老師JS密笈=>按F鍵可以發射怪奇糖果球', width*0.3 , height-20);
             textFont('微軟正黑體');
     }
 
